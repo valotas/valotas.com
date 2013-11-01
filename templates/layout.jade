@@ -14,23 +14,20 @@ html(lang='en')
       link(rel='stylesheet', href='http://fonts.googleapis.com/css?family=Open+Sans')
       link(rel='stylesheet', href='/style/main.css')
   body(class=bodyclass)
-    header.header
-      div.content-wrap
+    div#wrap
+      div#header.container
         block header
-          div.logo
-            h1
-              a(href=locals.url)= locals.name
-            p.description= locals.description
-    div#content
-      div.content-wrap
-        block content
-          h2 Welcome to zombocom!
-    footer
-      div.content-wrap
-        block footer
-          section.about
-            !=contents['about.md'].html
-          section.copy
-            p &copy; #{ new Date().getFullYear() } #{ locals.owner } &mdash; powered by&nbsp;
-              a(href='https://github.com/jnordberg/wintersmith') Wintersmith
-              //- please leave the "powered by" if you use the design
+          h1
+            a(href=locals.url)= locals.name
+          p.description= locals.description
+      div#content.container
+        div.content-wrap
+          block content
+            h2 Welcome to zombocom!
+      div#push 
+    div#footer.container
+      block footer
+        div.row
+          p &copy; #{ new Date().getFullYear() } #{ locals.owner } &mdash; powered by&nbsp;
+            a(href='https://github.com/jnordberg/wintersmith') Wintersmith
+            //- please leave the "powered by" if you use the design
