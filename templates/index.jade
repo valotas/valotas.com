@@ -2,19 +2,20 @@ extends layout
 
 block content
   each article in articles
-    div.row
-      div.date
-        span.day= moment.utc(article.date).format('DD')
-        span.month= moment.utc(article.date).format('MMMM')
-        span.year= moment.utc(article.date).format('YYYY')
-      div.article
-        h2
-          a(href=article.url)= article.title
-        section.content
-          !{ typogr(article.intro).typogrify() }
-          if article.hasMore
-            p.more
-              a(href=article.url) more
+    div.col-md-4
+      div.row
+        div.date
+          span.day= moment.utc(article.date).format('DD')
+          span.month= moment.utc(article.date).format('MMMM')
+          span.year= moment.utc(article.date).format('YYYY')
+        div.article
+          h2
+            a(href=article.url)= article.title
+          section.content
+            !{ typogr(article.intro).typogrify() }
+            if article.hasMore
+              p.more
+                a(href=article.url) more
 
 block prepend footer
   if prevPage
