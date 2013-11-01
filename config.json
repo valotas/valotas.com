@@ -6,7 +6,8 @@
     "description": "programming stuff :)"
   },
   "plugins": [
-    "./plugins/paginator.coffee"
+    "./plugins/paginator.coffee",
+    "./node_modules/wintersmith-less/"
   ],
   "require": {
     "moment": "moment",
