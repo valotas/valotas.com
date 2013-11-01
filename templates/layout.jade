@@ -15,17 +15,18 @@ html(lang='en')
       link(rel='stylesheet', href='/style/main.css')
   body(class=bodyclass)
     div#wrap
-      div#header.container
+      div.jumbotron
         block header
-          h1
-            a(href=locals.url)= locals.name
-          p.description= locals.description
+          div.container
+            h1= locals.name
+            p= locals.description
       div#content.container
         div.content-wrap
           block content
             h2 Welcome to zombocom!
       div#push 
     div#footer.container
+      hr
       block footer
         div.row
           p &copy; #{ new Date().getFullYear() } #{ locals.owner } &mdash; powered by&nbsp;
