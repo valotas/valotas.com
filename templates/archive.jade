@@ -16,8 +16,8 @@ block content
       each year, i in years
         - var h = archive[year].length * lineHeight;
         - var last = (years.length - 1 == i);
-        li.year(style='height: '+h+'em')
-          span.year-label(style='line-height: '+h+'em', class=(last?'last':''))= year
+        li.year
+          span.year-label(class=(last?'last':''))= year
           - var yearArticles = _.groupBy(archive[year], function(item) { return map[item.date.getUTCMonth()] })
           - var months = Object.keys(yearArticles);
           ul
