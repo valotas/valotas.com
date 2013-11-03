@@ -17,7 +17,7 @@ html(lang='en')
     div.jumbotron
       div.container
         div.col-md-3
-          div.photo.img-rounded
+          a.photo.img-rounded(href=contents.index.url)
         div.signature.col-md-9
         h1= locals.owner
         p
@@ -31,13 +31,17 @@ html(lang='en')
             i.fa.fa-twitter.fa-3x
           a(href='http://www.linkedin.com/in/valotas')
             i.fa.fa-linkedin.fa-3x
-    div#content.container
+    #content.container
       block content
         h2 Welcome to zombocom!
-    div#footer.container
-      hr
+    #footer.container
       block footer
+        hr
         div.row
           p &copy; #{ new Date().getFullYear() } #{ locals.owner } &mdash; powered by&nbsp;
             a(href='https://github.com/jnordberg/wintersmith') Wintersmith
-            //- please leave the "powered by" if you use the design
+            | &nbsp;with the help of 
+            a(href='http://getbootstrap.com/') Bootstrap css framework
+            | , 
+            a(href='http://fontawesome.io/') Fontawesome
+            | &nbsp;and my bad UX expertise :)
