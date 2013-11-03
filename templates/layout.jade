@@ -16,15 +16,15 @@ html(lang='en')
   body(class=bodyclass)
     div.jumbotron
       div.container
-        div.photo.col-md-3
-          img.img-rounded(src='/assets/me-250x250.jpg')
+        div.col-md-3
+          div.photo.img-rounded
         div.signature.col-md-9
         h1= locals.owner
         p
           span= locals.name
           span |
           span= locals.description
-        div
+        div.social
           a(href='https://github.com/valotas')
             i.fa.fa-github.fa-3x
           a(href='https://www.facebook.com/valotas')
