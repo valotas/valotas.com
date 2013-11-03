@@ -21,9 +21,7 @@ html(lang='en')
         div.signature.col-md-9
         h1= locals.owner
         p
-          span= locals.name
-          span |
-          span= locals.description
+          span #{locals.name} | #{locals.description}
         div.social
           a(href='https://github.com/valotas')
             i.fa.fa-github.fa-3x
