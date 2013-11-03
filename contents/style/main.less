@@ -12,7 +12,6 @@
 @import '../../vendor/bootstrap/less/buttons.less';
 
 @import '../../vendor/bootstrap/less/component-animations.less';
-@import '../../vendor/bootstrap/less/glyphicons.less';
 @import '../../vendor/bootstrap/less/dropdowns.less';
 @import '../../vendor/bootstrap/less/button-groups.less';
 @import '../../vendor/bootstrap/less/input-groups.less';
@@ -36,24 +35,17 @@
 @import '../../vendor/bootstrap/less/utilities.less';
 @import '../../vendor/bootstrap/less/responsive-utilities.less';
 
+@import 'fa-4.0.1/less/font-awesome.less';
+
 @import 'variables.less';
 
-.date {
-  .make-md-column(3);
-  text-align: center;
-
-  span {
-    display: block;
-  }
-  .day {
-    font-size: 30px;
-    font-weight: 500;
-    line-height: 1.1;
-  }
-}
 .article {
-  .make-md-column-push(3);
-  h2 {
-    margin-top: 0;
+  .make-md-column(4);
+  .date {
+    border-top: 1px solid #eee;
+    font-style: italic;
+    color: #bbb;
+    text-align: right;
   }
 }
+
