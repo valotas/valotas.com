@@ -14,17 +14,24 @@ html(lang='en')
       link(rel='stylesheet', href='http://fonts.googleapis.com/css?family=Open+Sans')
       link(rel='stylesheet', href='/style/main.css')
   body(class=bodyclass)
-    div#wrap
-      div.jumbotron
-        block header
-          div.container
-            h1= locals.name
-            p= locals.description
-      div#content.container
-        div.content-wrap
-          block content
-            h2 Welcome to zombocom!
-      div#push 
+    div.jumbotron
+      div.container
+        div.photo.col-md-3
+          img.img-rounded(src='/assets/me-250x250.jpg')
+        div.signature.col-md-9
+        h1= locals.owner
+        p
+          span= locals.name
+          span |
+          span= locals.description
+        div
+          i.fa.fa-github.fa-3x
+          i.fa.fa-facebook-square.fa-3x
+          i.fa.fa-twitter.fa-3x
+          i.fa.fa-linkedin.fa-3x
+    div#content.container
+      block content
+        h2 Welcome to zombocom!
     div#footer.container
       hr
       block footer
