@@ -9,6 +9,7 @@
     "grunt": "~0.4.2",
     "wintersmith-less": "~0.2.1",
     "bower": "~1.2.7",
-    "grunt-wintersmith": "0.0.2"
+    "grunt-wintersmith": "0.0.2",
+    "grunt-scp": "~0.1.6"
   }
 }
