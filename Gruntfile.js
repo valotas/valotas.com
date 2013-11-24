@@ -3,6 +3,7 @@ module.exports = function (grunt) {
 
   grunt.initConfig({
     wintersmith: {
+      build: {},
       preview: {
         options: {
           action: 'preview'
@@ -12,4 +13,5 @@ module.exports = function (grunt) {
   });
 
   grunt.registerTask('preview', ['wintersmith:preview']);
+  grunt.registerTask('deploy', ['wintersmith:build']);
 };
