@@ -12,6 +12,8 @@ block content
           if article.hasMore
             p.more
               a(href=article.url) more
+      if article.isThird
+        .clearfix
 
 block prepend footer
   if prevPage

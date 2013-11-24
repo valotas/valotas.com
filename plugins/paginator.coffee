@@ -20,6 +20,10 @@ module.exports = (env, callback) ->
     # note that each article is assumed to have its own directory in the articles directory
     articles = contents[options.articles]._.directories.map (item) -> item.index
     articles.sort (a, b) -> b.date - a.date
+
+    for article, i in articles
+      article.isThird = (i + 1) % 3 == 0
+
     return articles
 
   class PaginatorPage extends env.plugins.Page
