@@ -6,7 +6,9 @@
   },
   "repository": "none",
   "devDependencies": {
+    "grunt": "~0.4.2",
     "wintersmith-less": "~0.2.1",
-    "bower": "~1.2.7"
+    "bower": "~1.2.7",
+    "grunt-wintersmith": "0.0.2"
   }
 }
