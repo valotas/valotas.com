@@ -1,7 +1,6 @@
 module.exports = function (grunt) {
   grunt.loadNpmTasks('grunt-wintersmith');
   grunt.loadNpmTasks('grunt-ssh');
-  
 
   grunt.initConfig({
     wintersmith: {
