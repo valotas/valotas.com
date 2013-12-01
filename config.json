@@ -1,6 +1,6 @@
 {
   "locals": {
-    "url": "http://localhost:8080",
+    "url": "",
     "name": "Things to remember",
     "owner": "Yoryos Valotasios",
     "description": "programming stuff :)"
