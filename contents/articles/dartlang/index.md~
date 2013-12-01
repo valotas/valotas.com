@@ -1,0 +1,21 @@
+Some thoughts on Dart language
+So google choose to announce the release of the production ready dart lang at this year's devoxx. That was though mostly a rebrand of the 0.8 version that was available some weeks earlier but that is marketing.
+
+For some reason I  felt like I should try the language earlier so I found a simple project to try to implement it with it. Apparently as dart is at version 1.0, I felt like I should also rebrand my latest branch of mustache4dart to v1.0, but given that I've used it for about a year now, I though that it is the right time to write some things about the language.
+
+First impression
+Unlike most of the new programming languages, this one comes with an IDE (based on Eclipse) and it makes it much more simple to get start with. That was a really good first impression.
+
+Apart from that, given my java background, I can say that I felt really familiar with the language it self. The syntax has been kept really close to java and c# and it looks like that was on purpose. They really wanted to make it easy for every java and c# programmer be a dart programmer and I can say that they managed to do that. From the other point of view though, I do not know why, at the year 2013, man should be using semicolons on the end of each line at my code.
+
+A thing that was new to me was the getters and setters of the language, something that you can find with C# but not with Java. To be honest I can not see the need of them as they look like methods and they act like methods, but they should not be used like ones (ex: do not try to perform an IO operation with a getter or setter). In java world the same rule applies with the exception that you must always provide a getter/setter method for each of your fields you would like to be accessible. So I do not see the need to have yet another syntax for them, but I would like to have them without writing them.
+
+A thing that I liked with the language is the ability to have named parameters. This is really cool and something that would make for example the builder pattern in java to go away.
+
+Another interesting thing is constructors. First they are much more concise which I liked (event though the syntax may look awkword at the beginning). Second each class can have more that one named constructor. I tend to think of them as java's static methods constructors. Lastly there is the so called factory constructor which can only be used as... a factoty method! Generally I do not know how much of a help are these features and only time can tell. For sure they where targeting the removal of the factory object and/or static method factory patterns. I have to say that I'm quite skeptical about them as they are introducing new patterns. For eample a factory constructor can only be used in conjuction with another named one.
+
+One of the good parts of dart are functions. Yes, the language supports functions as first lever citizens. In fact every object can be used as a function by implementing a call method which I think is a good introduction to the feature to purelly object oriented thinking guys. Ofcourse there are also normal named and anonymus functions. After all lambdas are finally available to Java and it was for some time in C#. Javascript was born with closures and is more functional as a language rather than object oriented.
+
+So, another thing that the dart guys tried to advertise is that it is an optionaly typed language. So you can start scripting and as soon as you grow you can start using types. In my opinion here is that they should make the language also attractive to javascript developers as the long term target for the language is to replace javascript. As soon as javascript does not have types it would be hard to enforce them in a new language. Using the language though I found myself dropping back to an untyped solution in cases where I did not want to have a complex api (not to introduce yet another method) but I do not know if it is good in the long run. For sure there are people in the programming language world who have more thoughts against optional typing.
+
+
