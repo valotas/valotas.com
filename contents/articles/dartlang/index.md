@@ -36,13 +36,13 @@ Another interesting thing with the language is its support for asynchronous prog
 Although I'm slowly moving to a promise/future based way of thinking for async tasks and I'm still getting used to it, the api felt like fresh air to me.
 
 ## Some other's thoughts
-Well, I am not a language expert and as it is a new language and it is from google, it is a little bit hard to find any serious arguments against the language. Though, there are some written at the beggining of the language:
+Well, I am not a language expert and as it is a new language and it is from google, it is a little bit hard to find any serious arguments against the it. Though, there are some written at the begining of it's lifecycle:
 
 - [Why dart is not the language of the future][dart-not-future]
 - [Dart; or Why JavaScript has already won][js-won]
 
 ## Final thoughts
-Just like anything new, it is a little bit hard to say if it will be successful or not. For sure google wants to push it and the whole strategy behind the language is to target as many developers as possible.
+Just like anything new, it is a little bit hard to say if it will be successful or not. For sure google wants to push it and the whole strategy behind the language is to target as many developers as possible so that then they can push for the adaption of the VM to more browsers.
 
 ### One language to rule them all
 So dart is targeting the web and that for javascript. There are some blog posts about [why it is cooler than javascript syntacticaly][dart-better-syntax] and a lot of comments stating that dart is what javascript should have been. Not surprising to me these comments are not coming from the javascript word.
