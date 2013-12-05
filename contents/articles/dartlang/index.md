@@ -1,5 +1,6 @@
 ---
 title: Some thoughts on Dart language
+date: 2013-12-01 19:04
 tags:
   - dartlang
   - dart
@@ -7,7 +8,9 @@ tags:
 
 So google choose to announce the release of the production ready dart lang at this year's devoxx. That was though mostly a rebrand of the 0.8 version that was available some weeks earlier but that is marketing.
 
-For some reason I  felt like I should try the language earlier so I found a simple project to try to implement it with it. Apparently as dart is at version 1.0, I felt like I should also rebrand my latest branch of mustache4dart to v1.0, but given that I've used it for about a year now, I though that it is the right time to write some things about the language.
+## A little bit of background
+
+For some reason I  felt like I should try the language earlier so I found a simple project to try to implement it with it. Apparently as dart is at version 1.0, I felt like I should also rebrand my latest branch of [mustache4dart][mustache4dart] to v1.0, but given that I've used it for about a year now, I though that it is the right time to write some things about the language.
 
 ## First impression
 Unlike most of the new programming languages, this one comes with an IDE (based on Eclipse) and it makes it much more simple to get start with. That was a really good first impression.
@@ -77,6 +80,7 @@ On top of that, considering languages that have been developed targeting javascr
 
 Given though the fact that it comes with it's own vm, it looks more likely to me to see dart being a language for android or [chrome os][chrome-os] or [chome apps][chrome-apps] and then pushing for being the language for the web, rather than replacing javascript on the web.
 
+[mustache4dart]: https://github.com/valotas/mustache4dart
 [idiomatic-dart]: https://www.dartlang.org/articles/idiomatic-dart/
 [lombok]: http://projectlombok.org/
 [java-constructor]: http://stackoverflow.com/questions/13803032/java-constructor-and-static-method
