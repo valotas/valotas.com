@@ -13,6 +13,7 @@
     "grunt-ssh": "~0.8.0",
     "typescript": "~0.9.1-1",
     "tsd": "~0.3.1",
-    "express": "~3.4.6"
+    "express": "~3.4.6",
+    "less-middleware": "~0.1.14"
   }
 }
