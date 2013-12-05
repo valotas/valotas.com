@@ -15,6 +15,6 @@
     "tsd": "~0.3.1",
     "express": "~3.4.6",
     "less-middleware": "~0.1.14",
-    "grunt-typescript": "~0.2.4"
+    "grunt-ts": "~1.4.6"
   }
 }
