@@ -1,4 +1,10 @@
+# valotas.com website
+This is a static site created with [wintersmith](http://wintersmith.io). It is build with [grunt](http://gruntjs.com/).
 
-# Blog
+## Quickstart
+Assuming that you have nodejs and npm install, just do the following:
 
-The default [wintersmith](https://github.com/jnordberg/wintersmith) template
+```bash
+npm install
+grunt preview
+```
