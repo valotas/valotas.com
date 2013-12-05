@@ -6,7 +6,7 @@ block content
       div.article
         h2.header
           a(href=article.url)= article.title
-        div.date= moment.utc(article.date).format('YYYY-MM-DD')
+        div.date= article.dateFormated('YYYY-MM-DD')
         div.descr
           !{ typogr(article.intro).typogrify() }
           if article.hasMore

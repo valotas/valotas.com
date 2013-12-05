@@ -23,6 +23,7 @@ module.exports = (env, callback) ->
 
     for article, i in articles
       article.isThird = (i + 1) % 3 == 0
+      article.dateFormated = (format) -> moment.utc(this.date).format(format)
 
     return articles
 
