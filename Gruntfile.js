@@ -1,6 +1,7 @@
 module.exports = function (grunt) {
   grunt.loadNpmTasks('grunt-wintersmith');
   grunt.loadNpmTasks('grunt-ssh');
+  grunt.loadNpmTasks('grunt-typescript');
 
   var readFileIfExists = function (path) {
     var f = grunt.file;
@@ -12,6 +13,12 @@ module.exports = function (grunt) {
   };
 
   grunt.initConfig({
+    typescript: {
+      server: {
+        src: ['server/**/*.ts'],
+        dest: 'build/server.js'
+      }
+    },
     wintersmith: {
       build: {},
       preview: {
@@ -38,6 +45,7 @@ module.exports = function (grunt) {
     }
   });
 
+  grunt.registerTask('build', ['typescript:server']);
   grunt.registerTask('preview', ['wintersmith:preview']);
   grunt.registerTask('deploy', ['wintersmith:build', 'sftp:build']);
 };
