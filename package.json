@@ -10,6 +10,9 @@
     "wintersmith-less": "~0.2.1",
     "bower": "~1.2.7",
     "grunt-wintersmith": "0.0.2",
-    "grunt-ssh": "~0.8.0"
+    "grunt-ssh": "~0.8.0",
+    "typescript": "~0.9.1-1",
+    "tsd": "~0.3.1",
+    "express": "~3.4.6"
   }
 }
