@@ -2,6 +2,15 @@ module.exports = function (grunt) {
   grunt.loadNpmTasks('grunt-wintersmith');
   grunt.loadNpmTasks('grunt-ssh');
 
+  var readFileIfExists = function (path) {
+    var f = grunt.file;
+    if (f.exists(path)) {
+      return f.read(path);
+    } else {
+      return null;
+    }
+  };
+
   grunt.initConfig({
     wintersmith: {
       build: {},
@@ -22,8 +31,8 @@ module.exports = function (grunt) {
           host: 'pi',
           createDirectories: true,
           username: 'valotas',
-          privateKey: grunt.file.read("/home/valotas/.ssh/id_rsa"),
-          passphrase: grunt.file.read("/home/valotas/.ssh/id_rsa.pass")
+          privateKey: readFileIfExists("/home/valotas/.ssh/id_rsa"),
+          passphrase: readFileIfExists("/home/valotas/.ssh/id_rsa.pass")
         }
       }
     }
