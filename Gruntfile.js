@@ -4,6 +4,7 @@ module.exports = function (grunt) {
   grunt.loadNpmTasks('grunt-ts');
   grunt.loadNpmTasks('grunt-develop');
   grunt.loadNpmTasks('grunt-contrib-watch');
+  grunt.loadNpmTasks('grunt-contrib-clean');
 
   var readFileIfExists = function (path) {
     var f = grunt.file;
@@ -15,6 +16,9 @@ module.exports = function (grunt) {
   };
 
   grunt.initConfig({
+    clean: {
+      build: ['build']
+    },
     watch: {
       ts: {
         files: ['server/**/*.ts'],
@@ -66,7 +70,7 @@ module.exports = function (grunt) {
     }
   });
 
-  grunt.registerTask('build', ['ts:server']);
+  grunt.registerTask('build', ['clean:build', 'ts:server']);
   grunt.registerTask('dev', ['build', 'develop:server', 'watch:ts']);
   grunt.registerTask('preview', ['wintersmith:preview']);
   grunt.registerTask('deploy', ['wintersmith:build', 'sftp:build']);
