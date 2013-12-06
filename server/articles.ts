@@ -5,8 +5,13 @@ import express = require('express')
 
 var app = express();
 
-app.get('/articles', (req: express.Request, resp: express.Response) => {
-  resp.send('Articles here!');
+app.get('/:year/:month/:title', (req: express.Request, resp: express.Response, next?: Function) => {
+  if (req.params.year && req.params.month && req.params.title) {
+    resp.send('Articles here!');
+  } else {
+    console.log('Could not serve article')
+    next();
+  }
 });
 
 export = app;
