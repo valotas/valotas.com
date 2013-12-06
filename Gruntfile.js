@@ -5,6 +5,7 @@ module.exports = function (grunt) {
   grunt.loadNpmTasks('grunt-develop');
   grunt.loadNpmTasks('grunt-contrib-watch');
   grunt.loadNpmTasks('grunt-contrib-clean');
+  grunt.loadNpmTasks('grunt-contrib-jshint');
 
   var readFileIfExists = function (path) {
     var f = grunt.file;
@@ -19,10 +20,20 @@ module.exports = function (grunt) {
     clean: {
       build: ['build']
     },
+    jshint: {
+      all: ['Gruntfile.js']
+    },
     watch: {
       ts: {
         files: ['server/**/*.ts'],
         tasks: ['ts:server', 'develop:server'],
+        options: {
+          nospawn: true
+        }
+      },
+      js: {
+        files: ['**/*.js', '!build/**', '!node_modules/**'],
+        tasks: ['jshint:all'],
         options: {
           nospawn: true
         }
@@ -71,7 +82,7 @@ module.exports = function (grunt) {
   });
 
   grunt.registerTask('build', ['clean:build', 'ts:server']);
-  grunt.registerTask('dev', ['build', 'develop:server', 'watch:ts']);
+  grunt.registerTask('dev', ['build', 'jshint:all', 'develop:server', 'watch:ts', 'watch:js']);
   grunt.registerTask('preview', ['wintersmith:preview']);
   grunt.registerTask('deploy', ['wintersmith:build', 'sftp:build']);
 };
