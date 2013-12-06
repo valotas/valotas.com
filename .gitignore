@@ -4,3 +4,4 @@ build/**
 *~
 d.ts/**
 tscommand.tmp.txt
+npm-debug.log
