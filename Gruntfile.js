@@ -2,6 +2,8 @@ module.exports = function (grunt) {
   grunt.loadNpmTasks('grunt-wintersmith');
   grunt.loadNpmTasks('grunt-ssh');
   grunt.loadNpmTasks('grunt-ts');
+  grunt.loadNpmTasks('grunt-develop');
+  grunt.loadNpmTasks('grunt-contrib-watch');
 
   var readFileIfExists = function (path) {
     var f = grunt.file;
@@ -13,6 +15,15 @@ module.exports = function (grunt) {
   };
 
   grunt.initConfig({
+    watch: {
+      ts: {
+        files: ['server/**/*.ts'],
+        tasks: ['ts:server', 'develop:server'],
+        options: {
+          nospawn: true
+        }
+      }
+    },
     ts: {
       server: {
         src: ['server/**/*.ts'],
@@ -21,6 +32,12 @@ module.exports = function (grunt) {
           target: 'es5',
           module: 'commonjs'
         }
+      }
+    },
+    develop: {
+      server: {
+        file: 'build/app.js',
+        nodeArgs: ['--debug']
       }
     },
     wintersmith: {
@@ -50,6 +67,7 @@ module.exports = function (grunt) {
   });
 
   grunt.registerTask('build', ['ts:server']);
+  grunt.registerTask('dev', ['build', 'develop:server', 'watch:ts']);
   grunt.registerTask('preview', ['wintersmith:preview']);
   grunt.registerTask('deploy', ['wintersmith:build', 'sftp:build']);
 };
