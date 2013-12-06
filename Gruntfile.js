@@ -1,5 +1,4 @@
 module.exports = function (grunt) {
-  grunt.loadNpmTasks('grunt-wintersmith');
   grunt.loadNpmTasks('grunt-ssh');
   grunt.loadNpmTasks('grunt-ts');
   grunt.loadNpmTasks('grunt-develop');
@@ -53,14 +52,6 @@ module.exports = function (grunt) {
       server: {
         file: 'build/app.js',
         nodeArgs: ['--debug']
-      }
-    },
-    wintersmith: {
-      build: {},
-      preview: {
-        options: {
-          action: 'preview'
-        }
       }
     },
     sftp: {

@@ -1,15 +1,10 @@
 {
   "dependencies": {
-    "moment": "2.3",
-    "underscore": "1.4.x",
-    "typogr": "0.5.x"
   },
   "repository": "none",
   "devDependencies": {
     "grunt": "~0.4.2",
-    "wintersmith-less": "~0.2.1",
     "bower": "~1.2.7",
-    "grunt-wintersmith": "0.0.2",
     "grunt-ssh": "~0.8.0",
     "typescript": "~0.9.1-1",
     "tsd": "~0.3.1",
