@@ -5,16 +5,18 @@
 import express = require('express')
 import less = require('less-middleware')
 import path = require('path')
+import cons = require('consolidate')
 import articles = require('articles')
 
 var contents = path.normalize(__dirname + '/../contents'),
+  templates = path.normalize(__dirname + '/../templates'),
   app = express();
 
 app
-//  .use(function (req: express.Request, resp: express.Response, next?: Function) {
-//    console.log('%s %s %s', contents, req.method, req.originalUrl);
-//    next();
-//  })
+  //Add a view engine
+  .engine('jade', cons.jade)
+  .set('view engine', 'jade')
+  .set('views', templates)
 
   .use(express.logger())
 
