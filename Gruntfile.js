@@ -5,6 +5,7 @@ module.exports = function (grunt) {
   grunt.loadNpmTasks('grunt-contrib-watch');
   grunt.loadNpmTasks('grunt-contrib-clean');
   grunt.loadNpmTasks('grunt-contrib-jshint');
+  grunt.loadNpmTasks('grunt-mocha-cli');
 
   var readFileIfExists = function (path) {
     var f = grunt.file;
@@ -25,7 +26,7 @@ module.exports = function (grunt) {
     watch: {
       ts: {
         files: ['server/**/*.ts'],
-        tasks: ['ts:server', 'develop:server'],
+        tasks: ['ts:server', 'jasmine:specs', 'develop:server'],
         options: {
           nospawn: true
         }
@@ -45,6 +46,15 @@ module.exports = function (grunt) {
         options: {
           target: 'es5',
           module: 'commonjs'
+        }
+      }
+    },
+    mochacli: {
+      server: {
+        options: {
+          files: 'build/*.js',
+          reporter: 'spec',
+          require: ['chai']
         }
       }
     },
@@ -72,7 +82,7 @@ module.exports = function (grunt) {
     }
   });
 
-  grunt.registerTask('build', ['clean:build', 'ts:server']);
+  grunt.registerTask('build', ['clean:build', 'ts:server', 'mochacli:server']);
   grunt.registerTask('dev', ['build', 'jshint:all', 'develop:server', 'watch:ts', 'watch:js']);
   grunt.registerTask('preview', ['wintersmith:preview']);
   grunt.registerTask('deploy', ['wintersmith:build', 'sftp:build']);
