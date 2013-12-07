@@ -1,6 +1,5 @@
 ///<reference path='../d.ts/DefinitelyTyped/node/node.d.ts' />
 ///<reference path='../d.ts/DefinitelyTyped/express/express.d.ts' />
-///<reference path='less.d.ts' />
 
 import express = require('express')
 import less = require('less-middleware')
