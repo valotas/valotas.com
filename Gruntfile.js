@@ -52,7 +52,7 @@ module.exports = function (grunt) {
     mochacli: {
       server: {
         options: {
-          files: 'build/*.js',
+          files: ['build/*.spec.js'],
           reporter: 'spec',
           require: ['chai']
         }
