@@ -6,10 +6,19 @@ var expect = require('chai').expect;
 
 describe('articles', () => {
   describe('ArticleUrlParam', () => {
+
     it('should throw an error when trying to construct it without paramters', () => {
       expect(() => {
         new articles.ArticleUrlParams(null);
-      }).to.throw(/Can not work with a null paramter object/)
+      }).to.throw(/null parameter object/)
     });
+
+
+    it('should throw an error when trying to construct it without a title', () => {
+      expect(() => {
+        new articles.ArticleUrlParams({year:'123', month: '123'});
+      }).to.throw(/Title can not be null/)
+    });
+
   })
 });
