@@ -26,7 +26,7 @@ module.exports = function (grunt) {
     watch: {
       ts: {
         files: ['server/**/*.ts'],
-        tasks: ['ts:server', 'jasmine:specs', 'develop:server'],
+        tasks: ['ts:server', 'mochacli:server', 'develop:server'],
         options: {
           nospawn: true
         }
@@ -82,8 +82,8 @@ module.exports = function (grunt) {
     }
   });
 
-  grunt.registerTask('build', ['clean:build', 'ts:server', 'mochacli:server']);
-  grunt.registerTask('dev', ['build', 'jshint:all', 'develop:server', 'watch:ts', 'watch:js']);
+  grunt.registerTask('build', ['clean:build', 'jshint:all', 'ts:server', 'mochacli:server']);
+  grunt.registerTask('dev', ['build', 'develop:server', 'watch:ts', 'watch:js']);
   grunt.registerTask('preview', ['wintersmith:preview']);
   grunt.registerTask('deploy', ['wintersmith:build', 'sftp:build']);
 };
