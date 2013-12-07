@@ -13,11 +13,15 @@ describe('articles', () => {
       }).to.throw(/null parameter object/)
     });
 
-
     it('should throw an error when trying to construct it without a title', () => {
       expect(() => {
         new articles.ArticleUrlParams({year:'123', month: '123'});
       }).to.throw(/Title can not be null/)
+    });
+
+    it('should give the expected path based on the given title', () => {
+      var p = new articles.ArticleUrlParams({title: 'xxx'});
+      expect(p.path()).to.match(/contents\/articles\/xxx\/index\.md/);
     });
 
   })

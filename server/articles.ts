@@ -20,7 +20,7 @@ export class ArticleUrlParams {
   }
 
   path():string {
-    return 'asd';
+    return __dirname + '/contents/articles/' + this._title + '/index.md';
   }
 }
 
