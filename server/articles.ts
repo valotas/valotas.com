@@ -1,7 +1,7 @@
 ///<reference path='../d.ts/DefinitelyTyped/express/express.d.ts' />
 ///<reference path='../d.ts/DefinitelyTyped/node/node.d.ts' />
 
-class ArticleUrlParam {
+export class ArticleUrlParams {
   private _title: string;
   private _year: number;
   private _month: number;
@@ -37,4 +37,4 @@ app.get('/:year/:month/:title', (req: express.Request, resp: express.Response, n
   }
 });
 
-export = app;
+export var expressApp = app;
