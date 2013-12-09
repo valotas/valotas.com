@@ -51,7 +51,9 @@ export class ArticleUrlParams {
       return null;
     }
 
-    return new Article(p);
+    return new Article(fs.readFileSync(p, {
+      encoding: 'UTF8'
+    }));
   }
 }
 
@@ -64,27 +66,25 @@ class ArticleParseException implements Error {
 
 export class Article {
   private meta;
+  private contentWithoutHeader: string;
 
-  constructor(public content: string) {
-    var lines = content.split('\n'),
-      header;
+  constructor(content: string) {
+    var splitted = content.split(/---\n/),
+      i = 2;
 
-    for (var i in lines) {
-      var line = lines[i];
-      if (line === '---') {
-        if (header) {
-          break;
-        } else {
-          header = '';
-        }
-      } else {
-        header += line + '\n';
-      }
+    if (splitted.length === 0) {
+      throw new ArticleParseException('Could not find the header of the content');
     }
 
-    this.meta = yalm.load(header);
+    this.meta = yalm.load(splitted[1]);
+
     if (this.meta === null) {
-      throw new ArticleParseException("Can not extract meta info out of '" + header + "'" );
+      throw new ArticleParseException("Can not extract meta info out of '" + splitted[1] + "'" );
+    }
+
+    this.contentWithoutHeader = splitted[2];
+    for (i = 3; i < splitted.length; i++) {
+      this.contentWithoutHeader += '---\n' + splitted[i];
     }
   }
 
@@ -102,6 +102,10 @@ export class Article {
 
   tags(): string[] {
     return this.meta.tags;
+  }
+
+  content(): string {
+    return this.contentWithoutHeader;
   }
 }
 
