@@ -1,6 +1,7 @@
 {
   "dependencies": {},
   "repository": "none",
+  "private": true,
   "devDependencies": {
     "grunt": "~0.4.2",
     "bower": "~1.2.7",
