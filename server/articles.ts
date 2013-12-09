@@ -3,33 +3,62 @@
 ///<reference path='../d.ts/DefinitelyTyped/moment/moment.d.ts' />
 
 import fs = require('fs')
+import path = require('path')
 import yalm = require('js-yaml')
 var moment = require('moment');
+
+class ArticleUrlCreationException implements Error {
+  public name = 'ArticleUrlCreationException';
+  constructor(public message: string) {
+
+  }
+}
 
 export class ArticleUrlParams {
   private _title: string;
   private _year: number;
   private _month: number;
+  private _dir: string;
 
   constructor(param: any) {
     if (!(param)) {
-      throw 'Can not work with a null parameter object'
+      throw new ArticleUrlCreationException('Can not work with an undefined parameters');
     }
     this._month = param.month || null;
     this._year = param.year || null;
     this._title = param.title || null;
 
     if (this._title == null) {
-      throw 'Title can not be null';
+      throw new ArticleUrlCreationException('Title can not be null');
     }
   }
 
-  path():string {
-    return __dirname + '/contents/articles/' + this._title + '/index.md';
+  private mdPathIfExists(basePath: string):string {
+    var md = basePath + '/contents/articles/' + this._title;
+
+    if (fs.existsSync(md)) { //it should be a directory
+      md += '/index.md';
+    } else {
+      md += '.md';
+    }
+
+    return fs.existsSync(md) ? path.normalize(md) : null;
   }
 
-  article(): Article {
-    return new Article(this.path());
+  article(basePath: string): Article {
+    var p = this.mdPathIfExists(basePath);
+    if (p == null) {
+      return null;
+    }
+
+    return new Article(p);
+  }
+}
+
+class ArticleParseException implements Error {
+  public name = 'ArticleParseException';
+  constructor(public message: string) {
+
   }
 }
 
@@ -55,10 +84,7 @@ export class Article {
 
     this.meta = yalm.load(header);
     if (this.meta === null) {
-      throw {
-        type: 'ArticleParseException',
-        message: "Can not extract meta info out of '" + header + "'"
-      };
+      throw new ArticleParseException("Can not extract meta info out of '" + header + "'" );
     }
   }
 
