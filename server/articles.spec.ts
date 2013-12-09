@@ -42,7 +42,8 @@ describe('articles', () => {
       'tags:\n' +
       '- dartlang\n' +
       '- dart\n' +
-      '---',
+      '---\n' + 
+      'super content!',
       article: articles.Article;
 
     beforeEach(() => {
@@ -65,5 +66,8 @@ describe('articles', () => {
       expect(article.tags()).to.eql(['dartlang', 'dart']);
     });
 
+    it('should provide the content without the header', () => {
+      expect(article.content()).to.equal('super content!');
+    });
   });
 });
