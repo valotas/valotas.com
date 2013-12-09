@@ -1,8 +1,10 @@
 ///<reference path='../d.ts/DefinitelyTyped/express/express.d.ts' />
 ///<reference path='../d.ts/DefinitelyTyped/node/node.d.ts' />
+///<reference path='../d.ts/DefinitelyTyped/moment/moment.d.ts' />
 
 import fs = require('fs')
 import yalm = require('js-yaml')
+var moment = require('moment');
 
 export class ArticleUrlParams {
   private _title: string;
@@ -64,9 +66,12 @@ export class Article {
     return this.meta['title'];
   }
 
-  date(format?: string): string {
-    //TODO: Should return a moments instance
-    return this.meta.date;
+  date(format: string = 'YYYY-MM-DD HH:mm'): string {
+    return this.moment().format(format);
+  }
+
+  private moment(): Moment {
+    return moment(this.meta.date);
   }
 
   tags(): string[] {

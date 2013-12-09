@@ -48,6 +48,10 @@ describe('articles', () => {
       expect(article.date()).to.equal('2013-12-01 19:04');
     });
 
+    it('should provide a way to get the date formated', () => {
+      expect(article.date('YYYY-MM-DD')).to.equal('2013-12-01');
+    });
+
     it('should provide an array of tags extracted from the metadata', () => {
       expect(article.tags()).to.eql(['dartlang', 'dart']);
     });
