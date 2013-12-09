@@ -10,7 +10,7 @@ describe('articles', () => {
     it('should throw an error when trying to construct it without paramters', () => {
       expect(() => {
         new articles.ArticleUrlParams(null);
-      }).to.throw(/null parameter object/)
+      }).to.throw(/undefined parameters/)
     });
 
     it('should throw an error when trying to construct it without a title', () => {
@@ -19,11 +19,20 @@ describe('articles', () => {
       }).to.throw(/Title can not be null/)
     });
 
-    it('should give the expected path based on the given title', () => {
-      var p = new articles.ArticleUrlParams({title: 'xxx'});
-      expect(p.path()).to.match(/contents\/articles\/xxx\/index\.md/);
+    it('should return null if there is no file coresponding to the given title', () => {
+      var url = new articles.ArticleUrlParams({title: 'xxx'});
+      expect(url.article('.')).to.be.null;
     });
 
+    it('should return an article if there is a file named as [title].md', () => {
+      var url = new articles.ArticleUrlParams({title: 'quicker-jerseytest'});
+      expect(url.article(__dirname + '/..')).not.to.be.null;
+    });
+
+    it('should return an article if there is a file named as [title]/index.md', () => {
+      var url = new articles.ArticleUrlParams({title: 'dartlang'});
+      expect(url.article(__dirname + '/..')).not.to.be.null;
+    });
   });
 
   describe('Article', () => {
@@ -55,5 +64,6 @@ describe('articles', () => {
     it('should provide an array of tags extracted from the metadata', () => {
       expect(article.tags()).to.eql(['dartlang', 'dart']);
     });
+
   });
 });
