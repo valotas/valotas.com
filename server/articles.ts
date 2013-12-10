@@ -111,21 +111,17 @@ export class Article {
 
 import express = require('express')
 
-var app = express();
+var router = new express.Router();
 
-app.get('/:year/:month/:title', (req: express.Request, resp: express.Response, next?: Function) => {
+router.get('/:year/:month/:title', (req: express.Request, resp: express.Response, next?: Function) => {
   try {
-    var params = new ArticleUrlParams(req.params);
+    var params = new ArticleUrlParams(req.params),
+      article = params.article(__dirname + '/..');
 
+    resp.render('article', article);
   } catch (e) {
     next(e);
   }
-  if (req.params.year && req.params.month && req.params.title) {
-    resp.send('Articles here!');
-  } else {
-    console.log('Could not serve article')
-    next();
-  }
 });
 
-export var expressApp = app;
+export var router = router;
