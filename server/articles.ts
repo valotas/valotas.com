@@ -111,7 +111,7 @@ export class Article {
 
 import express = require('express')
 
-var router = express.Router();
+var router = new express.Router();
 
 router.get('/:year/:month/:title', (req: express.Request, resp: express.Response, next?: Function) => {
   try {
