@@ -26,7 +26,7 @@ app
   .use(express.static(contents))
 
   // Add an article handler:
-  .use(articles.expressApp)
+  .use(articles.router.middleware)
 
   //Add a simple handler for /
   .get('/', function (req: express.Request, resp: express.Response) {
