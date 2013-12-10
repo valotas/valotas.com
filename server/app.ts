@@ -6,9 +6,11 @@ import less = require('less-middleware')
 import path = require('path')
 import cons = require('consolidate')
 import articles = require('articles')
+import os = require('os')
 
 var contents = path.normalize(__dirname + '/../contents'),
   templates = path.normalize(__dirname + '/../templates'),
+  tmpDir = os.tmpDir() + '/valotas.com',
   app = express();
 
 app
@@ -20,10 +22,16 @@ app
   .use(express.logger())
 
   //Add less support to our server
-  .use(less({ src: contents }))
+  .use(less({ 
+    src: contents,
+    dest: tmpDir,
+    optimization: 2,
+    compress: true
+  }))
 
   // Server static content
   .use(express.static(contents))
+  .use(express.static(tmpDir))
 
   // Add an article handler:
   .use(articles.router.middleware)
