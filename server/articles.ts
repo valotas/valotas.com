@@ -29,6 +29,14 @@ export class ArticleUrlParams {
     this._year = param.year || null;
     this._title = param.title || null;
 
+    if (this._month !== null && this._year === null) {
+      throw new ArticleUrlCreationException('Year is mandatory when month is given')
+    }
+
+    if (this._year !== null && this._month === null) {
+      throw new ArticleUrlCreationException('Month is mandatory when year is given')
+    }
+
     if (this._title == null) {
       throw new ArticleUrlCreationException('Title can not be null');
     }
@@ -47,14 +55,27 @@ export class ArticleUrlParams {
   }
 
   article(basePath: string): Article {
-    var p = this.mdPathIfExists(basePath);
+    var p = this.mdPathIfExists(basePath),
+      a, m;
     if (p == null) {
       return null;
     }
 
-    return new Article(fs.readFileSync(p, {
+    a = new Article(fs.readFileSync(p, {
       encoding: 'UTF8'
     }));
+
+    if (this._year != null) {
+      m = a.moment();
+      if (this._year !== m.year()) {
+        return null;
+      }
+      if (this._month !== m.month() + 1) {
+        return null;
+      }
+    }
+
+    return a;
   }
 }
 
