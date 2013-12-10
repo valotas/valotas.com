@@ -67,7 +67,7 @@ describe('articles', () => {
     });
 
     it('should provide the content without the header', () => {
-      expect(article.content()).to.equal('super content!');
+      expect(article.content()).to.equal('<p>super content!</p>\n');
     });
   });
 });

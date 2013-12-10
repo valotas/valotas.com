@@ -6,6 +6,7 @@ import fs = require('fs')
 import path = require('path')
 import yalm = require('js-yaml')
 var moment = require('moment');
+var marked = require('marked');
 
 class ArticleUrlCreationException implements Error {
   public name = 'ArticleUrlCreationException';
@@ -105,7 +106,7 @@ export class Article {
   }
 
   content(): string {
-    return this.contentWithoutHeader;
+    return marked(this.contentWithoutHeader);
   }
 }
 
