@@ -118,7 +118,11 @@ router.get('/:year/:month/:title', (req: express.Request, resp: express.Response
     var params = new ArticleUrlParams(req.params),
       article = params.article(__dirname + '/..');
 
-    resp.render('article', article);
+    resp.render('article', {
+      page: article, 
+      contents: {
+        index: { url: 'xxx' }
+      }});
   } catch (e) {
     next(e);
   }
