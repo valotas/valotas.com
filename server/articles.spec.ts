@@ -39,6 +39,11 @@ describe('articles', () => {
       expect(url.article(__dirname + '/..')).not.to.be.null;
     });
 
+    it('should accept the year and month as strings or numbers', () => {
+      var url = new articles.ArticleUrlParams({year: '2013', month: 12, title: 'dartlang'});
+      expect(url.article(__dirname + '/..')).not.to.be.null;
+    });
+
     it('should return null if the given year/month does not match the article\'s one', () => {
       var p = new articles.ArticleUrlParams({year: 2012, month: 12, title: 'dartlang'});
 

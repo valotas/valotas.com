@@ -25,8 +25,9 @@ export class ArticleUrlParams {
     if (!(param)) {
       throw new ArticleUrlCreationException('Can not work with an undefined parameters');
     }
-    this._month = param.month || null;
-    this._year = param.year || null;
+
+    this._month = parseInt(param.month, 10) || null;
+    this._year = parseInt(param.year, 10) || null;
     this._title = param.title || null;
 
     if (this._month !== null && this._year === null) {
@@ -65,7 +66,7 @@ export class ArticleUrlParams {
       encoding: 'UTF8'
     }));
 
-    if (this._year != null) {
+    if (this._year !== null) {
       m = a.moment();
       if (this._year !== m.year()) {
         return null;
@@ -140,11 +141,16 @@ router.get('/:year/:month/:title', (req: express.Request, resp: express.Response
     var params = new ArticleUrlParams(req.params),
       article = params.article(__dirname + '/..');
 
-    resp.render('article', {
-      page: article, 
-      contents: {
-        index: { url: 'xxx' }
-      }});
+    if (article === null) {
+      next();
+    }
+    else {
+      resp.render('article', {
+        page: article, 
+        contents: {
+          index: { url: 'xxx' }
+        }});
+    }
   } catch (e) {
     next(e);
   }
