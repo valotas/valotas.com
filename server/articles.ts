@@ -134,9 +134,7 @@ export class Article {
 
 import express = require('express')
 
-var router = new express.Router();
-
-router.get('/:year/:month/:title', (req: express.Request, resp: express.Response, next?: Function) => {
+var handler = (req: express.Request, resp: express.Response, next?: Function) => {
   try {
     var params = new ArticleUrlParams(req.params),
       article = params.article(__dirname + '/..');
@@ -154,6 +152,11 @@ router.get('/:year/:month/:title', (req: express.Request, resp: express.Response
   } catch (e) {
     next(e);
   }
-});
+};
+
+var router = new express.Router();
+
+router.get('/:year/:month/:title', handler)
+  .get('/:title', handler);
 
 export var router = router;
