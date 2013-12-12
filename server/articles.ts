@@ -154,9 +154,6 @@ var handler = (req: express.Request, resp: express.Response, next?: Function) =>
   }
 };
 
-var router = new express.Router();
-
-router.get('/:year/:month/:title', handler)
+export var router = new express.Router()
+  .get('/:year/:month/:title', handler)
   .get('/:title', handler);
-
-export var router = router;
