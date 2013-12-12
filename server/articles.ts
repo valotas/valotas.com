@@ -184,8 +184,25 @@ export class ArticleRepository {
   }
 
   get(q: ArticleQuery): Article {
-    var f = new ArticleFile(this.directory, q.title);
-    return f.article();
+    var f = new ArticleFile(this.directory, q.title),
+      a = f.article(),
+      m: Moment;
+
+    if (a == null) {
+      return null;
+    }
+
+    if (q.year) {
+      m = a.moment();
+      if (q.year !== m.year()) {
+        return null;
+      }
+      if (q.month !== m.month() + 1) {
+        return null;
+      }
+    }
+
+    return a;
   }
 }
 

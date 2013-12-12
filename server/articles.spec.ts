@@ -85,6 +85,16 @@ describe('articles', () => {
       var article = repo.get({title: 'dartlangg'});
       expect(article).to.be.null;
     });
+
+    it('should return null if the given year/month does not match the article\'s one', () => {
+      var article = repo.get({title: 'dartlang', year: 2012, month: 12});
+      expect(article).to.be.null;
+    });
+
+    it('should return an article if both year and month are matching with the article\'s meta when given', () => {
+      var article = repo.get({year: 2013, month: 12, title: 'dartlang'});
+      expect(article).not.to.be.null;
+    });
   });
 
   describe('ArticleUrlParam', () => {
@@ -116,21 +126,12 @@ describe('articles', () => {
       expect(url.article(__dirname + '/..')).not.to.be.null;
     });
 
-    it('should return an article if both year and month are matching with the article\'s meta when given', () => {
-      var url = new articles.ArticleUrlParams({year: 2013, month: 12, title: 'dartlang'});
-      expect(url.article(__dirname + '/..')).not.to.be.null;
-    });
 
     it('should accept the year and month as strings or numbers', () => {
       var url = new articles.ArticleUrlParams({year: '2013', month: 12, title: 'dartlang'});
       expect(url.article(__dirname + '/..')).not.to.be.null;
     });
 
-    it('should return null if the given year/month does not match the article\'s one', () => {
-      var p = new articles.ArticleUrlParams({year: 2012, month: 12, title: 'dartlang'});
-
-      expect(p.article(__dirname + '/..')).to.be.null;
-    });
 
     it('should throw an error when trying to create with a year and no month', () => {
       expect(() => {
