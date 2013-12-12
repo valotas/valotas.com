@@ -107,30 +107,29 @@ class ArticleUrlCreationException implements Error {
   }
 }
 
-export class ArticleUrlParams {
-  private _title: string;
-  private _year: number;
-  private _month: number;
-  private _dir: string;
+export class ArticleUrlParams implements ArticleQuery {
+  title: string;
+  year: number;
+  month: number;
 
   constructor(param: any) {
     if (!(param)) {
       throw new ArticleUrlCreationException('Can not work with an undefined parameters');
     }
 
-    this._month = parseInt(param.month, 10) || null;
-    this._year = parseInt(param.year, 10) || null;
-    this._title = param.title || null;
+    this.month = parseInt(param.month, 10) || null;
+    this.year = parseInt(param.year, 10) || null;
+    this.title = param.title || null;
 
-    if (this._month !== null && this._year === null) {
+    if (this.month !== null && this.year === null) {
       throw new ArticleUrlCreationException('Year is mandatory when month is given')
     }
 
-    if (this._year !== null && this._month === null) {
+    if (this.year !== null && this.month === null) {
       throw new ArticleUrlCreationException('Month is mandatory when year is given')
     }
 
-    if (this._title == null) {
+    if (this.title == null) {
       throw new ArticleUrlCreationException('Title can not be null');
     }
   }
@@ -186,25 +185,26 @@ export class ArticleRepository {
 
 import express = require('express')
 
-var handler = (req: express.Request, resp: express.Response, next?: Function) => {
-  try {
-    var params = new ArticleUrlParams(req.params),
-      article = params.article(__dirname + '/..');
+var repo = new ArticleRepository(__dirname + '/..'),
+  handler = (req: express.Request, resp: express.Response, next?: Function) => {
+    try {
+      var params = new ArticleUrlParams(req.params),
+        article = repo.get(params);
 
-    if (article === null) {
-      next();
-    }
-    else {
-      resp.locals.title = 'XXX';
-      resp.locals.contents = {
-        index: {url: 'xxx'}
+      if (article === null) {
+        next();
       }
-      resp.render('article', { page: article });
+      else {
+        resp.locals.title = 'XXX';
+        resp.locals.contents = {
+          index: {url: 'xxx'}
+        }
+        resp.render('article', { page: article });
+      }
+    } catch (e) {
+      next(e);
     }
-  } catch (e) {
-    next(e);
-  }
-};
+  };
 
 export var router = new express.Router()
   .get('/:year/:month/:title', handler)

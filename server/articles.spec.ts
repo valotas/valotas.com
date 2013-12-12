@@ -113,7 +113,7 @@ describe('articles', () => {
 
     it('should accept the year and month as strings or numbers', () => {
       var url = new articles.ArticleUrlParams({year: '2013', month: 12, title: 'dartlang'});
-      expect(url.article(__dirname + '/..')).not.to.be.null;
+      expect(url.year).to.equal(2013);
     });
 
 
