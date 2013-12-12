@@ -172,19 +172,6 @@ var getArticleFiles = (directory: string, files: string[] = []): string[] => {
   return files;
 }
 
-export class ArticleList {
-  private files: string[];
-  private articles: Article[];
-
-  constructor(directory: string) {
-    this.files = getArticleFiles(directory);
-  }
-
-  size(): number {
-    return this.files.length;
-  }
-}
-
 import express = require('express')
 
 var handler = (req: express.Request, resp: express.Response, next?: Function) => {

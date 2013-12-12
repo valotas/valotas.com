@@ -128,14 +128,4 @@ describe('articles', () => {
     });
   });
 
-  describe('ArticleList', () => {
-    it('should be initialized with a directory', () => {
-      expect(new articles.ArticleList(__dirname)).not.to.be.null;
-    });
-
-    it('should provide the size of the articles', () => {
-      expect(new articles.ArticleList(__dirname).size()).to.be.at.least(5);
-    });
-  });
-
 });
