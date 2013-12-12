@@ -134,28 +134,6 @@ export class ArticleUrlParams {
       throw new ArticleUrlCreationException('Title can not be null');
     }
   }
-
-  article(basePath: string): Article {
-    var f = new ArticleFile(basePath, this._title),
-      a = f.article(),
-      m;
-
-    if (a == null) {
-      return null;
-    }
-
-    if (this._year !== null) {
-      m = a.moment();
-      if (this._year !== m.year()) {
-        return null;
-      }
-      if (this._month !== m.month() + 1) {
-        return null;
-      }
-    }
-
-    return a;
-  }
 }
 
 var getArticleFiles = (directory: string, files: string[] = []): string[] => {

@@ -111,22 +111,6 @@ describe('articles', () => {
       }).to.throw(/Title can not be null/)
     });
 
-    it('should return null if there is no file coresponding to the given title', () => {
-      var url = new articles.ArticleUrlParams({title: 'xxx'});
-      expect(url.article('.')).to.be.null;
-    });
-
-    it('should return an article if there is a file named as [title].md', () => {
-      var url = new articles.ArticleUrlParams({title: 'quicker-jerseytest'});
-      expect(url.article(__dirname + '/..')).not.to.be.null;
-    });
-
-    it('should return an article if there is a file named as [title]/index.md', () => {
-      var url = new articles.ArticleUrlParams({title: 'dartlang'});
-      expect(url.article(__dirname + '/..')).not.to.be.null;
-    });
-
-
     it('should accept the year and month as strings or numbers', () => {
       var url = new articles.ArticleUrlParams({year: '2013', month: 12, title: 'dartlang'});
       expect(url.article(__dirname + '/..')).not.to.be.null;
