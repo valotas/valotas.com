@@ -107,33 +107,6 @@ class ArticleUrlCreationException implements Error {
   }
 }
 
-export class ArticleUrlParams implements ArticleQuery {
-  title: string;
-  year: number;
-  month: number;
-
-  constructor(param: any) {
-    if (!(param)) {
-      throw new ArticleUrlCreationException('Can not work with an undefined parameters');
-    }
-
-    this.month = parseInt(param.month, 10) || null;
-    this.year = parseInt(param.year, 10) || null;
-    this.title = param.title || null;
-
-    if (this.month !== null && this.year === null) {
-      throw new ArticleUrlCreationException('Year is mandatory when month is given')
-    }
-
-    if (this.year !== null && this.month === null) {
-      throw new ArticleUrlCreationException('Month is mandatory when year is given')
-    }
-
-    if (this.title == null) {
-      throw new ArticleUrlCreationException('Title can not be null');
-    }
-  }
-}
 
 var getArticleFiles = (directory: string, files: string[] = []): string[] => {
   var filenames = fs.readdirSync(directory);
@@ -180,6 +153,34 @@ export class ArticleRepository {
     }
 
     return a;
+  }
+}
+
+export class ArticleUrlParams implements ArticleQuery {
+  title: string;
+  year: number;
+  month: number;
+
+  constructor(param: any) {
+    if (!(param)) {
+      throw new ArticleUrlCreationException('Can not work with an undefined parameters');
+    }
+
+    this.month = parseInt(param.month, 10) || null;
+    this.year = parseInt(param.year, 10) || null;
+    this.title = param.title || null;
+
+    if (this.month !== null && this.year === null) {
+      throw new ArticleUrlCreationException('Year is mandatory when month is given')
+    }
+
+    if (this.year !== null && this.month === null) {
+      throw new ArticleUrlCreationException('Month is mandatory when year is given')
+    }
+
+    if (this.title == null) {
+      throw new ArticleUrlCreationException('Title can not be null');
+    }
   }
 }
 
