@@ -81,7 +81,7 @@ export class ArticleFile {
       md += this.ext;
     }
 
-    return fs.existsSync(md) ? path.normalize(md) : null;
+    return fs.existsSync(md) ? md : null;
   }
 
   article(): Article {
