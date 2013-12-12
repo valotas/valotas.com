@@ -69,6 +69,24 @@ describe('articles', () => {
     });
   });
 
+  describe('ArticleRepository', () => {
+    var repo = new articles.ArticleRepository(__dirname + '/..');
+
+    it('should provide a getter for a simple article', () => {
+      expect(repo.get).not.to.be.undefined
+    });
+
+    it('should return an article when it exists', () => {
+      var article = repo.get({title: 'dartlang'});
+      expect(article).not.to.be.null;
+    });
+
+    it('should return null when article does not exists', () => {
+      var article = repo.get({title: 'dartlangg'});
+      expect(article).to.be.null;
+    });
+  });
+
   describe('ArticleUrlParam', () => {
 
     it('should throw an error when trying to construct it without paramters', () => {

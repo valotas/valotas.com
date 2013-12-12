@@ -172,6 +172,23 @@ var getArticleFiles = (directory: string, files: string[] = []): string[] => {
   return files;
 }
 
+export interface ArticleQuery {
+  title: string;
+  year?: number;
+  month?: number;
+}
+
+export class ArticleRepository {
+  constructor(private directory: string) {
+
+  }
+
+  get(q: ArticleQuery): Article {
+    var f = new ArticleFile(this.directory, q.title);
+    return f.article();
+  }
+}
+
 import express = require('express')
 
 var handler = (req: express.Request, resp: express.Response, next?: Function) => {
