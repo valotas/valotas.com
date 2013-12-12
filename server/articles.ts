@@ -108,19 +108,6 @@ class ArticleUrlCreationException implements Error {
 }
 
 
-var getArticleFiles = (directory: string, files: string[] = []): string[] => {
-  var filenames = fs.readdirSync(directory);
-  for (var i in filenames) {
-    if (!filenames.hasOwnProperty(i)) continue;
-    var f = directory + '/' + filenames[i];
-    if (fs.statSync(f).isDirectory()) {
-      getArticleFiles(f, files);
-    } else {
-      files.push(f);
-    }
-  }
-  return files;
-}
 
 export interface ArticleQuery {
   title: string;
@@ -129,8 +116,11 @@ export interface ArticleQuery {
 }
 
 export class ArticleRepository {
-  constructor(private directory: string) {
+  private articles: Article[];
+  private directory: string;
 
+  constructor(directory: string) {
+    this.directory = path.normalize(directory);
   }
 
   get(q: ArticleQuery): Article {
@@ -153,6 +143,34 @@ export class ArticleRepository {
     }
 
     return a;
+  }
+
+  private getArticleFiles = (): ArticleFile[] => {
+    var files: ArticleFile[] = [],
+      filenames = fs.readdirSync(this.directory + '/contents/articles');
+
+    for (var i in filenames) {
+      if (!filenames.hasOwnProperty(i)) continue;
+      files.push(new ArticleFile(this.directory, filenames[i]));
+    }
+
+    return files;
+  }
+
+  private getArticles = (): Article[] => {
+    var files = this.getArticleFiles(),
+      articles = [], i;
+    for (i in files) {
+      articles.push(files[i].article())
+    }
+    return articles;
+  }
+
+  list(): Article[] {
+    if (!(this.articles)) {
+      this.articles = this.getArticles();
+    }
+    return this.articles;
   }
 }
 

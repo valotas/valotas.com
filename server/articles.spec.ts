@@ -95,6 +95,16 @@ describe('articles', () => {
       var article = repo.get({year: 2013, month: 12, title: 'dartlang'});
       expect(article).not.to.be.null;
     });
+
+    it('should provide a way to list all Articles', () => {
+      expect(repo.list).not.to.be.undefined;
+    });
+
+    it('should return all articles with list', () => {
+      var articles = repo.list();
+      expect(articles).not.to.be.null;
+      expect(articles.length).to.equal(5);
+    });
   });
 
   describe('ArticleUrlParam', () => {
