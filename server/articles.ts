@@ -111,9 +111,6 @@ export class ArticleFile {
   }
 }
 
-
-
-
 export interface ArticleQuery {
   title: string;
   year?: number;
