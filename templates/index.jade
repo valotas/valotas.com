@@ -5,16 +5,16 @@ block title
 
 block content
   div#index-content
-    each article in articles.all()
+    each article, index in articles.all()
       div.article
         h2.header
           a(href=article.url())= article.title()
         div.date= article.date('YYYY-MM-DD')
         div.descr
-          !{ article.intro }
+          !{ article.intro() }
           p.more
             a(href=article.url()) more
-      if article.isThird
+      if (index + 1) % 3 === 0
         .clearfix
 
 block footer
