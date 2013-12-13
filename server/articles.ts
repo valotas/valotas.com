@@ -27,7 +27,7 @@ export class Article {
   private meta;
   private contentWithoutHeader: string;
 
-  constructor(content: string, private name?: string) {
+  constructor(content: string, private name: string) {
     var splitted = content.split(/---\n/),
       i = 2;
 
@@ -68,10 +68,7 @@ export class Article {
   }
 
   url(): string {
-    if (this.name) {
-      return '/' + this.name;
-    }
-    throw new ArticleUrlCreationException('No name given to create a url');
+    return '/' + this.name;
   }
 }
 
@@ -108,7 +105,7 @@ export class ArticleFile {
 
     a = new Article(fs.readFileSync(p, {
       encoding: 'UTF8'
-    }).toString());
+    }).toString(), this.name);
 
     return a;
   }
