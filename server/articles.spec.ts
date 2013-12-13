@@ -97,11 +97,11 @@ describe('articles', () => {
     });
 
     it('should provide a way to list all Articles', () => {
-      expect(repo.list).not.to.be.undefined;
+      expect(repo.all).not.to.be.undefined;
     });
 
     it('should return all articles with list', () => {
-      var articles = repo.list();
+      var articles = repo.all();
       expect(articles).not.to.be.null;
       expect(articles.length).to.equal(5);
     });

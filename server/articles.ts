@@ -166,7 +166,7 @@ export class ArticleRepository {
     return articles;
   }
 
-  list(): Article[] {
+  all(): Article[] {
     if (!(this.articles)) {
       this.articles = this.getArticles();
     }
