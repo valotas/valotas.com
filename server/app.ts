@@ -10,6 +10,7 @@ import articles = require('articles')
 import sitemap = require('sitemap')
 
 var less = require('less-middleware'),
+  conf = require('../config.json'),
   contents = path.normalize(__dirname + '/../contents'),
   templates = path.normalize(__dirname + '/../templates'),
   tmpDir = os.tmpDir() + '/valotas.com',
@@ -36,6 +37,11 @@ app
   // Server static content
   .use(express.static(contents))
   .use(express.static(tmpDir))
+
+  .use((req: express.Request, resp: express.Response, next?: Function) => {
+    resp.locals = conf.locals;
+    next();
+  })
 
   .use(sitemap.middleware)
 
