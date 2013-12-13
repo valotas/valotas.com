@@ -2,13 +2,13 @@
 ///<reference path='../d.ts/DefinitelyTyped/express/express.d.ts' />
 
 import express = require('express')
-import less = require('less-middleware')
 import path = require('path')
 import cons = require('consolidate')
 import articles = require('articles')
 import os = require('os')
 
-var contents = path.normalize(__dirname + '/../contents'),
+var less = require('less-middleware'),
+  contents = path.normalize(__dirname + '/../contents'),
   templates = path.normalize(__dirname + '/../templates'),
   tmpDir = os.tmpDir() + '/valotas.com',
   app = express();
