@@ -43,7 +43,7 @@ describe('articles', () => {
 
     it('should return a url of /[name]', () => {
       var article = new articles.Article(content, 'xxx');
-      expect(article.url()).to.equal('/xxx');
+      expect(article.url()).to.equal('/xxx/');
     });
   });
 

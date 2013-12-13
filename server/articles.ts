@@ -68,7 +68,7 @@ export class Article {
   }
 
   url(): string {
-    return '/' + this.name;
+    return '/' + this.name + '/';
   }
 }
 
