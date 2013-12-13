@@ -5,7 +5,7 @@ block content
     each article in articles.all()
       div.article
         h2.header
-          a(href='xxxx')= article.title()
+          a(href=article.url())= article.title()
         div.date= article.date('YYYY-MM-DD')
         div.descr
           !{ article.intro }
