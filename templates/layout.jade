@@ -20,9 +20,9 @@ html(lang='en')
           a.photo.img-rounded(href=sitemap.homepage().url)
         div.signature.col-md-9
         block header
-          h1= locals.owner
+          h1= owner
         p
-          span #{locals.name} | #{locals.description}
+          span #{name} | #{description}
         div.social
           a(href='https://github.com/valotas')
             i.fa.fa-github.fa-3x
@@ -39,8 +39,12 @@ html(lang='en')
       block footer
         hr
         div.row
-          p &copy; #{ new Date().getFullYear() } #{ locals.owner } &mdash; powered by&nbsp;
-            a(href='http://getbootstrap.com/') Bootstrap css framework
-            | , 
-            a(href='http://fontawesome.io/') Fontawesome
+          p &copy; #{ moment().year() } #{ owner } &mdash; powered by&nbsp;
+            a(href='http://nodejs.org/' targe='_blank') nodeJS
+            |, 
+            a(href='http://expressjs.com/' targe='_blank') expressjs
+            |, 
+            a(href='http://getbootstrap.com/' targe='_blank') Bootstrap
+            | &nbsp;css framework, 
+            a(href='http://fontawesome.io/' targe='_blank') Fontawesome
             | &nbsp;and my bad UX expertise :)
