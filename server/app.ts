@@ -4,8 +4,10 @@
 import express = require('express')
 import path = require('path')
 import cons = require('consolidate')
-import articles = require('articles')
 import os = require('os')
+
+import articles = require('articles')
+import sitemap = require('sitemap')
 
 var less = require('less-middleware'),
   contents = path.normalize(__dirname + '/../contents'),
@@ -34,6 +36,8 @@ app
   // Server static content
   .use(express.static(contents))
   .use(express.static(tmpDir))
+
+  .use(sitemap.middleware)
 
   // Add an article handler:
   .use(articles.middleware)
