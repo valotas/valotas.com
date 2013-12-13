@@ -1,3 +1,5 @@
+///<reference path='../d.ts/DefinitelyTyped/express/express.d.ts' />
+
 declare module "less-middleware" {
   import express = require('express');
 
