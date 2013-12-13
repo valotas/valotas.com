@@ -225,6 +225,11 @@ var repo = new ArticleRepository(__dirname + '/..'),
     }
   };
 
+export var middleware = (req: express.Request, resp: express.Response, next?: Function) => {
+  resp.locals.articles = repo;
+  next();
+}
+
 export var router = new express.Router()
   .get('/:year/:month/:title', handler)
   .get('/:title', handler);

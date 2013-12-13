@@ -34,6 +34,7 @@ app
   .use(express.static(tmpDir))
 
   // Add an article handler:
+  .use(articles.middleware)
   .use(articles.router.middleware)
 
   //Add a simple handler for /
