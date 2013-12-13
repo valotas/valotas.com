@@ -170,7 +170,19 @@ export class ArticleRepository {
 
   all(): Article[] {
     if (!(this.articles)) {
-      this.articles = this.getArticles();
+      this.articles = this
+        .getArticles()
+        .sort((a: Article, b: Article): number => {
+          var ma = a.moment(),
+            mb = b.moment();
+          if (ma.isSame(mb)) {
+            return 0;
+          }
+          if (ma.isAfter(mb)) {
+            return -1;
+          }
+          return 1;
+        });
     }
     return this.articles;
   }

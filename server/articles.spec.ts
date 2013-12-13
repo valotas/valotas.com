@@ -110,6 +110,16 @@ describe('articles', () => {
       expect(articles).not.to.be.null;
       expect(articles.length).to.equal(5);
     });
+
+    it('should return articles sorted by date', () => {
+      var last: articles.Article;
+      repo.all().forEach((a: articles.Article) => {
+        if (last != null) {
+          expect(a.moment().isBefore(last.moment())).to.be.true;
+        }
+        last = a;
+      });
+    });
   });
 
   describe('ArticleUrlParam', () => {
