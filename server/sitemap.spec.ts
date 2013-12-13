@@ -6,9 +6,9 @@ import sm = require('sitemap');
 var expect = require('chai').expect;
 
 describe('sitemap', () => {
-  describe('SiteMapService', () => {
-    var sitemap = new sm.SiteMapService();
+  var sitemap = new sm.SiteMapService();
 
+  describe('SiteMapService', () => {
     it('should have an homepage function', () => {
       var home = sitemap.homepage();
       expect(home).not.to.be.null;

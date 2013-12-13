@@ -8,6 +8,7 @@ export interface SiteMapEntry {
 }
 
 export class SiteMapService {
+
   homepage(): SiteMapEntry {
     return {
       url: '/',
@@ -16,7 +17,9 @@ export class SiteMapService {
   }
 }
 
+var sitemap = new SiteMapService();
+
 export var middleware = (req: express.Request, resp: express.Response, next?: Function) => {
-  resp.locals.sitemap = new SiteMapService();
+  resp.locals.sitemap = sitemap;
   next();
 }

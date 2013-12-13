@@ -204,7 +204,7 @@ export class ArticleUrlParams implements ArticleQuery {
 
 import express = require('express')
 
-var repo = new ArticleRepository(__dirname + '/..'),
+export var repo = new ArticleRepository(__dirname + '/..'),
   handler = (req: express.Request, resp: express.Response, next?: Function) => {
     try {
       var params = new ArticleUrlParams(req.params),
