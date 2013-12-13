@@ -2,26 +2,18 @@ extends layout
 
 block content
   div#index-content
-    each article in articles
+    each article in articles.all()
       div.article
         h2.header
-          a(href=article.url)= article.title
-        div.date= article.dateFormated('YYYY-MM-DD')
+          a(href='xxxx')= article.title
+        div.date= article.date('YYYY-MM-DD')
         div.descr
-          !{ typogr(article.intro).typogrify() }
-          if article.hasMore
-            p.more
-              a(href=article.url) more
+          !{ article.intro }
+          p.more
+            a(href='#more') more
       if article.isThird
         .clearfix
 
-block prepend footer
-  if prevPage
-    a(href=prevPage.url) « Newer
-  else
-    a(href='/archive.html') « Archives
-  if nextPage
-    a(href=nextPage.url) Next page »
-
-
+block footer
+  a(href='/archive.html') « Archives
 

@@ -26,7 +26,9 @@ app
     src: contents,
     dest: tmpDir,
     optimization: 2,
-    compress: true
+    compress: true,
+    force: true, //always re-compile
+    debug: true
   }))
 
   // Server static content
