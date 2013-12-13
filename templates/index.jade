@@ -13,7 +13,7 @@ block content
         div.descr
           !{ article.intro }
           p.more
-            a(href='#more') more
+            a(href=article.url()) more
       if article.isThird
         .clearfix
 
