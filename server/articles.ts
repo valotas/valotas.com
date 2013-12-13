@@ -215,9 +215,6 @@ export var repo = new ArticleRepository(__dirname + '/..'),
       }
       else {
         resp.locals.title = 'XXX';
-        resp.locals.contents = {
-          index: {url: 'xxx'}
-        }
         resp.render('article', { page: article });
       }
     } catch (e) {
