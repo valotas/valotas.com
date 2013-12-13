@@ -67,6 +67,11 @@ export class Article {
     return marked(this.contentWithoutHeader);
   }
 
+  intro(): string {
+    return marked(this.contentWithoutHeader
+        .substring(0, this.contentWithoutHeader.indexOf('##')));
+  }
+
   url(): string {
     return '/' + this.name + '/';
   }
