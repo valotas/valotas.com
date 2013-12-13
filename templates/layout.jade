@@ -19,7 +19,8 @@ html(lang='en')
         div.col-md-3
           a.photo.img-rounded(href=sitemap.homepage().url)
         div.signature.col-md-9
-        h1= locals.owner
+        block header
+          h1= locals.owner
         p
           span #{locals.name} | #{locals.description}
         div.social

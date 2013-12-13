@@ -216,8 +216,9 @@ export var repo = new ArticleRepository(__dirname + '/..'),
         next();
       }
       else {
-        resp.locals.title = 'XXX';
-        resp.render('article', { page: article });
+        resp.locals.article = article;
+        resp.locals.page = article;
+        resp.render('article');
       }
     } catch (e) {
       next(e);
@@ -230,5 +231,8 @@ export var middleware = (req: express.Request, resp: express.Response, next?: Fu
 }
 
 export var router = new express.Router()
-  .get('/:year/:month/:title', handler)
-  .get('/:title', handler);
+  .get('/:year/:month/:title/', handler)
+  .get('/:title/', handler)
+  .get('/archive/', (req: express.Request, resp: express.Response, next?: Function) => {
+    resp.render('archive');
+  });
