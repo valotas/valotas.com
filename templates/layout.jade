@@ -19,8 +19,7 @@ html(lang='en')
         div.col-md-3
           a.photo.img-rounded(href=sitemap.homepage().url)
         div.signature.col-md-9
-        block header
-          h1= owner
+        h1= owner
         p
           span #{name} | #{description}
         div.social
@@ -33,6 +32,7 @@ html(lang='en')
           a(href='http://www.linkedin.com/in/valotas')
             i.fa.fa-linkedin.fa-3x
     #content.container
+      block header
       block content
         h2 Welcome to zombocom!
     #footer.container
