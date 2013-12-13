@@ -39,10 +39,7 @@ app
 
   //Add a simple handler for /
   .get('/', function (req: express.Request, resp: express.Response) {
-    var body = 'Hello man!';
-    resp.contentType('text/plain')
-      .header('Content-Length', '' + body.length)
-      .end(body);
+    resp.render('index');
   })
 
   //Run the server on port 8080
