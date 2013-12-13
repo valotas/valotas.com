@@ -16,11 +16,18 @@ class ArticleParseException implements Error {
   }
 }
 
+class ArticleUrlCreationException implements Error {
+  public name = 'ArticleUrlCreationException';
+  constructor(public message: string) {
+
+  }
+}
+
 export class Article {
   private meta;
   private contentWithoutHeader: string;
 
-  constructor(content: string) {
+  constructor(content: string, private name?: string) {
     var splitted = content.split(/---\n/),
       i = 2;
 
@@ -58,6 +65,13 @@ export class Article {
 
   content(): string {
     return marked(this.contentWithoutHeader);
+  }
+
+  url(): string {
+    if (this.name) {
+      return '/' + this.name;
+    }
+    throw new ArticleUrlCreationException('No name given to create a url');
   }
 }
 
@@ -100,12 +114,6 @@ export class ArticleFile {
   }
 }
 
-class ArticleUrlCreationException implements Error {
-  public name = 'ArticleUrlCreationException';
-  constructor(public message: string) {
-
-  }
-}
 
 
 

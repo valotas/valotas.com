@@ -40,6 +40,17 @@ describe('articles', () => {
     it('should provide the content without the header', () => {
       expect(article.content()).to.equal('<p>super content!</p>\n');
     });
+
+    it('should throw an exception if url is asked without a name', () => {
+      expect(() => {
+        article.url();
+      }).to.throw(/No name given to create a url/);
+    });
+
+    it('should return a url of /[name]', () => {
+      var article = new articles.Article(content, 'xxx');
+      expect(article.url()).to.equal('/xxx');
+    });
   });
 
   describe('ArticleFile', () => {
