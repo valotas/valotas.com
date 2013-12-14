@@ -1,3 +1,9 @@
+---
+title: Why do we need getters and setters
+date: 2013-12-14
+---
+
+
 Recently I had a look at the dartlang and that reminded me of the getters and setters mechanism that someone has with C#. So let's have a look at them.
 
 ## Where to use them
