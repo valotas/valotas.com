@@ -1,6 +1,7 @@
 ///<reference path='../d.ts/DefinitelyTyped/express/express.d.ts' />
 ///<reference path='../d.ts/DefinitelyTyped/node/node.d.ts' />
 ///<reference path='../d.ts/DefinitelyTyped/moment/moment.d.ts' />
+///<reference path='../d.ts/js-yaml.d.ts' />
 
 import fs = require('fs')
 import path = require('path')
