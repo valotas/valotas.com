@@ -4,10 +4,10 @@ date: 2013-12-14
 ---
 
 
-Recently I had a look at the dartlang and that reminded me of the getters and setters mechanism that someone has with C#. So let's have a look at them.
+Recently I [had a look at the Dart programming language][thoughts-on-dart] and that reminded me of the getters and setters mechanism that someone has with [C#][csharp]. So let's have a look at them.
 
-## Where to use them
-Well, the idea in OO languages is very simple. You have a class and you have a property:
+## Where we use them
+Well, the idea in OO languages is very simple. You have a class and you have a property, a field or whatever piece of data that you want to access:
 
 ```
 class Person {
@@ -20,19 +20,19 @@ You start using this property in other classes:
 ```
 var george = new Person();
 george.name = "George";
-assert george.name === "George";
+assert george.name === "George"; //true
 ```
 
-Now you need to change your class. The name property is not enough anymore but you need to define a `firstname` and `lastname`. In order to provide backwards compatibility you do not want to just remove the name property anymore, or at least do not allow to update it but give something back when someone is calling it. It would be cool for example to have the above:
+Now you need to change your class a little bit. The name property is not enough anymore but you need to define a `firstname` and `lastname`. In order to provide backwards compatibility you do not want to just remove the name property. That is straight forward, just return something like `firstname username` when someone is trying to access the `name` field. For simplicity we also do not allow any direct updates of the `name` field. "Speaking" in pseudo code, it would be cool to have the above:
 
 ```
 var george = new Person();
 george.firstname = "George";
 george.lastname = "Valotasios";
-assert george.name === "George Valotasios"
+assert george.name === "George Valotasios" //true
 ```
 
-Well, something like that is a no-go for java, but there are languages (Scala, C# and Dart to name a few) that allow you to do that. I do not really care on the syntax of the feature nut let's take dart's syntax as an example and provide a solution to our problem:
+Well, something like that is a no-go for java, but there are languages (Scala, C# and Dart to name a few) that allow you to do that. I do not really care about the syntax of the feature but let's take dart's syntax as an example and provide a solution to our problem:
 
 ```
 class Person {
@@ -71,15 +71,17 @@ class Person {
 
 and making sure that you followed the rule of having private fields, you only end up having to always write some more characters for accessing fields: `person.getName()` instead of `persons.name`.
 
-## Getters and setters should not be regular method
-Two rules of good getters and setters:
+All in all, till now getters and setters looks like a "special" methods. They either have a special name or a special syntax. Thas speciallity allows you to make some assumptions about what is going to happen. But should it be that way?
+
+## Getters and setters should not be regular methods
+Getters and setters in general should describe a property of a class. That said they should just update or return that property value. So in theory no computation should happen in then, they should be fast and of they should be side-effect free. As theory an practice are the same only in theory, we can change a little bit the definition of them and apply only two rules:
 
 - they should be fast
-- they should be side-effect free
+- they should have any side-effect other than updating the underlying property (in the case of a setter)
 
-These two rules tells you for example that you should not do there any IO stuff or spawning new threads. Still these two rules has been violated even by framework developers who's exeprtise in a language should not have been questionable.
+These two rules is simplification of the [principle of least surprise][pols] and tells you for example that you should not do there any IO stuff or spawn new threads or even update any fields other that the one that the name of the setter defines. Still these two rules has been violated even by framework developers who's exeprtise in a language is not questionable.
 
-As I can not question their expertise, I can only assume that it easy to just abuse this feature (or gennerally a getter or setter method in a language that do not provide it as a core feuture) by mistake. But if that is the case, there should be some precations against. Static analysis tools have been around for a while so, for sure they can help us there.
+As I can not question their expertise, I can only assume that it easy to just abuse this feature by mistake. But if that is the case, there should be some precations against. Static analysis tools have been around for a while so, for sure they can help us there.
 
 It would be also cooler if the compiler of a language would be able to do the analysis for you as part of the compilation. In that case it makes sense to help the compiler and yourself with a special definition of the feature:
 
@@ -88,3 +90,16 @@ It would be also cooler if the compiler of a language would be able to do the an
 - Prevent newbies from misusing them
 
 At the end, I do not see the need for a syntactic sugar for a method definitions, if that syntactic sugar only forces assumptions about the underlying execution.
+
+# Do you really need a getter or a setter?
+Having said that and assuming that our code provide good implementations of getters and setters, there is still the question of their need. 
+
+A simple mistake that I used to do for example was to just let my IDE create them for me. So every class good implementation of stuff that never needed. So, does a field represent an internal state of your class? If so, there is no need to provide a getter or a setter for this. Do you always need to update a property of a class? If not why to provide a setter for it?
+
+Not all of our object should be [`DAO`][dao]s and with that exception I hardly have to provide any setters for other object. Apparently even the use of getters is kind of limited outside the scope of a `DAO`.
+
+[thoughts-on-dart]: http://blog.valotas.com/2013/12/dart-language.html
+[dartlang]: https://www.dartlang.org/
+[csharp]: http://en.wikipedia.org/wiki/C_Sharp_(programming_language)
+[pols]: http://en.wikipedia.org/wiki/Principle_of_least_astonishment
+[dao]: http://en.wikipedia.org/wiki/Data_access_object
