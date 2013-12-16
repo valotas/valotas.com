@@ -9,6 +9,9 @@ block prepend title
 
 block header
   h1= article.title()
+  p.date
+    span posted on: &nbsp;
+    span= article.date('YYYY-MM-DD')
 
 block content
   article.article
