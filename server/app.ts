@@ -23,6 +23,10 @@ app
   .set('view engine', 'jade')
   .set('views', templates)
 
+  .configure(function () {
+    app.locals.pretty = true;
+  })
+
   .use(express.logger())
 
   //Add less support to our server
