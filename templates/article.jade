@@ -17,6 +17,10 @@ block content
   article.article
     section.content!= page.content()
 
-//-block prepend footer
-  div.row
-    a.btn.btn-default(href=contents.index.url) « Full blog
+  #footer-actions.row
+    .btn-group
+      a.btn.btn-default(href=sitemap.homepage().url) 
+        i.fa.fa-home
+        | &nbsp; Home
+      a.btn.btn-default(href='#') Top&nbsp;
+        i.fa.fa-toggle-up
