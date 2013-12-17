@@ -35,16 +35,5 @@ html(lang='en')
       block header
       block content
         h2 Welcome to zombocom!
-    #footer.jumbotron
-      .container
-        block footer
-          div.row
-            p &copy; #{ moment().year() } #{ owner } &mdash; powered by&nbsp;
-              a(href='http://nodejs.org/' target='_blank') nodeJS
-              |, 
-              a(href='http://expressjs.com/' target='_blank') expressjs
-              |, 
-              a(href='http://getbootstrap.com/' target='_blank') Bootstrap
-              | &nbsp;css framework, 
-              a(href='http://fontawesome.io/' target='_blank') Fontawesome
-              | &nbsp;and my bad UX expertise :)
+    #footer
+      .container &copy; #{ moment().year() } #{ owner } 
