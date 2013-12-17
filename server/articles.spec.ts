@@ -14,8 +14,9 @@ describe('articles', () => {
       '- dartlang\n' +
       '- dart\n' +
       '---\n' + 
-      'super content!\n' + 
-      '## li la lo',
+      'super content [with link][link]!\n' + 
+      '## li la lo\n' +
+      '[link]: http://link.me',
       article: articles.Article;
 
     beforeEach(() => {
@@ -39,7 +40,7 @@ describe('articles', () => {
     });
 
     it('should provide the content without the header', () => {
-      expect(article.content()).to.equal('<p>super content!</p>\n<h2 id="li-la-lo">li la lo</h2>\n');
+      expect(article.content()).to.equal('<p>super content <a href="http://link.me">with link</a>!</p>\n<h2 id="li-la-lo">li la lo</h2>\n');
     });
 
     it('should return a url of /[name]', () => {
@@ -49,7 +50,7 @@ describe('articles', () => {
 
     it('should return the first lines up to the first h2 with the intro function', () => {
       expect(article.intro).not.to.be.undefined;
-      expect(article.intro()).to.equal('<p>super content!</p>\n');
+      expect(article.intro()).to.equal('<p>super content <a href="http://link.me">with link</a>!</p>\n');
     })
   });
 

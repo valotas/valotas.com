@@ -69,8 +69,8 @@ export class Article {
   }
 
   intro(): string {
-    return marked(this.contentWithoutHeader
-        .substring(0, this.contentWithoutHeader.indexOf('##')));
+    var content = this.content();
+    return content.substring(0, content.indexOf('<h2 id='));
   }
 
   url(): string {
