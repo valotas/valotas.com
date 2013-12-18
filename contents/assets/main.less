@@ -21,7 +21,7 @@
 //@import '../../vendor/bootstrap/less/pagination.less';
 //@import '../../vendor/bootstrap/less/pager.less';
 //@import '../../vendor/bootstrap/less/labels.less';
-//@import '../../vendor/bootstrap/less/badges.less';
+@import '../../vendor/bootstrap/less/badges.less';
 @import '../../vendor/bootstrap/less/jumbotron.less';
 //@import '../../vendor/bootstrap/less/thumbnails.less';
 //@import '../../vendor/bootstrap/less/alerts.less';
@@ -39,6 +39,16 @@
 
 @import 'variables.less';
 
+body {
+  font-family: "Open Sans";
+  background: #eee;
+}
+
+.jumbotron {
+  background: url('http://www.hdwallpaperfreedownload.com/wp-content/gallery/greece/greece-wallpaper-hd-pictures-35.jpg');
+  background-size: cover;
+}
+
 .photo {
   display: block;
   background-image: url('me-250x250.jpg');
@@ -51,12 +61,20 @@
 }
 
 #index-content .article {
-  .make-md-column(4);
-  .date {
-    border-top: 1px solid #eee;
-    font-style: italic;
-    color: #bbb;
+  padding: 1em 1.3em;
+  margin-bottom: 1em;
+  background: white;
+  box-shadow: 0px 2px 4px rgba(0, 0, 0, 0.2);
+
+  .descr {
+    margin-top: 10px;
+  }
+  .more {
     text-align: right;
+  }
+  .badge {
+    background: @v-blue;
+    font-weight: 400;
   }
 }
 
@@ -64,10 +82,6 @@
   h1 {
     padding-bottom: 0.5em;
     margin-bottom: 0.2em;
-  }
-  .date {
-    text-align: right;
-    font-style: italic;
   }
 }
 
@@ -77,8 +91,11 @@
 }
 
 #footer {
+  background: url('http://www.hdwallpaperfreedownload.com/wp-content/gallery/greece/greece-wallpaper-hd-pictures-35.jpg');
+  background-size: cover;
+  width: 100%;
   text-align: center;
-  border-top: 1px solid #eee;
-  padding: 1.5em;
-  margin: 2.5em;
+  margin-top: 2em;
+  padding: 2em;
+  color: @v-blue;
 }
