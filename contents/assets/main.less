@@ -45,6 +45,11 @@ body {
 }
 
 .jumbotron {
+  h1 {
+    font-size: 32px;
+    font-weight: 600;
+  }
+
   background: url('http://www.hdwallpaperfreedownload.com/wp-content/gallery/greece/greece-wallpaper-hd-pictures-35.jpg');
   background-size: cover;
 }
@@ -56,15 +61,50 @@ body {
   height: 250px;
 }
 
-.social a {
-  margin: 0 10px;
+.social {
+  a {
+    margin: 0 .5em;
+    padding: .3em;
+    //  margin: 0 2px 0 2px;
+    width: 2em;
+    height: 2em;
+    display: inline-block;
+    font-size: 1.2em;
+    border-radius: 50%;
+    text-decoration: none;
+    text-align: center;
+    border: none;
+  }
+
+  a:hover {
+    opacity: 0.8;
+  }
+}
+
+.fa-github-square {
+  color: #666;
+}
+
+.fa-facebook-square {
+  color: #305c99;
+}
+
+.fa-twitter-square {
+  color: #4099ff;
+}
+
+.fa-linkedin-square {
+  color: #0e76a8;
+}
+
+.article {
+  padding: 1em 1.3em;
+  background: white;
+  box-shadow: 0px 2px 4px rgba(0, 0, 0, 0.2);
 }
 
 #index-content .article {
-  padding: 1em 1.3em;
   margin-bottom: 1em;
-  background: white;
-  box-shadow: 0px 2px 4px rgba(0, 0, 0, 0.2);
 
   .descr {
     margin-top: 10px;

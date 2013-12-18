@@ -8,15 +8,16 @@ block prepend title
   | #{ article.title() }
 
 block header
-  .page-header
-    h1= article.title()
-  p.date
-    span posted on: &nbsp;
-    span= article.date('YYYY-MM-DD')
 
 block content
-  article.article
-    section.content!= page.content()
+  .article
+    .page-header
+      h1= article.title()
+    p.date
+      span posted on: &nbsp;
+      span= article.date('YYYY-MM-DD')
+    article
+      section.content!= page.content()
 
   #footer-actions.row
     .btn-group
