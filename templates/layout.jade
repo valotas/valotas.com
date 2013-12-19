@@ -19,18 +19,18 @@ html(lang='en')
         div.col-md-3
           a.photo.img-rounded(href=sitemap.homepage().url)
         div.signature.col-md-9
-        h1= owner
-        p
-          span #{name} | #{description}
-        .social
-          a(href='https://github.com/valotas' target="_blank")
-            i.fa.fa-github-square.fa-2x
-          a(href='https://www.facebook.com/valotas' target="_blank")
-            i.fa.fa-facebook-square.fa-2x
-          a(href='https://twitter.com/valotas' target="_blank")
-            i.fa.fa-twitter-square.fa-2x
-          a(href='http://www.linkedin.com/in/valotas' target="_blank")
-            i.fa.fa-linkedin-square.fa-2x
+          h1.whitebg= owner
+          p.whitebg
+            span #{name} | #{description}
+          .social.whitebg
+            a(href='https://github.com/valotas' target="_blank")
+              i.fa.fa-github-square.fa-2x
+            a(href='https://www.facebook.com/valotas' target="_blank")
+              i.fa.fa-facebook-square.fa-2x
+            a(href='https://twitter.com/valotas' target="_blank")
+              i.fa.fa-twitter-square.fa-2x
+            a(href='http://www.linkedin.com/in/valotas' target="_blank")
+              i.fa.fa-linkedin-square.fa-2x
     #content.container
       block header
       block content
