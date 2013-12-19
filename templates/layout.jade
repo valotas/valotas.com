@@ -18,11 +18,11 @@ html(lang='en')
       .container
         .col-md-3
           a.photo.img-rounded(href=sitemap.homepage().url)
-        .signature.col-md-9
-          h1= owner
-          p
+        div.signature.col-md-9
+          h1.whitebg= owner
+          p.whitebg
             span #{name} | #{description}
-          .social
+          .social.whitebg
             a(href='https://github.com/valotas' target="_blank")
               i.fa.fa-github-square.fa-2x
             a(href='https://www.facebook.com/valotas' target="_blank")
