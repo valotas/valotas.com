@@ -254,7 +254,6 @@ export var middleware = (req: express.Request, resp: express.Response, next?: Fu
 
 export var router = new express.Router()
   .get('/:year/:month/:title.html', redirectHandler)
-  .get('/:year/:month/:title/', redirectHandler)
   .get('/:title/', handler)
   .get('/archive/', (req: express.Request, resp: express.Response, next?: Function) => {
     resp.render('archive');
