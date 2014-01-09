@@ -3,12 +3,13 @@
 ///<reference path='../d.ts/DefinitelyTyped/moment/moment.d.ts' />
 ///<reference path='../d.ts/js-yaml.d.ts' />
 
-import fs = require('fs')
-import path = require('path')
-import yalm = require('js-yaml')
+import fs = require('fs');
+import path = require('path');
+import yalm = require('js-yaml');
+import express = require('express');
+
 var moment = require('moment');
 var marked = require('marked');
-
 
 class ArticleParseException implements Error {
   public name = 'ArticleParseException';
@@ -222,10 +223,14 @@ export class ArticleUrlParams implements ArticleQuery {
   }
 }
 
-import express = require('express')
 
-export var repo = new ArticleRepository(__dirname + '/..'),
-  handler = (req: express.Request, resp: express.Response, next?: Function) => {
+export var repo = new ArticleRepository(__dirname + '/..');
+export var middleware = (req: express.Request, resp: express.Response, next?: Function) => {
+  resp.locals.articles = repo;
+  next();
+};
+
+var handler = (req: express.Request, resp: express.Response, next?: Function) => {
     try {
       var params = new ArticleUrlParams(req.params),
         article = repo.get(params);
@@ -247,10 +252,6 @@ var redirectHandler = (req: express.Request, resp: express.Response, next?: Func
   resp.redirect(301, '/' + req.params.title + '/');
 };
 
-export var middleware = (req: express.Request, resp: express.Response, next?: Function) => {
-  resp.locals.articles = repo;
-  next();
-};
 
 export var router = new express.Router()
   .get('/:year/:month/:title.html', redirectHandler)
@@ -258,3 +259,4 @@ export var router = new express.Router()
   .get('/archive/', (req: express.Request, resp: express.Response, next?: Function) => {
     resp.render('archive');
   });
+
