@@ -243,13 +243,18 @@ export var repo = new ArticleRepository(__dirname + '/..'),
     }
   };
 
+var redirectHandler = (req: express.Request, resp: express.Response, next?: Function) => {
+  resp.redirect(301, '/' + req.params.title + '/');
+};
+
 export var middleware = (req: express.Request, resp: express.Response, next?: Function) => {
   resp.locals.articles = repo;
   next();
-}
+};
 
 export var router = new express.Router()
-  .get('/:year/:month/:title/', handler)
+  .get('/:year/:month/:title.html', redirectHandler)
+  .get('/:year/:month/:title/', redirectHandler)
   .get('/:title/', handler)
   .get('/archive/', (req: express.Request, resp: express.Response, next?: Function) => {
     resp.render('archive');
