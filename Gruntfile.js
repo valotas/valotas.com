@@ -1,11 +1,5 @@
 module.exports = function (grunt) {
-  grunt.loadNpmTasks('grunt-ssh');
-  grunt.loadNpmTasks('grunt-ts');
-  grunt.loadNpmTasks('grunt-develop');
-  grunt.loadNpmTasks('grunt-contrib-watch');
-  grunt.loadNpmTasks('grunt-contrib-clean');
-  grunt.loadNpmTasks('grunt-contrib-jshint');
-  grunt.loadNpmTasks('grunt-mocha-cli');
+  require('load-grunt-tasks')(grunt);
 
   var readFileIfExists = function (path) {
     var f = grunt.file;
