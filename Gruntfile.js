@@ -78,6 +78,4 @@ module.exports = function (grunt) {
 
   grunt.registerTask('build', ['clean:build', 'jshint:all', 'ts:server', 'mochacli:server']);
   grunt.registerTask('dev', ['build', 'develop:server', 'watch:ts', 'watch:js']);
-  grunt.registerTask('preview', ['wintersmith:preview']);
-  grunt.registerTask('deploy', ['wintersmith:build', 'sftp:build']);
 };
