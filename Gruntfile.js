@@ -1,6 +1,5 @@
 module.exports = function (grunt) {
-  grunt.loadNpmTasks('grunt-wintersmith');
-  grunt.loadNpmTasks('grunt-ssh');
+  require('load-grunt-tasks')(grunt);
 
   var readFileIfExists = function (path) {
     var f = grunt.file;
