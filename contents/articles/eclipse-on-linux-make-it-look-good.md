@@ -1,7 +1,7 @@
 ---
 title: Eclipse on Linux, make it look good
 author: valotas
-date: 2010-07-08
+date: 2010-02-24
 template: article.jade
 ---
 
