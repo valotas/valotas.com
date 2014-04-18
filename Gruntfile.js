@@ -79,6 +79,7 @@ module.exports = function (grunt) {
     }
   });
 
-  grunt.registerTask('build', ['clean:build', 'jshint:all', 'ts:server', 'mochacli:server']);
+  grunt.registerTask('compile', ['clean:build', 'jshint:all', 'ts:server']);
+  grunt.registerTask('build', ['compile', 'mochacli:server']);
   grunt.registerTask('dev', ['build', 'develop:server', 'watch:ts', 'watch:js']);
 };
