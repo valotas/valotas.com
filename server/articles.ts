@@ -225,10 +225,6 @@ export class ArticleUrlParams implements ArticleQuery {
 
 
 export var repo = new ArticleRepository(__dirname + '/..');
-var repoSetter = (req: express.Request, resp: express.Response, next?: Function) => {
-  resp.locals.articles = repo;
-  next();
-};
 
 var handler = (req: express.Request, resp: express.Response, next?: Function) => {
     try {
@@ -248,14 +244,15 @@ var handler = (req: express.Request, resp: express.Response, next?: Function) =>
     }
   };
 
-var redirectHandler = (req: express.Request, resp: express.Response, next?: Function) => {
-  resp.redirect(301, '/' + req.params.title + '/');
-};
-
 
 export var router = new express.Router()
-  .use(repoSetter)
-  .get('/:year/:month/:title.html', redirectHandler)
+  .use((req: express.Request, resp: express.Response, next?: Function) => {
+    resp.locals.articles = repo;
+    next();
+  })
+  .get('/:year/:month/:title.html', (req: express.Request, resp: express.Response, next?: Function) => {
+    resp.redirect(301, '/' + req.params.title + '/')
+  })
   .get('/:title/', handler)
   .get('/archive/', (req: express.Request, resp: express.Response, next?: Function) => {
     resp.render('archive');
