@@ -2,7 +2,8 @@
 ///<reference path='../d.ts/DefinitelyTyped/chai/chai.d.ts' />
 
 import articles = require('articles')
-var expect = require('chai').expect;
+var chai = require('chai'),
+  expect = chai.expect;
 
 describe('articles', () => {
 
@@ -119,11 +120,22 @@ describe('articles', () => {
       expect(articles.length).to.be.at.below(30);
     });
 
+    chai.Assertion.addMethod('before', function (other: articles.Article) {
+      var self = this._obj;
+
+      this.assert(
+        self.moment().isBefore(other.moment())
+        , 'expected ' + self.date() + ' from "' + self.title() + '" to be before ' + other.date() + ' from "' + other.title() + '"'
+        , true
+        , false
+      );
+    });
+
     it('should return articles sorted by date', () => {
       var last: articles.Article;
       repo.all().forEach((a: articles.Article) => {
         if (last != null) {
-          expect(a.moment().isBefore(last.moment())).to.be.true;
+          expect(a).to.be.before(last);
         }
         last = a;
       });
