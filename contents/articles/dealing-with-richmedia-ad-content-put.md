@@ -1,7 +1,7 @@
 ---
 title: Dealing with Richmedia ad content
 author: valotas
-date: 2009-11-15
+date: 2009-11-08
 template: article.jade
 ---
 
