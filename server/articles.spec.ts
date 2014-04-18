@@ -116,7 +116,7 @@ describe('articles', () => {
       var articles = repo.all();
       expect(articles).not.to.be.null;
       expect(articles.length).to.be.at.above(5);
-      expect(articles.length).to.be.at.below(20);
+      expect(articles.length).to.be.at.below(30);
     });
 
     it('should return articles sorted by date', () => {
