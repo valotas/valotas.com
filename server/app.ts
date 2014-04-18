@@ -7,8 +7,8 @@ import path = require('path')
 import cons = require('consolidate')
 import os = require('os')
 
-import articles = require('articles')
-import sitemap = require('sitemap')
+import articles = require('./articles')
+import sitemap = require('./sitemap')
 
 var less = require('less-middleware'),
   conf = require('../config.json'),

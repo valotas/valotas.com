@@ -9,7 +9,7 @@
     "typescript": "~1.0",
     "express": "~3.4",
     "less-middleware": "~0.1",
-    "grunt-ts": "~1.4",
+    "grunt-ts": "~1.10",
     "grunt-develop": "~0.2",
     "grunt-contrib-watch": "~0.5",
     "grunt-contrib-clean": "~0.5",

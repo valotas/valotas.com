@@ -1,7 +1,7 @@
 ///<reference path='../d.ts/DefinitelyTyped/mocha/mocha.d.ts' />
 ///<reference path='../d.ts/DefinitelyTyped/chai/chai.d.ts' />
 
-import articles = require('articles')
+import articles = require('./articles')
 var chai = require('chai'),
   expect = chai.expect;
 

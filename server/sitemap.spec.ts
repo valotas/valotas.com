@@ -2,7 +2,7 @@
 ///<reference path='../d.ts/DefinitelyTyped/mocha/mocha.d.ts' />
 ///<reference path='../d.ts/DefinitelyTyped/chai/chai.d.ts' />
 
-import sm = require('sitemap');
+import sm = require('./sitemap');
 var expect = require('chai').expect;
 
 describe('sitemap', () => {
