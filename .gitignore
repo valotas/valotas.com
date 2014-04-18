@@ -5,3 +5,5 @@ build/**
 tscommand.tmp.txt
 npm-debug.log
 server/**/*.js
+.tscache
+.baseDir.ts
