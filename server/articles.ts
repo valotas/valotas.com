@@ -225,7 +225,7 @@ export class ArticleUrlParams implements ArticleQuery {
 
 
 export var repo = new ArticleRepository(__dirname + '/..');
-export var middleware = (req: express.Request, resp: express.Response, next?: Function) => {
+var repoSetter = (req: express.Request, resp: express.Response, next?: Function) => {
   resp.locals.articles = repo;
   next();
 };
@@ -254,6 +254,7 @@ var redirectHandler = (req: express.Request, resp: express.Response, next?: Func
 
 
 export var router = new express.Router()
+  .use(repoSetter)
   .get('/:year/:month/:title.html', redirectHandler)
   .get('/:title/', handler)
   .get('/archive/', (req: express.Request, resp: express.Response, next?: Function) => {

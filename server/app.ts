@@ -21,16 +21,14 @@ app
   //Add a view engine
   .engine('jade', cons.jade)
   .set('view engine', 'jade')
-  .set('views', templates)
+  .set('views', templates);
 
-  .configure(function () {
-    app.locals.pretty = true;
-  })
+app.locals.pretty = true;
 
-  .use(express.logger())
+  //.use(express.logger())
 
   //Add less support to our server
-  .use(less({ 
+app.use(less({ 
     src: contents,
     dest: tmpDir,
     optimization: 2,
@@ -51,8 +49,7 @@ app
   .use(sitemap.middleware)
 
   // Add an article handler:
-  .use(articles.middleware)
-  .use(articles.router.middleware)
+  .use(articles.router)
 
   //Add a simple handler for /
   .get('/', function (req: express.Request, resp: express.Response) {
