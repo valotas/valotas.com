@@ -25,8 +25,6 @@ app
 
 app.locals.pretty = true;
 
-  //.use(express.logger())
-
   //Add less support to our server
 app.use(less({ 
     src: contents,
