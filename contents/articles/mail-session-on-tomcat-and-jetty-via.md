@@ -1,7 +1,7 @@
 ---
 title: Mail Session on tomcat and jetty via jndi
 author: valotas
-date: 2010-07-08
+date: 2010-05-01
 template: article.jade
 ---
 
