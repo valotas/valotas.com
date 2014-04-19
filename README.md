@@ -1,5 +1,5 @@
 # valotas.com website
-This is a static site created with [wintersmith](http://wintersmith.io). It is build with [grunt](http://gruntjs.com/).
+Just my personal website
 
 ## Quickstart
 Assuming that you have nodejs and npm install, just do the following:
