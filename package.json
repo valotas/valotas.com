@@ -1,5 +1,5 @@
 {
-  "repository": "none",
+  "repository": "git@github.com:valotas/valotas.com.git",
   "private": true,
   "devDependencies": {
     "bower": "~1.2",
