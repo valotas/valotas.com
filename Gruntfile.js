@@ -64,22 +64,40 @@ module.exports = function (grunt) {
     sftp: {
       build: {
         files: {
-          './': 'build/**'
+          './': ['build/**', '!build/**.spec.js', '!build/**.map'],
+          './contents': 'contents/**',
+          './templates': 'templates/**',
+          './config.json': 'config.json',
+          './package.json': 'package.json',
         },
         options: {
           path: '/var/www/valotas.com/',
-          srcBasePath: 'build/',
-          host: 'pi',
+          //srcBasePath: 'build/',
           createDirectories: true,
+          showProgress: true,
+          host: 'pi',
+          username: 'valotas',
+          privateKey: readFileIfExists("/home/valotas/.ssh/id_rsa"),
+          passphrase: readFileIfExists("/home/valotas/.ssh/id_rsa.pass")
+        }
+      }
+    },
+    sshexec: {
+      restart: {
+        command: 'cd valotas.com && npm stop && npm start',
+        options : {
+          host: 'pi',
           username: 'valotas',
           privateKey: readFileIfExists("/home/valotas/.ssh/id_rsa"),
           passphrase: readFileIfExists("/home/valotas/.ssh/id_rsa.pass")
         }
       }
     }
+
   });
 
   grunt.registerTask('compile', ['clean:build', 'jshint:all', 'ts:server']);
   grunt.registerTask('build', ['compile', 'mochacli:server']);
+  grunt.registerTask('deploy', ['build', 'sftp:build', 'sshexec:restart']);
   grunt.registerTask('dev', ['build', 'develop:server', 'watch:ts', 'watch:js']);
 };
