@@ -6,16 +6,26 @@ import express = require('express')
 import path = require('path')
 import cons = require('consolidate')
 import os = require('os')
+import fs = require('fs')
 
 import articles = require('./articles')
 import sitemap = require('./sitemap')
 
 var less = require('less-middleware'),
-  conf = require('../config.json'),
-  contents = path.normalize(__dirname + '/../contents'),
-  templates = path.normalize(__dirname + '/../templates'),
+  conf = fs.existsSync(__dirname + '/config.json') ? 
+    require(__dirname + '/config.json') : require(__dirname + '/../config.json'),
+  contents = path.normalize(__dirname + '/contents'),
+  templates = path.normalize(__dirname + '/templates'),
   tmpDir = os.tmpDir() + '/valotas.com',
   app = express();
+
+if (!fs.existsSync(contents)) {
+  contents = path.normalize(__dirname + '/../contents');
+}
+
+if (!fs.existsSync(templates)) {
+  templates = path.normalize(__dirname + '/../templates');
+}
 
 app
   //Add a view engine
