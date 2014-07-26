@@ -2,30 +2,19 @@
   "repository": "git@github.com:valotas/valotas.com.git",
   "private": true,
   "devDependencies": {
-    "bower": "~1.2",
-    "chai": "~1.8",
+    "assemble": "^0.4.41",
     "grunt": "~0.4",
     "grunt-contrib-clean": "~0.5",
     "grunt-contrib-jshint": "~0.7",
+    "grunt-contrib-less": "^0.11.3",
     "grunt-contrib-watch": "~0.5",
     "grunt-develop": "~0.2",
     "grunt-mocha-cli": "~1.3",
+    "grunt-newer": "^0.7.0",
     "grunt-ssh": "^0.11.2",
     "grunt-ts": "~1.10",
+    "jade": "^1.5.0",
     "load-grunt-tasks": "~0.3",
-    "typescript": "~1.0"
-  },
-  "dependencies": {
-    "consolidate": "~0.10",
-    "express": "~4.0",
-    "jade": "~0.35",
-    "js-yaml": "~2.1",
-    "less-middleware": "~0.1",
-    "marked": "~0.2",
-    "moment": "~2.4"
-  },
-  "scripts": {
-    "start": "npm install --production && nohup node build/app.js > /dev/null 2>&1 &",
-    "stop": "kill -9 `pgrep -f 'node build/app.js'`"
+    "markdown": "^0.5.0"
   }
 }
