@@ -1,26 +1,25 @@
-
 extends layout
 
 block append vars
   - bodyclass = 'article-detail'
 
 block prepend title
-  | #{ article.title() }
+  | #{ title }
 
 block header
 
 block content
   .article
     .page-header
-      h1= article.title()
+      h1= title
     p.date
-      span.badge= article.date('YYYY-MM-DD')
+      span.badge= 'DATE'
     article
-      section.content!= page.content()
+      section.content!= html()
 
   #footer-actions.row
     .btn-group
-      a.btn.btn-default(href=sitemap.homepage().url) 
+      a.btn.btn-default(href='#') 
         i.fa.fa-home
         | &nbsp; Home
       a.btn.btn-default(href='#') Top&nbsp;

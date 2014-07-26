@@ -1,4 +1,4 @@
-!!! 5
+doctype html
 block vars
   - var bodyclass = null;
 html(lang='en')
@@ -10,14 +10,13 @@ html(lang='en')
       title
         block title
           = name
-      link(rel='alternate', href=url+'/feed.xml', type='application/rss+xml', title=description)
       link(rel='stylesheet', href='http://fonts.googleapis.com/css?family=Open+Sans')
-      link(rel='stylesheet', href='/assets/main.css')
+      link(rel='stylesheet', href='assets/main.css')
   body(class=bodyclass)
     .jumbotron
       .container
         .col-md-3
-          a.photo.img-rounded(href=sitemap.homepage().url)
+          a.photo.img-rounded(href='/')
         div.signature.col-md-9
           h1.whitebg= owner
           p.whitebg
@@ -36,8 +35,8 @@ html(lang='en')
       block content
         h2 Welcome to zombocom!
     #footer
-      .container &copy; #{ moment().year() } #{ owner }
-        | - CSS by 
+      .container &copy; #{ owner }
+        | - CSS by
         a(href="http://twitter.com/P_Dei" target="_blank") @P_Dei
 script.
   (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
