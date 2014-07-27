@@ -31,6 +31,13 @@ module.exports = function (grunt) {
         }
       }
     },
+    copy: {
+      assets: {
+        files: [
+          { expand: true, cwd: 'src/', src: ['assets/**', '!assets/**.less'], dest: 'build/' }
+        ]
+      }
+    },
     clean: {
       build: ['build']
     },
@@ -39,6 +46,6 @@ module.exports = function (grunt) {
     }
   });
 
-  grunt.registerTask('default', ['clean', 'jshint', 'less:site', 'assemble']);
+  grunt.registerTask('default', ['clean', 'jshint', 'less:site', 'copy:assets', 'assemble']);
 
 };
