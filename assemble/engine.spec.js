@@ -20,7 +20,7 @@ describe('engine', function () {
       }
     };
 
-    engine.render('h1 jade #{src}', options, cb);
+    engine.render('h1 jade #{page.src}', options, cb);
     expect(cb).toHaveBeenCalledWith(null, '\n<h1>jade path/to/the/file</h1>');
   });
 

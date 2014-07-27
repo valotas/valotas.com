@@ -10,7 +10,8 @@ module.exports = function (grunt) {
     assemble: {
       options: {
         jade: {
-          layout: 'src/templates/article.jade' //the default layout
+          templates: 'src/templates/',
+          defaultTemplate: 'article.jade'
         },
         plugins: ['assemble/*.js'],
         initializeEngine: function (engine) {
@@ -20,7 +21,7 @@ module.exports = function (grunt) {
       },
       site: {
         files: {
-          'build/': ['src/articles/*.md']
+          'build/': ['src/articles/*.md', 'src/templates/index.jade']
         }
       }
     },

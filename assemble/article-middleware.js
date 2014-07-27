@@ -13,15 +13,15 @@ function Article(page) {
   this.date = function (format) {
     return this.moment().format(format || 'DD/MM/YYYY');
   };
-}
 
-function addArticleInfo (page) {
-  page.article = new Article(page);
+  this.html = function () {
+    return page.html ? page.html() : '';
+  };
 }
 
 var middleware = function (param, next) {
   var page = param.context.page;
-  addArticleInfo(page);
+  param.context.article = new Article(page);
   next();
 };
 

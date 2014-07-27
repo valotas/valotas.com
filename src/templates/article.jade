@@ -15,7 +15,7 @@ block content
     p.date
       span.badge= article.date('DD/MM/YYYY')
     article
-      section.content!= html()
+      section.content!= article.html()
 
   #footer-actions.row
     .btn-group

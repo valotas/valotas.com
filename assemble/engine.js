@@ -18,7 +18,7 @@ function render (tmpl, opt, cb) {
   } else {
     template = jade.compile(tmpl, options);
   }
-  cb(null, template(opt.page));
+  cb(null, template(opt));
 }
 
 module.exports = {

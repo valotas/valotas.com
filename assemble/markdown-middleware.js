@@ -13,6 +13,7 @@ var middleware = function (param, next) {
     page.html = function () {
       return markdown.toHTML(page.page);
     };
+    page.md = true;
   }
   next();
 };
