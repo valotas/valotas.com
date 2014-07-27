@@ -25,12 +25,19 @@ module.exports = function (grunt) {
         plugins: ['assemble/*.js'],
         initializeEngine: function (engine) {
           engine.engine = require('./assemble/engine');
-        },
-        flatten: true
+        }
       },
       site: {
+        options: {
+          expand: true,
+          cwd: 'src',
+          rename: function (dest, src) {
+            console.log(dest, src);
+            return dest;
+          }
+        },
         files: {
-          'build/': ['src/articles/*.md', 'src/templates/index.jade']
+          'build/': ['src/articles/**/*.md']
         }
       }
     },
