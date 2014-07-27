@@ -6,6 +6,15 @@ module.exports = function (grunt) {
   grunt.loadNpmTasks('assemble');
   grunt.loadNpmTasks('grunt-jasmine-node');
 
+  function readFileIfExists (path) {
+    var f = grunt.file;
+    if (f.exists(path)) {
+      return f.read(path);
+    } else {
+      return null;
+    }
+  }
+
   grunt.initConfig({
     assemble: {
       options: {
@@ -52,10 +61,27 @@ module.exports = function (grunt) {
     },
     jshint: {
       all: ['Gruntfile.js', 'assemble/**.js']
+    },
+    sftp: {
+      build: {
+        files: {
+          './': 'build/**'
+        },
+        options: {
+          showProgress: true,
+          path: '/var/www/valotas.com/',
+          srcBasePath: 'build/',
+          host: 'pi',
+          createDirectories: true,
+          username: 'valotas',
+          privateKey: readFileIfExists("/home/valotas/.ssh/id_rsa"),
+          passphrase: readFileIfExists("/home/valotas/.ssh/id_rsa.pass")
+        }
+      }
     }
   });
 
   grunt.registerTask('test', ['jshint', 'jasmine_node:all']);
   grunt.registerTask('default', ['clean', 'test', 'less:site', 'copy:assets', 'assemble']);
-
+  grunt.registerTask('deploy', ['sftp:build']);
 };
