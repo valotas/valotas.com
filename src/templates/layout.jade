@@ -18,9 +18,11 @@ html(lang='en')
         .col-md-3
           a.photo.img-rounded(href='/')
         div.signature.col-md-9
-          h1.whitebg= owner
+          h1.whitebg Γιώργος Βαλοτάσιος
+            a(href="#aka")
+              i.fa.fa-asterisk
           p.whitebg
-            span #{name} | #{description}
+            span Things to remember | Programming stuff :)
           .social.whitebg
             a(href='https://github.com/valotas' target="_blank")
               i.fa.fa-github-square.fa-2x
@@ -35,9 +37,18 @@ html(lang='en')
       block content
         h2 Welcome to zombocom!
     #footer
-      .container &copy; #{ owner }
-        | - CSS by
-        a(href="http://twitter.com/P_Dei" target="_blank") @P_Dei
+      .container 
+        .col-md-12
+          &copy; Γιώργος Βαλοτάσιος
+          | - CSS by
+          a(href="http://twitter.com/P_Dei" target="_blank") @P_Dei
+        .col-md-12
+          i.fa.fa-asterisk 
+          | The greek name "
+          strong
+            em Γιώργος
+          "is also know as Yoryos, Georgios or just George which seems to be easier to most english speaking people.
+          If you are trying to find out what "Βαλοτασιος" means, just think of it as "Valotasios" ans you should be fine.
     script.
       (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
       (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
