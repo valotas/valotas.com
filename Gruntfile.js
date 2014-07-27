@@ -4,9 +4,9 @@
 module.exports = function (grunt) {
   require('load-grunt-tasks')(grunt);
   grunt.loadNpmTasks('assemble');
+  grunt.loadNpmTasks('grunt-jasmine-node');
 
   grunt.initConfig({
-    //site: grunt.file.readYAML('src/_config.yml'),
     assemble: {
       options: {
         jade: {
@@ -38,6 +38,14 @@ module.exports = function (grunt) {
         ]
       }
     },
+    jasmine_node: {
+      options: {
+        showColors: true,
+        includeStackTrace: false,
+        forceExit: true
+      },
+      all: ['assemble/']
+    },
     clean: {
       build: ['build']
     },
@@ -46,6 +54,7 @@ module.exports = function (grunt) {
     }
   });
 
-  grunt.registerTask('default', ['clean', 'jshint', 'less:site', 'copy:assets', 'assemble']);
+  grunt.registerTask('test', ['jshint', 'jasmine_node:all']);
+  grunt.registerTask('default', ['clean', 'test', 'less:site', 'copy:assets', 'assemble']);
 
 };
