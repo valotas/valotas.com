@@ -26,7 +26,6 @@ function Article(page) {
     }
     if (page.html) {
       var html = page.html();
-      console.log(html);
       return html.substring(0, html.indexOf('<h2 id='));
     }
     return '';
