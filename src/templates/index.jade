@@ -10,7 +10,6 @@ block content
         .article
           h2.header
             a(href=article.page.link())= article.page.data.title
-          //span.badge= page.article.date('YYYY-MM-DD')
           span.badge= article.date()
           div.descr
             !{ article.description() }
@@ -18,4 +17,3 @@ block content
               a.btn.btn-primary(href=article.page.link()) more
       if (index + 1) % 3 === 0
         .clearfix
-
