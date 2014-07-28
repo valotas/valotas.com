@@ -32,7 +32,7 @@ describe('article-middleware', function () {
       ctx = runMiddlewareAndGetContext({});
     });
 
-    it('should provide a function to get the published date', function (){
+    it('should provide a function to get the published date', function () {
       expect(ctx.article.date).not.toBeUndefined();
       ctx.page.data = {
         date: '22 Aug 2013'
@@ -40,7 +40,7 @@ describe('article-middleware', function () {
       expect(ctx.article.date()).toEqual('22/08/2013');
     });
 
-    it('should allow to get the published date formated', function (){
+    it('should allow to get the published date formated', function () {
       ctx.page.data = {
         date: '22 Aug 2013'
       };
