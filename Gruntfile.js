@@ -22,6 +22,7 @@ module.exports = function (grunt) {
           templates: 'src/templates/',
           defaultTemplate: 'article.jade'
         },
+        assets: 'build/assets',
         plugins: ['assemble/*.js'],
         initializeEngine: function (engine) {
           engine.engine = require('./assemble/engine');
@@ -33,7 +34,7 @@ module.exports = function (grunt) {
           {
             expand: true,
             cwd: 'src/articles',
-            src: ['**/*.md', ],
+            src: [ '**/*.md' ],
             dest: 'build/',
             rename: function (dest, src) {
               var endsWithIndex = src.indexOf('/index.md', src.length - '/index.md'.length) !== -1;
