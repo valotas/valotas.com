@@ -5,7 +5,6 @@
 var moment = require('moment');
 
 function Article(page) {
-
   this.page = page;
 
   this.moment = function () {
@@ -33,9 +32,16 @@ function Article(page) {
 }
 
 function buildArticles(pages) {
-  return pages.map(function (p) {
-    return new Article(p);
+  var articles = [];
+  pages.map(function (p) {
+    if (p.dest !== 'build/index.html') {
+      articles.push(new Article(p));
+    }
   });
+  articles.sort(function (a, b) {
+    return a.moment().isAfter(b.moment()) ? -1 : 1;
+  });
+  return articles;
 }
 
 var middleware = function (param, next) {
