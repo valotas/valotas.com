@@ -29,9 +29,23 @@ module.exports = function (grunt) {
         flatten: true
       },
       site: {
-        files: {
-          'build/': ['src/articles/*.md', 'src/templates/index.jade']
-        }
+        files: [
+          {
+            expand: true,
+            cwd: 'src/articles',
+            src: ['**/*.md', ],
+            dest: 'build/',
+            rename: function (dest, src) {
+              var endsWithIndex = src.indexOf('/index.md', src.length - '/index.md'.length) !== -1;
+              dest = dest + src.substring(0, src.length - 3);
+              if (!endsWithIndex) {
+                dest += '/index';
+              }
+              return dest;
+            }
+          },
+          { expand: true, cwd: 'src/templates', src: 'index.jade', dest: 'build/' }
+        ]
       }
     },
     less: {
