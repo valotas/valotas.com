@@ -1,0 +1,127 @@
+body {
+  font-family: "Open Sans";
+  background: #eee;
+}
+
+.jumbotron {
+  text-align: center;
+  h1 {
+    font-size: 32px;
+    font-weight: 600;
+  }
+
+  background: url('greece-wallpaper-hd-pictures-35.jpg');
+  background-size: cover;
+
+}
+
+.photo {
+  display: block;
+  background-image: url('me-250x250.jpg');
+  background-size: cover;
+  width: 200px;
+  height: 200px;
+  margin: 0 auto;
+}
+
+.social {
+  a {
+    margin: 0 .5em;
+    padding: .3em;
+    //  margin: 0 2px 0 2px;
+    width: 2em;
+    height: 2em;
+    display: inline-block;
+    font-size: 1.2em;
+    border-radius: 50%;
+    text-decoration: none;
+    text-align: center;
+    border: none;
+  }
+
+  a:hover {
+    opacity: 0.8;
+  }
+}
+
+.fa-github-square {
+  color: #666;
+}
+
+.fa-facebook-square {
+  color: #305c99;
+}
+
+.fa-twitter-square {
+  color: #4099ff;
+}
+
+.fa-linkedin-square {
+  color: #0e76a8;
+}
+
+
+.whitebg {
+  background: rgba(255,255,255,.5);
+}
+
+@media (min-width: @screen-lg) {
+  .photo {
+    width: 250px;
+    height: 250px;
+  }
+
+}
+
+@media (min-width: @screen-md) {
+  .jumbotron {
+    text-align: left;
+    .whitebg {
+      background: transparent;
+    }
+  }
+}
+
+.article {
+  padding: 1em 1.3em;
+  background: white;
+  box-shadow: 0px 2px 4px rgba(0, 0, 0, 0.2);
+
+  .badge {
+    background: @v-blue;
+    font-weight: 400;
+  }
+}
+
+#index-content .article {
+  margin-bottom: 1em;
+
+  .descr {
+    margin-top: 10px;
+  }
+  .more {
+    text-align: right;
+  }
+}
+
+#content {
+  h1 {
+    padding-bottom: 0.5em;
+    margin-bottom: 0.2em;
+  }
+}
+
+#footer-actions {
+  text-align: center;
+  padding-top: 1.5em;
+}
+
+#footer {
+  background: url('greece-wallpaper-hd-pictures-35.jpg');
+  background-size: cover;
+  width: 100%;
+  text-align: center;
+  margin-top: 2em;
+  padding: 2em;
+  color: @v-blue;
+}
