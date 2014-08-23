@@ -10,7 +10,7 @@ html(lang='en')
       title
         block title
           = name
-      link(rel='stylesheet', href='//fonts.googleapis.com/css?family=Open+Sans')
+      link(rel='stylesheet', href='//fonts.googleapis.com/css?family=Open+Sans&subset=greek')
       link(rel='stylesheet', href= assets + '/main.css')
   body(class=bodyclass)
     .jumbotron
@@ -18,9 +18,7 @@ html(lang='en')
         .col-md-3
           a.photo.img-rounded(href='/')
         div.signature.col-md-9
-          h1.whitebg Γιώργος Βαλοτάσιος
-            a(href="#aka")
-              i.fa.fa-asterisk
+          h1.whitebg.row Γιώργος Βαλοτάσιος
           p.whitebg.row
             span Things to remember | Programming stuff :)
           .social.whitebg.row
@@ -44,7 +42,7 @@ html(lang='en')
           a(href="https://twitter.com/MrPirrera" target="_blank") @MrPirrera
         .col-sm-12.col-md-1
           i.fa.fa-asterisk
-        .col-sm-12.col-md-11.whitebg#aka
+        .col-sm-12.col-md-11.whitebg
           | The greek name "
           strong
             em Γιώργος
