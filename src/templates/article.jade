@@ -5,7 +5,9 @@ block append vars
   - subtitle = 'Γιώργος Βαλοτάσιος'
   
 block append subtitle
-  span.badge.date= article.date('DD/MM/YYYY')
+  span.badge.date
+    i.fa.fa-pencil-square-o
+    = ' ' + article.date('DD/MM/YYYY')
 
 block header
 
