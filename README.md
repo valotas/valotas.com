@@ -6,10 +6,10 @@ Assuming that you have nodejs and npm install, just do the following:
 
 ```bash
 npm install
-grunt
+npm run build
 ```
 
-After that you can just `grunt deploy` in order to deploy the site assuming that you have the right keys at the right path in order to connent to the server passwordless.
+After that you can just `npm run deploy` in order to deploy the site assuming that you have the right keys at the right path in order to connent to the server passwordless.
 
 ## NGNX configuration
 In order to have the old (blogger) urls working, just add the following rewrite rule to nginx:nginx
