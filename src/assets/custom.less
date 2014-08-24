@@ -3,6 +3,12 @@ body {
   background: #eee;
 }
 
+
+.date.badge {
+  background: @v-blue;
+}
+
+
 .jumbotron {
   text-align: center;
   h1 {
@@ -13,6 +19,9 @@ body {
   background: url('greece-wallpaper-hd-pictures-35.jpg');
   background-size: cover;
 
+  .date {
+    margin-left: 1em; 
+  }
 }
 
 .photo {
@@ -82,15 +91,14 @@ body {
   }
 }
 
-.date.badge {
-  background: @v-blue;
-  margin-left: 1em;
-}
-
 .article {
   padding: 1em 1.3em;
   background: white;
   box-shadow: 0px 2px 4px rgba(0, 0, 0, 0.2);
+  
+  .date {
+    font-weight: 400;
+  }
 }
 
 #index-content .article {

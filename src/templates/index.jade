@@ -7,7 +7,7 @@ block content
         .article
           h2.header
             a(href=article.page.link())= article.page.data.title
-          span.badge= article.date()
+          span.badge.date= article.date()
           div.descr
             p !{article.description()}
             p.more
