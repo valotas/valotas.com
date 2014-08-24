@@ -3,13 +3,14 @@ extends layout
 block append vars
   - title = page.title
   - subtitle = 'Γιώργος Βαλοτάσιος'
+  
+block append subtitle
+  span.badge.date= article.date('DD/MM/YYYY')
 
 block header
 
 block content
   .article
-    p.date
-      span.badge= article.date('DD/MM/YYYY')
     article
       section.content!= article.html()
 

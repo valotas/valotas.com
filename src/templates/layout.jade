@@ -20,8 +20,9 @@ html(lang='en')
           a.photo.img-rounded(href='/')
         div.signature.col-md-9
           h1.whitebg.row= title
-          p.whitebg.row 
-            span= subtitle
+          p.whitebg.row
+            block subtitle
+              span= subtitle
           .social.whitebg.row
               a(href='https://github.com/valotas' target="_blank")
                 i.fa.fa-github-square.fa-2x
