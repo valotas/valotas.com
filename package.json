@@ -20,8 +20,11 @@
     "marked": "^0.3.2",
     "moment": "^2.7.0"
   },
-  "scripts" : {
+  "scripts": {
     "build": "grunt",
     "deploy": "grunt deploy"
+  },
+  "dependencies": {
+    "MD5": "^1.2.1"
   }
 }

@@ -10,7 +10,9 @@ function noop() {}
 
 function runMiddlewareAndGetAsset() {
   var params = {
-    context: {}
+    context: {
+      assets: '/path/to/assets'
+    }
   };
   middleware(params, noop);
   return params.context.asset;
@@ -22,10 +24,17 @@ describe('asset-middleware', function () {
     expect(asset).not.toBeUndefined();
   });
   
-  describe('asset function', function () {
-    it('should return the md5 of the given file', function () {
+  describe('asset()', function () {
+    it('should return a file with the same extention', function () {
       var asset = runMiddlewareAndGetAsset();
-      expect(asset(path.resolve(__filename))).toEqual('asdkldjf');
+      var assetFilename = asset(path.resolve(__filename));
+      expect(path.extname(assetFilename)).toEqual('.js');
+    });
+    
+    it('should return a filename prefix with the assets path', function () {
+      var asset = runMiddlewareAndGetAsset();
+      var assetFilename = asset(path.resolve(__filename));
+      expect(assetFilename.indexOf('/path/to/assets')).toEqual(0);
     });
   });
   
