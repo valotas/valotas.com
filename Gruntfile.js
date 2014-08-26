@@ -93,10 +93,20 @@ module.exports = function (grunt) {
           passphrase: readFileIfExists("/home/valotas/.ssh/id_rsa.pass")
         }
       }
+    },
+    connect: {
+      server: {
+        options: {
+          port: 8000,
+          base: 'build',
+          keepalive: true
+        }
+      }
     }
   });
 
   grunt.registerTask('test', ['jshint', 'jasmine_node:all']);
   grunt.registerTask('default', ['clean', 'test', 'less:site', 'copy:assets', 'assemble']);
   grunt.registerTask('deploy', ['sftp:build']);
+  grunt.registerTask('serve', ['connect']);
 };
