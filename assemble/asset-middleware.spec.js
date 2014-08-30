@@ -45,9 +45,19 @@ describe('asset-middleware', function () {
     this.addMatchers({ toThrowNamed: toThrowNamedMatcher });
   });
   
-  it('should throw an exception if no originalAssets is present', function () {
+  it('should throw an exception if no originalAssets property is present', function () {
     expect(function () {
-      runMiddlewareAndGetAsset({}); 
+      runMiddlewareAndGetAsset({
+        assets: '/path/to/assets'
+      }); 
+    }).toTrowNamed('IllegalContextException');
+  });
+  
+  it('should throw an exception if no assets property is present', function () {
+    expect(function () {
+      runMiddlewareAndGetAsset({
+        orriginalAssets: '/path/to/original/assets'
+      }); 
     }).toTrowNamed('IllegalContextException');
   });
   
