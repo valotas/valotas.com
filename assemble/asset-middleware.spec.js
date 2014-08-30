@@ -35,7 +35,7 @@ describe('asset-middleware', function () {
     it('should return a filename prefix with the assets path', function () {
       var asset = runMiddlewareAndGetAsset();
       var assetFilename = asset(path.resolve(__filename));
-      expect(assetFilename.indexOf('/path/to/assets')).toEqual(0);
+      expect(assetFilename.indexOf('/path/to/assets/')).toEqual(0);
     });
     
     it('should create the hashed file if that does not exists', function () {
