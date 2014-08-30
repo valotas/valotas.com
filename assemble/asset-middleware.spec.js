@@ -1,5 +1,5 @@
 /*jshint node:true*/
-/*globals describe, it, expect*/
+/*globals describe, it, expect, beforeEach*/
 
 'use strict';
 
@@ -26,27 +26,29 @@ describe('asset-middleware', function () {
   });
   
   describe('asset()', function () {
+    var file;
+    
+    beforeEach(function () {
+      file = '/tmp/assemble-asset-middleware.spec.js';
+      fs.writeFileSync(file, fs.readFileSync(path.resolve(__filename)));
+    });
+    
     it('should return a file with the same extention', function () {
       var asset = runMiddlewareAndGetAsset();
-      var assetFilename = asset(path.resolve(__filename));
+      var assetFilename = asset(file);
       expect(path.extname(assetFilename)).toEqual('.js');
     });
     
     it('should return a filename prefix with the assets path', function () {
       var asset = runMiddlewareAndGetAsset();
-      var assetFilename = asset(path.resolve(__filename));
+      var assetFilename = asset(file);
       expect(assetFilename.indexOf('/path/to/assets/')).toEqual(0);
     });
     
     it('should create the hashed file if that does not exists', function () {
-      var currentFilename = path.resolve(__filename);
-      var tempFile = '/tmp/assemble-asset-middleware.spec.js';
-      fs.writeFileSync(tempFile, fs.readFileSync(currentFilename));
-      
       var asset = runMiddlewareAndGetAsset();
-      var assetFileName = asset(tempFile);
+      var assetFileName = asset(file);
       var baseName = path.basename(assetFileName);
-      console.log(assetFileName, baseName);
       expect(fs.existsSync('/tmp/' + baseName)).toEqual(true);
     });
   });
