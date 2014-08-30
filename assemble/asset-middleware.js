@@ -14,7 +14,21 @@ function ensureFileExists(sourceFile, targetFileName) {
   }
 }
 
-function createAsset(assets) {
+function createAsset(assets, originalAssets) {
+  if (!(assets)) {
+    throw {
+      name: 'IllegalContextException',
+      message: 'Assets property does not exists within given context'
+    };
+  }
+  
+  if (!(originalAssets)) {
+    throw {
+      name: 'IllegalContextException',
+      message: 'originalAssets property does not exists within given context'
+    };
+  }
+
   return function (filename) {
     var content = fs.readFileSync(filename, 'utf-8');
     var ext = path.extname(filename);
@@ -25,7 +39,7 @@ function createAsset(assets) {
 }
 
 var middleware = function (param, next) {
-  param.context.asset = createAsset(param.context.assets);
+  param.context.asset = createAsset(param.context.assets, param.context.originalAssets);
   next();
 };
 
