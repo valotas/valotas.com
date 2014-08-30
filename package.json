@@ -24,5 +24,8 @@
   "scripts": {
     "build": "grunt",
     "deploy": "grunt deploy"
+  },
+  "dependencies": {
+    "MD5": "^1.2.1"
   }
 }

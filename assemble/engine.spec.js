@@ -25,7 +25,7 @@ describe('engine', function () {
   });
 
   describe('markdown', function () {
-    it('should try to render giben page.template when page is markdown', function () {
+    it('should try to render given page.template when page is markdown', function () {
       var options = {
         jade: {
           templates: 'src/templates/'
@@ -33,7 +33,10 @@ describe('engine', function () {
         page: {
           md: true,
           template: 'layout.jade',
-          src: 'path/to/file'
+          src: 'path/to/file',
+        },
+        asset: function (filename) {
+          return '/path/to/' + filename;
         }
       };
 
