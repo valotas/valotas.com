@@ -30,10 +30,11 @@ function createAsset(assets, originalAssets) {
   }
 
   return function (filename) {
-    var content = fs.readFileSync(filename, 'utf-8');
+    var file = path.join(originalAssets, filename);
+    var content = fs.readFileSync(file, 'utf-8');
     var ext = path.extname(filename);
     var targetFileName  = md5(content) + ext;
-    ensureFileExists(filename, targetFileName);
+    ensureFileExists(file, targetFileName);
     return path.join(assets, targetFileName);
   };
 }

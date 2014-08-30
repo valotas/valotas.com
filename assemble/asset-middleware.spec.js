@@ -72,8 +72,8 @@ describe('asset-middleware', function () {
     var file;
     
     beforeEach(function () {
-      file = '/tmp/assemble-asset-middleware.spec.js';
-      fs.writeFileSync(file, fs.readFileSync(path.resolve(__filename)));
+      file = 'assemble-asset-middleware.spec.js';
+      fs.writeFileSync(path.join('/tmp', file), fs.readFileSync(path.resolve(__filename)));
     });
     
     it('should return a file with the same extention', function () {
