@@ -63,6 +63,13 @@ describe('article-middleware', function () {
         };
         expect(ctx.article.description()).toEqual('123456789 123456789');
       });
+      
+      it('should return the the first letter within a span.first-letter', function () {
+        ctx.page.html = function () {
+          return '<p>123</p>';
+        };
+        expect(ctx.article.html()).toEqual('<p><span class="first-letter">1</span>23');
+      });
     });
 
   });
