@@ -12,21 +12,23 @@ var commonContext = {
   assets: '/path/to/assets' 
 };
 
-var toThrowNamedMatcher = {
-  compare: function (actual, expected) {
-    try {
-      actual();
-      return {
-        pass: false,
-        message: 'Expected exception: "' + expected + '" but got nothing'
-      };
-    } catch (e) {
-      return {
-        pass: e.name === expected,
-        message: e.name + ' is not equal to ' + expected
-      };
-    }
+var toThrowNamedMatcher = function (expected) {
+  var exception;
+  
+  if (typeof this.actual !== 'function') {
+    throw new Error('Given "actual" is not a function'); 
   }
+  
+  try {
+    this.actual();
+  } catch (e) {
+    exception = e.name || 'undefined';
+  }
+  
+  this.message = function () {
+    return 'Expected exception: "' + expected + '" but got "' + exception + '"';
+  };
+  return exception && exception === expected;
 };
 
 function noop() {}
@@ -34,7 +36,7 @@ function noop() {}
 function runMiddlewareAndGetAsset(context) {
   context = context || commonContext;
   var params = {
-    context: commonContext
+    context: context
   };
   middleware(params, noop);
   return params.context.asset;
@@ -50,7 +52,7 @@ describe('asset-middleware', function () {
       runMiddlewareAndGetAsset({
         assets: '/path/to/assets'
       }); 
-    }).toTrowNamed('IllegalContextException');
+    }).toThrowNamed('IllegalContextException');
   });
   
   it('should throw an exception if no assets property is present', function () {
@@ -58,7 +60,7 @@ describe('asset-middleware', function () {
       runMiddlewareAndGetAsset({
         orriginalAssets: '/path/to/original/assets'
       }); 
-    }).toTrowNamed('IllegalContextException');
+    }).toThrowNamed('IllegalContextException');
   });
   
   it('should add an asset() function to the given context', function () {
