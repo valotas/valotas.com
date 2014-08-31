@@ -68,7 +68,7 @@ describe('article-middleware', function () {
         ctx.page.html = function () {
           return '<p>123</p>';
         };
-        expect(ctx.article.html()).toEqual('<p><span class="first-letter">1</span>23');
+        expect(ctx.article.html()).toEqual('<p><span class="first-letter">1</span>23</p>');
       });
     });
 
