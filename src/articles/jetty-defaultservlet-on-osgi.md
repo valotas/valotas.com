@@ -73,8 +73,6 @@ Now what we just did is to override the `getResource` resource method of the `De
 
 ## References
 
-* [Embedding Jetty in OSGi][jetty-and-osgi]
-* [Embedding Jetty in OSGi (osgi felix sample step 3)][emded-jetty-osgi]
+* [Embedding Jetty in OSGi][embed-jetty-osgi]
 
 [embed-jetty-osgi]: http://www.gridshore.nl/2008/02/15/embedding-jetty-in-osgi-osgi-felix-sample-step-3/
-[jetty-and-osgi]: http://blogs.webtide.com/janb/entry/jetty_and_osgi
