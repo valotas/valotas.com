@@ -16,7 +16,11 @@ function Article(page) {
   };
 
   this.html = function () {
-    return page.html ? page.html() : '';
+    var html = page.html ? page.html() : '';
+    if (html.length > 4) {
+      html = html.replace(/<p>(.)(.*)/, '<p><span class="first-letter">$1</span>$2');
+    }
+    return html;
   };
 
   this.description = function () {
