@@ -8,8 +8,7 @@ block content
           h2.header
             a(href=article.page.link())= article.page.data.title
           span.badge.date= article.date()
-          div.descr
-            p !{article.description()}
+          div.descr !{article.description()}
             p.more
               a.btn.btn-primary(href=article.page.link())
                 | more&nbsp
