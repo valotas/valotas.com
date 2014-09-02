@@ -3,6 +3,7 @@
 'use strict';
 
 var fs = require('fs');
+var os = require('os');
 var path = require('path');
 var md5 = require('MD5');
 
@@ -35,7 +36,11 @@ function createAsset(assets, originalAssets) {
     var ext = path.extname(filename);
     var targetFileName  = md5(content) + ext;
     ensureFileExists(file, targetFileName);
-    return path.join(assets, targetFileName);
+    var result = path.join(assets, targetFileName);
+    if (path.sep === '\\') {
+      result = result.replace(/\\/g, '/');
+    }
+    return result;
   };
 }
 

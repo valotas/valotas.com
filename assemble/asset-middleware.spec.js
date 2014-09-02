@@ -5,10 +5,11 @@
 
 var path = require('path');
 var fs = require('fs');
+var os = require('os');
 var middleware = require('./asset-middleware');
 
 var commonContext = {
-  originalAssets: '/tmp',
+  originalAssets: os.tmpdir(),
   assets: '/path/to/assets' 
 };
 
@@ -73,7 +74,7 @@ describe('asset-middleware', function () {
     
     beforeEach(function () {
       file = 'assemble-asset-middleware.spec.js';
-      fs.writeFileSync(path.join('/tmp', file), fs.readFileSync(path.resolve(__filename)));
+      fs.writeFileSync(path.join(os.tmpdir(), file), fs.readFileSync(path.resolve(__filename)));
     });
     
     it('should return a file with the same extention', function () {
@@ -85,6 +86,7 @@ describe('asset-middleware', function () {
     it('should return a filename prefix with the assets path', function () {
       var asset = runMiddlewareAndGetAsset();
       var assetFilename = asset(file);
+      console.log('######',assetFilename);
       expect(assetFilename.indexOf('/path/to/assets/')).toEqual(0);
     });
     
@@ -92,7 +94,7 @@ describe('asset-middleware', function () {
       var asset = runMiddlewareAndGetAsset();
       var assetFileName = asset(file);
       var baseName = path.basename(assetFileName);
-      expect(fs.existsSync('/tmp/' + baseName)).toEqual(true);
+      expect(fs.existsSync(path.join(os.tmpdir(), baseName))).toEqual(true);
     });
   });
   

@@ -10,7 +10,11 @@ function decorate(page) {
       if (otherPath.indexOf('/') === 0) {
         otherPath = otherPath.substring(1);
       }
-      return path.relative(link, otherPath);
+      var relativePath = path.relative(link, otherPath);
+      if  (path.sep === '\\') {
+        relativePath = relativePath.replace(/\\/g, '/');
+      }
+      return relativePath;
     }
     return link;
   };
