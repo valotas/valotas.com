@@ -52,6 +52,14 @@ interface Node {
 
 Now everything looks simpler. You have to still write the metadata in html as we just did, but at least now we can give a representation of and html object in an object oriented way.
 
+### Javascript: behaviour mixins
+Now that we can style our node with css mixins, what about adding some behaviour there? This is where javascript is comming.
+
 [dom]: http://en.wikipedia.org/wiki/Document_Object_Model
 [composition]: http://en.wikipedia.org/wiki/Object_composition
 [mixin]: http://en.wikipedia.org/wiki/Mixin
+
+Refs
+----
+http://code.tutsplus.com/tutorials/object-oriented-css-what-how-and-why--net-6986
+http://stackoverflow.com/questions/918380/abstract-classes-vs-interfaces-vs-mixins
