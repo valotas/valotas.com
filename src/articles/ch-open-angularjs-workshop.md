@@ -1,7 +1,7 @@
 ---
 title: Unleash your creativity with Angular.JS
 author: valotas
-date: 2014-09-09
+date: 2014-09-13
 ---
 
 On 9th of September [Gion Kunz](http://mindtheshift.wordpress.com/) and me ran a workshop for [ch/open][ch-open]. The idea was to introduce the basics of angular js so that someone could start experiment with it. During the workshop we did some excersizes with [jsbin][jsbin] and hacked together a [chat application][chat-application].
