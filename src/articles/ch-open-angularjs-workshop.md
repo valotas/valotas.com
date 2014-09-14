@@ -4,7 +4,7 @@ author: valotas
 date: 2014-09-09
 ---
 
-On 9th of September me and [Gion Kunz](http://mindtheshift.wordpress.com/) ran a workshop for [ch/open][ch-open]. The idea was to introduce the basics of angular js so that someone could start experiment with it. During the workshop we did some excersizes with [jsbin][jsbin] and hacked together a [chat application][chat-application].
+On 9th of September [Gion Kunz](http://mindtheshift.wordpress.com/) and me ran a workshop for [ch/open][ch-open]. The idea was to introduce the basics of angular js so that someone could start experiment with it. During the workshop we did some excersizes with [jsbin][jsbin] and hacked together a [chat application][chat-application].
 
 ## Some notes for the workshop
 For me that was the first time trying to help people on a subject outside of my coleague/friends cycle. Ofcourse I'm always more than excited to help, but when you are running a workshop, you always have some stress as the expectations are not the same. After all someone attending the workshop should take back what he came in for as you can not be next to him everyday.
@@ -29,7 +29,7 @@ After that we introduced `$scope`, `ng-controller` and `ng-model` which are the 
 
 The important thing here is to understand what is a controller, how is it used and how our model is somehow (or should I say automagically) bound to the html.
 
-### Architecture. Or where you start to need DI
+### Architecture. Or where you need DI
 When you are happy enough to create your own apps, you easily come to the point that your controllers are big enough to be completelly unmaintainable. And this is where DI shines. Although a little bit difficult to illustrate the need, you at least can illustrate the coolness of it. That was the last excersise of the introduction to the framework. Modules and factories. We worked again on jsbin: http://jsbin.com/huguj and this time the excericiSes were:
 
 - Modify the service in order to be able to add a task
