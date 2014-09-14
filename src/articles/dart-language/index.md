@@ -63,9 +63,11 @@ Dart is targeting the web and that for javascript. There are some blog posts abo
 
 The best break down of the language till now can be found at [this article][dart-launch] and I would like to copy what the author wrote:
 
-    If you like Java and can’t get yourself to like JavaScript, you program Dart.
-    If you like Ruby and can’t get yourself to like JavaScript, you program CoffeeScript.
-    If you like JavaScript, you program JavaScript.
+> If you like Java and can’t get yourself to like JavaScript, you program Dart.
+>
+> If you like Ruby and can’t get yourself to like JavaScript, you program CoffeeScript.
+>
+> If you like JavaScript, you program JavaScript.
 
 We like it or not javascript will be with us for a while. All the cool new programming languages targeting the web are getting compiled down to javascript and this can not be changed just by the introduction of a new one.
 
