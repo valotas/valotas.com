@@ -1,10 +1,10 @@
 ---
 title: Object oriented html
-date: ???
+date: 2014-09-20
 published: false
 ---
 
-There is quite a buzz nowadays (2014) for functional programming and so we all try to move our thinking in a more functional way. Still, the object oriented approach seems to be the easiest way to understand and so to programm at the end. The object oriented programming can be applied to any structural schemantic. One of that structurs though that we tend to forget is `html`. So, let's try to visualize the thing.
+There is quite a buzz nowadays (2014) for functional programming and so we all try to move our thinking in a more functional way. Still, the object oriented approach seems to be the easiest way to understand and so to program at the end. The object oriented programming can be applied to any structural schematic. One of that structures though that we tend to forget is `html`. So, let's try to visualize the it.
 
 ## What is an html object
 That is not that hard to think of if you know what is the [`DOM`][dom]. If you've written a little bit of javascript you used it in order to bind functionality to your presentation layer. To simplify things, think of every html tag as an object. [Object composition][composition] allows objects to contain other objects and there for you can have your `document` object to contain your paragraph object (`p`) which contains a banch of `text`.
@@ -53,7 +53,63 @@ interface Node {
 Now everything looks simpler. You have to still write the metadata in html as we just did, but at least now we can give a representation of and html object in an object oriented way.
 
 ### Javascript: behaviour mixins
-Now that we can style our node with css mixins, what about adding some behaviour there? This is where javascript is comming.
+Now that we can style our node with css mixins, what about adding some behaviour there? This is where javascript is comming. So let's say that we have a `<button/>` that we would like to use in order to show an alert to the user. Assuming that our button is also styled, we can describe this button with the following pseudo class:
+
+```
+class AlertMessageButton extends Node, CssButton, CssMessage, AlertMessageAction {
+  //Nothing to implement
+}
+```
+
+In html that would be something like the below:
+
+```html
+<button class="button message action-alert-message">Alert!</button>
+```
+
+and now all we have to do is to somehow implement this AlertMessageAction mixin. And that would be kinda easy:
+
+```javascript
+function alertMessage(msg) {
+  window.alert(msg);
+}
+```
+
+Now all that left is to bind that mixin to the elements's `action-alert-message` class. There is no standart way doing that but with jquery we can do it pretty easy:
+
+```javascript
+$('.action-alert-message').click(alertMessage);
+```
+
+But let's pimp our example a little bit more. As you see our mixin needs a `msg` to show. That means that our `AlertMessageButtton` should implement a `getAlertMessage` method or have an `alertMessage` field (we do not care about how we represent that on the class base). Well what about tweaking a little bit our html:
+
+```html
+<button class="button message action-alert-message" data-alert-message="Hi!">Alert!</button>
+```
+
+And now we are done. We have the `classname` of our object, the mixins that it is implementing and also some fields with data. Sounds like a proper instance to me.
+
+One last thing to take care would be the actuall binding of the mixins to the element. The styling is something that our browser takes care of, but the behaviour is something that we should deal with. For that we have to use the hooks provided by our browser and just add our behaviour. With jQuery that would be something like:
+
+```javascript
+$(function (){ //on document load
+
+  // bind our function to the click event of the .action-alert-message
+  $(document).on('click', '.action-alert-message', function() {
+    var msg = $(this).data('alert-message');
+    alertMessage(msg);
+  });
+  
+});
+```
+
+And I guess we are done! Do not try to hack stuff arround anymore. Use classes and mixins the way you should (even if they are kind of restrictive as they are in our html world).
+
+### But why not to use `data` atributes as mixin names
+Well, that kind of answer is kinda opiniated. Many frameworks are going that way, trying to let the user work with classes in a css central way. My answer to that is why not do the same with css? Why not use `data` attributes to style your elements?
+
+As there is no straigh answer, let's say that I just like to have everything properly grouped. Therefor I use the `class` attribute to define the characteristics of an element and `data` attribute to give actual data to the element. It just looks much more logical to me, but still opiniated.
+
 
 [dom]: http://en.wikipedia.org/wiki/Document_Object_Model
 [composition]: http://en.wikipedia.org/wiki/Object_composition
