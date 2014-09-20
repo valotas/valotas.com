@@ -110,12 +110,14 @@ Well, that kind of answer is kinda opiniated. Many frameworks are going that way
 
 As there is no straigh answer, let's say that I just like to have everything properly grouped. Therefor I use the `class` attribute to define the characteristics of an element and `data` attribute to give actual data to the element. It just looks much more logical to me, but still opiniated.
 
+# References
+- [DOM][dom]
+- [Object composition][composition]
+- [Object-Oriented CSS: What, How, and Why](http://code.tutsplus.com/tutorials/object-oriented-css-what-how-and-why--net-6986)
+- [Mixin][mixin]
+- [Abstract classes vs. interfaces vs. mixins](http://stackoverflow.com/questions/918380/abstract-classes-vs-interfaces-vs-mixins)
+
 
 [dom]: http://en.wikipedia.org/wiki/Document_Object_Model
 [composition]: http://en.wikipedia.org/wiki/Object_composition
 [mixin]: http://en.wikipedia.org/wiki/Mixin
-
-Refs
-----
-http://code.tutsplus.com/tutorials/object-oriented-css-what-how-and-why--net-6986
-http://stackoverflow.com/questions/918380/abstract-classes-vs-interfaces-vs-mixins
