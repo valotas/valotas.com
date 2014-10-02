@@ -4,12 +4,12 @@ date: 2014-09-20
 published: false
 ---
 
-There is quite a buzz nowadays (2014) for functional programming and so we all try to move our thinking in a more functional way. Still, the object oriented approach seems to be the easiest way to understand and so to program at the end. The object oriented programming can be applied to any structural schematic. One of that structures though that we tend to forget is `html`. So, let's try to visualize the it.
+There is quite a buzz nowadays (2014) for functional programming and so we all try to move our thinking in a more functional way. Still, the object oriented approach seems to be the easiest way to understand and so to program at the end. The object oriented programming can be applied to any structural schematic. One of that structures though that we tend to forget is `html`. So, let's try to visualize it.
 
 ## What is an html object
-That is not that hard to think of if you know what is the [`DOM`][dom]. If you've written a little bit of javascript you used it in order to bind functionality to your presentation layer. To simplify things, think of every html tag as an object. [Object composition][composition] allows objects to contain other objects and there for you can have your `document` object to contain your paragraph object (`p`) which contains a banch of `text`.
+It is not that hard if you think of it as something that you allready know which is the [`DOM`][dom]. If you've written a little bit of javascript you've interacted with it in order to bind functionality to your presentation layer. But it is not only about javascript. To simplify things, think of every html tag as an object. [Object composition][composition] allows objects to contain other objects and there for you can have your `document` object to contain your paragraph object (`p`) which contains a banch of `text`.
 
-Object signatures may differ based on the type of the html element they describe but they all share some functionality. For simplicity, we can say that all html elements conform the interface below:
+Object signatures may differ based on the type of the html element they describe but they all share some functionality. We can easily find out that the interface below describes all the known html elements:
 
 ```
 interface Node {
@@ -22,7 +22,7 @@ interface Node {
 Now the way we represent markup to objects is straigh forward and is not the part of this article. What I am more interested in is this `getClassNames()` part which can be easily misunderstood. Every html element can have a `class` attribute where the user can put as many space separated classes as he wants. These classes are then accessible by this `getClassNames()` method.
 
 ### A css example
-This is the most important method for us, as we developers, as it gives a binding point for styling and behaviour. This can be used in order to add css classes and define the style of the object. As an example, let's look at this markup:
+This is the most important method for us, as developers, as it gives a binding point for styling and behaviour. This can be used in order to add css classes and define the style of the object. As an example, let's look at this markup:
 
 ```html
 <div class="main article white">
@@ -50,7 +50,7 @@ interface Node {
 }
 ```
 
-Now everything looks simpler. You have to still write the metadata in html as we just did, but at least now we can give a representation of and html object in an object oriented way.
+Now everything looks simpler. You have to still write the metadata in html as we just did, but at least we now can give a representation of an html element in an object oriented way.
 
 ### Javascript: behaviour mixins
 Now that we can style our node with css mixins, what about adding some behaviour there? This is where javascript is comming. So let's say that we have a `<button/>` that we would like to use in order to show an alert to the user. Assuming that our button is also styled, we can describe this button with the following pseudo class:
