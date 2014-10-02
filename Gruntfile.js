@@ -56,6 +56,13 @@ module.exports = function (grunt) {
         }
       }
     },
+    cssmin: {
+      site: {
+        files: {
+          'build/assets/main.css': 'build/assets/main.css'
+        }
+      }
+    },
     copy: {
       assets: {
         files: [
@@ -106,7 +113,7 @@ module.exports = function (grunt) {
   });
 
   grunt.registerTask('test', ['jshint', 'jasmine_node:all']);
-  grunt.registerTask('default', ['clean', 'test', 'less:site', 'copy:assets', 'assemble']);
+  grunt.registerTask('default', ['clean', 'test', 'less:site', 'cssmin:site', 'copy:assets', 'assemble']);
   grunt.registerTask('deploy', ['sftp:build']);
   grunt.registerTask('serve', ['connect']);
 };
