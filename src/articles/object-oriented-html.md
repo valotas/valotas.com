@@ -1,7 +1,6 @@
 ---
 title: Object oriented html
-date: 2014-09-20
-published: false
+date: 2014-10-11
 ---
 
 There is quite a buzz nowadays (2014) for functional programming and so we all try to move our thinking in a more functional way. Still, the object oriented approach seems to be the easiest way to understand and so to program at the end. The object oriented programming can be applied to any structural schematic. One of that structures though that we tend to forget is `html`. So, let's try to visualize it.
