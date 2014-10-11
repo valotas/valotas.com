@@ -49,27 +49,6 @@ module.exports = function (grunt) {
         ]
       }
     },
-    less: {
-      site: {
-        files: {
-          'build/assets/main.css': 'src/assets/main.less'
-        }
-      }
-    },
-    cssmin: {
-      site: {
-        files: {
-          'build/assets/main.css': 'build/assets/main.css'
-        }
-      }
-    },
-    copy: {
-      assets: {
-        files: [
-          { expand: true, cwd: 'src/', src: ['assets/**', '!assets/**.less'], dest: 'build/' }
-        ]
-      }
-    },
     jasmine_node: {
       options: {
         showColors: true,
@@ -77,12 +56,6 @@ module.exports = function (grunt) {
         forceExit: true
       },
       all: ['assemble/']
-    },
-    clean: {
-      build: ['build']
-    },
-    jshint: {
-      all: ['Gruntfile.js', 'assemble/**.js']
     },
     sftp: {
       build: {
