@@ -105,9 +105,10 @@ $(function (){ //on document load
 And I guess we are done! Do not try to hack stuff arround anymore. Use classes and mixins the way you should (even if they are kind of restrictive as they are in our html world).
 
 ### But why not to use `data` atributes as mixin names
-Well, that kind of answer is kinda opiniated. Many frameworks are going that way, trying to let the user work with classes in a css central way. My answer to that is why not do the same with css? Why not use `data` attributes to style your elements?
 
-As there is no straigh answer, let's say that I just like to have everything properly grouped. Therefor I use the `class` attribute to define the characteristics of an element and `data` attribute to give actual data to the element. It just looks much more logical to me, but still opiniated.
+Well, I believe that this is an opiniated question and therefor I can only give an opiniated answer. Many frameworks are going that way, trying to let the user work with classes in a css central way. My answer to that is why not do the same with css? Why not use `data` attributes to style your elements?
+
+As I can not find a straight answer to my question, let's say that I just like to have everything properly grouped. Therefor I use the `class` attribute to define the characteristics of an element and `data` attribute to give actual data to the element. It just looks much more logical to me, but still opiniated.
 
 # References
 - [DOM][dom]
