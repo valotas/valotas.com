@@ -6,7 +6,7 @@ var gulp = require('gulp');
 var jshint = require('gulp-jshint');
 var stylish = require('jshint-stylish');
 var jasmine = require('gulp-jasmine');
-var del = require('del');
+var rimraf = require('rimraf');
 var less = require('gulp-less');
 var cssmin = require('gulp-cssmin');
 //var assemble = require('assemble');
@@ -29,20 +29,18 @@ gulp.task('assemble-plugins-test', function () {
 gulp.task('test', ['lint', 'assemble-plugins-test']);
 
 gulp.task('clean', function (done) {
-  del('build', {
-    force: true
-  }, done);
+  rimraf('build', done);
 });
 
-gulp.task('less', function () {
-  gulp.src('src/assets/main.less')
+gulp.task('less', ['clean'], function () {
+  return gulp.src('src/assets/main.less')
     .pipe(less())
     .pipe(cssmin())
     .pipe(gulp.dest('build/assets'));
 });
 
-gulp.task('copy', function () {
-  gulp.src('src/assets/**') //TODO: filter out less files
+gulp.task('copy', ['clean'], function () {
+  return gulp.src('src/assets/**') //TODO: filter out less files
     .pipe(gulp.dest('build/assets'));
 });
 
@@ -50,4 +48,4 @@ gulp.task('assemble', function () {
   //TODO: implement this
 });
 
-gulp.task('build', ['clean', 'less', 'copy', 'assemble']);
+gulp.task('build', ['less', 'copy', 'assemble']);
