@@ -9,7 +9,8 @@ var jasmine = require('gulp-jasmine');
 var rimraf = require('rimraf');
 var less = require('gulp-less');
 var cssmin = require('gulp-cssmin');
-//var assemble = require('assemble');
+var assemble = require('gulp-assemble');
+
 
 gulp.task('lint', function () {
   return gulp.src(['gulpfile.js', '.bowerrc', 'assemble/**.js'])
@@ -44,8 +45,23 @@ gulp.task('copy', ['clean'], function () {
     .pipe(gulp.dest('build/assets'));
 });
 
-gulp.task('assemble', function () {
-  //TODO: implement this
+gulp.task('assemble', ['clean', 'less'], function () {
+  var options = {
+    jade: {
+          templates: 'src/templates/',
+          defaultTemplate: 'article.jade'
+        },
+        assets: 'build/assets',
+        plugins: ['assemble/*.js'],
+        initializeEngine: function (engine) {
+          engine.engine = require('./assemble/engine');
+        },
+        flatten: true
+  };
+
+  gulp.src('src/articles')
+    .pipe(assemble(options))
+    .pipe(gulp.dest('build'));
 });
 
 gulp.task('build', ['less', 'copy', 'assemble']);
