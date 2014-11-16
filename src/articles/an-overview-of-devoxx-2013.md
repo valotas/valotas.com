@@ -46,7 +46,7 @@ It looks like google wants everything to be done in the browser and that is why 
 ## Buzz words
 A new buzzwords to put at my vocabulary is *Reactive* programming. There are was some talks about it. I attended one but Joshua Suereth spend about 20 minutes trying to explain how the java api of the play framework would have been with the new lambda support of java. For sure the worst talk of the conference so far.
 
-## Room fo improvements
+## Room for improvements
 This is not for criticizing the event, but rather remarks to get better. Some of the talks were more like an advertisement. There is a remedy for that though, filter out the talks where there is no engineer talking.
 
 The food was bad but again you do not go there for the food. Still, if you want to have fun, just search for [#devoxx salad](https://twitter.com/search?q=%23devoxx%20salad&src=typd) at twitter.
