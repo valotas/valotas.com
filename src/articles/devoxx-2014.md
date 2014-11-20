@@ -22,7 +22,7 @@ Well, there is nothing new here as [Vlad](https://twitter.com/DevoxxBorat) said.
 <blockquote class="twitter-tweet" lang="en"><p><a href="https://twitter.com/hashtag/Devoxx?src=hash">#Devoxx</a> <a href="https://twitter.com/valotas">@valotas</a> is not new. Is we use with .niet in Azamat for centuries</p>&mdash; Born to be Borat. (@DevoxxBorat) <a href="https://twitter.com/DevoxxBorat/status/533363657024233472">November 14, 2014</a></blockquote>
 <script async src="//platform.twitter.com/widgets.js" charset="utf-8"></script>
 
-The thing is though that even with a delay of some years [reactive programming](http://www.reactivemanifesto.org/) becomes a trend to Java too (an once again in software engineering in general). There where some libraries for reactive prgramming before but lambdas again can make the existing apis much more fluent.
+The thing is though that even with a delay of some years [reactive programming](http://www.reactivemanifesto.org/) becomes a trend to Java too (and once again in software engineering in general). There where some libraries for reactive prgramming before but lambdas again can make the existing apis much more fluent.
 
 I believe a very good answer to most of the newbies questions would be [netflix's article](http://techblog.netflix.com/2013/02/rxjava-netflix-api.html) regarding the use of a reactive programming model. Interestingly, I find this post a very good abstract of [Venkat Subramaniam](https://twitter.com/venkat_s)'s [university session](http://cfp.devoxx.be/2014/talk/SUC-8683/Reactive_Programming:_creating_highly_responsive_applications) which was the most popular session within the 5 days of the conference.
 
