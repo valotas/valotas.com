@@ -43,7 +43,7 @@ So the requirement is to have at the end a route module that can be configured b
   lazyRoute
     .initAfter(initService.init())
     .with(function (initServiceResult) {
-      lazyRoute.when('/another/route/after/init',{ 
+      lazyRoute.when('/another/route/after/init',{
         //config based on initServiceResult
       });
     });
@@ -150,3 +150,7 @@ this.$get = function ($route) {
 ```
 
 An example with the full solution can be found at: 
+
+
+## Angular new Router
+Finally, it looks like the new angular's [router](https://github.com/angular/router) does not have the same problem as the injected service can be directly configured saving us from the encupsulation above.
