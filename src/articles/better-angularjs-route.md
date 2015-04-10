@@ -64,9 +64,9 @@ As we need something that should be configurable at config time we should go wit
 
   this.$get = function () {
     return {
-      initAfter: function () {return this},
-      with: function () {return this},
-      when: function () {return this}
+      initAfter: function () { return this; },
+      with: function () { return this; },
+      when: function () { return this; }
     }
   };
 })
@@ -85,7 +85,7 @@ So, the idea here is to just keep track of the arguments passed to the `lazyWhen
   };
 
   this.lazyWhen = function(path, route) {
-    routes.push({
+    lazyRoutes.push({
       path: path,
       route: route
     });
@@ -97,7 +97,7 @@ So, the idea here is to just keep track of the arguments passed to the `lazyWhen
 ```
 
 ### implement the lazyRoute module (`$get` function)
-No, let's try to implement our service which is what is returned by the `$get` function.
+Now, let's try to implement our service which is what is returned by the `$get` function.
 
 First of all the `when` function should delegate again to `$routeProvider`:
 
@@ -112,15 +112,15 @@ this.$get = function () {
 };
 ```
 
-then we should also store the `with` function so that we can later use it within the `initAfter`. That is easy enough:
+then we should also store the `with` function so that we can later use it within the `initAfter`. We wrap the `with` function into a promise. That way, we can make use of it directly within `initAfter` but it will get executed only when it is resolved:
 
 ```js
-this.$get = function () {
-  var withFn;
+this.$get = function ($q) {
+  var deferredWith = $q.defer();
 
   return {
     with: function (fn) {
-      withFn = fn;
+      deferredWith.resolve(fn);
       return this;
     }
   };
@@ -131,26 +131,34 @@ finally we need within the `initAfter` to wait for the given init promise to get
 
 ```js
 this.$get = function ($route) {
-  var withFn;
+  var deferredWith = $q.defer();
 
   return {
     initAfter: function (initPromise) {
-      initPromise
-        .then(function (initResult) {
-          angular.forEach(lazyRoutes, function (r) {
-            $routeProvider.when(r.path, r.route);
+      $q.all({
+        initPromise: initPromise,
+        withPromise: deferredWith.promise
+      })
+      .then(function (result) {
+          var initPromise = result.initPromise,
+              withFn = result.withPromise;
+
+          angular.forEach(lazyRoutes, function (routeDefinition) {
+            $routeProvider.when(routeDefinition.path, routeDefinition.route);
           });
+
           withFn(initResult);
-          $route.reload()
-          return initResult;
+          $route.reload();
+          return initPromise;
         });
+      return this;
     }
   };
 };
 ```
 
-An example with the full solution can be found at: 
+An example with the full solution can be found at: http://jsbin.com/jokibe
 
 
 ## Angular new Router
-Finally, it looks like the new angular's [router](https://github.com/angular/router) does not have the same problem as the injected service can be directly configured saving us from the encupsulation above.
+Finally, it looks like the new angular's [router](https://github.com/angular/router) does not have the same problem as the injected service can be directly configured saving us from the encupsulation above. Diving into this though is a very good excersize for exploring promises, angularjs provider and the $route service.
