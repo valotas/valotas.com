@@ -1,5 +1,5 @@
 ---
-title: Better $routProvider for AngularJS
+title: Better $routeProvider for AngularJS
 author: valotas
 date: 2015-04-13
 ---
@@ -71,7 +71,7 @@ As we need something that should be configurable at config time we should go wit
 })
 ```
 
-### implement `lazyWhen`
+### Implement `lazyWhen`
 So, the idea here is to just keep track of the arguments passed to the `lazyWhen` function for later use:
 
 ```js
@@ -95,7 +95,7 @@ So, the idea here is to just keep track of the arguments passed to the `lazyWhen
 })
 ```
 
-### implement the lazyRoute module (`$get` function)
+### Implement the lazyRoute module (`$get` function)
 Now, let's try to implement our service which is what is returned by the `$get` function.
 
 First of all the `when` function should delegate again to `$routeProvider`. On top of that, we should also `reload` the `$route` service as it has allready been setted up. Reloading for every new route definition is not so efficient but ok for our proof of concept.
