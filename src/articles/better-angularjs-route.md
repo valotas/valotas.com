@@ -1,8 +1,7 @@
 ---
 title: Better $routProvider for AngularJS
 author: valotas
-date: 2015-03-03
-published: false
+date: 2015-04-13
 ---
 So, you just did your first angularjs webapp and are ready for production. And then comes the requirement that before initilization you have to do an ajax request. There should be an easy way to do that right?
 
@@ -99,13 +98,14 @@ So, the idea here is to just keep track of the arguments passed to the `lazyWhen
 ### implement the lazyRoute module (`$get` function)
 Now, let's try to implement our service which is what is returned by the `$get` function.
 
-First of all the `when` function should delegate again to `$routeProvider`:
+First of all the `when` function should delegate again to `$routeProvider`. On top of that, we should also `reload` the `$route` service as it has allready been setted up. Reloading for every new route definition is not so efficient but ok for our proof of concept.
 
 ```js
 this.$get = function () {
   return {
     when: function (path, route) {
       $routeProvider.when(path, route);
+      $route.reload();
       return this;
     }
   };
@@ -147,8 +147,7 @@ this.$get = function ($route) {
             $routeProvider.when(routeDefinition.path, routeDefinition.route);
           });
 
-          withFn(initResult);
-          $route.reload();
+          withFn(initPromise);
           return initPromise;
         });
       return this;
@@ -160,5 +159,5 @@ this.$get = function ($route) {
 An example with the full solution can be found at: http://jsbin.com/jokibe
 
 
-## Angular new Router
-Finally, it looks like the new angular's [router](https://github.com/angular/router) does not have the same problem as the injected service can be directly configured saving us from the encupsulation above. Diving into this though is a very good excersize for exploring promises, angularjs provider and the $route service.
+## tl;dr: Angular new Router
+Finally, it looks like the new angular's [router](https://github.com/angular/router) does not have the same problem as the injected service can be directly configured saving us from the encupsulation above. Diving into this though is a very good excersize for exploring promises, angularjs provider and the a little bit of the `$route` service.
