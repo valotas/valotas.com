@@ -15,7 +15,7 @@ That means that once your app starts, routing has allready been defined. If you 
 So a solution to the problem whould be to have a way to run **always** some initiliazation code before defining the routes so that angular can continue with the routing after that. And it looks like this is not possible in your config phase, as no services are available there and during run phase no providers are available.
 
 ## A `$routeProvider` provider
-Now let's try a naive hack and find a way to inject `$routeProvider` after the config phase. Then we can configure it lazyly (let's say after our initilization). It looks like `$provider` is a service available at the config phase and we can use it to register new services/factories. So, let's try to create register `$routeProvider` service:
+Now let's try a naive hack and find a way to inject `$routeProvider` after the config phase. Then we can configure it lazily (let's say after our initilization). It looks like `$provider` is a service available at the config phase and we can use it to register new services/factories. So, let's try to register a `$routeProvider` service:
 
 ```js
 .config(function ($provide, $routeProvider) {
@@ -28,9 +28,9 @@ Now let's try a naive hack and find a way to inject `$routeProvider` after the c
 This allows us to directly use `$routeProvider` later on in our app. An example which uses this technique can be found [here](http://jsbin.com/salini/edit).
 
 ## The `lazyRoute` module
-As mentioned before such a solution whould only be considered as a proof of concept. Having that working though can let us provide a proper module which can make use of this technique.
+As mentioned before such a solution whould only be considered as a proof of concept. Having that working though can let us create a proper angularjs module which can make use of this technique.
 
-So the requirement is to have at the end a route module that can be configured both on config and run time but should be initilized manually and a given init promise is resolved. Ideally we would like something like the following:
+So the requirement is to have at the end a route module that can be configured both on config and run phase. It should be able to initilize routes after a given promise is resolved. Ideally we would like something like the following:
 
 ```js
 .config(function (lazyRouteProvider) {
