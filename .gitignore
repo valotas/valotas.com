@@ -7,3 +7,4 @@ npm-debug.log
 server/**/*.js
 .tscache
 .baseDir.ts
+.idea
