@@ -35,14 +35,14 @@ describe('article-middleware', function () {
     it('should provide a function to get the published date', function () {
       expect(ctx.article.date).not.toBeUndefined();
       ctx.page.data = {
-        date: '22 Aug 2013'
+        date: '2013-08-22'
       };
       expect(ctx.article.date()).toEqual('22/08/2013');
     });
 
     it('should allow to get the published date formated', function () {
       ctx.page.data = {
-        date: '22 Aug 2013'
+        date: '2013-08-22 00:01'
       };
       expect(ctx.article.date('YY-MM-DD')).toEqual('13-08-22');
     });

@@ -2,13 +2,25 @@
 
 'use strict';
 
-var moment = require('moment');
+var moment = require('moment'),
+    INPUT_FORMAT = [
+      'YYYY-MM-DD HH:mm',
+      'YYYY-MM-DD'
+    ];
 
 function Article(page) {
   this.page = page;
 
   this.moment = function () {
-    return moment(page.data.date);
+    var date = page.data.date;
+    var m = moment(date, INPUT_FORMAT);
+    if (m.isValid()) {
+      return m;
+    }
+    throw {
+      name: 'IllegalFormatException',
+      message: 'Could not parse ' + date + ' as date using formats: ' + INPUT_FORMAT
+    };
   };
 
   this.date = function (format) {
