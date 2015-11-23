@@ -50,11 +50,13 @@ Finally theoretical physics professor [Lawrence M. Krauss](https://twitter.com/L
 
 ## Lack of advertisements talks
 
-I think my tweet says it all:
+I did tweet the following:
 
 <blockquote class="twitter-tweet" lang="en"><p lang="en" dir="ltr">No advertising talk till now at <a href="https://twitter.com/hashtag/devoxx2015?src=hash">#devoxx2015</a> either my filter works better or there is an improvement there!</p>&mdash; Yoryos Valotassios (@valotas) <a href="https://twitter.com/valotas/status/664743040448376832">November 12, 2015</a></blockquote>
 <script async src="//platform.twitter.com/widgets.js" charset="utf-8"></script>
 
-This is in my opinion a major improvement. I can understand the need of advertisement talks but I do not see what they can bring in terms of marketing if there are only a couple of people watching them.
+Although someone can argue that there were not any marketing talks, I have to say that this time were not that obvious ones. This is in my opinion a major improvement. I can understand the need of advertisement talks but I do not see what they can bring in terms of marketing if there are only a couple of people watching them.
 
 One of the coolest advertisement talks for example, was [The Twelve Factor app: Best Practices for Java Deployment](https://www.youtube.com/watch?v=94PxlbuizCU) where you at least got a couple of usefull information regarding the [12 factor app](http://12factor.net/) (which in my opinion is 12 rule of thumbs for creating microservices) and the only advertisement was that you could deploy that super easy with heroku.
+
+As I said before there were not big news this year and maybe that is whay there were no interest from companies to advertise anything. In any case, the main sponsors of this year's conference where not any big names like Google, Microsoft or Oracle as it used to be
