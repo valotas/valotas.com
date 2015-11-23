@@ -17,7 +17,11 @@ Although that can be nothing compared to other attendands, it gives me something
 
 ## tl;rd
 
-Based on the talks I saw last two times during the univercity days, I thought it would be better to just skip them. The rest of the conference gave me a bitter sweat taste, as either I did not see anything more than I expected or my expectations were not that big because of lack of big events during this year. So let's break the thing up to smaller peaces...
+Based on the talks I saw last two times during the univercity days, I thought it would be better to just skip them. The rest of the conference gave me a bitter sweat taste, as either I did not see anything more than I expected or my expectations were not that big because of lack of big events during this year. 
+
+The most interesting talk for me, was ["Graal.JS - high-performance JavaScript on the JVM"](https://www.youtube.com/watch?v=OUo3BFMwQFo). The title is misleading here, as it has not to do with javascript on the JVM directly but with polyglotism on the JVM. Worth checking it out I believe.
+
+Regarding the rest of the conference, let's break it up to smaller peaces...
 
 ## University days
 
@@ -59,4 +63,18 @@ Although someone can argue that there were not any marketing talks, I have to sa
 
 One of the coolest advertisement talks for example, was [The Twelve Factor app: Best Practices for Java Deployment](https://www.youtube.com/watch?v=94PxlbuizCU) where you at least got a couple of usefull information regarding the [12 factor app](http://12factor.net/) (which in my opinion is 12 rule of thumbs for creating microservices) and the only advertisement was that you could deploy that super easy with heroku.
 
-As I said before there were not big news this year and maybe that is whay there were no interest from companies to advertise anything. In any case, the main sponsors of this year's conference where not any big names like Google, Microsoft or Oracle as it used to be
+As I said before there were not big news this year and maybe that is whay there were no interest from companies to advertise anything. In any case, the main sponsors of this year's conference where not any big names like Google, Microsoft or Oracle as it used to be.
+
+## Trends
+
+As I said before, no big news, but there are some trends you can see. It looks like reactive programming and microservices are still the thing this year.
+
+### Reactive programming
+
+Working with streams has been the thing for some years now. As I watched some talks on this topic the previous years, I skipped this one. Unfortunatelly, Java has only recently added basic support for that with the changes of JDK8, which means that it lacks the apis on the EE side.
+
+Of cource there are solutions available. Mainly [RxJava](https://github.com/ReactiveX/RxJava) and [akka](http://akka.io/) based ones from typesafe.
+
+### Microservices
+
+Yes, microservices are still the trend.
