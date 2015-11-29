@@ -2,6 +2,7 @@
   "repository": "git@github.com:valotas/valotas.com.git",
   "private": true,
   "devDependencies": {
+    "browser-sync": "^2.10.0",
     "gulp": "^3.9.0",
     "gulp-cssmin": "^0.1.7",
     "gulp-eslint": "^1.1.1",
@@ -11,6 +12,7 @@
     "rimraf": "^2.4.4"
   },
   "scripts": {
+    "tsc": "tsc -p . -w",
     "build": "node_modules/gulp/bin/gulp.js build",
     "test": "node_modules/gulp/bin/gulp.js test"
   },
