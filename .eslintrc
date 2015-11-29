@@ -1,0 +1,23 @@
+{
+  "root": true,
+  "extends": "eslint:recommended",
+  "ecmaFeatures": {
+    "arrowFunctions": true,
+    "classes": true,
+    "modules": true,
+    "blockBindings": true
+  },
+  "evn": {
+    "es6": true,
+    "browser": true
+  },
+  "globals": {
+    "require": true,
+    "module": true
+  },
+  "rules": {
+    "arrow-parens": 2,
+    "arrow-spacing": 2,
+    "constructor-super": 2
+  }
+}
