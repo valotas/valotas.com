@@ -15,7 +15,6 @@ module.exports = function (gulp, onChange) {
       .pipe(less())
       .pipe(cssmin())
       .pipe(gulp.dest('./build/assets'))
-      .pipe(gulp.dest('./build/assets'))
       .on('change',  onChange || noop);
   };
 };
