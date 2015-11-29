@@ -4,6 +4,7 @@
 
 var gulp = require('gulp');
 var clean = require('rimraf');
+var browserSync = require('browser-sync').create();
 
 gulp.task('clean-build', function (done) {
   clean('./build', done);
@@ -23,3 +24,26 @@ gulp.task('copy-assets', ['clean-build'], function () {
 gulp.task('css', ['clean-build'], require('./.gulp/css')(gulp));
 
 gulp.task('build', ['lint', 'copy-assets', 'css']);
+
+gulp.task('serve', [
+    'build'
+  ],
+  function () {
+    browserSync.init({
+      logLevel: 'debug',
+      server: {
+        baseDir: [
+          //'./src',
+          './build'
+        ]
+      },
+      watchOptions: {
+        ignoreInitial: true,
+        ignored: 'node_modules/**'
+      }
+    });
+  }
+);
+
+gulp.task('play', ['serve']);
+
