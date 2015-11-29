@@ -25,11 +25,14 @@ gulp.task('css', ['clean-build'], require('./.gulp/css')(gulp));
 
 gulp.task('build-index', ['clean-build'], require('./.gulp/html')(gulp));
 
+gulp.task('tsc', ['clean-build'], require('./.gulp/ts')(gulp));
+
 gulp.task('build', [
   'lint',
   'copy-assets',
   'css',
-  'build-index'
+  'build-index',
+  'tsc'
 ]);
 
 gulp.task('serve', [
