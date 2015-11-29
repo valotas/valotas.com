@@ -20,4 +20,6 @@ gulp.task('copy-assets', ['clean-build'], function () {
     .pipe(gulp.dest('./build/assets'));
 });
 
-gulp.task('build', ['copy-assets']);
+gulp.task('css', ['clean-build'], require('./.gulp/css')(gulp));
+
+gulp.task('build', ['lint', 'copy-assets', 'css']);
