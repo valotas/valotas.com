@@ -9,3 +9,4 @@ server/**/*.js
 .tscache
 .baseDir.ts
 .idea
+.vscode
