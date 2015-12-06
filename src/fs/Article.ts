@@ -1,5 +1,5 @@
+import 'moment';
 import {MdFile} from './MdFile';
-import {moment} from 'moment';
 
 const INPUT_FORMATS = [
     'YYYY-MM-DD HH:mm',
@@ -13,7 +13,7 @@ export class Article {
 
     }
 
-    moment() {
+    moment(): moment.Moment {
         var date = this._file.date,
             m = moment(date, INPUT_FORMATS);
         if (m.isValid()) {

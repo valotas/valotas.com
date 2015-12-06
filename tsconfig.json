@@ -11,6 +11,8 @@
     "noImplicitAny": false
   },
   "files": [
-    "src/main.ts"
+    "typings/tsd.d.ts",
+    "src/main.ts",
+    "src/fs/Article.spec.ts"
   ]
 }
