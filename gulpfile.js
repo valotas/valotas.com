@@ -27,6 +27,8 @@ gulp.task('build-index', ['clean-build'], require('./.gulp/html')(gulp));
 
 gulp.task('tsc', ['clean-build'], require('./.gulp/ts')(gulp));
 
+gulp.task('test', ['tsc'], require('./.gulp/test')(gulp));
+
 gulp.task('build', [
   'lint',
   'copy-assets',
