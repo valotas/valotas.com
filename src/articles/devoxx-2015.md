@@ -1,8 +1,7 @@
 ---
 title: An overview of Devoxx 2015
 author: valotas
-date: 2015-11-22
-published: false
+date: 2015-11-29
 ---
 
 This year's devoxx was once again an excuse to write a new blogpost.
@@ -33,9 +32,9 @@ Regarding the rest of the conference, let's break it up to smaller peaces...
 
 ## University days
 
-As I said I did not attend them as I felt that they were too "boring" the last to years. The combination of 3 hours duration and lack of actual hands on programming, makes you wanting to change the topic as soon as possible. In other way, I can only remember just one of these talks. There, the speaker managed to timebox different aspects of webdevelopment and speak for each one a couple of minutes. Which technically is more than one talk made by one guy.
+As I said I did not attend them as I felt that they were too "boring" the last to years. The combination of 3 hours duration and lack of actual hands on programming, makes you wanting to change the topic as soon as possible. In other way, I can only remember just one of these talks. There, the speaker managed to time box different aspects of web development and speak for each one a couple of minutes. Which technically is more than one talk made by one guy.
 
-It can of course that I'm just a little bit strange. The truth is that I haven't heard either anything really positive regarding the universiry days except from this years ones.  Some friend of mine told me that they found the first 2 days this year much more interesting. Maybe I am just unlucky.
+It can of course that I'm just a little bit strange. The truth is that I haven't heard either anything really positive regarding the university days except from this years ones. Some friend of mine told me that they found the first 2 days this year much more interesting. Maybe I am just unlucky.
 
 Anyway, keeping someone interested for 3 hours is not an easy job, and this is why the days have been named University days. The attendant should be willing to stay and filter the information he gets.
 
@@ -47,7 +46,7 @@ It looks like this year's devoxx was the bigger ever. I think it was about 3500 
 
 Apart from [Devoxx Belgium](http://www.devoxx.be/), there were also [Devoxx UK](http://www.devoxx.co.uk/), [Devoxx PL](http://www.devoxx.pl/), [Devoxx FR](http://www.devoxx.fr/) and [Devoxx MA](http://www.devoxx.ma/) along with bunch of [voxxed days](https://voxxeddays.com/), which I did not keep track of. It looks like the conference market is expanding and [Stephan](https://twitter.com/Stephan007) make use of it.
 
-Although the bigger devoxx ever, there were no major problems with overcrouded rooms (or should I say ciname halls?).
+Although the bigger devoxx ever, there were no major problems with overcrowded rooms (or should I say cinema halls?).
 
 ## The keynotes
 
@@ -105,9 +104,9 @@ After checking them all out, let me know what kind of database microservice you 
 
 Back to [Graal.js][graal-js]...
 
-When we are talking about Java, we are mostly refering to the Java as a language. This wouldn't be possible without that beast called JVM. I did not spot any JVM specific talks to be honest, but I did found one whith a title that was giving you the impression that it was yet another javascript on the jvm implementation.
+When we are talking about Java, we are mostly referring to the Java as a language. This wouldn't be possible without that beast called JVM. I did not spot any JVM specific talks to be honest, but I did found one with a title that was giving you the impression that it was yet another javascript on the jvm implementation.
 
-Aparently the talk was mostly about how mature the JVM became and how it can nowadays be used as a platform from other languages. Given the number of languages implemented on top of that, this is not new news, but the interoperability of them it is. It worths having a look at the talk, to see how javascript code has been used from within [R code](https://www.r-project.org/).
+Apparently the talk was mostly about how mature the JVM became and how it can nowadays be used as a platform from other languages. Given the number of languages implemented on top of that, this is not new news, but the interoperability of them it is. It worth having a look at the talk, to see how javascript code has been used from within [R code](https://www.r-project.org/).
 
 [stephan]: https://twitter.com/Stephan007
 [graal-js]: https://www.youtube.com/watch?v=OUo3BFMwQFo

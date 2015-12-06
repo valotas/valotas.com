@@ -3,7 +3,6 @@
 'use strict';
 
 var fs = require('fs');
-var os = require('os');
 var path = require('path');
 var md5 = require('MD5');
 

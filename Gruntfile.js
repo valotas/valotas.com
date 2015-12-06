@@ -23,7 +23,10 @@ module.exports = function (grunt) {
           defaultTemplate: 'article.jade'
         },
         assets: 'build/assets',
-        plugins: ['assemble/*.js'],
+        plugins: [
+          'assemble/*.js',
+          '!assemble/Article.js'
+        ],
         initializeEngine: function (engine) {
           engine.engine = require('./assemble/engine');
         },

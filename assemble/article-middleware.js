@@ -6,7 +6,7 @@ var Article = require('./Article');
 
 function buildArticles(pages) {
   var articles = [];
-  pages.map(function (p) {
+  pages.forEach(function (p) {
     if (p.dest !== 'build/index.html') {
       articles.push(new Article(p));
     }

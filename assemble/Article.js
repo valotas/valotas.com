@@ -5,7 +5,8 @@
 var moment = require('moment'),
     INPUT_FORMAT = [
       'YYYY-MM-DD HH:mm',
-      'YYYY-MM-DD'
+      'YYYY-MM-DD',
+      'LLLL'
     ];
 
 module.exports = function Article(page) {
