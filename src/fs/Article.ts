@@ -1,4 +1,5 @@
-import 'moment';
+import * as moment from 'moment';
+import * as marked from 'marked';
 import {MdFile} from './MdFile';
 
 const INPUT_FORMATS = [
@@ -25,13 +26,13 @@ export class Article {
         };
     }
 
-    date(format: string) {
+    date(format?: string): string {
         return this.moment().format(format || 'DD/MM/YYYY');
     }
 
-    html() {
+    html(): string {
         if (!this._html) {
-            this._html = 'asdasd';
+            this._html = marked(this._file.raw);
         }
         if(this._html.length > 4) {
             this._html = this._html.replace(/<p>(.)(.*)/, '<p><span class="first-letter">$1</span>$2');
