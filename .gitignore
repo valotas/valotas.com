@@ -1,6 +1,7 @@
 node_modules/**
 vendor/**
 build/**
+typings/**
 *~
 tscommand.tmp.txt
 npm-debug.log
