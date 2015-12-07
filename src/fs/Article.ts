@@ -1,6 +1,7 @@
 import * as moment from 'moment';
 import * as marked from 'marked';
 import {MdFile} from './MdFile';
+import * as ex from '../exceptions';
 
 const INPUT_FORMATS = [
     'YYYY-MM-DD HH:mm',
@@ -20,10 +21,8 @@ export class Article {
         if (m.isValid()) {
             return m;
         }
-        throw {
-            name: 'IllegalFormatException',
-            message: 'Could not parse ' + date + ' as date using formats: ' + INPUT_FORMATS
-        };
+        
+        throw new ex.IllegalFromatException('Could not parse ' + date + ' as date using formats: ' + INPUT_FORMATS);
     }
 
     date(format?: string): string {
