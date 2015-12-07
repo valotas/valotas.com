@@ -1,10 +1,12 @@
 'use strict';
 
+var merge = require('merge-stream');
 var eslint = require('gulp-eslint');
+var tslint = require('gulp-tslint');
 
 module.exports = function (gulp) {
   return function () {
-    return gulp.src([
+    var es = gulp.src([
         'gulpfile.js',
         'src/**/*.js',
         'src/**/*.jsx',
@@ -13,5 +15,13 @@ module.exports = function (gulp) {
       .pipe(eslint())
       .pipe(eslint.format())
       .pipe(eslint.failAfterError());
+      
+    var ts = gulp.src([
+        'src/**/*.ts'
+      ])
+      .pipe(tslint())
+      .pipe(tslint.report('verbose'));
+      
+    return merge(es, ts);
   };
 };

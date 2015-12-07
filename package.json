@@ -10,10 +10,14 @@
     "gulp-jasmine": "^2.2.1",
     "gulp-less": "^3.0.5",
     "gulp-rename": "^1.2.2",
+    "gulp-tslint": "^4.1.1",
     "gulp-useref": "^3.0.3",
     "jade": "1.11.0",
     "jasmine-core": "^2.4.1",
-    "rimraf": "^2.4.4"
+    "merge-stream": "^1.0.0",
+    "rimraf": "^2.4.4",
+    "tslint": "^3.1.1",
+    "typescript": "^1.7.3"
   },
   "scripts": {
     "tsc": "tsc -p . -w",
