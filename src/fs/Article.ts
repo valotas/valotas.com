@@ -9,7 +9,7 @@ const INPUT_FORMATS = [
 ];
 
 export class Article {
-    _html: string;
+    private _html: string;
 
     constructor(private _file: MdFile) {
 
@@ -33,10 +33,14 @@ export class Article {
         if (!this._html) {
             this._html = marked(this._file.raw);
         }
-        if(this._html.length > 4) {
+        if (this._html.length > 4) {
             this._html = this._html.replace(/<p>(.)(.*)/, '<p><span class="first-letter">$1</span>$2');
         }
         return this._html;
     }
 
+    description(): string {
+        const html = this.html();
+        return html.substring(0, html.indexOf('<h2 id='));
+    }
 }

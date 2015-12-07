@@ -46,5 +46,27 @@ describe('Article', () => {
             expect(html).toContain('>this is big</h1>');
             expect(html).toContain('>this smaller</h2>');
         });
+        
+        it('should replace the first letter with a span', () => {
+            const html = new Article({
+                title: 'md file',
+                date: '2015-11-12',
+                published: false,
+                raw: 'this is the very first paragraph'
+            }).html();
+            expect(html).toContain('<p><span class="first-letter">t</span>his is');
+        });
+    });
+    
+    describe('description()', () => {
+       it('should return the very first paragraph', () => {
+           const description = new Article({
+                title: 'md file',
+                date: '2015-11-12',
+                published: false,
+                raw: 'this is the very first paragraph\n\n## h1\nanother paragraph'
+            }).description();
+            expect(description).toEqual('<p><span class="first-letter">t</span>his is the very first paragraph</p>');
+       });
     });
 });
