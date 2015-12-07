@@ -2,9 +2,9 @@
 
 var jasmine = require('gulp-jasmine');
 
-module.exports = function (gulp) {
+module.exports = function (gulp, path) {
   return function () {
-    gulp.src('build/**/*.spec.js')
+    gulp.src(path)
       .pipe(jasmine());
   };
 };

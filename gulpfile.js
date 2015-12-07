@@ -4,6 +4,7 @@
 
 var gulp = require('gulp');
 var clean = require('rimraf');
+var ts = require('./.gulp/ts');
 var browserSync = require('browser-sync').create();
 
 gulp.task('clean-build', function (done) {
@@ -25,9 +26,14 @@ gulp.task('css', ['clean-build'], require('./.gulp/css')(gulp));
 
 gulp.task('build-index', ['clean-build'], require('./.gulp/html')(gulp));
 
-gulp.task('tsc', ['clean-build'], require('./.gulp/ts')(gulp));
+gulp.task('tsc', ['clean-build'], ts.task(gulp));
 
-gulp.task('test', ['tsc'], require('./.gulp/test')(gulp));
+gulp.task('test', require('./.gulp/test')(gulp, 'build/**/*.spec.js'));
+
+gulp.task('tdd', ['test'], function () {
+  ts.watch();
+  gulp.watch('build/**/*.spec.js', ['test']);
+});
 
 gulp.task('build', [
   'lint',
