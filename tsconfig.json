@@ -15,6 +15,7 @@
     "typings/tsd.d.ts",
     "src/main.ts",
     "src/fs/Article.spec.ts",
-    "src/react/Layout.spec.tsx"
+    "src/react/Layout.spec.tsx",
+    "src/react/Header.spec.tsx"    
   ]
 }
