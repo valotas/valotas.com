@@ -16,6 +16,7 @@
     "src/main.ts",
     "src/fs/Article.spec.ts",
     "src/react/Layout.spec.tsx",
-    "src/react/Header.spec.tsx"    
+    "src/react/Header.spec.tsx",    
+    "src/react/Icon.spec.tsx"
   ]
 }
