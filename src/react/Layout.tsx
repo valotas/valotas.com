@@ -1,4 +1,5 @@
 import * as React from 'react';
+import {Header} from './Header';
 
 /* Stateless functional components are not supported yet?
 export function Layout() {
@@ -10,7 +11,7 @@ export function Layout() {
 export class Layout extends React.Component<any, {}> {	
 	render() {
 		return (
-			<div className="lol">Layout here</div>
+			<Header title="The title" subtitle="the subtitle" />
 		);
 	}
 }
