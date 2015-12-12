@@ -66,7 +66,7 @@ describe('Article', () => {
                 published: false,
                 raw: 'this is the very first paragraph\n\n## h1\nanother paragraph'
             }).description();
-            expect(description).toEqual('<p><span class="first-letter">t</span>his is the very first paragraph</p>');
+            expect(description).toEqual('<p><span class="first-letter">t</span>his is the very first paragraph</p>\n');
        });
     });
 });

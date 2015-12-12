@@ -16,7 +16,7 @@ export class Article {
     }
 
     moment(): moment.Moment {
-        var date = this._file.date,
+        const date = this._file.date,
             m = moment(date, INPUT_FORMATS);
         if (m.isValid()) {
             return m;
