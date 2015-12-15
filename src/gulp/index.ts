@@ -6,9 +6,24 @@ import {Layout} from '../react/Layout';
 import * as React from 'react';
 import * as RDS from 'react-dom/server';
 
-export function mdFile() {
+function cloneWithNewPath(origin) {
+	const file = origin.clone();
+	const filePath = path.parse(file.path);
+	if (filePath.name !== 'index') {
+		file.path = path.join(filePath.dir, '_md', filePath.base);
+	} else {
+		const parent = path.parse(filePath.dir);
+		file.path = path.join(parent.dir, '_md', parent.base, filePath.base);
+	}
+	return file;
+}
+
+export function mdFile(clone = true) {
 	return through.obj(function (file, enc, callback) {
 		if (file.path && file.path.indexOf('.md') === file.path.length - 3) {
+			if (clone) {
+				this.push(cloneWithNewPath(file));
+			}
 			//extract the header info
 			const content = file.contents.toString(enc);
 			file.mdfile = MdFile.create(content);
