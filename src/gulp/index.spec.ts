@@ -1,19 +1,37 @@
 import * as fs from 'vinyl-fs';
 import * as path from 'path';
 import * as through from 'through2';
-import {mdHeader} from './index';
+import {mdFile, toArticle} from './index';
 
-describe('mdHeader', () => {	
-	it('should parse the header as yalm', (done) => {
-		fs.src(['src/articles/**/*.md'], {
+describe('mdFile', () => {	
+	it('should parse the mdfile as yalm', (done) => {
+		fs.src(['src/articles/tomcat-initd-*.md'], {
 				base: path.join(__dirname, '../../')
 			})
-			.pipe(mdHeader())
+			.pipe(mdFile())
 			.pipe(through.obj(function (chunk, enc, cb) {
-				console.log(chunk.path, chunk.header);
-				expect(chunk.header).toBeTruthy();
+				const mdfile = chunk.mdfile;
+				expect(mdfile).toBeTruthy();
+				expect(mdfile.title).toBeTruthy();
+				expect(mdfile.date).toBeTruthy();
 				cb();
 			}))
 			.on('finish', done);
+	});
+});
+
+describe('toArticle', () => {
+	it('should adapt the path of the given chunk if it is an md file', (done) => {
+		fs.src(['src/articles/tomcat-initd-*.md'], {
+				base: path.join(__dirname, '../../')
+			})
+			.pipe(mdFile())
+			.pipe(toArticle())
+			.pipe(through.obj(function (chunk, enc, cb) {
+				expect(chunk.path).toContain('tomcat-initd-script/index.html')
+				cb();
+			}))
+			.on('finish', done);
+		
 	});
 });
