@@ -11,15 +11,7 @@
     "noImplicitAny": false,
     "jsx": "react"
   },
-  "files": [
-    "typings/tsd.d.ts",
-    "src/main.ts",
-    "src/gulp/index.ts",
-    "src/gulp/index.spec.ts",
-    "src/fs/Article.spec.ts",
-    "src/fs/MdFile.spec.ts",
-    "src/react/Layout.spec.tsx",
-    "src/react/Header.spec.tsx",    
-    "src/react/Icon.spec.tsx"
+  "exclude": [
+    "node_modules"
   ]
 }
