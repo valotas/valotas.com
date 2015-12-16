@@ -10,12 +10,6 @@ function execTsc (watch, cb) {
   exec(cmd, cb);
 }
 
-function tsc () {
-  return function (cb) {
-    exec('tsc -p .', cb);
-  };
-}
-
 module.exports = {
   task: function () {
     return function (cb) {
