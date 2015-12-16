@@ -8,16 +8,17 @@ interface ArticleProps extends React.Props<any> {
 
 export class ArticleComponent extends React.Component<ArticleProps, {}> {	
 	render() {
-		var article = this.props.article;
+		const article = this.props.article;
 		if (!article) {
 			return null;
 		}
+		const html = {
+			__html: article.html()
+		};
 		return (
 			<div>
 				<div className="article">
-					<section className="content">
-						{article.html()}
-					</section>
+					<section className="content" dangerouslySetInnerHTML={html} />
 				</div>
 				<div id="footer-actions" className="row text-center">
 					<div className="btn-group">
