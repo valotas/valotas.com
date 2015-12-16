@@ -9,9 +9,23 @@
     <!-- build:css -->
     <link rel="stylesheet" href="assets/main.less" />
     <!-- endbuild -->
-    <!-- build:js -->
-    <script src="typescript/main.ts"></script>
-    <!-- endbuild -->
+    <script src="node_modules/systemjs/dist/system.src.js"></script>
+    <script>
+        System.config({
+           packages: {
+               'typescript': {
+                   'defaultExtention': 'js'
+               },
+           },
+           map: {
+               'react': 'node_modules/react/dist/react.min.js',
+               'react-dom': 'node_modules/react-dom/dist/react-dom.min.js',
+               'moment': 'node_modules/moment/min/moment.min.js',
+               'marked': 'node_modules/marked/marked.min.js'
+           }
+        });
+        System.import('typescript/main')
+    </script>
 </head>
 <body>
 Loading...

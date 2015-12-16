@@ -50,10 +50,10 @@ gulp.task('serve', [
     browserSync.init({
       logLevel: 'debug',
       server: {
-        baseDir: [
-          //'./src',
-          './build'
-        ]
+        baseDir: './build',
+        routes: {
+          '/node_modules': 'node_modules'
+        }
       },
       watchOptions: {
         ignoreInitial: true,
