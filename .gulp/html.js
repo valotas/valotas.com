@@ -1,7 +1,7 @@
 'use strict';
 
 var gulpif = require('gulp-if'), 
-  useref = require('gulp-useref'),
+  htmlreplace = require('gulp-html-replace'),
   htmlmin = require('gulp-htmlmin');
 
 module.exports = function (gulp) {
@@ -13,7 +13,10 @@ module.exports = function (gulp) {
       ])
       .pipe(plugin.mdFile())
       .pipe(plugin.toArticle())
-      .pipe(gulpif('*.html', useref()))
+      .pipe(gulpif('*.html', htmlreplace({
+        'css': 'assets/main.css',
+        'js': 'typescript/main.js'
+      })))
       .pipe(gulpif('*.html', htmlmin()))
       .pipe(gulp.dest('build'))
   };
