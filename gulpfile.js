@@ -39,8 +39,8 @@ gulp.task('build', [
   'lint',
   'copy-assets',
   'css',
-  //'build-index',
-  'tsc'
+  'tsc',
+  'html'
 ]);
 
 gulp.task('serve', [
