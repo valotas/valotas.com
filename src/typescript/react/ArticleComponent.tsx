@@ -1,5 +1,5 @@
 import * as React from 'react';
-import {Article} from '../fs/Article';
+import {Article} from '../content/Article';
 import {Icon} from './Icon'
 
 interface ArticleProps extends React.Props<any> {

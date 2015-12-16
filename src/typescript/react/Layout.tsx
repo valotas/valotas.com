@@ -1,5 +1,5 @@
 import * as React from 'react';
-import {Article} from '../fs/Article';
+import {Article} from '../content/Article';
 import {ArticleComponent} from './ArticleComponent';
 import {Header} from './Header';
 import {Footer} from './Footer';

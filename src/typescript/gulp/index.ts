@@ -1,7 +1,7 @@
 import * as path from 'path';
 import * as through from 'through2';
-import {Article} from '../fs/Article';
-import {MdFile} from '../fs/MdFile';
+import {Article} from '../content/Article';
+import {MdFile} from '../content/MdFile';
 import {Layout} from '../react/Layout';
 import * as React from 'react';
 import * as RDS from 'react-dom/server';
