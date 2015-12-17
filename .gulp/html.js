@@ -9,7 +9,7 @@ module.exports = function (gulp) {
     var plugin = require('../build/typescript/gulp');
     return gulp.src([
         'src/articles/**/*.md',
-        'src/index.html'
+        'src/index.md'
       ])
       .pipe(plugin.mdFile())
       .pipe(plugin.toArticle())

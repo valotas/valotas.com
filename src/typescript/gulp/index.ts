@@ -9,21 +9,26 @@ import * as jade from 'jade';
 
 function cloneWithNewPath(origin) {
 	const file = origin.clone();
-	const filePath = path.parse(file.path);
-	if (filePath.name !== 'index') {
-		file.path = path.join(filePath.dir, '_md', filePath.base);
+	const p = path.parse(file.path);
+	if (p.name !== 'index') {
+		file.path = path.join(p.dir, '_md', p.base);
 	} else {
-		const parent = path.parse(filePath.dir);
-		file.path = path.join(parent.dir, '_md', parent.base, filePath.base);
+		const parent = path.parse(p.dir);
+		if (parent.name === 'src') {
+			return null;
+		}
+		file.path = path.join(parent.dir, '_md', parent.base, p.base);
 	}
 	return file;
 }
 
 export function mdFile(clone = true) {
 	return through.obj(function (file, enc, callback) {
-		if (file.path && file.path.indexOf('.md') === file.path.length - 3) {
-			if (clone) {
-				this.push(cloneWithNewPath(file));
+		const f = file.path ? path.parse(file.path) : null;
+		if (f && f.ext === '.md') {
+			var cloned = clone ? cloneWithNewPath(file) : null;
+			if (cloned) {
+				this.push(cloned);
 			}
 			//extract the header info
 			const content = file.contents.toString(enc);
@@ -66,8 +71,7 @@ export function wrapHtml(templateFile) {
 	return through.obj(function (file, enc, callback) {
 		if (file.html) {
 			const html = template({
-				content: file.html,
-				asset: (file) => `/assets/${file}`
+				content: file.html
 			});
 			file.contents = new Buffer(html, enc);
 		}
