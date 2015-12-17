@@ -5,6 +5,7 @@ import {MdFile} from '../content/MdFile';
 import {Layout} from '../react/Layout';
 import * as React from 'react';
 import * as RDS from 'react-dom/server';
+import * as jade from 'jade';
 
 function cloneWithNewPath(origin) {
 	const file = origin.clone();
@@ -33,6 +34,20 @@ export function mdFile(clone = true) {
 	}); 
 }
 
+export function toArticle () {
+	return through.obj(function (file, enc, callback) {
+		const mdfile = file.mdfile;
+		if (mdfile) {
+			const article = new Article(mdfile);
+			file.html = layout(article);
+			file.contents = new Buffer(file.html, enc);
+			file.path = createIndexPath(file.path);
+		}
+		this.push(file);
+		callback();
+	});
+}
+
 function layout(article: Article):string {
 	const layout = React.createElement(Layout, {article: article});
 	return RDS.renderToString(layout);
@@ -46,13 +61,15 @@ function createIndexPath(filePath: string) {
 	return path.join(p.dir, 'index.html');
 }
 
-export function toArticle () {
+export function wrapHtml(templateFile) {
+	var template = jade.compileFile(templateFile);
 	return through.obj(function (file, enc, callback) {
-		const mdfile = file.mdfile;
-		if (mdfile) {
-			const article = new Article(mdfile);
-			file.contents = new Buffer(layout(article), enc);
-			file.path = createIndexPath(file.path);
+		if (file.html) {
+			const html = template({
+				content: file.html,
+				asset: (file) => `/assets/${file}`
+			});
+			file.contents = new Buffer(html, enc);
 		}
 		this.push(file);
 		callback();

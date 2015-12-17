@@ -1,17 +1,32 @@
-extends layout
-
-block content
-  div#index-content
-    each article, index in articles
-      .col-md-4
-        .article
-          h2.header
-            a(href=article.page.link())= article.page.data.title
-          span.badge.date= article.date()
-          div.descr !{article.description()}
-            p.more
-              a.btn.btn-primary(href=article.page.link())
-                | more&nbsp
-                i.fa.fa-angle-double-right
-      if (index + 1) % 3 === 0
-        .clearfix
+doctype html
+block vars
+  - var title = 'Γιώργος Βαλοτάσιος'
+  - var subtitle = 'Things to remember | Programming stuff :)'
+  
+html(lang='en')
+  head
+    block head
+      meta(charset='utf-8')
+      meta(http-equiv='X-UA-Compatible', content='IE=edge,chrome=1')
+      meta(name='viewport', content='width=device-width, initial-scale=1.0')
+      title= title + ' - ' + subtitle
+      link(rel='stylesheet', href= '/assets/main.css')
+      link(rel='shortcut icon', href= '/assets/favicon.ico')
+      scritp(src= 'node_modules/systemjs/dist/system.src.js')
+      script.
+        System.config({
+          packages: {
+            'typescript': {
+               'defaultExtention': 'js'
+            },
+          },
+          map: {
+            'react': 'node_modules/react/dist/react.min.js',
+            'react-dom': 'node_modules/react-dom/dist/react-dom.min.js',
+            'moment': 'node_modules/moment/min/moment.min.js',
+            'marked': 'node_modules/marked/marked.min.js'
+          }
+        });
+        System.import('typescript/main');
+  body
+    #app!= content
