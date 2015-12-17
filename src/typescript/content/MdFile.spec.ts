@@ -19,5 +19,22 @@ The actual content
         expect(file.title).toEqual('Tomcat init.d script');
         expect(file.date).toEqual('2011-05-14');
         expect(file.raw).toEqual('The actual content');
+        expect(file.template).toEqual('article.jade');
+    });
+    
+    it('should use null if a property has not been found',  () => {
+        const file = MdFile.create(`
+---
+title: Tomcat init.d script
+date: 2011-05-14
+---
+
+The actual content
+
+`);
+        expect(file.title).toEqual('Tomcat init.d script');
+        expect(file.date).toEqual('2011-05-14');
+        expect(file.raw).toEqual('The actual content');
+        expect(file.template).toBeFalsy();
     });
 });

@@ -14,6 +14,7 @@ export class MdFile {
     date: string;
     published: boolean = true;
     raw: string;
+    template: string;
     
     static create(raw: string): MdFile {
         let file = new MdFile();
@@ -23,6 +24,7 @@ export class MdFile {
         const pairs = matches[1].trim().split(KV_SPLIT); 
         file.title = findValue(pairs, 'title');
         file.date = findValue(pairs, 'date');
+        file.template = findValue(pairs, 'template');
         return file;
     }
 }
