@@ -3,6 +3,7 @@ import * as through from 'through2';
 import {Article} from '../content/Article';
 import {MdFile} from '../content/MdFile';
 import {Layout} from '../react/Layout';
+import {escapeTags} from '../utils';
 import * as React from 'react';
 import * as RDS from 'react-dom/server';
 import * as jade from 'jade';
@@ -44,7 +45,6 @@ export function toArticle () {
 		const mdfile = file.mdfile;
 		if (mdfile) {
 			file.html = createHtml(mdfile);
-			file.contents = new Buffer(file.html, enc);
 			file.path = createIndexPath(file.path);
 		}
 		this.push(file);
@@ -70,7 +70,8 @@ export function wrapHtml(templateFile) {
 	return through.obj(function (file, enc, callback) {
 		if (file.html) {
 			const html = template({
-				content: file.html
+				content: file.html,
+				mdfile: escapeTags(JSON.stringify(file.mdfile))
 			});
 			file.contents = new Buffer(html, enc);
 		}

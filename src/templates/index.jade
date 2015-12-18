@@ -12,21 +12,22 @@ html(lang='en')
       title= title + ' - ' + subtitle
       link(rel='stylesheet', href= '/assets/main.css')
       link(rel='shortcut icon', href= '/assets/favicon.ico')
-      scritp(src= 'node_modules/systemjs/dist/system.src.js')
+      script(src= '/node_modules/systemjs/dist/system.src.js')
       script.
         System.config({
           packages: {
-            'typescript': {
+            '/typescript': {
                'defaultExtention': 'js'
             },
           },
           map: {
-            'react': 'node_modules/react/dist/react.min.js',
-            'react-dom': 'node_modules/react-dom/dist/react-dom.min.js',
-            'moment': 'node_modules/moment/min/moment.min.js',
-            'marked': 'node_modules/marked/marked.min.js'
+            'react': '/node_modules/react/dist/react.min.js',
+            'react-dom': '/node_modules/react-dom/dist/react-dom.min.js',
+            'moment': '/node_modules/moment/min/moment.min.js',
+            'marked': '/node_modules/marked/marked.min.js'
           }
         });
-        System.import('typescript/main');
+        System.import('/typescript/main');
   body
     #app!= content
+    script(type='application/json').!= mdfile
