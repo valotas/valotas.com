@@ -43,8 +43,7 @@ export function toArticle () {
 	return through.obj(function (file, enc, callback) {
 		const mdfile = file.mdfile;
 		if (mdfile) {
-			const article = new Article(mdfile);
-			file.html = layout(article);
+			file.html = createHtml(mdfile);
 			file.contents = new Buffer(file.html, enc);
 			file.path = createIndexPath(file.path);
 		}
@@ -53,8 +52,8 @@ export function toArticle () {
 	});
 }
 
-function layout(article: Article):string {
-	const layout = React.createElement(Layout, {article: article});
+function createHtml(mdfile: MdFile):string {
+	const layout = React.createElement(Layout, {mdfile: mdfile});
 	return RDS.renderToString(layout);
 }
 

@@ -1,6 +1,5 @@
 import * as React from 'react';
 import * as ReactDom from 'react-dom';
-import {Article} from './content/Article';
 import {MdFile} from './content/MdFile';
 import {Layout} from './react/Layout';
 
@@ -15,6 +14,4 @@ template: article.jade
 The actual content
 
 `);
-const article = new Article(mdfile);
-
-ReactDom.render(React.createElement(Layout, {article: article}), document.body);
+ReactDom.render(React.createElement(Layout, {mdfile: mdfile}), document.body);
