@@ -23,7 +23,9 @@ export class Layout extends React.Component<LaypoutProps, {}> {
 		return (
 			<div>
 				<Header title="The title" subtitle="the subtitle" />
-				{content}
+				<div id="content" className="container">
+					{content}
+				</div>
 				<Footer/>
 			</div>
 		);
