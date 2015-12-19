@@ -10,9 +10,12 @@ const INPUT_FORMATS = [
 
 export class Article {
     private _html: string;
+    title: string;
+    key: string;
 
     constructor(private _file: MdFile) {
-
+        this.title = _file.title;
+        this.key = _file.path;
     }
 
     moment(): moment.Moment {

@@ -11,12 +11,13 @@ function findValue(pairs, key) {
 
 export class MdFile {
     title: string;
+    path: string;
     date: string;
     published: boolean = true;
     raw: string;
     template: string;
     
-    static create(raw: string): MdFile {
+    static create(raw: string, path?: string): MdFile {
         let file = new MdFile();
         const matches = raw.split(DASHES);
         file.raw = matches[2].trim();
@@ -25,6 +26,7 @@ export class MdFile {
         file.title = findValue(pairs, 'title');
         file.date = findValue(pairs, 'date');
         file.template = findValue(pairs, 'template');
+        file.path = path;
         return file;
     }
 }

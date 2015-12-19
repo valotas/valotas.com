@@ -8,7 +8,8 @@ describe('Article', () => {
             date: '2015-11-11',
             published: false,
             raw: 'some md content',
-            template: null
+            template: null,
+            path: null
         });
         expect(article).not.toBeNull();
     });
@@ -20,7 +21,8 @@ describe('Article', () => {
                 date: '2015-11-12',
                 published: false,
                 raw: 'some md content',
-                template: null
+                template: null,
+                path: null
             });
             expect(article.date()).toEqual('12/11/2015');
         });
@@ -31,7 +33,8 @@ describe('Article', () => {
                 date: '2015-11-12',
                 published: false,
                 raw: 'some md content',
-                template: null
+                template: null,
+                path: null
             });
             expect(article.date('YYYY.DD.MM')).toEqual('2015.12.11');
         });
@@ -44,7 +47,8 @@ describe('Article', () => {
                 date: '2015-11-12',
                 published: false,
                 raw: '# this is big\n##  this smaller',
-                template: null
+                template: null,
+                path: null
             }).html();
 
             expect(html).toContain('>this is big</h1>');
@@ -57,7 +61,8 @@ describe('Article', () => {
                 date: '2015-11-12',
                 published: false,
                 raw: 'this is the very first paragraph',
-                template: null
+                template: null,
+                path: null
             }).html();
             expect(html).toContain('<p><span class="first-letter">t</span>his is');
         });
@@ -70,7 +75,8 @@ describe('Article', () => {
                 date: '2015-11-12',
                 published: false,
                 raw: 'this is the very first paragraph\n\n## h1\nanother paragraph',
-                template: null
+                template: null,
+                path: null
             }).description();
             expect(description).toEqual('<p><span class="first-letter">t</span>his is the very first paragraph</p>\n');
        });
