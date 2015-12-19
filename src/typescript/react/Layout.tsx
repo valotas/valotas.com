@@ -14,6 +14,7 @@ export function Layout() {
 
 interface LaypoutProps extends React.Props<any> {
 	mdfile?: MdFile;
+	articles?: Article[];
 }
 
 //http://staxmanade.com/2015/08/playing-with-typescript-and-jsx/
@@ -32,11 +33,16 @@ export class Layout extends React.Component<LaypoutProps, {}> {
 	}
 	
 	private createMainContent() {
-		const mdfile = this.props.mdfile; 
-		if (!mdfile || mdfile.template === 'Index') {
-			return <Index />;
+		const articles = this.props.articles;
+		if (articles) {
+			return <Index articles={articles}/>;
 		}
-		const article = new Article(mdfile);
-		return <ArticleComponent article={article} />;
+		
+		const mdfile = this.props.mdfile;
+		if (mdfile) {
+			const article = new Article(mdfile);
+			return <ArticleComponent article={article} />;		
+		}
+		return null;
 	}
 }
