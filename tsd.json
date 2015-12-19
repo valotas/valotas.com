@@ -27,13 +27,13 @@
       "commit": "8ea42cd8bb11863ed6f242d67c502288ebc45a7b"
     },
     "node/node.d.ts": {
-      "commit": "8ea42cd8bb11863ed6f242d67c502288ebc45a7b"
+      "commit": "40c60850ad6c8175a62d5ab48c4e016ea5b3dffe"
     },
     "vinyl-fs/vinyl-fs.d.ts": {
       "commit": "8ea42cd8bb11863ed6f242d67c502288ebc45a7b"
     },
     "vinyl/vinyl.d.ts": {
-      "commit": "8ea42cd8bb11863ed6f242d67c502288ebc45a7b"
+      "commit": "40c60850ad6c8175a62d5ab48c4e016ea5b3dffe"
     },
     "jade/jade.d.ts": {
       "commit": "78ba6e41543e5ababbd1dda19797601be3c1f304"

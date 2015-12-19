@@ -7,6 +7,7 @@ import {escapeTags} from '../utils';
 import * as React from 'react';
 import * as RDS from 'react-dom/server';
 import * as jade from 'jade';
+import File = require('vinyl'); //how to use import File from 'vinyl'?
 
 function cloneWithNewPath(origin) {
 	const file = origin.clone();
@@ -44,7 +45,8 @@ export function toArticle () {
 	return through.obj(function (file, enc, callback) {
 		const mdfile = file.mdfile;
 		if (mdfile) {
-			file.html = createHtml(mdfile);
+			file.article = new Article(mdfile);
+			file.html = createLayoutHtml(mdfile);
 			file.path = createIndexPath(file.path);
 		}
 		this.push(file);
@@ -52,8 +54,11 @@ export function toArticle () {
 	});
 }
 
-function createHtml(mdfile: MdFile):string {
-	const layout = React.createElement(Layout, {mdfile: mdfile});
+function createLayoutHtml(mdfile: MdFile, articles?: Article[]):string {
+	const layout = React.createElement(Layout, {
+		mdfile: mdfile,
+		articles: articles
+	});
 	return RDS.renderToString(layout);
 }
 
@@ -77,5 +82,29 @@ export function wrapHtml(templateFile) {
 		}
 		this.push(file);
 		callback();
+	});
+}
+
+export function addIndex() {
+	let articles: Article[] = [];
+	let cwd; 
+	let enc;
+	return through.obj(function (file, enc, callback) {
+		const article = file.article;
+		if (article && article instanceof Article) {
+			cwd = file.cwd;
+			enc = enc;
+			articles.push(article);
+		}
+		this.push(file);
+		callback();
+	}, function () {
+		const index = new File({
+			cwd: cwd,
+			base: path.join(cwd, 'src'),
+			path: path.join(cwd, 'src', 'index.html')
+		}) as any;
+		index.html = createLayoutHtml(null, articles);
+		this.push(index);
 	});
 }

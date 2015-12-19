@@ -8,11 +8,11 @@ module.exports = function (gulp) {
   return function () {
     var plugin = require('../build/typescript/gulp');
     return gulp.src([
-        'src/articles/**/*.md',
-        'src/index.md'
+        'src/articles/**/*.md'
       ])
       .pipe(plugin.mdFile())
       .pipe(plugin.toArticle())
+      .pipe(plugin.addIndex())
       .pipe(plugin.wrapHtml('src/templates/index.jade'))
       .pipe(gulpif('*.html', htmlreplace({
         'css': 'assets/main.css',
