@@ -15,7 +15,12 @@ describe('escapeTags', () => {
 				within html [[[i]]]tags[[[/i]]]
 			[[[/div]]]
 		`);		
-	});	
+	});
+	
+	it('should return the input as is if it is falsey', () => {
+		const actual = escapeTags(null);
+		expect(actual).toBeFalsy();
+	});
 });
 
 
@@ -34,5 +39,10 @@ describe('unEscapeTags', () => {
 				within html <i>tags</i>
 			</div>
 		`);		
+	});
+	
+	it('should return the input as is if it is falsey', () => {
+		const actual = unEscapeTags(null);
+		expect(actual).toBeFalsy();
 	});	
 });
