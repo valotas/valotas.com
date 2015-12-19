@@ -34,7 +34,9 @@ export function mdFile(clone = true) {
 			}
 			//extract the header info
 			const content = file.contents.toString(enc);
-			file.mdfile = MdFile.create(content);
+			const mdfile = MdFile.create(content);
+			mdfile.path = file.path;
+			file.mdfile = mdfile;
 		}
 		this.push(file);
 		callback();
