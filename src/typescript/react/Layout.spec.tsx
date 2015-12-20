@@ -30,4 +30,33 @@ describe('Layout', () => {
 		expect(html).toContain('first article');
 		expect(html).toContain('second article');
 	});
+        
+        it('should render a clear fix for each 3 articles', () => {
+		const article1 = new Article({
+                        title: 'first article',
+                        date: '2015-11-11',
+                        published: true,
+                        raw: 'some md content',
+                        template: null,
+                        path: 'article1'
+                });
+                const article2 = new Article({
+                        title: 'second article',
+                        date: '2015-11-11',
+                        published: true,
+                        raw: 'some md content',
+                        template: null,
+                        path: 'article2'
+                });
+                const article3 = new Article({
+                        title: 'third article',
+                        date: '2015-11-11',
+                        published: true,
+                        raw: 'some md content',
+                        template: null,
+                        path: 'article3'
+                });
+		const html = RDS.renderToString(<Layout articles={[article1, article2, article3]}/>);
+		expect(html).toContain('class="clearfix"');
+	});
 });
