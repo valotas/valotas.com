@@ -1,6 +1,7 @@
 import * as React from 'react';
 import {Article} from '../content/Article';
-import {Icon} from './Icon'
+import {Link} from './Link';
+import {Icon} from './Icon';
 
 interface IndexProps extends React.Props<any> {
 	articles: Article[];
@@ -54,7 +55,15 @@ class ArticleDescription extends React.Component<ArticleDescriptionProps, {}> {
 				<div className="article">
 					<h2 className="header">{article.title}</h2>
 					<span className="badge date">{article.date()}</span>
-					<div className="descr" dangerouslySetInnerHTML={html} />
+					<div className="descr">
+						<div dangerouslySetInnerHTML={html}/>
+						<p className="more">
+							<Link article={article} className="btn btn-primary">
+								more&nbsp;
+								<Icon name="fa-angle-double-right"/>
+							</Link>
+						</p>
+					</div>
 				</div>
 			</div>
 		);
