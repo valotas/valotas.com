@@ -1,6 +1,7 @@
 import * as React from 'react';
 import {Article} from '../content/Article';
-import {Icon} from './Icon'
+import {Icon} from './Icon';
+import {Link} from './Link';
 
 interface ArticleProps extends React.Props<any> {
 	article?: Article;
@@ -22,9 +23,9 @@ export class ArticleComponent extends React.Component<ArticleProps, {}> {
 				</div>
 				<div id="footer-actions" className="row text-center">
 					<div className="btn-group">
-						<a href="/" className="btn btn-default">
+						<Link className="btn btn-default">
 							<Icon name="fa-home" size="2x"/>
-						</a>
+						</Link>
 						<a href="#" className="btn btn-default">
 							<Icon name="fa-toggle-up" size="2x"/>
 						</a>
