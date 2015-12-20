@@ -50,6 +50,7 @@ export function toArticle () {
 			file.article = new Article(mdfile);
 			file.html = createLayoutHtml(mdfile);
 			file.path = createIndexPath(file.path);
+			file.meta = mdfile;
 		}
 		this.push(file);
 		callback();
@@ -78,7 +79,7 @@ export function wrapHtml(templateFile) {
 		if (file.html) {
 			const html = template({
 				content: file.html,
-				mdfile: escapeTags(JSON.stringify(file.mdfile))
+				meta: escapeTags(JSON.stringify(file.meta))
 			});
 			file.contents = new Buffer(html, enc);
 		}
@@ -106,6 +107,7 @@ export function addIndex() {
 			path: path.join(cwd, 'src', 'index.html')
 		}) as any;
 		index.html = createLayoutHtml(null, articles);
+		index.meta = articles;
 		this.push(index);
 		callback();
 	});
