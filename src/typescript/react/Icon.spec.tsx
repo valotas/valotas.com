@@ -6,6 +6,6 @@ describe('Icon', () => {
 	it('should render an i with the given name as classname',() => {
 		const html = RDS.renderToString(<Icon name="name"/>);
 		expect(html).toContain('<i');
-		expect(html).toContain('class="fa name fa-2x"');
+		expect(html).toContain('class="fa name fa-1x"');
 	});
 });

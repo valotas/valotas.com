@@ -7,8 +7,7 @@ interface IconProps extends React.Props<any> {
 
 export class Icon extends React.Component<IconProps, {}> {	
 	render() {
-		const size = this.props.size || 'fa-2x';
-		const className = 'fa ' + this.props.name + ' ' +  size;
+		const className = 'fa ' + this.props.name + ' fa-' +  (this.props.size || '1x');
 		return (
 			<i className={className} />
 		);

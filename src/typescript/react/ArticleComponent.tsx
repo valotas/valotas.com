@@ -23,10 +23,10 @@ export class ArticleComponent extends React.Component<ArticleProps, {}> {
 				<div id="footer-actions" className="row text-center">
 					<div className="btn-group">
 						<a href="/" className="btn btn-default">
-							<Icon name="fa-home"/>
+							<Icon name="fa-home" size="2x"/>
 						</a>
 						<a href="#" className="btn btn-default">
-							<Icon name="fa-toggle-up"/>
+							<Icon name="fa-toggle-up" size="2x"/>
 						</a>
 					</div>
 				</div>

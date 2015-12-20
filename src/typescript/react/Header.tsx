@@ -19,16 +19,16 @@ export class Header extends React.Component<HeaderProps, {}> {
 						<p className="row whitebg">{this.props.subtitle}</p>
 						<div className="row whitebg social">
 							<a href="https://github.com/valotas" target="_blank">
-								<Icon name="fa-github-square"/>
+								<Icon name="fa-github-square" size="2x"/>
 							</a>
 							<a href="https://www.facebook.com/valotas" target="_blank">
-								<Icon name="fa-facebook-square"/>
+								<Icon name="fa-facebook-square" size="2x"/>
 							</a>
 							<a href="https://twitter.com/valotas" target="_blank">
-								<Icon name="fa-twitter-square"/>
+								<Icon name="fa-twitter-square" size="2x"/>
 							</a>
 							<a href="http://www.linkedin.com/in/valotas" target="_blank">
-								<Icon name="fa-linkedin-square"/>
+								<Icon name="fa-linkedin-square" size="2x"/>
 							</a>
 						</div>
 					</div>
