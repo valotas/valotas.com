@@ -1,7 +1,7 @@
 {
   "version": "v4",
-  "repo": "borisyankov/DefinitelyTyped",
-  "ref": "master",
+  "repo": "valotas/DefinitelyTyped",
+  "ref": "master20151222",
   "path": "typings",
   "bundle": "typings/tsd.d.ts",
   "installed": {
@@ -24,7 +24,7 @@
       "commit": "8ea42cd8bb11863ed6f242d67c502288ebc45a7b"
     },
     "through2/through2.d.ts": {
-      "commit": "8ea42cd8bb11863ed6f242d67c502288ebc45a7b"
+      "commit": "c37376a16cb6c17e053d5ee0935864d8cf2d2bda"
     },
     "node/node.d.ts": {
       "commit": "40c60850ad6c8175a62d5ab48c4e016ea5b3dffe"
@@ -36,7 +36,7 @@
       "commit": "40c60850ad6c8175a62d5ab48c4e016ea5b3dffe"
     },
     "jade/jade.d.ts": {
-      "commit": "78ba6e41543e5ababbd1dda19797601be3c1f304"
+      "commit": "c37376a16cb6c17e053d5ee0935864d8cf2d2bda"
     }
   }
 }
