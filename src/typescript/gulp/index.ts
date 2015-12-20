@@ -98,9 +98,8 @@ export function addIndex() {
 			enc = enc;
 			articles.push(article);
 		}
-		this.push(file);
-		callback();
-	}, function () {
+		callback(null, file);
+	}, function (callback) {
 		const index = new File({
 			cwd: cwd,
 			base: path.join(cwd, 'src'),
@@ -108,5 +107,6 @@ export function addIndex() {
 		}) as any;
 		index.html = createLayoutHtml(null, articles);
 		this.push(index);
+		callback();
 	});
 }
