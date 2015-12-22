@@ -9,38 +9,30 @@ import * as RDS from 'react-dom/server';
 import * as jade from 'jade';
 import File = require('vinyl'); //how to use import File from 'vinyl'?
 
-function cloneWithNewPath(origin) {
-	const file = origin.clone();
-	const p = path.parse(file.path);
-	if (p.name !== 'index') {
-		file.path = path.join(p.dir, '_md', p.base);
-	} else {
-		const parent = path.parse(p.dir);
-		if (parent.name === 'src') {
-			return null;
-		}
-		file.path = path.join(parent.dir, '_md', parent.base, p.base);
-	}
-	return file;
-}
-
 export function mdFile(clone = true) {
 	return through.obj(function (file, enc, callback) {
 		const f = file.path ? path.parse(file.path) : null;
 		if (f && f.ext === '.md') {
-			var cloned = clone ? cloneWithNewPath(file) : null;
-			if (cloned) {
-				this.push(cloned);
-			}
 			//extract the header info
 			const content = file.contents.toString(enc);
 			const mdfile = MdFile.create(content);
-			mdfile.path = file.path;
+			if (!mdfile.published) {
+				callback(null);
+				return;
+			}
+			mdfile.path = computeMdFilePath(f);
 			file.mdfile = mdfile;
 		}
-		this.push(file);
-		callback();
+		callback(null, file);
 	}); 
+}
+
+function computeMdFilePath(file) {
+	if (file.name !== 'index') {
+		return file.name;
+	} 
+	const parent = path.parse(file.dir);
+	return parent.name;
 }
 
 export function toArticle () {
@@ -49,7 +41,6 @@ export function toArticle () {
 		if (mdfile) {
 			file.article = new Article(mdfile);
 			file.html = createLayoutHtml(mdfile);
-			file.path = createIndexPath(file.path);
 			file.meta = mdfile;
 		}
 		this.push(file);
@@ -65,12 +56,14 @@ function createLayoutHtml(mdfile: MdFile, articles?: Article[]):string {
 	return RDS.renderToString(layout);
 }
 
-function createIndexPath(filePath: string) {
-	const p = path.parse(filePath);
-	if (p.name !== 'index') {
-		return path.join(p.dir, p.name, 'index.html')
-	}
-	return path.join(p.dir, 'index.html');
+export function adaptPaths () {
+	return through.obj(function (file, enc, callback) {
+		const mdfile = file.mdfile;
+		if (mdfile) {
+			file.path = path.join(file.base, mdfile.path, 'index.html');
+		}
+		callback(null, file);
+	});
 }
 
 export function wrapHtml(templateFile) {

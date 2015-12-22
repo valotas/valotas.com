@@ -1,69 +1,61 @@
 import * as fs from 'vinyl-fs';
 import * as path from 'path';
 import * as through from 'through2';
-import {mdFile, toArticle} from './index';
+import {Article} from '../content/Article';
+import {mdFile, toArticle, adaptPaths} from './index';
 
 describe('mdFile', () => {	
 	it('should parse the mdfile as yalm', (done) => {
 		fs.src(['src/articles/tomcat-initd-*.md'], {
 				base: path.join(__dirname, '../../')
 			})
-			.pipe(mdFile(false))
+			.pipe(mdFile())
 			.pipe(through.obj(function (chunk, enc, cb) {
 				const mdfile = chunk.mdfile;
 				expect(mdfile).toBeTruthy();
 				expect(mdfile.title).toBeTruthy();
 				expect(mdfile.date).toBeTruthy();
+				expect(mdfile.path).toEqual('tomcat-initd-script');
 				cb();
 			}))
 			.on('finish', done);
 	});
 	
-	it('should by default clone each file to a different path',(done) => {
-		fs.src(['src/articles/tomcat-initd-*.md'], {
+	it('should not pass non published files to the pipe chain', (done) => {
+		var chunk;
+		fs.src(['src/articles/documenting-code.md'], {
 				base: path.join(__dirname, '../../')
 			})
 			.pipe(mdFile())
-			.pipe(through.obj(function (chunk, enc, cb) {
-				if (!chunk.mdfile) {
-					expect(chunk.path).toContain('/_md/tomcat-initd');
-				}
-				cb();
+			.pipe(through.obj(function (_chunk, enc, cb) {
+				chunk = _chunk;
+				cb(null, chunk);
 			}))
-			.on('finish', done);
+			.on('finish', function () {
+				expect(chunk).toBeFalsy();
+				done();
+			});
 	});
-	
-	it('should respect the file structure',(done) => {
-		fs.src(['src/articles/dart-language/*.md'], {
-				base: path.join(__dirname, '../../')
-			})
-			.pipe(mdFile())
-			.pipe(through.obj(function (chunk, enc, cb) {
-				if (!chunk.mdfile) {
-					expect(chunk.path).toContain('/_md/dart-language/');
-				}
-				cb();
-			}))
-			.on('finish', done);
-	})
 });
 
 describe('toArticle', () => {
-	it('should adapt the path of the given chunk if it is an md file', (done) => {
-		let indexCounter = 0;
+	it('should add an article/meta/html property to the given chunk', (done) => {
 		fs.src(['src/articles/tomcat-initd-*.md'], {
 				base: path.join(__dirname, '../../')
 			})
-			.pipe(mdFile(false))
+			.pipe(mdFile())
 			.pipe(toArticle())
 			.pipe(through.obj(function (chunk, enc, cb) {
-				expect(chunk.path).toContain('tomcat-initd-script/index.html')
+				expect(chunk.article).toBeDefined();
+				expect(chunk.article instanceof Article).toBeTruthy();
+				expect(chunk.html).toBeTruthy();
+				expect(chunk.meta).toBeTruthy();
 				cb();
 			}))
 			.on('finish', done);
 		
 	});
-	
+
 	it('should not be applied no mdfile is available', (done) => {
 		fs.src(['src/articles/tomcat-initd-*.md'], {
 				base: path.join(__dirname, '../../')
@@ -71,6 +63,23 @@ describe('toArticle', () => {
 			.pipe(toArticle())
 			.pipe(through.obj(function (chunk, enc, cb) {
 				expect(chunk.path).toContain('tomcat-initd-script.md')
+				cb();
+			}))
+			.on('finish', done);
+		
+	});
+});
+
+describe('adaptPaths', () => {
+	it('should adapt the path of the given chunk if it is an md file', (done) => {
+		let indexCounter = 0;
+		fs.src(['src/articles/tomcat-initd-*.md'], {
+				base: path.join(__dirname, '../../')
+			})
+			.pipe(mdFile())
+			.pipe(adaptPaths())
+			.pipe(through.obj(function (chunk, enc, cb) {
+				expect(chunk.path).toContain('tomcat-initd-script/index.html')
 				cb();
 			}))
 			.on('finish', done);
