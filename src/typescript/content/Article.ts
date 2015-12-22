@@ -1,35 +1,14 @@
 import * as moment from 'moment';
 import * as marked from 'marked';
 import {MdFile} from './MdFile';
+import {ArticleDescription} from './ArticleDescription';
 import * as ex from '../exceptions';
 
-const INPUT_FORMATS = [
-    'YYYY-MM-DD HH:mm',
-    'YYYY-MM-DD'
-];
-
-export class Article {
+export class Article extends ArticleDescription {
     private _html: string;
-    title: string;
-    key: string;
 
     constructor(private _file: MdFile) {
-        this.title = _file.title;
-        this.key = _file.path;
-    }
-
-    moment(): moment.Moment {
-        const date = this._file.date,
-            m = moment(date, INPUT_FORMATS);
-        if (m.isValid()) {
-            return m;
-        }
-        
-        throw new ex.IllegalFromatException('Could not parse ' + date + ' as date using formats: ' + INPUT_FORMATS);
-    }
-
-    date(format?: string): string {
-        return this.moment().format(format || 'DD/MM/YYYY');
+        super(_file);
     }
 
     html(): string {
