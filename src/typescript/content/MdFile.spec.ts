@@ -8,6 +8,7 @@ title: Tomcat init.d script
 author: valotas
 date: 2011-05-14
 template: article.jade
+published: false
 ---
 
 The actual content
@@ -20,6 +21,7 @@ The actual content
         expect(file.date).toEqual('2011-05-14');
         expect(file.raw).toEqual('The actual content');
         expect(file.template).toEqual('article.jade');
+        expect(file.published).toEqual(false);
     });
     
     it('should use null if a property has not been found',  () => {

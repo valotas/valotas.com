@@ -9,6 +9,14 @@ function findValue(pairs, key) {
     }
 }
 
+function findBoolean(pairs, key) {
+    const value = findValue(pairs, key);
+    if (value === 'false' || value === '0') {
+        return false;
+    }
+    return true;
+}
+
 export class MdFile {
     title: string;
     path: string;
@@ -26,6 +34,7 @@ export class MdFile {
         file.title = findValue(pairs, 'title');
         file.date = findValue(pairs, 'date');
         file.template = findValue(pairs, 'template');
+        file.published = findBoolean(pairs, 'published');
         file.path = path;
         return file;
     }
