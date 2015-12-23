@@ -1,6 +1,6 @@
 import {MetaFile} from './MetaFile';
 
-export class MetaFileService {
+export class MetaFileStore {
 	constructor(private fetcher: Window) {
 		
 	}

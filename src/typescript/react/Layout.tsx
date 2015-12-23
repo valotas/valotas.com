@@ -6,7 +6,7 @@ import {ArticleComponent} from './ArticleComponent';
 import {Index} from './Index';
 import {Header} from './Header';
 import {Footer} from './Footer';
-import {MetaFileService} from '../content/MetaFileService';
+import {MetaFileStore} from '../content/MetaFileStore';
 
 /* Stateless functional components are not supported yet?
 export function Layout() {
@@ -17,7 +17,7 @@ export function Layout() {
 interface LaypoutProps extends React.Props<any> {
 	articles?: Article[];
 	meta?: MetaFile|MetaFile[];
-	metafileService?: MetaFileService;
+	metafileStore?: MetaFileStore;
 }
 
 //http://staxmanade.com/2015/08/playing-with-typescript-and-jsx/
@@ -40,7 +40,7 @@ export class Layout extends React.Component<LaypoutProps, {}> {
 
 		const articles = isMetaArray(meta) ? toArticles(meta) : this.props.articles;
 		if (articles) {
-			return <Index articles={articles} metafileService={this.props.metafileService}/>;
+			return <Index articles={articles} metafileStore={this.props.metafileStore}/>;
 		}
 
 		if (meta) {

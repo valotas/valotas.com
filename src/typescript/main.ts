@@ -1,7 +1,7 @@
 import * as React from 'react';
 import * as ReactDom from 'react-dom';
 import {MetaFile} from './content/MetaFile';
-import {MetaFileService} from './content/MetaFileService';
+import {MetaFileStore} from './content/MetaFileStore';
 import {Layout} from './react/Layout';
 import {inflate} from './utils';
 
@@ -12,6 +12,6 @@ const meta = inflate(metaHolder.innerHTML) as MetaFile|MetaFile[];
 console.debug('Infalted metadata', meta);
 const el = React.createElement(Layout, {
 	meta: meta,
-	metafileService: new MetaFileService(window)
+	metafileStore: new MetaFileStore(window)
 });
 ReactDom.render(el, query('#app'), () => console.timeEnd('load'));

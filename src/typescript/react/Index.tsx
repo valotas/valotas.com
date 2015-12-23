@@ -1,12 +1,12 @@
 import * as React from 'react';
 import {ArticleDescription} from '../content/ArticleDescription';
-import {MetaFileService} from '../content/MetaFileService';
+import {MetaFileStore} from '../content/MetaFileStore';
 import {Link} from './Link';
 import {Icon} from './Icon';
 
 interface IndexProps extends React.Props<any> {
 	articles: ArticleDescription[];
-	metafileService?: MetaFileService;
+	metafileStore?: MetaFileStore;
 }
 
 export class Index extends React.Component<IndexProps, {}> {	
@@ -25,7 +25,7 @@ export class Index extends React.Component<IndexProps, {}> {
 		}
 		
 		return (
-			<ArticleDescriptionComponent article={article} key={article.key} metafileService={this.props.metafileService}/>
+			<ArticleDescriptionComponent article={article} key={article.key} metafileStore={this.props.metafileStore}/>
 		);
 	}
 }
@@ -44,7 +44,7 @@ function addSeparators(articles: ArticleDescription[]) {
 interface ArticleDescriptionComponentProps extends React.Props<any> {
 	article: ArticleDescription;
 	key: string;
-	metafileService?: MetaFileService;
+	metafileStore?: MetaFileStore;
 }
 
 class ArticleDescriptionComponent extends React.Component<ArticleDescriptionComponentProps, {}> {
@@ -61,7 +61,7 @@ class ArticleDescriptionComponent extends React.Component<ArticleDescriptionComp
 					<div className="descr">
 						<div dangerouslySetInnerHTML={html}/>
 						<p className="more">
-							<Link article={article} className="btn btn-primary" metafileService={this.props.metafileService}>
+							<Link article={article} className="btn btn-primary" metafileStore={this.props.metafileStore}>
 								more&nbsp;
 								<Icon name="fa-angle-double-right"/>
 							</Link>

@@ -1,23 +1,23 @@
 import * as React from 'react';
 import {ArticleDescription} from '../content/ArticleDescription';
-import {MetaFileService} from '../content/MetaFileService';
+import {MetaFileStore} from '../content/MetaFileStore';
 import {Icon} from './Icon'
 
 interface LinkProps extends React.Props<any> {
 	article?: ArticleDescription;
-	metafileService?: MetaFileService;
+	metafileStore?: MetaFileStore;
 	className: string;
 }
 
 export class Link extends React.Component<LinkProps, {}> {
 	handleClick (e) {
-		const metafileService = this.props.metafileService;
-		if (!metafileService) {
+		const store = this.props.metafileStore;
+		if (!store) {
 			return;
 		}
 		e.preventDefault();
-		console.log(metafileService, this.props.article);
-		metafileService.load(this.props.article.key +'/meta.json')
+		console.log(store, this.props.article);
+		store.load(this.props.article.key +'/meta.json')
 			.then((body) => {
 				console.log('fetched', body);
 			})
