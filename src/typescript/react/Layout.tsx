@@ -14,14 +14,38 @@ export function Layout() {
 }
 */
 
-interface LaypoutProps extends React.Props<any> {
+interface LayoutProps extends React.Props<any> {
 	articles?: Article[];
 	meta?: MetaFile|MetaFile[];
 	metafileStore?: MetaFileStore;
 }
 
+interface LayoutState {
+	meta: MetaFile|MetaFile[];
+}
+
 //http://staxmanade.com/2015/08/playing-with-typescript-and-jsx/
-export class Layout extends React.Component<LaypoutProps, {}> {
+export class Layout extends React.Component<LayoutProps, LayoutState> {
+	constructor(props: LayoutProps) {
+		super(props);
+		this.state = {
+			meta: props.meta
+		}
+	}
+	
+	componentDidMount() {
+		const store = this.props.metafileStore;
+		if (!store) {
+			return;
+		}
+		store.onChange((meta: MetaFile) => {
+			console.log('Updateting state', meta);
+			this.setState({
+				meta: meta
+			});
+		});
+	}
+	
 	render() {
 		const content = this.createMainContent()
 		return (
@@ -51,7 +75,7 @@ export class Layout extends React.Component<LaypoutProps, {}> {
 	}
 }
 
-function toArticles(arr: MetaFile[]): ArticleDescription[] {
+function toArticles (arr: MetaFile[]): ArticleDescription[] {
 	return arr.map((input) => new ArticleDescription(input));
 }
 

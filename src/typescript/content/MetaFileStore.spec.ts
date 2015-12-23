@@ -3,11 +3,9 @@ import {MetaFile} from './MetaFile';
 
 describe('MetaFileStore', () => {
     let store: MetaFileStore;
-    let fetch;
     
     beforeEach(() => {
-        fetch = jasmine.createSpy('fetch');
-        store = new MetaFileStore(fetch);
+        store = new MetaFileStore({fetch: jasmine.createSpy('fetch')});
     });
     
     it('should have a way to add new listeners', () => {

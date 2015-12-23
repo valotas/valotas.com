@@ -1,9 +1,13 @@
 import {MetaFile} from './MetaFile';
 
+interface Fetcher {
+	fetch: (url: string|Request, init?: RequestInit) => Promise<Response>
+}
+
 export class MetaFileStore {
 	private listeners: Function[] = [];
 	
-	constructor(private fetch: (url: string|Request, init?: RequestInit) => Promise<Response>) {
+	constructor(private fetcher: Fetcher) {
 
 	}
 	
@@ -18,7 +22,8 @@ export class MetaFileStore {
 	}
 	
 	_loadMetaFile(key: string) {
-		return this.fetch('/' + key)
+		return this.fetcher
+			.fetch('/' + key)
 			.then((body) => {
 				return body.json();
 			})
