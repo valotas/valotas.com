@@ -1,10 +1,12 @@
 import * as React from 'react';
 import {ArticleDescription} from '../content/ArticleDescription';
+import {MetaFileService} from '../content/MetaFileService';
 import {Link} from './Link';
 import {Icon} from './Icon';
 
 interface IndexProps extends React.Props<any> {
 	articles: ArticleDescription[];
+	metafileService?: MetaFileService;
 }
 
 export class Index extends React.Component<IndexProps, {}> {	
@@ -12,7 +14,7 @@ export class Index extends React.Component<IndexProps, {}> {
 		const articles = addSeparators(this.props.articles);
 		return (
 			<div id="index-content">
-				{articles.map(this.createArticleBox)}
+				{articles.map(this.createArticleBox.bind(this))}
 			</div>
 		);
 	}
@@ -23,7 +25,7 @@ export class Index extends React.Component<IndexProps, {}> {
 		}
 		
 		return (
-			<ArticleDescriptionComponent article={article} key={article.key} />
+			<ArticleDescriptionComponent article={article} key={article.key} metafileService={this.props.metafileService}/>
 		);
 	}
 }
@@ -42,6 +44,7 @@ function addSeparators(articles: ArticleDescription[]) {
 interface ArticleDescriptionComponentProps extends React.Props<any> {
 	article: ArticleDescription;
 	key: string;
+	metafileService?: MetaFileService;
 }
 
 class ArticleDescriptionComponent extends React.Component<ArticleDescriptionComponentProps, {}> {
@@ -50,7 +53,6 @@ class ArticleDescriptionComponent extends React.Component<ArticleDescriptionComp
 		const html = {
 			__html: article.description()
 		};
-		//console.log(html);
 		return (
 			<div className="col-md-4">
 				<div className="article">
@@ -59,7 +61,7 @@ class ArticleDescriptionComponent extends React.Component<ArticleDescriptionComp
 					<div className="descr">
 						<div dangerouslySetInnerHTML={html}/>
 						<p className="more">
-							<Link article={article} className="btn btn-primary">
+							<Link article={article} className="btn btn-primary" metafileService={this.props.metafileService}>
 								more&nbsp;
 								<Icon name="fa-angle-double-right"/>
 							</Link>

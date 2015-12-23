@@ -6,7 +6,7 @@ export class MetaFileService {
 	}
 	
 	load(key: string) {
-		return fetch(`/{key}`)
+		return fetch('/' + key)
 			.then((body) => {
 				return body.json();
 			})
