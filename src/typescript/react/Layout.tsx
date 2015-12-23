@@ -15,7 +15,6 @@ export function Layout() {
 */
 
 interface LayoutProps extends React.Props<any> {
-	articles?: Article[];
 	meta?: MetaFile|MetaFile[];
 	metafileStore?: MetaFileStore;
 }
@@ -62,8 +61,8 @@ export class Layout extends React.Component<LayoutProps, LayoutState> {
 	private createMainContent() {
 		const meta = this.props.meta;
 
-		const articles = isMetaArray(meta) ? toArticles(meta) : this.props.articles;
-		if (articles) {
+		if (isMetaArray(meta)) {
+			const articles =  toArticles(meta)
 			return <Index articles={articles} metafileStore={this.props.metafileStore}/>;
 		}
 
