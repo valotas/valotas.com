@@ -2,7 +2,7 @@ import * as path from 'path';
 import * as through from 'through2';
 import {Article} from '../content/Article';
 import {ArticleDescription} from '../content/ArticleDescription';
-import {MdFile} from '../content/MdFile';
+import {MetaFile} from '../content/MetaFile';
 import {Layout} from '../react/Layout';
 import {deflate} from '../utils';
 import * as React from 'react';
@@ -16,7 +16,7 @@ export function mdFile(clone = true) {
 		if (f && f.ext === '.md') {
 			//extract the header info
 			const content = file.contents.toString(enc);
-			const mdfile = MdFile.create(content);
+			const mdfile = MetaFile.create(content);
 			if (!mdfile.published) {
 				callback(null);
 				return;
@@ -49,10 +49,9 @@ export function toArticle () {
 	});
 }
 
-function createLayoutHtml(mdfile: MdFile, articles?: Article[]):string {
+function createLayoutHtml(meta: MetaFile|MetaFile[]):string {
 	const layout = React.createElement(Layout, {
-		mdfile: mdfile,
-		articles: articles
+		meta: meta
 	});
 	return RDS.renderToString(layout);
 }
@@ -83,7 +82,7 @@ export function wrapHtml(templateFile) {
 }
 
 export function addIndex() {
-	let articles: Article[] = [];
+	let metas: MetaFile[] = [];
 	let cwd; 
 	let enc;
 	return through.obj(function (file, enc, callback) {
@@ -91,7 +90,10 @@ export function addIndex() {
 		if (article && article instanceof Article) {
 			cwd = file.cwd;
 			enc = enc;
-			articles.push(article);
+			const meta = new MetaFile(article.meta);
+			meta.raw = null;
+			meta.description = article.description();
+			metas.push(meta);
 		}
 		callback(null, file);
 	}, function (callback) {
@@ -100,8 +102,8 @@ export function addIndex() {
 			base: path.join(cwd, 'src'),
 			path: path.join(cwd, 'src', 'index.html')
 		}) as any;
-		index.html = createLayoutHtml(null, articles);
-		index.meta = articles.map((articles) => new ArticleDescription(articles));
+		index.html = createLayoutHtml(metas);
+		index.meta = metas;
 		this.push(index);
 		callback();
 	});

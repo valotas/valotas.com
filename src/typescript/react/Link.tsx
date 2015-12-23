@@ -1,9 +1,9 @@
 import * as React from 'react';
-import {Article} from '../content/Article';
+import {ArticleDescription} from '../content/ArticleDescription';
 import {Icon} from './Icon'
 
 interface LinkProps extends React.Props<any> {
-	article?: Article;
+	article?: ArticleDescription;
 	className: string;
 } 
 

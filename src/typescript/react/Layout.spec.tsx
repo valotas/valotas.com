@@ -16,7 +16,8 @@ describe('Layout', () => {
                         published: true,
                         raw: 'some md content',
                         template: null,
-                        path: 'article1'
+                        path: 'article1',
+                        description: null
                 });
                 const article2 = new Article({
                         title: 'second article',
@@ -24,7 +25,8 @@ describe('Layout', () => {
                         published: true,
                         raw: 'some md content',
                         template: null,
-                        path: 'article2'
+                        path: 'article2',
+                        description: null
                 });
 		const html = RDS.renderToString(<Layout articles={[article1, article2]}/>);
 		expect(html).toContain('first article');
@@ -38,7 +40,8 @@ describe('Layout', () => {
                         published: true,
                         raw: 'some md content',
                         template: null,
-                        path: 'article1'
+                        path: 'article1',
+                        description: null
                 });
                 const article2 = new Article({
                         title: 'second article',
@@ -46,7 +49,8 @@ describe('Layout', () => {
                         published: true,
                         raw: 'some md content',
                         template: null,
-                        path: 'article2'
+                        path: 'article2',
+                        description: null
                 });
                 const article3 = new Article({
                         title: 'third article',
@@ -54,7 +58,8 @@ describe('Layout', () => {
                         published: true,
                         raw: 'some md content',
                         template: null,
-                        path: 'article3'
+                        path: 'article3',
+                        description: null
                 });
 		const html = RDS.renderToString(<Layout articles={[article1, article2, article3]}/>);
 		expect(html).toContain('class="clearfix"');

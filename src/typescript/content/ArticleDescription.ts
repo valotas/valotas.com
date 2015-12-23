@@ -1,16 +1,12 @@
 import * as moment from 'moment';
 import * as marked from 'marked';
-import {MdFile} from './MdFile';
+import {MetaFile} from './MetaFile';
 import * as ex from '../exceptions';
 
 const INPUT_FORMATS = [
     'YYYY-MM-DD HH:mm',
     'YYYY-MM-DD'
 ];
-
-function isMdFile (input: any): input is MdFile {
-    return input && input.raw;
-}
 
 export class ArticleDescription {
     title: string;
@@ -19,18 +15,11 @@ export class ArticleDescription {
     private _date: string;
     private _description: string;
     
-    constructor(input: ArticleDescription|MdFile) {
-        if (isMdFile(input)) {
-            this.title = input.title;
-            this.key = input.path;
-            this._date = input.date;
-        }
-        else {
-            this.title = input.title;
-            this.key = input.key;
-            this._date = input._date;
-            this._description = input.description();
-        }
+    constructor(meta: MetaFile) {
+        this.title = meta.title;
+        this.key = meta.path;
+        this._date = meta.date;
+        this._description = meta.description;
     }
 
     moment(): moment.Moment {

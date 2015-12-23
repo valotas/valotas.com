@@ -1,6 +1,7 @@
 import * as React from 'react';
 import {Article} from '../content/Article';
-import {MdFile} from '../content/MdFile';
+import {ArticleDescription} from '../content/ArticleDescription';
+import {MetaFile} from '../content/MetaFile';
 import {ArticleComponent} from './ArticleComponent';
 import {Index} from './Index';
 import {Header} from './Header';
@@ -13,8 +14,8 @@ export function Layout() {
 */
 
 interface LaypoutProps extends React.Props<any> {
-	mdfile?: MdFile;
 	articles?: Article[];
+	meta?: MetaFile|MetaFile[];
 }
 
 //http://staxmanade.com/2015/08/playing-with-typescript-and-jsx/
@@ -33,16 +34,25 @@ export class Layout extends React.Component<LaypoutProps, {}> {
 	}
 	
 	private createMainContent() {
-		const articles = this.props.articles;
+		const meta = this.props.meta;
+
+		const articles = isMetaArray(meta) ? toArticles(meta) : this.props.articles;
 		if (articles) {
 			return <Index articles={articles}/>;
 		}
-		
-		const mdfile = this.props.mdfile;
-		if (mdfile) {
-			const article = new Article(mdfile);
+
+		if (meta) {
+			const article = new Article(meta as MetaFile);
 			return <ArticleComponent article={article} />;		
 		}
 		return null;
 	}
+}
+
+function toArticles(arr: MetaFile[]): ArticleDescription[] {
+	return arr.map((input) => new ArticleDescription(input));
+}
+
+function isMetaArray (input: any): input is MetaFile[] {
+	return input && input.length;
 }

@@ -1,10 +1,10 @@
 import * as React from 'react';
-import {Article} from '../content/Article';
+import {ArticleDescription} from '../content/ArticleDescription';
 import {Link} from './Link';
 import {Icon} from './Icon';
 
 interface IndexProps extends React.Props<any> {
-	articles: Article[];
+	articles: ArticleDescription[];
 }
 
 export class Index extends React.Component<IndexProps, {}> {	
@@ -17,18 +17,18 @@ export class Index extends React.Component<IndexProps, {}> {
 		);
 	}
 	
-	createArticleBox(article: Article, index: number) {
+	createArticleBox(article: ArticleDescription, index: number) {
 		if (article === null) {
 			return <div className="clearfix" key={index} />
 		}
 		
 		return (
-			<ArticleDescription article={article} key={article.key} />
+			<ArticleDescriptionComponent article={article} key={article.key} />
 		);
 	}
 }
 
-function addSeparators(articles: Article[]) {
+function addSeparators(articles: ArticleDescription[]) {
 	const result = [];
 	articles.forEach((article, index) => {
 		result.push(article);
@@ -39,17 +39,18 @@ function addSeparators(articles: Article[]) {
 	return result;
 }
 
-interface ArticleDescriptionProps extends React.Props<any> {
-	article: Article;
+interface ArticleDescriptionComponentProps extends React.Props<any> {
+	article: ArticleDescription;
 	key: string;
 }
 
-class ArticleDescription extends React.Component<ArticleDescriptionProps, {}> {
+class ArticleDescriptionComponent extends React.Component<ArticleDescriptionComponentProps, {}> {
 	render() {
 		const article = this.props.article;
 		const html = {
 			__html: article.description()
 		};
+		//console.log(html);
 		return (
 			<div className="col-md-4">
 				<div className="article">

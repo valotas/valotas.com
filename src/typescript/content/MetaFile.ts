@@ -17,19 +17,33 @@ function findBoolean(pairs, key) {
     return true;
 }
 
-export class MdFile {
+export class MetaFile {
     title: string;
     path: string;
     date: string;
     published: boolean = true;
     raw: string;
+    description: string;
     template: string;
     
-    static create(raw: string, path?: string): MdFile {
-        let file = new MdFile();
+    constructor(input?: MetaFile) {
+        if (!input) {
+            return;
+        }
+        this.title = input.title;
+        this.path = input.path;
+        this.date = input.date;
+        this.published = input.published;
+        this.raw = input.raw;
+        this.description = input.description;
+        this.template = input.template;
+    }
+    
+    static create(raw: string, path?: string): MetaFile {
+        let file = new MetaFile();
         const matches = raw.split(DASHES);
         file.raw = matches[2].trim();
-        
+
         const pairs = matches[1].trim().split(KV_SPLIT); 
         file.title = findValue(pairs, 'title');
         file.date = findValue(pairs, 'date');
