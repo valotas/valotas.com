@@ -2,7 +2,7 @@ import * as fs from 'vinyl-fs';
 import * as path from 'path';
 import * as through from 'through2';
 import {Article} from '../content/Article';
-import {mdFile, toArticle, adaptPaths} from './index';
+import {mdFile, toArticle, adaptPaths, addMetafiles} from './index';
 
 describe('mdFile', () => {	
 	it('should parse the mdfile as yalm', (done) => {
@@ -72,7 +72,6 @@ describe('toArticle', () => {
 
 describe('adaptPaths', () => {
 	it('should adapt the path of the given chunk if it is an md file', (done) => {
-		let indexCounter = 0;
 		fs.src(['src/articles/tomcat-initd-*.md'], {
 				base: path.join(__dirname, '../../')
 			})
@@ -83,6 +82,27 @@ describe('adaptPaths', () => {
 				cb();
 			}))
 			.on('finish', done);
-		
+	});
+});
+
+describe('addMetafiles', () => {
+	it('should a meta.json for each file with a meta property containing it', (done) => {
+		var counter = 0;
+		fs.src(['src/articles/tomcat-initd-*.md'], {
+				base: path.join(__dirname, '../../')
+			})
+			.pipe(mdFile())
+			.pipe(addMetafiles())
+			.pipe(through.obj(function (chunk, enc, cb) {
+				counter++;
+				if (!chunk.meta) {
+					expect(chunk.path).toContain('tomcat-initd-script/meta.json');					
+				}
+				cb();
+			}))
+			.on('finish', function () {
+				expect(counter).toEqual(2);
+				done();
+			});
 	});
 });

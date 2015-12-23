@@ -23,6 +23,7 @@ export function mdFile(clone = true) {
 			}
 			mdfile.path = computeMdFilePath(f);
 			file.mdfile = mdfile;
+			file.meta = mdfile;
 		}
 		callback(null, file);
 	}); 
@@ -42,7 +43,6 @@ export function toArticle () {
 		if (mdfile) {
 			file.article = new Article(mdfile);
 			file.html = createLayoutHtml(mdfile);
-			file.meta = mdfile;
 		}
 		this.push(file);
 		callback();
@@ -106,5 +106,21 @@ export function addIndex() {
 		index.meta = metas;
 		this.push(index);
 		callback();
+	});
+}
+
+export function addMetafiles() {
+	return through.obj(function (file, enc, callback) {
+		const meta = file.meta;
+		if (meta && meta.path) {
+			const index = new File({
+				cwd: file.cwd,
+				base: path.join(file.cwd, 'src'),
+				path: path.join(file.cwd, 'src', meta.path, 'meta.json'),
+				contents: new Buffer(JSON.stringify(meta), enc)
+			}) as any;
+			this.push(index);
+		}
+		callback(null, file);
 	});
 }

@@ -13,6 +13,7 @@ module.exports = function (gulp) {
       .pipe(plugin.mdFile())
       .pipe(plugin.toArticle())
       .pipe(plugin.addIndex())
+      .pipe(plugin.addMetafiles())
       .pipe(plugin.adaptPaths())
       .pipe(plugin.wrapHtml('src/templates/index.jade'))
       .pipe(gulpif('*.html', htmlreplace({
