@@ -1,4 +1,5 @@
-import {escapeTags, unEscapeTags} from './utils';
+import {escapeTags, unEscapeTags, inflate,  deflate} from './utils';
+
 
 describe('escapeTags', () => {	
 	it('should replace all <tag> with [[[tag]]]', () => {
@@ -45,4 +46,32 @@ describe('unEscapeTags', () => {
 		const actual = unEscapeTags(null);
 		expect(actual).toBeFalsy();
 	});	
+});
+
+describe('deflate/infalte', () => {
+	const obj = {
+		param1: 'val1',
+		param2: {
+			param21: 'val21',
+			param22: 'val22'
+		}
+	};
+	
+	it('should be able to inflate a given object and deflate it back', () => {
+		const binary = deflate(obj);
+		expect(binary).toBeTruthy();
+		const restored = inflate(binary);
+		expect(restored).toEqual(obj);
+	});
+	
+	it('should be able to inflate a given object and encode it and decode before deflating it back', () => {
+		const binary = deflate(obj, (input) => {
+			return new Buffer(input).toString('base64');
+		});
+		expect(binary).toBeTruthy();
+		const restored = inflate(binary, (input) => {
+			return new Buffer(input, 'base64').toString();
+		});
+		expect(restored).toEqual(obj);
+	});
 });
