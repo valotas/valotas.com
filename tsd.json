@@ -37,6 +37,12 @@
     },
     "jade/jade.d.ts": {
       "commit": "c37376a16cb6c17e053d5ee0935864d8cf2d2bda"
+    },
+    "whatwg-fetch/whatwg-fetch.d.ts": {
+      "commit": "c37376a16cb6c17e053d5ee0935864d8cf2d2bda"
+    },
+    "es6-promise/es6-promise.d.ts": {
+      "commit": "c37376a16cb6c17e053d5ee0935864d8cf2d2bda"
     }
   }
 }
