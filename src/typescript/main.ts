@@ -12,6 +12,6 @@ const meta = inflate(metaHolder.innerHTML) as MetaFile|MetaFile[];
 console.debug('Infalted metadata', meta);
 const el = React.createElement(Layout, {
 	meta: meta,
-	metafileStore: new MetaFileStore(window)
+	metafileStore: new MetaFileStore(window.fetch)
 });
 ReactDom.render(el, query('#app'), () => console.timeEnd('load'));
