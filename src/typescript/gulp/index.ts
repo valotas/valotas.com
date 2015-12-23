@@ -1,9 +1,10 @@
 import * as path from 'path';
 import * as through from 'through2';
 import {Article} from '../content/Article';
+import {ArticleDescription} from '../content/ArticleDescription';
 import {MdFile} from '../content/MdFile';
 import {Layout} from '../react/Layout';
-import {escapeTags} from '../utils';
+import {deflate} from '../utils';
 import * as React from 'react';
 import * as RDS from 'react-dom/server';
 import * as jade from 'jade';
@@ -72,7 +73,7 @@ export function wrapHtml(templateFile) {
 		if (file.html) {
 			const html = template({
 				content: file.html,
-				meta: escapeTags(JSON.stringify(file.meta))
+				meta: deflate(file.meta)
 			});
 			file.contents = new Buffer(html, enc);
 		}
@@ -100,7 +101,7 @@ export function addIndex() {
 			path: path.join(cwd, 'src', 'index.html')
 		}) as any;
 		index.html = createLayoutHtml(null, articles);
-		index.meta = articles;
+		index.meta = articles.map((articles) => new ArticleDescription(articles));
 		this.push(index);
 		callback();
 	});

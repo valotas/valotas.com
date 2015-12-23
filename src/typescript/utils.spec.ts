@@ -63,15 +63,4 @@ describe('deflate/infalte', () => {
 		const restored = inflate(binary);
 		expect(restored).toEqual(obj);
 	});
-	
-	it('should be able to inflate a given object and encode it and decode before deflating it back', () => {
-		const binary = deflate(obj, (input) => {
-			return new Buffer(input).toString('base64');
-		});
-		expect(binary).toBeTruthy();
-		const restored = inflate(binary, (input) => {
-			return new Buffer(input, 'base64').toString();
-		});
-		expect(restored).toEqual(obj);
-	});
 });

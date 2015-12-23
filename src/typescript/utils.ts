@@ -1,22 +1,23 @@
 import * as pako from 'pako';
+import * as base64 from 'base64-js';
 
 const TO_STRING = {to: 'string'};
 
-export function deflate(obj, encoder?: (input) => string) {
+export function deflate(obj) {
 	if (!obj) {
 		return null;
 	}
 	const json = JSON.stringify(obj);
-	const deflated = pako.deflate(json, TO_STRING);
-	return encoder ? encoder(deflated) : deflated;
+	const deflated = pako.deflate(json) as number[];
+	return base64.fromByteArray(deflated);
 }
 
-export function inflate(input: string, decoder?: (input) => string) {
+export function inflate(input: string) {
 	if (!input) {
 		return input;
 	}
-	const decoded = decoder ? decoder(input) : input;
-	const restored = pako.inflate(decoded, TO_STRING) as string;
+	const bytes = base64.toByteArray(input);
+	const restored = pako.inflate(bytes, TO_STRING) as string;
 	return JSON.parse(restored);
 }
 
