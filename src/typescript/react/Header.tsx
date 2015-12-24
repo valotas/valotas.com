@@ -1,13 +1,16 @@
 import * as React from 'react';
 import {Icon} from './Icon';
+import {VALOTAS} from '../utils';
 
 interface HeaderProps extends React.Props<any> {
 	title: string;
-	subtitle: string;
+	subtitle?: string;
+	date?: string
 }
 
 export class Header extends React.Component<HeaderProps, {}> {	
 	render() {
+		const subtitle = this.props.subtitle || VALOTAS;
 		return (
 			<div className="jumbotron">
 				<div className="container">
@@ -16,7 +19,10 @@ export class Header extends React.Component<HeaderProps, {}> {
 					</div>
 					<div className="col-md-9 signature">
 						<h1 className="row whitebg">{this.props.title}</h1>
-						<p className="row whitebg">{this.props.subtitle}</p>
+						<p className="row whitebg">
+							<span>{subtitle}</span>
+							{this.renderDate()}
+						</p>
 						<div className="row whitebg social">
 							<a href="https://github.com/valotas" target="_blank">
 								<Icon name="fa-github-square" size="2x"/>
@@ -35,5 +41,16 @@ export class Header extends React.Component<HeaderProps, {}> {
 				</div>
 			</div>
 		);
+	}
+	renderDate() {
+		if (!this.props.date) {
+			return null;
+		}
+		return (
+			<span className="badge date">
+				<Icon name="fa-pencil-square-o" />
+				{this.props.date}
+			</span>
+		)
 	}
 }

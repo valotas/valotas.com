@@ -3,6 +3,8 @@ import * as base64 from 'base64-js';
 
 const TO_STRING = {to: 'string'};
 
+export const VALOTAS = 'Γιώργος Βαλοτάσιος';
+
 export function deflate(obj) {
 	if (!obj) {
 		return null;
