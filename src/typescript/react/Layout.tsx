@@ -2,8 +2,8 @@ import * as React from 'react';
 import {Article} from '../content/Article';
 import {ArticleDescription} from '../content/ArticleDescription';
 import {MetaFile} from '../content/MetaFile';
-import {ArticleComponent} from './ArticleComponent';
-import {Index} from './Index';
+import {ArticleWithHeaderComponent} from './ArticleComponent';
+import {IndexWithHeader} from './Index';
 import {Header} from './Header';
 import {Footer} from './Footer';
 import {MetaFileStore} from '../content/MetaFileStore';
@@ -47,14 +47,9 @@ export class Layout extends React.Component<LayoutProps, LayoutState> {
 	}
 	
 	render() {
-		const title = this.state.meta.title || VALOTAS;
-		const content = this.createMainContent()
 		return (
 			<div>
-				<Header title="The title" />
-				<div id="content" className="container">
-					{content}
-				</div>
+				{this.createMainContent()}
 				<Footer/>
 			</div>
 		);
@@ -64,13 +59,13 @@ export class Layout extends React.Component<LayoutProps, LayoutState> {
 		const meta = this.state.meta;
 
 		if (isMetaArray(meta)) {
-			const articles =  toArticles(meta)
-			return <Index articles={articles} metafileStore={this.props.metafileStore}/>;
+			const articles =  toArticles(meta);
+			return <IndexWithHeader articles={articles} metafileStore={this.props.metafileStore}/>;
 		}
 
 		if (meta) {
 			const article = new Article(meta as MetaFile);
-			return <ArticleComponent article={article} />;		
+			return <ArticleWithHeaderComponent article={article} />;		
 		}
 		return null;
 	}

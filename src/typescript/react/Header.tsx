@@ -49,6 +49,7 @@ export class Header extends React.Component<HeaderProps, {}> {
 		return (
 			<span className="badge date">
 				<Icon name="fa-pencil-square-o" />
+				&nbsp;
 				{this.props.date}
 			</span>
 		)
