@@ -18,6 +18,7 @@ export function Layout() {
 interface LayoutProps extends React.Props<any> {
 	meta?: MetaFile|MetaFile[];
 	metafileStore?: MetaFileStore;
+	win?: Window
 }
 
 interface LayoutState {
@@ -44,6 +45,17 @@ export class Layout extends React.Component<LayoutProps, LayoutState> {
 				meta: meta
 			});
 		});
+		const win = this.props.win;
+		if (!win) {
+			return;
+		}
+		win.onpopstate = (ev: PopStateEvent) => {
+			const state = ev.state as MetaFile;
+			const meta = state || this.props.meta;
+			this.setState({
+				meta: meta
+			});
+		}
 	}
 	
 	render() {

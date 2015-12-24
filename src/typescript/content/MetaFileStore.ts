@@ -33,7 +33,7 @@ export class MetaFileStore {
 			});
 	}
 	
-	onChange(listener: Function) {
+	onChange(listener: (meta: MetaFile) => void) {
 		this.listeners.push(listener);
 		return () => {
 			const index = this.listeners.indexOf(listener);
