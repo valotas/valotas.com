@@ -18,7 +18,7 @@ describe('MetaFileStore', () => {
 
         store.load('123');
         
-        expect(store._loadMetaFile).toHaveBeenCalledWith('123');
+        expect(store._loadMetaFile).toHaveBeenCalledWith('/123/meta.json');
     });
     
     it('should notify the listeners of newly loaded metafiles', (done) => {
