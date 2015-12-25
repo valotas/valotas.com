@@ -90,10 +90,7 @@ export function addIndex() {
 		if (article && article instanceof Article) {
 			cwd = file.cwd;
 			enc = enc;
-			const meta = new MetaFile(article.meta);
-			meta.raw = null;
-			meta.description = article.description();
-			metas.push(meta);
+			metas.push(createDescriptionMetaFile(article));
 		}
 		callback(null, file);
 	}, function (callback) {
@@ -104,21 +101,29 @@ export function addIndex() {
 		}) as any;
 		index.html = createLayoutHtml(metas);
 		index.meta = metas;
+		index.meta.path = '';
 		this.push(index);
 		callback();
 	});
 }
 
+function createDescriptionMetaFile(article: Article) {
+	const meta = new MetaFile(article.meta);
+	meta.raw = null;
+	meta.description = article.description();
+	return meta;
+}
+
 export function addMetafiles() {
 	return through.obj(function (file, enc, callback) {
 		const meta = file.meta;
-		if (meta && meta.path) {
+		if (meta) {
 			const index = new File({
 				cwd: file.cwd,
 				base: path.join(file.cwd, 'src'),
 				path: path.join(file.cwd, 'src', meta.path, 'meta.json'),
 				contents: new Buffer(JSON.stringify(meta), enc)
-			}) as any;
+			});
 			this.push(index);
 		}
 		callback(null, file);
