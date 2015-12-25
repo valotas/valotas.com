@@ -77,7 +77,7 @@ export class Layout extends React.Component<LayoutProps, LayoutState> {
 
 		if (meta) {
 			const article = new Article(meta as MetaFile);
-			return <ArticleWithHeaderComponent article={article} />;		
+			return <ArticleWithHeaderComponent article={article} metafileStore={this.props.metafileStore}/>;		
 		}
 		return null;
 	}

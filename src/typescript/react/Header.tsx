@@ -1,11 +1,14 @@
 import * as React from 'react';
 import {Icon} from './Icon';
 import {VALOTAS} from '../utils';
+import {Link} from './Link';
+import {MetaFileStore} from '../content/MetaFileStore';
 
 interface HeaderProps extends React.Props<any> {
 	title: string;
 	subtitle?: string;
-	date?: string
+	date?: string;
+	metafileStore?: MetaFileStore;
 }
 
 export class Header extends React.Component<HeaderProps, {}> {	
@@ -15,7 +18,7 @@ export class Header extends React.Component<HeaderProps, {}> {
 			<div className="jumbotron">
 				<div className="container">
 					<div className="col-md-3">
-						<a className="photo img-rounded" href="/"/>
+						<Link className="photo img-rounded" metafileStore={this.props.metafileStore}/>
 					</div>
 					<div className="col-md-9 signature">
 						<h1 className="row whitebg">{this.props.title}</h1>
