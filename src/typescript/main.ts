@@ -1,9 +1,9 @@
 import * as React from 'react';
 import * as ReactDom from 'react-dom';
-import {MetaFile} from './content/MetaFile';
+import {MetaFile, isValidMetaFile} from './content/MetaFile';
 import {MetaFileStore} from './content/MetaFileStore';
 import {Layout} from './react/Layout';
-import {inflate} from './utils';
+import {inflate, VALOTAS} from './utils';
 
 console.time('load');
 
@@ -15,7 +15,10 @@ console.debug('Infalted meta', meta);
 // Create the main store and register the state to the history object
 const metafileStore = new MetaFileStore(window);
 metafileStore.onChange((meta) => {
-	history.pushState(meta, meta.title, '/' + meta.path + '/');
+	if (isValidMetaFile(meta)) {
+		history.pushState(meta, meta.title, '/' + meta.path + '/');
+	}
+	history.pushState(meta, VALOTAS, '/');
 });
 
 

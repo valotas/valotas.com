@@ -2,10 +2,14 @@ import {MetaFileStore} from './MetaFileStore';
 import {MetaFile} from './MetaFile';
 
 describe('MetaFileStore', () => {
+    let fetcher;
     let store: MetaFileStore;
     
     beforeEach(() => {
-        store = new MetaFileStore({fetch: jasmine.createSpy('fetch')});
+        fetcher = {fetch: function () {
+            
+        }};
+        store = new MetaFileStore(fetcher);
     });
     
     it('should have a way to add new listeners', () => {
@@ -48,5 +52,65 @@ describe('MetaFileStore', () => {
                 expect(listener).not.toHaveBeenCalledWith(meta); 
             })
             .then(done);
+    });
+    
+    describe('_createUrl', () => {
+       it('should add the meta.json at the end if the path is the root: /', () => {
+           const actual = store._createUrl('/');
+           expect(actual).toEqual('/meta.json');
+       });
+       
+       it('should create urls starting with /', () => {
+           const actual = store._createUrl('key');
+           expect(actual).toEqual('/key/meta.json');
+       });
+       
+       it('should not duplicate trailing /', () => {
+           const actual = store._createUrl('key/');
+           expect(actual).toEqual('/key/meta.json');
+       });
+    });
+    
+    describe('_loadMetaFile', () => {
+        const meta1 = new MetaFile();
+        meta1.path = 'path1';
+        const meta2 = new MetaFile();
+        meta2.path = 'path2';
+        
+        let body;
+       
+        it('should fetch the meta.json', (done) => {
+            body = {
+                json: function () {
+                    return Promise.resolve(meta1)
+                }
+            }
+            spyOn(fetcher, 'fetch').and.returnValue(Promise.resolve(body));
+           
+            store
+                .load('any')
+                .then((actual) => {
+                    expect(actual).toBe(meta1);
+                    expect(fetcher.fetch).toHaveBeenCalledWith('/any/meta.json');
+                })
+                .then(done);
+       });
+       
+       
+       it('should also allow arrays of metafiles', (done) => {
+           body = {
+               json: function () {
+                   return Promise.resolve([meta1, meta2])
+               }
+           }
+           spyOn(fetcher, 'fetch').and.returnValue(Promise.resolve(body));
+           
+           store
+                .load('any')
+                .then((actual) => {
+                    expect(actual).toEqual([meta1, meta2]);
+                })
+                .then(done);
+       });
     });
 });

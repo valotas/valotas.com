@@ -1,4 +1,4 @@
-import {MetaFile} from './MetaFile';
+import {MetaFile, isValidMetaFile} from './MetaFile';
 import {ArticleDescription} from './ArticleDescription';
 import * as ex from '../exceptions';
 
@@ -38,7 +38,7 @@ export class MetaFileStore {
 			if (url.indexOf('/') !== 0) {
 				url = '/' + url;
 			}
-			if (url.lastIndexOf('/') < url.length) {
+			if (url.lastIndexOf('/') < url.length - 1) {
 				url += '/';
 			}
 			return url + 'meta.json';
@@ -52,16 +52,16 @@ export class MetaFileStore {
 	_loadMetaFile(url: string) {
 		return this.fetcher
 			.fetch(url)
-			.then((body) => {
-				return body.json();
-			})
+			.then((body) => body.json())
 			.then((json) => {
-				const meta = json as MetaFile;
-				return new MetaFile(meta);
+				if (isValidMetaFile(json)) {
+					return json;
+				}
+				return json as MetaFile[];
 			});
 	}
 	
-	onChange(listener: (meta: MetaFile) => void) {
+	onChange(listener: (meta: MetaFile|MetaFile[]) => void) {
 		this.listeners.push(listener);
 		return () => {
 			const index = this.listeners.indexOf(listener);

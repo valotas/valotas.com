@@ -53,3 +53,7 @@ export class MetaFile {
         return file;
     }
 }
+
+export function isValidMetaFile(file: any): file is MetaFile {
+    return file && file.title && file.path && file.date;
+}
