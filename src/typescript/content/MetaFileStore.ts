@@ -21,7 +21,7 @@ export class MetaFileStore {
 
 	}
 	
-	load(input: string) {
+	load(input: string|ArticleDescription) {
 		const url = this._createUrl(input);
 		return this._loadMetaFile(url)
 			.then((meta) => {

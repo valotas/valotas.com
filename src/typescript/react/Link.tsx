@@ -16,7 +16,7 @@ export class Link extends React.Component<LinkProps, {}> {
 			return;
 		}
 		e.preventDefault();
-		store.load(this.props.article.key +'/meta.json');
+		store.load(this.props.article || '/');
 	}
 	render() {
 		var href = '/';
