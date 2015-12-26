@@ -29,7 +29,6 @@
     "test": "node_modules/gulp/bin/gulp.js test"
   },
   "dependencies": {
-    "MD5": "^1.2.1",
     "base64-js": "0.0.8",
     "bootstrap": "^3.3.1",
     "font-awesome": "^4.2.0",
