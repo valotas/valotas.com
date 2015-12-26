@@ -4,8 +4,11 @@ import {MetaFile, isValidMetaFile} from './content/MetaFile';
 import {MetaFileStore} from './content/MetaFileStore';
 import {Layout} from './react/Layout';
 import {inflate, VALOTAS} from './utils';
+import {loadWebfonts} from './google';
 
 console.time('load');
+
+loadWebfonts();
 
 const query = document.querySelector.bind(document);
 const metaHolder = query('script[type="application/json"]') as HTMLElement;
