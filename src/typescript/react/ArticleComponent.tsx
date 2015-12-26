@@ -44,9 +44,9 @@ export class ArticleComponent extends React.Component<ArticleProps, {}> {
 						<Link className="btn btn-default" metafileStore={this.props.metafileStore}>
 							<Icon name="fa-home" size="2x"/>
 						</Link>
-						<a href="#" className="btn btn-default">
+						<Link href="#" className="btn btn-default">
 							<Icon name="fa-toggle-up" size="2x"/>
-						</a>
+						</Link>
 					</div>
 				</div>
 			</div>
