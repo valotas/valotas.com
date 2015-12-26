@@ -10,11 +10,6 @@ console.time('load');
 
 loadWebfonts();
 
-const query = document.querySelector.bind(document);
-const metaHolder = query('script[type="application/json"]') as HTMLElement;
-const meta = inflate(metaHolder.innerHTML) as MetaFile|MetaFile[];
-console.debug('Infalted meta', meta);
-
 // Create the main store and register the state to the history object
 const metafileStore = new MetaFileStore(window);
 metafileStore.onChange((meta) => {
@@ -23,8 +18,14 @@ metafileStore.onChange((meta) => {
 	} else {
 		history.pushState(meta, VALOTAS, '/');
 	}
+	window.scrollTo(0, 0);
 });
 
+console.time('react-load');
+const query = document.querySelector.bind(document);
+const metaHolder = query('script[type="application/json"]') as HTMLElement;
+const meta = inflate(metaHolder.innerHTML) as MetaFile|MetaFile[];
+console.debug('Infalted meta', meta);
 
 // Render the main react component
 const el = React.createElement(Layout, {
@@ -32,4 +33,7 @@ const el = React.createElement(Layout, {
 	metafileStore: metafileStore,
 	win: window
 });
-ReactDom.render(el, query('#app'), () => console.timeEnd('load'));
+ReactDom.render(el, query('#app'), () => {
+	console.timeEnd('load');
+	console.timeEnd('react-load');
+});
