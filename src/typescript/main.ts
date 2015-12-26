@@ -20,8 +20,9 @@ const metafileStore = new MetaFileStore(window);
 metafileStore.onChange((meta) => {
 	if (isValidMetaFile(meta)) {
 		history.pushState(meta, meta.title, '/' + meta.path + '/');
+	} else {
+		history.pushState(meta, VALOTAS, '/');
 	}
-	history.pushState(meta, VALOTAS, '/');
 });
 
 
