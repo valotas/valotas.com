@@ -97,3 +97,7 @@ function parseHeader (text) {
 export function isValidMetaFile(file: any): file is MetaFile {
     return file && file.title && file.path && file.date && file.moment;
 }
+
+function isArray(input: any): input is [] {
+    return input && input.length;
+}
