@@ -8,7 +8,7 @@ import {loadWebfonts} from './google';
 
 console.time('load');
 
-loadWebfonts();
+loadWebfonts(window);
 
 // Create the main store and register the state to the history object
 const metafileStore = new MetaFileStore(window);
