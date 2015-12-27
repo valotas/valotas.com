@@ -1,4 +1,5 @@
-import {inflate,  deflate} from './utils';
+import {inflate, deflate, compareMoments} from './utils';
+import * as moment from 'moment';
 
 describe('deflate/infalte', () => {
 	const obj = {
@@ -14,5 +15,25 @@ describe('deflate/infalte', () => {
 		expect(binary).toBeTruthy();
 		const restored = inflate(binary);
 		expect(restored).toEqual(obj);
+	});
+});
+
+describe('compareMoments', () => {
+	class Dummy {
+		constructor(private date: string) {
+			
+		}
+		
+		moment() {
+			return moment(this.date);
+		}
+	}
+	it('should sort arrays in moment descending order', () => {
+		const one = new Dummy('2013-05-01');
+		const two = new Dummy('2015-05-01');
+		const three = new Dummy('2014-05-01');
+		
+		const actual = [one, two, three].sort(compareMoments);
+		expect(actual).toEqual([two, three, one]);
 	});
 });
