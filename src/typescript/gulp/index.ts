@@ -99,8 +99,9 @@ export function addIndex() {
 			base: path.join(cwd, 'src'),
 			path: path.join(cwd, 'src', 'index.html')
 		}) as any;
+		metas = metas.sort(compareMoments);
 		index.html = createLayoutHtml(metas);
-		index.meta = metas.sort(compareMoments);
+		index.meta = metas;
 		index.meta.path = '';
 		this.push(index);
 		callback();
