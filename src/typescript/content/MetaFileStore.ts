@@ -1,4 +1,4 @@
-import {MetaFile, isValidMetaFile} from './MetaFile';
+import {MetaFile, MetaFileData, isValidMetaFile} from './MetaFile';
 import {ArticleDescription} from './ArticleDescription';
 import * as ex from '../exceptions';
 
@@ -54,10 +54,7 @@ export class MetaFileStore {
 			.fetch(url)
 			.then((body) => body.json())
 			.then((json) => {
-				if (isValidMetaFile(json)) {
-					return json;
-				}
-				return json as MetaFile[];
+				return MetaFile.fromData(json as MetaFileData|MetaFileData[]);
 			});
 	}
 	

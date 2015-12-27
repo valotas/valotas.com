@@ -1,5 +1,5 @@
 import {MetaFileStore} from './MetaFileStore';
-import {MetaFile} from './MetaFile';
+import {MetaFile, MetaFileData} from './MetaFile';
 
 describe('MetaFileStore', () => {
     let fetcher;
@@ -72,10 +72,17 @@ describe('MetaFileStore', () => {
     });
     
     describe('_loadMetaFile', () => {
-        const meta1 = new MetaFile();
-        meta1.path = 'path1';
-        const meta2 = new MetaFile();
-        meta2.path = 'path2';
+        const meta1:MetaFileData = {
+            title: 'title1',
+            path: 'path1',
+            date: null
+        };
+
+        const meta2:MetaFileData = {
+            title: 'title2',
+            path: 'path2',
+            date: null
+        }
         
         let body;
        
@@ -90,7 +97,7 @@ describe('MetaFileStore', () => {
             store
                 .load('any')
                 .then((actual) => {
-                    expect(actual).toBe(meta1);
+                    expect(actual).toEqual(new MetaFile(meta1));
                     expect(fetcher.fetch).toHaveBeenCalledWith('/any/meta.json');
                 })
                 .then(done);
@@ -108,7 +115,7 @@ describe('MetaFileStore', () => {
            store
                 .load('any')
                 .then((actual) => {
-                    expect(actual).toEqual([meta1, meta2]);
+                    expect(actual).toEqual([new MetaFile(meta1), new MetaFile(meta2)]);
                 })
                 .then(done);
        });

@@ -9,7 +9,7 @@ const INPUT_FORMATS = [
     'YYYY-MM-DD'
 ];
 
-export interface MetaFileInput {
+export interface MetaFileData {
     title: string;
     path: string;
     date: string;
@@ -28,7 +28,7 @@ export class MetaFile {
     description: string;
     template: string;
     
-    constructor(input?: MetaFileInput) {
+    constructor(input?: MetaFileData) {
         if (!input) {
             return;
         }
@@ -46,13 +46,21 @@ export class MetaFile {
         const matches = raw.split(DASHES);
         file.raw = matches[2].trim();
 
-        const obj = parse(matches[1]);
+        const obj = parseHeader(matches[1]);
         file.title = obj.title;
         file.date = obj.date;
         file.template = obj.template;
         file.published = obj.published === '0' || obj.published === 'false' ? false : true;
         file.path = path;
         return file;
+    }
+    
+    static fromData(input: MetaFileData|MetaFileData[]): MetaFile|MetaFile[] {
+        if (isArray(input)) {
+            return input.map((data) => new MetaFile(data));
+        } else {
+            return new MetaFile(input);
+        }
     }
 
     moment(): moment.Moment {
@@ -66,7 +74,7 @@ export class MetaFile {
     }
 }
 
-function parse (text) {
+function parseHeader (text) {
     const lines = text.trim().split(NL_SPLIT);
     return lines.map((line) => {
         const pair = line.split(KV_SPLIT);
@@ -87,5 +95,5 @@ function parse (text) {
 }
 
 export function isValidMetaFile(file: any): file is MetaFile {
-    return file && file.title && file.path && file.date;
+    return file && file.title && file.path && file.date && file.moment;
 }
