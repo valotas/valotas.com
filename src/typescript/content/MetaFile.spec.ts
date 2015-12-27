@@ -40,6 +40,22 @@ The actual content
         expect(file.template).toBeFalsy();
     });
     
+    it('should use extract dates containing :',  () => {
+        const file = MetaFile.create(`
+---
+date: 2011-05-14 12:13
+title: Tomcat init.d script
+---
+
+The actual content
+
+`);
+        expect(file.title).toEqual('Tomcat init.d script');
+        expect(file.date).toEqual('2011-05-14 12:13');
+        expect(file.raw).toEqual('The actual content');
+        expect(file.template).toBeFalsy();
+    });
+    
     describe('moment()', () => {
        it('should parse given date and return a moment instance',  () => {
           const meta = new MetaFile({

@@ -2,27 +2,12 @@ import * as moment from 'moment';
 import * as ex from '../exceptions';
 
 const DASHES = /\n?---/;
+const NL_SPLIT = /\n/;
 const KV_SPLIT = /\n|\:/;
 const INPUT_FORMATS = [
     'YYYY-MM-DD HH:mm',
     'YYYY-MM-DD'
 ];
-
-function findValue(pairs, key) {
-    for (var i = 0; i < pairs.length; i++) {
-        if (key === pairs[i]) {
-            return pairs[i + 1].trim();
-        }
-    }
-}
-
-function findBoolean(pairs, key) {
-    const value = findValue(pairs, key);
-    if (value === 'false' || value === '0') {
-        return false;
-    }
-    return true;
-}
 
 export interface MetaFileInput {
     title: string;
@@ -61,11 +46,11 @@ export class MetaFile {
         const matches = raw.split(DASHES);
         file.raw = matches[2].trim();
 
-        const pairs = matches[1].trim().split(KV_SPLIT); 
-        file.title = findValue(pairs, 'title');
-        file.date = findValue(pairs, 'date');
-        file.template = findValue(pairs, 'template');
-        file.published = findBoolean(pairs, 'published');
+        const obj = parse(matches[1]);
+        file.title = obj.title;
+        file.date = obj.date;
+        file.template = obj.template;
+        file.published = obj.published === '0' || obj.published === 'false' ? false : true;
         file.path = path;
         return file;
     }
@@ -79,6 +64,26 @@ export class MetaFile {
 
         throw new ex.IllegalFromatException('Could not parse ' + this.date + ' as date using formats: ' + INPUT_FORMATS);
     }
+}
+
+function parse (text) {
+    const lines = text.trim().split(NL_SPLIT);
+    return lines.map((line) => {
+        const pair = line.split(KV_SPLIT);
+        const key = pair.shift();
+        return {
+            key: key.trim(),
+            value: pair.join(':').trim()
+        }
+    }).reduce((prev, current) => {
+        prev[current.key] = current.value;
+        return prev;
+    }, {
+        title: null,
+        date: null,
+        template: null,
+        published: null
+    });
 }
 
 export function isValidMetaFile(file: any): file is MetaFile {
