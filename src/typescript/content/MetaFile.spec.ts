@@ -2,7 +2,7 @@ import {MetaFile} from './MetaFile';
 
 describe('MdFile', () => {
     
-    var raw = `
+    const raw = `
 ---
 title: Tomcat init.d script
 author: valotas
@@ -38,5 +38,34 @@ The actual content
         expect(file.date).toEqual('2011-05-14');
         expect(file.raw).toEqual('The actual content');
         expect(file.template).toBeFalsy();
+    });
+    
+    describe('moment()', () => {
+       it('should parse given date and return a moment instance',  () => {
+          const meta = new MetaFile({
+              date: '2011-05-14',
+              title: 'title',
+              path: 'path'
+          });
+          
+          const actual = meta.moment();
+          expect(actual).toBeTruthy();
+          expect(actual.isValid()).toBe(true);
+       });
+       
+       it('should throw exception if given date is not in a right format',  () => {
+          const meta = new MetaFile({
+              date: '2015/05/01',
+              title: 'title',
+              path: 'path'
+          });
+          
+          try {  
+              meta.moment();
+              fail('An exception is expected');
+          } catch (ex) {
+              expect(ex).toBeTruthy();
+          }
+       });
     });
 });

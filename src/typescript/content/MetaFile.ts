@@ -1,5 +1,12 @@
+import * as moment from 'moment';
+import * as ex from '../exceptions';
+
 const DASHES = /\n?---/;
-const KV_SPLIT = /\n|\:/
+const KV_SPLIT = /\n|\:/;
+const INPUT_FORMATS = [
+    'YYYY-MM-DD HH:mm',
+    'YYYY-MM-DD'
+];
 
 function findValue(pairs, key) {
     for (var i = 0; i < pairs.length; i++) {
@@ -17,6 +24,16 @@ function findBoolean(pairs, key) {
     return true;
 }
 
+export interface MetaFileInput {
+    title: string;
+    path: string;
+    date: string;
+    published?: boolean;
+    raw?: string;
+    description?: string;
+    template?: string;
+}
+
 export class MetaFile {
     title: string;
     path: string;
@@ -26,7 +43,7 @@ export class MetaFile {
     description: string;
     template: string;
     
-    constructor(input?: MetaFile) {
+    constructor(input?: MetaFileInput) {
         if (!input) {
             return;
         }
@@ -51,6 +68,16 @@ export class MetaFile {
         file.published = findBoolean(pairs, 'published');
         file.path = path;
         return file;
+    }
+
+    moment(): moment.Moment {
+        const m = moment(this.date, INPUT_FORMATS, true);
+
+        if (m.isValid()) {
+            return m;
+        }
+
+        throw new ex.IllegalFromatException('Could not parse ' + this.date + ' as date using formats: ' + INPUT_FORMATS);
     }
 }
 
