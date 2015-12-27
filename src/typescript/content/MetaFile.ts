@@ -19,7 +19,7 @@ export interface MetaFileData {
     template?: string;
 }
 
-export class MetaFile {
+export class MetaFile implements MetaFileData {
     title: string;
     path: string;
     date: string;
@@ -56,6 +56,9 @@ export class MetaFile {
     }
     
     static fromData(input: MetaFileData|MetaFileData[]): MetaFile|MetaFile[] {
+        if (!input) {
+            return null;
+        }
         if (isArray(input)) {
             return input.map((data) => new MetaFile(data));
         } else {

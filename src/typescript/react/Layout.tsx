@@ -1,7 +1,7 @@
 import * as React from 'react';
 import {Article} from '../content/Article';
 import {ArticleDescription} from '../content/ArticleDescription';
-import {MetaFile} from '../content/MetaFile';
+import {MetaFile, MetaFileData} from '../content/MetaFile';
 import {ArticleWithHeaderComponent} from './ArticleComponent';
 import {IndexWithHeader} from './Index';
 import {Header} from './Header';
@@ -50,7 +50,7 @@ export class Layout extends React.Component<LayoutProps, LayoutState> {
 			return;
 		}
 		win.onpopstate = (ev: PopStateEvent) => {
-			const state = ev.state as MetaFile;
+			const state = MetaFile.fromData(ev.state as MetaFileData);
 			const meta = state || this.props.meta;
 			this.setState({
 				meta: meta
