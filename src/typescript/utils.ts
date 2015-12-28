@@ -38,15 +38,3 @@ interface CreateScriptOptions {
 	protocol?: string;
 	id?: string;
 }
-
-export function createScript(url: string, options?: CreateScriptOptions): HTMLScriptElement {
-	const wf = document.createElement('script');
-	const proto = options && options.protocol ? options.protocol : 'https:' == document.location.protocol ? 'https' : 'http';
-    wf.src = proto + ':' + url;
-    wf.type = 'text/javascript';
-    wf.async = true;
-	if (options && options.id) {
-		wf.id = options.id
-	}
-	return wf;
-}
