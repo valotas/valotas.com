@@ -11,6 +11,10 @@ console.time('load');
 
 LOADER.loadWebFonts();
 
+const ga = LOADER.loadAnalytics();
+ga('create', 'UA-12048148-1', 'valotas.com');
+ga('send', 'pageview');
+
 // Create the main store and register the state to the history object
 const metafileStore = new MetaFileStore(window);
 metafileStore.onChange((meta) => {
@@ -19,6 +23,7 @@ metafileStore.onChange((meta) => {
 	} else {
 		history.pushState(meta, VALOTAS, '/');
 	}
+	ga('send', 'pageview');
 	window.scrollTo(0, 0);
 });
 

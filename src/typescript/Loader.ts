@@ -41,6 +41,21 @@ export class Loader {
 		};
 		this.win.addScript('//ajax.googleapis.com/ajax/libs/webfont/1/webfont.js');
 	}
+	
+	// base on the code found at https://mjau-mjau.com/blog/ajax-universal-analytics/
+	loadAnalytics() {
+		const window = this.win.window;
+		if (window['ga']) {
+			return window['ga'];
+		}
+		
+		const ga = window['ga'] = window['ga'] || function () {
+			(ga.q=ga.q||[]).push(arguments)
+		};
+		ga.l=+new Date;
+		this.win.addScript('//www.google-analytics.com/analytics.js');
+		return ga;
+	}
 }
 
 export const LOADER = new Loader();
