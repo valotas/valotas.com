@@ -45,10 +45,12 @@ fdescribe('MarkedRenderer', () => {
 	it('should quotes with paragraphs',() => {
 		const rendered = createComponentTree(`
 > this is a quote paragraph
-> this is another paragraph		
+>
+> this is another paragraph
+>		
 		`);
 		const html = RDS.renderToStaticMarkup(rendered);
-		expect(html).toContain('<blockquote><p this is a quote paragraph</p>');
-		expect(html).toContain('<p> this is another paragraph</p></blockquote>');
+		expect(html).toContain('<blockquote><p>this is a quote paragraph</p>');
+		expect(html).toContain('<p>this is another paragraph</p></blockquote>');
 	});
 });

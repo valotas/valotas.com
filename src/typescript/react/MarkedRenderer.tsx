@@ -7,6 +7,7 @@ import * as ex from '../exceptions';
 const R = React.DOM;
 
 class MarkedReactRenderer {
+	private outerTree;
 	private tree = [];
 	private index = 0;
 	private inlineTree = [];
@@ -20,8 +21,15 @@ class MarkedReactRenderer {
 		this.pushBlock(R.pre);
 	}
 	
+	blockquoteStart() {
+		this.outerTree = this.tree;
+		this.tree = [];
+	}
+	
     blockquote(quote: string) {
-		console.log('blockquote', quote);
+		const children = this.tree;
+		this.tree = this.outerTree;
+		this.pushBlock(R.blockquote, {}, children);
 	}
 	
     html(html: string) {
@@ -32,10 +40,9 @@ class MarkedReactRenderer {
 		const el = 'h' + level;
 		this.pushBlock(R[el]);
 	}
-	pushBlock(factory, props = {key: '0'}) {
-		this.index = this.index + 1;
-		props.key = this.index + '';
-		const childs = firstChildOrFullArray(this.inlineTree);
+	pushBlock(factory, props: any = {}, children?: any[]) {
+		props.key = this.index++;
+		const childs = firstChildOrFullArray(children || this.inlineTree);
 		const el = factory(props, childs);
 		this.inlineTree = [];
 		this.tree.push(el);
@@ -98,14 +105,24 @@ class MarkedReactRenderer {
 	}
 	
 	createComponentTree(html: string) {
-		//const tokens = marked.lexer(html);
-		//const parser = marked.parser(tokens);
-		//console.log(parser);
-		marked(html, {
+		const parser = new marked.Parser({
 			renderer: this,
 			smartypants: true
 		});
+		const tokens = marked.lexer(html);
+		patchParser(parser, this);
+		parser.parse(tokens);
 		return <div>{firstChildOrFullArray(this.tree)}</div>;
+	}
+}
+
+function patchParser(parser, renderer: MarkedReactRenderer) {
+	const tok = parser.tok;
+	parser.tok = function () {
+		if (this.token.type === 'blockquote_start') {
+			renderer.blockquoteStart();
+		}
+		tok.call(parser, arguments);
 	}
 }
 
