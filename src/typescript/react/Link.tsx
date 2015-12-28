@@ -10,7 +10,7 @@ interface LinkProps extends React.Props<any> {
 	className: string;
 }
 
-export class Link extends React.Component<LinkProps, {}> {
+export class Link extends React.Component<LinkProps, any> {
 	handleClick (e) {
 		if (this.props.href === '#') {
 			e.preventDefault();
@@ -18,13 +18,14 @@ export class Link extends React.Component<LinkProps, {}> {
 			return;
 		}
 
-		const store = this.props.metafileStore;
+		const store = this.props.metafileStore || this.context.metafileStore;
+		console.log(store);
 		if (!store) {
 			return;
 		}
 		
 		e.preventDefault();
-		store.load(this.props.article || '/');
+		store.load(this.props.article || this.props.href || '/');
 	}
 	render() {
 		const href = this.props.href || this.createHref();
@@ -38,4 +39,7 @@ export class Link extends React.Component<LinkProps, {}> {
 		}
 		return href;
 	}
+	static contextTypes: React.ValidationMap<any> = {
+		metafileStore: React.PropTypes.object
+	};
 }

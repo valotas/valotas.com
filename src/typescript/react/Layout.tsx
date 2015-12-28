@@ -34,6 +34,16 @@ export class Layout extends React.Component<LayoutProps, LayoutState> {
 		}
 	}
 	
+	static childContextTypes: React.ValidationMap<any> = {
+		metafileStore: React.PropTypes.object
+	};
+	
+	getChildContext() {
+		return {
+			metafileStore: this.props.metafileStore
+		}
+	}
+	
 	componentDidMount() {
 		const store = this.props.metafileStore;
 		if (!store) {

@@ -5,7 +5,8 @@ import {Link} from './Link';
 import {Header} from './Header';
 import {VALOTAS} from '../utils';
 import {MetaFileStore} from '../content/MetaFileStore';
-import {LOADER} from '../Loader'
+import {LOADER} from '../Loader';
+import {MarkedComponent} from './MarkedComponent';
 
 interface ArticleProps extends React.Props<any> {
 	article?: Article;
@@ -35,12 +36,14 @@ export class ArticleComponent extends React.Component<ArticleProps, {}> {
 			return null;
 		}
 		this.html = {
-			__html: article.html()
+			_html: article.html()
 		};
 		return (
 			<div>
 				<div className="article">
-					<section className="content" dangerouslySetInnerHTML={this.html} />
+					<section className="content">
+						<MarkedComponent meta={this.props.article.meta}/>
+					</section>
 				</div>
 				<div id="footer-actions" className="row text-center">
 					<div className="btn-group">
@@ -61,7 +64,7 @@ export class ArticleComponent extends React.Component<ArticleProps, {}> {
 	}
 	
 	private _loadTwitterWidgets() {
-		if (this.html.__html.indexOf('twitter-tweet') < 0) {
+		if (this.html.__html && this.html.__html.indexOf('twitter-tweet') < 0) {
 			return;
 		}
 		LOADER.loadTwitter().then((twttr) => {
