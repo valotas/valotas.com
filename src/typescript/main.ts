@@ -4,11 +4,12 @@ import {MetaFile, MetaFileData, isValidMetaFile} from './content/MetaFile';
 import {MetaFileStore} from './content/MetaFileStore';
 import {Layout} from './react/Layout';
 import {inflate, VALOTAS} from './utils';
-import {loadWebfonts} from './google';
+import {WIN} from './Window';
+import {LOADER} from './Loader';
 
 console.time('load');
 
-loadWebfonts(window);
+LOADER.loadWebFonts();
 
 // Create the main store and register the state to the history object
 const metafileStore = new MetaFileStore(window);
@@ -22,8 +23,7 @@ metafileStore.onChange((meta) => {
 });
 
 console.time('react-load');
-const query = document.querySelector.bind(document);
-const metaHolder = query('script[type="application/json"]') as HTMLElement;
+const metaHolder = WIN.query('script[type="application/json"]') as HTMLElement;
 const metadata = inflate(metaHolder.innerHTML) as MetaFileData|MetaFileData[];
 const meta = MetaFile.fromData(metadata);
 console.debug('Infalted meta', meta);
@@ -34,7 +34,7 @@ const el = React.createElement(Layout, {
 	metafileStore: metafileStore,
 	win: window
 });
-ReactDom.render(el, query('#app'), () => {
+ReactDom.render(el, WIN.query('#app'), () => {
 	console.timeEnd('load');
 	console.timeEnd('react-load');
 });

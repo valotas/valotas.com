@@ -5,7 +5,7 @@ import {Link} from './Link';
 import {Header} from './Header';
 import {VALOTAS} from '../utils';
 import {MetaFileStore} from '../content/MetaFileStore';
-import {loadTwitter} from '../twitter'
+import {LOADER} from '../Loader'
 
 interface ArticleProps extends React.Props<any> {
 	article?: Article;
@@ -64,7 +64,7 @@ export class ArticleComponent extends React.Component<ArticleProps, {}> {
 		if (this.html.__html.indexOf('twitter-tweet') < 0) {
 			return;
 		}
-		loadTwitter(window).then((twttr) => {
+		LOADER.loadTwitter().then((twttr) => {
 			console.log(twttr);
 			twttr.widgets.load();
 		});
