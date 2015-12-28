@@ -53,4 +53,16 @@ fdescribe('MarkedRenderer', () => {
 		expect(html).toContain('<blockquote><p>this is a quote paragraph</p>');
 		expect(html).toContain('<p>this is another paragraph</p></blockquote>');
 	});
+	
+	it('should render links',() => {
+		const rendered = createComponentTree('this is a [link](/to/another/page) to another page');
+		const html = RDS.renderToStaticMarkup(rendered);
+		expect(html).toContain('<a href="/to/another/page" class="">link</a>');
+	});
+	
+	it('should pass through html as is',() => {
+		const rendered = createComponentTree('this is some\n<script scr="path/to/script"></script>');
+		const html = RDS.renderToStaticMarkup(rendered);
+		expect(html).toContain('<script scr="path/to/script">strange script</script>');
+	});
 });

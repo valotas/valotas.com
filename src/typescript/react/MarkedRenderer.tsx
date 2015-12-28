@@ -1,6 +1,7 @@
 import * as marked from 'marked';
 import * as React from 'react';
 import * as ex from '../exceptions';
+import {Link} from './Link';
 
 //https://github.com/christianalfoni/markdown-to-react-components/blob/master/src/index.js
 
@@ -33,7 +34,7 @@ class MarkedReactRenderer {
 	}
 	
     html(html: string) {
-		
+		console.log('html', html);	
 	}
 	
     heading(text: string, level: number) {
@@ -72,20 +73,20 @@ class MarkedReactRenderer {
 		//not implemented yet
 	}
     strong(text: string) {
-		this.pushInline(R.strong, text);
+		this.pushInline(R.strong(null, text));
 	}
     em(text: string) {
-		this.pushInline(R.em, text);
+		this.pushInline(R.em(null, text));
 	}
-	pushInline(el, text, props = null) {
+	pushInline(component) {
 		this.inlineTree.pop();
-		this.inlineTree.push(el(props, text));
+		this.inlineTree.push(component);
 	}
     codespan(code: string, lang?: string) {
 		const props = lang ? {
 			className: 'lang-' + lang
 		} : null;
-		this.pushInline(R.code, code, props);
+		this.pushInline(R.code(props, code));
 	}
     br() {
 		
@@ -94,7 +95,7 @@ class MarkedReactRenderer {
 		
 	}
     link(href: string, title: string, text: string) {
-		
+		this.pushInline(<Link href={href} className=''>{text}</Link>);
 	}
     image(href: string, title: string, text: string) {
 		
