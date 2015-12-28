@@ -71,7 +71,11 @@ class ArticleDescriptionComponent extends React.Component<ArticleDescriptionComp
 		return (
 			<div className="col-md-4">
 				<div className="article">
-					<h2 className="header">{article.title}</h2>
+					<h2 className="header">
+						<Link article={article} className="" metafileStore={this.props.metafileStore}>
+							{article.title}
+						</Link>
+					</h2>
 					<span className="badge date">{article.date()}</span>
 					<div className="descr">
 						<div dangerouslySetInnerHTML={html}/>

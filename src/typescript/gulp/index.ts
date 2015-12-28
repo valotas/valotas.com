@@ -4,7 +4,7 @@ import {Article} from '../content/Article';
 import {ArticleDescription} from '../content/ArticleDescription';
 import {MetaFile} from '../content/MetaFile';
 import {Layout} from '../react/Layout';
-import {deflate} from '../utils';
+import {deflate,compareMoments} from '../utils';
 import * as React from 'react';
 import * as RDS from 'react-dom/server';
 import * as jade from 'jade';
@@ -99,6 +99,7 @@ export function addIndex() {
 			base: path.join(cwd, 'src'),
 			path: path.join(cwd, 'src', 'index.html')
 		}) as any;
+		metas = metas.sort(compareMoments);
 		index.html = createLayoutHtml(metas);
 		index.meta = metas;
 		index.meta.path = '';

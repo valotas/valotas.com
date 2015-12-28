@@ -1,14 +1,19 @@
 import * as React from 'react';
 import * as ReactDom from 'react-dom';
-import {MetaFile, isValidMetaFile} from './content/MetaFile';
+import {MetaFile, MetaFileData, isValidMetaFile} from './content/MetaFile';
 import {MetaFileStore} from './content/MetaFileStore';
 import {Layout} from './react/Layout';
 import {inflate, VALOTAS} from './utils';
-import {loadWebfonts} from './google';
+import {WIN} from './Window';
+import {LOADER} from './Loader';
 
 console.time('load');
 
-loadWebfonts();
+LOADER.loadWebFonts();
+
+const ga = LOADER.loadAnalytics();
+ga('create', 'UA-12048148-1', 'valotas.com');
+ga('send', 'pageview');
 
 // Create the main store and register the state to the history object
 const metafileStore = new MetaFileStore(window);
@@ -18,13 +23,14 @@ metafileStore.onChange((meta) => {
 	} else {
 		history.pushState(meta, VALOTAS, '/');
 	}
+	ga('send', 'pageview');
 	window.scrollTo(0, 0);
 });
 
 console.time('react-load');
-const query = document.querySelector.bind(document);
-const metaHolder = query('script[type="application/json"]') as HTMLElement;
-const meta = inflate(metaHolder.innerHTML) as MetaFile|MetaFile[];
+const metaHolder = WIN.query('script[type="application/json"]') as HTMLElement;
+const metadata = inflate(metaHolder.innerHTML) as MetaFileData|MetaFileData[];
+const meta = MetaFile.fromData(metadata);
 console.debug('Infalted meta', meta);
 
 // Render the main react component
@@ -33,7 +39,7 @@ const el = React.createElement(Layout, {
 	metafileStore: metafileStore,
 	win: window
 });
-ReactDom.render(el, query('#app'), () => {
+ReactDom.render(el, WIN.query('#app'), () => {
 	console.timeEnd('load');
 	console.timeEnd('react-load');
 });

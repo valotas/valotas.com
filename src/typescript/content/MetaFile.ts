@@ -1,23 +1,25 @@
+import * as moment from 'moment';
+import * as ex from '../exceptions';
+
 const DASHES = /\n?---/;
-const KV_SPLIT = /\n|\:/
+const NL_SPLIT = /\n/;
+const KV_SPLIT = /\n|\:/;
+const INPUT_FORMATS = [
+    'YYYY-MM-DD HH:mm',
+    'YYYY-MM-DD'
+];
 
-function findValue(pairs, key) {
-    for (var i = 0; i < pairs.length; i++) {
-        if (key === pairs[i]) {
-            return pairs[i + 1].trim();
-        }
-    }
+export interface MetaFileData {
+    title: string;
+    path: string;
+    date: string;
+    published?: boolean;
+    raw?: string;
+    description?: string;
+    template?: string;
 }
 
-function findBoolean(pairs, key) {
-    const value = findValue(pairs, key);
-    if (value === 'false' || value === '0') {
-        return false;
-    }
-    return true;
-}
-
-export class MetaFile {
+export class MetaFile implements MetaFileData {
     title: string;
     path: string;
     date: string;
@@ -26,7 +28,7 @@ export class MetaFile {
     description: string;
     template: string;
     
-    constructor(input?: MetaFile) {
+    constructor(input?: MetaFileData) {
         if (!input) {
             return;
         }
@@ -44,16 +46,61 @@ export class MetaFile {
         const matches = raw.split(DASHES);
         file.raw = matches[2].trim();
 
-        const pairs = matches[1].trim().split(KV_SPLIT); 
-        file.title = findValue(pairs, 'title');
-        file.date = findValue(pairs, 'date');
-        file.template = findValue(pairs, 'template');
-        file.published = findBoolean(pairs, 'published');
+        const obj = parseHeader(matches[1]);
+        file.title = obj.title;
+        file.date = obj.date;
+        file.template = obj.template;
+        file.published = obj.published === '0' || obj.published === 'false' ? false : true;
         file.path = path;
         return file;
     }
+    
+    static fromData(input: MetaFileData|MetaFileData[]): MetaFile|MetaFile[] {
+        if (!input) {
+            return null;
+        }
+        if (isArray(input)) {
+            return input.map((data) => new MetaFile(data));
+        } else {
+            return new MetaFile(input);
+        }
+    }
+
+    moment(): moment.Moment {
+        const m = moment(this.date, INPUT_FORMATS, true);
+
+        if (m.isValid()) {
+            return m;
+        }
+
+        throw new ex.IllegalFromatException('Could not parse ' + this.date + ' as date using formats: ' + INPUT_FORMATS);
+    }
+}
+
+function parseHeader (text) {
+    const lines = text.trim().split(NL_SPLIT);
+    return lines.map((line) => {
+        const pair = line.split(KV_SPLIT);
+        const key = pair.shift();
+        return {
+            key: key.trim(),
+            value: pair.join(':').trim()
+        }
+    }).reduce((prev, current) => {
+        prev[current.key] = current.value;
+        return prev;
+    }, {
+        title: null,
+        date: null,
+        template: null,
+        published: null
+    });
 }
 
 export function isValidMetaFile(file: any): file is MetaFile {
-    return file && file.title && file.path && file.date;
+    return file && file.title && file.path && file.date && file.moment;
+}
+
+function isArray(input: any): input is [] {
+    return input && input.length;
 }

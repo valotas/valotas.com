@@ -63,7 +63,6 @@ Finally theoretical physics professor [Lawrence M. Krauss](https://twitter.com/L
 I did tweet the following:
 
 <blockquote class="twitter-tweet" lang="en"><p lang="en" dir="ltr">No advertising talk till now at <a href="https://twitter.com/hashtag/devoxx2015?src=hash">#devoxx2015</a> either my filter works better or there is an improvement there!</p>&mdash; Yoryos Valotassios (@valotas) <a href="https://twitter.com/valotas/status/664743040448376832">November 12, 2015</a></blockquote>
-<script async src="//platform.twitter.com/widgets.js" charset="utf-8"></script>
 
 Although someone can argue that there were no marketing talks, I have to say that this time at least were not that obvious ones. This is in my opinion a major improvement. I can understand the need of them but I do not see what they can bring in terms of marketing if there are only a couple of people watching them.
 

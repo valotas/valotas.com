@@ -5,6 +5,7 @@ import {Link} from './Link';
 import {Header} from './Header';
 import {VALOTAS} from '../utils';
 import {MetaFileStore} from '../content/MetaFileStore';
+import {LOADER} from '../Loader'
 
 interface ArticleProps extends React.Props<any> {
 	article?: Article;
@@ -25,19 +26,21 @@ export class ArticleWithHeaderComponent extends React.Component<ArticleProps, {}
 	}
 }
 
-export class ArticleComponent extends React.Component<ArticleProps, {}> {	
+export class ArticleComponent extends React.Component<ArticleProps, {}> {
+	private html;
+	
 	render() {
 		const article = this.props.article;
 		if (!article) {
 			return null;
 		}
-		const html = {
+		this.html = {
 			__html: article.html()
 		};
 		return (
 			<div>
 				<div className="article">
-					<section className="content" dangerouslySetInnerHTML={html} />
+					<section className="content" dangerouslySetInnerHTML={this.html} />
 				</div>
 				<div id="footer-actions" className="row text-center">
 					<div className="btn-group">
@@ -51,5 +54,23 @@ export class ArticleComponent extends React.Component<ArticleProps, {}> {
 				</div>
 			</div>
 		);
+	}
+	
+	componentDidMount() {
+		this._loadTwitterWidgets();	
+	}
+	
+	private _loadTwitterWidgets() {
+		if (this.html.__html.indexOf('twitter-tweet') < 0) {
+			return;
+		}
+		LOADER.loadTwitter().then((twttr) => {
+			console.log(twttr);
+			twttr.widgets.load();
+		});
+	}
+	
+	componentDidUpdate() {
+		this._loadTwitterWidgets();
 	}
 }
