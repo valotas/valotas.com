@@ -172,6 +172,22 @@ function firstChildOrFullArray(input: any[]) {
 }
 
 export function createComponentTree(html: string): React.ReactElement<any> {
-	const renderer = new MarkedReactRenderer();
+	const renderer = new MarkedReactRenderer([htmlToGistTransformer]);
 	return renderer.createComponentTree(html);
+}
+
+const GIST_SCRIPT = /script.*src=.*gist.github.com\/([^\/]*\/)?(.*).js(on)?(\?(file=([^"]*)))?/;
+
+function htmlToGistTransformer(html: string) {
+	const matches = GIST_SCRIPT.exec(html);
+	if (!matches) {
+		return null;
+	}
+	return {
+		factory: R.div,
+		props: {
+			'data-gist-id': matches[2],
+			'data-gist-file': matches[6]
+		}
+	};
 }
