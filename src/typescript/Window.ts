@@ -33,6 +33,14 @@ class Win {
 	query(selector: string) {
 		return this.window.document.querySelector(selector);
 	}
+	
+	pushState(statedata: any, title?: string, url?: string) {
+		this.window.history.pushState(statedata, title, url);
+	}
+	
+	scrollToTop() {
+		this.window.scrollTo(0, 0);
+	}
 }
 
 function createWindow() {

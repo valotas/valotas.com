@@ -18,7 +18,8 @@ export function Layout() {
 interface LayoutProps extends React.Props<any> {
 	meta?: MetaFile|MetaFile[];
 	metafileStore?: MetaFileStore;
-	win?: Window
+	fetcher?: Fetcher;
+	win?: Window;
 }
 
 interface LayoutState {
@@ -42,7 +43,7 @@ export class Layout extends React.Component<LayoutProps, LayoutState> {
 	getChildContext() {
 		return {
 			metafileStore: this.props.metafileStore,
-			fetcher: this.props.win
+			fetcher: this.props.fetcher || this.props.win
 		}
 	}
 	

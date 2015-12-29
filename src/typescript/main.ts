@@ -19,12 +19,12 @@ ga('send', 'pageview');
 const metafileStore = new MetaFileStore(window);
 metafileStore.onChange((meta) => {
 	if (isValidMetaFile(meta)) {
-		history.pushState(meta, meta.title, '/' + meta.path + '/');
+		WIN.pushState(meta, meta.title, '/' + meta.path + '/');
 	} else {
-		history.pushState(meta, VALOTAS, '/');
+		WIN.pushState(meta, VALOTAS, '/');
 	}
 	ga('send', 'pageview');
-	window.scrollTo(0, 0);
+	WIN.scrollToTop();
 });
 
 console.time('react-load');
