@@ -18,9 +18,10 @@ class TreeContainer {
 		return new TreeContainer(this);
 	}
 	
-	pushBlock(factory, props: any = {}, childs?: any[]) {
+	pushBlock(factory: React.HTMLFactory, props: any = {}, childs?: any[]) {
 		props.key = this.tree.length;
-		const el = factory(props, firstChildOrFullArray(childs || this.inline));
+		const children = props.dangerouslySetInnerHTML ? null : firstChildOrFullArray(childs || this.inline);
+		const el = factory(props, children);
 		this.inline = [];
 		this.tree.push(el);
 	}
@@ -56,7 +57,12 @@ class MarkedReactRenderer {
 	}
 	
     html(html: string) {
-		//console.log('html', html);	
+		const props = {
+			dangerouslySetInnerHTML: {
+				__html: html	
+			}
+		};
+		this.container.pushBlock(R.div, props);
 	}
 	
     heading(text: string, level: number) {
@@ -121,7 +127,6 @@ class MarkedReactRenderer {
 			smartypants: true
 		});
 		const tokens = marked.lexer(html);
-		//console.log(tokens);
 		patchParser(parser, this);
 		parser.parse(tokens);
 		return <div>{firstChildOrFullArray(this.container.tree)}</div>;

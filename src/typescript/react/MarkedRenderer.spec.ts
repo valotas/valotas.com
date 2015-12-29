@@ -60,10 +60,10 @@ fdescribe('MarkedRenderer', () => {
 		expect(html).toContain('<a href="/to/another/page" class="">link</a>');
 	});
 	
-	xit('should pass through html as is',() => {
+	it('should pass through html as is',() => {
 		const rendered = createComponentTree('this is some\n<script scr="path/to/script"></script>');
 		const html = RDS.renderToStaticMarkup(rendered);
-		expect(html).toContain('<script scr="path/to/script">strange script</script>');
+		expect(html).toContain('<script scr="path/to/script"></script>');
 	});
 	
 	it('should render ordered/unordered lists', () => {
