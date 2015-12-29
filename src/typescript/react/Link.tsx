@@ -11,6 +11,13 @@ interface LinkProps extends React.Props<any> {
 }
 
 export class Link extends React.Component<LinkProps, any> {
+	context: {
+		metafileStore: MetaFileStore
+	}
+	static contextTypes: React.ValidationMap<any> = {
+		metafileStore: React.PropTypes.object
+	};
+	
 	handleClick (e) {
 		if (this.props.href === '#') {
 			e.preventDefault();
@@ -39,7 +46,4 @@ export class Link extends React.Component<LinkProps, any> {
 		}
 		return href;
 	}
-	static contextTypes: React.ValidationMap<any> = {
-		metafileStore: React.PropTypes.object
-	};
 }
