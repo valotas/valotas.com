@@ -184,6 +184,7 @@ function htmlToGistTransformer(html: string) {
 	if (!matches) {
 		return null;
 	}
+	//console.log(matches[2],matches[6]);
 	return {
 		factory: React.createFactory(Gist) as React.DOMFactory<any>,
 		props: {

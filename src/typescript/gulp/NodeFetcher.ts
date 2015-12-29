@@ -9,7 +9,6 @@ export class NodeFetcher implements Fetcher {
 	}
 	
 	fetch (url: string|Request, init?: RequestInit) {
-		console.log('fetching', url);
 		const promise = this._fetch(url, init);
 		this.promises.push(promise);
 		return promise;
