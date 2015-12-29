@@ -10,7 +10,9 @@ describe('Loader', () => {
 		createScript: () => null,
 		getBody: () => null,
 		query: () => null,
-		doc: {}
+		doc: {},
+		pushState: (statedata: any, title?: string, url?: string) => null,
+		scrollToTop: () => null
 	};
 	let loader;
 	
