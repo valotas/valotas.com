@@ -38,8 +38,32 @@ class TreeContainer {
 	}
 }
 
+type HtmlTransfomer = (html:string) => {
+	factory: React.HTMLFactory,
+	props: any
+}
+
+function innerHtmlTransformer(html:string) {
+	return {
+		factory: R.div,
+		props: {
+			dangerouslySetInnerHTML: {
+				__html: html	
+			}
+		}
+	}
+}
+
+function notNull(obj) {
+	return !!obj;
+}
+
 class MarkedReactRenderer {
 	private container = new TreeContainer();
+	
+	constructor(private transformers: HtmlTransfomer[] = []) {
+		this.transformers.push(innerHtmlTransformer);
+	}
 	
 	nextToken(token: {type:string}) {
 		if (token.type === 'blockquote_start' || 
@@ -58,12 +82,10 @@ class MarkedReactRenderer {
 	}
 	
     html(html: string) {
-		const props = {
-			dangerouslySetInnerHTML: {
-				__html: html	
-			}
-		};
-		this.container.pushBlock(R.div, props);
+		const block = this.transformers.map((t) => {
+			return t(html);
+		}).filter(notNull)[0];
+		this.container.pushBlock(block.factory, block.props);
 	}
 	
     heading(text: string, level: number) {
