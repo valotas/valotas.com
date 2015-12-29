@@ -3,7 +3,7 @@ import * as RDS from 'react-dom/server';
 import * as marked from 'marked';
 import {createComponentTree} from './MarkedRenderer';
 
-fdescribe('MarkedRenderer', () => {
+describe('MarkedRenderer', () => {
 	it('should render headers',() => {
 		const rendered = createComponentTree('# head');
 		const html = RDS.renderToStaticMarkup(rendered);
@@ -76,7 +76,7 @@ fdescribe('MarkedRenderer', () => {
 		expect(html).toContain('<ul><li>item1</li><li>item2</li></ul>');
 	});
 	
-	it('should transform gist script to a gist component',() => {
+	xit('should transform gist script to a gist component',() => {
 		const rendered = createComponentTree('<script src="https://gist.github.com/1240545.js?file=ServletUsingCustomResponse.java"></script>');
 		const html = RDS.renderToStaticMarkup(rendered);
 		expect(html).toContain('<div data-gist-id="1240545" data-gist-file="ServletUsingCustomResponse.java"></div>');
