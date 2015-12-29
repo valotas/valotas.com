@@ -20,13 +20,13 @@ class TreeContainer {
 	
 	pushBlock(factory, props: any = {}, childs?: any[]) {
 		props.key = this.tree.length;
-		const el = factory(props, childs || this.inline);
+		const el = factory(props, firstChildOrFullArray(childs || this.inline));
 		this.inline = [];
 		this.tree.push(el);
 	}
 	
 	pushToParent(factory, props: any = {}) {
-		this.parent.pushBlock(factory, props, this.tree);
+		this.parent.pushBlock(factory, props, firstChildOrFullArray(this.tree));
 		return this.parent;
 	}
 	
