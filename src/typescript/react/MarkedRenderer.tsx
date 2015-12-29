@@ -21,7 +21,8 @@ class TreeContainer {
 	pushBlock(factory: React.HTMLFactory, props: any = {}, childs?: any[]) {
 		props.key = this.tree.length;
 		const children = props.dangerouslySetInnerHTML ? null : firstChildOrFullArray(childs || this.inline);
-		const el = factory(props, children);
+		const args = [props].concat(children);
+		const el = factory.apply(factory, args);
 		this.inline = [];
 		this.tree.push(el);
 	}
@@ -129,7 +130,7 @@ class MarkedReactRenderer {
 		const tokens = marked.lexer(html);
 		patchParser(parser, this);
 		parser.parse(tokens);
-		return <div>{firstChildOrFullArray(this.container.tree)}</div>;
+		return <div key='markdown-root'>{firstChildOrFullArray(this.container.tree)}</div>;
 	}
 }
 
