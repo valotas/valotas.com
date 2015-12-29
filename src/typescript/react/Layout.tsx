@@ -43,7 +43,7 @@ export class Layout extends React.Component<LayoutProps, LayoutState> {
 	getChildContext() {
 		return {
 			metafileStore: this.props.metafileStore,
-			fetcher: this.props.fetcher || this.props.win
+			fetcher: this.props.fetcher
 		}
 	}
 	
@@ -53,7 +53,6 @@ export class Layout extends React.Component<LayoutProps, LayoutState> {
 			return;
 		}
 		store.onChange((meta: MetaFile) => {
-			console.log('Updateting state', meta);
 			this.setState({
 				meta: meta
 			});
