@@ -2,10 +2,6 @@ import {MetaFile, MetaFileData, isValidMetaFile} from './MetaFile';
 import {ArticleDescription} from './ArticleDescription';
 import * as ex from '../exceptions';
 
-interface Fetcher {
-	fetch: (url: string|Request, init?: RequestInit) => Promise<Response>
-}
-
 function isString(input:any): input is string {
 	return typeof input === 'string';
 }
