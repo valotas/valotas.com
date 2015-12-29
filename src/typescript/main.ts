@@ -37,7 +37,8 @@ console.debug('Infalted meta', meta);
 const el = React.createElement(Layout, {
 	meta: meta,
 	metafileStore: metafileStore,
-	win: window
+	win: window,
+	fetcher: window
 });
 ReactDom.render(el, WIN.query('#app'), () => {
 	console.timeEnd('load');

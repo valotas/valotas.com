@@ -5,8 +5,8 @@ import {Icon} from './Icon'
 
 interface GistProps extends React.Props<any> {
 	gistId: string;
+	file: string;
 	user?: string;
-	file?: string;
 }
 
 interface GistState {
@@ -14,6 +14,9 @@ interface GistState {
 }
 
 export class Gist extends React.Component<GistProps, GistState> {
+	promisedContent;
+	content;
+	
 	context: {
 		fetcher: Fetcher
 	}
@@ -22,31 +25,40 @@ export class Gist extends React.Component<GistProps, GistState> {
 		fetcher: React.PropTypes.object
 	}
 	
-	constructor(props) {
-		super(props);
+	constructor(props, context) {
+		super(props, context);
+		console.log('Gist', props.gistId);
+
 		this.state = {
 			content: null
 		};
-	}
-	
-	componentDidMount() {
-		const fetcher = this.context.fetcher;
-		const user = this.props.user || 'valotas';
+
+		const fetcher = context.fetcher;
 		if (!fetcher) {
 			return;
 		}
-		fetcher.fetch(`https://gist.githubusercontent.com/${user}/${this.props.gistId}/raw/${this.props.file}`)
+
+		const user = props.user || 'valotas';
+		this.promisedContent = fetcher.fetch(`https://gist.githubusercontent.com/${user}/${props.gistId}/raw/${props.file}`)
 			.then((body) => {
 				return body.text();
 			})
 			.then((content) => {
-				this.setState({
-					content: content
-				});
+				this.content = content;
 			});
 	}
-
+	
+	componentDidMount() {
+		this.promisedContent.then((content) => {
+			this.setState({
+				content: content
+			});
+		});
+	}
+	
 	render() {
-		return <pre data-gist-id={this.props.gistId}><code>{this.state.content}</code></pre>;
+		const content = this.state.content || this.content;
+		console.log(this.content, this.promisedContent);
+		return <pre data-gist-id={this.props.gistId}><code>{content}</code></pre>;
 	}
 }
