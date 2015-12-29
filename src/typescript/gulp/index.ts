@@ -2,13 +2,25 @@ import * as path from 'path';
 import * as through from 'through2';
 import {Article} from '../content/Article';
 import {ArticleDescription} from '../content/ArticleDescription';
-import {MetaFile} from '../content/MetaFile';
+import {MetaFile, isValidMetaFile} from '../content/MetaFile';
 import {Layout} from '../react/Layout';
 import {deflate,compareMoments} from '../utils';
 import * as React from 'react';
 import * as RDS from 'react-dom/server';
 import * as jade from 'jade';
+import {NodeFetcher} from './NodeFetcher';
 import File = require('vinyl'); //how to use import File from 'vinyl'?
+
+const layout = React.createFactory(Layout);
+
+interface GulpFile {
+	meta: MetaFile|MetaFile[];
+	html?: string;
+	article?: Article;
+	contents?: any;
+	path: string;
+	base: string;
+}
 
 export function mdFile(clone = true) {
 	return through.obj(function (file, enc, callback) {
@@ -22,7 +34,6 @@ export function mdFile(clone = true) {
 				return;
 			}
 			mdfile.path = computeMdFilePath(f);
-			file.mdfile = mdfile;
 			file.meta = mdfile;
 		}
 		callback(null, file);
@@ -37,30 +48,43 @@ function computeMdFilePath(file) {
 	return parent.name;
 }
 
-export function toArticle () {
-	return through.obj(function (file, enc, callback) {
-		const mdfile = file.mdfile;
-		if (mdfile) {
-			file.article = new Article(mdfile);
-			file.html = createLayoutHtml(mdfile);
+export function toArticle (fetcher?: Fetcher) {
+	return through.obj(function (file: GulpFile, enc, callback) {
+		const meta = file.meta;
+		if (isValidMetaFile(meta)) {
+			file.article = new Article(meta);
+			createLayoutHtml(file, fetcher).then(function (html) {
+				file.html = html;
+				callback(null, file);		
+			}, function (er) {
+				console.error(er);
+				callback(er);
+			});
+		} else {
+			callback(null, file);
 		}
-		this.push(file);
-		callback();
 	});
 }
 
-function createLayoutHtml(meta: MetaFile|MetaFile[]):string {
-	const layout = React.createElement(Layout, {
-		meta: meta
+function createLayoutHtml(file: GulpFile, givenFetcher?: Fetcher): Promise<string> {
+	const fetcher = new NodeFetcher(givenFetcher);
+	const meta = file.meta;
+	const layoutElement = layout({
+		meta: meta,
+		fetcher: fetcher
 	});
-	return RDS.renderToString(layout);
+	return fetcher.all()
+		.then((all) => {
+			console.log('all', all);
+			return RDS.renderToString(layoutElement);
+		});
 }
 
 export function adaptPaths () {
-	return through.obj(function (file, enc, callback) {
-		const mdfile = file.mdfile;
-		if (mdfile) {
-			file.path = path.join(file.base, mdfile.path, 'index.html');
+	return through.obj(function (file:GulpFile, enc, callback) {
+		const meta = file.meta;
+		if (isValidMetaFile(meta)) {
+			file.path = path.join(file.base, meta.path, 'index.html');
 		}
 		callback(null, file);
 	});
@@ -68,7 +92,7 @@ export function adaptPaths () {
 
 export function wrapHtml(templateFile) {
 	var template = jade.compileFile(templateFile);
-	return through.obj(function (file, enc, callback) {
+	return through.obj(function (file: GulpFile, enc, callback) {
 		if (file.html) {
 			const html = template({
 				content: file.html,
@@ -100,11 +124,14 @@ export function addIndex() {
 			path: path.join(cwd, 'src', 'index.html')
 		}) as any;
 		metas = metas.sort(compareMoments);
-		index.html = createLayoutHtml(metas);
 		index.meta = metas;
 		index.meta.path = '';
-		this.push(index);
-		callback();
+		createLayoutHtml(index)
+			.then((html) => {
+				index.html = html;
+				this.push(index);
+				callback();
+			});
 	});
 }
 

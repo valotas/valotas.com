@@ -5,13 +5,13 @@ import {Article} from '../content/Article';
 import {mdFile, toArticle, adaptPaths, addMetafiles} from './index';
 
 describe('mdFile', () => {	
-	it('should parse the mdfile as yalm', (done) => {
+	it('should parse the meta as yalm', (done) => {
 		fs.src(['src/articles/tomcat-initd-*.md'], {
 				base: path.join(__dirname, '../../')
 			})
 			.pipe(mdFile())
 			.pipe(through.obj(function (chunk, enc, cb) {
-				const mdfile = chunk.mdfile;
+				const mdfile = chunk.meta;
 				expect(mdfile).toBeTruthy();
 				expect(mdfile.title).toBeTruthy();
 				expect(mdfile.date).toBeTruthy();
@@ -39,12 +39,18 @@ describe('mdFile', () => {
 });
 
 describe('toArticle', () => {
+	const resp = {} as Response;
+	const dummyFetcher = {
+		fetch: function () {
+			return Promise.resolve(resp);
+		}
+	}
 	it('should add an article/meta/html property to the given chunk', (done) => {
 		fs.src(['src/articles/tomcat-initd-*.md'], {
 				base: path.join(__dirname, '../../')
 			})
 			.pipe(mdFile())
-			.pipe(toArticle())
+			.pipe(toArticle(dummyFetcher))
 			.pipe(through.obj(function (chunk, enc, cb) {
 				expect(chunk.article).toBeDefined();
 				expect(chunk.article instanceof Article).toBeTruthy();
@@ -53,7 +59,6 @@ describe('toArticle', () => {
 				cb();
 			}))
 			.on('finish', done);
-		
 	});
 
 	it('should not be applied no mdfile is available', (done) => {
