@@ -4,61 +4,75 @@ import * as ex from '../exceptions';
 import {Link} from './Link';
 
 //https://github.com/christianalfoni/markdown-to-react-components/blob/master/src/index.js
-
 const R = React.DOM;
 
-class MarkedReactRenderer {
-	private outerTree;
-	private tree = [];
-	private index = 0;
-	private inlineTree = [];
+class TreeContainer {
+	tree = [];
+	inline = [];
 	
-	constructor () {
-		
+	constructor(private parent?: TreeContainer) {
+	
+	}
+	
+	childContainer() {
+		return new TreeContainer(this);
+	}
+	
+	pushBlock(factory, props: any = {}, childs?: any[]) {
+		props.key = this.tree.length;
+		const el = factory(props, childs || this.inline);
+		this.inline = [];
+		this.tree.push(el);
+	}
+	
+	pushToParent(factory, props: any = {}) {
+		this.parent.pushBlock(factory, props, this.tree);
+		return this.parent;
+	}
+	
+	pushInline(component) {
+		this.inline.pop();
+		this.inline.push(component);
+	}
+}
+
+class MarkedReactRenderer {
+	private container = new TreeContainer();
+	
+	nextToken(token: {type:string}) {
+		if (token.type === 'blockquote_start' || 
+			token.type === 'list_start') {
+			this.container = this.container.childContainer();
+		}
 	}
 	
 	code(code: string, language: string) {
 		this.codespan(code, language);
-		this.pushBlock(R.pre);
-	}
-	
-	blockquoteStart() {
-		this.outerTree = this.tree;
-		this.tree = [];
+		this.container.pushBlock(R.pre);
 	}
 	
     blockquote(quote: string) {
-		const children = this.tree;
-		this.tree = this.outerTree;
-		this.pushBlock(R.blockquote, {}, children);
+		this.container = this.container.pushToParent(R.blockquote, {});
 	}
 	
     html(html: string) {
-		console.log('html', html);	
+		//console.log('html', html);	
 	}
 	
     heading(text: string, level: number) {
-		const el = 'h' + level;
-		this.pushBlock(R[el]);
-	}
-	pushBlock(factory, props: any = {}, children?: any[]) {
-		props.key = this.index++;
-		const childs = firstChildOrFullArray(children || this.inlineTree);
-		const el = factory(props, childs);
-		this.inlineTree = [];
-		this.tree.push(el);
+		this.container.pushBlock(R['h' + level]);
 	}
     hr() {
-		this.pushBlock(R.hr);
+		this.container.pushBlock(R.hr);
 	}
     list(body: string, ordered: boolean) {
-		
+		this.container = this.container.pushToParent(R.ul);
 	}
     listitem(text: string) {
-		
+		this.container.pushBlock(R.li);
 	}
     paragraph(text: string) {
-		this.pushBlock(R.p);
+		this.container.pushBlock(R.p);
 	}
     table(header: string, body: string) {
 		//not implemented yet
@@ -73,20 +87,16 @@ class MarkedReactRenderer {
 		//not implemented yet
 	}
     strong(text: string) {
-		this.pushInline(R.strong(null, text));
+		this.container.pushInline(R.strong(null, text));
 	}
     em(text: string) {
-		this.pushInline(R.em(null, text));
-	}
-	pushInline(component) {
-		this.inlineTree.pop();
-		this.inlineTree.push(component);
+		this.container.pushInline(R.em(null, text));
 	}
     codespan(code: string, lang?: string) {
 		const props = lang ? {
 			className: 'lang-' + lang
 		} : null;
-		this.pushInline(R.code(props, code));
+		this.container.pushInline(R.code(props, code));
 	}
     br() {
 		
@@ -95,13 +105,13 @@ class MarkedReactRenderer {
 		
 	}
     link(href: string, title: string, text: string) {
-		this.pushInline(<Link href={href} className=''>{text}</Link>);
+		this.container.pushInline(<Link href={href} className=''>{text}</Link>);
 	}
     image(href: string, title: string, text: string) {
 		
 	}
 	text(text: string) {
-		this.inlineTree.push(text);
+		this.container.inline.push(text);
 		return text;
 	}
 	
@@ -111,18 +121,17 @@ class MarkedReactRenderer {
 			smartypants: true
 		});
 		const tokens = marked.lexer(html);
+		//console.log(tokens);
 		patchParser(parser, this);
 		parser.parse(tokens);
-		return <div>{firstChildOrFullArray(this.tree)}</div>;
+		return <div>{firstChildOrFullArray(this.container.tree)}</div>;
 	}
 }
 
 function patchParser(parser, renderer: MarkedReactRenderer) {
 	const tok = parser.tok;
 	parser.tok = function () {
-		if (this.token.type === 'blockquote_start') {
-			renderer.blockquoteStart();
-		}
+		renderer.nextToken(this.token);
 		tok.call(parser, arguments);
 	}
 }

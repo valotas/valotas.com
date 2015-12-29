@@ -60,9 +60,19 @@ fdescribe('MarkedRenderer', () => {
 		expect(html).toContain('<a href="/to/another/page" class="">link</a>');
 	});
 	
-	it('should pass through html as is',() => {
+	xit('should pass through html as is',() => {
 		const rendered = createComponentTree('this is some\n<script scr="path/to/script"></script>');
 		const html = RDS.renderToStaticMarkup(rendered);
 		expect(html).toContain('<script scr="path/to/script">strange script</script>');
+	});
+	
+	it('should render ordered/unordered lists', () => {
+		const source = `
+- item1
+- item2
+`;
+		const rendered = createComponentTree(source);
+		const html = RDS.renderToStaticMarkup(rendered);
+		expect(html).toContain('<ul><li>item1</li><li>item2</li></ul>');
 	});
 });
