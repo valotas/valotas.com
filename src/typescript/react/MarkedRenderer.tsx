@@ -2,6 +2,7 @@ import * as marked from 'marked';
 import * as React from 'react';
 import * as ex from '../exceptions';
 import {Link} from './Link';
+import {Gist} from './Gist';
 
 //https://github.com/christianalfoni/markdown-to-react-components/blob/master/src/index.js
 const R = React.DOM;
@@ -18,7 +19,7 @@ class TreeContainer {
 		return new TreeContainer(this);
 	}
 	
-	pushBlock(factory: React.HTMLFactory, props: any = {}, childs?: any[]) {
+	pushBlock(factory: React.DOMFactory<any>, props: any = {}, childs?: any[]) {
 		props.key = this.tree.length;
 		const children = props.dangerouslySetInnerHTML ? null : firstChildOrFullArray(childs || this.inline);
 		const args = [props].concat(children);
@@ -184,10 +185,10 @@ function htmlToGistTransformer(html: string) {
 		return null;
 	}
 	return {
-		factory: R.div,
+		factory: React.createFactory(Gist) as React.DOMFactory<any>,
 		props: {
-			'data-gist-id': matches[2],
-			'data-gist-file': matches[6]
+			gistId: matches[2],
+			file: matches[6]
 		}
 	};
 }
