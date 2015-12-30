@@ -1,5 +1,6 @@
 import {MetaFile, MetaFileData, isValidMetaFile} from './MetaFile';
 import {ArticleDescription} from './ArticleDescription';
+import {Gist} from '../react/Gist';
 import * as ex from '../exceptions';
 
 interface ListenerInput {
@@ -9,22 +10,44 @@ interface ListenerInput {
 
 export class GistStore {
 	private listeners: Function[] = [];
+	private components = [];
+	private states = {};
 	
 	constructor(public fetcher: Fetcher) {
 
 	}
 	
-	load(input: GistDescription) {
-		const user = input.user || 'valotas';
-		const url = `https://gist.githubusercontent.com/${user}/${input.gistId}/raw/${input.file}`;
+	register(component: Gist) {
+		this.components.push(component);
+		const updated = this.updateComponentState(component); 
+		if (updated) {
+			return;
+		}
+		this.load(component.props);
+	}
+	
+	deregister(component: Gist) {
+		const index = this.components.indexOf(component);
+		this.components.splice(index, 1);
+	}
+	
+	private load(input: GistDescription) {
+		const url = this.createUrl(input);
 		return this._load(url)
 			.then((content) => {
 				const notification = {
 					gist: input,
 					content: content
 				}
+				this.states[url] = content;
+				this.updateComponentStates();
 				this.listeners.forEach((l) => l(notification));
 			});
+	}
+	
+	private createUrl(input: GistDescription) {
+		const user = input.user || 'valotas';
+		return `https://gist.githubusercontent.com/${user}/${input.gistId}/raw/${input.file}`;
 	}
 	
 	_load(url: string) {
@@ -33,11 +56,21 @@ export class GistStore {
 			.then((body) => body.text());
 	}
 	
-	onGist(listener: (input: ListenerInput) => void) {
-		this.listeners.push(listener);
-		return () => {
-			const index = this.listeners.indexOf(listener);
-			this.listeners.splice(index, 1);
-		};
+	private updateComponentStates() {
+		this.components.forEach((comp) => {
+			this.updateComponentState(comp);	
+		})
+	}
+	
+	private updateComponentState(comp: Gist) {
+		const url = this.createUrl(comp.props);
+		const content = this.states[url];
+		if (!content) {
+			return false;
+		}	
+		comp.setState({
+			content: content
+		});
+		return true;
 	}
 }

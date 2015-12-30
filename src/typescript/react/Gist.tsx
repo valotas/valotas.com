@@ -13,7 +13,6 @@ interface GistState {
 }
 
 export class Gist extends React.Component<GistProps, GistState> {
-	private listener;
 	private content;
 	
 	context: {
@@ -30,24 +29,14 @@ export class Gist extends React.Component<GistProps, GistState> {
 		this.state = {
 			content: null
 		};
-		
-		this.listener = context.gistStore.onGist(({gist, content}) => {
-			if (gist !== props) {
-				return;
-			}
-			this.content = content;
-			this.setState({
-				content: content
-			});
-		});
 	}
 	
 	componentWillMount() {
-		this.context.gistStore.load(this.props);
+		this.context.gistStore.register(this);
 	}
 	
 	componentWillUnmount() {
-		this.listener();
+		this.context.gistStore.deregister(this);
 	}
 	
 	render() {
