@@ -1,7 +1,7 @@
 import nfetch = require('node-fetch');
 
 export class NodeFetcher implements Fetcher {
-	promises: Promise<Response>[] = [];
+	private promises: {[k: string]: Promise<Response>} = {};
 	_fetch;
 	
 	constructor(delegate: Fetcher) {
@@ -9,13 +9,15 @@ export class NodeFetcher implements Fetcher {
 	}
 	
 	fetch (url: string|Request, init?: RequestInit) {
-		const promise = this._fetch(url, init);
-		this.promises.push(promise);
+		const key = url as string;
+		console.log(key, this.promises[key] ? true : false);
+		const promise = this.promises[key] || this._fetch(url, init);
+		this.promises[key] = promise; 
 		return promise;
 	}
 	
 	all () {
-		return Promise.all(this.promises);
+		return Promise.all(Object.keys(this.promises).map((k) => this.promises[k]));
 	}
 }
 

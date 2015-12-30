@@ -73,9 +73,10 @@ function createLayoutHtml(file: GulpFile, givenFetcher?: Fetcher): Promise<strin
 		meta: meta,
 		fetcher: fetcher
 	});
+	//initial rendering to cause the initialization of all our components
+	RDS.renderToString(layoutElement);
 	return fetcher.all()
 		.then((all) => {
-			console.log('all', all);
 			return RDS.renderToString(layoutElement);
 		});
 }

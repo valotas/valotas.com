@@ -27,7 +27,6 @@ export class Gist extends React.Component<GistProps, GistState> {
 	
 	constructor(props, context) {
 		super(props, context);
-		console.log('Gist', props.gistId);
 
 		this.state = {
 			content: null
@@ -37,7 +36,7 @@ export class Gist extends React.Component<GistProps, GistState> {
 		if (!fetcher) {
 			return;
 		}
-
+		
 		const user = props.user || 'valotas';
 		this.promisedContent = fetcher.fetch(`https://gist.githubusercontent.com/${user}/${props.gistId}/raw/${props.file}`)
 			.then((body) => {
