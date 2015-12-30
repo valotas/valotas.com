@@ -10,6 +10,6 @@ For some reason allmost all the `init.d` scripts for starting and stoping tomcat
 ## A solution
 So what I need is a way to try stop tomcat with it's shutdown script, wait a little bit to see if tomcat shutdown and if not just kill the process. The script below does exactly that.
 
-<script type="text/javascript" src="https://gist.github.com/1000094.js"></script>
+<script type="text/javascript" src="https://gist.github.com/valotas/1000094.js?file=tomcat.sh"></script>
 
 It would be much better to have a pid file at start time and use that one and not try to figure out the pid from ps. Maybe next version.

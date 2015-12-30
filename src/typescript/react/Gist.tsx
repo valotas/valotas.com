@@ -57,7 +57,8 @@ export class Gist extends React.Component<GistProps, GistState> {
 	
 	render() {
 		const content = this.state.content || this.content;
+		const user = this.props.user || 'valotas';
 		console.log(this.content, this.promisedContent);
-		return <pre data-gist-id={this.props.gistId}><code>{content}</code></pre>;
+		return <pre data-gist-id={this.props.gistId} data-gist-user={user} data-gist-file={this.props.file}><code>{content}</code></pre>;
 	}
 }

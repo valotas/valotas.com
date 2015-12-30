@@ -177,19 +177,20 @@ export function createComponentTree(html: string): React.ReactElement<any> {
 	return renderer.createComponentTree(html);
 }
 
-const GIST_SCRIPT = /script.*src=.*gist.github.com\/([^\/]*\/)?(.*).js(on)?(\?(file=([^"]*)))?/;
+const GIST_SCRIPT = /script.*src=.*gist.github.com\/(([^\/]*)\/)?(([^\?]*)\.js(on)?)(\?(file=([^"]*)))?/;
 
 function htmlToGistTransformer(html: string) {
 	const matches = GIST_SCRIPT.exec(html);
 	if (!matches) {
 		return null;
 	}
-	//console.log(matches[2],matches[6]);
+	//console.log(matches);
 	return {
 		factory: React.createFactory(Gist) as React.DOMFactory<any>,
 		props: {
-			gistId: matches[2],
-			file: matches[6]
+			user: matches[2],
+			gistId: matches[4],
+			file: matches[8]
 		}
 	};
 }

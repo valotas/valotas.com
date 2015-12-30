@@ -76,9 +76,21 @@ describe('MarkedRenderer', () => {
 		expect(html).toContain('<ul><li>item1</li><li>item2</li></ul>');
 	});
 	
-	xit('should transform gist script to a gist component',() => {
+	it('should transform gist script to a gist component for java files',() => {
 		const rendered = createComponentTree('<script src="https://gist.github.com/1240545.js?file=ServletUsingCustomResponse.java"></script>');
 		const html = RDS.renderToStaticMarkup(rendered);
-		expect(html).toContain('<div data-gist-id="1240545" data-gist-file="ServletUsingCustomResponse.java"></div>');
+		expect(html).toContain('<pre data-gist-id="1240545" data-gist-user="valotas" data-gist-file="ServletUsingCustomResponse.java">');
+	});
+	
+	it('should transform gist script to a gist component for js files',() => {
+		const rendered = createComponentTree('<script src="https://gist.github.com/valotas/1175447.js?file=scrapy.js"></script>');
+		const html = RDS.renderToStaticMarkup(rendered);
+		expect(html).toContain('<pre data-gist-id="1175447" data-gist-user="valotas" data-gist-file="scrapy.js">');
+	});
+	
+	it('should transform gist script to a gist component for sh files',() => {
+		const rendered = createComponentTree('<script src="https://gist.github.com/valotas/1000094.js?file=tomcat.sh"></script>');
+		const html = RDS.renderToStaticMarkup(rendered);
+		expect(html).toContain('<pre data-gist-id="1000094" data-gist-user="valotas" data-gist-file="tomcat.sh">');
 	});
 });
