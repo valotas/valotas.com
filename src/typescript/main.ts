@@ -6,6 +6,7 @@ import {Layout} from './react/Layout';
 import {inflate, VALOTAS} from './utils';
 import {WIN} from './Window';
 import {LOADER} from './Loader';
+import {GistStore} from './content/GistStore';
 
 console.time('load');
 
@@ -38,7 +39,8 @@ const el = React.createElement(Layout, {
 	meta: meta,
 	metafileStore: metafileStore,
 	win: window,
-	fetcher: window
+	fetcher: window,
+	gistStore: new GistStore(window)
 });
 ReactDom.render(el, WIN.query('#app'), () => {
 	console.timeEnd('load');

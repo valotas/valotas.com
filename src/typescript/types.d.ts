@@ -11,3 +11,9 @@ declare module 'node-fetch' {
 interface Fetcher {
 	fetch: (url: string|Request, init?: RequestInit) => Promise<Response>;
 }
+
+interface GistDescription {
+	gistId: string;
+	file: string;
+	user?: string;
+}

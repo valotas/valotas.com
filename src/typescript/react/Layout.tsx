@@ -7,6 +7,7 @@ import {IndexWithHeader} from './Index';
 import {Header} from './Header';
 import {Footer} from './Footer';
 import {MetaFileStore} from '../content/MetaFileStore';
+import {GistStore} from '../content/GistStore';
 import {VALOTAS} from '../utils';
 
 /* Stateless functional components are not supported yet?
@@ -19,6 +20,7 @@ interface LayoutProps extends React.Props<any> {
 	meta?: MetaFile|MetaFile[];
 	metafileStore?: MetaFileStore;
 	fetcher?: Fetcher;
+	gistStore?: GistStore;
 	win?: Window;
 }
 
@@ -37,13 +39,15 @@ export class Layout extends React.Component<LayoutProps, LayoutState> {
 	
 	static childContextTypes: React.ValidationMap<any> = {
 		metafileStore: React.PropTypes.object,
-		fetcher: React.PropTypes.object
+		fetcher: React.PropTypes.object,
+		gistStore: React.PropTypes.object
 	};
 	
 	getChildContext() {
 		return {
 			metafileStore: this.props.metafileStore,
-			fetcher: this.props.fetcher
+			fetcher: this.props.fetcher,
+			gistStore: this.props.gistStore
 		}
 	}
 	

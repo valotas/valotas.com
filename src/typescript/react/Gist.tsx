@@ -1,12 +1,11 @@
 import * as React from 'react';
 import {ArticleDescription} from '../content/ArticleDescription';
 import {MetaFileStore} from '../content/MetaFileStore';
+import {GistStore} from '../content/GistStore';
 import {Icon} from './Icon'
 
-interface GistProps extends React.Props<any> {
-	gistId: string;
-	file: string;
-	user?: string;
+interface GistProps extends React.Props<any>, GistDescription {
+	
 }
 
 interface GistState {
@@ -14,15 +13,15 @@ interface GistState {
 }
 
 export class Gist extends React.Component<GistProps, GistState> {
-	promisedContent;
-	content;
+	private listener;
+	private content;
 	
 	context: {
-		fetcher: Fetcher
+		gistStore: GistStore
 	}
 	
 	static contextTypes: React.ValidationMap<any> = {
-		fetcher: React.PropTypes.object
+		gistStore: React.PropTypes.object
 	}
 	
 	constructor(props, context) {
@@ -31,34 +30,29 @@ export class Gist extends React.Component<GistProps, GistState> {
 		this.state = {
 			content: null
 		};
-
-		const fetcher = context.fetcher;
-		if (!fetcher) {
-			return;
-		}
 		
-		const user = props.user || 'valotas';
-		this.promisedContent = fetcher.fetch(`https://gist.githubusercontent.com/${user}/${props.gistId}/raw/${props.file}`)
-			.then((body) => {
-				return body.text();
-			})
-			.then((content) => {
-				this.content = content;
-			});
-	}
-	
-	componentDidMount() {
-		this.promisedContent.then((content) => {
+		this.listener = context.gistStore.onGist(({gist, content}) => {
+			if (gist !== props) {
+				return;
+			}
+			this.content = content;
 			this.setState({
 				content: content
 			});
 		});
 	}
 	
+	componentWillMount() {
+		this.context.gistStore.load(this.props);
+	}
+	
+	componentWillUnmount() {
+		this.listener();
+	}
+	
 	render() {
 		const content = this.state.content || this.content;
 		const user = this.props.user || 'valotas';
-		console.log(this.content, this.promisedContent);
 		return <pre data-gist-id={this.props.gistId} data-gist-user={user} data-gist-file={this.props.file}><code>{content}</code></pre>;
 	}
 }

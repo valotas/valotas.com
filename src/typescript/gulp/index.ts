@@ -3,13 +3,18 @@ import * as through from 'through2';
 import {Article} from '../content/Article';
 import {ArticleDescription} from '../content/ArticleDescription';
 import {MetaFile, isValidMetaFile} from '../content/MetaFile';
+import {CacheableGistStore} from './CacheableGistStore';
 import {Layout} from '../react/Layout';
 import {deflate,compareMoments} from '../utils';
 import * as React from 'react';
 import * as RDS from 'react-dom/server';
 import * as jade from 'jade';
-import {NodeFetcher} from './NodeFetcher';
 import File = require('vinyl'); //how to use import File from 'vinyl'?
+import nfetch = require('node-fetch');
+
+const NODE_FETCHER = {
+	fetch: nfetch
+};
 
 const layout = React.createFactory(Layout);
 
@@ -48,7 +53,8 @@ function computeMdFilePath(file) {
 	return parent.name;
 }
 
-export function toArticle (fetcher?: Fetcher) {
+export function toArticle (givenFetcher?: Fetcher) {
+	const fetcher = givenFetcher || NODE_FETCHER;
 	return through.obj(function (file: GulpFile, enc, callback) {
 		const meta = file.meta;
 		if (isValidMetaFile(meta)) {
@@ -66,16 +72,17 @@ export function toArticle (fetcher?: Fetcher) {
 	});
 }
 
-function createLayoutHtml(file: GulpFile, givenFetcher?: Fetcher): Promise<string> {
-	const fetcher = new NodeFetcher(givenFetcher);
+function createLayoutHtml(file: GulpFile, fetcher: Fetcher): Promise<string> {
 	const meta = file.meta;
+	const store = new CacheableGistStore(fetcher);
 	const layoutElement = layout({
 		meta: meta,
-		fetcher: fetcher
+		fetcher: fetcher,
+		gistStore: store
 	});
 	//initial rendering to cause the initialization of all our components
 	RDS.renderToString(layoutElement);
-	return fetcher.all()
+	return store.all()
 		.then((all) => {
 			return RDS.renderToString(layoutElement);
 		});
@@ -127,7 +134,7 @@ export function addIndex() {
 		metas = metas.sort(compareMoments);
 		index.meta = metas;
 		index.meta.path = '';
-		createLayoutHtml(index)
+		createLayoutHtml(index, NODE_FETCHER)
 			.then((html) => {
 				index.html = html;
 				this.push(index);
