@@ -2,8 +2,9 @@ import * as React from 'react';
 import {ArticleDescription} from '../content/ArticleDescription';
 import {MetaFileStore} from '../content/MetaFileStore';
 import {GistStore} from '../content/GistStore';
-import {Icon} from './Icon';
 import {isPromise} from '../utils';
+import {Link} from './Link';
+import {Icon} from './Icon';
 
 interface GistProps extends React.Props<any>, GistDescription {
 	
@@ -57,6 +58,19 @@ export class Gist extends React.Component<GistProps, GistState> {
 	
 	render() {
 		const user = this.props.user || 'valotas';
-		return <pre data-gist-id={this.props.gistId} data-gist-user={user} data-gist-file={this.props.file}><code>{this.state.content}</code></pre>;
+		const href = `https://gist.github.com/${user}/${this.props.gistId}?file=${this.props.file}`;
+		return (
+			<div className='panel panel-code'>
+				<div className='panel-heading'>
+					<Link href={href}>
+						<Icon name='fa-github'/>&nbsp;
+						{this.props.file}
+					</Link>
+				</div>
+				<pre className='panel-body' data-gist-id={this.props.gistId} data-gist-user={user} data-gist-file={this.props.file}>
+					<code>{this.state.content}</code>
+				</pre>
+			</div>
+		);
 	}
 }

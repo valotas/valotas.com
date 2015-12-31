@@ -7,7 +7,7 @@ interface LinkProps extends React.Props<any> {
 	article?: ArticleDescription;
 	href?: string;
 	metafileStore?: MetaFileStore;
-	className: string;
+	className?: string;
 }
 
 export class Link extends React.Component<LinkProps, any> {
