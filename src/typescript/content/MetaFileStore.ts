@@ -21,9 +21,7 @@ export class MetaFileStore {
 		const url = this._createUrl(input);
 		return this._loadMetaFile(url)
 			.then((meta) => {
-				this.listeners.forEach((listener) => {
-					listener(meta);
-				});
+				this.listeners.forEach((listener) => listener(meta));
 				return meta;
 			});
 	}
@@ -49,9 +47,7 @@ export class MetaFileStore {
 		return this.fetcher
 			.fetch(url)
 			.then((body) => body.json())
-			.then((json) => {
-				return MetaFile.fromData(json as MetaFileData|MetaFileData[]);
-			});
+			.then((json) => MetaFile.fromData(json as MetaFileData|MetaFileData[]));
 	}
 	
 	onChange(listener: (meta: MetaFile|MetaFile[]) => void) {

@@ -8,7 +8,7 @@ import {Header} from './Header';
 import {Footer} from './Footer';
 import {MetaFileStore} from '../content/MetaFileStore';
 import {GistStore} from '../content/GistStore';
-import {VALOTAS} from '../utils';
+import {VALOTAS, isArray} from '../utils';
 
 /* Stateless functional components are not supported yet?
 export function Layout() {
@@ -52,16 +52,16 @@ export class Layout extends React.Component<LayoutProps, LayoutState> {
 	}
 	
 	componentDidMount() {
-		const store = this.props.metafileStore;
-		if (!store) {
+		const {metafileStore, win} = this.props;
+		if (!metafileStore) {
 			return;
 		}
-		store.onChange((meta: MetaFile) => {
+		metafileStore.onChange((meta: MetaFile) => {
 			this.setState({
 				meta: meta
 			});
 		});
-		const win = this.props.win;
+
 		if (!win) {
 			return;
 		}
@@ -86,7 +86,7 @@ export class Layout extends React.Component<LayoutProps, LayoutState> {
 	private createMainContent() {
 		const meta = this.state.meta;
 
-		if (isMetaArray(meta)) {
+		if (isArray(meta)) {
 			const articles =  toArticles(meta);
 			return <IndexWithHeader articles={articles} metafileStore={this.props.metafileStore}/>;
 		}
@@ -97,11 +97,6 @@ export class Layout extends React.Component<LayoutProps, LayoutState> {
 		}
 		return null;
 	}
-}
-
-
-function isMetaArray (input: any): input is MetaFile[]|ArticleDescription[] {
-	return input && input.length;
 }
 
 function toArticles (arr: MetaFile[]): ArticleDescription[] {

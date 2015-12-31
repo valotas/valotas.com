@@ -25,7 +25,7 @@ export class GistStore {
 		this.load(component.props);
 	}
 	
-	deregister(component: Gist) {
+	unregister(component: Gist) {
 		const index = this.components.indexOf(component);
 		this.components.splice(index, 1);
 	}

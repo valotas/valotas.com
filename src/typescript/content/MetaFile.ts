@@ -1,5 +1,6 @@
 import * as moment from 'moment';
 import * as ex from '../exceptions';
+import {isArray} from '../utils';
 
 const DASHES = /\n?---/;
 const NL_SPLIT = /\n/;
@@ -89,8 +90,4 @@ function parseHeader (text) {
 
 export function isValidMetaFile(file: any): file is MetaFile {
     return file && file.title && file.path && file.date && file.moment;
-}
-
-function isArray(input: any): input is [] {
-    return input && input.length;
 }

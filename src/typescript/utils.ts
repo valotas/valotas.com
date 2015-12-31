@@ -34,7 +34,6 @@ export function compareMoments(a: HasMoment, b: HasMoment): number {
 	return moment2.isAfter(moment1) ? 1 : moment1.isAfter(moment2) ? -1 : 0;
 }
 
-interface CreateScriptOptions {
-	protocol?: string;
-	id?: string;
+export function isArray(input: any): input is [] {
+    return input && input.length;
 }
