@@ -4,8 +4,8 @@ import {GistStore} from '../content/GistStore';
 export class CacheableGistStore extends GistStore {
 	private promises: {[k: string]: Promise<string>} = {};
 	
-	constructor(public fetcher: Fetcher) {
-		super(fetcher);
+	constructor(public fetcher: Fetcher, meta: MetaFileData) {
+		super(fetcher, null, meta);
 	}
 	
 	_load(url: string) {

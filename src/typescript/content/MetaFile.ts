@@ -18,6 +18,7 @@ export class MetaFile implements MetaFileData {
     raw: string;
     description: string;
     template: string;
+    gists: GistContent[];
     
     constructor(input?: MetaFileData) {
         if (!input) {
@@ -30,6 +31,7 @@ export class MetaFile implements MetaFileData {
         this.raw = input.raw;
         this.description = input.description;
         this.template = input.template;
+        this.gists = input.gists ? input.gists : [];
     }
     
     static create(raw: string, path?: string): MetaFile {
@@ -43,6 +45,7 @@ export class MetaFile implements MetaFileData {
         file.template = obj.template;
         file.published = obj.published === '0' || obj.published === 'false' ? false : true;
         file.path = path;
+        file.gists = [];
         return file;
     }
     

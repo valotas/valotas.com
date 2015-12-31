@@ -40,7 +40,7 @@ const el = React.createElement(Layout, {
 	metafileStore: metafileStore,
 	win: window,
 	fetcher: window,
-	gistStore: new GistStore(window)
+	gistStore: new GistStore(window, metafileStore, isValidMetaFile(meta) ? meta: null)
 });
 ReactDom.render(el, WIN.query('#app'), () => {
 	console.timeEnd('load');

@@ -1,42 +1,49 @@
 import {MetaFile, isValidMetaFile} from './MetaFile';
+import {MetaFileStore} from './MetaFileStore';
 import {ArticleDescription} from './ArticleDescription';
 import {Gist} from '../react/Gist';
 import * as ex from '../exceptions';
 
-interface ListenerInput {
-	gist: GistDescription,
-	content: string;
-}
-
 export class GistStore {
-	private components = [];
-	private states = {};
-	
-	constructor(public fetcher: Fetcher) {
-
-	}
-	
-	register(component: Gist) {
-		this.components.push(component);
-		const updated = this.updateComponentState(component); 
-		if (updated) {
+	constructor(public fetcher: Fetcher, metafileStore: MetaFileStore, private meta?: MetaFileData) {
+		if (!metafileStore) {
 			return;
 		}
-		this.load(component.props);
+		metafileStore.onChange((current) => {
+			this.meta = isValidMetaFile(current) ? current : null;
+			console.log('GistStore has new metafile', this.meta, current);
+		});
 	}
 	
-	unregister(component: Gist) {
-		const index = this.components.indexOf(component);
-		this.components.splice(index, 1);
-	}
-	
-	private load(input: GistDescription) {
+	/**
+	 * Should either return the gist content found within the current metafile or
+	 * load it, save it in the current meta and return a promise of the content
+	 */
+	load(input: GistDescription): string|Promise<string> {
+		const gist = this.filterMeta(input);
+		if (gist) {
+			return gist.content;
+		}
 		const url = this.createUrl(input);
 		return this._load(url)
 			.then((content) => {
-				this.states[url] = content;
-				this.updateComponentStates();
+				this.meta.gists.push({
+					content: content,
+					gistId: input.gistId,
+					file: input.file,
+					user: input.user
+				});
+				return content;
 			});
+	}
+	
+	private filterMeta (input: GistDescription) {
+		const {gists} = this.meta;
+		if (!gists) {
+			return null;
+		}
+		const filtered = gists.filter((gist) => gist.gistId === input.gistId && gist.file === input.file);
+		return filtered.length === 0 ? null : filtered[0];
 	}
 	
 	private createUrl(input: GistDescription) {
@@ -48,23 +55,5 @@ export class GistStore {
 		return this.fetcher
 			.fetch(url)
 			.then((body) => body.text());
-	}
-	
-	private updateComponentStates() {
-		this.components.forEach((comp) => {
-			this.updateComponentState(comp);	
-		})
-	}
-	
-	private updateComponentState(comp: Gist) {
-		const url = this.createUrl(comp.props);
-		const content = this.states[url];
-		if (!content) {
-			return false;
-		}	
-		comp.setState({
-			content: content
-		});
-		return true;
 	}
 }

@@ -74,7 +74,7 @@ export function toArticle (givenFetcher?: Fetcher) {
 
 function createLayoutHtml(file: GulpFile, fetcher: Fetcher): Promise<string> {
 	const meta = file.meta;
-	const store = new CacheableGistStore(fetcher);
+	const store = new CacheableGistStore(fetcher, isValidMetaFile(meta) ? meta: null);
 	const layoutElement = layout({
 		meta: meta,
 		fetcher: fetcher,

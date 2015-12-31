@@ -1,10 +1,7 @@
 import {MetaFile, isValidMetaFile} from './MetaFile';
 import {ArticleDescription} from './ArticleDescription';
+import {isString} from '../utils';
 import * as ex from '../exceptions';
-
-function isString(input:any): input is string {
-	return typeof input === 'string';
-}
 
 function isArticle(input:any): input is ArticleDescription {
 	return input.key;

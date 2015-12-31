@@ -18,6 +18,10 @@ interface GistDescription {
 	user?: string;
 }
 
+interface GistContent extends GistDescription {
+	content?: string;
+}
+
 interface MetaFileData {
     title: string;
     path: string;
@@ -26,4 +30,5 @@ interface MetaFileData {
     raw?: string;
     description?: string;
     template?: string;
+	gists?: GistContent[];
 }
