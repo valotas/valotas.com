@@ -1,8 +1,11 @@
 import * as marked from 'marked';
 import * as React from 'react';
 import * as ex from '../exceptions';
-import {Link} from './Link';
-import {Gist} from './Gist';
+import {Link as LinkComponent} from './Link';
+import {Gist as GistComponent} from './Gist';
+
+const Link = React.createFactory(LinkComponent);
+const Gist = React.createFactory(GistComponent);
 
 //https://github.com/christianalfoni/markdown-to-react-components/blob/master/src/index.js
 const R = React.DOM;
@@ -135,7 +138,7 @@ class MarkedReactRenderer {
 		
 	}
     link(href: string, title: string, text: string) {
-		this.container.pushInline(<Link href={href} className=''>{text}</Link>);
+		this.container.pushInline(Link({href: href, className: ''}, text));
 	}
     image(href: string, title: string, text: string) {
 		
@@ -153,7 +156,9 @@ class MarkedReactRenderer {
 		const tokens = marked.lexer(html);
 		patchParser(parser, this);
 		parser.parse(tokens);
-		return <div key='markdown-root'>{firstChildOrFullArray(this.container.tree)}</div>;
+		return R.div({
+			key: 'markdown-root'
+		}, firstChildOrFullArray(this.container.tree));
 	}
 }
 
@@ -184,9 +189,8 @@ function htmlToGistTransformer(html: string) {
 	if (!matches) {
 		return null;
 	}
-	//console.log(matches);
 	return {
-		factory: React.createFactory(Gist) as React.DOMFactory<any>,
+		factory: Gist as React.DOMFactory<any>,
 		props: {
 			user: matches[2],
 			gistId: matches[4],
