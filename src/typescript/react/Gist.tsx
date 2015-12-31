@@ -32,11 +32,17 @@ export class Gist extends React.Component<GistProps, GistState> {
 	}
 	
 	componentWillMount() {
-		this.context.gistStore.register(this);
+		const store  = this.context.gistStore;
+		if (store) {
+			store.register(this);
+		}
 	}
 	
 	componentWillUnmount() {
-		this.context.gistStore.unregister(this);
+		const store  = this.context.gistStore;
+		if (store) {
+			store.unregister(this);
+		}
 	}
 	
 	render() {

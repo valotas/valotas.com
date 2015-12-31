@@ -45,8 +45,9 @@ describe('toArticle', () => {
 			return Promise.resolve(resp);
 		}
 	}
+
 	it('should add an article/meta/html property to the given chunk', (done) => {
-		fs.src(['src/articles/tomcat-initd-*.md'], {
+		fs.src(['src/articles/getters-and-setters.md'], {
 				base: path.join(__dirname, '../../')
 			})
 			.pipe(mdFile())
