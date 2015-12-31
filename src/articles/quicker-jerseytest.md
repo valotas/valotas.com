@@ -54,11 +54,11 @@ I could change two things. Either the `getContainer` method or the `getTestConta
 
 So what I needed was a custom TestContainerFactory that would cache the resulted TestContainer per AppDescriptor. Something like:
 
-<script src="https://gist.github.com/2344641.js?file=OnePerAppDescriptorTestContainerFactory.java"></script>
+<script src="https://gist.github.com/valotas/2344641.js?file=OnePerAppDescriptorTestContainerFactory.java"></script>
 
 Now I can wrap any other TestContainerFactory and only use it if I do not have any other TestContainer ready for a given AppDescriptor. The last problem would be a shutdown hook. As I'm using TestNG the `@BeforeSuite` with `@AfterSuite` annotations worked just fine:
 
-<script src="https://gist.github.com/2344641.js?file=BetterJerseyTest.java"></script>
+<script src="https://gist.github.com/valotas/2344641.js?file=BetterJerseyTest.java"></script>
 
 The jUnit users may have a look [here][junit-before-after-hook] to check how they can implement a shutdown hook or just don't at all :-).
 
