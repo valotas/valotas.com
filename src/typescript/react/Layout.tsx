@@ -9,12 +9,7 @@ import {Footer} from './Footer';
 import {MetaFileStore} from '../content/MetaFileStore';
 import {GistStore} from '../content/GistStore';
 import {VALOTAS, isArray} from '../utils';
-
-/* Stateless functional components are not supported yet?
-export function Layout() {
-	return (<div className="lol">Layout here</div>);
-}
-*/
+import * as ex from '../exceptions';
 
 interface LayoutProps extends React.Props<any> {
 	meta?: MetaFile|MetaFile[];
@@ -54,7 +49,7 @@ export class Layout extends React.Component<LayoutProps, LayoutState> {
 	componentDidMount() {
 		const {metafileStore, win} = this.props;
 		if (!metafileStore) {
-			return;
+			throw ex.illegalArgumentException('MetaFileStore is needed on the client side to register for changes');
 		}
 		metafileStore.onChange((meta: MetaFile) => {
 			this.setState({
@@ -63,7 +58,7 @@ export class Layout extends React.Component<LayoutProps, LayoutState> {
 		});
 
 		if (!win) {
-			return;
+			throw ex.illegalArgumentException('window is needed on the client side to register for PopStateEvents');
 		}
 		win.onpopstate = (ev: PopStateEvent) => {
 			const state = MetaFile.fromData(ev.state as MetaFileData);
