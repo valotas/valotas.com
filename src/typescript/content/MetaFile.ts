@@ -9,16 +9,6 @@ const INPUT_FORMATS = [
     'YYYY-MM-DD'
 ];
 
-export interface MetaFileData {
-    title: string;
-    path: string;
-    date: string;
-    published?: boolean;
-    raw?: string;
-    description?: string;
-    template?: string;
-}
-
 export class MetaFile implements MetaFileData {
     title: string;
     path: string;

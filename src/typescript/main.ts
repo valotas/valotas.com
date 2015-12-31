@@ -1,6 +1,6 @@
 import * as React from 'react';
 import * as ReactDom from 'react-dom';
-import {MetaFile, MetaFileData, isValidMetaFile} from './content/MetaFile';
+import {MetaFile, isValidMetaFile} from './content/MetaFile';
 import {MetaFileStore} from './content/MetaFileStore';
 import {Layout} from './react/Layout';
 import {inflate, VALOTAS} from './utils';

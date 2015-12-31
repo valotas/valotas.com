@@ -17,3 +17,13 @@ interface GistDescription {
 	file: string;
 	user?: string;
 }
+
+interface MetaFileData {
+    title: string;
+    path: string;
+    date: string;
+    published?: boolean;
+    raw?: string;
+    description?: string;
+    template?: string;
+}

@@ -1,5 +1,5 @@
 import {MetaFileStore} from './MetaFileStore';
-import {MetaFile, MetaFileData} from './MetaFile';
+import {MetaFile} from './MetaFile';
 
 describe('MetaFileStore', () => {
     let fetcher;

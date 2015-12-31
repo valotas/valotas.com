@@ -1,4 +1,4 @@
-import {MetaFile, MetaFileData, isValidMetaFile} from './MetaFile';
+import {MetaFile, isValidMetaFile} from './MetaFile';
 import {ArticleDescription} from './ArticleDescription';
 import * as ex from '../exceptions';
 
