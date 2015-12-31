@@ -9,7 +9,6 @@ interface ListenerInput {
 }
 
 export class GistStore {
-	private listeners: Function[] = [];
 	private components = [];
 	private states = {};
 	
@@ -35,13 +34,8 @@ export class GistStore {
 		const url = this.createUrl(input);
 		return this._load(url)
 			.then((content) => {
-				const notification = {
-					gist: input,
-					content: content
-				}
 				this.states[url] = content;
 				this.updateComponentStates();
-				this.listeners.forEach((l) => l(notification));
 			});
 	}
 	
