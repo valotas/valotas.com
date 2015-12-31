@@ -62,7 +62,7 @@ describe('MarkedRenderer', () => {
 	
 	it('should render links',() => {
 		const html = renderToStaticMarkup('this is a [link](/to/another/page) to another page');
-		expect(html).toContain('<a href="/to/another/page" class="">link</a>');
+		expect(html).toContain('<a href="/to/another/page" target="_self">link</a>');
 	});
 	
 	it('should pass through html as is',() => {

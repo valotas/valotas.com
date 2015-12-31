@@ -58,11 +58,12 @@ export class Gist extends React.Component<GistProps, GistState> {
 	
 	render() {
 		const user = this.props.user || 'valotas';
-		const href = `https://gist.github.com/${user}/${this.props.gistId}?file=${this.props.file}`;
+		const filetarget = this.props.file.replace(/\./g, '-').toLocaleLowerCase();
+		const href = `https://gist.github.com/${user}/${this.props.gistId}#file-${filetarget}`;
 		return (
 			<div className='panel panel-code'>
 				<div className='panel-heading'>
-					<Link href={href}>
+					<Link href={href} target='_blank'>
 						<Icon name='fa-github'/>&nbsp;
 						{this.props.file}
 					</Link>

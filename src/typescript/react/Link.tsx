@@ -8,6 +8,7 @@ interface LinkProps extends React.Props<any> {
 	href?: string;
 	metafileStore?: MetaFileStore;
 	className?: string;
+	target?: string;
 }
 
 export class Link extends React.Component<LinkProps, any> {
@@ -24,9 +25,12 @@ export class Link extends React.Component<LinkProps, any> {
 			window.scrollTo(0, 0);
 			return;
 		}
+		
+		if (this.props.target !== '_self') {
+			return;
+		}
 
 		const store = this.props.metafileStore || this.context.metafileStore;
-		console.log(store);
 		if (!store) {
 			return;
 		}
@@ -36,7 +40,8 @@ export class Link extends React.Component<LinkProps, any> {
 	}
 	render() {
 		const href = this.props.href || this.createHref();
-		return <a href={href} className={this.props.className} onClick={this.handleClick.bind(this)}>{this.props.children}</a>;
+		const target = this.props.target || '_self';
+		return <a href={href} className={this.props.className} onClick={this.handleClick.bind(this)} target={target}>{this.props.children}</a>;
 	}
 	createHref() {
 		let href = '/';

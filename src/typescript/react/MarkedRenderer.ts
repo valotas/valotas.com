@@ -140,7 +140,7 @@ class MarkedReactRenderer {
 		
 	}
     link(href: string, title: string, text: string) {
-		this.container.pushInline(Link({href: href, className: ''}, text));
+		this.container.pushInline(Link({href: href}, text));
 	}
     image(href: string, title: string, text: string) {
 		
