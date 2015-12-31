@@ -36,8 +36,10 @@ class TreeContainer {
 		return this.parent;
 	}
 	
-	pushInline(component) {
-		this.inline.pop();
+	pushInline(component, pop = true) {
+		if (pop) {
+			this.inline.pop();
+		}
 		this.inline.push(component);
 	}
 }
@@ -129,7 +131,7 @@ class MarkedReactRenderer {
 		const props = lang ? {
 			className: 'lang-' + lang
 		} : null;
-		this.container.pushInline(R.code(props, code));
+		this.container.pushInline(R.code(props, code), false);
 	}
     br() {
 		
@@ -144,7 +146,7 @@ class MarkedReactRenderer {
 		
 	}
 	text(text: string) {
-		this.container.inline.push(text);
+		this.container.pushInline(text, false);
 		return text;
 	}
 	

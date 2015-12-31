@@ -3,10 +3,14 @@ import * as RDS from 'react-dom/server';
 import * as marked from 'marked';
 import {createComponentTree} from './MarkedRenderer';
 
+function renderToStaticMarkup(source) {
+	const tree = createComponentTree(source);
+	return RDS.renderToStaticMarkup(tree);
+}
+
 describe('MarkedRenderer', () => {
 	it('should render headers',() => {
-		const rendered = createComponentTree('# head');
-		const html = RDS.renderToStaticMarkup(rendered);
+		const html = renderToStaticMarkup('# head');
 		expect(html).toContain('<h1>head</h1>');
 	});
 	
@@ -37,32 +41,32 @@ describe('MarkedRenderer', () => {
 	});
 	
 	it('should render code blocks with a class derived from the language',() => {
-		const rendered = createComponentTree('this a\n\n```js\na code block\n```');
-		const html = RDS.renderToStaticMarkup(rendered);
-		expect(html).toContain('<pre><code class="lang-js">a code block</code></pre>');
+		const source = 'this a\n\n```js\na code block\n```';
+		const expected = marked(source).replace(/\n/g, '');
+		const html = renderToStaticMarkup(source);
+		expect(html).toContain(expected);
 	});
 	
 	it('should quotes with paragraphs',() => {
-		const rendered = createComponentTree(`
+		const source = `
 > this is a quote paragraph
 >
 > this is another paragraph
 >		
-		`);
-		const html = RDS.renderToStaticMarkup(rendered);
-		expect(html).toContain('<blockquote><p>this is a quote paragraph</p>');
-		expect(html).toContain('<p>this is another paragraph</p></blockquote>');
+		`;
+		const expected = marked(source).replace(/\n/g, '');
+		const html = renderToStaticMarkup(source);
+		expect(html).toContain(expected);
+		//expect(html).toContain('<p>this is another paragraph</p></blockquote>');
 	});
 	
 	it('should render links',() => {
-		const rendered = createComponentTree('this is a [link](/to/another/page) to another page');
-		const html = RDS.renderToStaticMarkup(rendered);
+		const html = renderToStaticMarkup('this is a [link](/to/another/page) to another page');
 		expect(html).toContain('<a href="/to/another/page" class="">link</a>');
 	});
 	
 	it('should pass through html as is',() => {
-		const rendered = createComponentTree('this is some\n<script scr="path/to/script"></script>');
-		const html = RDS.renderToStaticMarkup(rendered);
+		const html = renderToStaticMarkup('this is some\n<script scr="path/to/script"></script>');
 		expect(html).toContain('<script scr="path/to/script"></script>');
 	});
 	
@@ -71,26 +75,30 @@ describe('MarkedRenderer', () => {
 - item1
 - item2
 `;
-		const rendered = createComponentTree(source);
-		const html = RDS.renderToStaticMarkup(rendered);
-		expect(html).toContain('<ul><li>item1</li><li>item2</li></ul>');
+		const expected = marked(source).replace(/\n/g, '');
+		const html = renderToStaticMarkup(source);
+		expect(html).toContain(expected);
 	});
 	
 	it('should transform gist script to a gist component for java files',() => {
-		const rendered = createComponentTree('<script src="https://gist.github.com/1240545.js?file=ServletUsingCustomResponse.java"></script>');
-		const html = RDS.renderToStaticMarkup(rendered);
+		const html = renderToStaticMarkup('<script src="https://gist.github.com/1240545.js?file=ServletUsingCustomResponse.java"></script>');
 		expect(html).toContain('<pre data-gist-id="1240545" data-gist-user="valotas" data-gist-file="ServletUsingCustomResponse.java">');
 	});
 	
 	it('should transform gist script to a gist component for js files',() => {
-		const rendered = createComponentTree('<script src="https://gist.github.com/valotas/1175447.js?file=scrapy.js"></script>');
-		const html = RDS.renderToStaticMarkup(rendered);
+		const html = renderToStaticMarkup('<script src="https://gist.github.com/valotas/1175447.js?file=scrapy.js"></script>');
 		expect(html).toContain('<pre data-gist-id="1175447" data-gist-user="valotas" data-gist-file="scrapy.js">');
 	});
 	
 	it('should transform gist script to a gist component for sh files',() => {
-		const rendered = createComponentTree('<script src="https://gist.github.com/valotas/1000094.js?file=tomcat.sh"></script>');
-		const html = RDS.renderToStaticMarkup(rendered);
+		const html = renderToStaticMarkup('<script src="https://gist.github.com/valotas/1000094.js?file=tomcat.sh"></script>');
 		expect(html).toContain('<pre data-gist-id="1000094" data-gist-user="valotas" data-gist-file="tomcat.sh">');
+	});
+	
+	it('should render paragraphs with mix span and code blocks',() => {
+		const source = 'This is a paragraph  with `code block`.';
+		const expected = marked(source).trim();
+		const html = renderToStaticMarkup(source);
+		expect(html).toContain(expected);
 	});
 });
