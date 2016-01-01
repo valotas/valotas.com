@@ -1,5 +1,7 @@
 'use strict';
 
+var Builder = require('systemjs-builder');
+var createSystemConfig = require('../system.conf.js').createSystemConfig;
 var exec = require('child_process').exec;
 
 function execTsc (watch, cb) {
@@ -18,5 +20,14 @@ module.exports = {
   },
   watch: function () {
     execTsc(true);
+  },
+  bundle: function (gulp, basepath) {
+    var conf = createSystemConfig(basepath + '/');
+    var builder = new Builder(conf);
+    
+    return function (cb) {
+      builder.buildStatic('./build/typescript/main.js', './build/assets/bundle.js', { runtime: false })
+        .then(cb.bind(this, null), cb); 
+    }
   }
 };

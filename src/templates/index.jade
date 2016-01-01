@@ -12,10 +12,11 @@ html(lang='en')
       title= title + ' - ' + subtitle
       link(rel='stylesheet', href= '/assets/main.css')
       link(rel='shortcut icon', href= '/assets/favicon.ico')
-      script(src= '/node_modules/systemjs/dist/system.src.js')
-      script(src= '/system.conf.js')
-      script.
-        System.import('/typescript/main');
+      //script(src= '/node_modules/systemjs/dist/system.src.js')
+      //script(src= '/system.conf.js')
+      //script.
+      //  System.import('/typescript/main');
+      script(src= '/assets/bundle.js')
   body
     #app!= content
     script(type='application/json').!= meta

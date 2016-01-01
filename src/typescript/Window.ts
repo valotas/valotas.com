@@ -41,6 +41,10 @@ class Win {
 	scrollToTop() {
 		this.window.scrollTo(0, 0);
 	}
+	
+	ready(ondocumentReady) {
+		this.window.document.addEventListener('DOMContentLoaded', ondocumentReady);
+	}
 }
 
 function createWindow() {

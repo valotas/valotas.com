@@ -12,7 +12,8 @@ describe('Loader', () => {
 		query: () => null,
 		doc: {},
 		pushState: (statedata: any, title?: string, url?: string) => null,
-		scrollToTop: () => null
+		scrollToTop: () => null,
+		ready: () => null
 	};
 	let loader;
 	
