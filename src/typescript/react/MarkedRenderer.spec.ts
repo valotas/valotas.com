@@ -57,7 +57,6 @@ describe('MarkedRenderer', () => {
 		const expected = marked(source).replace(/\n/g, '');
 		const html = renderToStaticMarkup(source);
 		expect(html).toContain(expected);
-		//expect(html).toContain('<p>this is another paragraph</p></blockquote>');
 	});
 	
 	it('should render links',() => {
@@ -97,6 +96,13 @@ describe('MarkedRenderer', () => {
 	
 	it('should render paragraphs with mix span and code blocks',() => {
 		const source = 'This is a paragraph  with `code block`.';
+		const expected = marked(source).trim();
+		const html = renderToStaticMarkup(source);
+		expect(html).toContain(expected);
+	});
+	
+	it('should transform links to anchors',() => {
+		const source = 'Go to http://google.com/';
 		const expected = marked(source).trim();
 		const html = renderToStaticMarkup(source);
 		expect(html).toContain(expected);

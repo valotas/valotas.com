@@ -36,11 +36,19 @@ class TreeContainer {
 		return this.parent;
 	}
 	
-	pushInline(component, pop = true) {
-		if (pop) {
+	pushInline(component, pop: boolean|string = true) {
+		if (pop === true || this.containsInline(pop)) {
 			this.inline.pop();
 		}
 		this.inline.push(component);
+	}
+	
+	private containsInline(input) {
+		const index = this.inline.indexOf(input); 
+		if (index < 0) {
+			return false;
+		}
+		return index === this.inline.length - 1;
 	}
 }
 
@@ -140,7 +148,7 @@ class MarkedReactRenderer {
 		
 	}
     link(href: string, title: string, text: string) {
-		this.container.pushInline(Link({href: href}, text));
+		this.container.pushInline(Link({href: href}, text), text);
 	}
     image(href: string, title: string, text: string) {
 		
@@ -153,14 +161,12 @@ class MarkedReactRenderer {
 	createComponentTree(html: string) {
 		const parser = new marked.Parser({
 			renderer: this,
-			smartypants: true
+			gfm: true
 		});
 		const tokens = marked.lexer(html);
 		patchParser(parser, this);
 		parser.parse(tokens);
-		return R.div({
-			key: 'markdown-root'
-		}, firstChildOrFullArray(this.container.tree));
+		return R.div({}, firstChildOrFullArray(this.container.tree));
 	}
 }
 
