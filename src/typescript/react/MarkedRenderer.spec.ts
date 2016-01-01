@@ -116,4 +116,13 @@ describe('MarkedRenderer', () => {
 		const html = renderToStaticMarkup(source);
 		expect(html).toContain(expected);
 	});
+	
+	it('should links with inline code', () => {
+		const source = '[`DAO`](http://link.to/dao)s';
+		const expected = marked(source, {
+			smartypants: true
+		}).trim();
+		const html = renderToStaticMarkup(source);
+		expect(html).toContain(expected);
+	});
 });

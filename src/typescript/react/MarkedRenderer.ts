@@ -148,7 +148,13 @@ class MarkedReactRenderer {
 		
 	}
     link(href: string, title: string, text: string) {
-		this.container.pushInline(Link({href: href}, text), text);
+		if (text !== 'undefined') {
+			this.container.pushInline(Link({href: href}, text), text);
+		} else {
+			// if the given text is undefined, we use the last inlined element as the child of our link
+			const child = this.container.inline.pop();
+			this.container.pushInline(Link({href: href}, child), false);
+		}
 	}
     image(href: string, title: string, text: string) {
 		
