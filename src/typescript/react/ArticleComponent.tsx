@@ -19,9 +19,7 @@ export class ArticleWithHeaderComponent extends React.Component<ArticleProps, {}
 		return (
 			<div>
 				<Header title={article.title} subtitle={VALOTAS} date={article.date('DD/MM/YYYY')} metafileStore={this.props.metafileStore}/>
-				<div id="content" className="container">
-					<ArticleComponent article={this.props.article} metafileStore={this.props.metafileStore}/>
-				</div>
+				<ArticleComponent article={this.props.article} metafileStore={this.props.metafileStore}/>
 			</div>
 		);
 	}
@@ -39,7 +37,7 @@ export class ArticleComponent extends React.Component<ArticleProps, {}> {
 			_html: article.html()
 		};
 		return (
-			<div>
+			<div id="content" className="container">
 				<div className="article">
 					<section className="content">
 						<MarkedComponent meta={this.props.article.meta}/>
