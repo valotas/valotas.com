@@ -161,7 +161,8 @@ class MarkedReactRenderer {
 	createComponentTree(html: string) {
 		const parser = new marked.Parser({
 			renderer: this,
-			gfm: true
+			gfm: true,
+			smartypants: true
 		});
 		const tokens = marked.lexer(html);
 		patchParser(parser, this);

@@ -101,9 +101,18 @@ describe('MarkedRenderer', () => {
 		expect(html).toContain(expected);
 	});
 	
-	it('should transform links to anchors',() => {
+	it('should transform links to anchors', () => {
 		const source = 'Go to http://google.com/';
 		const expected = marked(source).trim();
+		const html = renderToStaticMarkup(source);
+		expect(html).toContain(expected);
+	});
+	
+	it('should handle escaping', () => {
+		const source = 'I\'ve used to use "©" charachters';
+		const expected = marked(source, {
+			smartypants: true
+		}).trim();
 		const html = renderToStaticMarkup(source);
 		expect(html).toContain(expected);
 	});
