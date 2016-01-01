@@ -11,7 +11,6 @@ export class GistStore {
 		}
 		metafileStore.onChange((current) => {
 			this.meta = isValidMetaFile(current) ? current : null;
-			console.log('GistStore has new metafile', this.meta, current);
 		});
 	}
 	
