@@ -14,19 +14,21 @@ interface LinkProps extends React.Props<any> {
 export class Link extends React.Component<LinkProps, any> {
 	context: {
 		metafileStore: MetaFileStore
-	}
+	};
+
 	static contextTypes: React.ValidationMap<any> = {
 		metafileStore: React.PropTypes.object
 	};
 	
 	handleClick (e) {
-		if (this.props.href === '#') {
+		const {href, target} = this.props;
+		if (href === '#') {
 			e.preventDefault();
 			window.scrollTo(0, 0);
 			return;
 		}
 		
-		if (this.props.target !== '_self') {
+		if (target === '_blank' || (href && href.indexOf('http') === 0)) {
 			return;
 		}
 
@@ -40,8 +42,7 @@ export class Link extends React.Component<LinkProps, any> {
 	}
 	render() {
 		const href = this.props.href || this.createHref();
-		const target = this.props.target || '_self';
-		return <a href={href} className={this.props.className} onClick={this.handleClick.bind(this)} target={target}>{this.props.children}</a>;
+		return <a href={href} className={this.props.className} onClick={this.handleClick.bind(this)} target={this.props.target}>{this.props.children}</a>;
 	}
 	createHref() {
 		let href = '/';
