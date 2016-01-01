@@ -52,7 +52,8 @@ gulp.task('serve', [
       server: {
         baseDir: './build',
         routes: {
-          '/node_modules': 'node_modules'
+          '/node_modules': 'node_modules',
+          '/system.conf.js': 'system.conf.js'
         }
       },
       watchOptions: {
