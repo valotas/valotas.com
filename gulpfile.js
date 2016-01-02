@@ -78,3 +78,18 @@ gulp.task('dist', [
   'tsc-bundle',
   'build'
 ], require('./.gulp/bundle')(gulp));
+
+gulp.task('serve-dist', 
+  function () {
+    browserSync.init({
+      logLevel: 'debug',
+      server: {
+        baseDir: './dist'
+      },
+      watchOptions: {
+        ignoreInitial: true,
+        ignored: 'node_modules/**'
+      }
+    });
+  }
+);

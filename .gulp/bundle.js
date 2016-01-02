@@ -8,11 +8,13 @@ var htmlmin = require('gulp-htmlmin'),
 module.exports = function (gulp) {
   return function () {
     var injectables = gulp.src([
-        './build/assets/**'
+        './build/**/*',
+        '!./build/**/*.html',
+        '!./build/typescript/**/*'
       ])
       .pipe(gulpif('*.js', rev()))
       .pipe(gulpif('*.css', rev()))
-      .pipe(gulp.dest('./dist/assets'));
+      .pipe(gulp.dest('./dist'));
 
     return gulp.src([
         './build/**/*.html'
