@@ -28,8 +28,7 @@ WIN.ready(() => {
 		ga('send', 'pageview');
 		WIN.scrollToTop();
 	});
-	
-	console.time('react-load');
+
 	const metaHolder = WIN.query('script[type="application/json"]') as HTMLElement;
 	const metadata = inflate(metaHolder.innerHTML) as MetaFileData|MetaFileData[];
 	const meta = MetaFile.fromData(metadata);
@@ -45,6 +44,5 @@ WIN.ready(() => {
 	});
 	ReactDom.render(el, WIN.query('#app'), () => {
 		console.timeEnd('load');
-		console.timeEnd('react-load');
 	});
 });

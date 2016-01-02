@@ -26,7 +26,10 @@ module.exports = {
     var builder = new Builder(conf);
     
     return function (cb) {
-      builder.buildStatic('./build/typescript/main.js', './build/assets/bundle.js', { runtime: false })
+      builder.buildStatic('./build/typescript/main.js', './build/assets/bundle.js', { 
+          runtime: false,
+          minify: true 
+        })
         .then(cb.bind(this, null), cb); 
     }
   }
