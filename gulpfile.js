@@ -11,6 +11,10 @@ gulp.task('clean-build', function (done) {
   clean('./build', done);
 });
 
+gulp.task('clean-dist', function (done) {
+  clean('./dist', done);
+});
+
 gulp.task('lint', require('./.gulp/lint')(gulp));
 
 gulp.task('copy-assets', ['clean-build'], function () {
@@ -25,7 +29,8 @@ gulp.task('copy-assets', ['clean-build'], function () {
 gulp.task('css', ['clean-build'], require('./.gulp/css')(gulp));
 
 gulp.task('tsc', ['clean-build'], ts.task(gulp));
-gulp.task('bundle', ['tsc'], ts.bundle(gulp, __dirname));
+
+gulp.task('tsc-bundle', ['tsc'], ts.bundle(gulp, __dirname));
 
 gulp.task('html', ['tsc'], require('./.gulp/html')(gulp));
 
@@ -67,3 +72,9 @@ gulp.task('serve', [
 
 gulp.task('play', ['serve']);
 
+
+gulp.task('dist', [
+  'clean-dist',
+  'tsc-bundle',
+  'build'
+], require('./.gulp/bundle')(gulp));

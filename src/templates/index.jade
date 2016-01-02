@@ -10,14 +10,16 @@ html(lang='en')
       meta(http-equiv='X-UA-Compatible', content='IE=edge,chrome=1')
       meta(name='viewport', content='width=device-width, initial-scale=1.0')
       title= title + ' - ' + subtitle
-      link(rel='stylesheet', href= '/assets/main.css')
       link(rel='shortcut icon', href= '/assets/favicon.ico')
-      //build:js
+      //inject:css
+      link(rel='stylesheet', href= '/assets/main.css')
+      //endinject
+      //inject:js
       script(src= '/node_modules/systemjs/dist/system.src.js')
       script(src= '/system.conf.js')
       script.
         System.import('/typescript/main');
-      //endbuild
+      //endinject
   body
     #app!= content
     script(type='application/json').!= meta
