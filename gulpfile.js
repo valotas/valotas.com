@@ -27,7 +27,7 @@ gulp.task('css', ['clean-build'], require('./.gulp/css')(gulp));
 gulp.task('tsc', ['clean-build'], ts.task(gulp));
 gulp.task('bundle', ['tsc'], ts.bundle(gulp, __dirname));
 
-gulp.task('html', ['bundle'], require('./.gulp/html')(gulp));
+gulp.task('html', ['tsc'], require('./.gulp/html')(gulp));
 
 gulp.task('test', require('./.gulp/test')(gulp, 'build/**/*.spec.js'));
 

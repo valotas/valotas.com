@@ -4,9 +4,10 @@ interface CreateScriptOptions {
 }
 
 class Win {
+	doc: Document;
 	
 	constructor(public window: Window) {
-		
+		this.doc = window.document;
 	}
 	
 	addScript(url: string, options?: CreateScriptOptions) {
@@ -15,7 +16,7 @@ class Win {
 	}
 	
 	createScript(url: string, options?: CreateScriptOptions): HTMLScriptElement {
-		const wf = this.window.document.createElement('script');
+		const wf = this.doc.createElement('script');
 		const proto = options && options.protocol ? options.protocol : 'https:' == document.location.protocol ? 'https' : 'http';
 		wf.src = proto + ':' + url;
 		wf.type = 'text/javascript';
@@ -27,11 +28,11 @@ class Win {
 	}
 	
 	getBody() {
-		return this.window.document.getElementsByTagName('body')[0];
+		return this.doc.getElementsByTagName('body')[0];
 	}
 	
 	query(selector: string) {
-		return this.window.document.querySelector(selector);
+		return this.doc.querySelector(selector);
 	}
 	
 	pushState(statedata: any, title?: string, url?: string) {
@@ -43,7 +44,11 @@ class Win {
 	}
 	
 	ready(ondocumentReady) {
-		this.window.document.addEventListener('DOMContentLoaded', ondocumentReady);
+		if (this.doc.readyState === 'complete') {
+			ondocumentReady();
+		} else {
+			this.doc.addEventListener('DOMContentLoaded', ondocumentReady, false);
+		}
 	}
 }
 
