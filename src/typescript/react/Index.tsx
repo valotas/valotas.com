@@ -17,7 +17,7 @@ export class IndexWithHeader extends React.Component<IndexProps, {}> {
 			<div>
 				<Header title={VALOTAS} subtitle="Things to remember | Programming stuff :)"/>
 				<div id="content" className="container">
-					<Index articles={this.props.articles} metafileStore={this.props.metafileStore}/>;
+					<Index articles={this.props.articles} metafileStore={this.props.metafileStore}/>
 				</div>
 			</div>
 		);
