@@ -25,11 +25,12 @@
     "systemjs-builder": "^0.14.15",
     "through2": "^2.0.0",
     "tslint": "^3.1.1",
-    "typescript": "^1.7.3"
+    "typescript": "^1.8.0-dev.20160103"
   },
   "scripts": {
-    "tsc": "node_modules/gulp/bin/gulp.js tsc",
+    "tsc": "node_modules/typescript/bin/tsc -p . -w",
     "build": "node_modules/gulp/bin/gulp.js build",
+    "dist": "node_modules/gulp/bin/gulp.js dist",
     "test": "node_modules/gulp/bin/gulp.js test"
   },
   "dependencies": {
