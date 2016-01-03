@@ -41,7 +41,7 @@ export class Gist extends React.Component<GistProps, GistState> {
 		if (isPromise(content)) {
 			this.contentPromise = content;	
 		} else {
-			this.state = { content: content };
+			this.state = { content: content.replace(/\t/g, '  ') };
 		}
 	}
 	
@@ -51,7 +51,7 @@ export class Gist extends React.Component<GistProps, GistState> {
 		}
 		this.contentPromise.then((content) => {
 			this.setState({
-				content: content
+				content: content.replace(/\t/g, '  ')
 			});
 		});
 	}
