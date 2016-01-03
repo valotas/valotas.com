@@ -26,7 +26,9 @@ gulp.task('copy-assets', ['clean-build'], function () {
     .pipe(gulp.dest('./build/assets'));
 });
 
-gulp.task('css', ['clean-build'], require('./.gulp/css')(gulp));
+gulp.task('css:only', require('./.gulp/css')(gulp));
+
+gulp.task('css', ['clean-build', 'css:only']);
 
 gulp.task('tsc', ['clean-build'], ts.task(gulp));
 
@@ -53,6 +55,7 @@ gulp.task('serve', [
     'build'
   ],
   function () {
+    gulp.watch('src/**/*.less', ['css:only']);
     browserSync.init({
       logLevel: 'debug',
       server: {
