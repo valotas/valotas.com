@@ -1,4 +1,3 @@
-import * as pako from 'pako';
 import * as base64 from 'base64-js';
 import * as moment from 'moment';
 
@@ -11,8 +10,16 @@ export function deflate(obj) {
 		return null;
 	}
 	const json = JSON.stringify(obj);
-	const deflated = pako.deflate(json) as number[];
-	return base64.fromByteArray(deflated);
+	const bytes = toByteArray(json);
+	return base64.fromByteArray(bytes);
+}
+
+function toByteArray(input: string): number[] {
+	const array = [];
+	for (let i = 0; i < input.length; i++) {
+		array.push(input.charCodeAt(i));
+	}
+	return array;
 }
 
 export function inflate(input: string) {
@@ -20,8 +27,12 @@ export function inflate(input: string) {
 		return input;
 	}
 	const bytes = base64.toByteArray(input);
-	const restored = pako.inflate(bytes, TO_STRING) as string;
+	const restored = toString(bytes);
 	return JSON.parse(restored);
+}
+
+function toString (bytes: number[]): string {
+	return String.fromCharCode.apply(null, bytes);
 }
 
 interface HasMoment {
@@ -35,7 +46,7 @@ export function compareMoments(a: HasMoment, b: HasMoment): number {
 }
 
 export function isArray(input: any): input is [] {
-    return input && input.length;
+    return input && Array.isArray(input);
 }
 
 export function isString(input:any): input is string {
