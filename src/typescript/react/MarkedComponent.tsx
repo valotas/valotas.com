@@ -8,8 +8,6 @@ interface MarkedComponentProps extends React.Props<any> {
 	meta: MetaFile
 }
 
-export class MarkedComponent extends React.Component<MarkedComponentProps, any>{
-	render() {
-		return createComponentTree(this.props.meta.raw);
-	}	
+export function MarkedComponent ({meta}: MarkedComponentProps) {
+	return createComponentTree(meta.raw);
 }

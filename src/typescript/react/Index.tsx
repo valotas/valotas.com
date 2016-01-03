@@ -11,17 +11,15 @@ interface IndexProps extends React.Props<any> {
 	metafileStore?: MetaFileStore;
 }
 
-export class IndexWithHeader extends React.Component<IndexProps, {}> {
-	render() {
-		return (
-			<div>
-				<Header title={VALOTAS} subtitle="Things to remember | Programming stuff :)"/>
-				<div id="content" className="container">
-					<Index articles={this.props.articles} metafileStore={this.props.metafileStore}/>
-				</div>
+export function IndexWithHeader ({articles, metafileStore}: IndexProps) {
+	return (
+		<div>
+			<Header title={VALOTAS} subtitle="Things to remember | Programming stuff :)"/>
+			<div id="content" className="container">
+				<Index articles={articles} metafileStore={metafileStore}/>
 			</div>
-		);
-	}
+		</div>
+	);
 }
 
 export class Index extends React.Component<IndexProps, {}> {	
@@ -62,32 +60,29 @@ interface ArticleDescriptionComponentProps extends React.Props<any> {
 	metafileStore?: MetaFileStore;
 }
 
-class ArticleDescriptionComponent extends React.Component<ArticleDescriptionComponentProps, {}> {
-	render() {
-		const article = this.props.article;
-		const html = {
-			__html: article.description()
-		};
-		return (
-			<div className="col-md-4">
-				<div className="article">
-					<h2 className="header">
-						<Link article={article} className="" metafileStore={this.props.metafileStore}>
-							{article.title}
+function ArticleDescriptionComponent ({article, metafileStore}: ArticleDescriptionComponentProps) {
+	const html = {
+		__html: article.description()
+	};
+	return (
+		<div className="col-md-4">
+			<div className="article">
+				<h2 className="header">
+					<Link article={article} className="" metafileStore={metafileStore}>
+						{article.title}
+					</Link>
+				</h2>
+				<span className="badge date">{article.date()}</span>
+				<div className="descr">
+					<div dangerouslySetInnerHTML={html}/>
+					<p className="more">
+						<Link article={article} className="btn btn-primary" metafileStore={metafileStore}>
+							more&nbsp;
+							<Icon name="fa-angle-double-right"/>
 						</Link>
-					</h2>
-					<span className="badge date">{article.date()}</span>
-					<div className="descr">
-						<div dangerouslySetInnerHTML={html}/>
-						<p className="more">
-							<Link article={article} className="btn btn-primary" metafileStore={this.props.metafileStore}>
-								more&nbsp;
-								<Icon name="fa-angle-double-right"/>
-							</Link>
-						</p>
-					</div>
+					</p>
 				</div>
 			</div>
-		);
-	}
+		</div>
+	);
 }
