@@ -3,8 +3,8 @@ import * as RDS from 'react-dom/server';
 import * as marked from 'marked';
 import {createComponentTree} from './MarkedRenderer';
 
-function renderToStaticMarkup(source) {
-	const tree = createComponentTree(source);
+function renderToStaticMarkup(source, options?) {
+	const tree = createComponentTree(source, options);
 	return RDS.renderToStaticMarkup(tree);
 }
 
@@ -124,5 +124,25 @@ describe('MarkedRenderer', () => {
 		}).trim();
 		const html = renderToStaticMarkup(source);
 		expect(html).toContain(expected);
+	});
+    
+    it('should mark the first leter of paragraphs', () => {
+		const source = `
+This is the first paragraph
+
+And this is the second one
+        `;
+		const html = renderToStaticMarkup(source, {firstLetterSpan: true});
+		expect(html).toContain('<p><span class="first-letter">T</span>his is the first paragraph</p>');
+	});
+    
+    it('should mark the first leter of only the first paragraph', () => {
+		const source = `
+This is the first paragraph
+
+And this is the second one
+        `;
+		const html = renderToStaticMarkup(source, {firstLetterSpan: true});
+		expect(html).toContain('<p>And this is the second one</p>');
 	});
 });

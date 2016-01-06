@@ -3,9 +3,12 @@ import * as React from 'react';
 import * as ex from '../exceptions';
 import {Link as LinkComponent} from './Link';
 import {Gist as GistComponent} from './Gist';
+import {ParagraphWithFirstLetterSpan} from './ParagraphWithFirstLetterSpan';
+
 
 const Link = React.createFactory(LinkComponent);
 const Gist = React.createFactory(GistComponent);
+const PP = React.createFactory(ParagraphWithFirstLetterSpan);
 
 //https://github.com/christianalfoni/markdown-to-react-components/blob/master/src/index.js
 const R = React.DOM;
@@ -22,7 +25,7 @@ class TreeContainer {
 		return new TreeContainer(this);
 	}
 	
-	pushBlock(factory: React.DOMFactory<any>, props: any = {}, childs?: any[]) {
+	pushBlock(factory: React.Factory<any>, props: any = {}, childs?: any[]) {
 		props.key = this.tree.length;
 		const children = props.dangerouslySetInnerHTML ? null : firstChildOrFullArray(childs || this.inline);
 		const args = [props].concat(children);
@@ -72,10 +75,16 @@ function notNull(obj) {
 	return !!obj;
 }
 
+
+interface CreateComponentTreeOptions {
+    firstLetterSpan: boolean;
+}
+
 class MarkedReactRenderer {
+    private paragraphCounter = 0;
 	private container = new TreeContainer();
 	
-	constructor(private transformers: HtmlTransfomer[] = []) {
+	constructor(private transformers: HtmlTransfomer[] = [], private reactOptions: CreateComponentTreeOptions = {firstLetterSpan: false}) {
 		this.transformers.push(innerHtmlTransformer);
 	}
 	
@@ -115,7 +124,8 @@ class MarkedReactRenderer {
 		this.container.pushBlock(R.li);
 	}
     paragraph(text: string) {
-		this.container.pushBlock(R.p);
+        const paragraphFactory = !this.reactOptions.firstLetterSpan || this.paragraphCounter++ > 0 ? R.p : PP;
+        this.container.pushBlock(paragraphFactory);
 	}
     table(header: string, body: string) {
 		//not implemented yet
@@ -192,8 +202,8 @@ function firstChildOrFullArray(input: any[]) {
 	return input;
 }
 
-export function createComponentTree(html: string): React.ReactElement<any> {
-	const renderer = new MarkedReactRenderer([htmlToGistTransformer]);
+export function createComponentTree(html: string, options?: CreateComponentTreeOptions): React.ReactElement<any> {
+	const renderer = new MarkedReactRenderer([htmlToGistTransformer], options);
 	return renderer.createComponentTree(html);
 }
 
