@@ -5,11 +5,15 @@ import {MetaFile} from '../content/MetaFile';
 import {createComponentTree} from './MarkedRenderer';
 
 interface MarkedComponentProps extends React.Props<any> {
-	meta: MetaFile
+	meta?: MetaFile,
+    markFirstLetter?: boolean;
 }
 
-export class MarkedComponent extends React.Component<MarkedComponentProps, any>{
+export class MarkedComponent extends React.Component<MarkedComponentProps, any> {
 	render() {
-		return createComponentTree(this.props.meta.raw, {firstLetterSpan: true});
+        const {meta} = this.props;
+        const markFirstLetter = this.props.markFirstLetter === false ? false : true; 
+        const input =  meta ? meta.raw : this.props.children as string;
+		return createComponentTree(input, {firstLetterSpan: markFirstLetter});
 	}	
 }

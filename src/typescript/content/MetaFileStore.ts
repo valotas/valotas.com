@@ -1,9 +1,9 @@
 import {MetaFile, isValidMetaFile} from './MetaFile';
-import {ArticleDescription} from './ArticleDescription';
+import {Article} from './Article';
 import {isString} from '../utils';
 import * as ex from '../exceptions';
 
-function isArticle(input:any): input is ArticleDescription {
+function isArticle(input:any): input is Article {
 	return input.key;
 } 
 
@@ -14,7 +14,7 @@ export class MetaFileStore {
 
 	}
 	
-	load(input: string|ArticleDescription) {
+	load(input: string|Article) {
 		const url = this._createUrl(input);
 		return this._loadMetaFile(url)
 			.then((meta) => {
@@ -23,7 +23,7 @@ export class MetaFileStore {
 			});
 	}
 	
-	_createUrl(input:string|ArticleDescription) {
+	_createUrl(input:string|Article) {
 		if (isString(input)) {
 			let url = input as string;
 			if (url.indexOf('/') !== 0) {

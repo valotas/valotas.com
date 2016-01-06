@@ -1,9 +1,5 @@
 import {MetaFile, isValidMetaFile} from './MetaFile';
 import {MetaFileStore} from './MetaFileStore';
-import {ArticleDescription} from './ArticleDescription';
-import {Gist} from '../react/Gist';
-import * as ex from '../exceptions';
-
 export class GistStore {
 	constructor(public fetcher: Fetcher, metafileStore: MetaFileStore, private meta?: MetaFileData) {
 		if (!metafileStore) {

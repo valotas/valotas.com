@@ -1,13 +1,14 @@
 import * as React from 'react';
-import {ArticleDescription} from '../content/ArticleDescription';
+import {Article} from '../content/Article';
 import {MetaFileStore} from '../content/MetaFileStore';
 import {Link} from './Link';
 import {Icon} from './Icon';
 import {Header} from './Header';
+import {MarkedComponent} from './MarkedComponent';
 import {VALOTAS} from '../utils';
 
 interface IndexProps extends React.Props<any> {
-	articles: ArticleDescription[];
+	articles: Article[];
 	metafileStore?: MetaFileStore;
 }
 
@@ -34,7 +35,7 @@ export class Index extends React.Component<IndexProps, {}> {
 		);
 	}
 	
-	createArticleBox(article: ArticleDescription, index: number) {
+	createArticleBox(article: Article, index: number) {
 		if (article === null) {
 			return <div className="clearfix" key={index} />
 		}
@@ -45,7 +46,7 @@ export class Index extends React.Component<IndexProps, {}> {
 	}
 }
 
-function addSeparators(articles: ArticleDescription[]) {
+function addSeparators(articles: Article[]) {
 	const result = [];
 	articles.forEach((article, index) => {
 		result.push(article);
@@ -57,7 +58,7 @@ function addSeparators(articles: ArticleDescription[]) {
 }
 
 interface ArticleDescriptionComponentProps extends React.Props<any> {
-	article: ArticleDescription;
+	article: Article;
 	key: string;
 	metafileStore?: MetaFileStore;
 }
@@ -65,9 +66,7 @@ interface ArticleDescriptionComponentProps extends React.Props<any> {
 class ArticleDescriptionComponent extends React.Component<ArticleDescriptionComponentProps, {}> {
 	render() {
 		const article = this.props.article;
-		const html = {
-			__html: article.description()
-		};
+        const description = article.description();
 		return (
 			<div className="col-md-4">
 				<div className="article">
@@ -78,7 +77,7 @@ class ArticleDescriptionComponent extends React.Component<ArticleDescriptionComp
 					</h2>
 					<span className="badge date">{article.date()}</span>
 					<div className="descr">
-						<div dangerouslySetInnerHTML={html}/>
+                    	<MarkedComponent markFirstLetter={false}>{description}</MarkedComponent>
 						<p className="more">
 							<Link article={article} className="btn btn-primary" metafileStore={this.props.metafileStore}>
 								more&nbsp;

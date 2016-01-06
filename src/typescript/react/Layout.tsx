@@ -1,6 +1,5 @@
 import * as React from 'react';
 import {Article} from '../content/Article';
-import {ArticleDescription} from '../content/ArticleDescription';
 import {MetaFile} from '../content/MetaFile';
 import {ArticleWithHeaderComponent} from './ArticleComponent';
 import {IndexWithHeader} from './Index';
@@ -94,6 +93,6 @@ export class Layout extends React.Component<LayoutProps, LayoutState> {
 	}
 }
 
-function toArticles (arr: MetaFile[]): ArticleDescription[] {
-	return arr.map((input) => new ArticleDescription(input));
+function toArticles (arr: MetaFile[]): Article[] {
+	return arr.map((input) => new Article(input));
 }

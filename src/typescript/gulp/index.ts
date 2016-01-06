@@ -1,7 +1,6 @@
 import * as path from 'path';
 import * as through from 'through2';
 import {Article} from '../content/Article';
-import {ArticleDescription} from '../content/ArticleDescription';
 import {MetaFile, isValidMetaFile} from '../content/MetaFile';
 import {CacheableGistStore} from './CacheableGistStore';
 import {Layout} from '../react/Layout';
@@ -144,7 +143,10 @@ export function addIndex() {
 				index.html = html;
 				this.push(index);
 				callback();
-			});
+			}, function (err) {
+                console.error(err);
+                callback();
+            });
 	});
 }
 

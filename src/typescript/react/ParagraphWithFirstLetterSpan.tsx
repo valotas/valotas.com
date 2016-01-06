@@ -1,7 +1,4 @@
 import * as React from 'react';
-import {ArticleDescription} from '../content/ArticleDescription';
-import {MetaFileStore} from '../content/MetaFileStore';
-import {Icon} from './Icon'
 
 export class ParagraphWithFirstLetterSpan extends React.Component<any, any> {	
 	render() {

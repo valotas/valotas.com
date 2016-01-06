@@ -1,6 +1,4 @@
 import * as React from 'react';
-import {ArticleDescription} from '../content/ArticleDescription';
-import {MetaFileStore} from '../content/MetaFileStore';
 import {GistStore} from '../content/GistStore';
 import {isPromise} from '../utils';
 import {Link} from './Link';

@@ -1,10 +1,10 @@
 import * as React from 'react';
-import {ArticleDescription} from '../content/ArticleDescription';
+import {Article} from '../content/Article';
 import {MetaFileStore} from '../content/MetaFileStore';
 import {Icon} from './Icon'
 
 interface LinkProps extends React.Props<any> {
-	article?: ArticleDescription;
+	article?: Article;
 	href?: string;
 	metafileStore?: MetaFileStore;
 	className?: string;
