@@ -33,9 +33,6 @@ export class ArticleComponent extends React.Component<ArticleProps, {}> {
 		if (!article) {
 			return null;
 		}
-		this.html = {
-			_html: article.html()
-		};
 		return (
 			<div id="content" className="container">
 				<div className="article">

@@ -46,39 +46,22 @@ describe('Article', () => {
             expect(article.date('YYYY.DD.MM')).toEqual('2015.12.11');
         });
     });
-
-    describe('html()', () => {
-        it('should be able to return the given raw in html', () => {
-            const html = createArticle({
-                title: 'md file',
-                date: '2015-11-12',
-                published: false,
-                raw: '# this is big\n##  this smaller',
-                template: null,
-                path: null,
-                description: null
-            }).html();
-
-            expect(html).toContain('>this is big</h1>');
-            expect(html).toContain('>this smaller</h2>');
-        });
-        
-        it('should replace the first letter with a span', () => {
-            const html = createArticle({
-                title: 'md file',
-                date: '2015-11-12',
-                published: false,
-                raw: 'this is the very first paragraph',
-                template: null,
-                path: null,
-                description: null
-            }).html();
-            expect(html).toContain('<p><span class="first-letter">t</span>his is');
-        });
-    });
-    
+       
     describe('description()', () => {
-       it('should return the very first paragraph', () => {
+       it('should return the description as is when provided', () => {
+           const description = createArticle({
+                title: 'md file',
+                date: '2015-11-12',
+                published: false,
+                raw: 'this is the very first paragraph\n\n## h1\nanother paragraph',
+                template: null,
+                path: null,
+                description: 'this is a description'
+            }).description();
+            expect(description).toEqual('this is a description');
+       });
+       
+       it('should compute the description from the given raw', () => {
            const description = createArticle({
                 title: 'md file',
                 date: '2015-11-12',
@@ -88,7 +71,7 @@ describe('Article', () => {
                 path: null,
                 description: null
             }).description();
-            expect(description).toEqual('<p><span class="first-letter">t</span>his is the very first paragraph</p>\n');
+            expect(description).toEqual('this is the very first paragraph');
        });
     });
 });
