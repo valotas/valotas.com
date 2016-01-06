@@ -145,4 +145,12 @@ And this is the second one
 		const html = renderToStaticMarkup(source, {firstLetterSpan: true});
 		expect(html).toContain('<p>And this is the second one</p>');
 	});
+    
+    it('should handle first paragraphs with inline objects', () => {
+        const source = `
+Some *strange* first paragraph
+        `;
+		const html = renderToStaticMarkup(source, {firstLetterSpan: true});
+        expect(html).toContain('<p><span class="first-letter">S</span>ome <em>strange</em>');
+    });
 });
