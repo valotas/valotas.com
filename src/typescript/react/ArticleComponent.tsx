@@ -59,11 +59,11 @@ export class ArticleComponent extends React.Component<ArticleProps, {}> {
 	}
 	
 	private _loadTwitterWidgets() {
-		if (this.html.__html && this.html.__html.indexOf('twitter-tweet') < 0) {
+        if (!this.props.article.hasTweets()) {
 			return;
 		}
 		LOADER.loadTwitter().then((twttr) => {
-			console.log(twttr);
+			console.log('Twitter loaded', twttr);
 			twttr.widgets.load();
 		});
 	}

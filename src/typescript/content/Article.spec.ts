@@ -74,4 +74,19 @@ describe('Article', () => {
             expect(description).toEqual('this is the very first paragraph');
        });
     });
+    
+    describe('hasTweets()', () => {
+        it('should return true if the raw contains "twitter-tweet"', () => {
+           const article = createArticle({
+                title: 'md file',
+                date: '2015-11-12',
+                published: false,
+                raw: 'this is the very first something containing "twitter-tweet"',
+                template: null,
+                path: null,
+                description: 'this is a description'
+            });
+            expect(article.hasTweets()).toEqual(true);
+       });
+    });
 });
