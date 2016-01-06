@@ -81,7 +81,12 @@ function createLayoutHtml(file: GulpFile, fetcher: Fetcher): Promise<string> {
 		gistStore: store
 	});
 	//initial rendering to cause the initialization of all our components
-	RDS.renderToString(layoutElement);
+	try {
+        RDS.renderToString(layoutElement);
+    } catch (ex) {
+        ex.message += `. Could not render ${file.path}`; 
+        return Promise.reject(ex);
+    }
 	return store.all()
 		.then((all) => {
 			return RDS.renderToString(layoutElement);
