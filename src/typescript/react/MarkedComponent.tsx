@@ -10,6 +10,6 @@ interface MarkedComponentProps extends React.Props<any> {
 
 export class MarkedComponent extends React.Component<MarkedComponentProps, any>{
 	render() {
-		return createComponentTree(this.props.meta.raw);
+		return createComponentTree(this.props.meta.raw, {firstLetterSpan: true});
 	}	
 }
