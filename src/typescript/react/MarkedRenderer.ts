@@ -149,7 +149,7 @@ class MarkedReactRenderer {
 		const props = lang ? {
 			className: 'lang-' + lang
 		} : null;
-		this.container.pushInline(R.code(props, code), false);
+		this.container.pushInline(R.code(props, unescapeText(code)), false);
 	}
     br() {
 		
@@ -170,7 +170,7 @@ class MarkedReactRenderer {
 		
 	}
 	text(text: string) {
-		this.container.pushInline(text, false);
+		this.container.pushInline(unescapeText(text), false);
 		return text;
 	}
 	
@@ -185,6 +185,13 @@ class MarkedReactRenderer {
 		parser.parse(tokens);
 		return R.div({}, firstChildOrFullArray(this.container.tree));
 	}
+}
+
+function unescapeText(input: string) {
+    return input.replace(/&lt;/g, '<')
+            .replace(/&gt;/g, '>')
+            .replace(/&amp;/g, '&')
+            .replace(/&quot;/g, '"');
 }
 
 function patchParser(parser, renderer: MarkedReactRenderer) {

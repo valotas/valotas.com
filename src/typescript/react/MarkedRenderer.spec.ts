@@ -153,4 +153,21 @@ Some *strange* first paragraph
 		const html = renderToStaticMarkup(source, {firstLetterSpan: true});
         expect(html).toContain('<p><span class="first-letter">S</span>ome <em>strange</em>');
     });
+    
+    it('should handle greater/lower than charachters right', () => {
+        const source = `
+Asume this ><&><
+        `;
+		const html = renderToStaticMarkup(source, {firstLetterSpan: true});
+        expect(html).toContain('this &gt;&lt;&amp;&gt;&lt;');
+    });
+    
+    it('should handle special characters in code blocks', () => {
+        const source = 'this is `some > code`';
+		const expected = marked(source, {
+			smartypants: true
+		}).trim();
+        const html = renderToStaticMarkup(source);
+        expect(html).toContain(expected);
+    });
 });
