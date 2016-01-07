@@ -15,6 +15,12 @@ To compile typescript files:
 npm run tsc
 ```
 
+To have an intermediate development site:
+
+```bash
+gulp play
+``` 
+
 After that you can just `npm run deploy` in order to deploy the site assuming that you have the right keys at the right path in order to connent to the server passwordless.
 
 ## NGNX configuration
