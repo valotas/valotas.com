@@ -10,6 +10,7 @@ import * as RDS from 'react-dom/server';
 import * as jade from 'jade';
 import File = require('vinyl'); //how to use import File from 'vinyl'?
 import nfetch = require('node-fetch');
+import * as gutil from 'gulp-util';
 
 const NODE_FETCHER = {
 	fetch: nfetch
@@ -111,9 +112,9 @@ export function wrapHtml(templateFile) {
 				meta: deflate(file.meta)
 			});
 			file.contents = new Buffer(html, enc);
+            gutil.log('Created', file.path);
 		}
-		this.push(file);
-		callback();
+		callback(null, file);
 	});
 }
 
@@ -168,6 +169,7 @@ export function addMetafiles() {
 				contents: new Buffer(JSON.stringify(meta), enc)
 			});
 			this.push(index);
+            gutil.log('Created', index.path);
 		}
 		callback(null, file);
 	});
