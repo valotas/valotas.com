@@ -48,7 +48,7 @@ export class Link extends React.Component<LinkProps, any> {
 		let href = '/';
 		const article = this.props.article;
 		if (article) {
-			href += article.key;
+			href += `${article.key}/`;
 		}
 		return href;
 	}
