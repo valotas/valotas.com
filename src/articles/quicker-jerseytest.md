@@ -7,6 +7,8 @@ template: article.jade
 
 That is a quick one. These days I was playing around with [Jersey][jersey] in order to create a rest web service. The thing is that I would like to test what I create. The good thing is that Jersey provides a testing framework. But... 
 
+[jersey]: http://jersey.java.net/
+
 ## Jersey test setup
 
 As the project I was working on was a mavenized one, all I had to do was to add the dependency:
@@ -62,5 +64,4 @@ Now I can wrap any other TestContainerFactory and only use it if I do not have a
 
 The jUnit users may have a look [here][junit-before-after-hook] to check how they can implement a shutdown hook or just don't at all :-).
 
-[jersey]: http://jersey.java.net/
 [junit-before-after-hook]: http://stackoverflow.com/questions/82949/before-and-after-suite-execution-hook-in-junit-4-x

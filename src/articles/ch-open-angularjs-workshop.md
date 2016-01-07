@@ -6,6 +6,10 @@ date: 2014-09-13
 
 On 9th of September [Gion Kunz](http://mindtheshift.wordpress.com/) and me ran a workshop for [ch/open][ch-open]. The idea was to introduce the basics of angular js so that someone could start experiment with it. During the workshop we did some excersizes with [jsbin][jsbin] and hacked together a [chat application][chat-application].
 
+[ch-open]: http://www.ch-open.ch/
+[jsbin]: http://jsbin.com/
+[chat-application]: https://github.com/gionkunz/md-chat-workshop
+
 ## Some notes for the workshop
 For me that was the first time trying to help people on a subject outside of my coleague/friends cycle. Ofcourse I'm always more than excited to help, but when you are running a workshop, you always have some stress as the expectations are not the same. After all someone attending the workshop should take back what he came in for as you can not be next to him everyday.
 
@@ -54,8 +58,4 @@ One thing that I was really unconfortable with, was the fact that we did not tal
 - [The chat application at github][chat-application]
 - [ch/open: Unleash Your Creativity with Angular.js](http://www.ch-open.ch/wstage/workshop-tage/programm-2014/ws-20-unleash-your-creativity-with-angularjs/)
 
-
-[chat-application]: https://github.com/gionkunz/md-chat-workshop
-[jsbin]: http://jsbin.com/
-[ch-open]: http://www.ch-open.ch/
 [git]: http://git-scm.com/

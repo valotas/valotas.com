@@ -5,6 +5,8 @@ date: 2014-08-30
 
 It was about time to get rid of the [blogger platform][blogger]. It serves well up to the point that you feel like your page is overbloated with stuff that you do not need.
 
+[blogger]: https://www.blogger.com
+
 ## valotas.com
 The new home of the blog is now valotas.com and all traffic from blog.valotas.com has been redirected there. The funny thing is that this new home is "hosted" at a [Raspberry Pi][raspberrypi] at my living room. Of course there is a cdn in front of it just in case it goes down, but I do not think that anybody will really care that much if my blog goes down for some minutes/hours (hopefully not days).
 
@@ -28,7 +30,6 @@ Surprisingly (or not) the site became much faster (plain html with css and only 
 That is all, enjoy my new web home :)
  
 [raspberrypi]: http://www.raspberrypi.org/
-[blogger]: https://www.blogger.com
 [wysiwyg]: http://en.wikipedia.org/wiki/WYSIWYG
 [markdown]: http://daringfireball.net/projects/markdown/
 [github]: https://github.com/

@@ -6,6 +6,9 @@ date: 2013-12-14
 
 Recently I [had a look at the Dart programming language][thoughts-on-dart] and that reminded me of the getters and setters mechanism that someone has with [C#][csharp]. So let's have a look at them.
 
+[thoughts-on-dart]: http://valotas.com/dart-language/
+[csharp]: http://en.wikipedia.org/wiki/C_Sharp_(programming_language)
+
 ## Where we use them
 Well, the idea in OO languages is very simple. You have a class and you have a property, a field or whatever piece of data that you want to access:
 
@@ -98,8 +101,6 @@ A simple mistake that I used to do for example was to just let my IDE create the
 
 Not all of our object should be [`DAO`][dao]s and with that exception I hardly have to provide any setters for other object. Apparently even the use of getters is kind of limited outside the scope of a `DAO`.
 
-[thoughts-on-dart]: http://valotas.com/dart-language/
 [dartlang]: https://www.dartlang.org/
-[csharp]: http://en.wikipedia.org/wiki/C_Sharp_(programming_language)
 [pols]: http://en.wikipedia.org/wiki/Principle_of_least_astonishment
 [dao]: http://en.wikipedia.org/wiki/Data_access_object
