@@ -9,13 +9,13 @@ import {MetaFileStore} from '../content/MetaFileStore';
 import {GistStore} from '../content/GistStore';
 import {VALOTAS, isArray} from '../utils';
 import * as ex from '../exceptions';
+import {WIN} from '../Window';
 
 interface LayoutProps extends React.Props<any> {
 	meta?: MetaFile|MetaFile[];
 	metafileStore?: MetaFileStore;
 	fetcher?: Fetcher;
 	gistStore?: GistStore;
-	win?: Window;
 }
 
 interface LayoutState {
@@ -46,7 +46,7 @@ export class Layout extends React.Component<LayoutProps, LayoutState> {
 	}
 	
 	componentDidMount() {
-		const {metafileStore, win} = this.props;
+		const {metafileStore} = this.props;
 		if (!metafileStore) {
 			throw ex.illegalArgumentException('MetaFileStore is needed on the client side to register for changes');
 		}
@@ -56,16 +56,16 @@ export class Layout extends React.Component<LayoutProps, LayoutState> {
 			});
 		});
 
-		if (!win) {
+		if (!WIN) {
 			throw ex.illegalArgumentException('window is needed on the client side to register for PopStateEvents');
 		}
-		win.onpopstate = (ev: PopStateEvent) => {
+        WIN.on('popstate', (ev: PopStateEvent) => {
 			const state = MetaFile.fromData(ev.state as MetaFileData);
 			const meta = state || this.props.meta;
 			this.setState({
 				meta: meta
 			});
-		}
+		});
 	}
 	
 	render() {

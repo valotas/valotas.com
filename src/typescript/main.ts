@@ -38,9 +38,8 @@ WIN.ready(() => {
 	const el = React.createElement(Layout, {
 		meta: meta,
 		metafileStore: metafileStore,
-		win: window,
-		fetcher: window,
-		gistStore: new GistStore(window, metafileStore, isValidMetaFile(meta) ? meta: null)
+		fetcher: WIN,
+		gistStore: new GistStore(WIN, metafileStore, isValidMetaFile(meta) ? meta: null)
 	});
 	ReactDom.render(el, WIN.query('#app'), () => {
 		console.timeEnd('load');

@@ -50,6 +50,14 @@ class Win {
 			this.doc.addEventListener('DOMContentLoaded', ondocumentReady, false);
 		}
 	}
+   
+    on(name: string, f) {
+        this.window['on' + name] = f;
+    }
+    
+    fetch(url: string) {
+        return this.window.fetch(url);
+    }
 }
 
 function createWindow() {
