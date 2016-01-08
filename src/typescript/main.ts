@@ -18,16 +18,7 @@ WIN.ready(() => {
 	ga('send', 'pageview');
 	
 	// Create the main store and register the state to the history object
-	const metafileStore = new MetaFileStore(window);
-	metafileStore.onChange((meta) => {
-		if (isValidMetaFile(meta)) {
-			WIN.pushState(meta, meta.title, '/' + meta.path + '/');
-		} else {
-			WIN.pushState(meta, VALOTAS, '/');
-		}
-		ga('send', 'pageview');
-		WIN.scrollToTop();
-	});
+	const metafileStore = createMetafileStore(ga);
 
 	const metaHolder = WIN.query('script[type="application/json"]') as HTMLElement;
 	const metadata = inflate(metaHolder.innerHTML) as MetaFileData|MetaFileData[];
@@ -45,3 +36,17 @@ WIN.ready(() => {
 		console.timeEnd('load');
 	});
 });
+
+function createMetafileStore(ga) {
+    const metafileStore = new MetaFileStore(WIN);
+	metafileStore.onChange((meta) => {
+		if (isValidMetaFile(meta)) {
+			WIN.pushState(meta, meta.title, '/' + meta.path + '/');
+		} else {
+			WIN.pushState(meta, VALOTAS, '/');
+		}
+		ga('send', 'pageview');
+		WIN.scrollToTop();
+	});
+    return metafileStore;
+}
