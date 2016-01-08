@@ -5,9 +5,11 @@ interface CreateScriptOptions {
 
 class Win {
 	doc: Document;
+    browserSupported: boolean;
 	
 	constructor(public window: Window) {
 		this.doc = window.document;
+        this.browserSupported = window['fetch'] && window['Promise'];
 	}
 	
 	addScript(url: string, options?: CreateScriptOptions) {

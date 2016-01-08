@@ -1,7 +1,8 @@
 import * as React from 'react';
 import {Article} from '../content/Article';
 import {MetaFileStore} from '../content/MetaFileStore';
-import {Icon} from './Icon'
+import {Icon} from './Icon';
+import {WIN} from '../Window';
 
 interface LinkProps extends React.Props<any> {
 	article?: Article;
@@ -27,6 +28,10 @@ export class Link extends React.Component<LinkProps, any> {
 			window.scrollTo(0, 0);
 			return;
 		}
+        
+        if (!WIN.browserSupported) {
+            return;
+        }
 		
 		if (target === '_blank' || (href && href.indexOf('http') === 0)) {
 			return;

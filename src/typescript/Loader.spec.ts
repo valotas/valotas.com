@@ -15,7 +15,8 @@ describe('Loader', () => {
 		scrollToTop: () => null,
 		ready: () => null,
         on: (name: string, f) => null,
-        fetch: (url: string) => null
+        fetch: (url: string) => null,
+        browserSupported: true
 	};
 	let loader;
 	
