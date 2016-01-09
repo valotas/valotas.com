@@ -8,21 +8,36 @@ interface Twttr {
 	widgets: TwttrWidgets;
 }
 
+class TwitterThenable {
+    init;
+    loadedTwttr: Twttr
+
+    constructor(win) {
+        this.init = win.prop('twttr', { _e: [] });
+        this.init._e.push(() => {
+           this.loadedTwttr = win.prop('twttr');
+        });
+    }
+    
+    then(f) {
+        if (this.loadedTwttr) {
+            f(this.loadedTwttr);
+        } else {
+            this.init._e.push(f);
+        }
+    }
+}
+
 export class Loader {
-	private twttrPromise;
+	private twttr;
 	
 	constructor (private win = WIN) {
 		
 	}
 	
-	loadTwitter(): Promise<Twttr> {
-		if (!this.twttrPromise) {
-			this.twttrPromise = new Promise((resolve) => {
-				const twttr = this.win.prop('twttr', { _e: [] });
-                twttr._e.push(() => {
-					resolve(twttr);
-				});
-			});
+	loadTwitter(): TwitterThenable {
+		if (!this.twttr) {
+			this.twttr = new TwitterThenable(this.win);
 		
 			//load the widgets.js
 			this.win.addScript('//platform.twitter.com/widgets.js', {
@@ -30,7 +45,7 @@ export class Loader {
 				protocol: 'https'
 			});
 		}
-		return this.twttrPromise;
+		return this.twttr;
 	}
 	
 	loadWebFonts(families: string[] = [ 'Gloria+Hallelujah::latin', 'Open+Sans::latin,greek' ]) {

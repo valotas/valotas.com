@@ -32,9 +32,9 @@ describe('Loader', () => {
 	});
 	
 	describe('loadTwitter()', () => {
-		it('should return a promise', () => {
+		it('should return a thenable', () => {
 			const actual = loader.loadTwitter();
-			expect(actual instanceof Promise).toBe(true);
+			expect(actual.then).toBeDefined();
 		});
 		
 		it('should add the twttr attribute in to the window object', () => {
@@ -42,12 +42,16 @@ describe('Loader', () => {
             expect(win['__twttr']).toBeDefined();
 		});
         
-        it('should return a promise that should be resolved once the last inserted action to twttr is called', (done) => {
-			var resolved = false;
-            loader.loadTwitter()
-                .then(done)
-                .catch(done.fail);
-            win['__twttr']._e[0]();
+        it('should add the functions added with then to the queque', () => {
+            const then1 = jasmine.createSpy('then1');
+            const then2 = jasmine.createSpy('then2');
+			
+            const actual = loader.loadTwitter();
+            actual.then(then1);
+            actual.then(then2);
+            
+            expect(actual.init._e).toContain(then1);
+            expect(actual.init._e).toContain(then2);
 		});
 		
 		it('should add the widget script', () => {
