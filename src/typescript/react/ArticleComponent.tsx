@@ -63,7 +63,6 @@ export class ArticleComponent extends React.Component<ArticleProps, {}> {
 			return;
 		}
 		LOADER.loadTwitter().then((twttr) => {
-			console.log('Twitter loaded', twttr);
 			twttr.widgets.load();
 		});
 	}
