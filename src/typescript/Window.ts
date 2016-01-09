@@ -4,11 +4,9 @@ interface CreateScriptOptions {
 }
 
 class Win {
-	doc: Document;
-    browserSupported: boolean;
+	browserSupported: boolean;
 	
-	constructor(public window: Window) {
-		this.doc = window.document;
+	constructor() {
         this.browserSupported = window['fetch'] && window['Promise'];
 	}
 	
@@ -18,7 +16,7 @@ class Win {
 	}
 	
 	createScript(url: string, options?: CreateScriptOptions): HTMLScriptElement {
-		const wf = this.doc.createElement('script');
+		const wf = window.document.createElement('script');
 		const proto = options && options.protocol ? options.protocol : 'https:' == document.location.protocol ? 'https' : 'http';
 		wf.src = proto + ':' + url;
 		wf.type = 'text/javascript';
@@ -30,40 +28,47 @@ class Win {
 	}
 	
 	getBody() {
-		return this.doc.getElementsByTagName('body')[0];
+		return window.document.getElementsByTagName('body')[0];
 	}
 	
 	query(selector: string) {
-		return this.doc.querySelector(selector);
+		return window.document.querySelector(selector);
 	}
 	
 	pushState(statedata: any, title?: string, url?: string) {
-		this.window.history.pushState(statedata, title, url);
+		window.history.pushState(statedata, title, url);
 	}
 	
 	scrollToTop() {
-		this.window.scrollTo(0, 0);
+		window.scrollTo(0, 0);
 	}
 	
 	ready(ondocumentReady) {
-		if (this.doc.readyState === 'complete') {
+		if (window.document.readyState === 'complete') {
 			ondocumentReady();
 		} else {
-			this.doc.addEventListener('DOMContentLoaded', ondocumentReady, false);
+			window.document.addEventListener('DOMContentLoaded', ondocumentReady, false);
 		}
 	}
    
     on(name: string, f) {
-        this.window['on' + name] = f;
+        window['on' + name] = f;
     }
     
     fetch(url: string) {
-        return this.window.fetch(url);
+        return window.fetch(url);
+    }
+    
+    prop(name: string, initialValue?) {
+        if (initialValue) {
+            window[name] = window[name] || initialValue;   
+        }
+        return window[name]; 
     }
 }
 
 function createWindow() {
-	return typeof window === 'undefined' ? null : new Win(window);
+	return typeof window === 'undefined' ? null : new Win();
 }
 
 export const WIN = createWindow();

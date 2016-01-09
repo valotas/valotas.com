@@ -17,11 +17,9 @@ export class Loader {
 	
 	loadTwitter(): Promise<Twttr> {
 		if (!this.twttrPromise) {
-			const win = this.win.window;
-			this.twttrPromise = new Promise(function (resolve) {
-				const twttr = win['twttr'] = win['twttr'] || { _e: [] };
-				twttr._e.push(() => {
-					console.log(twttr);
+			this.twttrPromise = new Promise((resolve) => {
+				const twttr = this.win.prop('twttr', { _e: [] });
+                twttr._e.push(() => {
 					resolve(twttr);
 				});
 			});
@@ -36,22 +34,22 @@ export class Loader {
 	}
 	
 	loadWebFonts(families: string[] = [ 'Gloria+Hallelujah::latin', 'Open+Sans::latin,greek' ]) {
-		this.win.window['WebFontConfig'] = {
+		this.win.prop('WebFontConfig', {
 			google: { families:  families}
-		};
+		});
 		this.win.addScript('//ajax.googleapis.com/ajax/libs/webfont/1/webfont.js');
 	}
 	
 	// base on the code found at https://mjau-mjau.com/blog/ajax-universal-analytics/
 	loadAnalytics() {
-		const window = this.win.window;
-		if (window['ga']) {
-			return window['ga'];
+		let ga = this.win.prop('ga');
+		if (ga) {
+			return ga;
 		}
 		
-		const ga = window['ga'] = window['ga'] || function () {
+		ga = this.win.prop('ga', function () {
 			(ga.q=ga.q||[]).push(arguments)
-		};
+		});
 		ga.l=+new Date;
 		this.win.addScript('//www.google-analytics.com/analytics.js');
 		return ga;

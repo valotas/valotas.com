@@ -1,26 +1,33 @@
 import {Loader} from './Loader';
 
 describe('Loader', () => {
-	const win = {
-		window: {} as Window,
-		addScriptCallCount: 0,
-		addScript: () => {
-			win.addScriptCallCount++; 
-		},
-		createScript: () => null,
-		getBody: () => null,
-		query: () => null,
-		doc: {} as Document,
-		pushState: (statedata: any, title?: string, url?: string) => null,
-		scrollToTop: () => null,
-		ready: () => null,
-        on: (name: string, f) => null,
-        fetch: (url: string) => null,
-        browserSupported: true
-	};
+	let win;
 	let loader;
 	
 	beforeEach(() => {
+        win = {
+            addScriptCallCount: 0,
+            addScript: () => {
+                win.addScriptCallCount++; 
+            },
+            createScript: () => null,
+            getBody: () => null,
+            query: () => null,
+            doc: {} as Document,
+            pushState: (statedata: any, title?: string, url?: string) => null,
+            scrollToTop: () => null,
+            ready: () => null,
+            on: (name: string, f) => null,
+            fetch: (url: string) => null,
+            browserSupported: true,
+            prop: (name, initialValue?) => {
+                const actualName = `__${name}`;
+                if (initialValue) {
+                    win[actualName] = win[actualName] || initialValue;   
+                }
+                return win[actualName];
+            }
+        };
 		loader = new Loader(win);
 	});
 	
@@ -31,8 +38,16 @@ describe('Loader', () => {
 		});
 		
 		it('should add the twttr attribute in to the window object', () => {
-			const actual = loader.loadTwitter();
-			expect(win.window['twttr']).toBeDefined();
+			loader.loadTwitter();
+            expect(win['__twttr']).toBeDefined();
+		});
+        
+        it('should return a promise that should be resolved once the last inserted action to twttr is called', (done) => {
+			var resolved = false;
+            loader.loadTwitter()
+                .then(done)
+                .catch(done.fail);
+            win['__twttr']._e[0]();
 		});
 		
 		it('should add the widget script', () => {
