@@ -67,7 +67,7 @@ export class MetaFile implements MetaFileData {
             return m;
         }
 
-        throw new ex.IllegalFromatException('Could not parse ' + this.date + ' as date using formats: ' + INPUT_FORMATS);
+        throw ex.illegalFromatException('Could not parse ' + this.date + ' as date using formats: ' + INPUT_FORMATS);
     }
 }
 
