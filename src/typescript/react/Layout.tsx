@@ -10,6 +10,7 @@ import {GistStore} from '../content/GistStore';
 import {VALOTAS, isArray} from '../utils';
 import * as ex from '../exceptions';
 import {WIN} from '../Window';
+import {FetchStreamer} from '../FetchStreamer';
 
 interface LayoutProps extends React.Props<any> {
 	meta?: MetaFile|MetaFile[];
@@ -40,7 +41,7 @@ export class Layout extends React.Component<LayoutProps, LayoutState> {
 	getChildContext() {
 		return {
 			metafileStore: this.props.metafileStore,
-			fetcher: this.props.fetcher,
+			fetcher: FetchStreamer.wrap(this.props.fetcher),
 			gistStore: this.props.gistStore
 		}
 	}

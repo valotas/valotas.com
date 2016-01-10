@@ -7,6 +7,7 @@ import {inflate, VALOTAS} from './utils';
 import {WIN} from './Window';
 import {LOADER} from './Loader';
 import {GistStore} from './content/GistStore';
+import {FetchStreamer} from './FetchStreamer';
 
 console.time('load');
 
@@ -18,7 +19,8 @@ WIN.ready(() => {
 	ga('send', 'pageview');
 	
 	// Create the main store and register the state to the history object
-	const metafileStore = createMetafileStore(ga);
+	const fetcher = new FetchStreamer(WIN);
+    const metafileStore = createMetafileStore(ga, fetcher);
 
 	const metaHolder = WIN.query('script[type="application/json"]') as HTMLElement;
 	const metadata = inflate(metaHolder.innerHTML) as MetaFileData|MetaFileData[];
@@ -29,16 +31,16 @@ WIN.ready(() => {
 	const el = React.createElement(Layout, {
 		meta: meta,
 		metafileStore: metafileStore,
-		fetcher: WIN,
-		gistStore: new GistStore(WIN, metafileStore, isValidMetaFile(meta) ? meta: null)
+		fetcher: fetcher,
+		gistStore: new GistStore(fetcher, metafileStore, isValidMetaFile(meta) ? meta: null)
 	});
 	ReactDom.render(el, WIN.query('#app'), () => {
 		console.timeEnd('load');
 	});
 });
 
-function createMetafileStore(ga) {
-    const metafileStore = new MetaFileStore(WIN);
+function createMetafileStore(ga, fetcher: Fetcher) {
+    const metafileStore = new MetaFileStore(fetcher);
 	metafileStore.onChange((meta) => {
 		if (isValidMetaFile(meta)) {
 			WIN.pushState(meta, meta.title, '/' + meta.path + '/');
