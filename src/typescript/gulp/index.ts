@@ -63,7 +63,7 @@ export function toArticle (givenFetcher?: Fetcher) {
 				file.html = html;
 				callback(null, file);		
 			}, function (er) {
-				console.error(er);
+                gutil.log('Could not create html', file.path, er);
 				callback(er);
 			});
 		} else {
