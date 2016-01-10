@@ -43,10 +43,12 @@ export class ArticleComponent extends React.Component<ArticleProps, {}> {
 				<div id="footer-actions" className="row text-center">
 					<div className="btn-group">
 						<Link className="btn btn-default" metafileStore={this.props.metafileStore}>
-							<Icon name="fa-home" size="2x"/>
+							<Icon name="fa-home" size="sm-2x"/>
+                            <span className="hidden-xs hidden-sm">&nbsp;Home</span>
 						</Link>
 						<Link href="#" className="btn btn-default">
-							<Icon name="fa-toggle-up" size="2x"/>
+							<span className="hidden-xs hidden-sm">Top&nbsp;</span>
+                            <Icon name="fa-toggle-up" size="sm-2x"/>
 						</Link>
 					</div>
 				</div>
