@@ -34,5 +34,5 @@ export class FetchStreamer implements Fetcher {
 }
 
 function isFetchStreamer (input: any): input is FetchStreamer {
-    return input.onFetch;
+    return input && input.onFetch;
 }
