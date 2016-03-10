@@ -5,7 +5,7 @@ date: 2016-03-03
 template: article.jade
 ---
 
-When you hear for a new technology, all you want to do is just to use. This is how my experience with [RxJS][reactivex] started a while ago. It for sure cool, but also a new way of thinking. Just like anything else new, you are going sooner or later hit a wall. After grasping myself to find which sequence of operators whould do the trick, I tried to just test the thing.
+When you hear for a new technology, all you want to do is just to use it. This is how my experience with [RxJS][reactivex] started a while ago. It for sure cool, but also a new way of thinking. Just like anything else new, you are going sooner or later hit a wall. After grasping myself to find which sequence of operators whould do the trick, I tried to just test the thing.
 
 [reactivex]: https://github.com/ReactiveX/RxJS
 
@@ -31,3 +31,30 @@ After some reading and [searching](https://blog.hyphe.me/rxjs-testing-in-real-wo
 My first attempt wat to create a simple hot or cold observable and play with it:
 
 <script src="https://gist.github.com/valotas/09f8fabc1a1db4b108b3.js?file=rxjs-marble-tests.js"></script>
+
+Now, let's try to subscribe to an observable after a period of time. Let's say that I subscribe directly to the following marble sequence: `--a-^-b-c-|`. That means that subscription should be notified only for `b` and `c`:
+
+```js
+it('should schedule the subscription on the right time', () => {
+    //given
+    const scheduler = new Rx.TestScheduler(null);
+    const source = scheduler.createHotObservable('--a-^-b-c|');
+    const results = [];
+
+    //when
+    source.subscribe((val) => {
+        results.push(val);
+    }, null, () => {
+        results.push('done');  
+    });
+     
+    scheduler.flush();
+    
+    //then
+    expect(results).toEqual(['b', 'c', 'done']);
+});
+```
+
+Guess what. This does not work. `TestScheduler` initialization allone can not cope with time. After some searching arround I found out how to let your scheduler schedule stuff and that is the `schedule` function. This accepts a closure where your time based part should be placed. Let's see how to achieve that:
+
+<script src="https://gist.github.com/valotas/09f8fabc1a1db4b108b3.js?file=schedule.js"></script>
