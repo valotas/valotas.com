@@ -58,3 +58,24 @@ it('should schedule the subscription on the right time', () => {
 Guess what. This does not work. `TestScheduler` initialization allone can not cope with time. After some searching arround I found out how to let your scheduler schedule stuff and that is the `schedule` function. This accepts a closure where your time based part should be placed. Let's see how to achieve that:
 
 <script src="https://gist.github.com/valotas/09f8fabc1a1db4b108b3.js?file=schedule.js"></script>
+
+### Simplifying the expectations
+Although, straight forward, it is a bit of code that you have to write in order to test a sequence of events and we haven't a way of testing the actual time (frame) that an event took place. `TestScheduler` provide us with the `expectObservable` function. With that we can write expectations with marble string just like we create the hot/cold observables, making testing much more easier.
+
+It is though a little bit trickier to use, as we should first instanciate our scheduler with an assertion function. This will be used in order to assert the sequence of the events when `flush`ing the scheduler:
+
+```
+function assertEquals (actual, expected) {
+    //we will use jasmine's api for the assertion:
+    expect(actual).toEqual(expected);
+}
+
+const scheduler = new Rx.TestScheduler(assertEquals);
+```
+
+a full example would look like the following:
+
+<script src="https://gist.github.com/valotas/09f8fabc1a1db4b108b3.js?file=expectobservable"></script>
+
+## Experimenting
+Finally if you feel like experimenting. which by the way is the only way of getting used to the library [this jsbin](https://output.jsbin.com/xowari) should get you up and running as it contains all the test cases we've discussed on this post.
