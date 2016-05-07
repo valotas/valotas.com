@@ -32,9 +32,9 @@
   "scripts": {
     "postinstall": "typings install",
     "tsc": "tsc -p . -w",
-    "build": "node_modules/gulp/bin/gulp.js build",
-    "test": "node_modules/gulp/bin/gulp.js test",
-    "deploy": "node_modules/gulp/bin/gulp.js dist && rsync -azP dist/ valotas@pi:~/valotas.com"
+    "build": "gulp build",
+    "test": "gulp test",
+    "deploy": "gulp dist && rsync -azP dist/ valotas@pi:~/valotas.com"
   },
   "dependencies": {
     "base64-js": "0.0.8",
