@@ -1,0 +1,20 @@
+{
+  "version": false,
+  "ambientDependencies": {
+    "moment-node": "github:valotas/DefinitelyTyped/moment/moment-node.d.ts#e5a27ea95e47b95333784f1f0d590127b4e39a89",
+    "moment": "github:valotas/DefinitelyTyped/moment/moment.d.ts#e5a27ea95e47b95333784f1f0d590127b4e39a89",
+    "jasmine": "github:valotas/DefinitelyTyped/jasmine/jasmine.d.ts#e5a27ea95e47b95333784f1f0d590127b4e39a89",
+    "marked": "github:valotas/DefinitelyTyped/marked/marked.d.ts#e31174ef24d252485501c85c67ba626ea735d2c4",
+    "react": "github:valotas/DefinitelyTyped/react/react.d.ts#8ea42cd8bb11863ed6f242d67c502288ebc45a7b",
+    "react-dom": "github:valotas/DefinitelyTyped/react/react-dom.d.ts#8ea42cd8bb11863ed6f242d67c502288ebc45a7b",
+    "through2": "github:valotas/DefinitelyTyped/through2/through2.d.ts#c37376a16cb6c17e053d5ee0935864d8cf2d2bda",
+    "node": "github:valotas/DefinitelyTyped/node/node.d.ts#c37376a16cb6c17e053d5ee0935864d8cf2d2bda",
+    "vinyl-fs": "github:valotas/DefinitelyTyped/vinyl-fs/vinyl-fs.d.ts#8ea42cd8bb11863ed6f242d67c502288ebc45a7b",
+    "vinyl": "github:valotas/DefinitelyTyped/vinyl/vinyl.d.ts#c37376a16cb6c17e053d5ee0935864d8cf2d2bda",
+    "jade": "github:valotas/DefinitelyTyped/jade/jade.d.ts#c37376a16cb6c17e053d5ee0935864d8cf2d2bda",
+    "whatwg-fetch": "github:valotas/DefinitelyTyped/whatwg-fetch/whatwg-fetch.d.ts#c37376a16cb6c17e053d5ee0935864d8cf2d2bda",
+    "es6-promise": "github:valotas/DefinitelyTyped/es6-promise/es6-promise.d.ts#c37376a16cb6c17e053d5ee0935864d8cf2d2bda",
+    "gulp-util": "github:valotas/DefinitelyTyped/gulp-util/gulp-util.d.ts#c37376a16cb6c17e053d5ee0935864d8cf2d2bda",
+    "chalk": "github:valotas/DefinitelyTyped/chalk/chalk.d.ts#c37376a16cb6c17e053d5ee0935864d8cf2d2bda"
+  }
+}
