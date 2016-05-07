@@ -9,7 +9,7 @@ function execTsc (watch, cb) {
   if (watch) {
     cmd += ' -w';
   }
-  exec(cmd, cb);
+  exec(cmd, { maxBuffer: 1024 * 500 }, cb);
 }
 
 module.exports = {
