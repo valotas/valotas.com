@@ -11,12 +11,11 @@ import * as jade from 'jade';
 import File = require('vinyl'); //how to use import File from 'vinyl'?
 import nfetch = require('node-fetch');
 import * as gutil from 'gulp-util';
+import {createTitle} from '../titleFactory';
 
 const NODE_FETCHER = {
 	fetch: nfetch
 };
-
-const GEORGE = 'Γιώργος Βαλοτάσιος';
 
 const layout = React.createFactory(Layout);
 
@@ -110,7 +109,7 @@ export function wrapHtml(templateFile) {
 	return through.obj(function (file: GulpFile, enc, callback) {
 		if (file.html) {
 			const html = template({
-				title: file.article ? `${file.article.title} - ${GEORGE}` : `${GEORGE} - Things to remember | Programming stuff :)`,
+				title: createTitle(file.meta || null),
 				content: file.html,
 				meta: deflate(file.meta)
 			});

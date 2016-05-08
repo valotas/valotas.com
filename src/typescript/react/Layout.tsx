@@ -11,6 +11,7 @@ import {VALOTAS, isArray} from '../utils';
 import * as ex from '../exceptions';
 import {WIN} from '../Window';
 import {FetchStreamer} from '../FetchStreamer';
+import {createTitle} from '../titleFactory';
 
 interface LayoutProps extends React.Props<any> {
 	meta?: MetaFile|MetaFile[];
@@ -52,9 +53,7 @@ export class Layout extends React.Component<LayoutProps, LayoutState> {
 			throw ex.illegalArgumentException('MetaFileStore is needed on the client side to register for changes');
 		}
 		metafileStore.onChange((meta: MetaFile) => {
-			this.setState({
-				meta: meta
-			});
+			this._setMetaFile(meta);
 		});
 
 		if (!WIN) {
@@ -63,10 +62,17 @@ export class Layout extends React.Component<LayoutProps, LayoutState> {
         WIN.on('popstate', (ev: PopStateEvent) => {
 			const state = MetaFile.fromData(ev.state as MetaFileData);
 			const meta = state || this.props.meta;
-			this.setState({
-				meta: meta
-			});
+			this._setMetaFile(meta);
 		});
+	}
+	
+	_setMetaFile(meta: MetaFile|MetaFile[]) {
+		this.setState({
+			meta: meta
+		});
+		if (WIN) {
+			WIN.title(createTitle(meta));
+		}
 	}
 	
 	render() {

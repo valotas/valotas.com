@@ -65,6 +65,10 @@ class Win {
         }
         return window[name]; 
     }
+	
+	title (title: string) {
+		window.document.title = title;
+	}
 }
 
 function createWindow() {
