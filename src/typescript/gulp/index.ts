@@ -16,6 +16,8 @@ const NODE_FETCHER = {
 	fetch: nfetch
 };
 
+const GEORGE = 'Γιώργος Βαλοτάσιος';
+
 const layout = React.createFactory(Layout);
 
 interface GulpFile {
@@ -108,6 +110,7 @@ export function wrapHtml(templateFile) {
 	return through.obj(function (file: GulpFile, enc, callback) {
 		if (file.html) {
 			const html = template({
+				title: file.article ? `${file.article.title} - ${GEORGE}` : `${GEORGE} - Things to remember | Programming stuff :)`,
 				content: file.html,
 				meta: deflate(file.meta)
 			});
