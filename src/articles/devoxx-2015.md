@@ -52,7 +52,7 @@ Although the bigger devoxx ever, there were no major problems with overcrowded r
 
 From the technology point of view, these were the poorest ever keynotes I've ever seen. No big announcements, which was kind of expected as no ground breaking technology made it into this year's radar.
 
-So it was mostly [Stephan][stephan] announcing the end of [Parleys][https://www.parleys.com/] and immediate use of Youtube/Vimeo for publishing conference videos. It is a pitty for parleys but I got the feeling that the  whole conference got a huge marketing push as speakers could reference to their talks a couple of hours after it. This means that you can have now access to [all of the conference talks](https://www.youtube.com/channel/UCCBVCTuk6uJrN3iFV_3vurg).
+So it was mostly [Stephan][stephan] announcing the end of [Parleys](https://www.parleys.com/) and immediate use of Youtube/Vimeo for publishing conference videos. It is a pitty for parleys but I got the feeling that the  whole conference got a huge marketing push as speakers could reference to their talks a couple of hours after it. This means that you can have now access to [all of the conference talks](https://www.youtube.com/channel/UCCBVCTuk6uJrN3iFV_3vurg).
 
 Then [Mark Reinhold](http://mreinhold.org/) took the step to talk about jdk9 and mostly about modulatity. Given the fact the we've been talking about it for the last 3 major Java releases, I did not see anyone extremely excited about it.
 
@@ -72,7 +72,7 @@ As I said before there were not big news this year and maybe that is why there w
 
 ## Trends
 
-As I said before, no big news, but there are some obvious trends. It looks like reactive programming and microservices are still the thing this year.
+Although there were no big news, there were some obvious trends. It looks like reactive programming and microservices are still the thing this year.
 
 ### Reactive programming
 
