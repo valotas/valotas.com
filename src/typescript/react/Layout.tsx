@@ -9,7 +9,7 @@ import {MetaFileStore} from '../content/MetaFileStore';
 import {GistStore} from '../content/GistStore';
 import {VALOTAS, isArray} from '../utils';
 import * as ex from '../exceptions';
-import {WIN} from '../Window';
+import {BROWSER} from '../browser/Browser';
 import {FetchStreamer} from '../FetchStreamer';
 import {createTitle} from '../titleFactory';
 
@@ -56,10 +56,10 @@ export class Layout extends React.Component<LayoutProps, LayoutState> {
 			this._setMetaFile(meta);
 		});
 
-		if (!WIN) {
+		if (!BROWSER) {
 			throw ex.illegalArgumentException('window is needed on the client side to register for PopStateEvents');
 		}
-        WIN.on('popstate', (ev: PopStateEvent) => {
+        BROWSER.on('popstate', (ev: PopStateEvent) => {
 			const state = MetaFile.fromData(ev.state as MetaFileData);
 			const meta = state || this.props.meta;
 			this._setMetaFile(meta);
@@ -70,8 +70,8 @@ export class Layout extends React.Component<LayoutProps, LayoutState> {
 		this.setState({
 			meta: meta
 		});
-		if (WIN) {
-			WIN.title(createTitle(meta));
+		if (BROWSER) {
+			BROWSER.title(createTitle(meta));
 		}
 	}
 	

@@ -72,33 +72,4 @@ describe('Loader', () => {
 			expect(win.addScriptCallCount).toEqual(initialCallCount + 1);
 		});
 	});
-    
-    describe('loadAnalytics()', () => {
-        it('should add the ga object to the win', () => {
-			const ga = loader.loadAnalytics();
-            expect(win['__ga']).toBeDefined();
-			expect(ga).toBe(win['__ga']);
-		});
-        
-		it('should add the widget script', () => {
-			spyOn(win, 'addScript').and.callThrough();
-			loader.loadAnalytics();
-			expect(win.addScript).toHaveBeenCalledWith('//www.google-analytics.com/analytics.js');
-		});
-        
-        it('should not try to add the script twice', () => {
-			const initialCallCount = win.addScriptCallCount;
-			spyOn(win, 'addScript').and.callThrough();
-			loader.loadAnalytics();
-			loader.loadAnalytics();
-			loader.loadAnalytics();
-			expect(win.addScriptCallCount).toEqual(initialCallCount + 1);
-		});
-        
-        it('should return an function that pushes the arguments to the queque once called', () => {
-			const ga = loader.loadAnalytics();
-            ga('arg1', 'arg2');
-			expect(ga.q).toContain(jasmine.objectContaining(['arg1', 'arg2']));
-		});
-    });
 });

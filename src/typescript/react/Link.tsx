@@ -2,7 +2,7 @@ import * as React from 'react';
 import {Article} from '../content/Article';
 import {MetaFileStore} from '../content/MetaFileStore';
 import {Icon} from './Icon';
-import {WIN} from '../Window';
+import {BROWSER} from '../browser/Browser';
 
 interface LinkProps extends React.Props<any> {
 	article?: Article;
@@ -29,7 +29,7 @@ export class Link extends React.Component<LinkProps, any> {
 			return;
 		}
         
-        if (!WIN.browserSupported) {
+        if (!BROWSER.browserSupported) {
             return;
         }
 		

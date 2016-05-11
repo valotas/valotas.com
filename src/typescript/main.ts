@@ -4,25 +4,24 @@ import {MetaFile, isValidMetaFile} from './content/MetaFile';
 import {MetaFileStore} from './content/MetaFileStore';
 import {Layout} from './react/Layout';
 import {inflate, VALOTAS} from './utils';
-import {WIN} from './Window';
+import {BROWSER} from './browser/Browser';
 import {LOADER} from './Loader';
 import {GistStore} from './content/GistStore';
 import {FetchStreamer} from './FetchStreamer';
+import {createGoogleAnalytics} from './browser/GoogleAnalytics';
 
 console.time('load');
 
-WIN.ready(() => {
-	LOADER.loadWebFonts();
+const ga = createGoogleAnalytics('UA-12048148-1').sendPageView();
 
-	const ga = LOADER.loadAnalytics();
-	ga('create', 'UA-12048148-1', 'valotas.com');
-	ga('send', 'pageview');
+BROWSER.ready(() => {
+	LOADER.loadWebFonts();
 	
 	// Create the main store and register the state to the history object
-	const fetcher = new FetchStreamer(WIN);
+	const fetcher = new FetchStreamer(BROWSER);
     const metafileStore = createMetafileStore(ga, fetcher);
 
-	const metaHolder = WIN.query('script[type="application/json"]') as HTMLElement;
+	const metaHolder = BROWSER.query('script[type="application/json"]') as HTMLElement;
 	const metadata = inflate(metaHolder.innerHTML) as MetaFileData|MetaFileData[];
 	const meta = MetaFile.fromData(metadata);
 	console.debug('Infalted meta', meta);
@@ -34,7 +33,7 @@ WIN.ready(() => {
 		fetcher: fetcher,
 		gistStore: new GistStore(fetcher, metafileStore, isValidMetaFile(meta) ? meta: null)
 	});
-	ReactDom.render(el, WIN.query('#app'), () => {
+	ReactDom.render(el, BROWSER.query('#app'), () => {
 		console.timeEnd('load');
 	});
 });
@@ -42,13 +41,15 @@ WIN.ready(() => {
 function createMetafileStore(ga, fetcher: Fetcher) {
     const metafileStore = new MetaFileStore(fetcher);
 	metafileStore.onChange((meta) => {
+		let title = VALOTAS;
+		let path = '/';
 		if (isValidMetaFile(meta)) {
-			WIN.pushState(meta, meta.title, '/' + meta.path + '/');
-		} else {
-			WIN.pushState(meta, VALOTAS, '/');
+			title =  meta.title;
+			path =  `/{meta.path}/`;
 		}
-		ga('send', 'pageview');
-		WIN.scrollToTop();
+		BROWSER.pushState(meta, title, path);
+		ga.sendPageView(path, title);
+		BROWSER.scrollToTop();
 	});
     return metafileStore;
 }

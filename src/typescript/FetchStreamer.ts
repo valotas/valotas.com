@@ -1,4 +1,4 @@
-import {WIN} from './Window';
+import {BROWSER} from './browser/Browser';
 
 interface ResponseListener {
     (promise: Promise<Response>): void;
@@ -7,7 +7,7 @@ interface ResponseListener {
 export class FetchStreamer implements Fetcher {
     private listeners: ResponseListener[] = [];
     
-    constructor (private delegate: Fetcher = WIN) {}
+    constructor (private delegate: Fetcher = BROWSER) {}
     
     fetch (url: string|Request, init?: RequestInit) {
         const promise = this.delegate.fetch(url, init);

@@ -1,4 +1,4 @@
-import {WIN} from './Window';
+import {BROWSER} from './browser/Browser';
 
 interface TwttrWidgets {
 	load();
@@ -31,7 +31,7 @@ class TwitterThenable {
 export class Loader {
 	private twttr;
 	
-	constructor (private win = WIN) {
+	constructor (private win = BROWSER) {
 		
 	}
 	
@@ -53,21 +53,6 @@ export class Loader {
 			google: { families:  families}
 		});
 		this.win.addScript('//ajax.googleapis.com/ajax/libs/webfont/1/webfont.js');
-	}
-	
-	// base on the code found at https://mjau-mjau.com/blog/ajax-universal-analytics/
-	loadAnalytics() {
-		let ga = this.win.prop('ga');
-		if (ga) {
-			return ga;
-		}
-		
-		ga = this.win.prop('ga', function () {
-			(ga.q=ga.q||[]).push(arguments)
-		});
-		ga.l=+new Date;
-		this.win.addScript('//www.google-analytics.com/analytics.js');
-		return ga;
 	}
 }
 

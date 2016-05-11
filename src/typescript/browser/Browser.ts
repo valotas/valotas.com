@@ -1,13 +1,17 @@
+import {createGoogleAnalytics} from './GoogleAnalytics';
+
 interface CreateScriptOptions {
 	protocol?: string;
 	id?: string;
 }
 
-class Win {
-	browserSupported: boolean;
+class Browser {
+	public browserSupported: boolean;
+	public window: Window;
 	
 	constructor() {
         this.browserSupported = window['fetch'] && window['Promise'];
+		this.window = window;
 	}
 	
 	addScript(url: string, options?: CreateScriptOptions) {
@@ -71,8 +75,8 @@ class Win {
 	}
 }
 
-function createWindow() {
-	return typeof window === 'undefined' ? null : new Win();
+function createBrowser() {
+	return typeof window === 'undefined' ? null : new Browser();
 }
 
-export const WIN = createWindow();
+export const BROWSER = createBrowser();
