@@ -11,15 +11,14 @@ export class MetaFileStore {
 	private listeners: Function[] = [];
 	
 	constructor(private fetcher: Fetcher) {
-
+		
 	}
 	
 	load(input: string|Article) {
 		const url = this._createUrl(input);
 		return this._loadMetaFile(url)
 			.then((meta) => {
-				this.listeners.forEach((listener) => listener(meta));
-				return meta;
+				return this.setMetaFile(meta);
 			});
 	}
 	
@@ -45,6 +44,11 @@ export class MetaFileStore {
 			.fetch(url)
 			.then((body) => body.json())
 			.then((json) => MetaFile.fromData(json as MetaFileData|MetaFileData[]));
+	}
+	
+	setMetaFile(meta: MetaFile|MetaFile[]) {
+		this.listeners.forEach((listener) => listener(meta));
+		return meta;
 	}
 	
 	onChange(listener: (meta: MetaFile|MetaFile[]) => void) {
