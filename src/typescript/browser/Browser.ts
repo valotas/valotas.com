@@ -53,7 +53,14 @@ class Browser {
 		}
 	}
    
-    on(name: string, f) {
+   	onPopstate(f: (state: PageState) => void) {
+		this.on('popstate', (ev: PopStateEvent) => {
+			const page = ev.state as PageState;
+			f(page);
+		});
+	}
+    
+	on(name: string, f) {
         window['on' + name] = f;
     }
     

@@ -7,7 +7,7 @@ import {Header} from './Header';
 import {Footer} from './Footer';
 import {MetaFileStore} from '../content/MetaFileStore';
 import {GistStore} from '../content/GistStore';
-import {VALOTAS, isArray} from '../utils';
+import {isArray} from '../utils';
 import * as ex from '../exceptions';
 import {BROWSER} from '../browser/Browser';
 import {FetchStreamer} from '../FetchStreamer';
@@ -59,14 +59,18 @@ export class Layout extends React.Component<LayoutProps, LayoutState> {
 		if (!BROWSER) {
 			throw ex.illegalArgumentException('window is needed on the client side to register for PopStateEvents');
 		}
-        BROWSER.on('popstate', (ev: PopStateEvent) => {
-			const page = ev.state as PageState;
-			const meta = MetaFile.fromData(page.meta);
-			this._setMetaFile(meta);
-			if (BROWSER) {
-				BROWSER.title(page.title);
-			}
-		});
+		BROWSER.onPopstate(this._setPageState.bind(this));
+	}
+	
+	_setPageState(page: PageState) {
+		const meta = MetaFile.fromData(page.meta);
+		if (BROWSER) {
+			BROWSER.title(page.title);
+		}
+		if (this.props.gistStore) {
+			this.props.gistStore.meta = isArray(meta) ? null : meta;
+		}
+		this._setMetaFile(meta);
 	}
 	
 	_setMetaFile(metaOrNull: MetaFile|MetaFile[]) {

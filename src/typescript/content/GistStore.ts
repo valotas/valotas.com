@@ -1,7 +1,9 @@
 import {MetaFile, isValidMetaFile} from './MetaFile';
 import {MetaFileStore} from './MetaFileStore';
+
 export class GistStore {
-	constructor(public fetcher: Fetcher, metafileStore: MetaFileStore, private meta?: MetaFileData) {
+	
+	constructor(public fetcher: Fetcher, metafileStore: MetaFileStore, public meta?: MetaFileData) {
 		if (!metafileStore) {
 			return;
 		}
