@@ -44,8 +44,8 @@ function createMetafileStore(ga, fetcher: Fetcher) {
 		let title = VALOTAS;
 		let path = '/';
 		if (isValidMetaFile(meta)) {
-			title =  meta.title;
-			path =  `/{meta.path}/`;
+			title = meta.title;
+			path = `/${meta.path}/`;
 		}
 		BROWSER.pushState(meta, title, path);
 		ga.sendPageView(path, title);
