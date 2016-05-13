@@ -32,3 +32,9 @@ interface MetaFileData {
     template?: string;
 	gists?: GistContent[];
 }
+
+interface PageState {
+	meta: MetaFileData|MetaFileData[];
+	title: string;
+	path: string;
+}

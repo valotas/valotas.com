@@ -60,19 +60,20 @@ export class Layout extends React.Component<LayoutProps, LayoutState> {
 			throw ex.illegalArgumentException('window is needed on the client side to register for PopStateEvents');
 		}
         BROWSER.on('popstate', (ev: PopStateEvent) => {
-			const state = MetaFile.fromData(ev.state as MetaFileData);
-			const meta = state || this.props.meta;
+			const page = ev.state as PageState;
+			const meta = MetaFile.fromData(page.meta);
 			this._setMetaFile(meta);
+			if (BROWSER) {
+				BROWSER.title(page.title);
+			}
 		});
 	}
 	
-	_setMetaFile(meta: MetaFile|MetaFile[]) {
+	_setMetaFile(metaOrNull: MetaFile|MetaFile[]) {
+		const meta = metaOrNull || this.props.meta;
 		this.setState({
 			meta: meta
 		});
-		if (BROWSER) {
-			BROWSER.title(createTitle(meta));
-		}
 	}
 	
 	render() {

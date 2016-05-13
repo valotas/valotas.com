@@ -1,5 +1,3 @@
-import {createGoogleAnalytics} from './GoogleAnalytics';
-
 interface CreateScriptOptions {
 	protocol?: string;
 	id?: string;
@@ -39,8 +37,8 @@ class Browser {
 		return window.document.querySelector(selector);
 	}
 	
-	pushState(statedata: any, title?: string, url?: string) {
-		window.history.pushState(statedata, title, url);
+	pushState(page: PageState) {
+		window.history.pushState(page, page.title, page.path);
 	}
 	
 	scrollToTop() {

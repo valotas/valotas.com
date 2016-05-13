@@ -3,12 +3,13 @@ import * as ReactDom from 'react-dom';
 import {MetaFile, isValidMetaFile} from './content/MetaFile';
 import {MetaFileStore} from './content/MetaFileStore';
 import {Layout} from './react/Layout';
-import {inflate, VALOTAS} from './utils';
+import {inflate} from './utils';
 import {BROWSER} from './browser/Browser';
 import {LOADER} from './Loader';
 import {GistStore} from './content/GistStore';
 import {FetchStreamer} from './FetchStreamer';
 import {createGoogleAnalytics} from './browser/GoogleAnalytics';
+import {createPageState} from './PageState';
 
 console.time('load');
 
@@ -19,7 +20,7 @@ BROWSER.ready(() => {
 	
 	// Create the main store and register the state to the history object
 	const fetcher = new FetchStreamer(BROWSER);
-    const metafileStore = createMetafileStore(ga, fetcher);
+    const metafileStore = createMetafileStore(fetcher);
 
 	const metaHolder = BROWSER.query('script[type="application/json"]') as HTMLElement;
 	const metadata = inflate(metaHolder.innerHTML) as MetaFileData|MetaFileData[];
@@ -38,17 +39,12 @@ BROWSER.ready(() => {
 	});
 });
 
-function createMetafileStore(ga, fetcher: Fetcher) {
+function createMetafileStore(fetcher: Fetcher) {
     const metafileStore = new MetaFileStore(fetcher);
 	metafileStore.onChange((meta) => {
-		let title = VALOTAS;
-		let path = '/';
-		if (isValidMetaFile(meta)) {
-			title = meta.title;
-			path = `/${meta.path}/`;
-		}
-		BROWSER.pushState(meta, title, path);
-		ga.sendPageView(path, title);
+		const state = createPageState(meta);
+		BROWSER.pushState(state);
+		ga.sendPageView(state);
 		BROWSER.scrollToTop();
 	});
     return metafileStore;
