@@ -8,21 +8,18 @@ import {MetaFileStore} from '../content/MetaFileStore';
 import {LOADER} from '../Loader';
 import {MarkedComponent} from './MarkedComponent';
 
-interface ArticleProps extends React.Props<any> {
+interface ArticleProps {
 	article?: Article;
 	metafileStore: MetaFileStore;
 }
 
-export class ArticleWithHeaderComponent extends React.Component<ArticleProps, {}> {
-	render() {
-		const article = this.props.article;
-		return (
-			<div>
-				<Header title={article.title} subtitle={VALOTAS} date={article.date('DD/MM/YYYY')} metafileStore={this.props.metafileStore}/>
-				<ArticleComponent article={this.props.article} metafileStore={this.props.metafileStore}/>
-			</div>
-		);
-	}
+export function ArticleWithHeaderComponent ({article, metafileStore}: ArticleProps) {
+	return (
+		<div>
+			<Header title={article.title} subtitle={VALOTAS} date={article.date('DD/MM/YYYY')} metafileStore={metafileStore}/>
+			<ArticleComponent article={article} metafileStore={metafileStore}/>
+		</div>
+	); 
 }
 
 export class ArticleComponent extends React.Component<ArticleProps, {}> {

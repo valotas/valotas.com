@@ -1,6 +1,6 @@
 import * as React from 'react';
 
-interface IconProps extends React.Props<any> {
+interface IconProps {
 	name: string;
 	size?: string;
 }
