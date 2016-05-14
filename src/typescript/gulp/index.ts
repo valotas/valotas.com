@@ -4,11 +4,11 @@ import {Article} from '../content/Article';
 import {MetaFile, isValidMetaFile} from '../content/MetaFile';
 import {CacheableGistStore} from './CacheableGistStore';
 import {Layout} from '../react/Layout';
-import {deflate,compareMoments} from '../utils';
+import {deflate, compareMoments} from '../utils';
 import * as React from 'react';
 import * as RDS from 'react-dom/server';
 import * as jade from 'jade';
-import File = require('vinyl'); //how to use import File from 'vinyl'?
+import File = require('vinyl'); // how to use import File from 'vinyl'?
 import nfetch = require('node-fetch');
 import * as gutil from 'gulp-util';
 import {createTitle} from '../titleFactory';
@@ -32,7 +32,7 @@ export function mdFile(clone = true) {
 	return through.obj(function (file, enc, callback) {
 		const f = file.path ? path.parse(file.path) : null;
 		if (f && f.ext === '.md') {
-			//extract the header info
+			// extract the header info
 			const content = file.contents.toString(enc);
 			const mdfile = MetaFile.create(content);
 			if (!mdfile.published) {
@@ -43,13 +43,13 @@ export function mdFile(clone = true) {
 			file.meta = mdfile;
 		}
 		callback(null, file);
-	}); 
+	});
 }
 
 function computeMdFilePath(file) {
 	if (file.name !== 'index') {
 		return file.name;
-	} 
+	}
 	const parent = path.parse(file.dir);
 	return parent.name;
 }
@@ -62,7 +62,7 @@ export function toArticle (givenFetcher?: Fetcher) {
 			file.article = new Article(meta);
 			createLayoutHtml(file, fetcher).then(function (html) {
 				file.html = html;
-				callback(null, file);		
+				callback(null, file);
 			}, function (er) {
                 gutil.log('Could not create html', file.path, er);
 				callback(er);
@@ -75,17 +75,17 @@ export function toArticle (givenFetcher?: Fetcher) {
 
 function createLayoutHtml(file: GulpFile, fetcher: Fetcher): Promise<string> {
 	const meta = file.meta;
-	const store = new CacheableGistStore(fetcher, isValidMetaFile(meta) ? meta: null);
+	const store = new CacheableGistStore(fetcher, isValidMetaFile(meta) ? meta : null);
 	const layoutElement = layout({
 		meta: meta,
 		fetcher: fetcher,
 		gistStore: store
 	});
-	//initial rendering to cause the initialization of all our components
+	// initial rendering to cause the initialization of all our components
 	try {
         RDS.renderToString(layoutElement);
     } catch (ex) {
-        ex.message += `. Could not render ${file.path}`; 
+        ex.message += `. Could not render ${file.path}`;
         return Promise.reject(ex);
     }
 	return store.all()
@@ -95,7 +95,7 @@ function createLayoutHtml(file: GulpFile, fetcher: Fetcher): Promise<string> {
 }
 
 export function adaptPaths () {
-	return through.obj(function (file:GulpFile, enc, callback) {
+	return through.obj(function (file: GulpFile, enc, callback) {
 		const meta = file.meta;
 		if (isValidMetaFile(meta)) {
 			file.path = path.join(file.base, meta.path, 'index.html');
@@ -105,7 +105,7 @@ export function adaptPaths () {
 }
 
 export function wrapHtml(templateFile) {
-	var template = jade.compileFile(templateFile);
+	const template = jade.compileFile(templateFile);
 	return through.obj(function (file: GulpFile, enc, callback) {
 		if (file.html) {
 			const html = template({
@@ -122,7 +122,7 @@ export function wrapHtml(templateFile) {
 
 export function addIndex() {
 	let metas: MetaFile[] = [];
-	let cwd; 
+	let cwd;
 	let enc;
 	return through.obj(function (file, enc, callback) {
 		const article = file.article;
@@ -179,14 +179,13 @@ export function addMetafiles() {
 
 export function addSitemap() {
 	const sitemap: string[] = [];
-	let cwd; 
+	let cwd;
 	let enc;
 	return through.obj(function (file, enc, callback) {
 		const meta = file.meta;
 		if (meta) {
 			cwd = file.cwd;
 			enc = enc;
-			let entry = 
 			sitemap.push(createSitemapEntry(meta));
 		}
 		callback(null, file);

@@ -4,7 +4,7 @@ import * as through from 'through2';
 import {Article} from '../content/Article';
 import {mdFile, toArticle, adaptPaths, addMetafiles} from './index';
 
-describe('mdFile', () => {	
+describe('mdFile', () => {
 	it('should parse the meta as yalm', (done) => {
 		fs.src(['src/articles/tomcat-initd-*.md'], {
 				base: path.join(__dirname, '../../')
@@ -20,9 +20,9 @@ describe('mdFile', () => {
 			}))
 			.on('finish', done);
 	});
-	
+
 	it('should not pass non published files to the pipe chain', (done) => {
-		var chunk;
+		let chunk;
 		fs.src(['src/articles/documenting-code.md'], {
 				base: path.join(__dirname, '../../')
 			})
@@ -44,7 +44,7 @@ describe('toArticle', () => {
 		fetch: function () {
 			return Promise.resolve(resp);
 		}
-	}
+	};
 
 	it('should add an article/meta/html property to the given chunk', (done) => {
 		fs.src(['src/articles/getters-and-setters.md'], {
@@ -68,11 +68,10 @@ describe('toArticle', () => {
 			})
 			.pipe(toArticle())
 			.pipe(through.obj(function (chunk, enc, cb) {
-				expect(chunk.path).toContain('tomcat-initd-script.md')
+				expect(chunk.path).toContain('tomcat-initd-script.md');
 				cb();
 			}))
 			.on('finish', done);
-		
 	});
 });
 
@@ -84,7 +83,7 @@ describe('adaptPaths', () => {
 			.pipe(mdFile())
 			.pipe(adaptPaths())
 			.pipe(through.obj(function (chunk, enc, cb) {
-				expect(chunk.path).toContain('tomcat-initd-script/index.html')
+				expect(chunk.path).toContain('tomcat-initd-script/index.html');
 				cb();
 			}))
 			.on('finish', done);
@@ -93,7 +92,7 @@ describe('adaptPaths', () => {
 
 describe('addMetafiles', () => {
 	it('should a meta.json for each file with a meta property containing it', (done) => {
-		var counter = 0;
+		let counter = 0;
 		fs.src(['src/articles/tomcat-initd-*.md'], {
 				base: path.join(__dirname, '../../')
 			})
@@ -102,7 +101,7 @@ describe('addMetafiles', () => {
 			.pipe(through.obj(function (chunk, enc, cb) {
 				counter++;
 				if (!chunk.meta) {
-					expect(chunk.path).toContain('tomcat-initd-script/meta.json');					
+					expect(chunk.path).toContain('tomcat-initd-script/meta.json');
 				}
 				cb();
 			}))
