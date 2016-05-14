@@ -9,7 +9,7 @@ describe('deflate/infalte', () => {
 			param22: 'val22'
 		}
 	};
-	
+
 	it('should be able to inflate a given object and deflate it back', () => {
 		const binary = deflate(obj);
 		expect(binary).toBeTruthy();
@@ -21,9 +21,9 @@ describe('deflate/infalte', () => {
 describe('compareMoments', () => {
 	class Dummy {
 		constructor(private date: string) {
-			
+
 		}
-		
+
 		moment() {
 			return moment(this.date);
 		}
@@ -32,7 +32,7 @@ describe('compareMoments', () => {
 		const one = new Dummy('2013-05-01');
 		const two = new Dummy('2015-05-01');
 		const three = new Dummy('2014-05-01');
-		
+
 		const actual = [one, two, three].sort(compareMoments);
 		expect(actual).toEqual([two, three, one]);
 	});

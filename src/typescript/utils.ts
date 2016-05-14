@@ -36,7 +36,7 @@ function toString (bytes: number[]): string {
 }
 
 interface HasMoment {
-	moment(): moment.Moment
+	moment(): moment.Moment;
 }
 
 export function compareMoments(a: HasMoment, b: HasMoment): number {
@@ -49,10 +49,10 @@ export function isArray(input: any): input is [] {
     return input && Array.isArray(input);
 }
 
-export function isString(input:any): input is string {
+export function isString (input: any): input is string {
 	return typeof input === 'string';
 }
 
-export function isPromise(input:any): input is Promise<any> {
+export function isPromise (input: any): input is Promise<any> {
 	return input && input.then;
 }
