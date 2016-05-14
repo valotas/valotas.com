@@ -19,7 +19,7 @@ export class MetaFile implements MetaFileData {
     description: string;
     template: string;
     gists: GistContent[];
-    
+
     constructor(input?: MetaFileData) {
         if (!input) {
             return;
@@ -33,7 +33,7 @@ export class MetaFile implements MetaFileData {
         this.template = input.template;
         this.gists = input.gists ? input.gists : [];
     }
-    
+
     static create(raw: string, path?: string): MetaFile {
         let file = new MetaFile();
         const matches = raw.split(DASHES);
@@ -48,7 +48,7 @@ export class MetaFile implements MetaFileData {
         file.gists = [];
         return file;
     }
-    
+
     static fromData(input: MetaFileData|MetaFileData[]): MetaFile|MetaFile[] {
         if (!input) {
             return null;
@@ -79,7 +79,7 @@ function parseHeader (text) {
         return {
             key: key.trim(),
             value: pair.join(':').trim()
-        }
+        };
     }).reduce((prev, current) => {
         prev[current.key] = current.value;
         return prev;
