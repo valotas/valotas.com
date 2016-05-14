@@ -10,8 +10,12 @@ interface SendPageViewArgument {
 }
 
 class GoogleAnalytics {
-    constructor(public ga, propertyId: string) {
-        ga('create', propertyId, 'auto');
+    constructor(private ctx, private name:string, propertyId: string) {
+        this.ga('create', propertyId, 'auto');
+    }
+    
+    ga(...any) {
+        this.ctx[this.name].apply(this.ctx, arguments);
     }
 
     sendPageView(page?: SendPageViewArgument): GoogleAnalytics {
@@ -29,12 +33,11 @@ class GoogleAnalytics {
 
 export function createGoogleAnalytics(propertyId: string, win = BROWSER): GoogleAnalytics {
     if (!win) {
-        return new GoogleAnalytics(noop, '');
+        return new GoogleAnalytics({ ga: noop }, 'ga', '');
     }
-
+    
     const window = win.window;
     const name = 'ga';
-
     const ga = window[name];
     if (ga) {
         return ga;
@@ -48,5 +51,5 @@ export function createGoogleAnalytics(propertyId: string, win = BROWSER): Google
 
     win.addScript('//www.google-analytics.com/analytics.js');
 
-    return new GoogleAnalytics(window[name], propertyId);
+    return new GoogleAnalytics(window, name, propertyId);
 }

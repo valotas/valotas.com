@@ -22,11 +22,6 @@ describe('GoogleAnalytics', () => {
 			expect(win.window.ga).toBeDefined();
 		});
 
-		it('should create a GoogleAnalytics object containing the create window.ga', () => {
-			const actual = createGoogleAnalytics('xxx', win);
-			expect(actual.ga).toEqual(win.window.ga);
-		});
-
 		it('should add the appropriate script using the given function', () => {
 			win.addScript = jasmine.createSpy('addScript');
 			createGoogleAnalytics('xxx', win);
@@ -39,6 +34,16 @@ describe('GoogleAnalytics', () => {
 			createGoogleAnalytics('xxx', win);
 			createGoogleAnalytics('xxx', win);
 			expect(win.addScript.calls.count()).toEqual(1);
+		});
+	});
+	
+	describe('ga()',  () => {
+		it('should delegate calls to win.ga function', () => {
+			const ga = jasmine.createSpy('win.window.ga');
+			const actual = createGoogleAnalytics('xxx', win);
+			win.window.ga = ga;
+			actual.ga('1', '2', {'name': 'value'});
+			expect(ga).toHaveBeenCalledWith('1', '2', {'name': 'value'});
 		});
 	});
 
