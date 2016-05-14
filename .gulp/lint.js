@@ -17,7 +17,8 @@ module.exports = function (gulp) {
       .pipe(eslint.failAfterError());
       
     var ts = gulp.src([
-        'src/**/*.ts'
+        'src/**/*.ts',
+        'src/**/*.tsx'
       ])
       .pipe(tslint())
       .pipe(tslint.report('verbose'));
