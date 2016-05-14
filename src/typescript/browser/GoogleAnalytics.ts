@@ -10,12 +10,12 @@ interface SendPageViewArgument {
 }
 
 class GoogleAnalytics {
-    constructor(private ctx, private name:string, propertyId: string) {
+    constructor(private ctx, private name: string, propertyId: string) {
         this.ga('create', propertyId, 'auto');
     }
-    
-    ga(...any) {
-        this.ctx[this.name].apply(this.ctx, arguments);
+
+    ga(...args) {
+        this.ctx[this.name].apply(this.ctx, args);
     }
 
     sendPageView(page?: SendPageViewArgument): GoogleAnalytics {
@@ -35,7 +35,7 @@ export function createGoogleAnalytics(propertyId: string, win = BROWSER): Google
     if (!win) {
         return new GoogleAnalytics({ ga: noop }, 'ga', '');
     }
-    
+
     const window = win.window;
     const name = 'ga';
     const ga = window[name];

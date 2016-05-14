@@ -36,7 +36,7 @@ describe('GoogleAnalytics', () => {
 			expect(win.addScript.calls.count()).toEqual(1);
 		});
 	});
-	
+
 	describe('ga()',  () => {
 		it('should delegate calls to win.ga function', () => {
 			const ga = jasmine.createSpy('win.window.ga');
