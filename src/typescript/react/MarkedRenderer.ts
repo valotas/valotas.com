@@ -10,21 +10,21 @@ const Link = React.createFactory(LinkComponent);
 const Gist = React.createFactory(GistComponent);
 const PP = React.createFactory(ParagraphWithFirstLetterSpan);
 
-//https://github.com/christianalfoni/markdown-to-react-components/blob/master/src/index.js
+// https://github.com/christianalfoni/markdown-to-react-components/blob/master/src/index.js
 const R = React.DOM;
 
 class TreeContainer {
 	tree = [];
 	inline = [];
-	
+
 	constructor(private parent?: TreeContainer) {
-	
+
 	}
-	
+
 	childContainer() {
 		return new TreeContainer(this);
 	}
-	
+
 	pushBlock(factory: React.Factory<any>, props: any = {}, childs?: any[]) {
 		props.key = this.tree.length;
 		const children = props.dangerouslySetInnerHTML ? null : firstChildOrFullArray(childs || this.inline);
@@ -33,21 +33,21 @@ class TreeContainer {
 		this.inline = [];
 		this.tree.push(el);
 	}
-	
+
 	pushToParent(factory, props: any = {}) {
 		this.parent.pushBlock(factory, props, firstChildOrFullArray(this.tree));
 		return this.parent;
 	}
-	
+
 	pushInline(component, pop: boolean|string = true) {
 		if (pop === true || this.containsInline(pop)) {
 			this.inline.pop();
 		}
 		this.inline.push(component);
 	}
-	
+
 	private containsInline(input) {
-		const index = this.inline.indexOf(input); 
+		const index = this.inline.indexOf(input);
 		if (index < 0) {
 			return false;
 		}
@@ -55,20 +55,20 @@ class TreeContainer {
 	}
 }
 
-type HtmlTransfomer = (html:string) => {
+type HtmlTransfomer = (html: string) => {
 	factory: React.HTMLFactory,
 	props: any
 }
 
-function innerHtmlTransformer(html:string) {
+function innerHtmlTransformer(html: string) {
 	return {
 		factory: R.div,
 		props: {
 			dangerouslySetInnerHTML: {
-				__html: html	
+				__html: html
 			}
 		}
-	}
+	};
 }
 
 function notNull(obj) {
@@ -83,34 +83,34 @@ interface CreateComponentTreeOptions {
 class MarkedReactRenderer {
     private paragraphCounter = 0;
 	private container = new TreeContainer();
-	
+
 	constructor(private transformers: HtmlTransfomer[] = [], private reactOptions: CreateComponentTreeOptions = {firstLetterSpan: false}) {
 		this.transformers.push(innerHtmlTransformer);
 	}
-	
-	nextToken(token: {type:string}) {
-		if (token.type === 'blockquote_start' || 
+
+	nextToken(token: {type: string}) {
+		if (token.type === 'blockquote_start' ||
 			token.type === 'list_start') {
 			this.container = this.container.childContainer();
 		}
 	}
-	
+
 	code(code: string, language: string) {
 		this.codespan(code, language);
 		this.container.pushBlock(R.pre);
 	}
-	
+
     blockquote(quote: string) {
 		this.container = this.container.pushToParent(R.blockquote, {});
 	}
-	
+
     html(html: string) {
 		const block = this.transformers.map((t) => {
 			return t(html);
 		}).filter(notNull)[0];
 		this.container.pushBlock(block.factory, block.props);
 	}
-	
+
     heading(text: string, level: number) {
 		this.container.pushBlock(R['h' + level]);
 	}
@@ -128,16 +128,16 @@ class MarkedReactRenderer {
         this.container.pushBlock(paragraphFactory);
 	}
     table(header: string, body: string) {
-		//not implemented yet
+		// not implemented yet
 	}
     tablerow(content: string) {
-		//not implemented yet
+		// not implemented yet
 	}
     tablecell(content: string, flags: {
         header: boolean,
         align: string
     }) {
-		//not implemented yet
+		// not implemented yet
 	}
     strong(text: string) {
 		this.container.pushInline(R.strong(null, text));
@@ -152,10 +152,10 @@ class MarkedReactRenderer {
 		this.container.pushInline(R.code(props, unescapeText(code)), false);
 	}
     br() {
-		
+
 	}
     del(text: string) {
-		
+
 	}
     link(href: string, title: string, text: string) {
 		if (text !== 'undefined') {
@@ -167,13 +167,13 @@ class MarkedReactRenderer {
 		}
 	}
     image(href: string, title: string, text: string) {
-		
+
 	}
 	text(text: string) {
 		this.container.pushInline(unescapeText(text), false);
 		return text;
 	}
-	
+
 	createComponentTree(html: string) {
 		const parser = new marked.Parser({
 			renderer: this,
@@ -199,7 +199,7 @@ function patchParser(parser, renderer: MarkedReactRenderer) {
 	parser.tok = function () {
 		renderer.nextToken(this.token);
 		tok.call(parser, arguments);
-	}
+	};
 }
 
 function firstChildOrFullArray(input: any[]) {
