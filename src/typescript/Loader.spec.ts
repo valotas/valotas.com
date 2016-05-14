@@ -3,12 +3,12 @@ import {Loader} from './Loader';
 describe('Loader', () => {
 	let win;
 	let loader;
-	
+
 	beforeEach(() => {
         win = {
             addScriptCallCount: 0,
             addScript: () => {
-                win.addScriptCallCount++; 
+                win.addScriptCallCount++;
             },
             createScript: () => null,
             getBody: () => null,
@@ -23,37 +23,37 @@ describe('Loader', () => {
             prop: (name, initialValue?) => {
                 const actualName = `__${name}`;
                 if (initialValue) {
-                    win[actualName] = win[actualName] || initialValue;   
+                    win[actualName] = win[actualName] || initialValue;
                 }
                 return win[actualName];
             }
         };
 		loader = new Loader(win);
 	});
-	
+
 	describe('loadTwitter()', () => {
 		it('should return a thenable', () => {
 			const actual = loader.loadTwitter();
 			expect(actual.then).toBeDefined();
 		});
-		
+
 		it('should add the twttr attribute in to the window object', () => {
 			loader.loadTwitter();
             expect(win['__twttr']).toBeDefined();
 		});
-        
+
         it('should add the functions added with then to the queque', () => {
             const then1 = jasmine.createSpy('then1');
             const then2 = jasmine.createSpy('then2');
-			
+
             const actual = loader.loadTwitter();
             actual.then(then1);
             actual.then(then2);
-            
+
             expect(actual.init._e).toContain(then1);
             expect(actual.init._e).toContain(then2);
 		});
-		
+
 		it('should add the widget script', () => {
 			spyOn(win, 'addScript').and.callThrough();
 			loader.loadTwitter();
@@ -62,7 +62,7 @@ describe('Loader', () => {
 				protocol: 'https'
 			});
 		});
-		
+
 		it('should not try to add the script twice', () => {
 			const initialCallCount = win.addScriptCallCount;
 			spyOn(win, 'addScript').and.callThrough();

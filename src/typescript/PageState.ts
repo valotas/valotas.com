@@ -3,8 +3,8 @@ import {createTitle} from './titleFactory';
 
 class PageStateImpl implements PageState {
 	public title: string;
-	public path: string; 
-	
+	public path: string;
+
 	constructor (public meta: MetaFileData|MetaFileData[]) {
 		this.title = createTitle(meta);
 		this.path = createPath(meta);

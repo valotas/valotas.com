@@ -10,7 +10,7 @@ interface Twttr {
 
 class TwitterThenable {
     init;
-    loadedTwttr: Twttr
+    loadedTwttr: Twttr;
 
     constructor(win) {
         this.init = win.prop('twttr', { _e: [] });
@@ -18,7 +18,7 @@ class TwitterThenable {
            this.loadedTwttr = win.prop('twttr');
         });
     }
-    
+
     then(f) {
         if (this.loadedTwttr) {
             f(this.loadedTwttr);
@@ -30,16 +30,16 @@ class TwitterThenable {
 
 export class Loader {
 	private twttr;
-	
+
 	constructor (private win = BROWSER) {
-		
+
 	}
-	
+
 	loadTwitter(): TwitterThenable {
 		if (!this.twttr) {
 			this.twttr = new TwitterThenable(this.win);
-		
-			//load the widgets.js
+
+			// load the widgets.js
 			this.win.addScript('//platform.twitter.com/widgets.js', {
 				id: 'twitter-wjs',
 				protocol: 'https'
@@ -47,7 +47,7 @@ export class Loader {
 		}
 		return this.twttr;
 	}
-	
+
 	loadWebFonts(families: string[] = [ 'Gloria+Hallelujah::latin', 'Open+Sans::latin,greek' ]) {
 		this.win.prop('WebFontConfig', {
 			google: { families:  families}

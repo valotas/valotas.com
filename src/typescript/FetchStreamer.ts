@@ -6,9 +6,9 @@ interface ResponseListener {
 
 export class FetchStreamer implements Fetcher {
     private listeners: ResponseListener[] = [];
-    
+
     constructor (private delegate: Fetcher = BROWSER) {}
-    
+
     fetch (url: string|Request, init?: RequestInit) {
         const promise = this.delegate.fetch(url, init);
         this.listeners.forEach((l) => {
@@ -16,15 +16,15 @@ export class FetchStreamer implements Fetcher {
         });
         return promise;
     }
-    
+
     onFetch (listener: ResponseListener) {
         this.listeners.push(listener);
         return () => {
             const index = this.listeners.indexOf(listener);
 			this.listeners.splice(index, 1);
-        }
+        };
     }
-    
+
     static wrap (fetcher: Fetcher|FetchStreamer) {
         if (isFetchStreamer(fetcher)) {
             return fetcher;

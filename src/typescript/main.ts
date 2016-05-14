@@ -17,7 +17,7 @@ const ga = createGoogleAnalytics('UA-12048148-1').sendPageView();
 
 BROWSER.ready(() => {
 	LOADER.loadWebFonts();
-	
+
 	// Create the main store and register the state to the history object
 	const fetcher = new FetchStreamer(BROWSER);
     const metafileStore = createMetafileStore(fetcher);
@@ -26,13 +26,13 @@ BROWSER.ready(() => {
 	const metadata = inflate(metaHolder.innerHTML) as MetaFileData|MetaFileData[];
 	const meta = MetaFile.fromData(metadata);
 	console.debug('Infalted meta', meta);
-	
+
 	// Render the main react component
 	const el = React.createElement(Layout, {
 		meta: meta,
 		metafileStore: metafileStore,
 		fetcher: fetcher,
-		gistStore: new GistStore(fetcher, metafileStore, isValidMetaFile(meta) ? meta: null)
+		gistStore: new GistStore(fetcher, metafileStore, isValidMetaFile(meta) ? meta : null)
 	});
 	ReactDom.render(el, BROWSER.query('#app'), () => {
 		console.timeEnd('load');
