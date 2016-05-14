@@ -19,44 +19,44 @@ export function ArticleWithHeaderComponent ({article, metafileStore}: ArticlePro
 			<Header title={article.title} subtitle={VALOTAS} date={article.date('DD/MM/YYYY')} metafileStore={metafileStore}/>
 			<ArticleComponent article={article} metafileStore={metafileStore}/>
 		</div>
-	); 
+	);
 }
 
 export class ArticleComponent extends React.Component<ArticleProps, {}> {
 	private html;
-	
+
 	render() {
 		const article = this.props.article;
 		if (!article) {
 			return null;
 		}
 		return (
-			<div id="content" className="container">
-				<div className="article">
-					<section className="content">
+			<div id='content' className='container'>
+				<div className='article'>
+					<section className='content'>
 						<MarkedComponent meta={this.props.article.meta}/>
 					</section>
 				</div>
-				<div id="footer-actions" className="row text-center">
-					<div className="btn-group">
-						<Link className="btn btn-default" metafileStore={this.props.metafileStore}>
-							<Icon name="fa-home" size="sm-2x"/>
-                            <span className="hidden-xs hidden-sm">&nbsp;Home</span>
+				<div id='footer-actions' className='row text-center'>
+					<div className='btn-group'>
+						<Link className='btn btn-default' metafileStore={this.props.metafileStore}>
+							<Icon name='fa-home' size='sm-2x'/>
+                            <span className='hidden-xs hidden-sm'>&nbsp;Home</span>
 						</Link>
-						<Link href="#" className="btn btn-default">
-							<span className="hidden-xs hidden-sm">Top&nbsp;</span>
-                            <Icon name="fa-toggle-up" size="sm-2x"/>
+						<Link href='#' className='btn btn-default'>
+							<span className='hidden-xs hidden-sm'>Top&nbsp;</span>
+                            <Icon name='fa-toggle-up' size='sm-2x'/>
 						</Link>
 					</div>
 				</div>
 			</div>
 		);
 	}
-	
+
 	componentDidMount() {
-		this._loadTwitterWidgets();	
+		this._loadTwitterWidgets();
 	}
-	
+
 	private _loadTwitterWidgets() {
         if (!this.props.article.hasTweets()) {
 			return;
@@ -65,7 +65,7 @@ export class ArticleComponent extends React.Component<ArticleProps, {}> {
 			twttr.widgets.load();
 		});
 	}
-	
+
 	componentDidUpdate() {
 		this._loadTwitterWidgets();
 	}

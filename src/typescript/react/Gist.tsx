@@ -5,44 +5,44 @@ import {Link} from './Link';
 import {Icon} from './Icon';
 
 interface GistProps extends React.Props<any>, GistDescription {
-	
+
 }
 
 interface GistState {
-	content:string
+	content: string;
 }
 
 export class Gist extends React.Component<GistProps, GistState> {
 	private contentPromise: Promise<string>;
-	
+
 	context: {
 		gistStore: GistStore
-	}
-	
+	};
+
 	static contextTypes: React.ValidationMap<any> = {
 		gistStore: React.PropTypes.object
-	}
-	
+	};
+
 	constructor(props, context) {
 		super(props, context);
 
 		this.state = {
 			content: null
 		};
-		
+
 		const {gistStore} =  this.context;
 		if (!gistStore) {
 			return;
 		}
 		const content = gistStore.load(this.props);
-		
+
 		if (isPromise(content)) {
-			this.contentPromise = content;	
+			this.contentPromise = content;
 		} else {
 			this.state = { content: content.replace(/\t/g, '  ') };
 		}
 	}
-	
+
 	componentDidMount() {
 		if (!this.contentPromise) {
 			return;
@@ -53,7 +53,7 @@ export class Gist extends React.Component<GistProps, GistState> {
 			});
 		});
 	}
-	
+
 	render() {
 		const user = this.props.user || 'valotas';
 		const filetarget = this.props.file.replace(/\./g, '-').toLocaleLowerCase();
