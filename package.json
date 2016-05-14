@@ -30,7 +30,7 @@
   "scripts": {
     "postinstall": "typings install",
     "tsc": "tsc -p . -w",
-    "lint": "tslint src/**/*.ts",
+    "lint": "gulp lint",
     "build": "gulp build",
     "test": "gulp test",
     "deploy": "gulp dist && rsync -azP dist/ valotas@pi:~/valotas.com"
