@@ -56,7 +56,7 @@ class TreeContainer {
 }
 
 type HtmlTransfomer = (html: string) => {
-	factory: React.HTMLFactory,
+	factory: React.HTMLFactory<HTMLElement>,
 	props: any
 }
 
@@ -222,7 +222,7 @@ function htmlToGistTransformer(html: string) {
 		return null;
 	}
 	return {
-		factory: Gist as React.DOMFactory<any>,
+		factory: Gist as React.DOMFactory<any, any>,
 		props: {
 			user: matches[2],
 			gistId: matches[4],
