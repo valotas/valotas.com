@@ -1,3 +1,4 @@
+/*eslint-env browser*/
 /*global System*/
 
 (function (g) {
