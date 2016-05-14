@@ -39,6 +39,7 @@ class Browser {
 	
 	pushState(page: PageState) {
 		window.history.pushState(page, page.title, page.path);
+		this.title(page.title);
 	}
 	
 	scrollToTop() {
