@@ -12,32 +12,32 @@ interface IndexProps extends React.Props<any> {
 	metafileStore?: MetaFileStore;
 }
 
-export function IndexWithHeader (props: IndexProps){
+export function IndexWithHeader (props: IndexProps) {
 	return (
 		<div>
-			<Header title={VALOTAS} subtitle="Things to remember | Programming stuff :)"/>
-			<div id="content" className="container">
+			<Header title={VALOTAS} subtitle='Things to remember | Programming stuff :)'/>
+			<div id='content' className='container'>
 				<Index articles={props.articles} metafileStore={props.metafileStore}/>
 			</div>
 		</div>
 	);
 }
 
-export class Index extends React.Component<IndexProps, {}> {	
+export class Index extends React.Component<IndexProps, {}> {
 	render() {
 		const articles = addSeparators(this.props.articles);
 		return (
-			<div id="index-content">
+			<div id='index-content'>
 				{articles.map(this.createArticleBox.bind(this))}
 			</div>
 		);
 	}
-	
+
 	createArticleBox(article: Article, index: number) {
 		if (article === null) {
-			return <div className="clearfix" key={index} />
+			return <div className='clearfix' key={index} />;
 		}
-		
+
 		return (
 			<ArticleDescriptionComponent article={article} key={article.key} metafileStore={this.props.metafileStore}/>
 		);
@@ -65,20 +65,20 @@ function ArticleDescriptionComponent (props: ArticleDescriptionComponentProps) {
 	const article = props.article;
 	const description = article.description();
 	return (
-		<div className="col-md-4">
-			<div className="article">
-				<h2 className="header">
-					<Link article={article} className="" metafileStore={props.metafileStore}>
+		<div className='col-md-4'>
+			<div className='article'>
+				<h2 className='header'>
+					<Link article={article} className='' metafileStore={props.metafileStore}>
 						{article.title}
 					</Link>
 				</h2>
-				<span className="badge date">{article.date()}</span>
-				<div className="descr">
+				<span className='badge date'>{article.date()}</span>
+				<div className='descr'>
 					<MarkedComponent markFirstLetter={false}>{description}</MarkedComponent>
-					<p className="more">
-						<Link article={article} className="btn btn-primary" metafileStore={props.metafileStore}>
+					<p className='more'>
+						<Link article={article} className='btn btn-primary' metafileStore={props.metafileStore}>
 							more&nbsp;
-							<Icon name="fa-angle-double-right"/>
+							<Icon name='fa-angle-double-right'/>
 						</Link>
 					</p>
 				</div>
