@@ -4,12 +4,12 @@ import {Layout} from './Layout';
 import {Article} from '../content/Article';
 import {MetaFile} from '../content/MetaFile';
 
-describe('Layout', () => {	
-	it('should render html',() => {
+describe('Layout', () => {
+	it('should render html', () => {
 		const html = RDS.renderToString(<Layout />);
 		expect(html).toBeTruthy();
 	});
-	
+
 	it('should render the Index layout if a list of articles is given', () => {
 		const article1 = new MetaFile({
                         title: 'first article',
@@ -29,7 +29,7 @@ describe('Layout', () => {
 		expect(html).toContain('first article');
 		expect(html).toContain('second article');
 	});
-        
+
         it('should render a clear fix for each 3 articles', () => {
 		const article1 = new MetaFile({
                         title: 'first article',

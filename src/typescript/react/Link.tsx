@@ -20,7 +20,7 @@ export class Link extends React.Component<LinkProps, any> {
 	static contextTypes: React.ValidationMap<any> = {
 		metafileStore: React.PropTypes.object
 	};
-	
+
 	handleClick (e) {
 		const {href, target} = this.props;
 		if (href === '#') {
@@ -28,11 +28,11 @@ export class Link extends React.Component<LinkProps, any> {
 			window.scrollTo(0, 0);
 			return;
 		}
-        
+
         if (!BROWSER.browserSupported) {
             return;
         }
-		
+
 		if (target === '_blank' || (href && href.indexOf('http') === 0)) {
 			return;
 		}
@@ -41,7 +41,7 @@ export class Link extends React.Component<LinkProps, any> {
 		if (!store) {
 			return;
 		}
-		
+
 		e.preventDefault();
 		store.load(this.props.article || this.props.href || '/');
 	}

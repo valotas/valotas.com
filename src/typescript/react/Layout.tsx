@@ -24,29 +24,29 @@ interface LayoutState {
 	meta: MetaFile|MetaFile[];
 }
 
-//http://staxmanade.com/2015/08/playing-with-typescript-and-jsx/
+// http://staxmanade.com/2015/08/playing-with-typescript-and-jsx/
 export class Layout extends React.Component<LayoutProps, LayoutState> {
 	constructor(props: LayoutProps) {
 		super(props);
 		this.state = {
 			meta: props.meta
-		}
+		};
 	}
-	
+
 	static childContextTypes: React.ValidationMap<any> = {
 		metafileStore: React.PropTypes.object,
 		fetcher: React.PropTypes.object,
 		gistStore: React.PropTypes.object
 	};
-	
+
 	getChildContext() {
 		return {
 			metafileStore: this.props.metafileStore,
 			fetcher: FetchStreamer.wrap(this.props.fetcher),
 			gistStore: this.props.gistStore
-		}
+		};
 	}
-	
+
 	componentDidMount() {
 		const {metafileStore} = this.props;
 		if (!metafileStore) {
@@ -61,7 +61,7 @@ export class Layout extends React.Component<LayoutProps, LayoutState> {
 		}
 		BROWSER.onPopstate(this._setPageState.bind(this));
 	}
-	
+
 	_setPageState(page: PageState) {
 		const meta = MetaFile.fromData(page.meta);
 		if (BROWSER) {
@@ -72,14 +72,14 @@ export class Layout extends React.Component<LayoutProps, LayoutState> {
 		}
 		this._setMetaFile(meta);
 	}
-	
+
 	_setMetaFile(metaOrNull: MetaFile|MetaFile[]) {
 		const meta = metaOrNull || this.props.meta;
 		this.setState({
 			meta: meta
 		});
 	}
-	
+
 	render() {
 		return (
 			<div>
@@ -88,7 +88,7 @@ export class Layout extends React.Component<LayoutProps, LayoutState> {
 			</div>
 		);
 	}
-	
+
 	private createMainContent() {
 		const meta = this.state.meta;
 
@@ -99,7 +99,7 @@ export class Layout extends React.Component<LayoutProps, LayoutState> {
 
 		if (meta) {
 			const article = new Article(meta as MetaFile);
-			return <ArticleWithHeaderComponent article={article} metafileStore={this.props.metafileStore}/>;		
+			return <ArticleWithHeaderComponent article={article} metafileStore={this.props.metafileStore}/>;
 		}
 		return null;
 	}
