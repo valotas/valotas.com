@@ -3,9 +3,9 @@ import {FetchStreamer} from '../FetchStreamer';
 
 interface LoadingBarState {
     loading: number;
-} 
+}
 
-export class LoadingBar extends React.Component<React.Props<any>, LoadingBarState> {	
+export class LoadingBar extends React.Component<React.Props<any>, LoadingBarState> {
 	context: {
 		fetcher: FetchStreamer
 	};
@@ -13,14 +13,14 @@ export class LoadingBar extends React.Component<React.Props<any>, LoadingBarStat
 	static contextTypes: React.ValidationMap<any> = {
 		fetcher: React.PropTypes.object
 	};
-    
+
     constructor (props, context) {
         super(props, context);
         this.state = {
             loading: 0
         };
     }
-    
+
     componentDidMount() {
         this.context.fetcher.onFetch((promise) => {
             this.add(1);
@@ -30,7 +30,7 @@ export class LoadingBar extends React.Component<React.Props<any>, LoadingBarStat
             });
         });
     }
-    
+
     add(addition: number) {
         this.setState({
             loading: this.state.loading + addition
@@ -38,10 +38,10 @@ export class LoadingBar extends React.Component<React.Props<any>, LoadingBarStat
     }
 
     render() {
-        const classNames = `loading-bar ${this.state.loading ? 'loading' : ''}`
+        const classNames = `loading-bar ${this.state.loading ? 'loading' : ''}`;
 		return (
 			<div className={classNames}>
-                <div className="loading-bar-inner"></div>
+                <div className='loading-bar-inner'></div>
             </div>
 		);
 	}
