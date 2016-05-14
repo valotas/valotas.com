@@ -11,7 +11,7 @@ export class Article {
         this.key = meta.path;
         this.title = meta.title;
     }
-    
+
     moment(): moment.Moment {
         return this.meta.moment();
     }
@@ -24,8 +24,8 @@ export class Article {
         const {description, raw} = this.meta;
         return description || raw.substr(0, raw.indexOf('#')).trim();
     }
-    
+
     hasTweets() {
-        return this.meta.raw.indexOf('"twitter-tweet"') > 0
+        return this.meta.raw.indexOf('"twitter-tweet"') > 0;
     }
 }

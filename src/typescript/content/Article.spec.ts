@@ -46,7 +46,7 @@ describe('Article', () => {
             expect(article.date('YYYY.DD.MM')).toEqual('2015.12.11');
         });
     });
-       
+
     describe('description()', () => {
        it('should return the description as is when provided', () => {
            const description = createArticle({
@@ -60,7 +60,7 @@ describe('Article', () => {
             }).description();
             expect(description).toEqual('this is a description');
        });
-       
+
        it('should compute the description from the given raw', () => {
            const description = createArticle({
                 title: 'md file',
@@ -74,7 +74,7 @@ describe('Article', () => {
             expect(description).toEqual('this is the very first paragraph');
        });
     });
-    
+
     describe('hasTweets()', () => {
         it('should return true if the raw contains "twitter-tweet"', () => {
            const article = createArticle({
