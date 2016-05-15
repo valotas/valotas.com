@@ -1,7 +1,6 @@
 import * as React from 'react';
 import * as RDS from 'react-dom/server';
 import {Layout} from './Layout';
-import {Article} from '../content/Article';
 import {MetaFile} from '../content/MetaFile';
 
 describe('Layout', () => {

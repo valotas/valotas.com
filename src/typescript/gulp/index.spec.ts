@@ -1,7 +1,6 @@
 import * as fs from 'vinyl-fs';
 import * as path from 'path';
 import * as through from 'through2';
-import {Article} from '../content/Article';
 import {mdFile, toArticle, adaptPaths, addMetafiles} from './index';
 
 describe('mdFile', () => {
