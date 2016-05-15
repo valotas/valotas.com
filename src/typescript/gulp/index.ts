@@ -17,7 +17,7 @@ export function toArticle () {
 	return through.obj(function (file: GulpFile, enc, callback) {
 		const meta = file.meta;
 		if (isValidMetaFile(meta)) {
-			file.article = createArticle(meta);	
+			file.article = createArticle(meta);
 		}
 		callback(null, file);
 	});

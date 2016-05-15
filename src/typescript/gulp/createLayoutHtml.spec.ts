@@ -10,7 +10,7 @@ describe('createLayoutHtml', () => {
 			return Promise.resolve(resp);
 		}
 	};
-	
+
 	it('should add an html with the rendered layout to the given file', (done) => {
 		fs.src(['src/articles/better-angular-*.md'], {
 				base: path.join(__dirname, '../../')
