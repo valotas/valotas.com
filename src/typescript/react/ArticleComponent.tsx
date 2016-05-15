@@ -1,5 +1,4 @@
 import * as React from 'react';
-import {Article} from '../content/Article';
 import {Icon} from './Icon';
 import {Link} from './Link';
 import {Header} from './Header';

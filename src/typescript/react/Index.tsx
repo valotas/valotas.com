@@ -1,5 +1,4 @@
 import * as React from 'react';
-import {Article} from '../content/Article';
 import {MetaFileStore} from '../content/MetaFileStore';
 import {Link} from './Link';
 import {Icon} from './Icon';

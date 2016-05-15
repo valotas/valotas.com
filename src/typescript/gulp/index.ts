@@ -1,32 +1,21 @@
 import * as path from 'path';
 import * as through from 'through2';
-import {Article} from '../content/Article';
+import {createArticle} from '../content/Article';
 import {MetaFile, isValidMetaFile} from '../content/MetaFile';
 import {CacheableGistStore} from './CacheableGistStore';
 import {Layout} from '../react/Layout';
 import {deflate, compareMoments} from '../utils';
 import * as React from 'react';
 import * as RDS from 'react-dom/server';
-import * as jade from 'jade';
 import File = require('vinyl'); // how to use import File from 'vinyl'?
 import nfetch = require('node-fetch');
 import * as gutil from 'gulp-util';
-import {createTitle} from '../titleFactory';
 
 const NODE_FETCHER = {
 	fetch: nfetch
 };
 
 const layout = React.createFactory(Layout);
-
-interface GulpFile {
-	meta: MetaFile|MetaFile[];
-	html?: string;
-	article?: Article;
-	contents?: any;
-	path: string;
-	base: string;
-}
 
 export function mdFile(clone = true) {
 	return through.obj(function (file, enc, callback) {
@@ -59,7 +48,7 @@ export function toArticle (givenFetcher?: Fetcher) {
 	return through.obj(function (file: GulpFile, enc, callback) {
 		const meta = file.meta;
 		if (isValidMetaFile(meta)) {
-			file.article = new Article(meta);
+			file.article = createArticle(meta);
 			createLayoutHtml(file, fetcher).then(function (html) {
 				file.html = html;
 				callback(null, file);
@@ -104,29 +93,13 @@ export function adaptPaths () {
 	});
 }
 
-export function wrapHtml(templateFile) {
-	const template = jade.compileFile(templateFile);
-	return through.obj(function (file: GulpFile, enc, callback) {
-		if (file.html) {
-			const html = template({
-				title: createTitle(file.meta || null),
-				content: file.html,
-				meta: deflate(file.meta)
-			});
-			file.contents = new Buffer(html, enc);
-            gutil.log('Created', file.path);
-		}
-		callback(null, file);
-	});
-}
-
 export function addIndex() {
 	let metas: MetaFile[] = [];
 	let cwd;
 	let enc;
 	return through.obj(function (file, enc, callback) {
 		const article = file.article;
-		if (article && article instanceof Article) {
+		if (article /* && article instanceof Article */) {
 			cwd = file.cwd;
 			enc = enc;
 			metas.push(createDescriptionMetaFile(article));

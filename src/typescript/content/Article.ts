@@ -1,9 +1,7 @@
 import * as moment from 'moment';
-import * as marked from 'marked';
 import {MetaFile} from './MetaFile';
-import * as ex from '../exceptions';
 
-export class Article {
+class ArticleImpl implements Article {
     title: string;
     key: string;
 
@@ -28,4 +26,8 @@ export class Article {
     hasTweets() {
         return this.meta.raw.indexOf('"twitter-tweet"') > 0;
     }
+}
+
+export function createArticle(meta: MetaFile): Article {
+   return new ArticleImpl(meta);
 }

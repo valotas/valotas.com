@@ -1,8 +1,8 @@
 import {MetaFile} from './MetaFile';
-import {Article} from './Article';
+import {createArticle as createArticleFromMetaFile} from './Article';
 
 function createArticle(input: any) {
-    return new Article(new MetaFile(input));
+    return createArticleFromMetaFile(new MetaFile(input));
 }
 
 describe('Article', () => {

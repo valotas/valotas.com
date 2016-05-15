@@ -54,9 +54,9 @@ export class MetaFile implements MetaFileData {
             return null;
         }
         if (isArray(input)) {
-            return input.map((data) => new MetaFile(data));
+            return input.map(castOrCreate);
         } else {
-            return new MetaFile(input);
+            return castOrCreate(input);
         }
     }
 
@@ -89,6 +89,13 @@ function parseHeader (text) {
         template: null,
         published: null
     });
+}
+
+function castOrCreate(data: MetaFileData): MetaFile {
+    if (isValidMetaFile(data)) {
+        return data;
+    }
+    return new MetaFile(data);
 }
 
 export function isValidMetaFile(file: any): file is MetaFile {

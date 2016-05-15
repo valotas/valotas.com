@@ -1,11 +1,10 @@
 import * as marked from 'marked';
 import * as React from 'react';
 import * as ex from '../exceptions';
-import {MetaFile} from '../content/MetaFile';
 import {createComponentTree} from './MarkedRenderer';
 
 interface MarkedComponentProps extends React.Props<any> {
-	meta?: MetaFile;
+	meta?: MetaFileData;
     markFirstLetter?: boolean;
 }
 

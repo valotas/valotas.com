@@ -1,5 +1,5 @@
 import * as React from 'react';
-import {Article} from '../content/Article';
+import {createArticle} from '../content/Article';
 import {MetaFile} from '../content/MetaFile';
 import {ArticleWithHeaderComponent} from './ArticleComponent';
 import {IndexWithHeader} from './Index';
@@ -14,7 +14,7 @@ import {FetchStreamer} from '../FetchStreamer';
 import {createTitle} from '../titleFactory';
 
 interface LayoutProps extends React.Props<any> {
-	meta?: MetaFile|MetaFile[];
+	meta?: MetaFileData|MetaFileData[];
 	metafileStore?: MetaFileStore;
 	fetcher?: Fetcher;
 	gistStore?: GistStore;
@@ -29,7 +29,7 @@ export class Layout extends React.Component<LayoutProps, LayoutState> {
 	constructor(props: LayoutProps) {
 		super(props);
 		this.state = {
-			meta: props.meta
+			meta: MetaFile.fromData(props.meta)
 		};
 	}
 
@@ -74,7 +74,7 @@ export class Layout extends React.Component<LayoutProps, LayoutState> {
 	}
 
 	_setMetaFile(metaOrNull: MetaFile|MetaFile[]) {
-		const meta = metaOrNull || this.props.meta;
+		const meta = metaOrNull || MetaFile.fromData(this.props.meta);
 		this.setState({
 			meta: meta
 		});
@@ -93,12 +93,12 @@ export class Layout extends React.Component<LayoutProps, LayoutState> {
 		const meta = this.state.meta;
 
 		if (isArray(meta)) {
-			const articles =  toArticles(meta);
+			const articles = toArticles(meta);
 			return <IndexWithHeader articles={articles} metafileStore={this.props.metafileStore}/>;
 		}
 
 		if (meta) {
-			const article = new Article(meta as MetaFile);
+			const article = createArticle(meta as MetaFile);
 			return <ArticleWithHeaderComponent article={article} metafileStore={this.props.metafileStore}/>;
 		}
 		return null;
@@ -106,5 +106,5 @@ export class Layout extends React.Component<LayoutProps, LayoutState> {
 }
 
 function toArticles (arr: MetaFile[]): Article[] {
-	return arr.map((input) => new Article(input));
+	return arr.map((input) => createArticle(input));
 }

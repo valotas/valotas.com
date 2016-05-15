@@ -1,5 +1,4 @@
 import {MetaFile, isValidMetaFile} from './MetaFile';
-import {Article} from './Article';
 import {isString} from '../utils';
 import * as ex from '../exceptions';
 
