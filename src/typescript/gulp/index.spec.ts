@@ -38,23 +38,15 @@ describe('mdFile', () => {
 });
 
 describe('toArticle', () => {
-	const resp = {} as Response;
-	const dummyFetcher = {
-		fetch: function () {
-			return Promise.resolve(resp);
-		}
-	};
-
-	it('should add an article/meta/html property to the given chunk', (done) => {
+	it('should add an article/meta property to the given chunk', (done) => {
 		fs.src(['src/articles/getters-and-setters.md'], {
 				base: path.join(__dirname, '../../')
 			})
 			.pipe(mdFile())
-			.pipe(toArticle(dummyFetcher))
+			.pipe(toArticle())
 			.pipe(through.obj(function (chunk, enc, cb) {
 				expect(chunk.article).toBeDefined();
 				// expect(chunk.article instanceof Article).toBeTruthy();
-				expect(chunk.html).toBeTruthy();
 				expect(chunk.meta).toBeTruthy();
 				cb();
 			}))
