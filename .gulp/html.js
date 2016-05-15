@@ -14,6 +14,7 @@ module.exports = function (gulp) {
       .pipe(plugin.addSitemap())
       .pipe(plugin.addMetafiles())
       .pipe(plugin.adaptPaths())
+      .pipe(plugin.createLayoutHtml())
       .pipe(plugin.wrapHtml('src/templates/index.jade'))
       .pipe(gulp.dest('build'))
   };
