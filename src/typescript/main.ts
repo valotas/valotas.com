@@ -25,8 +25,9 @@ BROWSER.ready(() => {
 
 	// Create the main store and register the state to the history object
 	const ga = createGoogleAnalytics('UA-12048148-1').sendPageView();
-	BROWSER.history.onPopState(ga.sendPageView);
-	BROWSER.history.onPushState(ga.sendPageView);
+	const sendPageView = ga.sendPageView.bind(ga);
+	BROWSER.history.onPopState(sendPageView);
+	BROWSER.history.onPushState(sendPageView);
 
 	const fetcher = new FetchStreamer(BROWSER);
     const metafileStore = createMetafileStore(fetcher);
