@@ -14,7 +14,7 @@ describe('HistoryService', () => {
 	});
 
 	it('should register an onpopstate listener', () => {
-		expect(win.onpopstate).toBeDefined();
+		expect(win.popstate).toBeDefined();
 	});
 
 	describe('onPopState', () => {
@@ -24,7 +24,7 @@ describe('HistoryService', () => {
 			const event = {
 				state: {} as PageState
 			};
-			win.onpopstate(event);
+			win.popstate(event);
 			expect(listener).toHaveBeenCalledWith(event.state);
 		});
 	});

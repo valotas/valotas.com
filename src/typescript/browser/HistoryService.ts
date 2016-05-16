@@ -6,7 +6,7 @@ export class HistoryService {
 	private pushStateBus: Bus<PageState> = new Bus();
 
 	constructor(private win: Window) {
-        win.addEventListener('onpopstate', (ev: PopStateEvent) => {
+        win.addEventListener('popstate', (ev: PopStateEvent) => {
 			const page = ev.state as PageState;
 			this.popStateBus.notify(page);
 		});
