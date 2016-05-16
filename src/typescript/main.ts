@@ -5,7 +5,7 @@ import {MetaFileStore} from './content/MetaFileStore';
 import {Layout} from './react/Layout';
 import {inflate} from './utils';
 import {BROWSER} from './browser/Browser';
-import {LOADER} from './Loader';
+import {loadWebFonts} from './browser/loadWebFonts';
 import {GistStore} from './content/GistStore';
 import {FetchStreamer} from './FetchStreamer';
 import {createGoogleAnalytics} from './browser/GoogleAnalytics';
@@ -21,7 +21,7 @@ function setCurrentTitle(state: PageState) {
 }
 
 BROWSER.ready(() => {
-	LOADER.loadWebFonts();
+	loadWebFonts();
 
 	// Create the main store and register the state to the history object
 	const ga = createGoogleAnalytics('UA-12048148-1').sendPageView();

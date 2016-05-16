@@ -4,7 +4,7 @@ import {Link} from './Link';
 import {Header} from './Header';
 import {VALOTAS} from '../utils';
 import {MetaFileStore} from '../content/MetaFileStore';
-import {LOADER} from '../Loader';
+import {loadTwitter} from '../browser/Twitter';
 import {MarkedComponent} from './MarkedComponent';
 
 interface ArticleProps {
@@ -60,7 +60,7 @@ export class ArticleComponent extends React.Component<ArticleProps, {}> {
         if (!this.props.article.hasTweets()) {
 			return;
 		}
-		LOADER.loadTwitter().then((twttr) => {
+		loadTwitter().then((twttr) => {
 			twttr.widgets.load();
 		});
 	}

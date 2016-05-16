@@ -1,8 +1,7 @@
-import {Loader} from './Loader';
+import {loadTwitter} from './Twitter';
 
-describe('Loader', () => {
+describe('Twitter', () => {
 	let win;
-	let loader;
 
 	beforeEach(() => {
         win = {
@@ -28,17 +27,16 @@ describe('Loader', () => {
                 return win[actualName];
             }
         };
-		loader = new Loader(win);
 	});
 
 	describe('loadTwitter()', () => {
 		it('should return a thenable', () => {
-			const actual = loader.loadTwitter();
+			const actual = loadTwitter(win);
 			expect(actual.then).toBeDefined();
 		});
 
 		it('should add the twttr attribute in to the window object', () => {
-			loader.loadTwitter();
+			loadTwitter(win);
             expect(win['__twttr']).toBeDefined();
 		});
 
@@ -46,7 +44,7 @@ describe('Loader', () => {
             const then1 = jasmine.createSpy('then1');
             const then2 = jasmine.createSpy('then2');
 
-            const actual = loader.loadTwitter();
+            const actual = loadTwitter(win);
             actual.then(then1);
             actual.then(then2);
 
@@ -56,7 +54,7 @@ describe('Loader', () => {
 
 		it('should add the widget script', () => {
 			spyOn(win, 'addScript').and.callThrough();
-			loader.loadTwitter();
+			loadTwitter(win);
 			expect(win.addScript).toHaveBeenCalledWith('//platform.twitter.com/widgets.js', {
 				id: 'twitter-wjs',
 				protocol: 'https'
@@ -66,9 +64,9 @@ describe('Loader', () => {
 		it('should not try to add the script twice', () => {
 			const initialCallCount = win.addScriptCallCount;
 			spyOn(win, 'addScript').and.callThrough();
-			loader.loadTwitter();
-			loader.loadTwitter();
-			loader.loadTwitter();
+			loadTwitter(win);
+			loadTwitter(win);
+			loadTwitter(win);
 			expect(win.addScriptCallCount).toEqual(initialCallCount + 1);
 		});
 	});
