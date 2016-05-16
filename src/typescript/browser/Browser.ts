@@ -1,3 +1,5 @@
+import {HistoryService} from './HistoryService';
+
 interface CreateScriptOptions {
 	protocol?: string;
 	id?: string;
@@ -6,10 +8,12 @@ interface CreateScriptOptions {
 class Browser {
 	public browserSupported: boolean;
 	public window: Window;
+	public history: HistoryService;
 
 	constructor() {
         this.browserSupported = window['fetch'] && window['Promise'];
 		this.window = window;
+		this.history = new HistoryService(window);
 	}
 
 	addScript(url: string, options?: CreateScriptOptions) {
@@ -37,11 +41,6 @@ class Browser {
 		return window.document.querySelector(selector);
 	}
 
-	pushState(page: PageState) {
-		window.history.pushState(page, page.title, page.path);
-		this.title(page.title);
-	}
-
 	scrollToTop() {
 		window.scrollTo(0, 0);
 	}
@@ -52,13 +51,6 @@ class Browser {
 		} else {
 			window.document.addEventListener('DOMContentLoaded', ondocumentReady, false);
 		}
-	}
-
-   	onPopstate(f: (state: PageState) => void) {
-		this.on('popstate', (ev: PopStateEvent) => {
-			const page = ev.state as PageState;
-			f(page);
-		});
 	}
 
 	on(name: string, f) {

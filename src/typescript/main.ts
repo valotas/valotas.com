@@ -13,13 +13,23 @@ import {createPageState} from './PageState';
 
 console.time('load');
 
+BROWSER.history.onPopState(setCurrentTitle);
+BROWSER.history.onPushState(setCurrentTitle);
+
+function setCurrentTitle(state: PageState) {
+	BROWSER.title(state.title);
+}
+
 BROWSER.ready(() => {
 	LOADER.loadWebFonts();
 
 	// Create the main store and register the state to the history object
-	const fetcher = new FetchStreamer(BROWSER);
 	const ga = createGoogleAnalytics('UA-12048148-1').sendPageView();
-    const metafileStore = createMetafileStore(ga, fetcher);
+	BROWSER.history.onPopState(ga.sendPageView);
+	BROWSER.history.onPushState(ga.sendPageView);
+
+	const fetcher = new FetchStreamer(BROWSER);
+    const metafileStore = createMetafileStore(fetcher);
 
 	const metaHolder = BROWSER.query('script[type="application/json"]') as HTMLElement;
 	const metadata = inflate(metaHolder.innerHTML) as MetaFileData|MetaFileData[];
@@ -38,12 +48,11 @@ BROWSER.ready(() => {
 	});
 });
 
-function createMetafileStore(ga: {sendPageView: (PageState) => any}, fetcher: Fetcher) {
+function createMetafileStore(fetcher: Fetcher) {
     const metafileStore = new MetaFileStore(fetcher);
 	metafileStore.onChange((meta) => {
 		const state = createPageState(meta);
-		BROWSER.pushState(state);
-		ga.sendPageView(state);
+		BROWSER.history.pushState(state);
 		BROWSER.scrollToTop();
 	});
     return metafileStore;
