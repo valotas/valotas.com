@@ -1,4 +1,6 @@
 {
+  "name": "valotas.com",
+  "version": "1.0.0",
   "repository": "git@github.com:valotas/valotas.com.git",
   "private": true,
   "devDependencies": {
@@ -33,7 +35,10 @@
     "lint": "gulp lint",
     "build": "gulp build",
     "test": "gulp test",
-    "deploy": "gulp dist && rsync -azP dist/ valotas@pi:~/valotas.com"
+    "rsync": "rsync -azP dist/ valotas@pi:~/valotas.com",
+    "deploy": "gulp dist && npm run rsync",
+    "preversion": "gulp dist",
+    "postversion": "npm run rsync"
   },
   "dependencies": {
     "base64-js": "0.0.8",
