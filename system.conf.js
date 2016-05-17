@@ -7,13 +7,6 @@
     var pre = prefix || '/';
     return {
       defaultJSExtensions: true,
-      /*
-      packages: {
-        '/typescript': {
-            'defaultExtention': 'js'
-        }
-      },
-      */
       map: {
         'react': pre + 'node_modules/react/dist/react.min.js',
         'react-dom': pre + 'node_modules/react-dom/dist/react-dom.min.js',
