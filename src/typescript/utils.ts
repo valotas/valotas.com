@@ -1,5 +1,4 @@
 import * as base64 from 'base64-js';
-import * as moment from 'moment';
 
 const TO_STRING = {to: 'string'};
 
