@@ -39,5 +39,5 @@ export function loadTwitter(win = BROWSER) {
 			protocol: 'https'
 		});
 	}
-	return new TwitterThenable(win); 	
+	return new TwitterThenable(win);
 }
