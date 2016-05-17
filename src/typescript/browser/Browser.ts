@@ -9,10 +9,12 @@ class Browser {
 	public browserSupported: boolean;
 	public window: Window;
 	public history: HistoryService;
+	public initialTitle: string;
 
 	constructor() {
         this.browserSupported = window['fetch'] && window['Promise'];
 		this.window = window;
+		this.initialTitle = window.document.title;
 		this.history = new HistoryService(window);
 	}
 

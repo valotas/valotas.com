@@ -17,7 +17,8 @@ BROWSER.history.onPopState(setCurrentTitle);
 BROWSER.history.onPushState(setCurrentTitle);
 
 function setCurrentTitle(state: PageState) {
-	BROWSER.title(state.title);
+	const newTitle = state ? state.title : BROWSER.initialTitle;
+	BROWSER.title(newTitle);
 }
 
 BROWSER.ready(() => {
