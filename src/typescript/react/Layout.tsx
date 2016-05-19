@@ -63,7 +63,7 @@ export class Layout extends React.Component<LayoutProps, LayoutState> {
 	}
 
 	_setPageState(page: PageState) {
-		const meta = MetaFile.fromData(page.meta);
+		const meta = page ? MetaFile.fromData(page.meta) : null;
 		if (this.props.gistStore) {
 			this.props.gistStore.meta = isArray(meta) ? null : meta;
 		}
