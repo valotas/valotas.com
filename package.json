@@ -36,9 +36,9 @@
     "build": "gulp build",
     "test": "gulp test",
     "rsync": "rsync -azP dist/ valotas@pi:~/valotas.com",
-    "deploy": "gulp dist && npm run rsync",
+    "deploy": "npm version patch2 -m \"Release v%s\"",
     "preversion": "gulp dist",
-    "postversion": "npm run rsync"
+    "postversion": "npm run rsync && git push origin master --tags"
   },
   "dependencies": {
     "base64-js": "0.0.8",
