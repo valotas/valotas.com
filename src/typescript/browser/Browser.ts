@@ -63,7 +63,7 @@ class Browser {
         return window.fetch(url);
     }
 
-    prop(name: string, initialValue?) {
+    prop<T>(name: string, initialValue?: T): T {
         if (initialValue) {
             window[name] = window[name] || initialValue;
         }

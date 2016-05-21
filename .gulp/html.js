@@ -1,5 +1,7 @@
 'use strict';
 
+var pkg = require('../package.json');
+
 module.exports = function (gulp) {
   return function () {
     var plugin = require('../build/typescript/gulp');
@@ -14,8 +16,8 @@ module.exports = function (gulp) {
       .pipe(plugin.addSitemap())
       .pipe(plugin.addMetafiles())
       .pipe(plugin.adaptPaths())
-      .pipe(plugin.createLayoutHtml())
-      .pipe(plugin.wrapHtml('src/templates/index.jade'))
+      .pipe(plugin.createLayoutHtml(pkg))
+      .pipe(plugin.wrapHtml('src/templates/index.jade', pkg))
       .pipe(gulp.dest('build'))
   };
 };

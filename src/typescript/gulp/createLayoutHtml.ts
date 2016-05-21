@@ -14,7 +14,7 @@ const NODE_FETCHER = {
 
 const layout = React.createFactory(Layout);
 
-export function createLayoutHtml (fetcher: Fetcher = NODE_FETCHER, pkg: PackageJson) {
+export function createLayoutHtml (pkg: PackageJson, fetcher: Fetcher = NODE_FETCHER) {
 	return through.obj(function (file: GulpFile, enc, callback) {
 		if (file.meta) {
 			renderLayout(file, fetcher, pkg).then(function (html) {

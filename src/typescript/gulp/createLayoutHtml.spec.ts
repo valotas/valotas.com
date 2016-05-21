@@ -20,7 +20,7 @@ describe('createLayoutHtml', () => {
 				base: path.join(__dirname, '../../')
 			})
 			.pipe(mdFile())
-			.pipe(createLayoutHtml(dummyFetcher, pkg))
+			.pipe(createLayoutHtml(pkg, dummyFetcher))
 			.pipe(through.obj(function (chunk, enc, cb) {
 				expect(chunk.html).toBeTruthy();
 				cb();
@@ -32,7 +32,7 @@ describe('createLayoutHtml', () => {
 		fs.src(['src/robots.txt'], {
 				base: path.join(__dirname, '../../')
 			})
-			.pipe(createLayoutHtml(dummyFetcher, pkg))
+			.pipe(createLayoutHtml(pkg, dummyFetcher))
 			.pipe(through.obj(function (chunk, enc, cb) {
 				expect(chunk.html).toBeUndefined();
 				cb(null, chunk);
