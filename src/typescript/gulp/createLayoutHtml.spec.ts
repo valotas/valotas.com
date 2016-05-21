@@ -4,6 +4,10 @@ import * as through from 'through2';
 import {mdFile, toArticle, adaptPaths, addMetafiles, createLayoutHtml} from './index';
 
 describe('createLayoutHtml', () => {
+	const pkg: PackageJson = {
+		name: 'the name',
+		version: '666'
+	};
 	const resp = {} as Response;
 	const dummyFetcher = {
 		fetch: function () {
@@ -16,7 +20,7 @@ describe('createLayoutHtml', () => {
 				base: path.join(__dirname, '../../')
 			})
 			.pipe(mdFile())
-			.pipe(createLayoutHtml(dummyFetcher))
+			.pipe(createLayoutHtml(dummyFetcher, pkg))
 			.pipe(through.obj(function (chunk, enc, cb) {
 				expect(chunk.html).toBeTruthy();
 				cb();
@@ -28,7 +32,7 @@ describe('createLayoutHtml', () => {
 		fs.src(['src/robots.txt'], {
 				base: path.join(__dirname, '../../')
 			})
-			.pipe(createLayoutHtml(dummyFetcher))
+			.pipe(createLayoutHtml(dummyFetcher, pkg))
 			.pipe(through.obj(function (chunk, enc, cb) {
 				expect(chunk.html).toBeUndefined();
 				cb(null, chunk);

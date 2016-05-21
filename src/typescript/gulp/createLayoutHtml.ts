@@ -14,10 +14,10 @@ const NODE_FETCHER = {
 
 const layout = React.createFactory(Layout);
 
-export function createLayoutHtml (fetcher: Fetcher = NODE_FETCHER) {
+export function createLayoutHtml (fetcher: Fetcher = NODE_FETCHER, pkg: PackageJson) {
 	return through.obj(function (file: GulpFile, enc, callback) {
 		if (file.meta) {
-			renderLayout(file, fetcher).then(function (html) {
+			renderLayout(file, fetcher, pkg).then(function (html) {
 				file.html = html;
 				callback(null, file);
 			}, function (er) {
@@ -30,13 +30,14 @@ export function createLayoutHtml (fetcher: Fetcher = NODE_FETCHER) {
 	});
 }
 
-function renderLayout(file: GulpFile, fetcher: Fetcher): Promise<string> {
+function renderLayout(file: GulpFile, fetcher: Fetcher, pkg: PackageJson): Promise<string> {
 	const meta = file.meta;
 	const store = new CacheableGistStore(fetcher, isValidMetaFile(meta) ? meta : null);
 	const layoutElement = layout({
 		meta: meta,
 		fetcher: fetcher,
-		gistStore: store
+		gistStore: store,
+		pkg: pkg
 	});
 	// initial rendering to cause the initialization of all our components
 	try {

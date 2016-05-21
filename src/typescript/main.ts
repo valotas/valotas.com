@@ -43,7 +43,11 @@ BROWSER.ready(() => {
 		meta: meta,
 		metafileStore: metafileStore,
 		fetcher: fetcher,
-		gistStore: new GistStore(fetcher, metafileStore, isValidMetaFile(meta) ? meta : null)
+		gistStore: new GistStore(fetcher, metafileStore, isValidMetaFile(meta) ? meta : null),
+		pkg: BROWSER.prop('pkg', {
+			name: 'valotas.com',
+			version: 'DEV'
+		})
 	});
 	ReactDom.render(el, BROWSER.query('#app'), () => {
 		console.timeEnd('load');

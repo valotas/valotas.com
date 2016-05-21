@@ -18,6 +18,7 @@ interface LayoutProps extends React.Props<any> {
 	metafileStore?: MetaFileStore;
 	fetcher?: Fetcher;
 	gistStore?: GistStore;
+	pkg: PackageJson;
 }
 
 interface LayoutState {
@@ -81,7 +82,7 @@ export class Layout extends React.Component<LayoutProps, LayoutState> {
 		return (
 			<div>
 				{this.createMainContent()}
-				<Footer/>
+				<Footer pkg={this.props.pkg}/>
 			</div>
 		);
 	}

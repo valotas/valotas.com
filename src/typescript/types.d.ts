@@ -17,3 +17,8 @@ interface PageState {
 	title: string;
 	path: string;
 }
+
+interface PackageJson {
+	version: string;
+	name: string;
+}
