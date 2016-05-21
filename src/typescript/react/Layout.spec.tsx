@@ -7,7 +7,7 @@ describe('Layout', () => {
         const pkg: PackageJson = {
                 name: 'the name',
                 version: '666'
-        }
+        };
 	it('should render html', () => {
 		const html = RDS.renderToString(<Layout pkg={pkg}/>);
 		expect(html).toBeTruthy();
