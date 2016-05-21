@@ -10,7 +10,7 @@ export function Footer ({pkg}: FooterProps) {
 		<div id='footer'>
 			<div className='container text-center'>
 				<div className='col-md-12'>
-					{pkg.name} v{pkg.version} &copy; Γιώργος Βαλοτάσιος - CSS by &nbsp;
+					{pkg.name} <strong>v{pkg.version}</strong> &copy; Γιώργος Βαλοτάσιος - CSS by &nbsp;
 					<a href='https://twitter.com/MrPirrera' target='_blank'>@MrPirrera</a>
 				</div>
 				<div className='col-sm-12 col-md-1'>
