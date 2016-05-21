@@ -36,7 +36,7 @@
     "build": "gulp build",
     "test": "gulp test",
     "rsync": "rsync -azP dist/ valotas@pi:~/valotas.com",
-    "deploy": "npm version patch2 -m \"Release v%s\"",
+    "deploy": "npm version patch -m \"Release v%s\"",
     "preversion": "gulp dist",
     "postversion": "npm run rsync && git push origin master --tags"
   },
