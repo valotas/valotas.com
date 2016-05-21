@@ -46,7 +46,6 @@ gulp.task('tdd', ['test'], function () {
 });
 
 gulp.task('build', [
-  'lint',
   'copy-assets',
   'css',
   'tsc',
