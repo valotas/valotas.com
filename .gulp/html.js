@@ -1,9 +1,12 @@
+/*eslint-env node*/
+
 'use strict';
+var fs = require('fs');
 
 module.exports = function (gulp) {
   return function () {
     var plugin = require('../build/typescript/gulp');
-    var pkg = require('../package.json');
+    var pkg = JSON.parse(fs.readFileSync(__dirname + '/../package.json', 'utf8'));
     return gulp.src([
         'src/articles/**/*.md',
         'src/*.html',
