@@ -38,6 +38,8 @@ gulp.task('html', ['tsc'], require('./.gulp/html')(gulp));
 
 gulp.task('test', require('./.gulp/test')(gulp, 'build/**/*.spec.js'));
 
+gulp.task('lint-test', ['lint', 'test']);
+
 gulp.task('tdd', ['test'], function () {
   ts.watch();
   gulp.watch('build/**/*.spec.js', ['test']);
