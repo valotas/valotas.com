@@ -6,3 +6,8 @@ interface GulpFile {
 	path: string;
 	base: string;
 }
+
+interface Directory {
+	writeFile(fileName: string, data: string): Promise<string>;
+	readFile(fileName: string): Promise<string>;
+}
