@@ -1,6 +1,7 @@
 import * as React from 'react';
 import {createArticle} from '../content/Article';
 import {MetaFile} from '../content/MetaFile';
+import {LoadingBar} from './LoadingBar';
 import {ArticleWithHeaderComponent} from './ArticleComponent';
 import {IndexWithHeader} from './Index';
 import {Header} from './Header';
@@ -81,6 +82,7 @@ export class Layout extends React.Component<LayoutProps, LayoutState> {
 	render() {
 		return (
 			<div>
+				<LoadingBar/>
 				{this.createMainContent()}
 				<Footer pkg={this.props.pkg}/>
 			</div>

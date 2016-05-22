@@ -2,7 +2,6 @@ import * as React from 'react';
 import {Icon} from './Icon';
 import {VALOTAS} from '../utils';
 import {Link} from './Link';
-import {LoadingBar} from './LoadingBar';
 import {MetaFileStore} from '../content/MetaFileStore';
 
 interface HeaderProps extends React.Props<any> {
@@ -15,7 +14,6 @@ interface HeaderProps extends React.Props<any> {
 export function Header ({title, subtitle = VALOTAS, date, metafileStore}: HeaderProps) {
 	return (
 		<div className='jumbotron'>
-			<LoadingBar/>
 			<div className='container'>
 				<div className='col-md-3'>
 					<Link className='photo img-rounded' metafileStore={metafileStore}/>
