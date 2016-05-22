@@ -2,7 +2,7 @@
 
 'use strict';
 
-var less = require('gulp-less');
+var sass = require('gulp-sass');
 var cssmin = require('gulp-cssmin');
 
 function noop() {
@@ -11,8 +11,10 @@ function noop() {
 
 module.exports = function (gulp, onChange) {
   return function () {
-    return gulp.src('./src/assets/main.less')
-      .pipe(less())
+    return gulp.src('./src/sass/**/*.scss')
+      .pipe(sass({
+        includePaths: './node_modules/foundation-sites/scss'
+      }).on('error', sass.logError))
       .pipe(cssmin())
       .pipe(gulp.dest('./build/assets'))
       .on('change',  onChange || noop);
