@@ -3,6 +3,12 @@ import * as path from 'path';
 import * as through from 'through2';
 import {mdFile, toArticle, adaptPaths, addMetafiles} from './index';
 
+const noopLogger = {
+	log(message?: any, ...optionalParams: any[]) {
+		
+	}
+};
+
 describe('mdFile', () => {
 	it('should parse the meta as yalm', (done) => {
 		fs.src(['src/articles/tomcat-initd-*.md'], {
@@ -88,7 +94,7 @@ describe('addMetafiles', () => {
 				base: path.join(__dirname, '../../')
 			})
 			.pipe(mdFile())
-			.pipe(addMetafiles())
+			.pipe(addMetafiles(noopLogger))
 			.pipe(through.obj(function (chunk, enc, cb) {
 				counter++;
 				if (!chunk.meta) {

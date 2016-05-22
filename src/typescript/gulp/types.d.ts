@@ -11,3 +11,7 @@ interface Directory {
 	writeFile(fileName: string, data: string): Promise<string>;
 	readFile(fileName: string): Promise<string>;
 }
+
+interface Logger {
+	log(message?: any, ...optionalParams: any[]): void;
+}

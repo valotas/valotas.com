@@ -3,7 +3,7 @@ import * as gutil from 'gulp-util';
 import File = require('vinyl'); // how to use import File from 'vinyl'?
 import * as path from 'path';
 
-export function addMetafiles() {
+export function addMetafiles(logger: Logger = gutil) {
 	return through.obj(function (file, enc, callback) {
 		const meta = file.meta;
 		if (meta) {
@@ -14,7 +14,7 @@ export function addMetafiles() {
 				contents: new Buffer(JSON.stringify(meta), enc)
 			});
 			this.push(index);
-            gutil.log('Created', index.path);
+            logger.log('Created', index.path);
 		}
 		callback(null, file);
 	});

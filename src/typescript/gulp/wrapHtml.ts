@@ -5,7 +5,7 @@ import {deflate} from '../utils';
 import {createTitle} from '../titleFactory';
 import {createPackageJson} from '../PackageJson.factory';
 
-export function wrapHtml(templateFile, pkg) {
+export function wrapHtml(templateFile, pkg, logger: Logger = gutil) {
 	const packageJson = createPackageJson(pkg);
 	const template = jade.compileFile(templateFile);
 	return through.obj(function (file: GulpFile, enc, callback) {
@@ -17,7 +17,7 @@ export function wrapHtml(templateFile, pkg) {
 				pkg: `window.pkg=${JSON.stringify(packageJson)}`
 			});
 			file.contents = new Buffer(html, enc);
-            gutil.log('Created', file.path);
+            logger.log('Created', file.path);
 		}
 		callback(null, file);
 	});
