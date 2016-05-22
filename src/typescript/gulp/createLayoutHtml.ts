@@ -4,13 +4,11 @@ import {isValidMetaFile} from '../content/MetaFile';
 import * as gutil from 'gulp-util';
 import {CacheableGistStore} from './CacheableGistStore';
 import {Layout} from '../react/Layout';
-import nfetch = require('node-fetch');
 import * as React from 'react';
 import * as RDS from 'react-dom/server';
+import {NodeFetcher} from './NodeFetcher';
 
-const NODE_FETCHER = {
-	fetch: nfetch
-};
+const NODE_FETCHER = new NodeFetcher(null, '/tmp/valotas.com.createLayoutHtml');
 
 const layout = React.createFactory(Layout);
 

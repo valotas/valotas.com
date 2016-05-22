@@ -1,4 +1,3 @@
-import nfetch = require('node-fetch');
 import {GistStore} from '../content/GistStore';
 
 export class CacheableGistStore extends GistStore {
