@@ -3,7 +3,6 @@ import {createDirectory} from './Directory.factory';
 import {isString} from '../utils';
 
 export class NodeFetcher implements Fetcher {
-	private promises: {[k: string]: Promise<Response>} = {};
 	private cache: Directory;
 
 	constructor(private delegate: Fetcher, cacheDir: string) {
@@ -11,13 +10,6 @@ export class NodeFetcher implements Fetcher {
 	}
 
 	fetch (url: string|Request, init?: RequestInit) {
-		const key = url as string;
-		const promise = this.promises[key] || this._fetch(url, init);
-		this.promises[key] = promise;
-		return promise;
-	}
-
-	_fetch (url: string|Request, init?: RequestInit) {
 		const fileName = createCacheFileName(url);
 		return this.cache.readFile(fileName)
 			.then(createResponse, (err) => {
@@ -33,10 +25,6 @@ export class NodeFetcher implements Fetcher {
 				return this.cache.writeFile(fileName, text);
 			})
 			.then(createResponse);
-	}
-
-	all () {
-		return Promise.all(Object.keys(this.promises).map((k) => this.promises[k]));
 	}
 }
 
