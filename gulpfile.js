@@ -56,7 +56,7 @@ gulp.task('serve', [
     'build'
   ],
   function () {
-    gulp.watch('src/**/*.less', ['css:only']);
+    gulp.watch('src/sass/**/*.scss', ['css:only']);
     browserSync.init({
       logLevel: 'debug',
       server: {
