@@ -17,28 +17,27 @@ describe('NodeFetcher', () => {
 		}
 	};
 
+	let random;
 	let fetcher: NodeFetcher;
 
 	beforeEach(() => {
+		random = Math.random().toString(36).substring(2);
 		fetcher = new NodeFetcher(dummyFetcher, dir);
 	});
 
 	describe('fetch', () => {
-		let random;
-
-		beforeEach(() => {
-			random = Math.random().toString(36).substring(2);
-		});
-
 		it('should delegate the call to given fetcher', (done) => {
-			spyOn(dummyFetcher, 'fetch').and.callThrough();
+			const fetcherSpy = spyOn(dummyFetcher, 'fetch').and.callThrough();
 			const url = `http://some/url/to/fetch/${random}`;
 			const actual = fetcher.fetch(url);
 
-			actual.then((data) => {
-				expect(data).toEqual(resp);
-			})
-			.then(done, done.fail);
+			// expect(fetcherSpy).toHaveBeenCalledWith(url);
+			actual
+				.then((data) => data.text())
+				.then((text) => {
+					expect(text).toEqual(body);
+				})
+				.then(done, done.fail);
 		});
 
 		it('should cache the returned output', (done) => {
