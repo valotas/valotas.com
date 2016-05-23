@@ -3,11 +3,12 @@
 @import 'settings';
 @import 'foundation';
 // @import 'motion-ui';
+@import 'font-awesome';
 
 @include foundation-global-styles;
-@include foundation-grid;
+// @include foundation-grid;
 // @include foundation-flex-grid;
-// @include foundation-typography;
+@include foundation-typography;
 // @include foundation-button;
 // @include foundation-forms;
 // @include foundation-range-input;
@@ -48,3 +49,9 @@
 
 // @include motion-ui-transitions;
 // @include motion-ui-animations;
+
+@import 'base-grid';
+@import 'header';
+@import 'loading-bar';
+@import 'index';
+@import 'article';

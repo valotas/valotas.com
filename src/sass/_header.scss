@@ -1,0 +1,62 @@
+
+.header {
+    padding: 4em;
+    width: 100%;
+    background: url('greece-wallpaper-hd-pictures-35.jpg');
+    background-size: cover;
+    
+    h1, 
+    h4 {
+        font-family: $body-font-family    
+    }
+    
+    .photo {
+        @include grid-column(12);
+
+        a {
+            border-radius: $global-radius;
+            display: block;
+            background-image: url('me-250x250.jpg');
+            background-size: cover;
+            height: 200px;
+            width: 200px;   
+        }
+    }
+    
+    .signature {
+        @include grid-column(12);
+    }
+
+    @media #{$medium-up} {
+        .photo {
+            @include grid-column(4);
+        }
+        .signature {
+            @include grid-column(8);
+        }
+    }
+    
+    .social a {
+        display: inline-block;
+        width: 2em;
+        height: 2em;
+        text-decoration: none;
+        margin: 0 0.5em;
+    }
+    
+    .fa-github-square {
+        color: #666;
+    }
+
+    .fa-facebook-square {
+        color: #305c99;
+    }
+
+    .fa-twitter-square {
+        color: #4099ff;
+    }
+
+    .fa-linkedin-square {
+        color: #0e76a8;
+    }
+}

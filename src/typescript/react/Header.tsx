@@ -13,18 +13,15 @@ interface HeaderProps extends React.Props<any> {
 
 export function Header ({title, subtitle = VALOTAS, date, metafileStore}: HeaderProps) {
 	return (
-		<div className='jumbotron'>
+		<div className='header'>
 			<div className='container'>
-				<div className='col-md-3'>
-					<Link className='photo img-rounded' metafileStore={metafileStore}/>
+				<div className='photo'>
+					<Link className='radius' metafileStore={metafileStore}/>
 				</div>
-				<div className='col-md-9 signature'>
-					<h1 className='row whitebg'>{title}</h1>
-					<p className='row whitebg'>
-						<span>{subtitle}</span>
-						<Date date={date} />
-					</p>
-					<div className='row whitebg social'>
+				<div className='signature'>
+					<h1>{title}</h1>
+					<h4>{subtitle} <small><Date date={date} /></small></h4>
+					<div className='social'>
 						<a href='https://github.com/valotas' target='_blank'>
 							<Icon name='fa-github-square' size='2x'/>
 						</a>
