@@ -7,7 +7,17 @@
     
     h1, 
     h4 {
-        font-family: $body-font-family    
+        font-family: $body-font-family
+    }
+    
+    h1 {
+        font-size: rem-calc(32);
+        font-weight: 600;
+    }
+    
+    h4 {
+        font-size: rem-calc(21);
+        font-weight: 200;
     }
     
     .photo {
@@ -18,21 +28,29 @@
             display: block;
             background-image: url('me-250x250.jpg');
             background-size: cover;
-            height: 200px;
-            width: 200px;   
+            height: rem-calc(250);
+            width: rem-calc(250);
+            max-height: 250px;
+            max-width: 250px;
+            margin: 0 auto;
         }
     }
     
     .signature {
         @include grid-column(12);
+        margin-top: rem-calc(15);
+        background: rgba(255,255,255,.5);
+        text-align: center;
     }
 
-    @media #{$medium-up} {
+    @media #{$large-up} {
         .photo {
             @include grid-column(4);
         }
         .signature {
             @include grid-column(8);
+            background: transparent;
+            text-align: left;
         }
     }
     

@@ -46,7 +46,7 @@
 // ---------
 
 $global-font-size: 100%;
-$global-width: rem-calc(1200);
+$global-width: rem-calc(1170);
 $global-lineheight: 1.5;
 $foundation-palette: (
   primary: #2199e8,
@@ -80,9 +80,9 @@ $print-transparent-backgrounds: true;
 
 $breakpoints: (
   small: 0,
-  medium: 640px,
-  large: 1024px,
-  xlarge: 1200px,
+  medium: 750px,
+  large: 970px,
+  xlarge: 1170px,
   xxlarge: 1440px,
 );
 $breakpoint-classes: (small medium large);
