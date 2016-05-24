@@ -2,24 +2,23 @@ doctype html
 
 html(lang='en')
   head
-    block head
-      meta(charset='utf-8')
-      meta(http-equiv='X-UA-Compatible', content='IE=edge,chrome=1')
-      meta(name='viewport', content='width=device-width, initial-scale=1.0')
-      meta(name='google-site-verification', content='Tq6L96TOcvuR7nl6ikpW4tV4PUoA6zYK1-CArKe3ji0')
-      title!= title
-      link(rel='sitemap', type='text/html', title='Sitemap' href='/sitemap.txt')
-      link(rel='shortcut icon', href= '/assets/favicon.ico')
-      //inject:css
-      link(rel='stylesheet', href= '/assets/main.css')
-      //endinject
-      script.!= pkg
-      //inject:js
-      script(src= '/node_modules/systemjs/dist/system.src.js')
-      script(src= '/system.conf.js')
-      script.
-        System.import('/typescript/main');
-      //endinject
+    meta(charset='utf-8')
+    meta(http-equiv='X-UA-Compatible', content='IE=edge')
+    meta(name='viewport', content='width=device-width, initial-scale=1.0')
+    meta(name='google-site-verification', content='Tq6L96TOcvuR7nl6ikpW4tV4PUoA6zYK1-CArKe3ji0')
+    title!= title
+    link(rel='sitemap', type='text/html', title='Sitemap' href='/sitemap.txt')
+    link(rel='shortcut icon', href= '/assets/favicon.ico')
+    //inject:css
+    link(rel='stylesheet', href= '/assets/main.css')
+    //endinject
+    script.!= pkg
+    //inject:js
+    script(src= '/node_modules/systemjs/dist/system.src.js')
+    script(src= '/system.conf.js')
+    script.
+      System.import('/typescript/main');
+    //endinject
   body
     #app!= content
     script(type='application/json').!= meta
