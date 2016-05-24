@@ -7,16 +7,16 @@ interface FooterProps {
 
 export function Footer ({pkg}: FooterProps) {
 	return (
-		<div id='footer'>
+		<div className='footer'>
 			<div className='container text-center'>
-				<div className='col-md-12'>
+				<div className='version'>
 					{pkg.name} <strong>v{pkg.version}</strong> &copy; Γιώργος Βαλοτάσιος - CSS by &nbsp;
 					<a href='https://twitter.com/MrPirrera' target='_blank'>@MrPirrera</a>
 				</div>
-				<div className='col-sm-12 col-md-1'>
+				<div className='icon'>
 					<Icon name='fa-asterisk' />
 				</div>
-				<div className='col-sm-12 col-md-11 whitebg'>
+				<div className='note'>
 					The greek name
 					"<strong><em>Γιώργος</em></strong>"
 					is also know as Yoryos, Georgios or just George which seems to be easier to most english speaking people.

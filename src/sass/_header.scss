@@ -39,7 +39,7 @@
     .signature {
         @include grid-column(12);
         margin-top: rem-calc(15);
-        background: rgba(255,255,255,.5);
+        background: $white-on-blue-background;
         text-align: center;
     }
 
