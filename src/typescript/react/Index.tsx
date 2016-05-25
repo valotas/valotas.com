@@ -64,11 +64,11 @@ function ArticleCardComponent ({article, metafileStore}: ArticleDescriptionCompo
 						{article.title}
 					</Link>
 				</h2>
-				<span className='badge date'>{article.date()}</span>
+				<span className='label date'>{article.date()}</span>
 				<div className='descr'>
 					<MarkedComponent markFirstLetter={false}>{description}</MarkedComponent>
-					<p className='more'>
-						<Link article={article} className='btn btn-primary' metafileStore={metafileStore}>
+					<p className='more text-right'>
+						<Link article={article} className='button' metafileStore={metafileStore}>
 							more&nbsp;
 							<Icon name='fa-angle-double-right'/>
 						</Link>

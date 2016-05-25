@@ -31,15 +31,15 @@ export class ArticleComponent extends React.Component<ArticleProps, {}> {
 		}
 		return (
 			<div className='container'>
-				<div className='article'>
+				<div className='article text-justify'>
 					<MarkedComponent meta={this.props.article.meta}/>
 				</div>
 				<div className='actions'>
-					<Link className='btn btn-default' metafileStore={this.props.metafileStore}>
+					<Link className='button' metafileStore={this.props.metafileStore}>
 						<Icon name='fa-home' size='sm-2x'/>
 						<span className='hidden-xs hidden-sm'>&nbsp;Home</span>
 					</Link>
-					<Link href='#' className='btn btn-default'>
+					<Link href='#' className='button'>
 						<span className='hidden-xs hidden-sm'>Top&nbsp;</span>
 						<Icon name='fa-toggle-up' size='sm-2x'/>
 					</Link>

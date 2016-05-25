@@ -46,7 +46,7 @@ function Date ({date = null}) {
 		return null;
 	}
 	return (
-		<span className='badge date'>
+		<span className='label'>
 			<Icon name='fa-pencil-square-o' />
 			&nbsp;
 			{date}
