@@ -20,37 +20,33 @@ export function IndexWithHeader (props: IndexProps) {
 	);
 }
 
-export class Index extends React.Component<IndexProps, {}> {
-	render() {
-		//const articles = addSeparators(this.props.articles);
-		return (
-			<div className='container'>
-				{this.props.articles.map(this.createArticleBox.bind(this))}
-			</div>
-		);
-	}
-
-	createArticleBox(article: Article, index: number) {
-		// if (article === null) {
-		// 	return <div className='clearfix' key={index} />;
-		// }
-
-		return (
-			<ArticleDescriptionComponent article={article} key={article.key} metafileStore={this.props.metafileStore}/>
-		);
-	}
+export function Index ({articles}: IndexProps) {
+		return (<div className='container'>{toArticleRows(articles)}</div>);
 }
 
-// function addSeparators(articles: Article[]) {
-// 	const result = [];
-// 	articles.forEach((article, index) => {
-// 		result.push(article);
-// 		if ((index + 1) % 3 === 0) {
-// 			result.push(null);
-// 		}
-// 	});
-// 	return result;
-// }
+function toArticleRows(articles: Article[]) {
+	const result = [];
+
+	let triplet: Article[] = [];
+	articles.forEach((article, index) => {
+		triplet.push(article)
+		if ((index + 1) % 3 === 0) {
+			const row = <ArticleRow articles={triplet} />; 
+			result.push(row);
+			triplet = [];
+		}
+	});
+	
+	return result;
+}
+
+function ArticleRow ({articles, metafileStore}: IndexProps) {
+	return (
+		<div className='article-cards-row container'>
+			{articles.map((article) => <ArticleCardComponent article={article} key={article.key} metafileStore={metafileStore}/>)}
+		</div>	
+	);
+}
 
 interface ArticleDescriptionComponentProps extends React.Props<any> {
 	article: Article;
@@ -58,14 +54,13 @@ interface ArticleDescriptionComponentProps extends React.Props<any> {
 	metafileStore?: MetaFileStore;
 }
 
-function ArticleDescriptionComponent (props: ArticleDescriptionComponentProps) {
-	const article = props.article;
+function ArticleCardComponent ({article, metafileStore}: ArticleDescriptionComponentProps) {
 	const description = article.description();
 	return (
 		<div className='article-card'>
 			<div className='article'>
 				<h2>
-					<Link article={article} className='' metafileStore={props.metafileStore}>
+					<Link article={article} className='' metafileStore={metafileStore}>
 						{article.title}
 					</Link>
 				</h2>
@@ -73,7 +68,7 @@ function ArticleDescriptionComponent (props: ArticleDescriptionComponentProps) {
 				<div className='descr'>
 					<MarkedComponent markFirstLetter={false}>{description}</MarkedComponent>
 					<p className='more'>
-						<Link article={article} className='btn btn-primary' metafileStore={props.metafileStore}>
+						<Link article={article} className='btn btn-primary' metafileStore={metafileStore}>
 							more&nbsp;
 							<Icon name='fa-angle-double-right'/>
 						</Link>
