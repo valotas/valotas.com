@@ -1,11 +1,10 @@
 
-.article-card { 
-    padding: 0;
+.article-card {
     
     @media #{$medium-up} {
-        padding: 0.5em 3em;
+        padding: rem-calc(10 0);
     }
-    
+
     @media #{$large-up} {
         @include grid-column(4);
     }
