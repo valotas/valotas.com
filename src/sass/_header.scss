@@ -20,6 +20,10 @@
         font-weight: 200;
     }
     
+    .date {
+        vertical-align: middle;
+    }
+    
     .photo {
         @include grid-column(12);
 
@@ -54,12 +58,14 @@
         }
     }
     
-    .social a {
-        display: inline-block;
-        width: 2em;
-        height: 2em;
-        text-decoration: none;
-        margin: 0 0.5em;
+    .social {
+         a {
+            display: inline-block;
+        }
+        .fa {
+            font-size: 3em;
+            margin: 0 .25em;
+        }
     }
     
     .fa-github-square {

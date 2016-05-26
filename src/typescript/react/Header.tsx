@@ -20,7 +20,7 @@ export function Header ({title, subtitle = VALOTAS, date, metafileStore}: Header
 				</div>
 				<div className='signature'>
 					<h1>{title}</h1>
-					<h4>{subtitle} <small><Date date={date} /></small></h4>
+					<h4>{subtitle} <Date date={date} /></h4>
 					<div className='social'>
 						<a href='https://github.com/valotas' target='_blank'>
 							<Icon name='fa-github-square' size='2x'/>
@@ -46,7 +46,7 @@ function Date ({date = null}) {
 		return null;
 	}
 	return (
-		<span className='label'>
+		<span className='date label'>
 			<Icon name='fa-pencil-square-o' />
 			&nbsp;
 			{date}
