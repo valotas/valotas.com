@@ -34,13 +34,13 @@ export class ArticleComponent extends React.Component<ArticleProps, {}> {
 				<div className='article text-justify'>
 					<MarkedComponent meta={this.props.article.meta}/>
 				</div>
-				<div className='actions'>
+				<div className='actions button-group'>
 					<Link className='button' metafileStore={this.props.metafileStore}>
 						<Icon name='fa-home' size='sm-2x'/>
-						<span className='hidden-xs hidden-sm'>&nbsp;Home</span>
+						<span className='text'>&nbsp;Home</span>
 					</Link>
 					<Link href='#' className='button'>
-						<span className='hidden-xs hidden-sm'>Top&nbsp;</span>
+						<span className='text'>Top&nbsp;</span>
 						<Icon name='fa-toggle-up' size='sm-2x'/>
 					</Link>
 				</div>

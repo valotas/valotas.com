@@ -65,7 +65,7 @@ function ArticleCardComponent ({article, metafileStore}: ArticleDescriptionCompo
 					</Link>
 				</h2>
 				<span className='label date'>{article.date()}</span>
-				<div className='descr'>
+				<div className='descr text-justify'>
 					<MarkedComponent markFirstLetter={false}>{description}</MarkedComponent>
 					<p className='more text-right'>
 						<Link article={article} className='button' metafileStore={metafileStore}>

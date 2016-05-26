@@ -1,0 +1,32 @@
+
+.actions { 
+    text-align: center;
+    .fa {
+        font-size: 2em;
+    }
+    
+    .button {
+        color: $black;
+        background: $white;
+        border: 1px solid $medium-gray;
+        
+        &:hover {
+            border-color: $dark-gray;
+            background: $light-gray;
+        }
+    }
+    
+    .text {
+        display: none;
+    }
+    
+    @media #{$large-up} {
+        .fa {
+            font-size: 1em;
+        }
+        
+        .text {
+            display: inline;
+        }
+    }
+}
