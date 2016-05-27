@@ -25,7 +25,8 @@ function Index ({articles, metafileStore}: IndexProps) {
 }
 
 function toArticleCards(articles: Article[], metafileStore: MetaFileStore) {
-	return articles.map((article, index) => <ArticleCardComponent article={article} key={article.key} metafileStore={metafileStore} index={index}/>);
+	const lastIndex = articles.length - 1;
+	return articles.map((article, index) => <ArticleCardComponent article={article} key={article.key} metafileStore={metafileStore} index={index} last={lastIndex === index}/>);
 
 }
 
@@ -34,13 +35,17 @@ interface ArticleDescriptionComponentProps {
 	key: string;
 	metafileStore?: MetaFileStore;
 	index: number;
+	last: boolean;
 }
 
-function ArticleCardComponent ({article, metafileStore, index}: ArticleDescriptionComponentProps) {
+function ArticleCardComponent ({article, metafileStore, index, last}: ArticleDescriptionComponentProps) {
 	const description = article.description();
 	let className = 'article-card';
-	if ((index + 1) % 3 === 0) {
-		className += ' third';
+	if ((index + 1) % 3 === 1) {
+		className += ' first';
+	}
+	if (last) {
+		className += ' end';
 	}
 	return (
 		<div className={className}>
