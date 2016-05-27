@@ -20,44 +20,30 @@ export function IndexWithHeader (props: IndexProps) {
 	);
 }
 
-export function Index ({articles}: IndexProps) {
-		return (<div className='container'>{toArticleRows(articles)}</div>);
+function Index ({articles, metafileStore}: IndexProps) {
+		return (<div className='container'>{toArticleCards(articles, metafileStore)}</div>);
 }
 
-function toArticleRows(articles: Article[]) {
-	const result = [];
+function toArticleCards(articles: Article[], metafileStore: MetaFileStore) {
+	return articles.map((article, index) => <ArticleCardComponent article={article} key={article.key} metafileStore={metafileStore} index={index}/>);
 
-	let triplet: Article[] = [];
-	articles.forEach((article, index) => {
-		triplet.push(article)
-		if ((index + 1) % 3 === 0) {
-			const row = <ArticleRow articles={triplet} />; 
-			result.push(row);
-			triplet = [];
-		}
-	});
-	
-	return result;
 }
 
-function ArticleRow ({articles, metafileStore}: IndexProps) {
-	return (
-		<div className='article-cards-row container'>
-			{articles.map((article) => <ArticleCardComponent article={article} key={article.key} metafileStore={metafileStore}/>)}
-		</div>	
-	);
-}
-
-interface ArticleDescriptionComponentProps extends React.Props<any> {
+interface ArticleDescriptionComponentProps {
 	article: Article;
 	key: string;
 	metafileStore?: MetaFileStore;
+	index: number;
 }
 
-function ArticleCardComponent ({article, metafileStore}: ArticleDescriptionComponentProps) {
+function ArticleCardComponent ({article, metafileStore, index}: ArticleDescriptionComponentProps) {
 	const description = article.description();
+	let className = 'article-card';
+	if ((index + 1) % 3 === 0) {
+		className += ' third';
+	}
 	return (
-		<div className='article-card'>
+		<div className={className}>
 			<div className='article'>
 				<h2>
 					<Link article={article} className='' metafileStore={metafileStore}>

@@ -33,7 +33,7 @@ describe('Layout', () => {
 		expect(html).toContain('second article');
 	});
 
-        it('should render a clear fix for each 3 articles', () => {
+        it('should add the class third on each 3rd article card', () => {
 		const article1 = new MetaFile({
                         title: 'first article',
                         date: '2015-11-11',
@@ -58,6 +58,6 @@ describe('Layout', () => {
                         path: 'article3'
                 });
 		const html = RDS.renderToString(<Layout meta={[article1, article2, article3]} pkg={pkg}/>);
-		expect(html).toContain('class="clearfix"');
+		expect(html).toContain('class="article-card"');
 	});
 });
