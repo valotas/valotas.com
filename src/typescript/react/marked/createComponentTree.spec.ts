@@ -8,7 +8,7 @@ function renderToStaticMarkup(source, options?) {
 	return RDS.renderToStaticMarkup(tree);
 }
 
-fdescribe('createComponentTree', () => {
+describe('createComponentTree', () => {
 	it('should render headers', () => {
 		const html = renderToStaticMarkup('# head');
 		expect(html).toContain('<h1>head</h1>');
@@ -42,7 +42,8 @@ fdescribe('createComponentTree', () => {
 
 	it('should render code blocks with a class derived from the language', () => {
 		const source = 'this a\n\n```js\na code block\n```';
-		const expected = marked(source).replace(/\n/g, '');
+		const markedText = marked(source).replace(/\n/g, '');
+		const expected = markedText.substr(markedText.indexOf('<pre'));
 		const html = renderToStaticMarkup(source);
 		expect(html).toContain(expected);
 	});
@@ -169,5 +170,13 @@ Asume this ><&><
 		}).trim();
         const html = renderToStaticMarkup(source);
         expect(html).toContain(expected);
+    });
+	
+	it('should wrap pre blocks in a .codeblock', () => {
+        const source = `\`\`\`
+function xyz() {};
+\`\`\``;
+        const html = renderToStaticMarkup(source);
+        expect(html).toContain('<div class="codeblock"><pre><code>function xyz() {};</code></pre></div>');
     });
 });
