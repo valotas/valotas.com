@@ -1,14 +1,14 @@
 import * as React from 'react';
 import * as RDS from 'react-dom/server';
 import * as marked from 'marked';
-import {createComponentTree} from './MarkedRenderer';
+import {createComponentTree} from './createComponentTree';
 
 function renderToStaticMarkup(source, options?) {
 	const tree = createComponentTree(source, options);
 	return RDS.renderToStaticMarkup(tree);
 }
 
-describe('MarkedRenderer', () => {
+fdescribe('createComponentTree', () => {
 	it('should render headers', () => {
 		const html = renderToStaticMarkup('# head');
 		expect(html).toContain('<h1>head</h1>');
@@ -81,17 +81,17 @@ describe('MarkedRenderer', () => {
 
 	it('should transform gist script to a gist component for java files', () => {
 		const html = renderToStaticMarkup('<script src="https://gist.github.com/1240545.js?file=ServletUsingCustomResponse.java"></script>');
-		expect(html).toContain('<pre class="panel-body" data-gist-id="1240545" data-gist-user="valotas" data-gist-file="ServletUsingCustomResponse.java">');
+		expect(html).toContain('<pre data-gist-id="1240545" data-gist-user="valotas" data-gist-file="ServletUsingCustomResponse.java">');
 	});
 
 	it('should transform gist script to a gist component for js files', () => {
 		const html = renderToStaticMarkup('<script src="https://gist.github.com/valotas/1175447.js?file=scrapy.js"></script>');
-		expect(html).toContain('<pre class="panel-body" data-gist-id="1175447" data-gist-user="valotas" data-gist-file="scrapy.js">');
+		expect(html).toContain('<pre data-gist-id="1175447" data-gist-user="valotas" data-gist-file="scrapy.js">');
 	});
 
 	it('should transform gist script to a gist component for sh files', () => {
 		const html = renderToStaticMarkup('<script src="https://gist.github.com/valotas/1000094.js?file=tomcat.sh"></script>');
-		expect(html).toContain('<pre class="panel-body" data-gist-id="1000094" data-gist-user="valotas" data-gist-file="tomcat.sh">');
+		expect(html).toContain('<pre data-gist-id="1000094" data-gist-user="valotas" data-gist-file="tomcat.sh">');
 	});
 
 	it('should render paragraphs with mix span and code blocks', () => {

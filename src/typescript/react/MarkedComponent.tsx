@@ -1,7 +1,7 @@
 import * as marked from 'marked';
 import * as React from 'react';
 import * as ex from '../exceptions';
-import {createComponentTree} from './MarkedRenderer';
+import {createComponentTree} from './marked/createComponentTree';
 
 interface MarkedComponentProps extends React.Props<any> {
 	meta?: MetaFileData;

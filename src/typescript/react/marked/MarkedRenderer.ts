@@ -1,13 +1,8 @@
 import * as marked from 'marked';
 import * as React from 'react';
-import * as ex from '../exceptions';
-import {Link as LinkComponent} from './Link';
-import {Gist as GistComponent} from './Gist';
-import {ParagraphWithFirstLetterSpan} from './ParagraphWithFirstLetterSpan';
+import * as ex from '../../exceptions';
+import {ParagraphWithFirstLetterSpan} from '../ParagraphWithFirstLetterSpan';
 
-
-const Link = React.createFactory(LinkComponent);
-const Gist = React.createFactory(GistComponent);
 const PP = React.createFactory(ParagraphWithFirstLetterSpan);
 
 // https://github.com/christianalfoni/markdown-to-react-components/blob/master/src/index.js
@@ -55,11 +50,6 @@ class TreeContainer {
 	}
 }
 
-type HtmlTransfomer = (html: string) => {
-	factory: React.HTMLFactory<HTMLElement>,
-	props: any
-}
-
 function innerHtmlTransformer(html: string) {
 	return {
 		factory: R.div,
@@ -75,17 +65,24 @@ function notNull(obj) {
 	return !!obj;
 }
 
+type HtmlTransfomer = (html: string) => {
+	factory: React.HTMLFactory<HTMLElement>,
+	props: any
+}
 
-interface CreateComponentTreeOptions {
+interface MarkRenderOptions {
+	html: HtmlTransfomer[],
+	pre: React.Factory<any>;
+	link: React.Factory<any>;
     firstLetterSpan: boolean;
 }
 
-class MarkedReactRenderer {
+export class MarkedReactRenderer {
     private paragraphCounter = 0;
 	private container = new TreeContainer();
 
-	constructor(private transformers: HtmlTransfomer[] = [], private reactOptions: CreateComponentTreeOptions = {firstLetterSpan: false}) {
-		this.transformers.push(innerHtmlTransformer);
+	constructor(private renderOptions: MarkRenderOptions) {
+		renderOptions.html.push(innerHtmlTransformer);
 	}
 
 	nextToken(token: {type: string}) {
@@ -97,7 +94,7 @@ class MarkedReactRenderer {
 
 	code(code: string, language: string) {
 		this.codespan(code, language);
-		this.container.pushBlock(R.pre);
+		this.container.pushBlock(this.renderOptions.pre);
 	}
 
     blockquote(quote: string) {
@@ -105,7 +102,7 @@ class MarkedReactRenderer {
 	}
 
     html(html: string) {
-		const block = this.transformers.map((t) => {
+		const block = this.renderOptions.html.map((t) => {
 			return t(html);
 		}).filter(notNull)[0];
 		this.container.pushBlock(block.factory, block.props);
@@ -124,8 +121,9 @@ class MarkedReactRenderer {
 		this.container.pushBlock(R.li);
 	}
     paragraph(text: string) {
-        const paragraphFactory = !this.reactOptions.firstLetterSpan || this.paragraphCounter++ > 0 ? R.p : PP;
-        this.container.pushBlock(paragraphFactory);
+		this.paragraphCounter++;
+		const shouldMarkFirstLetter = this.renderOptions.firstLetterSpan && this.paragraphCounter === 1; 
+        this.container.pushBlock(shouldMarkFirstLetter ? PP : R.p);
 	}
     table(header: string, body: string) {
 		// not implemented yet
@@ -159,11 +157,13 @@ class MarkedReactRenderer {
 	}
     link(href: string, title: string, text: string) {
 		if (text !== 'undefined') {
-			this.container.pushInline(Link({href: href}, text), text);
+			const link = this.renderOptions.link({href: href}, text);
+			this.container.pushInline(link, text);
 		} else {
 			// if the given text is undefined, we use the last inlined element as the child of our link
 			const child = this.container.inline.pop();
-			this.container.pushInline(Link({href: href}, child), false);
+			const link =this.renderOptions.link({href: href}, child);
+			this.container.pushInline(link, false);
 		}
 	}
     image(href: string, title: string, text: string) {
@@ -209,24 +209,3 @@ function firstChildOrFullArray(input: any[]) {
 	return input;
 }
 
-export function createComponentTree(html: string, options?: CreateComponentTreeOptions): React.ReactElement<any> {
-	const renderer = new MarkedReactRenderer([htmlToGistTransformer], options);
-	return renderer.createComponentTree(html);
-}
-
-const GIST_SCRIPT = /script.*src=.*gist.github.com\/(([^\/]*)\/)?(([^\?]*)\.js(on)?)(\?(file=([^"]*)))?/;
-
-function htmlToGistTransformer(html: string) {
-	const matches = GIST_SCRIPT.exec(html);
-	if (!matches) {
-		return null;
-	}
-	return {
-		factory: Gist as React.DOMFactory<any, any>,
-		props: {
-			user: matches[2],
-			gistId: matches[4],
-			file: matches[8]
-		}
-	};
-}
