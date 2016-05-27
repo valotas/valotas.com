@@ -3,7 +3,7 @@
 @import 'settings';
 @import 'foundation';
 // @import 'motion-ui';
-@import 'font-awesome';
+@import 'fa';
 
 @include foundation-global-styles;
 // @include foundation-grid;
@@ -51,6 +51,7 @@
 // @include motion-ui-animations;
 
 @import 'base-grid';
+@import 'typography';
 @import 'typography';
 @import 'header';
 @import 'loading-bar';
