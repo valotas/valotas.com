@@ -3,6 +3,7 @@ import {GistStore} from '../content/GistStore';
 import {isPromise} from '../utils';
 import {Link} from './Link';
 import {Icon} from './Icon';
+import {Code} from './Code';
 
 interface GistProps extends React.Props<any>, GistDescription {
 
@@ -59,17 +60,13 @@ export class Gist extends React.Component<GistProps, GistState> {
 		const filetarget = this.props.file.replace(/\./g, '-').toLocaleLowerCase();
 		const href = `https://gist.github.com/${user}/${this.props.gistId}#file-${filetarget}`;
 		return (
-			<div className='codeblock'>
-				<div className='title'>
-					<Link href={href} target='_blank'>
-						<Icon name='fa-github'/>&nbsp;
-						{this.props.file}
-					</Link>
-				</div>
-				<pre data-gist-id={this.props.gistId} data-gist-user={user} data-gist-file={this.props.file}>
-					<code>{this.state.content}</code>
-				</pre>
-			</div>
+			<Code data-gist-id={this.props.gistId} data-gist-user={user} data-gist-file={this.props.file}>
+				<Link href={href} target='_blank'>
+					<Icon name='fa-github'/>&nbsp;
+					{this.props.file}
+				</Link>
+				<code>{this.state.content}</code>
+			</Code>
 		);
 	}
 }
