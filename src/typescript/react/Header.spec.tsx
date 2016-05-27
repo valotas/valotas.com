@@ -4,8 +4,10 @@ import {Header} from './Header';
 
 describe('Header', () => {
 	it('should render html with the given title and subtitle', () => {
-		const html = RDS.renderToString(<Header title='The title' subtitle='The subtitle' />);
-		expect(html).toContain('The title</h1>');
-		expect(html).toContain('The subtitle</span>');
+		const html = RDS.renderToString(<Header title='The title' subtitle='The subtitle' />)
+			.replace(/<\![^>]+>/g, '')
+			.replace(/\sdata-reactid="[0-9]+"/g, '');
+		expect(html).toContain('<h1>The title</h1>');
+		expect(html).toContain('<h4>The subtitle');
 	});
 });
