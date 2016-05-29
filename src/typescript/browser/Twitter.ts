@@ -26,11 +26,11 @@ class TwitterThenable {
 
 export function loadTwitter(browser = BROWSER) {
     const {window} = browser;
-    
+
 	const loaded = window[TWTTR];
 	if (!loaded) {
         window[TWTTR] = createTwttr(window);
-        
+
 		// load the widgets.js
 		browser.addScript('//platform.twitter.com/widgets.js', {
 			id: TWITTER_SCRIPT_ID,
@@ -44,6 +44,6 @@ function createTwttr(window) {
     const t = window[TWTTR] || { _e: [] };
     t.ready = function (f) {
         t._e.push(f);
-    }
+    };
     return t;
 }

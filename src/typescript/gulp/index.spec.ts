@@ -5,7 +5,7 @@ import {mdFile, toArticle, adaptPaths, addMetafiles} from './index';
 
 const noopLogger = {
 	log(message?: any, ...optionalParams: any[]) {
-		
+
 	}
 };
 
