@@ -1,4 +1,8 @@
 
+.article-container {
+    margin-top: -$header-overlap-padding;
+}
+
 .article { 
     background: $white;
     box-shadow: $maincontent-shadow;

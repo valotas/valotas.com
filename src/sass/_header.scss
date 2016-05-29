@@ -1,6 +1,7 @@
+$header-overlap-padding: 10em;
 
 .header {
-    padding: 4em;
+    padding: 4em 4em 4em + $header-overlap-padding;
     background: url('greece-wallpaper-hd-pictures-35.jpg');
     background-size: cover;
     

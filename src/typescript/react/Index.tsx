@@ -21,7 +21,7 @@ export function IndexWithHeader (props: IndexProps) {
 }
 
 function Index ({articles, metafileStore}: IndexProps) {
-		return (<div className='container'>{toArticleCards(articles, metafileStore)}</div>);
+		return (<div className='container index-container'>{toArticleCards(articles, metafileStore)}</div>);
 }
 
 function toArticleCards(articles: Article[], metafileStore: MetaFileStore) {
