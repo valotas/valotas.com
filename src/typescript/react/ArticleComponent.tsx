@@ -30,7 +30,7 @@ export class ArticleComponent extends React.Component<ArticleProps, {}> {
 			return null;
 		}
 		return (
-			<div className='container'>
+			<div className='container article-container'>
 				<div className='article text-justify'>
 					<MarkedComponent meta={this.props.article.meta}/>
 				</div>

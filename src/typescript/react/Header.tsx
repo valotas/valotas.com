@@ -19,9 +19,9 @@ export function Header ({title, subtitle = VALOTAS, date, metafileStore}: Header
 					<Link className='radius' metafileStore={metafileStore}/>
 				</div>
 				<div className='signature'>
-					<h1>{title}</h1>
-					<h4>{subtitle} <Date date={date} /></h4>
-					<div className='social'>
+					<h1 className='signature-row'>{title}</h1>
+					<h4 className='signature-row'>{subtitle} <Date date={date} /></h4>
+					<div className='social signature-row'>
 						<a href='https://github.com/valotas' target='_blank'>
 							<Icon name='fa-github-square' size='2x'/>
 						</a>
