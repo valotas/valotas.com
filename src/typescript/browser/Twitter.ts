@@ -1,6 +1,7 @@
 import {BROWSER} from './Browser';
 
 const TWITTER_SCRIPT_ID = 'twitter-wjs';
+const TWTTR = 'twttr';
 
 interface TwttrWidgets {
 	load();
@@ -11,33 +12,38 @@ interface Twttr {
 }
 
 class TwitterThenable {
-    init;
-    loadedTwttr: Twttr;
-
-    constructor(win) {
-        this.init = win.prop('twttr', { _e: [] });
-        this.init._e.push(() => {
-           this.loadedTwttr = win.prop('twttr');
-        });
-    }
-
-    then(f) {
-        if (this.loadedTwttr) {
-            f(this.loadedTwttr);
+    then(f: (t: Twttr) => void) {
+        const twttr = window[TWTTR];
+        if (twttr.widget) {
+            f(twttr as Twttr);
         } else {
-            this.init._e.push(f);
+            twttr.ready(() => {
+               f(window[TWTTR] as Twttr);
+            });
         }
     }
 }
 
-export function loadTwitter(win = BROWSER) {
-	const loaded = win.prop('twttr');
+export function loadTwitter(browser = BROWSER) {
+    const {window} = browser;
+    
+	const loaded = window[TWTTR];
 	if (!loaded) {
+        window[TWTTR] = createTwttr(window);
+        
 		// load the widgets.js
-		win.addScript('//platform.twitter.com/widgets.js', {
+		browser.addScript('//platform.twitter.com/widgets.js', {
 			id: TWITTER_SCRIPT_ID,
 			protocol: 'https'
 		});
 	}
-	return new TwitterThenable(win);
+	return new TwitterThenable();
+}
+
+function createTwttr(window) {
+    const t = window[TWTTR] || { _e: [] };
+    t.ready = function (f) {
+        t._e.push(f);
+    }
+    return t;
 }
