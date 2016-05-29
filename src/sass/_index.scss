@@ -7,10 +7,6 @@
     &.end {
         @include grid-column-end;
     }
-    
-    @media #{$medium-up} {
-        padding: rem-calc(10 0);
-    }
 
     @media #{$large-up} {
         @include grid-column(4);
