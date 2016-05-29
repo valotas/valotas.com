@@ -3,7 +3,8 @@
     background: $light-gray;
     border: 1px solid $medium-gray;
     border-radius: $global-radius;
-
+    margin-bottom: $paragraph-margin-bottom;
+    
     .title {
         padding: rem-calc(9);
         background: $white;
