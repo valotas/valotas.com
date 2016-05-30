@@ -1,3 +1,18 @@
+$code-color: #c7254e;
+
+code {
+    color: $code-color;
+    border-radius: rem-calc(4);
+}
+
+code a, 
+a code {
+    text-decoration: underline;
+}
+
+a:hover code {
+    color: scale-color($code-color, $lightness: -14%)
+}
 
 .codeblock { 
     background: $light-gray;
@@ -18,5 +33,6 @@
     code {
         border: 0;
         padding: 0;
+        color: $black;
     }
 }
