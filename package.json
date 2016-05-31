@@ -1,6 +1,6 @@
 {
   "name": "valotas.com",
-  "version": "1.0.7",
+  "version": "1.0.8",
   "repository": "git@github.com:valotas/valotas.com.git",
   "private": true,
   "devDependencies": {
@@ -33,7 +33,7 @@
     "postinstall": "typings install",
     "tsc": "tsc -p . -w",
     "build": "gulp build",
-    "test": "gulp lint-test",
+    "test": "gulp tsc && gulp lint-test",
     "rsync": "rsync -azP dist/ valotas@pi:~/valotas.com",
     "deploy": "npm version patch -m \"Release v%s\"",
     "preversion": "npm test",

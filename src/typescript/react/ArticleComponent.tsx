@@ -25,14 +25,14 @@ export class ArticleComponent extends React.Component<ArticleProps, {}> {
 	private html;
 
 	render() {
-		const article = this.props.article;
+		const {article} = this.props;
 		if (!article) {
 			return null;
 		}
 		return (
 			<div className='container article-container'>
 				<div className='article text-justify'>
-					<MarkedComponent meta={this.props.article.meta}/>
+					<MarkedComponent meta={article.meta}/>
 				</div>
 				<div className='actions button-group'>
 					<Link className='button' metafileStore={this.props.metafileStore}>

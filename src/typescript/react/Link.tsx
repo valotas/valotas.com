@@ -20,7 +20,7 @@ export class Link extends React.Component<LinkProps, any> {
 		metafileStore: React.PropTypes.object
 	};
 
-	handleClick (e) {
+	handleClick = (e) => {
 		const {href, target} = this.props;
 		if (href === '#') {
 			e.preventDefault();
@@ -46,7 +46,7 @@ export class Link extends React.Component<LinkProps, any> {
 	}
 	render() {
 		const href = this.props.href || this.createHref();
-		return <a href={href} className={this.props.className} onClick={this.handleClick.bind(this)} target={this.props.target}>{this.props.children}</a>;
+		return <a href={href} className={this.props.className} onClick={this.handleClick} target={this.props.target}>{this.props.children}</a>;
 	}
 	createHref() {
 		let href = '/';

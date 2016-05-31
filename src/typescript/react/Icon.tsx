@@ -5,8 +5,8 @@ interface IconProps {
 	size?: string;
 }
 
-export function Icon (props: IconProps) {
-	const className = 'fa ' + props.name + ' fa-' +  (props.size || '1x');
+export function Icon ({name, size}: IconProps) {
+	const className = 'fa ' + name + ' fa-' +  (size || '1x');
 	return (
 		<i className={className} />
 	);

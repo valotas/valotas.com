@@ -56,14 +56,14 @@ export class Gist extends React.Component<GistProps, GistState> {
 	}
 
 	render() {
-		const user = this.props.user || 'valotas';
-		const filetarget = this.props.file.replace(/\./g, '-').toLocaleLowerCase();
-		const href = `https://gist.github.com/${user}/${this.props.gistId}#file-${filetarget}`;
+		const {user = 'valotas', file, gistId} = this.props;
+		const filetarget = file.replace(/\./g, '-').toLocaleLowerCase();
+		const href = `https://gist.github.com/${user}/${gistId}#file-${filetarget}`;
 		return (
-			<Code data-gist-id={this.props.gistId} data-gist-user={user} data-gist-file={this.props.file}>
+			<Code data-gist-id={gistId} data-gist-user={user} data-gist-file={file}>
 				<Link href={href} target='_blank'>
 					<Icon name='fa-github'/>&nbsp;
-					{this.props.file}
+					{file}
 				</Link>
 				<code>{this.state.content}</code>
 			</Code>

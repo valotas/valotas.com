@@ -61,10 +61,10 @@ export class Layout extends React.Component<LayoutProps, LayoutState> {
 		if (!BROWSER) {
 			throw ex.illegalArgumentException('window is needed on the client side to register for PopStateEvents');
 		}
-		BROWSER.history.onPopState(this._setPageState.bind(this));
+		BROWSER.history.onPopState(this._setPageState);
 	}
 
-	_setPageState(page: PageState) {
+	_setPageState = (page: PageState) => {
 		const meta = page ? MetaFile.fromData(page.meta) : null;
 		if (this.props.gistStore) {
 			this.props.gistStore.meta = isArray(meta) ? null : meta;
