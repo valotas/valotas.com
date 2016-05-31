@@ -27,12 +27,12 @@ export class Index extends React.Component<IndexProps, {}> {
 		const articles = addSeparators(this.props.articles);
 		return (
 			<div id='index-content'>
-				{articles.map(this.createArticleBox.bind(this))}
+				{articles.map(this.createArticleBox)}
 			</div>
 		);
 	}
 
-	createArticleBox(article: Article, index: number) {
+	createArticleBox = (article: Article, index: number) => {
 		if (article === null) {
 			return <div className='clearfix' key={index} />;
 		}
