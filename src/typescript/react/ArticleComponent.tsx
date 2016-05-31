@@ -25,7 +25,7 @@ export class ArticleComponent extends React.Component<ArticleProps, {}> {
 	private html;
 
 	render() {
-		const article = this.props.article;
+		const {article} = this.props;
 		if (!article) {
 			return null;
 		}
@@ -33,7 +33,7 @@ export class ArticleComponent extends React.Component<ArticleProps, {}> {
 			<div id='content' className='container'>
 				<div className='article'>
 					<section className='content'>
-						<MarkedComponent meta={this.props.article.meta}/>
+						<MarkedComponent meta={article.meta}/>
 					</section>
 				</div>
 				<div id='footer-actions' className='row text-center'>
