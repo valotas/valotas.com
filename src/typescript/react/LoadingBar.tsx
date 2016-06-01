@@ -10,7 +10,7 @@ export class LoadingBar extends React.Component<React.Props<any>, LoadingBarStat
 	context: {
 		fetcher: FetchStreamer
 	};
-    
+
     private onFetchRegistration;
 
 	static contextTypes: React.ValidationMap<any> = {
@@ -30,13 +30,13 @@ export class LoadingBar extends React.Component<React.Props<any>, LoadingBarStat
             this.add(1);
             promise.then((result) => {
                 setTimeout(() => {
-                    this.add(-1);    
+                    this.add(-1);
                 }, 15);
                 return result;
             });
         });
     }
-    
+
     componentWillUnmount () {
         this.onFetchRegistration();
     }
@@ -50,7 +50,7 @@ export class LoadingBar extends React.Component<React.Props<any>, LoadingBarStat
             loading: newLoading
         });
     }
-    
+
     shouldComponentUpdate(nextProps, nextState) {
         const {loading} = this.state;
         if (loading === nextState.loading) {

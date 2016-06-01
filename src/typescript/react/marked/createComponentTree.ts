@@ -8,7 +8,7 @@ export function createComponentTree(html: string, options = {firstLetterSpan: fa
     const renderer = new MarkedReactRenderer({
         firstLetterSpan: options.firstLetterSpan,
         html: [htmlToGistTransformer],
-        pre: Code, 
+        pre: Code,
         link: Link
     });
 	return renderer.createComponentTree(html);

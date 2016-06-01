@@ -71,7 +71,7 @@ type HtmlTransfomer = (html: string) => {
 }
 
 interface MarkRenderOptions {
-	html: HtmlTransfomer[],
+	html: HtmlTransfomer[];
 	pre: React.Factory<any>;
 	link: React.Factory<any>;
     firstLetterSpan: boolean;
@@ -122,7 +122,7 @@ export class MarkedReactRenderer {
 	}
     paragraph(text: string) {
 		this.paragraphCounter++;
-		const shouldMarkFirstLetter = this.renderOptions.firstLetterSpan && this.paragraphCounter === 1; 
+		const shouldMarkFirstLetter = this.renderOptions.firstLetterSpan && this.paragraphCounter === 1;
         this.container.pushBlock(shouldMarkFirstLetter ? PP : R.p);
 	}
     table(header: string, body: string) {
@@ -162,7 +162,7 @@ export class MarkedReactRenderer {
 		} else {
 			// if the given text is undefined, we use the last inlined element as the child of our link
 			const child = this.container.inline.pop();
-			const link =this.renderOptions.link({href: href}, child);
+			const link = this.renderOptions.link({href: href}, child);
 			this.container.pushInline(link, false);
 		}
 	}

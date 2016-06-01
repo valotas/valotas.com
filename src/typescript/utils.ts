@@ -57,5 +57,5 @@ export function isPromise (input: any): input is Promise<any> {
 }
 
 export function noop () {
-	
+
 }

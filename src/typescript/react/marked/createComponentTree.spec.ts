@@ -171,7 +171,7 @@ Asume this ><&><
         const html = renderToStaticMarkup(source);
         expect(html).toContain(expected);
     });
-	
+
 	it('should wrap pre blocks in a .codeblock', () => {
         const source = `\`\`\`
 function xyz() {};
