@@ -20,7 +20,7 @@ class ArticleImpl implements Article {
 
     description(): string {
         const {description, raw} = this.meta;
-        return description || raw.substr(0, raw.indexOf('#')).trim();
+        return description || raw.substr(0, raw.indexOf('\n#')).trim();
     }
 
     hasTweets() {

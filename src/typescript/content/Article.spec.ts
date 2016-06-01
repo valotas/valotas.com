@@ -73,6 +73,19 @@ describe('Article', () => {
             }).description();
             expect(description).toEqual('this is the very first paragraph');
        });
+
+       it('should not break on simple #', () => {
+           const description = createArticle({
+                title: 'md file',
+                date: '2015-11-12',
+                published: false,
+                raw: 'paragraph with c#\n\n## h1\nanother paragraph',
+                template: null,
+                path: null,
+                description: null
+            }).description();
+            expect(description).toEqual('paragraph with c#');
+       });
     });
 
     describe('hasTweets()', () => {
