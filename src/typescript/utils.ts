@@ -55,3 +55,7 @@ export function isString (input: any): input is string {
 export function isPromise (input: any): input is Promise<any> {
 	return input && input.then;
 }
+
+export function noop () {
+	
+}

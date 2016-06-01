@@ -1,5 +1,6 @@
 import * as React from 'react';
 import {FetchStreamer} from '../FetchStreamer';
+import {noop} from '../utils';
 
 interface LoadingBarState {
     loading: number;
@@ -9,6 +10,8 @@ export class LoadingBar extends React.Component<React.Props<any>, LoadingBarStat
 	context: {
 		fetcher: FetchStreamer
 	};
+    
+    private onFetchRegistration;
 
 	static contextTypes: React.ValidationMap<any> = {
 		fetcher: React.PropTypes.object
@@ -19,22 +22,44 @@ export class LoadingBar extends React.Component<React.Props<any>, LoadingBarStat
         this.state = {
             loading: 0
         };
+        this.onFetchRegistration = noop;
     }
 
     componentDidMount() {
-        this.context.fetcher.onFetch((promise) => {
+        this.onFetchRegistration = this.context.fetcher.onFetch((promise) => {
             this.add(1);
             promise.then((result) => {
-                this.add(-1);
+                setTimeout(() => {
+                    this.add(-1);    
+                }, 15);
                 return result;
             });
         });
     }
+    
+    componentWillUnmount () {
+        this.onFetchRegistration();
+    }
 
     add(addition: number) {
+        const newLoading = this.state.loading + addition;
+        if (newLoading < 0) {
+            return;
+        }
         this.setState({
-            loading: this.state.loading + addition
+            loading: newLoading
         });
+    }
+    
+    shouldComponentUpdate(nextProps, nextState) {
+        const {loading} = this.state;
+        if (loading === nextState.loading) {
+            return false;
+        }
+        if (loading > 0 && nextState.loading > 0) {
+            return false;
+        }
+        return true;
     }
 
     render() {
