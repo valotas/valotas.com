@@ -45,6 +45,6 @@ To be honest, I do not know if I would ever propose bootstrap as a framework for
 
 ## TL;RD
 
-Back to where I started. If you would like to improve your css skills, you have to right css. It is ok to use a framework or to start with it, but you must be willing to go above it, customise it, adapt some things and finally replace parts of it with custom made css.
+Back to where I started. If you would like to improve your css skills, you have to write css. It is ok to use a framework or to start with it, but you must be willing to go above it, customise it, adapt some things and finally replace parts of it with custom made css.
 
 Rule of thumb: replace framework stuff that can be implemented with a simple straight forward way.
