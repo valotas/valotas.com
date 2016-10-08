@@ -2,11 +2,10 @@
 Just my personal website
 
 ## Quickstart
-Assuming that you have `nodejs`, `npm`, `tsd`, `gulp` installed, just do the following:
+Assuming that you have `nodejs` and `npm` installed, just do the following:
 
 ```bash
 npm install
-tsd install
 ```
 
 To compile typescript files:
