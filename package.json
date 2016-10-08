@@ -28,7 +28,8 @@
     "tslint": "^3.10.2",
     "typescript": "^1.8.10",
     "typings": "^0.8.1",
-    "vinyl": "^2.0.0"
+    "vinyl": "^2.0.0",
+    "vinyl-fs": "^2.4.3"
   },
   "scripts": {
     "postinstall": "typings install",
