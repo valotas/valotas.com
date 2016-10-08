@@ -27,7 +27,8 @@
     "through2": "2.0.1",
     "tslint": "^3.10.2",
     "typescript": "^1.8.10",
-    "typings": "^0.8.1"
+    "typings": "^0.8.1",
+    "vinyl": "^2.0.0"
   },
   "scripts": {
     "postinstall": "typings install",
