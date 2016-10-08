@@ -22,11 +22,11 @@ gulp play
 
 After that you can just `npm run deploy` in order to deploy the site assuming that you have the right keys at the right path in order to connent to the server passwordless.
 
-## NGNX configuration
-In order to have the old (blogger) urls working, just add the following rewrite rule to nginx:nginx
+## AWS deploy
+Among the available npm scripts the `deploy` is available that should handle the creation of the website locally and the deployment
+to AWS. In order to do that the [aws cli](http://docs.aws.amazon.com/cli/latest/userguide/installing.html) should be installed. If
+that is the case, the following should be all you need:
 
-```
-location / {
-  rewrite "^/20[0-9]{2}/[0-9]{2}/(.*).html" http://valotas.com/$1/ permanent;
-}
+```bash
+npm run deploy
 ```

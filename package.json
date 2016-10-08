@@ -37,9 +37,10 @@
     "build": "gulp build",
     "test": "gulp tsc && gulp lint-test",
     "rsync": "rsync -azP dist/ valotas@pi:~/valotas.com",
+    "aws:sync": "aws s3 sync dist s3://valotas.com",
     "deploy": "npm version patch -m \"Release v%s\"",
     "preversion": "npm test",
-    "postversion": "gulp dist && npm run rsync && git push origin master --tags"
+    "postversion": "gulp dist && npm run rsync && npm run aws:sync && git push origin master --tags"
   },
   "dependencies": {
     "base64-js": "0.0.8",
