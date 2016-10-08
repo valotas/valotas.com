@@ -26,27 +26,33 @@ export function toArticle () {
 export function addIndex() {
 	let metas: MetaFile[] = [];
 	let cwd;
-	let enc;
 	return through.obj(function (file, enc, callback) {
 		const article = file.article;
 		if (article /* && article instanceof Article */) {
 			cwd = file.cwd;
-			enc = enc;
 			metas.push(createDescriptionMetaFile(article));
 		}
 		callback(null, file);
 	}, function (callback) {
-		const index = new File({
-			cwd: cwd,
-			base: path.join(cwd, 'src'),
-			path: path.join(cwd, 'src', 'index.html')
-		}) as any;
 		metas = metas.sort(compareMoments);
-		index.meta = metas;
-		index.meta.path = '';
-		this.push(index);
+		this.push(createFileWithName('index.html', cwd, metas));
+		this.push(createFileWithName('error.html', cwd, metas));
 		callback();
 	});
+}
+
+function createFileWithName(name: string, cwd: string, metas: MetaFile[]) {
+	if (!cwd) {
+		throw new Error(`Expected a truthy cwd. Got '${cwd}'`);
+	}
+	const file = new File({
+		cwd: cwd,
+		base: path.join(cwd, 'src'),
+		path: path.join(cwd, 'src', name)
+	}) as any;
+	file.meta = metas;
+	file.meta.path = '';
+	return file;
 }
 
 function createDescriptionMetaFile(article: Article) {

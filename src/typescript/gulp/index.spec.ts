@@ -1,7 +1,7 @@
 import * as fs from 'vinyl-fs';
 import * as path from 'path';
 import * as through from 'through2';
-import {mdFile, toArticle, adaptPaths, addMetafiles} from './index';
+import {mdFile, toArticle, adaptPaths, addMetafiles, addIndex} from './index';
 
 const noopLogger = {
 	log(message?: any, ...optionalParams: any[]) {
@@ -88,7 +88,7 @@ describe('adaptPaths', () => {
 });
 
 describe('addMetafiles', () => {
-	it('should a meta.json for each file with a meta property containing it', (done) => {
+	it('should add a meta.json for each file with a meta property containing it', (done) => {
 		let counter = 0;
 		fs.src(['src/articles/tomcat-initd-*.md'], {
 				base: path.join(__dirname, '../../')
@@ -104,6 +104,28 @@ describe('addMetafiles', () => {
 			}))
 			.on('finish', function () {
 				expect(counter).toEqual(2);
+				done();
+			});
+	});
+});
+
+describe('addIndex', () => {
+	it('should add an index.html and error.html', (done) => {
+		const paths = [];
+		fs.src(['src/articles/tomcat-initd-*.md'], {
+				base: path.join(__dirname, '../../')
+			})
+			.pipe(mdFile())
+			.pipe(toArticle())
+			.pipe(addIndex())
+			.pipe(through.obj(function ({path}, enc, cb) {
+				const index = path.indexOf('/src/');
+				paths.push(path.substring(index + 5));
+				cb();
+			}))
+			.on('finish', function () {
+				expect(paths).toContain('index.html');
+				expect(paths).toContain('error.html');
 				done();
 			});
 	});
