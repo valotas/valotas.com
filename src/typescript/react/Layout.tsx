@@ -1,10 +1,6 @@
 import * as React from 'react';
-import {createArticle} from '../content/Article';
 import {MetaFile} from '../content/MetaFile';
 import {LoadingBar} from './LoadingBar';
-import {ArticleWithHeaderComponent} from './ArticleComponent';
-import {IndexWithHeader} from './Index';
-import {Header} from './Header';
 import {Footer} from './Footer';
 import {MetaFileStore} from '../content/MetaFileStore';
 import {GistStore} from '../content/GistStore';
@@ -12,7 +8,7 @@ import {isArray} from '../utils';
 import * as ex from '../exceptions';
 import {BROWSER} from '../browser/Browser';
 import {FetchStreamer} from '../FetchStreamer';
-import {createTitle} from '../titleFactory';
+import {LayoutMainContent} from './LayoutMainContent';
 
 interface LayoutProps extends React.Props<any> {
 	meta?: MetaFileData|MetaFileData[];
@@ -83,28 +79,9 @@ export class Layout extends React.Component<LayoutProps, LayoutState> {
 		return (
 			<div>
 				<LoadingBar/>
-				{this.createMainContent()}
+				<LayoutMainContent meta={this.state.meta} />
 				<Footer pkg={this.props.pkg}/>
 			</div>
 		);
 	}
-
-	private createMainContent() {
-		const meta = this.state.meta;
-
-		if (isArray(meta)) {
-			const articles = toArticles(meta);
-			return <IndexWithHeader articles={articles} metafileStore={this.props.metafileStore}/>;
-		}
-
-		if (meta) {
-			const article = createArticle(meta as MetaFile);
-			return <ArticleWithHeaderComponent article={article} metafileStore={this.props.metafileStore}/>;
-		}
-		return null;
-	}
-}
-
-function toArticles (arr: MetaFile[]): Article[] {
-	return arr.map((input) => createArticle(input));
 }
