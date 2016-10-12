@@ -26,7 +26,7 @@
     "systemjs-builder": "0.15.17",
     "through2": "2.0.1",
     "tslint": "^3.10.2",
-    "typescript": "^1.8.10",
+    "typescript": "2.0.3",
     "typings": "^0.8.1",
     "vinyl": "^2.0.0",
     "vinyl-fs": "^2.4.3"
