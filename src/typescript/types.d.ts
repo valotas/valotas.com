@@ -3,13 +3,15 @@ declare module 'base64-js' {
 	export function fromByteArray(bytes: number[]): string;
 }
 
+type Fetch = (url: RequestInfo, init?: RequestInit) => Promise<Response>;
+
 declare module 'node-fetch' {
-	const fetcher: Fetcher;
-	export = fetcher.fetch;
+	const fetch: Fetch;
+	export default fetch;
 }
 
 interface Fetcher {
-	fetch: (url: string|Request, init?: RequestInit) => Promise<Response>;
+	fetch: Fetch;
 }
 
 interface PageState {
