@@ -3,6 +3,8 @@ import * as React from 'react';
 import * as ex from '../../exceptions';
 import {ParagraphWithFirstLetterSpan} from '../ParagraphWithFirstLetterSpan';
 
+const EMPTY_STRING = '';
+
 const PP = React.createFactory(ParagraphWithFirstLetterSpan);
 
 // https://github.com/christianalfoni/markdown-to-react-components/blob/master/src/index.js
@@ -77,8 +79,8 @@ interface MarkRenderOptions {
     firstLetterSpan: boolean;
 }
 
-export class MarkedReactRenderer {
-    private paragraphCounter = 0;
+export class MarkedReactRenderer implements MarkedRenderer {
+	private paragraphCounter = 0;
 	private container = new TreeContainer();
 
 	constructor(private renderOptions: MarkRenderOptions) {
@@ -95,10 +97,12 @@ export class MarkedReactRenderer {
 	code(code: string, language: string) {
 		this.codespan(code, language);
 		this.container.pushBlock(this.renderOptions.pre);
+		return EMPTY_STRING;
 	}
 
     blockquote(quote: string) {
 		this.container = this.container.pushToParent(R.blockquote, {});
+		return EMPTY_STRING;
 	}
 
     html(html: string) {
@@ -106,54 +110,66 @@ export class MarkedReactRenderer {
 			return t(html);
 		}).filter(notNull)[0];
 		this.container.pushBlock(block.factory, block.props);
+		return EMPTY_STRING;
 	}
 
     heading(text: string, level: number) {
 		this.container.pushBlock(R['h' + level]);
+		return EMPTY_STRING;
 	}
     hr() {
 		this.container.pushBlock(R.hr);
+		return EMPTY_STRING;
 	}
     list(body: string, ordered: boolean) {
 		this.container = this.container.pushToParent(R.ul);
+		return EMPTY_STRING;
 	}
     listitem(text: string) {
 		this.container.pushBlock(R.li);
+		return EMPTY_STRING;
 	}
     paragraph(text: string) {
 		this.paragraphCounter++;
 		const shouldMarkFirstLetter = this.renderOptions.firstLetterSpan && this.paragraphCounter === 1;
         this.container.pushBlock(shouldMarkFirstLetter ? PP : R.p);
+		return EMPTY_STRING;
 	}
     table(header: string, body: string) {
 		// not implemented yet
+		return EMPTY_STRING;
 	}
     tablerow(content: string) {
 		// not implemented yet
+		return EMPTY_STRING;
 	}
     tablecell(content: string, flags: {
         header: boolean,
         align: string
     }) {
 		// not implemented yet
+		return EMPTY_STRING;
 	}
     strong(text: string) {
 		this.container.pushInline(R.strong(null, text));
+		return EMPTY_STRING;
 	}
     em(text: string) {
 		this.container.pushInline(R.em(null, text));
+		return EMPTY_STRING;
 	}
     codespan(code: string, lang?: string) {
 		const props = lang ? {
 			className: 'lang-' + lang
 		} : null;
 		this.container.pushInline(R.code(props, unescapeText(code)), false);
+		return EMPTY_STRING;
 	}
     br() {
-
+		return EMPTY_STRING;
 	}
     del(text: string) {
-
+		return EMPTY_STRING;
 	}
     link(href: string, title: string, text: string) {
 		if (text !== 'undefined') {
@@ -165,9 +181,10 @@ export class MarkedReactRenderer {
 			const link = this.renderOptions.link({href: href}, child);
 			this.container.pushInline(link, false);
 		}
+		return EMPTY_STRING;
 	}
     image(href: string, title: string, text: string) {
-
+		return EMPTY_STRING;
 	}
 	text(text: string) {
 		this.container.pushInline(unescapeText(text), false);
@@ -179,7 +196,7 @@ export class MarkedReactRenderer {
 			renderer: this,
 			gfm: true,
 			smartypants: true
-		});
+		} as MarkedOptions);
 		const tokens = marked.lexer(html);
 		patchParser(parser, this);
 		parser.parse(tokens);
