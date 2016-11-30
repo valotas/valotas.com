@@ -2,7 +2,7 @@
   "compilerOptions": {
     "rootDir": "src/",
     "outDir": "build/",
-    "target": "ES6",
+    "target": "es6",
     "module": "commonjs",
     "sourceMap": false,
     "emitDecoratorMetadata": true,
