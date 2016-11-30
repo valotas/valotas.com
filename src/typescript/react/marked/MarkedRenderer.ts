@@ -171,8 +171,8 @@ export class MarkedReactRenderer implements MarkedRenderer {
     del(text: string) {
 		return EMPTY_STRING;
 	}
-    link(href: string, title: string, text: string) {
-		if (text !== 'undefined') {
+    link(href: string, title: string, text: string = EMPTY_STRING) {
+		if (text !== EMPTY_STRING) {
 			const link = this.renderOptions.link({href: href}, text);
 			this.container.pushInline(link, text);
 		} else {
