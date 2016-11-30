@@ -1,3 +1,5 @@
+/*eslint-env node*/
+
 'use strict';
 
 const merge = require('merge-stream');
@@ -8,9 +10,7 @@ module.exports = function (gulp) {
   return function () {
     const es = gulp.src([
         'gulpfile.js',
-        'src/**/*.js',
-        'src/**/*.jsx',
-        '.gulp/**/*.js'
+        'gulp/**/*.js'
       ])
       .pipe(eslint())
       .pipe(eslint.format())

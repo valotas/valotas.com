@@ -1,3 +1,5 @@
+/*eslint-env node*/
+
 'use strict';
 
 var jasmine = require('gulp-jasmine');
