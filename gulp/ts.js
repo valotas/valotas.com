@@ -1,13 +1,11 @@
-/*eslint-env node*/
-
 'use strict';
 
-var Builder = require('systemjs-builder');
-var createSystemConfig = require('../system.conf.js').createSystemConfig;
-var exec = require('child_process').exec;
+const Builder = require('systemjs-builder');
+const {createSystemConfig} = require('../system.conf.js');
+const {exec} = require('child_process');
 
 function execTsc (watch, cb) {
-  var cmd = 'node_modules/typescript/bin/tsc -p .';
+  let cmd = 'node_modules/typescript/bin/tsc -p .';
   if (watch) {
     cmd += ' -w';
   }
@@ -24,8 +22,8 @@ module.exports = {
     execTsc(true);
   },
   bundle: function (gulp, basepath) {
-    var conf = createSystemConfig(basepath + '/');
-    var builder = new Builder(conf);
+    const conf = createSystemConfig(basepath + '/');
+    const builder = new Builder(conf);
     
     return function (cb) {
       builder.buildStatic('./build/typescript/main.js', './build/assets/bundle.js', { 

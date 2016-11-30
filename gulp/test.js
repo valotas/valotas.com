@@ -1,8 +1,6 @@
-/*eslint-env node*/
-
 'use strict';
 
-var jasmine = require('gulp-jasmine');
+const jasmine = require('gulp-jasmine');
 
 module.exports = function (gulp, path) {
   return function () {

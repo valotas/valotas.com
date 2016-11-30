@@ -1,11 +1,9 @@
-/*eslint-env node*/
-
 'use strict';
 
 module.exports = function (gulp) {
   return function () {
-    var plugin = require('../build/typescript/gulp');
-    var pkg = require('../package.json');
+    const plugin = require('../build/typescript/gulp');
+    const pkg = require('../package.json');
     return gulp.src([
         'src/articles/**/*.md',
         'src/*.html',
