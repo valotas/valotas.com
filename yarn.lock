@@ -27,6 +27,14 @@
     "@types/through2" "*"
     "@types/vinyl" "*"
 
+"@types/jade":
+  version "0.0.29"
+  resolved "https://registry.yarnpkg.com/@types/jade/-/jade-0.0.29.tgz#2d11334ebf91a00e3ded2c46b9efd6d67053122a"
+
+"@types/jasmine":
+  version "2.5.38"
+  resolved "https://registry.yarnpkg.com/@types/jasmine/-/jasmine-2.5.38.tgz#a4379124c4921d4e21de54ec74669c9e9b356717"
+
 "@types/minimatch@*":
   version "2.0.29"
   resolved "https://registry.yarnpkg.com/@types/minimatch/-/minimatch-2.0.29.tgz#5002e14f75e2d71e564281df0431c8c1b4a2a36a"
