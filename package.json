@@ -32,13 +32,13 @@
     "systemjs-builder": "0.15.33",
     "through2": "2.0.1",
     "tslint": "3.15.1",
-    "typescript": "^2.0.9",
+    "typescript": "2.0.10",
     "typings": "^2.0.0",
     "vinyl": "2.0.0",
     "vinyl-fs": "2.4.4"
   },
   "scripts": {
-    "postinstall": "typings --version && typings install",
+    "postinstall": "typings --version && typings install && npm rebuild node-sass",
     "tsc": "tsc --version && tsc -p . -w",
     "build": "gulp build",
     "gulp": "gulp",
