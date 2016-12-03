@@ -1,7 +1,6 @@
 {
   "version": false,
   "globalDependencies": {
-    "chalk": "registry:dt/chalk#0.4.0+20160317120654",
     "marked": "registry:dt/marked#0.0.0+20160325085301",
     "moment": "registry:dt/moment#2.11.1+20161010105546",
     "through2": "registry:dt/through2#2.0.0+20160926145203"
