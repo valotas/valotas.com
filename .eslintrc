@@ -4,8 +4,9 @@
   "parserOptions": {
     "ecmaVersion": 6
   },
-  "evn": {
-    "es6": true
+  "env": {
+    "es6": true,
+    "node": true
   },
   "globals": {
     "require": true,
@@ -14,9 +15,14 @@
   "rules": {
     "arrow-parens": 2,
     "arrow-spacing": 2,
+    "comma-dangle": [2, "never"],
     "constructor-super": 2,
+    "consistent-this": [2, "self"],
+    "eqeqeq": 2,
+    "curly": 2,
     "no-var": 2,
+    "one-var": [2, "never"],
     "prefer-arrow-callback": 2,
-    "one-var": [2, "never"]
+    "strict": [2, "safe"]
   }
 }
