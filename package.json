@@ -7,6 +7,7 @@
     "@types/gulp-util": "^3.0.29",
     "@types/jade": "^0.0.29",
     "@types/jasmine": "^2.5.38",
+    "@types/marked": "^0.0.28",
     "@types/node": "^6.0.46",
     "@types/react": "^0.14.47",
     "@types/react-dom": "^0.14.18",
