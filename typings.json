@@ -1,7 +1,6 @@
 {
   "version": false,
   "globalDependencies": {
-    "moment": "registry:dt/moment#2.11.1+20161010105546",
-    "through2": "registry:dt/through2#2.0.0+20160926145203"
+    "moment": "registry:dt/moment#2.11.1+20161010105546"
   }
 }

@@ -57,6 +57,12 @@
   dependencies:
     "@types/react" "*"
 
+"@types/through2":
+  version "2.0.32"
+  resolved "https://registry.yarnpkg.com/@types/through2/-/through2-2.0.32.tgz#470024450f1ab7640f19f9ebf42d3da574c26129"
+  dependencies:
+    "@types/node" "*"
+
 "@types/through2@*":
   version "2.0.31"
   resolved "https://registry.yarnpkg.com/@types/through2/-/through2-2.0.31.tgz#d834f540b2275afa4f5119801cea4bbddac0ffc6"
