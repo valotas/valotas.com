@@ -1,9 +1,9 @@
 'use strict';
 
-const htmlmin = require('gulp-htmlmin'),
-  gulpif = require('gulp-if'),
-  rev = require('gulp-rev'),
-  inject = require('gulp-inject');
+const htmlmin = require('gulp-htmlmin');
+const gulpif = require('gulp-if');
+const rev = require('gulp-rev');
+const inject = require('gulp-inject');
 
 module.exports = function (gulp) {
   return function () {
