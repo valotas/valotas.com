@@ -1,4 +1,8 @@
 
 .container {
     @include grid-row;
+
+    &.main {
+        margin-top: -$header-overlap-padding;
+    }
 }
