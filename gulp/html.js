@@ -9,7 +9,7 @@ module.exports = function (gulp) {
         'src/*.html',
         'src/*.txt'
       ])
-      .pipe(plugin.mdFile())
+      .pipe(plugin.parseMetaFile())
       .pipe(plugin.toArticle())
       .pipe(plugin.addIndex())
       .pipe(plugin.addSitemap())

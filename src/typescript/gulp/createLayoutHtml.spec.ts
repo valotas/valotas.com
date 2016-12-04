@@ -1,7 +1,7 @@
 import * as fs from 'vinyl-fs';
 import * as path from 'path';
 import * as through from 'through2';
-import {mdFile, toArticle, adaptPaths, addMetafiles, createLayoutHtml} from './index';
+import {parseMetaFile, toArticle, adaptPaths, addMetafiles, createLayoutHtml} from './index';
 
 describe('createLayoutHtml', () => {
 	const pkg: PackageJson = {
@@ -19,7 +19,7 @@ describe('createLayoutHtml', () => {
 		fs.src(['src/articles/better-angular-*.md'], {
 				base: path.join(__dirname, '../../')
 			})
-			.pipe(mdFile())
+			.pipe(parseMetaFile())
 			.pipe(createLayoutHtml(pkg, dummyFetcher))
 			.pipe(through.obj(function (chunk, enc, cb) {
 				expect(chunk.html).toBeTruthy();

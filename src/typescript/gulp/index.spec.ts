@@ -1,7 +1,7 @@
 import * as fs from 'vinyl-fs';
 import * as path from 'path';
 import * as through from 'through2';
-import {mdFile, toArticle, adaptPaths, addMetafiles, addIndex} from './index';
+import {parseMetaFile, toArticle, adaptPaths, addMetafiles, addIndex} from './index';
 
 const noopLogger = {
 	log(message?: any, ...optionalParams: any[]) {
@@ -9,12 +9,12 @@ const noopLogger = {
 	}
 };
 
-describe('mdFile', () => {
+describe('parseMetaFile', () => {
 	it('should parse the meta as yalm', (done) => {
 		fs.src(['src/articles/tomcat-initd-*.md'], {
 				base: path.join(__dirname, '../../')
 			})
-			.pipe(mdFile())
+			.pipe(parseMetaFile())
 			.pipe(through.obj(function (chunk, enc, cb) {
 				const mdfile = chunk.meta;
 				expect(mdfile).toBeTruthy();
@@ -31,7 +31,7 @@ describe('mdFile', () => {
 		fs.src(['src/articles/documenting-code.md'], {
 				base: path.join(__dirname, '../../')
 			})
-			.pipe(mdFile())
+			.pipe(parseMetaFile())
 			.pipe(through.obj(function (_chunk, enc, cb) {
 				chunk = _chunk;
 				cb(null, chunk);
@@ -48,7 +48,7 @@ describe('toArticle', () => {
 		fs.src(['src/articles/getters-and-setters.md'], {
 				base: path.join(__dirname, '../../')
 			})
-			.pipe(mdFile())
+			.pipe(parseMetaFile())
 			.pipe(toArticle())
 			.pipe(through.obj(function (chunk, enc, cb) {
 				expect(chunk.article).toBeDefined();
@@ -77,7 +77,7 @@ describe('adaptPaths', () => {
 		fs.src(['src/articles/tomcat-initd-*.md'], {
 				base: path.join(__dirname, '../../')
 			})
-			.pipe(mdFile())
+			.pipe(parseMetaFile())
 			.pipe(adaptPaths())
 			.pipe(through.obj(function (chunk, enc, cb) {
 				expect(chunk.path).toContain('tomcat-initd-script/index.html');
@@ -93,7 +93,7 @@ describe('addMetafiles', () => {
 		fs.src(['src/articles/tomcat-initd-*.md'], {
 				base: path.join(__dirname, '../../')
 			})
-			.pipe(mdFile())
+			.pipe(parseMetaFile())
 			.pipe(addMetafiles(noopLogger))
 			.pipe(through.obj(function (chunk, enc, cb) {
 				counter++;
@@ -115,7 +115,7 @@ describe('addIndex', () => {
 		fs.src(['src/articles/tomcat-initd-*.md'], {
 				base: path.join(__dirname, '../../')
 			})
-			.pipe(mdFile())
+			.pipe(parseMetaFile())
 			.pipe(toArticle())
 			.pipe(addIndex())
 			.pipe(through.obj(function ({path}, enc, cb) {
