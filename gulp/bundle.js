@@ -1,13 +1,13 @@
 'use strict';
 
-var htmlmin = require('gulp-htmlmin'),
-  gulpif = require('gulp-if'),
-  rev = require('gulp-rev'),
-  inject = require('gulp-inject');
+const htmlmin = require('gulp-htmlmin');
+const gulpif = require('gulp-if');
+const rev = require('gulp-rev');
+const inject = require('gulp-inject');
 
 module.exports = function (gulp) {
   return function () {
-    var injectables = gulp.src([
+    const injectables = gulp.src([
         './build/**/*',
         '!./build/**/*.html',
         '!./build/typescript/**/*'

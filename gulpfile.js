@@ -2,22 +2,22 @@
 
 'use strict';
 
-var gulp = require('gulp');
-var clean = require('rimraf');
-var ts = require('./.gulp/ts');
-var browserSync = require('browser-sync').create();
+const gulp = require('gulp');
+const clean = require('rimraf');
+const ts = require('./gulp/ts');
+const browserSync = require('browser-sync').create();
 
-gulp.task('clean-build', function (done) {
+gulp.task('clean-build', (done) => {
   clean('./build', done);
 });
 
-gulp.task('clean-dist', function (done) {
+gulp.task('clean-dist', (done) => {
   clean('./dist', done);
 });
 
-gulp.task('lint', require('./.gulp/lint')(gulp));
+gulp.task('lint', require('./gulp/lint')(gulp));
 
-gulp.task('copy-assets', ['clean-build'], function () {
+gulp.task('copy-assets', ['clean-build'], () => {
   return gulp.src([
       './src/assets/**/*',
       '!./src/assets/fonts',
@@ -26,7 +26,7 @@ gulp.task('copy-assets', ['clean-build'], function () {
     .pipe(gulp.dest('./build/assets'));
 });
 
-gulp.task('css:only', require('./.gulp/css')(gulp));
+gulp.task('css:only', require('./gulp/css')(gulp));
 
 gulp.task('css', ['clean-build', 'css:only']);
 
@@ -34,13 +34,13 @@ gulp.task('tsc', ['clean-build'], ts.task(gulp));
 
 gulp.task('tsc-bundle', ['tsc'], ts.bundle(gulp, __dirname));
 
-gulp.task('html', ['tsc'], require('./.gulp/html')(gulp));
+gulp.task('html', ['tsc'], require('./gulp/html')(gulp));
 
-gulp.task('test', require('./.gulp/test')(gulp, 'build/**/*.spec.js'));
+gulp.task('test', require('./gulp/test')(gulp, 'build/**/*.spec.js'));
 
 gulp.task('lint-test', ['lint', 'test']);
 
-gulp.task('tdd', ['test'], function () {
+gulp.task('tdd', ['test'], () => {
   ts.watch();
   gulp.watch('build/**/*.spec.js', ['test']);
 });
@@ -55,7 +55,7 @@ gulp.task('build', [
 gulp.task('serve', [
     'build'
   ],
-  function () {
+  () => {
     gulp.watch('src/sass/**/*.scss', ['css:only']);
     browserSync.init({
       logLevel: 'debug',
@@ -81,10 +81,9 @@ gulp.task('dist', [
   'clean-dist',
   'tsc-bundle',
   'build'
-], require('./.gulp/bundle')(gulp));
+], require('./gulp/bundle')(gulp));
 
-gulp.task('serve-dist', 
-  function () {
+gulp.task('serve-dist', () => {
     browserSync.init({
       logLevel: 'debug',
       server: {

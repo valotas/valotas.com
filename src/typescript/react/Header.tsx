@@ -41,8 +41,8 @@ export function Header ({title, subtitle = VALOTAS, date, metafileStore}: Header
 	);
 }
 
-function Date ({date = null}) {
-	if (date === null) {
+function Date ({date}) {
+	if (!date) {
 		return null;
 	}
 	return (

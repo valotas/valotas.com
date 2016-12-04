@@ -1,27 +1,27 @@
 'use strict';
 
-var merge = require('merge-stream');
-var eslint = require('gulp-eslint');
-var tslint = require('gulp-tslint');
+const merge = require('merge-stream');
+const eslint = require('gulp-eslint');
+const tslint = require('gulp-tslint');
 
 module.exports = function (gulp) {
   return function () {
-    var es = gulp.src([
+    const es = gulp.src([
         'gulpfile.js',
-        'src/**/*.js',
-        'src/**/*.jsx',
-        '.gulp/**/*.js'
+        'gulp/**/*.js'
       ])
       .pipe(eslint())
       .pipe(eslint.format())
       .pipe(eslint.failAfterError());
       
-    var ts = gulp.src([
+    const ts = gulp.src([
         'src/**/*.ts',
         'src/**/*.tsx'
       ])
-      .pipe(tslint())
-      .pipe(tslint.report('verbose'));
+      .pipe(tslint({
+        formatter: 'verbose'
+      }))
+      .pipe(tslint.report());
       
     return merge(es, ts);
   };

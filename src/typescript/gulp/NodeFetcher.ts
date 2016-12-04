@@ -18,7 +18,7 @@ export class NodeFetcher implements Fetcher {
 	}
 
 	private fetchAndCache(fileName: string, url: string|Request, init?: RequestInit) {
-		const fetch = this.delegate ? this.delegate.fetch : nfetch;
+		const fetch = (this.delegate ? this.delegate.fetch : nfetch) as Fetch;
 		return fetch(url, init)
 			.then((resp) => resp.text())
 			.then((text) => {

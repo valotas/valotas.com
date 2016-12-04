@@ -1,9 +1,7 @@
-/*jshint node:true*/
-
 'use strict';
 
-var sass = require('gulp-sass');
-var cssmin = require('gulp-cssmin');
+const sass = require('gulp-sass');
+const cssmin = require('gulp-cssmin');
 
 function noop() {
 
