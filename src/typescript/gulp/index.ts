@@ -36,12 +36,12 @@ export function addIndex() {
 	}, function (callback) {
 		metas = metas.sort(compareMoments);
 		this.push(createFileWithName('index.html', cwd, metas));
-		this.push(createFileWithName('error.html', cwd, metas));
+		this.push(createFileWithName('error.html', cwd, MetaFile.createError('Oups!')));
 		callback();
 	});
 }
 
-function createFileWithName(name: string, cwd: string, metas: MetaFile[]) {
+function createFileWithName(name: string, cwd: string, meta: MetaFile|MetaFile[]) {
 	if (!cwd) {
 		throw new Error(`Expected a truthy cwd. Got '${cwd}'`);
 	}
@@ -50,8 +50,8 @@ function createFileWithName(name: string, cwd: string, metas: MetaFile[]) {
 		base: path.join(cwd, 'src'),
 		path: path.join(cwd, 'src', name)
 	}) as any;
-	file.meta = metas;
-	file.meta.path = '';
+	file.meta = meta;
+	//file.meta.path = '';
 	return file;
 }
 

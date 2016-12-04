@@ -3,6 +3,7 @@ import {createArticle} from '../content/Article';
 import {MetaFile} from '../content/MetaFile';
 import {ArticleWithHeaderComponent} from './ArticleComponent';
 import {IndexWithHeader} from './Index';
+import {ErrorWithHeader} from './Error';
 import {isArray} from '../utils';
 
 export function LayoutMainContent ({meta}, {metafileStore}) {
@@ -11,11 +12,12 @@ export function LayoutMainContent ({meta}, {metafileStore}) {
 		return <IndexWithHeader articles={articles} metafileStore={metafileStore}/>;
 	}
 
-	if (meta) {
+	if (meta && !meta.error) {
 		const article = createArticle(meta as MetaFile);
 		return <ArticleWithHeaderComponent article={article} metafileStore={metafileStore}/>;
 	}
-	return null;
+
+	return <ErrorWithHeader/>;
 }
 
 

@@ -19,6 +19,7 @@ export class MetaFile implements MetaFileData {
     description: string;
     template: string;
     gists: GistContent[];
+    error?: any;
 
     constructor(input?: MetaFileData) {
         if (!input) {
@@ -32,6 +33,7 @@ export class MetaFile implements MetaFileData {
         this.description = input.description;
         this.template = input.template;
         this.gists = input.gists ? input.gists : [];
+        this.error = input.error ? input.error : false;
     }
 
     static create(raw: string, path?: string): MetaFile {
@@ -46,6 +48,19 @@ export class MetaFile implements MetaFileData {
         file.published = obj.published === '0' || obj.published === 'false' ? false : true;
         file.path = path;
         file.gists = [];
+        return file;
+    }
+
+    static createError(error: string): MetaFile {
+        let file = new MetaFile();
+        file.raw = '';
+        file.title = 'Oups!';
+        file.date = null;
+        file.template = null;
+        file.published = true;
+        file.path = null;
+        file.gists = [];
+        file.error = error;
         return file;
     }
 
@@ -99,5 +114,6 @@ function castOrCreate(data: MetaFileData): MetaFile {
 }
 
 export function isValidMetaFile(file: any): file is MetaFile {
-    return file && file.title && file.path && file.date && file.moment;
+    return (file && file.title && file.path && file.date && file.moment) || 
+        (file && file.error);
 }

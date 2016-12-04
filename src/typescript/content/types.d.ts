@@ -18,6 +18,7 @@ interface MetaFileData {
     description?: string;
     template?: string;
 	gists?: GistContent[];
+    error?: any;
 }
 
 interface GistDescription {

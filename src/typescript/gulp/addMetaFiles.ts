@@ -6,7 +6,7 @@ import * as path from 'path';
 export function addMetafiles(logger: Logger = gutil) {
 	return through.obj(function (file, enc, callback) {
 		const meta = file.meta;
-		if (meta) {
+		if (meta && meta.path) {
 			const index = new File({
 				cwd: file.cwd,
 				base: path.join(file.cwd, 'src'),
