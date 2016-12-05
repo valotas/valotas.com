@@ -5,7 +5,7 @@ import {isValidMetaFile} from '../content/MetaFile';
 export function adaptPaths () {
 	return through.obj(function (file: GulpFile, enc, callback) {
 		const meta = file.meta;
-		if (isValidMetaFile(meta) && !meta.error) {
+		if (isValidMetaFile(meta)) {
 			file.path = path.join(file.base, meta.path, 'index.html');
 		}
 		callback(null, file);

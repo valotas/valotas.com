@@ -46,7 +46,6 @@ describe('Layout', () => {
                         date: '2015-11-11',
                         published: true,
                         raw: 'some md content',
-                        template: null,
                         path: 'article2',
                         description: null
                 });

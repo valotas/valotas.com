@@ -9,16 +9,21 @@ interface Article {
     hasTweets(): boolean;
 }
 
+declare enum MetaFileType {
+    Article,
+    Error
+}
+
 interface MetaFileData {
     title: string;
     path: string;
-    date: string;
-    published?: boolean;
+    type?: MetaFileType;
     raw?: string;
+
+    date?: string;
+    published?: boolean;
     description?: string;
-    template?: string;
 	gists?: GistContent[];
-    error?: any;
 }
 
 interface GistDescription {

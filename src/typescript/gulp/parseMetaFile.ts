@@ -10,19 +10,29 @@ export function parseMetaFile(clone = true) {
 
 function createFile (file, enc) {
 	const f = file.path ? path.parse(file.path) : null;
-	if (f && f.ext === '.md') {
-		// extract the header info
-		const content = file.contents.toString(enc);
-		const mdfile = MetaFile.createFromRawMd(content);
-		if (!mdfile.published) {
-			return null;
-		}
-		mdfile.path = computeMdFilePath(f);
-		file.meta = mdfile;
+	if (!f) {
+		return file;
 	}
+	// extract the header info
+	const content = file.contents.toString(enc);
+	let meta = null;
+	if (f.ext === '.md') {
+		meta = MetaFile.createFromRawMd(content);
+	}
+	if (f.ext === '.json') {
+		meta = MetaFile.createFromJson(content);
+	}
+	if (!meta) {
+		return file;
+	}
+	if (!meta.published) {
+		return null;
+	}
+
+	meta.path = computeMdFilePath(f);
+	file.meta = meta;
 	return file;
 }
-
 function computeMdFilePath(file) {
 	if (file.name !== 'index') {
 		return file.name;

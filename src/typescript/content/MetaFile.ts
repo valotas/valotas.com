@@ -13,13 +13,12 @@ const INPUT_FORMATS = [
 export class MetaFile implements MetaFileData {
     title: string;
     path: string;
-    date: string;
-    published: boolean = true;
     raw: string;
-    description: string;
-    template: string;
-    gists: GistContent[];
-    error?: any;
+    type: MetaFileType
+    date?: string;
+    published?: boolean = true;
+    description?: string;
+    gists?: GistContent[];
 
     constructor(input?: MetaFileData) {
         if (!input) {
@@ -31,12 +30,10 @@ export class MetaFile implements MetaFileData {
         this.published = input.published;
         this.raw = input.raw;
         this.description = input.description;
-        this.template = input.template;
         this.gists = input.gists ? input.gists : [];
-        this.error = input.error ? input.error : false;
     }
 
-    static create(raw: string, path?: string): MetaFile {
+    static createFromRawMd(raw: string, path?: string): MetaFile {
         let file = new MetaFile();
         const matches = raw.split(DASHES);
         file.raw = matches[2].trim();
@@ -44,23 +41,22 @@ export class MetaFile implements MetaFileData {
         const obj = parseHeader(matches[1]);
         file.title = obj.title;
         file.date = obj.date;
-        file.template = obj.template;
         file.published = obj.published === '0' || obj.published === 'false' ? false : true;
         file.path = path;
         file.gists = [];
+        file.type = MetaFileType.Article;
         return file;
     }
-
-    static createError(error: string): MetaFile {
+    
+    static createFromJson(raw: string, path?: string): MetaFile {
+        const json = JSON.parse(raw);
         let file = new MetaFile();
-        file.raw = '';
-        file.title = 'Oups!';
-        file.date = null;
-        file.template = null;
-        file.published = true;
-        file.path = null;
-        file.gists = [];
-        file.error = error;
+        file.title = json.title || null;
+        file.date = json.date || null;
+        file.published = json.published || true;
+        file.path = path;
+        file.gists = json.gists || [];
+        file.type = MetaFileType.Error;
         return file;
     }
 
@@ -114,6 +110,5 @@ function castOrCreate(data: MetaFileData): MetaFile {
 }
 
 export function isValidMetaFile(file: any): file is MetaFile {
-    return (file && file.title && file.path && file.date && file.moment) || 
-        (file && file.error);
+    return file && file.title && file.path && file.moment;
 }
