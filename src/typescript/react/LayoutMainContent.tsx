@@ -6,13 +6,17 @@ import {IndexWithHeader} from './Index';
 import {ErrorWithHeader} from './Error';
 import {isArray} from '../utils';
 
-export function LayoutMainContent ({meta}, {metafileStore}) {
+interface LayoutMainContentProps {
+	meta: MetaFile|MetaFile[]
+}
+
+export function LayoutMainContent ({ meta }: LayoutMainContentProps, {metafileStore}) {
 	if (isArray(meta)) {
 		const articles = toArticles(meta);
 		return <IndexWithHeader articles={articles} metafileStore={metafileStore}/>;
 	}
 
-	if (meta && !meta.error) {
+	if (meta && meta.type === 'article') {
 		const article = createArticle(meta as MetaFile);
 		return <ArticleWithHeaderComponent article={article} metafileStore={metafileStore}/>;
 	}
