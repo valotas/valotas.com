@@ -6,6 +6,7 @@ module.exports = function (gulp) {
     const pkg = require('../package.json');
     return gulp.src([
         'src/articles/**/*.md',
+        'src/pages/**/*.json',
         'src/*.html',
         'src/*.txt'
       ])
