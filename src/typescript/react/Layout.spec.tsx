@@ -19,6 +19,7 @@ describe('Layout', () => {
       date: '2015-11-11',
       published: true,
       raw: 'some md content',
+      type: 'article',
       path: 'article1'
     });
     const article2 = new MetaFile({
@@ -26,7 +27,8 @@ describe('Layout', () => {
       date: '2015-11-11',
       published: true,
       raw: 'some md content',
-      path: 'article2'
+      path: 'article2',
+      type: 'article'
     });
     const html = RDS.renderToString(<Layout meta={[article1, article2]} pkg={pkg} />);
     expect(html).toContain('first article');
@@ -36,6 +38,7 @@ describe('Layout', () => {
   it('should add the class third on each 3rd article card', () => {
     const article1 = new MetaFile({
       title: 'first article',
+      type: 'article',
       date: '2015-11-11',
       published: true,
       raw: 'some md content',
@@ -43,6 +46,7 @@ describe('Layout', () => {
     });
     const article2 = new MetaFile({
       title: 'second article',
+      type: 'article',
       date: '2015-11-11',
       published: true,
       raw: 'some md content',
@@ -51,6 +55,7 @@ describe('Layout', () => {
     });
     const article3 = new MetaFile({
       title: 'third article',
+      type: 'article',
       date: '2015-11-11',
       published: true,
       raw: 'some md content',

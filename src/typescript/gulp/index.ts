@@ -16,7 +16,7 @@ export {createLayoutHtml} from './createLayoutHtml';
 export function toArticle () {
 	return through.obj(function (file: GulpFile, enc, callback) {
 		const meta = file.meta;
-		if (isValidMetaFile(meta)) {
+		if (isValidMetaFile(meta) && meta.type === 'article') {
 			file.article = createArticle(meta);
 		}
 		callback(null, file);
@@ -27,8 +27,8 @@ export function addIndex() {
 	let metas: MetaFile[] = [];
 	let cwd;
 	return through.obj(function (file, enc, callback) {
-		const article = file.article;
-		if (article /* && article instanceof Article */) {
+		const { article } = file;
+		if (article) {
 			cwd = file.cwd;
 			metas.push(createDescriptionMetaFile(article));
 		}
