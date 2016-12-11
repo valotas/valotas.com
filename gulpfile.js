@@ -19,10 +19,9 @@ gulp.task('lint', require('./gulp/lint')(gulp));
 
 gulp.task('copy-assets', ['clean-build'], () => {
   return gulp.src([
-      './src/assets/**/*',
-      '!./src/assets/fonts',
-      '!./src/assets/*.less'
-    ])
+    './src/assets/**/*',
+    '!./src/assets/fonts'
+  ])
     .pipe(gulp.dest('./build/assets'));
 });
 
@@ -53,8 +52,8 @@ gulp.task('build', [
 ]);
 
 gulp.task('serve', [
-    'build'
-  ],
+  'build'
+],
   () => {
     gulp.watch('src/sass/**/*.scss', ['css:only']);
     browserSync.init({
@@ -84,15 +83,14 @@ gulp.task('dist', [
 ], require('./gulp/bundle')(gulp));
 
 gulp.task('serve-dist', () => {
-    browserSync.init({
-      logLevel: 'debug',
-      server: {
-        baseDir: './dist'
-      },
-      watchOptions: {
-        ignoreInitial: true,
-        ignored: 'node_modules/**'
-      }
-    });
-  }
-);
+  browserSync.init({
+    logLevel: 'debug',
+    server: {
+      baseDir: './dist'
+    },
+    watchOptions: {
+      ignoreInitial: true,
+      ignored: 'node_modules/**'
+    }
+  });
+});
