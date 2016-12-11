@@ -59,8 +59,8 @@
     "foundation-sites": "^6.2.1",
     "marked": "0.3.5",
     "moment": "2.13.0",
-    "react": "15.3.2",
-    "react-dom": "15.3.2",
+    "react": "15.4.1",
+    "react-dom": "15.4.1",
     "systemjs": "0.19.28"
   }
 }
