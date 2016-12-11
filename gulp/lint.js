@@ -5,7 +5,7 @@ const eslint = require('gulp-eslint');
 const tslint = require('gulp-tslint');
 
 module.exports = function (gulp) {
-  return function () {
+  return () => {
     const es = gulp.src([
         'gulpfile.js',
         'gulp/**/*.js'
