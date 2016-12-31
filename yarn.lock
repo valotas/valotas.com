@@ -4831,6 +4831,10 @@ tryit@^1.0.1:
   version "1.0.3"
   resolved "https://registry.yarnpkg.com/tryit/-/tryit-1.0.3.tgz#393be730a9446fd1ead6da59a014308f36c289cb"
 
+tslib:
+  version "1.4.0"
+  resolved "https://registry.yarnpkg.com/tslib/-/tslib-1.4.0.tgz#6bb6b97fe5f3d71bfbcf10e22ee1e29b6e63cc19"
+
 tslint@3.15.1:
   version "3.15.1"
   resolved "https://registry.yarnpkg.com/tslint/-/tslint-3.15.1.tgz#da165ca93d8fdc2c086b51165ee1bacb48c98ea5"

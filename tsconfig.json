@@ -10,7 +10,8 @@
     "experimentalDecorators": true,
     "removeComments": false,
     "noImplicitAny": false,
-    "jsx": "react"
+    "jsx": "react",
+    "importHelpers": true
   },
   "exclude": [
     "node_modules"
