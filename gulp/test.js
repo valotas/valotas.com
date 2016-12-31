@@ -3,7 +3,7 @@
 const jasmine = require('gulp-jasmine');
 
 module.exports = function (gulp, path) {
-  return function () {
+  return () => {
     gulp.src(path)
       .pipe(jasmine());
   };

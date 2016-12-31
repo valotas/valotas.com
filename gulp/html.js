@@ -1,7 +1,7 @@
 'use strict';
 
 module.exports = function (gulp) {
-  return function () {
+  return () => {
     const plugin = require('../build/typescript/gulp');
     const pkg = require('../package.json');
     return gulp.src([

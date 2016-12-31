@@ -13,19 +13,19 @@ function execTsc (watch, cb) {
 }
 
 module.exports = {
-  task: function () {
-    return function (cb) {
+  task: () => {
+    return (cb) => {
       execTsc(false, cb);
     };
   },
-  watch: function () {
+  watch: () => {
     execTsc(true);
   },
-  bundle: function (gulp, basepath) {
+  bundle: (gulp, basepath) => {
     const conf = createSystemConfig(basepath + '/');
     const builder = new Builder(conf);
     
-    return function (cb) {
+    return (cb) => {
       builder.buildStatic('./build/typescript/main.js', './build/assets/bundle.js', { 
           runtime: false,
           minify: true 

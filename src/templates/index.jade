@@ -12,7 +12,7 @@ html(lang='en')
     //inject:css
     link(rel='stylesheet', href= '/assets/main.css')
     //endinject
-    script.!= pkg
+    script!= pkg
     //inject:js
     script(src= '/node_modules/systemjs/dist/system.src.js')
     script(src= '/system.conf.js')
@@ -21,4 +21,4 @@ html(lang='en')
     //endinject
   body
     #app!= content
-    script(type='application/json').!= meta
+    script(type='application/json')!= meta

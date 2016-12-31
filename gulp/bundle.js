@@ -6,7 +6,7 @@ const rev = require('gulp-rev');
 const inject = require('gulp-inject');
 
 module.exports = function (gulp) {
-  return function () {
+  return () => {
     const injectables = gulp.src([
         './build/**/*',
         '!./build/**/*.html',
