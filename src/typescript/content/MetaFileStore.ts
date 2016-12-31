@@ -42,7 +42,7 @@ export class MetaFileStore {
     return this.fetcher
       .fetch(url)
       .then((body) => body.json())
-      .then((json) => MetaFile.fromData(json as MetaFileData | MetaFileData[]));
+      .then((json: any) => MetaFile.fromData(json as MetaFileData | MetaFileData[]));
   }
 
   setMetaFile(meta: MetaFile | MetaFile[]) {
