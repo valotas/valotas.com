@@ -15,8 +15,6 @@ gulp.task('clean-dist', (done) => {
   clean('./dist', done);
 });
 
-gulp.task('lint', require('./gulp/lint')(gulp));
-
 gulp.task('copy-assets', ['clean-build'], () => {
   return gulp.src([
     './src/assets/**/*',
@@ -36,8 +34,6 @@ gulp.task('tsc-bundle', ['tsc'], ts.bundle(gulp, __dirname));
 gulp.task('html', ['tsc'], require('./gulp/html')(gulp));
 
 gulp.task('test', require('./gulp/test')(gulp, 'build/**/*.spec.js'));
-
-gulp.task('lint-test', ['lint', 'test']);
 
 gulp.task('tdd', ['test'], () => {
   ts.watch();
