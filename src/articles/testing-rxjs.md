@@ -66,13 +66,13 @@ Guess what. This does not work. `TestScheduler` initialization alone can not cop
 
 ### Simplifying the expectations
 
-Although, straight forward, it is a bit of code that you have to write in order to test a sequence of events and we haven't a way of testing the actual time (frame) that an event took place. In the [docu][writing-marble-tests], you see the existence of `expectObservable` function, but still no info on where to find it. This time I went straight to `TestScheduler` and it looked like it had what I needed:
+Although straight forward, it is a bit of code that you have to write in order to test a sequence of events and we haven't a way of testing the actual time (frame) that an event took place. In the [docu][writing-marble-tests], you see the existence of `expectObservable` function, but still no info on where to find it. This time I went straight to `TestScheduler` and it looked like it had what I needed:
 
 - `expectObservable(observable: Observable<any>, unsubscriptionMarbles: string = null): ({ toBe: observableToBeFn })`
 
 With that we can write expectations with marble strings just like we create the hot/cold observables, making testing much more easier.
 
-It is though a little bit trickier to use, as we should first instanciate our scheduler with an assertion function. This will be used in order to assert the sequence of the events when `flush`ing the scheduler. That means that it should make our test fail. So either through and exception or just use your testing framework:
+It is though a little bit trickier to use, as we should first instanciate our scheduler with an assertion function. This will be used in order to assert the sequence of the events when `flush`ing the scheduler. That means that it should make our test fail. So either throw an exception or just use your testing framework:
 
 ```
 function assertEquals (actual, expected) {
