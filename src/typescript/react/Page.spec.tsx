@@ -8,7 +8,7 @@ describe('Page', () => {
     name: 'the name',
     version: '666'
   };
-  
+
   it('should render html', () => {
     const html = RDS.renderToString(<Page pkg={pkg} />);
     expect(html).toBeTruthy();

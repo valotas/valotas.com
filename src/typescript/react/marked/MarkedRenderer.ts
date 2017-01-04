@@ -70,7 +70,7 @@ function notNull(obj) {
 type HtmlTransfomer = (html: string) => {
 	factory: React.HTMLFactory<HTMLElement>,
 	props: any
-}
+};
 
 interface MarkRenderOptions {
 	html: HtmlTransfomer[];
