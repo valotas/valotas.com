@@ -92,3 +92,5 @@ a full example would look like the following:
 Finally if you feel like experimenting, which by the way is the only way of getting used to the library [this jsbin](http://jsbin.com/gist/c71a7aa41de5d03197a2) should get you up and running as it contains all the test cases we've discussed on this post. If you are only interesting in the code, here it is:
 
 <script src="https://gist.github.com/valotas/c71a7aa41de5d03197a2.js?file=specs.js"></script>
+
+[writing-marble-tests]: https://github.com/ReactiveX/rxjs/blob/master/doc/writing-marble-tests.md
