@@ -14,7 +14,8 @@
         'react-dom': pre + 'node_modules/react-dom/dist/react-dom.min.js',
         'moment': pre + 'node_modules/moment/min/moment.min.js',
         'marked': pre + 'node_modules/marked/marked.min.js',
-        'base64-js': pre + 'node_modules/base64-js/lib/b64.js'
+        'base64-js': pre + 'node_modules/base64-js/lib/b64.js',
+        'tslib': pre + 'node_modules/tslib/tslib.js' 
       }  
     };
   }
