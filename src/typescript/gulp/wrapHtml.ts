@@ -6,7 +6,7 @@ import { createTitle } from '../titleFactory';
 import { createPackageJson } from '../PackageJson.factory';
 
 export function wrapHtml(templateFile, pkg, logger: Logger = gutil) {
-  const packageJson = createPackageJson(pkg);
+  const packageJson = JSON.stringify(createPackageJson(pkg));
   const template = compileFile(templateFile);
   return through.obj(function (file: GulpFile, enc, callback) {
     if (file.html) {
@@ -14,7 +14,7 @@ export function wrapHtml(templateFile, pkg, logger: Logger = gutil) {
         title: createTitle(file.meta || null),
         content: file.html,
         meta: deflate(file.meta),
-        pkg: `window.pkg=${JSON.stringify(packageJson)}`
+        pkg: `window.pkg=${packageJson}`
       });
       file.contents = new Buffer(html, enc);
       logger.log('Created', file.path);
