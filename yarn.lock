@@ -4609,9 +4609,9 @@ swap-case@^1.1.0:
     lower-case "^1.1.1"
     upper-case "^1.1.1"
 
-systemjs-builder@0.15.33:
-  version "0.15.33"
-  resolved "https://registry.yarnpkg.com/systemjs-builder/-/systemjs-builder-0.15.33.tgz#7bd4d045769a67b52f9596141ba21cd94b49910c"
+systemjs-builder@0.15.34:
+  version "0.15.34"
+  resolved "https://registry.yarnpkg.com/systemjs-builder/-/systemjs-builder-0.15.34.tgz#6f1b7437e681e395bbdadb2e0b9d4bfd86f1ce56"
   dependencies:
     babel-core "^6.9.0"
     babel-plugin-transform-cjs-system-wrapper "^0.2.1"
@@ -4625,19 +4625,13 @@ systemjs-builder@0.15.33:
     mkdirp "^0.5.1"
     rollup "^0.36.3"
     source-map "^0.5.3"
-    systemjs "^0.19.39"
+    systemjs "^0.19.41"
     traceur "0.0.105"
     uglify-js "^2.6.1"
 
-systemjs@^0.19.39:
-  version "0.19.40"
-  resolved "https://registry.yarnpkg.com/systemjs/-/systemjs-0.19.40.tgz#158f64a9f4ef541a7fda6b40e527ee46b6c54cd0"
-  dependencies:
-    when "^3.7.5"
-
-systemjs@0.19.28:
-  version "0.19.28"
-  resolved "https://registry.yarnpkg.com/systemjs/-/systemjs-0.19.28.tgz#1778fa364db1f688728930f4c0b00e71305ba41a"
+systemjs@^0.19.41, systemjs@0.19.41:
+  version "0.19.41"
+  resolved "https://registry.yarnpkg.com/systemjs/-/systemjs-0.19.41.tgz#835d2c0f10bf403b551fedc875f84bb44a02c4eb"
   dependencies:
     when "^3.7.5"
 
@@ -4867,9 +4861,9 @@ typescript@^2.0.3:
   version "2.0.7"
   resolved "https://registry.yarnpkg.com/typescript/-/typescript-2.0.7.tgz#efc39e8822e240d0b741d06ff86708137bcdb5e4"
 
-typescript@2.1.4:
-  version "2.1.4"
-  resolved "https://registry.yarnpkg.com/typescript/-/typescript-2.1.4.tgz#b53b69fb841126acb1dd4b397d21daba87572251"
+typescript@2.1.5:
+  version "2.1.5"
+  resolved "https://registry.yarnpkg.com/typescript/-/typescript-2.1.5.tgz#6fe9479e00e01855247cea216e7561bafcdbcd4a"
 
 typings:
   version "2.0.0"
