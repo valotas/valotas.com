@@ -1,8 +1,6 @@
 ---
 title: Testing RxJS
-author: valotas
 date: 2016-03-19
-template: article.jade
 ---
 
 When you hear for a new technology, all you want to do is just to use it. This is how my experience with [RxJS][reactivex] started a while ago. It is for sure cool, but also a new way of thinking. Just like anything else new, you are going sooner or later to hit a wall. After grasping myself to find which sequence of operators whould do the trick, I tried to just test the thing.
