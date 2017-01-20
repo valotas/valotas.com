@@ -91,4 +91,9 @@ Finally if you feel like experimenting, which by the way is the only way of gett
 
 <script src="https://gist.github.com/valotas/c71a7aa41de5d03197a2.js?file=specs.js"></script>
 
+## References
+- [RxJs test api](http://reactivex.io/rxjs/test.html)
+- [RxJs github repo][reactivex]
+- [Writing marble tests][writing-marble-tests]
+
 [writing-marble-tests]: https://github.com/ReactiveX/rxjs/blob/master/doc/writing-marble-tests.md
