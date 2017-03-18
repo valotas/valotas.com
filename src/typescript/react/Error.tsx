@@ -1,4 +1,4 @@
-import * as React from 'react';
+import { h } from 'preact';
 import { Header } from './Header';
 import { VALOTAS } from '../utils';
 import { Link } from './Link';

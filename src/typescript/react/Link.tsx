@@ -1,9 +1,9 @@
-import * as React from 'react';
+import { Component, h } from 'preact';
 import { MetaFileStore } from '../content/MetaFileStore';
 import { Icon } from './Icon';
 import { BROWSER } from '../browser/Browser';
 
-interface LinkProps extends React.Props<any> {
+interface LinkProps {
   article?: Article;
   href?: string;
   metafileStore?: MetaFileStore;
@@ -11,14 +11,14 @@ interface LinkProps extends React.Props<any> {
   target?: string;
 }
 
-export class Link extends React.Component<LinkProps, any> {
+export class Link extends Component<LinkProps, any> {
   context: {
     metafileStore: MetaFileStore
   };
 
-  static contextTypes: React.ValidationMap<any> = {
+/*  static contextTypes: = {
     metafileStore: React.PropTypes.object
-  };
+  };*/
 
   handleClick = (e) => {
     const { href, target } = this.props;
@@ -44,9 +44,10 @@ export class Link extends React.Component<LinkProps, any> {
     e.preventDefault();
     store.load(this.props.article || this.props.href || '/');
   }
-  render() {
-    const href = this.props.href || this.createHref();
-    return <a href={href} className={this.props.className} onClick={this.handleClick} target={this.props.target}>{this.props.children}</a>;
+
+  render(props) {
+    const href = props.href || this.createHref();
+    return <a href={href} className={props.className} onClick={this.handleClick} target={props.target}>{props.children}</a>;
   }
   createHref() {
     let href = '/';

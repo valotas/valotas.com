@@ -1,10 +1,10 @@
-import * as React from 'react';
+import { h } from 'preact';
 import { Icon } from './Icon';
 import { VALOTAS } from '../utils';
 import { Link } from './Link';
 import { MetaFileStore } from '../content/MetaFileStore';
 
-interface HeaderProps extends React.Props<any> {
+interface HeaderProps {
   title: string;
   subtitle?: string;
   date?: string;

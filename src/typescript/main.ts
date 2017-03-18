@@ -1,5 +1,4 @@
-import * as React from 'react';
-import * as ReactDom from 'react-dom';
+import { render, h } from 'preact';
 import { MetaFile, isValidMetaFile } from './content/MetaFile';
 import { MetaFileStore } from './content/MetaFileStore';
 import { Page } from './react/Page';
@@ -39,16 +38,14 @@ BROWSER.ready(() => {
   console.debug('Infalted meta', meta);
 
   // Render the main react component
-  const el = React.createElement(Page, {
+  const el = h(Page, {
     meta: meta,
     metafileStore: metafileStore,
     fetcher: fetcher,
     gistStore: new GistStore(fetcher, metafileStore, isValidMetaFile(meta) ? meta : null),
     pkg: BROWSER.prop('pkg') as PackageJson
   });
-  ReactDom.render(el, BROWSER.query('#app'), () => {
-    console.timeEnd('load');
-  });
+  render(el, BROWSER.query('#app'));
 });
 
 function createMetafileStore(fetcher: Fetcher) {

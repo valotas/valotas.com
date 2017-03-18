@@ -1,11 +1,11 @@
-import * as React from 'react';
+import { h, Component } from 'preact';
 import { GistStore } from '../content/GistStore';
 import { isPromise } from '../utils';
 import { Link } from './Link';
 import { Icon } from './Icon';
 import { Code } from './Code';
 
-interface GistProps extends React.Props<any>, GistDescription {
+interface GistProps extends GistDescription {
 
 }
 
@@ -13,19 +13,19 @@ interface GistState {
   content: string;
 }
 
-export class Gist extends React.Component<GistProps, GistState> {
+export class Gist extends Component<GistProps, GistState> {
   private contentPromise: Promise<string>;
 
   context: {
     gistStore: GistStore
   };
 
-  static contextTypes: React.ValidationMap<any> = {
+  /*static contextTypes: React.ValidationMap<any> = {
     gistStore: React.PropTypes.object
-  };
+  };*/
 
   constructor(props, context) {
-    super(props, context);
+    super(props);
 
     this.state = {
       content: null

@@ -1,4 +1,4 @@
-import * as React from 'react';
+import { h, Component } from 'preact';
 import { Icon } from './Icon';
 import { Link } from './Link';
 import { Header } from './Header';
@@ -12,7 +12,7 @@ interface ArticleProps {
   metafileStore: MetaFileStore;
 }
 
-export function ArticleWithHeaderComponent({article, metafileStore}: ArticleProps) {
+export function ArticleWithHeaderComponent({ article, metafileStore }: ArticleProps) {
   return (
     <div>
       <Header title={article.title} subtitle={VALOTAS} date={article.date('DD/MM/YYYY')} metafileStore={metafileStore} />
@@ -21,9 +21,9 @@ export function ArticleWithHeaderComponent({article, metafileStore}: ArticleProp
   );
 }
 
-export class ArticleComponent extends React.Component<ArticleProps, {}> {
+export class ArticleComponent extends Component<ArticleProps, {}> {
   render() {
-    const {article} = this.props;
+    const { article } = this.props;
     if (!article) {
       return null;
     }

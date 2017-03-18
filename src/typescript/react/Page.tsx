@@ -1,4 +1,4 @@
-import * as React from 'react';
+import { h, Component } from 'preact';
 import { MetaFile } from '../content/MetaFile';
 import { LoadingBar } from './LoadingBar';
 import { Footer } from './Footer';
@@ -10,7 +10,7 @@ import { BROWSER } from '../browser/Browser';
 import { FetchStreamer } from '../FetchStreamer';
 import { LayoutMainContent } from './LayoutMainContent';
 
-interface PageProps extends React.Props<any> {
+interface PageProps {
   meta?: MetaFileData | MetaFileData[];
   metafileStore?: MetaFileStore;
   fetcher?: Fetcher;
@@ -23,7 +23,7 @@ interface PageState {
 }
 
 // http://staxmanade.com/2015/08/playing-with-typescript-and-jsx/
-export class Page extends React.Component<PageProps, PageState> {
+export class Page extends Component<PageProps, PageState> {
   constructor(props: PageProps) {
     super(props);
     this.state = {
@@ -31,11 +31,11 @@ export class Page extends React.Component<PageProps, PageState> {
     };
   }
 
-  static childContextTypes: React.ValidationMap<any> = {
+  /*static childContextTypes: React.ValidationMap<any>; = {
     metafileStore: React.PropTypes.object,
     fetcher: React.PropTypes.object,
     gistStore: React.PropTypes.object
-  };
+  };*/
 
   getChildContext() {
     return {
@@ -46,7 +46,7 @@ export class Page extends React.Component<PageProps, PageState> {
   }
 
   componentDidMount() {
-    const {metafileStore} = this.props;
+    const { metafileStore } = this.props;
     if (!metafileStore) {
       throw ex.illegalArgumentException('MetaFileStore is needed on the client side to register for changes');
     }
@@ -75,12 +75,12 @@ export class Page extends React.Component<PageProps, PageState> {
     });
   }
 
-  render() {
+  render({ pkg }, { meta }) {
     return (
       <div>
         <LoadingBar />
-        <LayoutMainContent meta={this.state.meta} />
-        <Footer pkg={this.props.pkg} />
+        <LayoutMainContent meta={meta} />
+        <Footer pkg={pkg} />
       </div>
     );
   }

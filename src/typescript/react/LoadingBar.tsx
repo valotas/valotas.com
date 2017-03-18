@@ -1,4 +1,4 @@
-import * as React from 'react';
+import { h, Component } from 'preact';
 import { FetchStreamer } from '../FetchStreamer';
 import { noop } from '../utils';
 
@@ -6,19 +6,20 @@ interface LoadingBarState {
   loading: number;
 }
 
-export class LoadingBar extends React.Component<React.Props<any>, LoadingBarState> {
+export class LoadingBar extends Component<any, LoadingBarState> {
   context: {
     fetcher: FetchStreamer
   };
 
   private onFetchRegistration;
 
-  static contextTypes: React.ValidationMap<any> = {
-    fetcher: React.PropTypes.object
-  };
+  /*  static contextTypes: React.ValidationMap<any> = {
+      fetcher: React.PropTypes.object
+    };
+  */
 
-  constructor(props, context) {
-    super(props, context);
+  constructor(props) {
+    super(props);
     this.state = {
       loading: 0
     };
@@ -52,7 +53,7 @@ export class LoadingBar extends React.Component<React.Props<any>, LoadingBarStat
   }
 
   shouldComponentUpdate(nextProps, nextState) {
-    const {loading} = this.state;
+    const { loading } = this.state;
     if (loading === nextState.loading) {
       return false;
     }
@@ -62,8 +63,8 @@ export class LoadingBar extends React.Component<React.Props<any>, LoadingBarStat
     return true;
   }
 
-  render() {
-    const classNames = `loading-bar ${this.state.loading ? 'loading' : ''}`;
+  render({ }, { loading }) {
+    const classNames = `loading-bar ${loading ? 'loading' : ''}`;
     return (
       <div className={classNames}>
         <div className='loading-bar-inner'></div>

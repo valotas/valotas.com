@@ -1,4 +1,4 @@
-import * as React from 'react';
+import { h } from 'preact';
 import { createArticle } from '../content/Article';
 import { MetaFile } from '../content/MetaFile';
 import { ArticleWithHeaderComponent } from './ArticleComponent';
@@ -10,7 +10,7 @@ interface LayoutMainContentProps {
   meta: MetaFile | MetaFile[];
 }
 
-export function LayoutMainContent({ meta }: LayoutMainContentProps, {metafileStore}) {
+export function LayoutMainContent({ meta }: LayoutMainContentProps, { metafileStore }) {
   if (isArray(meta)) {
     const articles = toArticles(meta);
     return <IndexWithHeader articles={articles} metafileStore={metafileStore} />;

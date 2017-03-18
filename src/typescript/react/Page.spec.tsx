@@ -1,5 +1,5 @@
-import * as React from 'react';
-import * as RDS from 'react-dom/server';
+import { h } from 'preact';
+import render from 'preact-render-to-string';
 import { Page } from './Page';
 import { MetaFile } from '../content/MetaFile';
 
@@ -10,7 +10,7 @@ describe('Page', () => {
   };
 
   it('should render html', () => {
-    const html = RDS.renderToString(<Page pkg={pkg} />);
+    const html = render(<Page pkg={pkg} />);
     expect(html).toBeTruthy();
   });
 
@@ -31,7 +31,7 @@ describe('Page', () => {
       path: 'article2',
       type: 'article'
     });
-    const html = RDS.renderToString(<Page meta={[article1, article2]} pkg={pkg} />);
+    const html = render(<Page meta={[article1, article2]} pkg={pkg} />);
     expect(html).toContain('first article');
     expect(html).toContain('second article');
   });
@@ -62,7 +62,7 @@ describe('Page', () => {
       raw: 'some md content',
       path: 'article3'
     });
-    const html = RDS.renderToString(<Page meta={[article1, article2, article3]} pkg={pkg} />);
+    const html = render(<Page meta={[article1, article2, article3]} pkg={pkg} />);
     expect(html).toContain('class="article-card"');
   });
 });

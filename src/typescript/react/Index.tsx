@@ -1,4 +1,4 @@
-import * as React from 'react';
+import { h } from 'preact';
 import { MetaFileStore } from '../content/MetaFileStore';
 import { Link } from './Link';
 import { Icon } from './Icon';
@@ -6,7 +6,7 @@ import { Header } from './Header';
 import { MarkedComponent } from './MarkedComponent';
 import { VALOTAS } from '../utils';
 
-interface IndexProps extends React.Props<any> {
+interface IndexProps {
   articles: Article[];
   metafileStore?: MetaFileStore;
 }

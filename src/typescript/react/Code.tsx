@@ -1,11 +1,11 @@
-import * as React from 'react';
+import { h } from 'preact';
 import { GistStore } from '../content/GistStore';
 import { isPromise } from '../utils';
 import { Link } from './Link';
 import { Icon } from './Icon';
 
 export function Code(props) {
-  const {children} = props;
+  const { children } = props;
   const title = Array.isArray(children) ? children[0] : null;
   const code = Array.isArray(children) ? children[1] : children;
   return (

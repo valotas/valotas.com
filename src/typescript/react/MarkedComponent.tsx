@@ -1,11 +1,12 @@
 import * as marked from 'marked';
-import * as React from 'react';
+import { h } from 'preact';
 import * as ex from '../exceptions';
 import { createComponentTree } from './marked/createComponentTree';
 
-interface MarkedComponentProps extends React.Props<any> {
+interface MarkedComponentProps {
   meta?: MetaFileData;
   markFirstLetter?: boolean;
+  children?: any
 }
 
 export function MarkedComponent(props: MarkedComponentProps) {

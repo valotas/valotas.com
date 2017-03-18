@@ -1,7 +1,7 @@
-import * as React from 'react';
+import { h } from 'preact';
 
 export function ParagraphWithFirstLetterSpan(props) {
-  const childs = React.Children.toArray(props.children);
+  const childs = Array.from(props.children); // React.Children.toArray(props.children);
   const child = childs[0] as string;
   const first = child[0];
   childs[0] = child.substr(1);
