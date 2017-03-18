@@ -4,13 +4,11 @@ import { isValidMetaFile } from '../content/MetaFile';
 import * as gutil from 'gulp-util';
 import { CacheableGistStore } from './CacheableGistStore';
 import { Page } from '../react/Page';
-import * as React from 'react';
-import * as RDS from 'react-dom/server';
+import { h } from 'preact';
+import render from 'preact-render-to-string';
 import { NodeFetcher } from './NodeFetcher';
 
 const NODE_FETCHER = new NodeFetcher(null, '/tmp/valotas.com.createLayoutHtml');
-
-const createPage = React.createFactory(Page);
 
 export function createLayoutHtml(pkg: PackageJson, fetcher: Fetcher = NODE_FETCHER, logger: Logger = gutil) {
   return through.obj(function (file: GulpFile, enc, callback) {
@@ -31,7 +29,7 @@ export function createLayoutHtml(pkg: PackageJson, fetcher: Fetcher = NODE_FETCH
 function renderLayout(file: GulpFile, fetcher: Fetcher, pkg: PackageJson): Promise<string> {
   const meta = file.meta;
   const store = new CacheableGistStore(fetcher, isValidMetaFile(meta) ? meta : null);
-  const page = createPage({
+  const page = h(Page, {
     meta: meta,
     fetcher: fetcher,
     gistStore: store,
@@ -39,14 +37,14 @@ function renderLayout(file: GulpFile, fetcher: Fetcher, pkg: PackageJson): Promi
   });
   // initial rendering to cause the initialization of all our components
   try {
-    RDS.renderToString(page);
+    render(page);
   } catch (ex) {
     ex.message += `. Could not render ${file.path}`;
     return Promise.reject(ex);
   }
   return store.all()
     .then((all) => {
-      return RDS.renderToString(page);
+      return render(page);
     });
 }
 
