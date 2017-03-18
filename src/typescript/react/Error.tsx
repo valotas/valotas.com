@@ -4,7 +4,7 @@ import { VALOTAS } from '../utils';
 import { Link } from './Link';
 import { Icon } from './Icon';
 
-export function ErrorWithHeader({}, {metafileStore}) {
+export function ErrorWithHeader({ }, { metafileStore }) {
   return (
     <div>
       <Header title={VALOTAS} subtitle='Things to remember | Programming stuff :)' />
@@ -13,11 +13,11 @@ export function ErrorWithHeader({}, {metafileStore}) {
           <Icon name='fa-meh-o' size='5x' />
           <p>
             It looks like what you are looking for is not here.
-						<Link metafileStore={metafileStore}>
+            <Link metafileStore={metafileStore}>
               Try going&nbsp;
-							<Icon name='fa-home' size='sm-2x' />
+              <Icon name='fa-home' size='sm-2x' />
               &nbsp;again?
-						</Link>
+            </Link>
           </p>
         </div>
         <div className='actions button-group'>

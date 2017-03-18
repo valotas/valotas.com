@@ -1,33 +1,33 @@
-import {BROWSER} from './browser/Browser';
-import {Bus} from './Bus';
+import { BROWSER } from './browser/Browser';
+import { Bus } from './Bus';
 
 interface ResponseListener {
-    (promise: Promise<Response>): void;
+  (promise: Promise<Response>): void;
 }
 
 export class FetchStreamer implements Fetcher {
-    private bus: Bus<Promise<Response>> = new Bus();
+  private bus: Bus<Promise<Response>> = new Bus();
 
-    constructor (private delegate: Fetcher = BROWSER) {}
+  constructor(private delegate: Fetcher = BROWSER) { }
 
-    fetch (url: string|Request, init?: RequestInit) {
-        const promise = this.delegate.fetch(url, init);
-        this.bus.notify(promise);
-        return promise;
+  fetch(url: string | Request, init?: RequestInit) {
+    const promise = this.delegate.fetch(url, init);
+    this.bus.notify(promise);
+    return promise;
+  }
+
+  onFetch(listener: ResponseListener) {
+    return this.bus.register(listener);
+  }
+
+  static wrap(fetcher: Fetcher | FetchStreamer) {
+    if (isFetchStreamer(fetcher)) {
+      return fetcher;
     }
-
-    onFetch (listener: ResponseListener) {
-        return this.bus.register(listener);
-    }
-
-    static wrap (fetcher: Fetcher|FetchStreamer) {
-        if (isFetchStreamer(fetcher)) {
-            return fetcher;
-        }
-        return new FetchStreamer(fetcher);
-    }
+    return new FetchStreamer(fetcher);
+  }
 }
 
-function isFetchStreamer (input: any): input is FetchStreamer {
-    return input && input.onFetch;
+function isFetchStreamer(input: any): input is FetchStreamer {
+  return input && input.onFetch;
 }

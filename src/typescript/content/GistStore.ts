@@ -12,10 +12,10 @@ export class GistStore {
     });
   }
 
-	/**
-	 * Should either return the gist content found within the current metafile or
-	 * load it, save it in the current meta and return a promise of the content
-	 */
+  /**
+   * Should either return the gist content found within the current metafile or
+   * load it, save it in the current meta and return a promise of the content
+   */
   load(input: GistDescription): string | Promise<string> {
     const gist = this.filterMeta(input);
     if (gist) {
@@ -35,7 +35,7 @@ export class GistStore {
   }
 
   private filterMeta(input: GistDescription) {
-    const {gists} = this.meta;
+    const { gists } = this.meta;
     if (!gists) {
       return null;
     }

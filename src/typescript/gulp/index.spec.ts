@@ -118,7 +118,7 @@ describe('addIndex', () => {
       .pipe(parseMetaFile())
       .pipe(toArticle())
       .pipe(addIndex())
-      .pipe(through.obj(function ({path}, enc, cb) {
+      .pipe(through.obj(function ({ path }, enc, cb) {
         const index = path.indexOf('/src/');
         paths.push(path.substring(index + 5));
         cb();

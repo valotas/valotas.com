@@ -25,7 +25,7 @@ class TwitterThenable {
 }
 
 export function loadTwitter(browser = BROWSER) {
-  const {window} = browser;
+  const { window } = browser;
 
   const loaded = window[TWTTR];
   if (!loaded) {
