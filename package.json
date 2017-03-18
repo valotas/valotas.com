@@ -9,8 +9,6 @@
     "@types/marked": "^0.0.28",
     "@types/node": "^6.0.46",
     "@types/pug": "^2.0.3",
-    "@types/react": "^0.14.47",
-    "@types/react-dom": "^0.14.18",
     "@types/through2": "^2.0.32",
     "@types/vinyl-fs": "^0.0.28",
     "@types/whatwg-fetch": "0.0.33",
@@ -60,8 +58,7 @@
     "foundation-sites": "^6.2.1",
     "marked": "0.3.5",
     "moment": "2.13.0",
-    "react": "15.4.1",
-    "react-dom": "15.4.1",
+    "preact": "^7.2.0",
     "systemjs": "0.19.41"
   }
 }
