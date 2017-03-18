@@ -1,14 +1,15 @@
 import * as marked from 'marked';
-import * as React from 'react';
+import { h, ComponentConstructor } from 'preact';
 import * as ex from '../../exceptions';
 import { ParagraphWithFirstLetterSpan } from '../ParagraphWithFirstLetterSpan';
 
 const EMPTY_STRING = '';
 
-const PP = React.createFactory(ParagraphWithFirstLetterSpan);
-
 // https://github.com/christianalfoni/markdown-to-react-components/blob/master/src/index.js
-const R = React.DOM;
+
+type PreactStatelessFunctionComponet = (props: any) => JSX.Element;
+
+type PreactComponent = ComponentConstructor<any, any> | PreactStatelessFunctionComponet | string;
 
 class TreeContainer {
   tree = [];
@@ -22,21 +23,21 @@ class TreeContainer {
     return new TreeContainer(this);
   }
 
-  pushBlock(factory: React.Factory<any>, props: any = {}, childs?: any[]) {
+  pushBlock(type: PreactComponent, props: any = {}, childs?: any[]) {
     props.key = this.tree.length;
     const children = props.dangerouslySetInnerHTML ? null : firstChildOrFullArray(childs || this.inline);
-    const args = [props].concat(children);
-    const el = factory.apply(factory, args);
+    const args = [type].concat(props).concat(children);
+    const el = h.apply(h, args);
     this.inline = [];
     this.tree.push(el);
   }
 
-  pushToParent(factory, props: any = {}) {
-    this.parent.pushBlock(factory, props, firstChildOrFullArray(this.tree));
+  pushToParent(type: PreactComponent, props: any = {}) {
+    this.parent.pushBlock(type, props, firstChildOrFullArray(this.tree));
     return this.parent;
   }
 
-  pushInline(component, pop: boolean | string = true) {
+  pushInline(component: JSX.Element, pop: boolean | string = true) {
     if (pop === true || this.containsInline(pop)) {
       this.inline.pop();
     }
@@ -54,7 +55,7 @@ class TreeContainer {
 
 function innerHtmlTransformer(html: string) {
   return {
-    factory: R.div,
+    type: 'div',
     props: {
       dangerouslySetInnerHTML: {
         __html: html
@@ -68,14 +69,14 @@ function notNull(obj) {
 }
 
 type HtmlTransfomer = (html: string) => {
-  factory: React.HTMLFactory<HTMLElement>,
+  type: PreactComponent,
   props: any
 };
 
 interface MarkRenderOptions {
   html: HtmlTransfomer[];
-  pre: React.Factory<any>;
-  link: React.Factory<any>;
+  pre: ComponentConstructor<any, any>;
+  link: ComponentConstructor<any, any>;
   firstLetterSpan: boolean;
 }
 
@@ -101,24 +102,24 @@ export class MarkedReactRenderer implements MarkedRenderer {
   }
 
   blockquote(quote: string) {
-    this.container = this.container.pushToParent(R.blockquote, {});
+    this.container = this.container.pushToParent('blockquote');
     return EMPTY_STRING;
   }
 
   html(html: string) {
-    const block = this.renderOptions.html.map((t) => {
-      return t(html);
-    }).filter(notNull)[0];
-    this.container.pushBlock(block.factory, block.props);
+    const block = this.renderOptions.html
+      .map((t) => t(html))
+      .filter(notNull)[0];
+    this.container.pushBlock(block.type, block.props);
     return EMPTY_STRING;
   }
 
   heading(text: string, level: number) {
-    this.container.pushBlock(R['h' + level]);
+    this.container.pushBlock('h' + level);
     return EMPTY_STRING;
   }
   hr() {
-    this.container.pushBlock(R.hr);
+    this.container.pushBlock('hr');
     return EMPTY_STRING;
   }
   list(body: string, ordered: boolean) {
@@ -126,13 +127,13 @@ export class MarkedReactRenderer implements MarkedRenderer {
     return EMPTY_STRING;
   }
   listitem(text: string) {
-    this.container.pushBlock(R.li);
+    this.container.pushBlock('li');
     return EMPTY_STRING;
   }
   paragraph(text: string) {
     this.paragraphCounter++;
     const shouldMarkFirstLetter = this.renderOptions.firstLetterSpan && this.paragraphCounter === 1;
-    this.container.pushBlock(shouldMarkFirstLetter ? PP : R.p);
+    this.container.pushBlock(shouldMarkFirstLetter ? ParagraphWithFirstLetterSpan : 'p');
     return EMPTY_STRING;
   }
   table(header: string, body: string) {
@@ -151,18 +152,18 @@ export class MarkedReactRenderer implements MarkedRenderer {
     return EMPTY_STRING;
   }
   strong(text: string) {
-    this.container.pushInline(R.strong(null, text));
+    this.container.pushInline(h('strong', null, text));
     return EMPTY_STRING;
   }
   em(text: string) {
-    this.container.pushInline(R.em(null, text));
+    this.container.pushInline(h('em', null, text));
     return EMPTY_STRING;
   }
   codespan(code: string, lang?: string) {
     const props = lang ? {
       className: 'lang-' + lang
     } : null;
-    this.container.pushInline(R.code(props, unescapeText(code)), false);
+    this.container.pushInline(h('code', props, unescapeText(code)), false);
     return EMPTY_STRING;
   }
   br() {
@@ -173,12 +174,12 @@ export class MarkedReactRenderer implements MarkedRenderer {
   }
   link(href: string, title: string, text: string = EMPTY_STRING) {
     if (text !== EMPTY_STRING) {
-      const link = this.renderOptions.link({ href: href }, text);
+      const link = h(this.renderOptions.link, { href: href }, text);
       this.container.pushInline(link, text);
     } else {
       // if the given text is undefined, we use the last inlined element as the child of our link
       const child = this.container.inline.pop();
-      const link = this.renderOptions.link({ href: href }, child);
+      const link = h(this.renderOptions.link, { href: href }, child);
       this.container.pushInline(link, false);
     }
     return EMPTY_STRING;
@@ -187,7 +188,7 @@ export class MarkedReactRenderer implements MarkedRenderer {
     return EMPTY_STRING;
   }
   text(text: string) {
-    this.container.pushInline(unescapeText(text), false);
+    this.container.pushInline(h('span', null, unescapeText(text)), false);
     return text;
   }
 
@@ -200,7 +201,7 @@ export class MarkedReactRenderer implements MarkedRenderer {
     const tokens = marked.lexer(html);
     patchParser(parser, this);
     parser.parse(tokens);
-    return R.div({}, firstChildOrFullArray(this.container.tree));
+    return h('div', {}, firstChildOrFullArray(this.container.tree));
   }
 }
 

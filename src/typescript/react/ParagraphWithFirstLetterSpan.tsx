@@ -1,4 +1,4 @@
-import { h } from 'preact';
+import { h, Component } from 'preact';
 
 export function ParagraphWithFirstLetterSpan(props) {
   const childs = Array.from(props.children); // React.Children.toArray(props.children);

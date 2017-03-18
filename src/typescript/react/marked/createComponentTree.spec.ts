@@ -1,11 +1,10 @@
-import * as React from 'react';
-import * as RDS from 'react-dom/server';
+import render from 'preact-render-to-string';
 import * as marked from 'marked';
 import { createComponentTree } from './createComponentTree';
 
 function renderToStaticMarkup(source, options?) {
   const tree = createComponentTree(source, options);
-  return RDS.renderToStaticMarkup(tree);
+  return render(tree);
 }
 
 describe('createComponentTree', () => {
@@ -16,27 +15,27 @@ describe('createComponentTree', () => {
 
   it('should render headers with emphasized text', () => {
     const rendered = createComponentTree('# this _is_ important');
-    const html = RDS.renderToStaticMarkup(rendered);
+    const html = render(rendered);
     expect(html).toContain('<em>is</em>');
   });
 
   it('should render paragraphs with strong or emphasized text', () => {
     const rendered = createComponentTree('this a **very strong** _paragraph_!');
-    const html = RDS.renderToStaticMarkup(rendered);
+    const html = render(rendered);
     expect(html).toContain('<strong>very strong</strong>');
     expect(html).toContain('<em>paragraph</em>');
   });
 
   it('should render more than one block elements', () => {
     const rendered = createComponentTree('## header \n\nthis a _paragraph_!');
-    const html = RDS.renderToStaticMarkup(rendered);
+    const html = render(rendered);
     expect(html).toContain('<h2>header</h2>');
     expect(html).toContain('<em>paragraph</em>');
   });
 
   it('should render code spans', () => {
     const rendered = createComponentTree('this a `a code`!');
-    const html = RDS.renderToStaticMarkup(rendered);
+    const html = render(rendered);
     expect(html).toContain('<code>a code</code>');
   });
 
