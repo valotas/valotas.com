@@ -1,5 +1,5 @@
 import * as marked from 'marked';
-import { h, ComponentConstructor, Component, ComponentProps } from 'preact';
+import { h, Component, ComponentConstructor, FunctionalComponent } from 'preact';
 import * as ex from '../../exceptions';
 import { ParagraphWithFirstLetterSpan } from '../ParagraphWithFirstLetterSpan';
 
@@ -7,13 +7,8 @@ const EMPTY_STRING = '';
 
 // https://github.com/christianalfoni/markdown-to-react-components/blob/master/src/index.js
 
-type PreactStatelessFunctionComponet = (props: ComponentProps) => JSX.Element;
-
-type PreactComponent<T> = ComponentConstructor<T, any> | PreactStatelessFunctionComponet | string;
-
-interface LinkProps extends ComponentProps {
-  href?: string
-}
+type IntrinsicComponent<T> = ComponentConstructor<T, any> | FunctionalComponent<T, any>;
+type AnyComponent<T> = IntrinsicComponent<T> | string;
 
 class TreeContainer {
   tree = [];
@@ -27,7 +22,7 @@ class TreeContainer {
     return new TreeContainer(this);
   }
 
-  pushBlock(type: PreactComponent<any>, props: any = {}, childs?: any[]) {
+  pushBlock(type: AnyComponent<any>, props: any = {}, childs?: any[]) {
     props.key = this.tree.length;
     const children = props.dangerouslySetInnerHTML ? null : firstChildOrFullArray(childs || this.inline);
     const args = [type].concat(props).concat(children);
@@ -36,7 +31,7 @@ class TreeContainer {
     this.tree.push(el);
   }
 
-  pushToParent(type: PreactComponent<any>, props: any = {}) {
+  pushToParent(type: AnyComponent<any>, props: any = {}) {
     this.parent.pushBlock(type, props, firstChildOrFullArray(this.tree));
     return this.parent;
   }
@@ -72,15 +67,21 @@ function notNull(obj) {
   return !!obj;
 }
 
-type HtmlTransfomer<P> = (html: string) => {
-  type: PreactComponent<P>,
-  props: P
+interface HtmlTransfomer<P> {
+  (html: string): {
+    type: AnyComponent<P>,
+    props: P
+  }
 };
+
+interface LinkProps {
+  href?: string
+}
 
 interface MarkRenderOptions {
   html: HtmlTransfomer<any>[];
-  pre: PreactComponent<any>;
-  link: PreactComponent<LinkProps>;
+  pre: IntrinsicComponent<any>;
+  link: IntrinsicComponent<LinkProps>;
   firstLetterSpan: boolean;
 }
 
@@ -180,13 +181,13 @@ export class MarkedReactRenderer implements MarkedRenderer {
   link(href: string, title: string, text: string = EMPTY_STRING) {
     const props: LinkProps = { href };
     if (text !== EMPTY_STRING) {
-      // const link = h(this.renderOptions.link, props, text);
-      // this.container.pushInline(link, text);
+      const link = h(this.renderOptions.link, props, text);
+      this.container.pushInline(link, text);
     } else {
       // if the given text is undefined, we use the last inlined element as the child of our link
-      // const child = this.container.inline.pop();
-      // const link = h(this.renderOptions.link, props, child);
-      // this.container.pushInline(link, false);
+      const child = this.container.inline.pop();
+      const link = h(this.renderOptions.link, props, child);
+      this.container.pushInline(link, false);
     }
     return EMPTY_STRING;
   }
