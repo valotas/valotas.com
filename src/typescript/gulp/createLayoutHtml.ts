@@ -5,7 +5,7 @@ import * as gutil from 'gulp-util';
 import { CacheableGistStore } from './CacheableGistStore';
 import { Page } from '../react/Page';
 import { h } from 'preact';
-import render from 'preact-render-to-string';
+import * as render from 'preact-render-to-string';
 import { NodeFetcher } from './NodeFetcher';
 
 const NODE_FETCHER = new NodeFetcher(null, '/tmp/valotas.com.createLayoutHtml');

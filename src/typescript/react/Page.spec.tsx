@@ -1,5 +1,5 @@
 import { h } from 'preact';
-import render from 'preact-render-to-string';
+import * as render from 'preact-render-to-string';
 import { Page } from './Page';
 import { MetaFile } from '../content/MetaFile';
 
