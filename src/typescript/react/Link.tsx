@@ -1,9 +1,9 @@
-import { Component, h } from 'preact';
+import { h, Component, ComponentProps } from 'preact';
 import { MetaFileStore } from '../content/MetaFileStore';
 import { Icon } from './Icon';
 import { BROWSER } from '../browser/Browser';
 
-interface LinkProps {
+interface LinkProps extends ComponentProps {
   article?: Article;
   href?: string;
   metafileStore?: MetaFileStore;
@@ -15,10 +15,6 @@ export class Link extends Component<LinkProps, any> {
   context: {
     metafileStore: MetaFileStore
   };
-
-/*  static contextTypes: = {
-    metafileStore: React.PropTypes.object
-  };*/
 
   handleClick = (e) => {
     const { href, target } = this.props;

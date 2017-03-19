@@ -1,10 +1,10 @@
-import { h } from 'preact';
+import { h, ComponentProps } from 'preact';
 import { Icon } from './Icon';
 import { VALOTAS } from '../utils';
 import { Link } from './Link';
 import { MetaFileStore } from '../content/MetaFileStore';
 
-interface HeaderProps {
+interface HeaderProps extends ComponentProps {
   title: string;
   subtitle?: string;
   date?: string;

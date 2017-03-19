@@ -1,11 +1,11 @@
-import { h, Component } from 'preact';
+import { h, Component, ComponentProps } from 'preact';
 import { GistStore } from '../content/GistStore';
 import { isPromise } from '../utils';
 import { Link } from './Link';
 import { Icon } from './Icon';
 import { Code } from './Code';
 
-interface GistProps extends GistDescription {
+interface GistProps extends ComponentProps, GistDescription {
 
 }
 
@@ -19,10 +19,6 @@ export class Gist extends Component<GistProps, GistState> {
   context: {
     gistStore: GistStore
   };
-
-  /*static contextTypes: React.ValidationMap<any> = {
-    gistStore: React.PropTypes.object
-  };*/
 
   constructor(props, context) {
     super(props);
@@ -55,8 +51,7 @@ export class Gist extends Component<GistProps, GistState> {
     });
   }
 
-  render() {
-    const { user = 'valotas', file, gistId } = this.props;
+  render({ user = 'valotas', file, gistId }, { content }) {
     const filetarget = file.replace(/\./g, '-').toLocaleLowerCase();
     const href = `https://gist.github.com/${user}/${gistId}#file-${filetarget}`;
     return (
@@ -65,7 +60,7 @@ export class Gist extends Component<GistProps, GistState> {
           <Icon name='fa-github' />&nbsp;
           {file}
         </Link>
-        <code>{this.state.content}</code>
+        <code>{content}</code>
       </Code>
     );
   }
