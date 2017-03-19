@@ -1,9 +1,9 @@
-import { h, Component, ComponentProps } from 'preact';
+import { h, Component } from 'preact';
 import { MetaFileStore } from '../content/MetaFileStore';
 import { Icon } from './Icon';
 import { BROWSER } from '../browser/Browser';
 
-interface LinkProps extends ComponentProps {
+interface LinkProps {
   article?: Article;
   href?: string;
   metafileStore?: MetaFileStore;

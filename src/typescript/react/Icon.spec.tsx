@@ -8,4 +8,10 @@ describe('Icon', () => {
     expect(html).toContain('<i');
     expect(html).toContain('class="fa name fa-1x"');
   });
+
+  it('should render without jsx', () => {
+    const html = render(h(Icon, { name: 'name' }));
+    expect(html).toContain('<i');
+    expect(html).toContain('class="fa name fa-1x"');
+  });
 });

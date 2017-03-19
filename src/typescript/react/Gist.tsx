@@ -1,11 +1,11 @@
-import { h, Component, ComponentProps } from 'preact';
+import { h, Component } from 'preact';
 import { GistStore } from '../content/GistStore';
 import { isPromise } from '../utils';
 import { Link } from './Link';
 import { Icon } from './Icon';
 import { Code } from './Code';
 
-interface GistProps extends ComponentProps, GistDescription {
+interface GistProps extends GistDescription {
 
 }
 
