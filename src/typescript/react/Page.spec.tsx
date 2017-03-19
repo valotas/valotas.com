@@ -14,6 +14,11 @@ describe('Page', () => {
     expect(html).toBeTruthy();
   });
 
+  it('should render html without tsx', () => {
+    const html = render(h(Page, { pkg }));
+    expect(html).toBeTruthy();
+  });
+
   it('should render the Index layout if a list of articles is given', () => {
     const article1 = new MetaFile({
       title: 'first article',
