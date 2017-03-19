@@ -1,5 +1,5 @@
 import * as marked from 'marked';
-import { h, ComponentConstructor } from 'preact';
+import { h, ComponentConstructor, Component, ComponentProps } from 'preact';
 import * as ex from '../../exceptions';
 import { ParagraphWithFirstLetterSpan } from '../ParagraphWithFirstLetterSpan';
 
@@ -7,9 +7,13 @@ const EMPTY_STRING = '';
 
 // https://github.com/christianalfoni/markdown-to-react-components/blob/master/src/index.js
 
-type PreactStatelessFunctionComponet = (props: any) => JSX.Element;
+type PreactStatelessFunctionComponet = (props: ComponentProps) => JSX.Element;
 
-type PreactComponent = ComponentConstructor<any, any> | PreactStatelessFunctionComponet | string;
+type PreactComponent<T> = ComponentConstructor<T, any> | PreactStatelessFunctionComponet | string;
+
+interface LinkProps extends ComponentProps {
+  href?: string
+}
 
 class TreeContainer {
   tree = [];
@@ -23,7 +27,7 @@ class TreeContainer {
     return new TreeContainer(this);
   }
 
-  pushBlock(type: PreactComponent, props: any = {}, childs?: any[]) {
+  pushBlock(type: PreactComponent<any>, props: any = {}, childs?: any[]) {
     props.key = this.tree.length;
     const children = props.dangerouslySetInnerHTML ? null : firstChildOrFullArray(childs || this.inline);
     const args = [type].concat(props).concat(children);
@@ -32,7 +36,7 @@ class TreeContainer {
     this.tree.push(el);
   }
 
-  pushToParent(type: PreactComponent, props: any = {}) {
+  pushToParent(type: PreactComponent<any>, props: any = {}) {
     this.parent.pushBlock(type, props, firstChildOrFullArray(this.tree));
     return this.parent;
   }
@@ -68,15 +72,15 @@ function notNull(obj) {
   return !!obj;
 }
 
-type HtmlTransfomer = (html: string) => {
-  type: PreactComponent,
-  props: any
+type HtmlTransfomer<P> = (html: string) => {
+  type: PreactComponent<P>,
+  props: P
 };
 
 interface MarkRenderOptions {
-  html: HtmlTransfomer[];
-  pre: ComponentConstructor<any, any>;
-  link: ComponentConstructor<any, any>;
+  html: HtmlTransfomer<any>[];
+  pre: PreactComponent<any>;
+  link: PreactComponent<LinkProps>;
   firstLetterSpan: boolean;
 }
 
@@ -123,7 +127,7 @@ export class MarkedReactRenderer implements MarkedRenderer {
     return EMPTY_STRING;
   }
   list(body: string, ordered: boolean) {
-    this.container = this.container.pushToParent(R.ul);
+    this.container = this.container.pushToParent('ul');
     return EMPTY_STRING;
   }
   listitem(text: string) {
@@ -172,15 +176,17 @@ export class MarkedReactRenderer implements MarkedRenderer {
   del(text: string) {
     return EMPTY_STRING;
   }
+
   link(href: string, title: string, text: string = EMPTY_STRING) {
+    const props: LinkProps = { href };
     if (text !== EMPTY_STRING) {
-      const link = h(this.renderOptions.link, { href: href }, text);
-      this.container.pushInline(link, text);
+      // const link = h(this.renderOptions.link, props, text);
+      // this.container.pushInline(link, text);
     } else {
       // if the given text is undefined, we use the last inlined element as the child of our link
-      const child = this.container.inline.pop();
-      const link = h(this.renderOptions.link, { href: href }, child);
-      this.container.pushInline(link, false);
+      // const child = this.container.inline.pop();
+      // const link = h(this.renderOptions.link, props, child);
+      // this.container.pushInline(link, false);
     }
     return EMPTY_STRING;
   }
