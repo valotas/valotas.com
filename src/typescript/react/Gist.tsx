@@ -16,12 +16,12 @@ interface GistState {
 export class Gist extends Component<GistProps, GistState> {
   private contentPromise: Promise<string>;
 
-  context: {
+  /*context: {
     gistStore: GistStore
-  };
+  };*/
 
   constructor(props, context) {
-    super(props);
+    super(props, context);
 
     this.state = {
       content: null
@@ -36,7 +36,7 @@ export class Gist extends Component<GistProps, GistState> {
     if (isPromise(content)) {
       this.contentPromise = content;
     } else {
-      this.state = { content: content.replace(/\t/g, '  ') };
+      this.state = createState(content);
     }
   }
 
@@ -45,9 +45,7 @@ export class Gist extends Component<GistProps, GistState> {
       return;
     }
     this.contentPromise.then((content) => {
-      this.setState({
-        content: content.replace(/\t/g, '  ')
-      });
+      this.setState(createState(content));
     });
   }
 
@@ -64,4 +62,8 @@ export class Gist extends Component<GistProps, GistState> {
       </Code>
     );
   }
+}
+
+function createState(content): GistState {
+  return { content: content.replace(/\t/g, '  ') };
 }
