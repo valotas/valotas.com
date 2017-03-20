@@ -36,7 +36,7 @@ class TreeContainer {
     return this.parent;
   }
 
-  pushInline(component: JSX.Element, pop: boolean | string = true) {
+  pushInline(component: JSX.Element | string, pop: boolean | string = true) {
     if (pop === true || this.containsInline(pop)) {
       this.inline.pop();
     }
@@ -195,7 +195,7 @@ export class MarkedReactRenderer implements MarkedRenderer {
     return EMPTY_STRING;
   }
   text(text: string) {
-    this.container.pushInline(h('span', null, unescapeText(text)), false);
+    this.container.pushInline(unescapeText(text), false);
     return text;
   }
 
