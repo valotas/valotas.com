@@ -12,6 +12,6 @@ interface MarkedComponentProps {
 export function MarkedComponent(props: MarkedComponentProps) {
   const { meta, markFirstLetter } = props;
   const firstLetterSpan = markFirstLetter === false ? false : true;
-  const input = meta ? meta.raw : props.children as string;
+  const input = meta ? meta.raw : props.children[0] as string;
   return createComponentTree(input, { firstLetterSpan: firstLetterSpan });
 }
