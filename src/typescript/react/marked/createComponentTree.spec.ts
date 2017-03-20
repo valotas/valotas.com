@@ -40,7 +40,7 @@ describe('createComponentTree', () => {
   });
 
   it('should render code blocks with a class derived from the language', () => {
-    const source = 'this a\n\n```js\na code block\n```';
+    const source = 'this is a\n\n```js\na code block\n```';
     const markedText = marked(source).replace(/\n/g, '');
     const expected = markedText.substr(markedText.indexOf('<pre'));
     const html = renderToStaticMarkup(source);

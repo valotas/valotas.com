@@ -34,7 +34,7 @@ function createPreBlock(props, code) {
 }
 
 function createCodeBlock(code) {
-  if (code.type === 'code') {
+  if (code.length === 1 && code[0].nodeName === 'code') {
     return code;
   }
   return (<code>{code}</code>);
