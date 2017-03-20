@@ -6,8 +6,8 @@ import { Icon } from './Icon';
 
 export function Code(props) {
   const { children } = props;
-  const title = Array.isArray(children) ? children[0] : null;
-  const code = Array.isArray(children) ? children[1] : children;
+  const title = children.length > 1 ? children[0] : null;
+  const code = children.length > 1 ? children[1] : children;
   return (
     <div className='codeblock'>
       {createTitleBlock(title)}
