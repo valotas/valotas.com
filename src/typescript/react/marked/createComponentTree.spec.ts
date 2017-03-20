@@ -7,7 +7,7 @@ function renderToStaticMarkup(source, options?) {
   return render(tree);
 }
 
-xdescribe('createComponentTree', () => {
+describe('createComponentTree', () => {
   it('should render headers', () => {
     const html = renderToStaticMarkup('# head');
     expect(html).toContain('<h1>head</h1>');
