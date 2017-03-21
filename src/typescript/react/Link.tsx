@@ -12,11 +12,22 @@ interface LinkProps {
 }
 
 export class Link extends Component<LinkProps, any> {
-  context: {
-    metafileStore: MetaFileStore
-  };
 
-  handleClick = (e) => {
+  render(props) {
+    const href = props.href || this.createHref();
+    return <a href={href} className={props.className} onClick={this.handleClick} target={props.target}>{props.children}</a>;
+  }
+
+  private createHref() {
+    let href = '/';
+    const article = this.props.article;
+    if (article) {
+      href += `${article.key}/`;
+    }
+    return href;
+  }
+
+  private handleClick = (e) => {
     const { href, target } = this.props;
     if (href === '#') {
       e.preventDefault();
@@ -39,18 +50,5 @@ export class Link extends Component<LinkProps, any> {
 
     e.preventDefault();
     store.load(this.props.article || this.props.href || '/');
-  }
-
-  render(props) {
-    const href = props.href || this.createHref();
-    return <a href={href} className={props.className} onClick={this.handleClick} target={props.target}>{props.children}</a>;
-  }
-  createHref() {
-    let href = '/';
-    const article = this.props.article;
-    if (article) {
-      href += `${article.key}/`;
-    }
-    return href;
   }
 }
