@@ -9,6 +9,7 @@ import { GistStore } from './content/GistStore';
 import { FetchStreamer } from './FetchStreamer';
 import { createGoogleAnalytics } from './browser/GoogleAnalytics';
 import { createPageState } from './PageState';
+import 'preact/devtools';
 
 console.time('load');
 
@@ -45,7 +46,8 @@ BROWSER.ready(() => {
     gistStore: new GistStore(fetcher, metafileStore, isValidMetaFile(meta) ? meta : null),
     pkg: BROWSER.prop('pkg') as PackageJson
   });
-  render(el, BROWSER.query('#app'));
+  const root = BROWSER.query('#app');
+  render(el, root, root.firstElementChild);
 });
 
 function createMetafileStore(fetcher: Fetcher) {
