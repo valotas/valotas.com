@@ -13,10 +13,10 @@ const NODE_FETCHER = new NodeFetcher(null, '/tmp/valotas.com.createLayoutHtml');
 export function createLayoutHtml(pkg: PackageJson, fetcher: Fetcher = NODE_FETCHER, logger: Logger = gutil) {
   return through.obj(function (file: GulpFile, enc, callback) {
     if (file.meta) {
-      renderLayout(file, fetcher, pkg).then(function (html) {
+      renderLayout(file, fetcher, pkg).then((html) => {
         file.html = html;
         callback(null, file);
-      }, function (er) {
+      }, (er) => {
         logger.log('Could not create html', file.path, er);
         callback(er);
       });

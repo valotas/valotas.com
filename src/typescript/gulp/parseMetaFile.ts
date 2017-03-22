@@ -33,6 +33,7 @@ function createFile(file, enc) {
   file.meta = meta;
   return file;
 }
+
 function computeMdFilePath(file) {
   if (file.name !== 'index') {
     return file.name;
