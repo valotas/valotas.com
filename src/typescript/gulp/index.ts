@@ -23,7 +23,7 @@ export function toArticle() {
   });
 }
 
-export function addIndex() {
+export function addIndex(logger: Logger = gutil) {
   let metas: MetaFile[] = [];
   let cwd;
   return through.obj(function (file, enc, callback) {
@@ -35,7 +35,9 @@ export function addIndex() {
     callback(null, file);
   }, function (callback) {
     metas = metas.sort(compareMoments);
-    this.push(createFileWithName('index.html', cwd, metas));
+    const indexPage = createFileWithName('index.html', cwd, metas);
+    this.push(indexPage);
+    logger.log("Addded index Vinyl", indexPage.path);
     callback();
   });
 }

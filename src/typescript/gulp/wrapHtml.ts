@@ -17,7 +17,7 @@ export function wrapHtml(templateFile, pkg, logger: Logger = gutil) {
         pkg: `window.pkg=${packageJson}`
       });
       file.contents = new Buffer(html, enc);
-      logger.log('Created', file.path);
+      logger.log("Added html content to Vinyl", file.path);
     }
     callback(null, file);
   });
