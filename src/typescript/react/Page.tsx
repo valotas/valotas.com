@@ -51,7 +51,7 @@ export class Page extends Component<PageProps, PageState> {
       throw ex.illegalArgumentException('MetaFileStore is needed on the client side to register for changes');
     }
     metafileStore.onChange((meta: MetaFile) => {
-      this._setMetaFile(meta);
+      this._updateState(meta);
     });
 
     if (!BROWSER) {
@@ -65,10 +65,10 @@ export class Page extends Component<PageProps, PageState> {
     if (this.props.gistStore) {
       this.props.gistStore.meta = isArray(meta) ? null : meta;
     }
-    this._setMetaFile(meta);
+    this._updateState(meta);
   }
 
-  _setMetaFile(metaOrNull: MetaFile | MetaFile[]) {
+  private _updateState(metaOrNull: MetaFile | MetaFile[]) {
     const meta = metaOrNull || MetaFile.fromData(this.props.meta);
     this.setState({
       meta: meta

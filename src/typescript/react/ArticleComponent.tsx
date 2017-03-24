@@ -22,8 +22,7 @@ export function ArticleWithHeaderComponent({ article, metafileStore }: ArticlePr
 }
 
 export class ArticleComponent extends Component<ArticleProps, {}> {
-  render() {
-    const { article } = this.props;
+  render({ article, metafileStore }) {
     if (!article) {
       return null;
     }
@@ -33,7 +32,7 @@ export class ArticleComponent extends Component<ArticleProps, {}> {
           <MarkedComponent meta={article.meta} />
         </div>
         <div className='actions button-group'>
-          <Link className='button' metafileStore={this.props.metafileStore}>
+          <Link className='button' metafileStore={metafileStore}>
             <Icon name='fa-home' size='sm-2x' />
             <span className='text'>&nbsp;Home</span>
           </Link>
