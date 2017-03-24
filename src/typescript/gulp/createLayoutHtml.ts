@@ -42,8 +42,6 @@ function renderLayout(file: GulpFile, fetcher: Fetcher, pkg: PackageJson): Promi
     return Promise.reject(ex);
   }
   return store.all()
-    .then((all) => {
-      return render(page);
-    });
+    .then((all) => render(page));
 }
 
