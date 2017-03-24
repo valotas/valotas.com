@@ -27,7 +27,8 @@ class ArticleImpl implements Article {
   }
 
   date(format?: string): string {
-    return this.moment().format(format || 'DD/MM/YYYY');
+    const m = this.moment();
+    return m ? m.format(format || 'DD/MM/YYYY') : null;
   }
 
   description(): string {
