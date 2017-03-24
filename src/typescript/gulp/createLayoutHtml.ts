@@ -8,12 +8,11 @@ import { h } from 'preact';
 import * as render from 'preact-render-to-string';
 import { NodeFetcher } from './NodeFetcher';
 
-const NODE_FETCHER = new NodeFetcher(null, '/tmp/valotas.com.createLayoutHtml');
-
-export function createLayoutHtml(pkg: PackageJson, fetcher: Fetcher = NODE_FETCHER, logger: Logger = gutil) {
+export function createLayoutHtml(pkg: PackageJson, fetcher: Fetcher = null, logger: Logger = gutil) {
+  const actualFetcher = fetcher || new NodeFetcher(null, '/tmp/valotas.com.createLayoutHtml', logger);
   return through.obj(function (file: GulpFile, enc, callback) {
     if (file.meta) {
-      renderLayout(file, fetcher, pkg).then((html) => {
+      renderLayout(file, actualFetcher, pkg).then((html) => {
         file.html = html;
         callback(null, file);
       }, (er) => {
