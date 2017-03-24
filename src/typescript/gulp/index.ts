@@ -37,7 +37,7 @@ export function addIndex(logger: Logger = gutil) {
     metas = metas.sort(compareMoments);
     const indexPage = createFileWithName('index.html', cwd, metas);
     this.push(indexPage);
-    logger.log("Addded index Vinyl", indexPage.path);
+    logger.log('Addded index Vinyl', indexPage.path);
     callback();
   });
 }
