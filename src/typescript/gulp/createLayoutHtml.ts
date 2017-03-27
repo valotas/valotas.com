@@ -12,7 +12,7 @@ import { Page } from '../react/Page';
 import { NodeFetcher } from './NodeFetcher';
 
 export function createLayoutHtml(pkg: PackageJson, fetcher: Fetcher = null, logger: Logger = gutil) {
-  const actualFetcher = fetcher || new NodeFetcher(null, '/tmp/valotas.com.createLayoutHtml', logger);
+  const actualFetcher = fetcher || createNodeFetcher(logger);
   return through.obj(function (file: GulpFile, enc, callback) {
     if (file.meta) {
       renderLayout(file, actualFetcher, pkg).then((html) => {
@@ -26,6 +26,10 @@ export function createLayoutHtml(pkg: PackageJson, fetcher: Fetcher = null, logg
       callback(null, file);
     }
   });
+}
+
+function createNodeFetcher(logger: Logger) {
+  return new NodeFetcher(null, '/tmp/valotas.com.createLayoutHtml', logger);
 }
 
 function renderLayout(file: GulpFile, fetcher: Fetcher, pkg: PackageJson): Promise<string> {
