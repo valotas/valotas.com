@@ -1,8 +1,6 @@
 ---
 title: Resteasy Form annotations for Jersey
-author: valotas
 date: 2011-01-16
-template: article.jade
 ---
 
 Lately I was developing a jax-rs application. What I really like with jaxrs is the way you can handle any kind of parameter values of a request using annotations. So when I need a query parameter I just annotate a field or an argument of a Resource class with `@QueryParam("paramName")` and the parameter value will get injected for me.
@@ -49,7 +47,7 @@ In order to make our life a little bit easier we are going to use `com.sun.jerse
 ```java
 import com.sun.jersey.api.core.HttpContext;
 
-public class ContactFormParamsProvider 
+public class ContactFormParamsProvider
   extends AbstractHttpContextInjectable<ContactFormParams> {
   @Ovveride
   public ContactFormParams getValue(HttpContext ctx) {
@@ -65,8 +63,8 @@ Ok, we now have a factory that creates ContactFormParams for as and can get inje
 import com.sun.jersey.api.core.HttpContext;
 
 @Provider // Tell jersey that this class is a provider
-public class ContactFormParamsProvider 
-  extends AbstractHttpContextInjectable<ContactFormParams> 
+public class ContactFormParamsProvider
+  extends AbstractHttpContextInjectable<ContactFormParams>
   implements InjectableProvider<Context, Type> {
 
   @Ovveride
@@ -92,7 +90,7 @@ Finally add this class to the Singleton set of your Application subclass and you
 
 ```java
 @Path("/contact") // Tell jersey that this class is a provider
-public class SimpleContactFormController { 
+public class SimpleContactFormController {
   @Post
   public String getValue(@Context ContactFormParam formParameters) {
     // Use formParameters
@@ -118,7 +116,7 @@ public class ContactFormParams {
 
 //The resource class:
 @Path("/contact") // Tell jersey that this class is a provider
-public class SimpleContactFormController { 
+public class SimpleContactFormController {
   @Post
   public String getValue(@InjectParam ContactFormParam formParameters) {
     // Use formParameters

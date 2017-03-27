@@ -1,8 +1,6 @@
 ---
 title: Jetty DefaultServlet on the osgi
-author: valotas
 date: 2009-10-11
-template: article.jade
 ---
 
 Basically when you work on the osgi and want to use a resource, things are not that easy. What I wanted to do is use Jetty embedded on an Osgi container and use it with a simple servlet and a resource.
@@ -32,10 +30,10 @@ import org.mortbay.resource.Resource;
 /**
  * This is the default servlet that handles the the resources
  * that are inside an osgi bundle under the /webapp directory
- * 
- * It extends DefaultServlet and should be used instead of it with 
+ *
+ * It extends DefaultServlet and should be used instead of it with
  * embedded jetty inside an osgi environment
- * 
+ *
  *
  */
 public class OsgiDefaultServlet extends DefaultServlet {

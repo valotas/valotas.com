@@ -1,15 +1,13 @@
 ---
 title: Get the output of a jsp or servlet response as String
-author: valotas
 date: 2011-09-25
-template: article.jade
 ---
-Well, at the first glance the answer to this problem would be to just make an http request to the jsp file and get the output! 
+Well, at the first glance the answer to this problem would be to just make an http request to the jsp file and get the output!
 
 ## The problem
 In fact, many libraries can help you do that and you also have java's [HttpUrlConnection][httpurlconn]. This solution will work in most cases. At least it worked for me but I was never really happy with it. The jsp is within my webapp, why should I make an http connection to my webapp to get the computed output of the jsp? Not to mention that I had to pass all of my parameters again as my jsp could not use the attributes within my current request scope.
 
-Thanks God, the HttpUrlConnection solution stopped working after changing the network topology of the webapp. So instead of trying to tweak this solution I just thought of the better one as at that point I had the knowledge I needed! 
+Thanks God, the HttpUrlConnection solution stopped working after changing the network topology of the webapp. So instead of trying to tweak this solution I just thought of the better one as at that point I had the knowledge I needed!
 
 ## The goal
 So, the goal is to have the web container generate the output and instead of writing to the servlet output, write it to "something else" I had access to. Cool, how to do that? After a little reading you can find out that the container writes the output of the jsp using the writer of `HttpServletResponse.getWriter()` just like you do when you want to directly write to the output of you response. That happens because after all the jsp's are translated into servlets, get compiled and used as plain servlets.

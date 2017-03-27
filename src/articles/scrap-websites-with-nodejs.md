@@ -1,8 +1,6 @@
 ---
 title: Scrap websites with nodejs!
-author: valotas
 date: 2011-08-27
-template: article.jade
 ---
 
 I really wanted to experiment a little bit with nodejs.

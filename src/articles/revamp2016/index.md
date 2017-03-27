@@ -1,8 +1,6 @@
 ---
 title: Website revamp 2016
-author: valotas
 date: 2016-01-11
-template: article.jade
 ---
 
 A mixed combination of [react][reactjs] exploration, creativity and [assemble][assemble-io]'s inactivity, forced me to pop

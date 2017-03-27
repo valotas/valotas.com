@@ -1,6 +1,5 @@
 ---
 title: An overview of Devoxx 2014
-author: valotas
 date: 2014-11-16
 ---
 

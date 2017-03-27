@@ -1,8 +1,6 @@
 ---
 title: Dealing with Richmedia ad content
-author: valotas
 date: 2009-11-08
-template: article.jade
 ---
 
 Long story short: *Always put your javascript at the bottom of the html*. But why?
@@ -58,14 +56,14 @@ $.fn.attachBanners = function(o) {
       if (bannerholderWidth !== 0 && bannerholderHeight !== 0) {
         $placeholder
           .attr('class', function() { //Add to the placeholder the classes of the bannerholder
-            return this.className + ' ' + $bannerholder.attr('class'); 
+            return this.className + ' ' + $bannerholder.attr('class');
           })
           .width(bannerholderWidth)
           .height(bannerholderHeight);
         $bannerholder
           .css('position', 'absolute')
           .css($placeholder.offset('px'));
-    
+
         //We now make sure that the banner and the placeholder are always in sync
         setInterval(function() {
           $bannerholder.css($placeholder.offset('px'));
@@ -96,13 +94,13 @@ $.fn.offset = function(o) {
     offset_left = what.offsetLeft,
     offset_top = what.offsetTop,
     parentEl = what.offsetParent;
- 
+
   while (parentEl !== null){
     offset_left += parentEl.offsetLeft;
     offset_top += parentEl.offsetTop;
     parentEl = parentEl.offsetParent;
   }
- 
+
   if (o && o == 'px') {
     offset_left += 'px';
     offset_top += 'px';

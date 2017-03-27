@@ -1,6 +1,5 @@
 ---
 title: Improving CSS skills
-author: valotas
 date: 2016-06-08
 ---
 
@@ -13,7 +12,7 @@ As a "proper" developer I did not really touched css. Going a step further I mov
 
 After all the javascript related changes, I felt more obligated to work a little bit closer with css. Just like everytime I feel like improving somewhere, I set a simple goal. That was to get rid of bootstrap. Ofcourse I didn't feel like creating something from the beginning, I ended up just trying to integrate [ZURB Foundation for sites](http://foundation.zurb.com/sites.html).
 
-All in all, this site is now using a bootstrapized version of foundation framework, dropping the css file size from `61kb` to `42kb`. 
+All in all, this site is now using a bootstrapized version of foundation framework, dropping the css file size from `61kb` to `42kb`.
 
 ## How is it done?
 
@@ -39,7 +38,7 @@ It is really fantastic the amount of stuff that you can learn just by trying to 
 
 There are a lot of articles out there prasing or demystifying bootstrap. The truth is you have something good looking with minimum effort. You pay a price though. That is, minimum knowledge input, small flexibility of customization and a website that looks like... bootstrap.
 
-Sooner or later you'll want something different. You can of course try to customise bootstrap. My main problem though was that I had to write html in a way that I can apply bootstrap. And this is how you end up having an html that is anything but semantic. I would love to provide a css with the very basics, but I did not want to rewrite a framework nor I feld that I could swim good enough in to the css world so that I could finish within a couple of hours. The intermediate solution was to use a customisable framework. I have to note though that bootstrap is customizable enough, but this time I wanted to learn something new and still I did not know if I could get rid of the html part of the bootstrap. 
+Sooner or later you'll want something different. You can of course try to customise bootstrap. My main problem though was that I had to write html in a way that I can apply bootstrap. And this is how you end up having an html that is anything but semantic. I would love to provide a css with the very basics, but I did not want to rewrite a framework nor I feld that I could swim good enough in to the css world so that I could finish within a couple of hours. The intermediate solution was to use a customisable framework. I have to note though that bootstrap is customizable enough, but this time I wanted to learn something new and still I did not know if I could get rid of the html part of the bootstrap.
 
 To be honest, I do not know if I would ever propose bootstrap as a framework for the frontend part of a website. Have in mind that twitter itself does not use it for their public website. Of course if within a team there is no person with serious css experience, I wouldn't hesitate. I also believe that in any project with an absence of a styleguide, a framework (no matter how bad it is) should be used. In that case though just make sure that you do not fall in to the ["Not invented here syndrom"](https://en.wikipedia.org/wiki/Not_invented_here) category.
 

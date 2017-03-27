@@ -1,8 +1,6 @@
 ---
 title: Eclipse on Linux, make it look good
-author: valotas
 date: 2010-02-24
-template: article.jade
 ---
 
 I really do not know why such an issue hasn't been fixed. I do not care who is responsible for the uglyness of Eclipse on Linux but unfortunately this is a fact. After some search I found a solution.

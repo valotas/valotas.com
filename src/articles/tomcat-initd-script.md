@@ -1,8 +1,6 @@
 ---
 title: Tomcat init.d script
-author: valotas
 date: 2011-05-14
-template: article.jade
 ---
 
 For some reason allmost all the `init.d` scripts for starting and stoping tomcat just calls tomcat's `startup.sh` and `shutdown.sh` scripts. I am ok with that as far as they work. The startup script works just fine but when I want to restart or stop a tomcat instance, in most cases I have to just kill the process.

@@ -1,8 +1,6 @@
 ---
 title: Multiple tomcat 6 services on windows
-author: valotas
 date: 2009-09-07
-template: article.jade
 ---
 
 Not that there isn't any documentation out there, but just for helping myself, I need a place where to put all the steps needed for an installation of multiple instances of tomcats on a windows machine. Lets start...

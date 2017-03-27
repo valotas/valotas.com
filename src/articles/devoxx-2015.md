@@ -1,6 +1,5 @@
 ---
 title: An overview of Devoxx 2015
-author: valotas
 date: 2015-11-29
 ---
 
@@ -16,7 +15,7 @@ Although that can be nothing compared to what other attendands attended, it give
 
 ## tl;rd
 
-Based on the talks I saw last two times during the univercity days, I thought it would be better to just skip them. The rest of the conference gave me a bitter sweat taste, as I either did not see anything more than I expected or my expectations were not that big because of lack of big events during this year. 
+Based on the talks I saw last two times during the univercity days, I thought it would be better to just skip them. The rest of the conference gave me a bitter sweat taste, as I either did not see anything more than I expected or my expectations were not that big because of lack of big events during this year.
 
 The most interesting talk for me, was ["Graal.JS - high-performance JavaScript on the JVM"][graal-js]. The title is misleading here, as it has not to do with javascript on the JVM directly but with polyglotism on the JVM. Worth checking it out I believe.
 
@@ -68,7 +67,7 @@ Although someone can argue that there were no marketing talks, I have to say tha
 
 A very good example of such a talk in my opinion was [The Twelve Factor app: Best Practices for Java Deployment](https://www.youtube.com/watch?v=94PxlbuizCU) where you at least got a couple of usefull information regarding the [12 factor app](http://12factor.net/) (which in my opinion is 12 rule of thumbs for creating microservices) and the only advertisement was that you could deploy that super easy with [heroku](https://www.heroku.com/).
 
-As I said before there were not big news this year and maybe that is why there were no interest from big names to advertise anything. 
+As I said before there were not big news this year and maybe that is why there were no interest from big names to advertise anything.
 
 ## Trends
 
@@ -78,7 +77,7 @@ Although there were no big news, there were some obvious trends. It looks like r
 
 Working with streams has been the thing for some years now. Unfortunatelly Microsoft who is I think the main player behind the whole reactive idea, did not present anything the last 3 years on devoxx. But this is another topic...
 
-Back to reactive, as I watched some talks on this topic the previous years, I skipped these talks this time. Unfortunatelly, Java has only recently added basic support for that with the changes of JDK8, which means that it lacks the apis on the EE side and not only. 
+Back to reactive, as I watched some talks on this topic the previous years, I skipped these talks this time. Unfortunatelly, Java has only recently added basic support for that with the changes of JDK8, which means that it lacks the apis on the EE side and not only.
 
 There are solutions available. Mainly [RxJava](https://github.com/ReactiveX/RxJava) and [akka](http://akka.io/) based ones from typesafe. I still ask myself though if I'm going to depend for example on an sql server, how am I going to be reactive if I have to wait anyway for a response. I have to wrap the sql api to something "reactive", but this is not the standard anymore. Not that it is bad (spring or hibernate never was the standard for example), but it lets us know that it will take a while till reactive will be widelly adopted.
 

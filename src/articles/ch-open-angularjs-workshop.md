@@ -1,6 +1,5 @@
 ---
 title: Unleash your creativity with Angular.JS
-author: valotas
 date: 2014-09-13
 ---
 

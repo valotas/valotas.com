@@ -1,6 +1,5 @@
 ---
 title: An overview of Devoxx 2013
-author: valotas
 date: 2013-11-21
 ---
 So, devoxx 2013 is over. My first java community (or not) conference is over. The thing is that devoxx is not about java. It is more a technology/programming conference which I personal find it even better as you have a better overview of what is going on and what the future will be.
@@ -24,7 +23,7 @@ As I said before, devoxx is not only java and the proof of that is that two big 
 That is another interesting thing. We do not like javascript but, we write code compiling down to javascript in order to be able to run it everywhere! Any way, I did not follow the ceylon stuff, but I'm follow dart for [about a year](https://github.com/valotas/mustache4dart) now.
 
 ### Dart
-So, a language that looks like a hybrid of java and javascript, has it's own virtual machine but compiles also down to javascript (or should I say optimized javascript). It supposed to be a language for structured web apps that does not fragment more the web browsers. Yes this is google's description. 
+So, a language that looks like a hybrid of java and javascript, has it's own virtual machine but compiles also down to javascript (or should I say optimized javascript). It supposed to be a language for structured web apps that does not fragment more the web browsers. Yes this is google's description.
 
 Of course I do not know how yet another language for the web will not fragment web browsers. For sure Google will try to push it as much as possible. I can not think that it has been announced by coincidence at the second's day keynote with the title "Shaping the future of web development". On top of that, I heard Lars Bak saying that soon Chrome browser will get shipped with the dart virtual machine in order to run natively dart applications.
 
@@ -41,7 +40,7 @@ Last day has been dominated again by google and the google glasses presentation.
 ### Chrome Apps / HTML5 Apps
 That was the most interesting for me. I did not know that chrome provides you with the tools to create a native app using html5. You can find more info at [here](http://developer.chrome.com/apps/about_apps.html).
 
-It looks like google wants everything to be done in the browser and that is why dart on chrome make sense for me. On the long run, as soon as the user comforts himself with the browser they'll just port the browser to [something else](http://www.chromium.org/chromium-os). Ofcourse that means that everything will then be so easilly installed to your machine, you'll just go to the chrome app store and just install. From the other point of view, google will be in charge of all your apps so I would rather go with [something in between](https://github.com/rogerwang/node-webkit). Node-Webkit looks like it's trying to do the same thing. Of course you do not have the easyness of click and install but you can still have your html5 app running "natively" on your OS of choise. 
+It looks like google wants everything to be done in the browser and that is why dart on chrome make sense for me. On the long run, as soon as the user comforts himself with the browser they'll just port the browser to [something else](http://www.chromium.org/chromium-os). Ofcourse that means that everything will then be so easilly installed to your machine, you'll just go to the chrome app store and just install. From the other point of view, google will be in charge of all your apps so I would rather go with [something in between](https://github.com/rogerwang/node-webkit). Node-Webkit looks like it's trying to do the same thing. Of course you do not have the easyness of click and install but you can still have your html5 app running "natively" on your OS of choise.
 
 ## Buzz words
 A new buzzwords to put at my vocabulary is *Reactive* programming. There are was some talks about it. I attended one but Joshua Suereth spend about 20 minutes trying to explain how the java api of the play framework would have been with the new lambda support of java. For sure the worst talk of the conference so far.

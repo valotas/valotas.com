@@ -1,8 +1,6 @@
 ---
 title: Cleaner javascript code - namespacing
-author: valotas
 date: 2009-08-26
-template: article.jade
 ---
 
 Having read the *Clean Code* book by Robert C. Martin I always try to follow most of the rules he gives. In my opinion the best rule I've seen and helped me a lot in order to make more readable code is to try to make classes as small as possible.

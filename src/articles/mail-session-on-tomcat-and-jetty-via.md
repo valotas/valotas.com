@@ -1,8 +1,6 @@
 ---
 title: Mail Session on tomcat and jetty via jndi
-author: valotas
 date: 2010-05-01
-template: article.jade
 ---
 
 It's been a while since I last bloged but here I am again with something that took me a little bit in order to figure out how exactly should someone define a mail Session at the config files of jetty and tomcat. So the problem here is to define a mail session with name `mail/Session` using the host `my.mail.server.com` as mail server with username `mailserver_username` and password `mypassword`.

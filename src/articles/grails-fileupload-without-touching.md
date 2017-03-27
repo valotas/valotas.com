@@ -1,8 +1,6 @@
 ---
 title: Grails fileupload without touching the scaffolding actions (kinda)
-author: valotas
 date: 2009-11-20
-template: article.jade
 ---
 
 Well, when I'm prototyping and generally developing with grails I do not want to use generate-all and just edit the generated controllers and gsps. I try to find my way overwriting maybe some actions but not edit them and some or more changes to the scaffold templates.
@@ -27,7 +25,7 @@ Grails has the ability to intercept calls to actions. All we want to do is befor
 class UploadedFileController {
   def scaffold = true
   def beforeInterceptor = [action:this.&fileupload, only: ['save', 'update']]
- 
+
   def fileupload() {
     def filepath //the path of the uploaded file
     // handle normal file upload as per grails docs

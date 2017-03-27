@@ -1,8 +1,6 @@
 ---
 title: Apache Tomcat advanced startup configurations
-author: valotas
 date: 2013-01-08 14:21
-template: article.jade
 ---
 
 I am always searching for the last tomcat configuration every time I need to
