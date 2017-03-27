@@ -73,7 +73,11 @@ export class MetaFile implements MetaFileData {
     }
   }
 
-  moment(): moment.Moment {
+  moment(): moment.Moment | null {
+    if (!this.date) {
+      return null;
+    }
+
     const m = moment(this.date, INPUT_FORMATS, true);
 
     if (m.isValid()) {
