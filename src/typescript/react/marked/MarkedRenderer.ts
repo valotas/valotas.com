@@ -7,7 +7,7 @@ const EMPTY_STRING = '';
 
 // https://github.com/christianalfoni/markdown-to-react-components/blob/master/src/index.js
 
-type IntrinsicComponent<T> = ComponentConstructor<T, any> | FunctionalComponent<T, any>;
+type IntrinsicComponent<T> = ComponentConstructor<T, any> | FunctionalComponent<T>;
 type AnyComponent<T> = IntrinsicComponent<T> | string;
 
 class TreeContainer {
