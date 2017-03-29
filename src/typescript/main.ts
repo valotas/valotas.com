@@ -9,7 +9,6 @@ import { GistStore } from './content/GistStore';
 import { FetchStreamer } from './FetchStreamer';
 import { createGoogleAnalytics } from './browser/GoogleAnalytics';
 import { createPageState } from './PageState';
-import 'preact/devtools';
 
 console.time('load');
 

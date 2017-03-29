@@ -35,7 +35,8 @@
     "typescript": "^2.2.1",
     "typings": "^2.0.0",
     "vinyl": "2.0.0",
-    "vinyl-fs": "2.4.4"
+    "vinyl-fs": "2.4.4",
+    "yargs": "^7.0.2"
   },
   "scripts": {
     "postinstall": "typings --version && typings install && npm rebuild node-sass",
