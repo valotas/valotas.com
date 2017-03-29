@@ -6,7 +6,7 @@ import { createComponentTree } from './marked/createComponentTree';
 interface MarkedComponentProps {
   meta?: MetaFileData;
   markFirstLetter?: boolean;
-  children?: any
+  children?: any;
 }
 
 export function MarkedComponent(props: MarkedComponentProps) {

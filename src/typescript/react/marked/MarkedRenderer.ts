@@ -71,11 +71,11 @@ interface HtmlTransfomer<P> {
   (html: string): {
     type: AnyComponent<P>,
     props: P
-  }
+  };
 };
 
 interface LinkProps {
-  href?: string
+  href?: string;
 }
 
 interface MarkRenderOptions {
