@@ -18,15 +18,30 @@ To have an intermediate development site:
 
 ```bash
 gulp play
-``` 
+```
 
-After that you can just `npm run deploy` in order to deploy the site assuming that you have the right keys at the right path in order to connent to the server passwordless.
-
-## AWS deploy
+## Deploy
 Among the available npm scripts the `deploy` is available that should handle the creation of the website locally and the deployment
-to AWS. In order to do that the [aws cli](http://docs.aws.amazon.com/cli/latest/userguide/installing.html) should be installed. If
+to AWS.
+
+### Requirements
+
+In order to do that the [aws cli](http://docs.aws.amazon.com/cli/latest/userguide/installing.html) should be installed. If
 that is the case, the following should be all you need:
+
+### Deployment
+
+For a patch release all you need is
 
 ```bash
 npm run deploy
 ```
+
+This script is actually an alias to `npm version patch`. If you need to do a minor or major release you have to manually run
+the following
+
+```bash
+npm version minor -m "Release v%s"
+```
+
+adjusting minor appropriatelly.
