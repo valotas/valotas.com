@@ -1,5 +1,5 @@
-import { inflate, deflate, compareMoments } from './utils';
 import * as moment from 'moment';
+import { inflate, deflate, compareMoments } from './utils';
 
 describe('deflate/infalte', () => {
   const obj = {

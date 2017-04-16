@@ -1,3 +1,4 @@
+import * as td from '../td';
 import { createGoogleAnalytics } from './GoogleAnalytics';
 
 describe('GoogleAnalytics', () => {
@@ -23,13 +24,13 @@ describe('GoogleAnalytics', () => {
     });
 
     it('should add the appropriate script using the given function', () => {
-      win.addScript = jasmine.createSpy('addScript');
+      win.addScript = td.function('addScript');
       createGoogleAnalytics('xxx', win);
       expect(win.addScript).toHaveBeenCalledWith('//www.google-analytics.com/analytics.js');
     });
 
     it('should not call addScript more than once', () => {
-      win.addScript = jasmine.createSpy('addScript');
+      win.addScript = td.function('addScript');
       createGoogleAnalytics('xxx', win);
       createGoogleAnalytics('xxx', win);
       createGoogleAnalytics('xxx', win);
@@ -39,7 +40,7 @@ describe('GoogleAnalytics', () => {
 
   describe('ga()', () => {
     it('should delegate calls to win.ga function', () => {
-      const ga = jasmine.createSpy('win.window.ga');
+      const ga = td.function('win.window.ga');
       const actual = createGoogleAnalytics('xxx', win);
       win.window.ga = ga;
       actual.ga('1', '2', { 'name': 'value' });
@@ -53,7 +54,7 @@ describe('GoogleAnalytics', () => {
 
     beforeEach(() => {
       analytics = createGoogleAnalytics(win);
-      analytics.ga = ga = jasmine.createSpy('ga');
+      analytics.ga = ga = td.function('ga');
     });
 
     it('should call the underlying ga function and send a pageview', () => {

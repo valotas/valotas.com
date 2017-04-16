@@ -1,3 +1,4 @@
+import * as td from '../td';
 import { HistoryService } from './HistoryService';
 
 describe('HistoryService', () => {
@@ -19,7 +20,7 @@ describe('HistoryService', () => {
 
   describe('onPopState', () => {
     it('should register popstate listeners', () => {
-      const listener = jasmine.createSpy('popStateListener');
+      const listener = td.function('popStateListener');
       const registration = history.onPopState(listener);
       const event = {
         state: {} as PageState
@@ -31,7 +32,7 @@ describe('HistoryService', () => {
 
   describe('pushState', () => {
     it('should call win.history.pushState', () => {
-      win.history = jasmine.createSpyObj('history', ['pushState']);
+      win.history = td.constructor(['pushState']);
       const state = {
         meta: [],
         title: 'the title',
@@ -42,13 +43,13 @@ describe('HistoryService', () => {
     });
 
     it('should call notify registered listeners', () => {
-      win.history = jasmine.createSpyObj('history', ['pushState']);
+      win.history = td.constructor(['pushState']);
       const state = {
         meta: [],
         title: 'the title',
         path: 'the path'
       };
-      const listener = jasmine.createSpy('listener');
+      const listener = td.function('listener');
       history.onPushState(listener);
       history.pushState(state);
       expect(listener).toHaveBeenCalledWith(state);
