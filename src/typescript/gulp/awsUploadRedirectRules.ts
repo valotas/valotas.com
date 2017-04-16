@@ -1,4 +1,5 @@
 import * as cp from 'child_process';
+import * as fs from 'fs';
 import * as moment from 'moment';
 import { MetaFile } from '../content/MetaFile';
 import promisify from './promisify';
@@ -19,6 +20,10 @@ export class _RedirectRule {
   redirectLocation() {
     return `/${this.file.path}/`;
   }
+
+  toString() {
+    return `RedirectRule(${this.path()} => ${this.redirectLocation()})`;
+  }
 }
 
 const HTTP_DATE_FORMAT = 'ddd, DD MMM YYYY HH:mm:ss';
@@ -36,6 +41,7 @@ export class _Aws {
   }
 
   putRule(rule: _RedirectRule) {
+    console.log(`Uploading ${rule.toString()}`);
     return this.exec([
       'aws s3api put-object',
       // '--acl public-read',
@@ -45,10 +51,35 @@ export class _Aws {
       // '--content-length 0',
       `--expires "${this.expires}"`,
       `--website-redirect-location "${rule.redirectLocation()}"`
-    ].join(' '));
+    ].join(' '))
+    .then((result) => {
+      console.log(result);
+    });
   }
 }
 
-export function readRedirectRules() {
+export function readRedirectRules(): Promise<_RedirectRule[]> {
+  const readFile = promisify(fs.readFile);
+  return readFile('./build/meta.json')
+    .then(meta => {
+      let data;
+      if (meta instanceof Buffer) {
+        data = meta.toString('utf8');
+      }
+      return JSON.parse(data);
+    })
+    .then(meta => meta.map(m => MetaFile.fromData(m)))
+    .then(meta => meta.map(m => new _RedirectRule(m)));
+}
 
+const shouldExecute = process.argv.find(arg => arg.indexOf(__filename) >= 0);
+if (shouldExecute) {
+  readRedirectRules()
+    .then(rules => {
+      const aws = new _Aws('valotas.com');
+      rules.forEach(r => aws.putRule(r));
+    })
+    .catch(err => {
+      console.error(err);
+    });
 }

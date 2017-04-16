@@ -61,7 +61,7 @@ export class MetaFile implements MetaFileData {
     return file;
   }
 
-  static fromData(input: MetaFileData | MetaFileData[]): MetaFile | MetaFile[] {
+  static fromData(input: any | any[]): MetaFile | MetaFile[] {
     if (!input) {
       return null;
     }
@@ -103,7 +103,10 @@ function parseHeader(text) {
     });
 }
 
-function castOrCreate(data: MetaFileData): MetaFile {
+function castOrCreate(data: any): MetaFile {
+  if (!isValidMetaFileData(data)) {
+    throw new Error('Given data is not a valid MetaFileData');
+  }
   if (isValidMetaFile(data)) {
     return data;
   }
@@ -115,5 +118,9 @@ function throwIllegalArgumentException(msg): any {
 }
 
 export function isValidMetaFile(file: any): file is MetaFile {
-  return file && file.title && file.path && file.moment && file.type;
+  return isValidMetaFileData(file) && (<any>file).moment;
+}
+
+function isValidMetaFileData(file: any): file is MetaFileData {
+  return file && file.title && file.path && file.type;
 }
