@@ -1,5 +1,7 @@
+import * as cp from 'child_process';
+import * as moment from 'moment';
 import { MetaFile } from '../content/MetaFile';
-import { _RedirectRule } from './awsUploadRedirectRules';
+import { _RedirectRule, _Aws } from './awsUploadRedirectRules';
 
 
 describe('_RedirectRule', () => {
@@ -61,6 +63,38 @@ describe('_RedirectRule', () => {
       const actual = rule.redirectLocation();
 
       expect(actual).toEqual(`/the-path/`);
+    });
+  });
+});
+
+describe('_Aws', () => {
+
+  describe('putRule', () => {
+    const now = moment('2017-08-23T19:43:31');
+
+    it('executes aws s3api put-object', (done) => {
+      const meta = new MetaFile();
+      meta.published = true;
+      meta.date = '2015-08-24';
+      meta.path = 'the-path';
+
+      spyOn(cp, 'exec').and.callFake((cmd, cb) => {
+        cb(null, cmd);
+      });
+
+      const aws = new _Aws('the-site.com', now);
+      aws.putRule(new _RedirectRule(meta))
+        .then((cmd) => {
+          expect(cmd).toEqual([
+            'aws s3api put-object',
+            '--bucket "the-site.com"',
+            '--key "/2015/08/the-path.html"',
+            '--expires "Tue, 21 Nov 2017 19:43:31 GTM"',
+            '--website-redirect-location "/the-path/"'
+          ].join(' '));
+          done();
+        })
+        .catch(err => done.fail(err));
     });
   });
 });
