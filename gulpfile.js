@@ -39,11 +39,10 @@ gulp.task('build', [
   'html'
 ]);
 
-gulp.task('serve', [
+gulp.task('play', [
   'build'
 ],
   () => {
-    gulp.watch('src/sass/**/*.scss', ['css']);
     browserSync.init({
       logLevel: 'debug',
       server: {
@@ -58,11 +57,10 @@ gulp.task('serve', [
         ignored: 'node_modules/**'
       }
     });
+
+    gulp.watch('src/sass/**/*.scss', ['css']);
   }
 );
-
-gulp.task('play', ['serve']);
-
 
 gulp.task('dist', [
   'tsc-bundle',
