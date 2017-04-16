@@ -26,6 +26,7 @@
     "gulp-util": "3.0.7",
     "jasmine-core": "2.5.2",
     "node-fetch": "1.6.3",
+    "node-progress": "^0.1.0",
     "pug": "^2.0.0-beta6",
     "rimraf": "2.5.4",
     "systemjs-builder": "0.15.34",

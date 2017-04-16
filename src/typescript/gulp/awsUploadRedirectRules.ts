@@ -1,6 +1,7 @@
 import * as cp from 'child_process';
 import * as fs from 'fs';
 import * as moment from 'moment';
+import * as ProgressBar  from 'progress';
 import { MetaFile } from '../content/MetaFile';
 import promisify from './promisify';
 
@@ -41,7 +42,7 @@ export class _Aws {
   }
 
   putRule(rule: _RedirectRule) {
-    console.log(`Uploading ${rule.toString()}`);
+    // console.log(`Uploading ${rule.toString()}`);
     return this.exec([
       'aws s3api put-object',
       // '--acl public-read',
@@ -51,10 +52,7 @@ export class _Aws {
       // '--content-length 0',
       `--expires "${this.expires}"`,
       `--website-redirect-location "${rule.redirectLocation()}"`
-    ].join(' '))
-    .then((result) => {
-      console.log(result);
-    });
+    ].join(' '));
   }
 }
 
@@ -77,7 +75,13 @@ if (shouldExecute) {
   readRedirectRules()
     .then(rules => {
       const aws = new _Aws('valotas.com');
-      rules.forEach(r => aws.putRule(r));
+      const bar = new ProgressBar(`uploading rules [:bar] (:current/:total), eta: :etas`, {
+        total: rules.length
+      });
+      rules.forEach(r => {
+        aws.putRule(r)
+          .then(() => bar.tick());
+      });
     })
     .catch(err => {
       console.error(err);
