@@ -41,15 +41,18 @@
   "scripts": {
     "postinstall": "typings --version && typings install && npm rebuild node-sass",
     "tsc": "tsc --version && tsc -p . -w",
-    "build": "gulp build",
+    "build": "rm -rf build && gulp build",
+    "dist": "rm -rf dist build && gulp dist",
     "gulp": "gulp",
     "lint": "eslint '**/*.js' && tslint 'src/**/*.{ts,tsx}'",
     "test": "gulp tsc && gulp test",
     "rsync": "rsync -azP dist/ valotas@pi:~/valotas.com",
     "aws:sync": "aws s3 sync dist s3://valotas.com",
+    "aws:upload-redirect-rules": "node build/gulp/awsUpdateRedirectRules",
+    "upload-dist": "npm run rsync && npm run aws:sync && npm run aws:upload-redirect-rules",
     "deploy": "npm version patch -m \"Release v%s\"",
     "preversion": "npm run lint && npm test",
-    "postversion": "gulp dist && npm run rsync && npm run aws:sync && git push origin master --tags",
+    "postversion": "npm run dist && npm run upload-dist && git push origin master --tags",
     "start": "gulp play"
   },
   "dependencies": {

@@ -7,15 +7,9 @@ const clean = require('rimraf');
 const ts = require('./gulp/ts');
 const browserSync = require('browser-sync').create();
 
-gulp.task('clean-build', (done) => {
-  clean('./build', done);
-});
+gulp.task('clean-dist', (done) => clean('./dist', done));
 
-gulp.task('clean-dist', (done) => {
-  clean('./dist', done);
-});
-
-gulp.task('copy-assets', ['clean-build'], () => {
+gulp.task('copy-assets', () => {
   return gulp.src([
     './src/assets/**/*',
     '!./src/assets/fonts'
@@ -23,11 +17,9 @@ gulp.task('copy-assets', ['clean-build'], () => {
     .pipe(gulp.dest('./build/assets'));
 });
 
-gulp.task('css:only', require('./gulp/css')(gulp));
+gulp.task('css', require('./gulp/css')(gulp));
 
-gulp.task('css', ['clean-build', 'css:only']);
-
-gulp.task('tsc', ['clean-build'], ts.task(gulp));
+gulp.task('tsc', ts.task(gulp));
 
 gulp.task('tsc-bundle', ['tsc'], ts.bundle(gulp, __dirname));
 
@@ -51,7 +43,7 @@ gulp.task('serve', [
   'build'
 ],
   () => {
-    gulp.watch('src/sass/**/*.scss', ['css:only']);
+    gulp.watch('src/sass/**/*.scss', ['css']);
     browserSync.init({
       logLevel: 'debug',
       server: {
@@ -73,7 +65,6 @@ gulp.task('play', ['serve']);
 
 
 gulp.task('dist', [
-  'clean-dist',
   'tsc-bundle',
   'build'
 ], require('./gulp/bundle')(gulp));
