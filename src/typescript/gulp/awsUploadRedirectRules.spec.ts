@@ -48,7 +48,7 @@ describe('_RedirectRule', () => {
 
       const actual = rule.path();
 
-      expect(actual).toEqual(`/2015/08/the-path.html`);
+      expect(actual).toEqual(`2015/08/the-path.html`);
     });
   });
 
@@ -87,8 +87,9 @@ describe('_Aws', () => {
         .then((cmd) => {
           expect(cmd).toEqual([
             'aws s3api put-object',
+            '--acl public-read',
             '--bucket "the-site.com"',
-            '--key "/2015/08/the-path.html"',
+            '--key "2015/08/the-path.html"',
             '--expires "Tue, 21 Nov 2017 19:43:31 GTM"',
             '--website-redirect-location "/the-path/"'
           ].join(' '));

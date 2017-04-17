@@ -1,7 +1,7 @@
 import * as cp from 'child_process';
 import * as fs from 'fs';
 import * as moment from 'moment';
-import * as ProgressBar  from 'progress';
+import * as ProgressBar from 'progress';
 import { MetaFile } from '../content/MetaFile';
 import promisify from './promisify';
 
@@ -15,7 +15,7 @@ export class _RedirectRule {
 
   path() {
     const datePrefix = this.file.moment().format('YYYY/MM');
-    return `/${datePrefix}/${this.file.path}.html`;
+    return `${datePrefix}/${this.file.path}.html`;
   }
 
   redirectLocation() {
@@ -43,16 +43,17 @@ export class _Aws {
 
   putRule(rule: _RedirectRule) {
     // console.log(`Uploading ${rule.toString()}`);
-    return this.exec([
+    const cmd = [
       'aws s3api put-object',
-      // '--acl public-read',
+      '--acl public-read',
       `--bucket "${this.bucket}"`,
       `--key "${rule.path()}"`,
       // '--body ""',
       // '--content-length 0',
       `--expires "${this.expires}"`,
       `--website-redirect-location "${rule.redirectLocation()}"`
-    ].join(' '));
+    ].join(' ');
+    return this.exec(cmd);
   }
 }
 
