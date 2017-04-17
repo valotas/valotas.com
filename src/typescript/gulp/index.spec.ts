@@ -117,7 +117,7 @@ describe('addIndex', () => {
     })
       .pipe(parseMetaFile())
       .pipe(toArticle())
-      .pipe(addIndex())
+      .pipe(addIndex(noopLogger))
       .pipe(through.obj(function ({ path }, enc, cb) {
         const index = path.indexOf('/src/');
         paths.push(path.substring(index + 5));
