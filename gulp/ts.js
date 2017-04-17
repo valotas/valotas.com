@@ -2,23 +2,41 @@
 
 const Builder = require('systemjs-builder');
 const { createSystemConfig } = require('../system.conf.js');
-const { exec } = require('child_process');
+const { spawn } = require('child_process');
 const { argv } = require('yargs');
+const utils = require('gulp-util');
 
-function execTsc(watch, cb) {
-  let cmd = 'node_modules/typescript/bin/tsc -p .';
+function execTsc({ watch }, cb) {
+  const cmd = 'node_modules/typescript/bin/tsc';
+  const args = ['-p', '.'];
   if (watch) {
-    cmd += ' -w';
+    args.push('-w');
   }
-  exec(cmd, { maxBuffer: 1024 * 500 }, cb);
+  const child = spawn(cmd, args);
+  if (cb) {
+    child.on('error', cb);
+    child.on('close', (code) => {
+      const err = code !== 0 ? new Error(`Could not execute 'tsc ${args.join(' ')}'`) : null;
+      cb(err);
+    });
+  }
+  child.stdout.on('data', (data) => {
+    data = data.toString().trim();
+    if (!data) {
+      return;
+    }
+    const command = utils.colors.magenta(`tsc ${args.join(' ')}`);
+    utils.log(`[${command}] ${data.toString()}`);
+  });
+  return child;
 }
 
 module.exports = {
   task: () => (cb) => {
-    execTsc(false, cb);
+    execTsc({}, cb);
   },
   watch: () => {
-    execTsc(true);
+    execTsc({ watch: true });
   },
   bundle: (gulp, basepath) => {
     const conf = createSystemConfig(basepath + '/');

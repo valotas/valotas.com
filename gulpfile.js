@@ -58,6 +58,7 @@ gulp.task('play', [
       }
     });
 
+    ts.watch();
     gulp.watch('src/sass/**/*.scss', ['css']);
   }
 );
