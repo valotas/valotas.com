@@ -51,7 +51,7 @@
     "rsync": "rsync -azP dist/ valotas@pi:~/valotas.com",
     "aws:sync": "aws s3 sync dist s3://valotas.com",
     "aws:upload-redirect-rules": "node build/typescript/gulp/awsUploadRedirectRules.js",
-    "upload-dist": "npm run rsync && npm run aws:sync && npm run aws:upload-redirect-rules",
+    "upload-dist": "npm run aws:sync && npm run aws:upload-redirect-rules",
     "deploy": "npm version patch -m \"Release v%s\"",
     "preversion": "npm run lint && npm test",
     "postversion": "npm run dist && npm run upload-dist && git push origin master --tags",
