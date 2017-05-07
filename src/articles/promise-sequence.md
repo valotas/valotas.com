@@ -1,6 +1,7 @@
 ---
 title: Promise.sequence
 date: 2017-05-06
+published: false
 ---
 
 Since [`Promise`][promise] has been standardise, a lot have been eased to the callback hell world of javascript.
@@ -31,8 +32,8 @@ inSequence([action1, action2, action3])
   });
 ```
 
-The solution was very simple googling, but that kind of excerise can only help you sharp you Promise knowledge. So
-Let's try to implement the solution. In order to attack the problem, I'll try to solve it with just promises in the
+The solution was very simple googling, but that kind of excerise can only help you sharp your Promise knowledge. So
+Let's try to implement the solution. In order to attack the problem, I'll try to solve it with just 2 promises in the
 dumpest possible way:
 
 ```js
@@ -42,39 +43,53 @@ var result = action1()
   })
 ```
 
-This achives what I want. I first execute action1 and once it has been resolve, I execute action2. The problem is
-though that I get as a result only action2's one. I have to keep track of the results somehome
+Now, the question is, how can I make that work with more than 2 actions. In order to do that, let's start with the
+`last` action, wait for it and once done execute the `next` one. Update the `last` reference with the combination of
+both promises:
 
 ```js
-var results = [];
-var result = action1()
-  .then(function(result1) {
-    results.push(result1);
-    return action2();
-  })
-  .then(function (result2) {
-    results.push(result2);
-    return results;
-  })
+var last = Promise.resolve();
+actions.forEach(function (next) {
+  last = last.then(function () {
+    return next();
+  });
+});
+return last;
 ```
 
-Now you can see that the 2 then functions are looking pretty much the same. Push somthing in to our results and
-resolve the next. If there is no next left just return all results and we are done. That is a classical recursion
-problem. Let's solve it like that
+This is the most common way of executing actions in a sequence with promises, Let's create a function for it:
 
 ```js
-function recursiveInSequence(actions, results) {
-  results = results || [];
-  var action = actions[0];
-  return action()
+function simpleInSequence(actions) {
+  var last = Promise.resolve();
+  actions.forEach(function (next) {
+    last = last.then(function () {
+      return next();
+    });
+  });
+  return last;
+}
+```
+
+Now the question is, how am I going to keep track of the results too so that in the end I'll get a Promise who's
+result with be something like `[result1, result2, ...]`. Since our actions are now executed in sequence, we can
+just keep track of the results in an array:
+
+```js
+function inSequence(actions) {
+  var last = Promise.resolve();
+  var results = [];
+  actions.forEach(function (next) {
+    last = last.then(function () {
+      return next();
+    })
     .then(function (result) {
       results.push(result);
-      if (actions.length === 1) {
-          return results;
-      } else {
-          return recursiveInSequence(actions.slice(1), results);
-      }
     });
+  });
+  return last.then(function () {
+    return results;
+  });
 }
 ```
 
@@ -96,6 +111,29 @@ function reduceInSequence(actions) {
   }, Promise.resolve([]));
 }
 ```
+
+### Thinging more coplex
+When I first tried to implement a solution I had in mind that I needed an implementation that could give me back a
+Promise with an array of the results. I ended up using recursion for implementing it:
+
+```js
+function recursiveInSequence(actions, results) {
+  results = results || [];
+  var action = actions[0];
+  return action()
+    .then(function (result) {
+      results.push(result);
+      if (actions.length === 1) {
+          return results;
+      } else {
+          return recursiveInSequence(actions.slice(1), results);
+      }
+    });
+}
+```
+
+while the solution works just fine, it looks a little bit complexer, but I still have it writen here as a reminder to
+always split problems as much as possible.
 
 ## How to test it
 Really awesome work but without being able to test what we did, we are not falling in to the software engineers
@@ -138,7 +176,12 @@ it("should work with an array of more than 2 actions", function (done) {
 ```
 
 ## TLDR
-Since code speeks itself, you can just [have a look here](http://jsbin.com/gist/f785f29dff1502366554901ace772716?js,output)
+Since code speeks itself, you can [play with it](http://jsbin.com/gist/f785f29dff1502366554901ace772716?js,output) or
+just have a look at it:
+
+<script src="https://gist.github.com/valotas/f785f29dff1502366554901ace772716.js"></script>
 
 # References
 - [Promise][promise]
+- http://stackoverflow.com/questions/24586110/resolve-promises-one-after-another-i-e-in-sequence
+
