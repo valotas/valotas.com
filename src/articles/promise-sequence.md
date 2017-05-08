@@ -1,40 +1,32 @@
 ---
 title: Promise.sequence
-date: 2017-05-06
-published: false
+date: 2017-05-08
 ---
 
-Since [`Promise`][promise] has been standardise, a lot have been eased to the callback hell world of javascript.
-Lately I came across an interesting problem. What if you have a sequence of actions that you would like to execute
-one after the other?
+Lately I came across a problem for which the standard [`Promise`][promise]'s api wasn't enough. I needed something
+like `Promise.all` but I had to make sure that the actions array will get executed in sequence
 
 [promise]: https://www.promisejs.org/
 
-## The callback solution
-No matter how ungly it looks, with callback that was pretty easy implemented. Just call the new action inside of a
-callback of the previous one.
+## Prerequisites
+There is no reason reading more if you can't answer the question of [this blog post][problem-with-promises]
 
-```js
-doSomething(, (err) => {
-  doSomethingElse(() => {});
-});
-```
-
-## Promise based solution
-My chalenge here is to achive the same with Promises. The first that comes to someone's mind is the `Promise.all` but
-there is a big catch there. I do need the actions to take place one after the other. So given some actions that return
-a Promise as a result, I would ideally like something like the following:
+## Promise.inSequence
+Ideally, I need a utility method that get as an input an array of actions. It executes the given actions one after the
+other and every execution should wait for the previous one:
 
 ```js
 inSequence([action1, action2, action3])
   .then(([result1, result2, result3]) => {
-    // do something with results
+    // action1() should have been called first
+    // action2() should have been called only after action1 finished
+    // action3() should have been called only after action2 finished
   });
 ```
 
-The solution was very simple googling, but that kind of excerise can only help you sharp your Promise knowledge. So
-Let's try to implement the solution. In order to attack the problem, I'll try to solve it with just 2 promises in the
-dumpest possible way:
+The solution was very simple googling, but I am not fun of copy & paste development if I do not understand what am I
+copying, so as an excerise I though it would be a good idea to implement a solution myself. In order to attack the
+problem, I'll try to solve it with just 2 promises in the **dumpest possible way**:
 
 ```js
 var result = action1()
@@ -57,7 +49,7 @@ actions.forEach(function (next) {
 return last;
 ```
 
-This is the most common way of executing actions in a sequence with promises, Let's create a function for it:
+This is the **most common way of executing actions in a sequence with promises**, Let's create a function for it:
 
 ```js
 function simpleInSequence(actions) {
@@ -71,8 +63,8 @@ function simpleInSequence(actions) {
 }
 ```
 
-Now the question is, how am I going to keep track of the results too so that in the end I'll get a Promise who's
-result with be something like `[result1, result2, ...]`. Since our actions are now executed in sequence, we can
+Now the question is, how am I going to keep track of the results too so that in the end I'll get a Promise which's
+result will be something like `[result1, result2, ...]`. Since our actions are now executed in sequence, we can
 just keep track of the results in an array:
 
 ```js
@@ -89,6 +81,43 @@ function inSequence(actions) {
   });
   return last.then(function () {
     return results;
+  });
+}
+```
+
+Now we can slightly improve this by initializing a promise with an array and make sure that last will always resolve
+to an array of the results:
+
+```js
+function inSequence(actions) {
+  var last = Promise.resolve([]);
+  actions.forEach(function (next) {
+    last = last.then(function (results) {
+      return next()
+        .then(function (result) {
+          results.push(result);
+          return results;
+        });
+    });
+  });
+}
+```
+
+or even make use of `Promise.all` to avoid nested `.then` calls:
+
+```js
+function inSequence(actions) {
+  var last = Promise.resolve([]);
+  actions.forEach(function (next) {
+    last = last.then(function (results) {
+      return Promise.all([next(), results]);
+    })
+    .then(function (combination) {
+      var results = combination[1];
+      var result = combination[0]
+      results.push(result);
+      return results;
+    });
   });
 }
 ```
@@ -176,12 +205,13 @@ it("should work with an array of more than 2 actions", function (done) {
 ```
 
 ## TLDR
-Since code speeks itself, you can [play with it](http://jsbin.com/gist/f785f29dff1502366554901ace772716?js,output) or
-just have a look at it:
+Since code speeks itself, you can [play with it](http://jsbin.com/gist/valotas/f785f29dff1502366554901ace772716?js,output)
+or just have a look at it:
 
-<script src="https://gist.github.com/valotas/f785f29dff1502366554901ace772716.js"></script>
+<script src="https://gist.github.com/valotas/f785f29dff1502366554901ace772716.js?file=script.js"></script>
 
 # References
 - [Promise][promise]
 - http://stackoverflow.com/questions/24586110/resolve-promises-one-after-another-i-e-in-sequence
 
+[problem-with-promises]: https://pouchdb.com/2015/05/18/we-have-a-problem-with-promises.html
