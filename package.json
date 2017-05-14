@@ -65,6 +65,7 @@
     "moment": "2.13.0",
     "preact": "^8.1.0",
     "preact-render-to-string": "^3.6.0",
+    "prismjs": "^1.6.0",
     "systemjs": "0.19.41"
   },
   "eslintConfig": {
