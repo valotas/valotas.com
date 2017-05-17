@@ -5,6 +5,7 @@
 const gulp = require('gulp');
 const clean = require('rimraf');
 const ts = require('./gulp/ts');
+const test = require('./gulp/test');
 const browserSync = require('browser-sync').create();
 
 gulp.task('clean-dist', (done) => clean('./dist', done));
@@ -25,7 +26,7 @@ gulp.task('tsc-bundle', ['tsc'], ts.bundle(gulp, __dirname));
 
 gulp.task('html', ['tsc'], require('./gulp/html')(gulp));
 
-gulp.task('test', require('./gulp/test')(gulp, 'build/**/*.spec.js'));
+gulp.task('test', test(gulp, 'build/**/*.spec.js'));
 
 gulp.task('tdd', ['test'], () => {
   ts.watch();

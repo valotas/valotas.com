@@ -1,12 +1,13 @@
-'use strict';
+"use strict";
 
-const jasmine = require('gulp-jasmine');
+const jasmine = require("gulp-jasmine");
 
-module.exports = function (gulp, path) {
-  return () => {
-    gulp.src(path)
-      .pipe(jasmine({
+module.exports = function(gulp, path) {
+  return () =>
+    gulp.src(path).pipe(
+      jasmine({
+        // verbose: true,
         includeStackTrace: true
-      }));
-  };
+      })
+    );
 };
