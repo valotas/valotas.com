@@ -3,6 +3,7 @@ import { GistStore } from '../content/GistStore';
 import { isPromise } from '../utils';
 import { Link } from './Link';
 import { Icon } from './Icon';
+import { FormattedCode } from './FormattedCode';
 
 export function Code(props) {
   const { children } = props;
@@ -10,27 +11,27 @@ export function Code(props) {
   const code = children.length > 1 ? children[1] : children;
   return (
     <div className='codeblock'>
-      {createTitleBlock(title)}
-      {createPreBlock(props, code)}
+      <Title title={title}/>
+      <PreCode {...props}>{code}</PreCode>
     </div>
   );
 }
 
-function createTitleBlock(title) {
+function Title({ title }) {
   if (!title) {
     return null;
   }
   return (<div className='title'>{title}</div>);
 }
 
-function createPreBlock(props, code) {
+function PreCode(props) {
   const dataProps = {};
   Object.keys(props).forEach((key) => {
     if (key.indexOf('data-') === 0) {
       dataProps[key] = props[key];
     }
   });
-  return <pre {...dataProps}>{createCodeBlock(code)}</pre>;
+  return <pre {...dataProps}>{createCodeBlock(props.children)}</pre>;
 }
 
 function createCodeBlock(code) {
