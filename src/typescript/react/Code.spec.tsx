@@ -9,13 +9,11 @@ describe('Code', () => {
   });
 
   it('should not render <code/> twice if given as child', () => {
-    const code = 'var x = "xxx"';
     const html = render(<Code><code>var x = "xxx"</code></Code>);
     expect(html).toContain('<div class="codeblock"><pre><code>var x =');
   });
 
-  it('should make use of first child as title', () => {
-    const code = 'var x = "xxx"';
+  it('should make use of first child as title when 2 given', () => {
     const html = render(
       <Code>
         <h1>The title</h1>

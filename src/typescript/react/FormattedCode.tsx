@@ -1,7 +1,15 @@
 import { h } from 'preact';
 import { highlight, languages } from 'prismjs';
 
-export function FormattedCode({ language, code }: { language?, code }) {
+type FormattedCodeProps = { language?, code?, children?};
+
+export function FormattedCode({
+  language,
+  code,
+  children
+}: FormattedCodeProps) {
+
+  code = code || children[0];
   if (!language) {
     return <code>{code}</code>;
   }
