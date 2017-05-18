@@ -1,10 +1,10 @@
 import { h, Component } from 'preact';
-import { highlight, languages } from 'prismjs';
 import { GistStore } from '../content/GistStore';
 import { isPromise } from '../utils';
 import { Link } from './Link';
 import { Icon } from './Icon';
 import { Code } from './Code';
+import { FormattedCode } from './FormattedCode';
 
 interface GistProps extends GistDescription {
 
@@ -12,6 +12,7 @@ interface GistProps extends GistDescription {
 
 interface GistState {
   content: string;
+  language?: string;
 }
 
 export class Gist extends Component<GistProps, GistState> {
@@ -46,35 +47,30 @@ export class Gist extends Component<GistProps, GistState> {
     });
   }
 
-  render({ user = 'valotas', file, gistId }, { content }) {
+  render({ user = 'valotas', file, gistId }, { content, language }) {
     const filetarget = file.replace(/\./g, '-').toLocaleLowerCase();
     const href = `https://gist.github.com/${user}/${gistId}#file-${filetarget}`;
-    const html = {
-      dangerouslySetInnerHTML: {
-        __html: content
-      }
-    };
     return (
       <Code data-gist-id={gistId} data-gist-user={user} data-gist-file={file}>
         <Link href={href} target='_blank'>
           <Icon name='fa-github' />&nbsp;
           {file}
         </Link>
-        <div {...html} />
+        <FormattedCode language={language} code={content} />
       </Code>
     );
   }
 }
 
 function createState(content, { file }): GistState {
-  content = content.replace(/\t/g, '  ');
-  content = highlight(content, lang(file));
-  return { content: content.replace(/\t/g, '  ') };
+  return {
+    content: content.replace(/\t/g, '  '),
+    language: lang(file)
+  };
 }
 
 function lang(file: string) {
   if (file && file.indexOf('.js') > 0) {
-    return languages.javascript;
+    return 'javascript';
   }
-  return languages.javascript;
 }
