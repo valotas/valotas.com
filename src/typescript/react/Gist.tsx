@@ -50,7 +50,6 @@ export class Gist extends Component<GistProps, GistState> {
   render({ user = 'valotas', file, gistId }, { content, language }) {
     const filetarget = file.replace(/\./g, '-').toLocaleLowerCase();
     const href = `https://gist.github.com/${user}/${gistId}#file-${filetarget}`;
-    console.log(href, language);
     return (
       <Code data-gist-id={gistId} data-gist-user={user} data-gist-file={file}>
         <Link href={href} target='_blank'>
