@@ -50,6 +50,7 @@ export class Gist extends Component<GistProps, GistState> {
   render({ user = 'valotas', file, gistId }, { content, language }) {
     const filetarget = file.replace(/\./g, '-').toLocaleLowerCase();
     const href = `https://gist.github.com/${user}/${gistId}#file-${filetarget}`;
+    console.log(href, language);
     return (
       <Code data-gist-id={gistId} data-gist-user={user} data-gist-file={file}>
         <Link href={href} target='_blank'>
@@ -72,5 +73,8 @@ function createState(content, { file }): GistState {
 function lang(file: string) {
   if (file && file.indexOf('.js') > 0) {
     return 'javascript';
+  }
+  if (file && file.indexOf('.java') > 0) {
+    return 'java';
   }
 }
