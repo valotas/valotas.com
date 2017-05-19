@@ -18,7 +18,7 @@ someStream.subscribe((val) => {
 });
 ```
 
-## Marble tests 
+## Marble tests
 
 If you have that problem, let me tell you a well hidden secret: [marble tests][writing-marble-tests]. After finding that our, you are going to have yet another problem and that is the lack of documentation on how to use them. That means more baby steps, more source code reading(thanks god, the library is written in typescript) and more experimentation. Given that, I thought it would be better to also write down experiments.
 
@@ -48,11 +48,11 @@ it('should schedule the subscription on the right time', () => {
     source.subscribe((val) => {
         results.push(val);
     }, null, () => {
-        results.push('done');  
+        results.push('done');
     });
-     
+
     scheduler.flush();
-    
+
     //then
     expect(results).toEqual(['b', 'c', 'done']);
 });
@@ -72,7 +72,7 @@ With that we can write expectations with marble strings just like we create the 
 
 It is though a little bit trickier to use, as we should first instanciate our scheduler with an assertion function. This will be used in order to assert the sequence of the events when `flush`ing the scheduler. That means that it should make our test fail. So either throw an exception or just use your testing framework:
 
-```
+```js
 function assertEquals (actual, expected) {
     //we will use jasmine's api for the assertion:
     expect(actual).toEqual(expected);

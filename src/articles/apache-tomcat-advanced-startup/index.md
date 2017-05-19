@@ -5,18 +5,24 @@ date: 2013-01-08 14:21
 template: article.jade
 ---
 
-I am always searching for the last tomcat configuration every time I need to deploy a new one, so, here is what I use.
+I am always searching for the last tomcat configuration every time I need to
+deploy a new one, so, here is what I use.
 
 ## Common tomcat configuration
 
-Tomcat comes with some configuration tools. A command line one and a Window based one (tomcat6.exe and tomcat6w.exe respectively). Lets use the GUI. One thing to remember is that the executable should have the same basename with your service name. So we rename the `tomcat6w.exe` file to `tomcat6020w.exe`, and use it.
+Tomcat comes with some configuration tools. A command line one and a Window
+based one (tomcat6.exe and tomcat6w.exe respectively). Lets use the GUI. One
+thing to remember is that the executable should have the same basename with
+your service name. So we rename the `tomcat6w.exe` file to `tomcat6020w.exe`,
+and use it.
 
-One other thing to mention is that it's better not to rename the tomcat6.exe file as it will be used in order for the service to start up.
+One other thing to mention is that it's better not to rename the tomcat6.exe
+file as it will be used in order for the service to start up.
 
 ### Java Options
 What are the most common java options in my opinion:
 
-```sh
+```
 -Dcatalina.home=TOMCAT_HOME
 -Dcatalina.base=TOMCAT_HOME
 -Djava.endorsed.dirs=TOMCAT_HOME\common\endorsed
@@ -31,6 +37,5 @@ What are the most common java options in my opinion:
 -XX:MaxPermSize=128m
 ```
 
-I should add an explanation for each of the properties but it is not the time yet
-
-
+I should add an explanation for each of the properties but it is not the time
+yet

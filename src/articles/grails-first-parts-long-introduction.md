@@ -73,7 +73,7 @@ So we must take care of the layout/representation or whatever you would like to 
 
 Now lets create a simple page that will display this message. All we have to do is create a new gsp file under `grails-app/views/echo` folder named `echophrase.gsp`. The above will be just fine:
 
-```
+```html
 <html>
   <head>
     <title>EchoController - echophrase</title>
@@ -99,7 +99,7 @@ As we have seen in our example the model part is just a phrase a user passed to 
 
 To do that we must some how tell grails what we would like to save to the database. We define this using the so called domain classes. For our example we would like our echos to have a date they have been submited and the actual phrase the user has been submited. Domain classes are simple groovy classes inside the inside the `grails-app/domain` folder of our application. Let's create one manually (by creating an appropriate file) or letting grails doing it for us: `$ grails create-domain-class com.valotas.firstgrailsproject.Echo`. Now just edit the newly created file:
 
-```
+```groovy
 package com.valotas.firstgrailsproject
 
 class Echo {
@@ -116,7 +116,7 @@ We defined what we would like our model to have. Mention here that we would also
 
 Now let's add an action to also save the echos, and except from the last posted one display the previous ones ordered by the dateCreated descended.
 
-```
+```groovy
 def echoandlist = {
   //Get the list of the previous posted echos:
   def echolist = Echo.findAll([sort:'dateCreated', order:'desc'])
@@ -135,7 +135,7 @@ One thing to to mention here is the hasErrors, save and findAll methods. These m
 
 The last thing to do is to create our new view for this action. That will be something like the above
 
-```
+```html
 <html>
   <head>
     <title>EchoController - echoandlist</title>

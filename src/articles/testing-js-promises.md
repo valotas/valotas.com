@@ -63,7 +63,7 @@ spyOn(templateService, 'render');
 
  and make sure that is called:
 
- ```
+ ```js
 expect(templateService.render).toHaveBeenCalledWith({tweets: newTweets});
  ```
 
@@ -72,7 +72,7 @@ This is where the thing is not so straight forward. `loadTweets` should return a
 `Promise` is now a standard supported by most of the browsers, we can just return a promise that
 is immediatelly resolved:
 
-```
+```js
 var newTweets = [
   "tweet1",
   "tweet2"

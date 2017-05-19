@@ -20,7 +20,7 @@ Apart from that, given my java background, I can say that I felt really familiar
 Regarding the differences with Java someone could take a look at [this article][idiomatic-dart]. I think it describes most of the key features of the language and someone can compare with his own favorite language.
 
 ### Getters and setters
-A thing that was new to me was the getters and setters of the language, something that you can find with C# but not with Java. To be honest I can not see the need of them as they look like methods and they act like methods, but they should not be used like ones (ex: do not try to perform an IO operation with a getter or setter). In java world the same rule applies with the exception that you must always provide a getter/setter method for each of your fields you would like to be accessible and there is no special syntax for a getter/setter but a naming convention. This thing exists in C# though. 
+A thing that was new to me was the getters and setters of the language, something that you can find with C# but not with Java. To be honest I can not see the need of them as they look like methods and they act like methods, but they should not be used like ones (ex: do not try to perform an IO operation with a getter or setter). In java world the same rule applies with the exception that you must always provide a getter/setter method for each of your fields you would like to be accessible and there is no special syntax for a getter/setter but a naming convention. This thing exists in C# though.
 
 I personally do not see the need to have yet another syntax for them, but I would like to have them without writing them (thank you [project lombok][lombok]). I know that I'm biased here but I'm just used to the java way of dealing with fields and the simple rule: never try to access them directly. C# and Dart gives you the ability to do so, as you can later on change the behaviour of what looks only as a field access.
 
@@ -35,7 +35,7 @@ On top of that, there is the so called [factory constructor][dart-factory-constr
 For sure the whole construction thing was a little bit strange at the beginning and I think both java and javascript developers will have to spend sometime until they'll learn to use them right.
 
 ### Functions
-One of the good parts of dart are functions. Yes, the language supports functions as first lever citizens. In fact every object can be used as a function by implementing a call method. That is a good way to introduce the idea of function to a purely object oriented thinking guys. Of course there are also normal named and anonymous functions (lambdas or closures anyone?). 
+One of the good parts of dart are functions. Yes, the language supports functions as first lever citizens. In fact every object can be used as a function by implementing a call method. That is a good way to introduce the idea of function to a purely object oriented thinking guys. Of course there are also normal named and anonymous functions (lambdas or closures anyone?).
 
 After all lambdas are finally available to Java and it was for some time in C#. On top of that, Javascript was born with closures and is more functional as a language rather than object oriented. So there is no question, any language trying to replace them or just look familiar with them should support them.
 

@@ -10,7 +10,7 @@ It is not that hard if you think of it as something that you allready know which
 
 Object signatures may differ based on the type of the html element they describe but they all share some functionality. We can easily find out that the interface below describes all the known html elements:
 
-```
+```java
 interface Node {
   getClassNames(): List<String>
   getChilds(): List<Node>
@@ -40,9 +40,9 @@ class MainArticle extends Node, CssMain, CssArticle, CssWhite {
 }
 ```
 
-and our `Node` interface becomes simpler: 
+and our `Node` interface becomes simpler:
 
-```
+```java
 interface Node {
   getChilds(): List<Node>
   getParent(): Node
@@ -54,7 +54,7 @@ Now everything looks simpler. You have to still write the metadata in html as we
 ### Javascript: behaviour mixins
 Now that we can style our node with css mixins, what about adding some behaviour there? This is where javascript is comming. So let's say that we have a `<button/>` that we would like to use in order to show an alert to the user. Assuming that our button is also styled, we can describe this button with the following pseudo class:
 
-```
+```java
 class AlertMessageButton extends Node, CssButton, CssMessage, AlertMessageAction {
   //Nothing to implement
 }
@@ -98,7 +98,7 @@ $(function (){ //on document load
     var msg = $(this).data('alert-message');
     alertMessage(msg);
   });
-  
+
 });
 ```
 

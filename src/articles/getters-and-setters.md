@@ -12,7 +12,7 @@ Recently I [had a look at the Dart programming language][thoughts-on-dart] and t
 ## Where we use them
 Well, the idea in OO languages is very simple. You have a class and you have a property, a field or whatever piece of data that you want to access:
 
-```
+```js
 class Person {
     String name = null;
 }
@@ -20,7 +20,7 @@ class Person {
 
 You start using this property in other classes:
 
-```
+```js
 var george = new Person();
 george.name = "George";
 assert george.name === "George"; //true
@@ -28,7 +28,7 @@ assert george.name === "George"; //true
 
 Now you need to change your class a little bit. The name property is not enough anymore but you need to define a `firstname` and `lastname`. In order to provide backwards compatibility you do not want to just remove the name property. That is straight forward, just return something like `firstname username` when someone is trying to access the `name` field. For simplicity we also do not allow any direct updates of the `name` field. "Speaking" in pseudo code, it would be cool to have the above:
 
-```
+```js
 var george = new Person();
 george.firstname = "George";
 george.lastname = "Valotasios";
@@ -37,18 +37,18 @@ assert george.name === "George Valotasios" //true
 
 Well, something like that is a no-go for java, but there are languages (Scala, C# and Dart to name a few) that allow you to do that. I do not really care about the syntax of the feature but let's take dart's syntax as an example and provide a solution to our problem:
 
-```
+```js
 class Person {
     String firstname
     String lastname
-    
+
     Person(this.firstname, this.lastname);
-    
+
     String get name => "$firstname $lastname"
 }
 
 var george = new Person("George", "Valotasios");
-asser george.name === "George Valotasios"
+assert george.name === "George Valotasios"
 ```
 
 ## Just anonther method declaration
@@ -60,12 +60,12 @@ This is actually what we are forced to do with Java where no such feature exists
 class Person {
     private String firstname;
     private String lastname;
-    
+
     public Person(String firstname, String lastname) {
         this.firstname = firstname;
         this.lastname = lastname;
     }
-    
+
     public getName() {
         return firstname + " " + lastname;
     }
@@ -95,7 +95,7 @@ It would be also cooler if the compiler of a language would be able to do the an
 At the end, I do not see the need for a syntactic sugar for a method definitions, if that syntactic sugar only forces assumptions about the underlying execution.
 
 # Do you really need a getter or a setter?
-Having said that and assuming that our code provide good implementations of getters and setters, there is still the question of their need. 
+Having said that and assuming that our code provide good implementations of getters and setters, there is still the question of their need.
 
 A simple mistake that I used to do for example was to just let my IDE create them for me. I ended up having for every class stuff that never needed. In other words, before you use the stuff of your IDE, just make yourself a question: "does a field represent an internal state of your class?". If so, why do you need to provide a getter or a setter for this?. Even if you have a clear yes for a getter (it could be), question again yourself about the setter. Do you always need to update a property of a class? If not why to provide a setter for it?
 

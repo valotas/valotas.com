@@ -5,9 +5,12 @@ date: 2009-11-15
 template: article.jade
 ---
 
-After having [static resources get served right with Jetty within an OSGI enviroment](/jetty-defaultservlet-on-osgi/) you may want to be able to use groovy and more specific some groovlets
+After having [static resources get served right with Jetty within an OSGI enviroment](/jetty-defaultservlet-on-osgi/)
+you may want to be able to use groovy and more specific some groovlets
 
-More or less the problem is the one that has been described at a [previous post](/jetty-defaultservlet-on-osgi/).Once again all we have to do is give some more "space" to the `groovy.servlet.GroovyServlet` to look for our groovlets
+More or less the problem is the one that has been described at a [previous post](/jetty-defaultservlet-on-osgi/).
+Once again all we have to do is give some more "space" to the
+`groovy.servlet.GroovyServlet` to look for our groovlets
 
 ## The code
 
@@ -59,7 +62,13 @@ public class OsgiGroovyServlet extends GroovyServlet {
 }
 ```
 
-So all we do is to extend the GroovyServlet and override it's `getResourceConnection` in such a way that it will do a final try to find the groovlet from within the osgi bundle. That is what we implement with the `getResourceConnectionFromOsgi` method.
+So all we do is to extend the GroovyServlet and override it's
+`getResourceConnection` in such a way that it will do a final try to find the
+groovlet from within the osgi bundle. That is what we implement with the
+`getResourceConnectionFromOsgi` method.
 
-Caution: We assume that we pack all our resources and so our groovlets with in the webapp directory witch we provide with the resourcesPrefix variable. Of course we could change the servlet to get it's value with a servlet init parameter.
+Caution: We assume that we pack all our resources and so our groovlets with in
+the webapp directory witch we provide with the resourcesPrefix variable. Of
+course we could change the servlet to get it's value with a servlet init
+parameter.
 
