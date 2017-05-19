@@ -2,13 +2,15 @@ import { h, ComponentConstructor, Component } from 'preact';
 import { Gist } from '../Gist';
 import { Link } from '../Link';
 import { Code } from '../Code';
+import { FormattedCode } from '../FormattedCode';
 import { MarkedReactRenderer } from './MarkedRenderer';
 
 export function createComponentTree(html: string, options = { firstLetterSpan: false }) {
   const renderer = new MarkedReactRenderer({
     firstLetterSpan: options.firstLetterSpan,
-    html:  [htmlToGistTransformer],
+    html: [htmlToGistTransformer],
     pre: Code,
+    code: FormattedCode,
     link: Link
   });
   return renderer.createComponentTree(html);

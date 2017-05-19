@@ -40,8 +40,9 @@ function PreCode(props) {
 }
 
 function OneCodeBlock({ children }) {
-  if (children[0].nodeName === 'code') {
-    return children[0];
+  const code = children[0];
+  if (!code.nodeName) {
+    return <code>{code}</code>;
   }
-  return <code>{children}</code>;
+  return code;
 }

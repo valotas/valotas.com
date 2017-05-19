@@ -17,8 +17,10 @@ export function FormattedCode({
   if (language === 'js') {
     language = 'javascript';
   }
+  const format = languages[language];
+
   const html = {
-    __html: highlight(code, languages[language])
+    __html: format ? highlight(code, format) : code
   };
   return (
     <code className={`language-${language}`} dangerouslySetInnerHTML={html} />
