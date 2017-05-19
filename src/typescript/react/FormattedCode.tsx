@@ -1,6 +1,7 @@
 import { h } from 'preact';
 import { highlight, languages } from 'prismjs';
 import 'prismjs/components/prism-java';
+import 'prismjs/components/prism-groovy';
 
 type FormattedCodeProps = { language?, code?, children?};
 

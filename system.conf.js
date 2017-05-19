@@ -14,6 +14,7 @@
         'preact/devtools': pre + 'node_modules/preact/devtools.js',
         'prismjs': pre + 'node_modules/prismjs/prism.js',
         'prismjs/components/prism-java': pre + 'node_modules/prismjs/components/prism-java',
+        'prismjs/components/prism-groovy': pre + 'node_modules/prismjs/components/prism-groovy',
         'moment': pre + 'node_modules/moment/min/moment.min.js',
         'marked': pre + 'node_modules/marked/marked.min.js',
         'base64-js': pre + 'node_modules/base64-js/lib/b64.js',
