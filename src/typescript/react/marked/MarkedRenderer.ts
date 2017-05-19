@@ -24,7 +24,8 @@ class TreeContainer {
 
   pushBlock(type: AnyComponent<any>, props: any = {}, childs?: any[]) {
     props.key = this.tree.length;
-    const children = props.dangerouslySetInnerHTML ? null : firstChildOrFullArray(childs || this.inline);
+    const children = props.dangerouslySetInnerHTML ?
+      null : firstChildOrFullArray(childs || this.inline);
     const args = [type].concat(props).concat(children);
     const el = h.apply(h, args);
     this.inline = [];
@@ -81,6 +82,7 @@ interface LinkProps {
 interface MarkRenderOptions {
   html: HtmlTransfomer<any>[];
   pre: IntrinsicComponent<any>;
+  code: IntrinsicComponent<any>;
   link: IntrinsicComponent<LinkProps>;
   firstLetterSpan: boolean;
 }
@@ -137,8 +139,10 @@ export class MarkedReactRenderer implements MarkedRenderer {
   }
   paragraph(text: string) {
     this.paragraphCounter++;
-    const shouldMarkFirstLetter = this.renderOptions.firstLetterSpan && this.paragraphCounter === 1;
-    this.container.pushBlock(shouldMarkFirstLetter ? ParagraphWithFirstLetterSpan : 'p');
+    const shouldMarkFirstLetter = this.renderOptions.firstLetterSpan
+      && this.paragraphCounter === 1;
+    this.container.pushBlock(shouldMarkFirstLetter
+      ? ParagraphWithFirstLetterSpan : 'p');
     return EMPTY_STRING;
   }
   table(header: string, body: string) {
@@ -165,10 +169,10 @@ export class MarkedReactRenderer implements MarkedRenderer {
     return EMPTY_STRING;
   }
   codespan(code: string, lang?: string) {
-    const props = lang ? {
-      className: 'lang-' + lang
-    } : null;
-    this.container.pushInline(h('code', props, unescapeText(code)), false);
+    lang = lang === 'js' ? 'javascript' : lang;
+    this.container.pushInline(
+      h(this.renderOptions.code,
+        { language: lang }, unescapeText(code)), false);
     return EMPTY_STRING;
   }
   br() {

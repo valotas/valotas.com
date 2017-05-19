@@ -40,11 +40,27 @@ describe('createComponentTree', () => {
   });
 
   it('should render code blocks with a class derived from the language', () => {
-    const source = 'this is a\n\n```js\na code block\n```';
-    const markedText = marked(source).replace(/\n/g, '');
-    const expected = markedText.substr(markedText.indexOf('<pre'));
+    const source = [
+      'this is a',
+      '',
+      '```java',
+      'a code block',
+      '```'
+    ].join('\n');
     const html = renderToStaticMarkup(source);
-    expect(html).toContain(expected);
+    expect(html).toContain('<pre><code class="language-java">a code block</code></pre>');
+  });
+
+  it('should render code blocks with a javasscript class instead of js', () => {
+    const source = [
+      'this is a',
+      '',
+      '```js',
+      'a code block',
+      '```'
+    ].join('\n');
+    const html = renderToStaticMarkup(source);
+    expect(html).toContain('code class="language-javascript"');
   });
 
   it('should quotes with paragraphs', () => {
