@@ -42,7 +42,6 @@ export class _Aws {
   }
 
   putRule(rule: _RedirectRule) {
-    // console.log(`Uploading ${rule.toString()}`);
     const cmd = [
       'aws s3api put-object',
       '--acl public-read',

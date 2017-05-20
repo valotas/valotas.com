@@ -19,14 +19,13 @@ export function FormattedCode({
   const html = {
     __html: highlightCode(code, language)
   };
-  console.log(language, html);
   return (
     <code className={`language-${language}`} dangerouslySetInnerHTML={html} />
   );
 }
 
-function highlightCode(code, lang) {
-  const highlightLang = languages[lang === 'js' ? 'javascript' : lang];
+function highlightCode(code, lang = 'none') {
+  const highlightLang = languages[lang];
   if (!highlightLang) {
     return code;
   }

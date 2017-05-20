@@ -5,7 +5,7 @@ import { FormattedCode } from './FormattedCode';
 describe('FormattedCode', () => {
   it('should render formated the given code', () => {
     const html = render(<FormattedCode language='js' code='var x = "xxx";' />);
-    expect(html).toContain('<code class="language-javascript">');
+    expect(html).toContain('<code class="language-js">');
     expect(html).toContain('<span class="token keyword">var</span>');
     expect(html).toContain('<span class="token operator">=</span>');
     expect(html).toContain('<span class="token string">"xxx"</span>');
