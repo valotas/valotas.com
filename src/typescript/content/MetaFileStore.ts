@@ -1,6 +1,7 @@
 import { MetaFileData, Fetcher } from '../types';
 import { Article } from './Article';
 import { MetaFile, isValidMetaFile } from './MetaFile';
+import { Bus } from '../Bus';
 import { isString } from '../utils';
 import * as ex from '../exceptions';
 
@@ -8,8 +9,10 @@ function isArticle(input: any): input is Article {
   return input.key;
 }
 
+type MetaFileOrArray = MetaFile | MetaFile[];
+
 export class MetaFileStore {
-  private listeners: Function[] = [];
+  private bus: Bus<MetaFileOrArray> = new Bus();
 
   constructor(private fetcher: Fetcher) {
 
@@ -47,16 +50,12 @@ export class MetaFileStore {
       .then((json: any) => MetaFile.fromData(json as MetaFileData | MetaFileData[]));
   }
 
-  setMetaFile(meta: MetaFile | MetaFile[]) {
-    this.listeners.forEach((listener) => listener(meta));
+  setMetaFile(meta: MetaFileOrArray) {
+    this.bus.notify(meta);
     return meta;
   }
 
-  onChange(listener: (meta: MetaFile | MetaFile[]) => void) {
-    this.listeners.push(listener);
-    return () => {
-      const index = this.listeners.indexOf(listener);
-      this.listeners.splice(index, 1);
-    };
+  onChange(listener: (meta: MetaFileOrArray) => void) {
+    return this.bus.register(listener);
   }
 }
