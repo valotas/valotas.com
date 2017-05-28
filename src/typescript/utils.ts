@@ -1,3 +1,4 @@
+import { Moment } from 'moment';
 import * as base64 from 'base64-js';
 
 const TO_STRING = {to: 'string'};
@@ -35,7 +36,7 @@ function toString (bytes: number[]): string {
 }
 
 interface HasMoment {
-  moment(): moment.Moment;
+  moment(): Moment;
 }
 
 export function compareMoments(a: HasMoment, b: HasMoment): number {
