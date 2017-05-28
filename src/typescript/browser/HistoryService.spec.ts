@@ -1,3 +1,4 @@
+import { PageState } from '../PageState';
 import { HistoryService } from './HistoryService';
 
 describe('HistoryService', () => {

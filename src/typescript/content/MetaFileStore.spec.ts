@@ -1,3 +1,4 @@
+import { MetaFileData, Fetcher } from '../types';
 import { MetaFileStore } from './MetaFileStore';
 import { MetaFile } from './MetaFile';
 

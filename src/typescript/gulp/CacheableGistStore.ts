@@ -1,3 +1,4 @@
+import { Fetcher, MetaFileData } from '../types';
 import { GistStore } from '../content/GistStore';
 
 export class CacheableGistStore extends GistStore {

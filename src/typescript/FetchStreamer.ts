@@ -1,3 +1,4 @@
+import { Fetcher } from './types';
 import { BROWSER } from './browser/Browser';
 import { Bus } from './Bus';
 

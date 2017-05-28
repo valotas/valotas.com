@@ -1,11 +1,14 @@
 import * as through from 'through2';
 import * as path from 'path';
-import { isValidMetaFile } from '../content/MetaFile';
 import * as gutil from 'gulp-util';
-import { CacheableGistStore } from './CacheableGistStore';
-import { Page } from '../react/Page';
 import { h } from 'preact';
 import * as render from 'preact-render-to-string';
+import { GulpFile, Logger } from './gulp-types';
+import { Fetcher } from '../types';
+import { PackageJson } from '../PackageJson.factory';
+import { isValidMetaFile } from '../content/MetaFile';
+import { CacheableGistStore } from './CacheableGistStore';
+import { Page } from '../react/Page';
 import { NodeFetcher } from './NodeFetcher';
 
 export function createLayoutHtml(pkg: PackageJson, fetcher: Fetcher = null, logger: Logger = gutil) {

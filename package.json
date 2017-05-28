@@ -34,13 +34,12 @@
     "tslib": "^1.7.1",
     "tslint": "^5.2.0",
     "typescript": "^2.3.2",
-    "typings": "^2.1.1",
     "vinyl": "2.0.2",
     "vinyl-fs": "2.4.4",
     "yargs": "^8.0.1"
   },
   "scripts": {
-    "postinstall": "typings --version && typings install && npm rebuild node-sass",
+    "postinstall": "npm rebuild node-sass",
     "tsc": "tsc --version && tsc -p . -w",
     "build": "rm -rf build && gulp build",
     "dist": "rm -rf dist build && gulp dist",
@@ -58,11 +57,13 @@
     "start": "gulp play"
   },
   "dependencies": {
+    "@types/base64-js": "^1.2.5",
+    "@types/node-fetch": "^1.6.7",
     "base64-js": "1.2.0",
     "font-awesome": "^4.2.0",
     "foundation-sites": "6.2.1",
     "marked": "0.3.6",
-    "moment": "2.13.0",
+    "moment": "2.18.1",
     "preact": "^8.1.0",
     "preact-render-to-string": "^3.6.0",
     "prismjs": "^1.6.0",

@@ -2,6 +2,7 @@ import * as through from 'through2';
 import * as gutil from 'gulp-util';
 import Vinyl = require('vinyl'); // how to use import File from 'vinyl'?
 import * as path from 'path';
+import { Logger } from './gulp-types';
 import { MetaFile } from '../content/MetaFile';
 
 export function addMetafiles(logger: Logger = gutil) {

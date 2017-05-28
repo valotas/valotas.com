@@ -1,3 +1,5 @@
+import { MetaFileData, Fetcher } from '../types';
+import { PackageJson } from '../PackageJson.factory';
 import { h, Component } from 'preact';
 import { MetaFile } from '../content/MetaFile';
 import { LoadingBar } from './LoadingBar';
@@ -10,7 +12,7 @@ import { BROWSER } from '../browser/Browser';
 import { FetchStreamer } from '../FetchStreamer';
 import { LayoutMainContent } from './LayoutMainContent';
 
-interface PageProps {
+export interface PageProps {
   meta?: MetaFileData | MetaFileData[];
   metafileStore?: MetaFileStore;
   fetcher?: Fetcher;

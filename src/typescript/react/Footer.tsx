@@ -1,4 +1,5 @@
 import { h } from 'preact';
+import { PackageJson } from '../PackageJson.factory';
 import { Icon } from './Icon';
 
 interface FooterProps {

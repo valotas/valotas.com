@@ -1,4 +1,7 @@
-interface GulpFile {
+import { Article } from '../content/Article';
+import { MetaFileData } from '../types';
+
+export interface GulpFile {
   meta: MetaFileData|MetaFileData[];
   html?: string;
   article?: Article;
@@ -7,11 +10,6 @@ interface GulpFile {
   base: string;
 }
 
-interface Directory {
-  writeFile(fileName: string, data: string): Promise<string>;
-  readFile(fileName: string): Promise<string>;
-}
-
-interface Logger {
+export interface Logger {
   log(message?: any, ...optionalParams: any[]): void;
 }

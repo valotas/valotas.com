@@ -1,5 +1,17 @@
 import * as moment from 'moment';
+import { MetaFileData } from '../types';
 import { MetaFile } from './MetaFile';
+
+export interface Article {
+  title: string;
+  key: string;
+  meta: MetaFileData;
+  moment(): moment.Moment;
+  date(format?: string): string;
+  description(): string;
+  hasTweets(): boolean;
+}
+
 
 class ArticleImpl implements Article {
   title: string;

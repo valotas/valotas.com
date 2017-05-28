@@ -1,14 +1,16 @@
 import { render, h } from 'preact';
+import { Fetcher, MetaFileData } from './types';
+import { PackageJson } from './PackageJson.factory';
 import { MetaFile, isValidMetaFile } from './content/MetaFile';
 import { MetaFileStore } from './content/MetaFileStore';
-import { Page } from './react/Page';
+import { Page, PageProps } from './react/Page';
 import { inflate } from './utils';
 import { BROWSER } from './browser/Browser';
 import { loadWebFonts } from './browser/loadWebFonts';
 import { GistStore } from './content/GistStore';
 import { FetchStreamer } from './FetchStreamer';
 import { createGoogleAnalytics } from './browser/GoogleAnalytics';
-import { createPageState } from './PageState';
+import { createPageState, PageState } from './PageState';
 
 console.time('load');
 
@@ -38,13 +40,14 @@ BROWSER.ready(() => {
   console.debug('Infalted meta', meta);
 
   // Render the main react component
-  const el = h(Page, {
-    meta: meta,
-    metafileStore: metafileStore,
-    fetcher: fetcher,
+  const pageProps: PageProps = {
+    meta,
+    metafileStore,
+    fetcher,
     gistStore: new GistStore(fetcher, metafileStore, isValidMetaFile(meta) ? meta : null),
     pkg: BROWSER.prop('pkg') as PackageJson
-  });
+  };
+  const el = h(Page, pageProps);
   const root = BROWSER.query('#app');
   render(el, root, root.firstElementChild);
 });

@@ -1,5 +1,6 @@
 import * as through from 'through2';
 import * as path from 'path';
+import { GulpFile } from './gulp-types';
 import { isValidMetaFile } from '../content/MetaFile';
 
 export function adaptPaths() {

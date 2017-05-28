@@ -1,4 +1,5 @@
 import { h, Component } from 'preact';
+import { GistDescription } from '../types';
 import { GistStore } from '../content/GistStore';
 import { isPromise } from '../utils';
 import { Link } from './Link';

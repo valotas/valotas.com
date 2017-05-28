@@ -1,6 +1,7 @@
 import { compileFile } from 'pug';
 import * as through from 'through2';
 import * as gutil from 'gulp-util';
+import { GulpFile, Logger } from './gulp-types';
 import { deflate } from '../utils';
 import { createTitle } from '../titleFactory';
 import { createPackageJson } from '../PackageJson.factory';

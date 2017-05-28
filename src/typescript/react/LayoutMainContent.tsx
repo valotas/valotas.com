@@ -24,7 +24,6 @@ export function LayoutMainContent({ meta }: LayoutMainContentProps, { metafileSt
   return <ErrorWithHeader />;
 }
 
-
-function toArticles(arr: MetaFile[]): Article[] {
+function toArticles(arr: MetaFile[]) {
   return arr.map((input) => createArticle(input));
 }

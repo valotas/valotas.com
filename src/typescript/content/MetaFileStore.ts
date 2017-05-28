@@ -1,3 +1,5 @@
+import { MetaFileData, Fetcher } from '../types';
+import { Article } from './Article';
 import { MetaFile, isValidMetaFile } from './MetaFile';
 import { isString } from '../utils';
 import * as ex from '../exceptions';

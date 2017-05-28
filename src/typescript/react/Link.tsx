@@ -1,3 +1,4 @@
+import { Article } from '../content/Article';
 import { h, Component } from 'preact';
 import { MetaFileStore } from '../content/MetaFileStore';
 import { Icon } from './Icon';

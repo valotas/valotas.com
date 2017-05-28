@@ -1,8 +1,9 @@
 import * as path from 'path';
 import * as through from 'through2';
-import { createArticle } from '../content/Article';
+import { createArticle, Article } from '../content/Article';
 import { MetaFile, isValidMetaFile } from '../content/MetaFile';
 import { compareMoments } from '../utils';
+import { GulpFile, Logger } from './gulp-types';
 import File = require('vinyl'); // how to use import File from 'vinyl'?
 import * as gutil from 'gulp-util';
 

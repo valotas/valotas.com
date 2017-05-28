@@ -1,7 +1,14 @@
 import * as fs from 'vinyl-fs';
 import * as path from 'path';
 import * as through from 'through2';
-import { parseMetaFile, toArticle, adaptPaths, addMetafiles, createLayoutHtml } from './index';
+import { PackageJson } from '../PackageJson.factory';
+import {
+  parseMetaFile,
+  toArticle,
+  adaptPaths,
+  addMetafiles,
+  createLayoutHtml
+} from './index';
 
 describe('createLayoutHtml', () => {
   const pkg: PackageJson = {

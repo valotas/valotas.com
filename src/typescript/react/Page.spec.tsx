@@ -1,5 +1,6 @@
 import { h } from 'preact';
 import * as render from 'preact-render-to-string';
+import { PackageJson } from '../PackageJson.factory';
 import { Page } from './Page';
 import { MetaFile } from '../content/MetaFile';
 

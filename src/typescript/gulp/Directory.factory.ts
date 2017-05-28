@@ -1,5 +1,10 @@
 import * as fs from 'fs';
 
+export interface Directory {
+  writeFile(fileName: string, data: string): Promise<string>;
+  readFile(fileName: string): Promise<string>;
+}
+
 function writeFile(name: string, data: string): Promise<string> {
   return new Promise((resolve, reject) => {
     fs.open(name, 'w+', (err, fd) => {

@@ -1,3 +1,4 @@
+import { MetaFileData } from './types';
 import { VALOTAS, isArray } from './utils';
 
 export function createTitle(meta?: MetaFileData | MetaFileData[]) {

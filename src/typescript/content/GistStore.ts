@@ -1,3 +1,4 @@
+import { MetaFileData, Fetcher, GistDescription } from '../types';
 import { MetaFile, isValidMetaFile } from './MetaFile';
 import { MetaFileStore } from './MetaFileStore';
 

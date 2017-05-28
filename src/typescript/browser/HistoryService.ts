@@ -1,3 +1,4 @@
+import { PageState } from '../PageState';
 import { BROWSER } from './Browser';
 import { Bus } from '../Bus';
 

@@ -1,5 +1,6 @@
 import * as moment from 'moment';
 import * as ex from '../exceptions';
+import { MetaFileData, MetaFileType, GistContent } from '../types';
 import { isArray } from '../utils';
 
 const DASHES = /\n?---/;

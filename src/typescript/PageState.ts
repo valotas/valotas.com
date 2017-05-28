@@ -1,5 +1,12 @@
+import { MetaFileData } from './types';
 import { VALOTAS, isArray } from './utils';
 import { createTitle } from './titleFactory';
+
+export interface PageState {
+  meta: MetaFileData | MetaFileData[];
+  title: string;
+  path: string;
+}
 
 class PageStateImpl implements PageState {
   public title: string;

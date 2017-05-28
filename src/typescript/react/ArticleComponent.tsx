@@ -1,3 +1,4 @@
+import { Article } from '../content/Article';
 import { h, Component } from 'preact';
 import { Icon } from './Icon';
 import { Link } from './Link';
