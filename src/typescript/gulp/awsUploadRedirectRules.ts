@@ -19,7 +19,7 @@ export class _RedirectRule {
   }
 
   redirectLocation() {
-    return `/${this.file.path}/`;
+    return `https://valotas.com/${this.file.path}/`;
   }
 
   toString() {

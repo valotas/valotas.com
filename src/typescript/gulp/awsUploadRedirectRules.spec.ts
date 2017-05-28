@@ -62,7 +62,7 @@ describe('_RedirectRule', () => {
 
       const actual = rule.redirectLocation();
 
-      expect(actual).toEqual(`/the-path/`);
+      expect(actual).toEqual(`https://valotas.com/the-path/`);
     });
   });
 });
@@ -91,7 +91,7 @@ describe('_Aws', () => {
             '--bucket "the-site.com"',
             '--key "2015/08/the-path.html"',
             '--expires "Tue, 21 Nov 2017 19:43:31 GTM"',
-            '--website-redirect-location "/the-path/"'
+            '--website-redirect-location "https://valotas.com/the-path/"'
           ].join(' '));
           done();
         })
