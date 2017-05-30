@@ -2,10 +2,6 @@
 # yarn lockfile v1
 
 
-"@types/base64-js@^1.2.5":
-  version "1.2.5"
-  resolved "https://registry.yarnpkg.com/@types/base64-js/-/base64-js-1.2.5.tgz#582b2476169a6cba460a214d476c744441d873d5"
-
 "@types/chalk@*":
   version "0.4.31"
   resolved "https://registry.yarnpkg.com/@types/chalk/-/chalk-0.4.31.tgz#a31d74241a6b1edbb973cf36d97a2896834a51f9"
@@ -327,7 +323,7 @@ babel-code-frame@^6.22.0:
     esutils "^2.0.2"
     js-tokens "^3.0.0"
 
-babel-core@^6.18.2, babel-core@^6.24.1:
+babel-core@^6.24.1:
   version "6.24.1"
   resolved "https://registry.yarnpkg.com/babel-core/-/babel-core-6.24.1.tgz#8c428564dce1e1f41fb337ec34f4c3b022b5ad83"
   dependencies:
@@ -384,15 +380,15 @@ babel-messages@^6.23.0:
   dependencies:
     babel-runtime "^6.22.0"
 
-babel-plugin-transform-amd-system-wrapper@^0.3.3:
-  version "0.3.4"
-  resolved "https://registry.yarnpkg.com/babel-plugin-transform-amd-system-wrapper/-/babel-plugin-transform-amd-system-wrapper-0.3.4.tgz#8d85dda78a300bf89b3b89167b6eabe7648c8a1a"
+babel-plugin-transform-amd-system-wrapper@^0.3.7:
+  version "0.3.7"
+  resolved "https://registry.yarnpkg.com/babel-plugin-transform-amd-system-wrapper/-/babel-plugin-transform-amd-system-wrapper-0.3.7.tgz#521c782d35644491c979ea683e8a5e1caff0ba42"
   dependencies:
     babel-template "^6.9.0"
 
-babel-plugin-transform-cjs-system-wrapper@^0.6.0:
-  version "0.6.0"
-  resolved "https://registry.yarnpkg.com/babel-plugin-transform-cjs-system-wrapper/-/babel-plugin-transform-cjs-system-wrapper-0.6.0.tgz#e6eddad07b0412a103fe3667f13a48824ba8fba9"
+babel-plugin-transform-cjs-system-wrapper@^0.6.2:
+  version "0.6.2"
+  resolved "https://registry.yarnpkg.com/babel-plugin-transform-cjs-system-wrapper/-/babel-plugin-transform-cjs-system-wrapper-0.6.2.tgz#bd7494775289424ff493b6ed455de495bd71ba1d"
   dependencies:
     babel-template "^6.9.0"
 
@@ -404,9 +400,9 @@ babel-plugin-transform-es2015-modules-systemjs@^6.6.5:
     babel-runtime "^6.11.6"
     babel-template "^6.14.0"
 
-babel-plugin-transform-global-system-wrapper@^0.3.0:
-  version "0.3.0"
-  resolved "https://registry.yarnpkg.com/babel-plugin-transform-global-system-wrapper/-/babel-plugin-transform-global-system-wrapper-0.3.0.tgz#ddea2a2dc3f802593bdc0d026edb887763a53d6a"
+babel-plugin-transform-global-system-wrapper@^0.3.4:
+  version "0.3.4"
+  resolved "https://registry.yarnpkg.com/babel-plugin-transform-global-system-wrapper/-/babel-plugin-transform-global-system-wrapper-0.3.4.tgz#948dd7d29fc21447e39bd3447f2debc7f2f73aac"
   dependencies:
     babel-template "^6.9.0"
 
@@ -4649,15 +4645,15 @@ swap-case@^1.1.0:
     lower-case "^1.1.1"
     upper-case "^1.1.1"
 
-systemjs-builder@0.16.4:
-  version "0.16.4"
-  resolved "https://registry.yarnpkg.com/systemjs-builder/-/systemjs-builder-0.16.4.tgz#516b3451c191fa17eb598f6e0254990b9aa97432"
+systemjs-builder@0.16.6:
+  version "0.16.6"
+  resolved "https://registry.yarnpkg.com/systemjs-builder/-/systemjs-builder-0.16.6.tgz#4204c5b70099dd5adc417a8288b4c3d2cf8f9565"
   dependencies:
-    babel-core "^6.18.2"
-    babel-plugin-transform-amd-system-wrapper "^0.3.3"
-    babel-plugin-transform-cjs-system-wrapper "^0.6.0"
+    babel-core "^6.24.1"
+    babel-plugin-transform-amd-system-wrapper "^0.3.7"
+    babel-plugin-transform-cjs-system-wrapper "^0.6.2"
     babel-plugin-transform-es2015-modules-systemjs "^6.6.5"
-    babel-plugin-transform-global-system-wrapper "^0.3.0"
+    babel-plugin-transform-global-system-wrapper "^0.3.4"
     babel-plugin-transform-system-register "^0.0.1"
     bluebird "^3.3.4"
     data-uri-to-buffer "0.0.4"
@@ -4670,9 +4666,9 @@ systemjs-builder@0.16.4:
     traceur "0.0.105"
     uglify-js "^2.6.1"
 
-systemjs@0.20.12:
-  version "0.20.12"
-  resolved "https://registry.yarnpkg.com/systemjs/-/systemjs-0.20.12.tgz#135cc471280448453347829ebb9639a09a67f101"
+systemjs@0.20.13:
+  version "0.20.13"
+  resolved "https://registry.yarnpkg.com/systemjs/-/systemjs-0.20.13.tgz#adcdee167291996e54e8c9ede62da6d50c7f130f"
 
 systemjs@^0.19.46:
   version "0.19.47"

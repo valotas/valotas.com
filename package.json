@@ -7,7 +7,7 @@
     "@types/gulp-util": "^3.0.29",
     "@types/jasmine": "^2.5.38",
     "@types/marked": "^0.0.28",
-    "@types/node": "^6.0.46",
+    "@types/node": "^7.0.22",
     "@types/pug": "^2.0.3",
     "@types/through2": "^2.0.32",
     "@types/vinyl-fs": "^2.4.5",
@@ -29,7 +29,7 @@
     "node-progress": "^0.1.0",
     "pug": "^2.0.0-rc.1",
     "rimraf": "2.6.1",
-    "systemjs-builder": "0.16.4",
+    "systemjs-builder": "0.16.6",
     "through2": "2.0.3",
     "tslib": "^1.7.1",
     "tslint": "^5.2.0",
@@ -66,7 +66,7 @@
     "preact": "^8.1.0",
     "preact-render-to-string": "^3.6.0",
     "prismjs": "^1.6.0",
-    "systemjs": "0.20.12"
+    "systemjs": "0.20.13"
   },
   "eslintConfig": {
     "root": true,
