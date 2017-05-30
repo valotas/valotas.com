@@ -1,6 +1,6 @@
 import { render, h } from 'preact';
 import { Fetcher, MetaFileData } from './types';
-import { PackageJson } from './PackageJson.factory';
+import { PackageJson } from './PackageJson';
 import { MetaFile, isValidMetaFile } from './content/MetaFile';
 import { MetaFileStore } from './content/MetaFileStore';
 import { Page, PageProps } from './react/Page';

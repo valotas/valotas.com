@@ -5,7 +5,7 @@ import { h } from 'preact';
 import * as render from 'preact-render-to-string';
 import { GulpFile, Logger } from './gulp-types';
 import { Fetcher } from '../types';
-import { PackageJson } from '../PackageJson.factory';
+import { PackageJson } from '../PackageJson';
 import { isValidMetaFile } from '../content/MetaFile';
 import { CacheableGistStore } from './CacheableGistStore';
 import { Page } from '../react/Page';

@@ -8,14 +8,12 @@ export interface PageState {
   path: string;
 }
 
-class PageStateImpl implements PageState {
-  public title: string;
-  public path: string;
-
-  constructor(public meta: MetaFileData | MetaFileData[]) {
-    this.title = createTitle(meta);
-    this.path = createPath(meta);
-  }
+export function createPageState(meta: MetaFileData | MetaFileData[]): PageState {
+  return {
+    meta,
+    title: createTitle(meta),
+    path: createPath(meta)
+  };
 }
 
 function createPath(meta: MetaFileData | MetaFileData[]) {
@@ -23,8 +21,4 @@ function createPath(meta: MetaFileData | MetaFileData[]) {
     return `/${meta.path}/`;
   }
   return '/';
-}
-
-export function createPageState(meta: MetaFileData | MetaFileData[]): PageState {
-  return new PageStateImpl(meta);
 }

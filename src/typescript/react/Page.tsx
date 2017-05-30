@@ -1,5 +1,5 @@
 import { MetaFileData, Fetcher } from '../types';
-import { PackageJson } from '../PackageJson.factory';
+import { PackageJson } from '../PackageJson';
 import { h, Component } from 'preact';
 import { MetaFile } from '../content/MetaFile';
 import { LoadingBar } from './LoadingBar';

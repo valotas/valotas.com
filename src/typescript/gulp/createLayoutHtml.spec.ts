@@ -1,7 +1,7 @@
 import * as fs from 'vinyl-fs';
 import * as path from 'path';
 import * as through from 'through2';
-import { PackageJson } from '../PackageJson.factory';
+import { PackageJson } from '../PackageJson';
 import {
   parseMetaFile,
   toArticle,

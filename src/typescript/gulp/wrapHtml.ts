@@ -4,7 +4,7 @@ import * as gutil from 'gulp-util';
 import { GulpFile, Logger } from './gulp-types';
 import { deflate } from '../utils';
 import { createTitle } from '../titleFactory';
-import { createPackageJson } from '../PackageJson.factory';
+import { createPackageJson } from '../PackageJson';
 
 export function wrapHtml(templateFile, pkg, logger: Logger = gutil) {
   const packageJson = JSON.stringify(createPackageJson(pkg));

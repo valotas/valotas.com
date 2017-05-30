@@ -1,7 +1,7 @@
 import * as fs from 'fs';
 import { NodeFetcher } from './NodeFetcher';
 import { isPromise } from '../utils';
-import { createDirectory } from './Directory.factory';
+import { createDirectory } from './Directory';
 
 describe('NodeFetcher', () => {
   const body = 'body text';

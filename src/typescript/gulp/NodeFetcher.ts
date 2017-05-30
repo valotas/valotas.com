@@ -1,7 +1,7 @@
 import nfetch = require('node-fetch');
 import { Fetcher, Fetch } from '../types';
 import { Logger } from './gulp-types';
-import { createDirectory, Directory } from './Directory.factory';
+import { createDirectory, Directory } from './Directory';
 import { isString } from '../utils';
 
 export class NodeFetcher implements Fetcher {
