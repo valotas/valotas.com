@@ -56,7 +56,7 @@ class DirectoryImpl {
 }
 
 export function createDirectory(dir: string): Directory {
-  const openedDirectory = new Promise((resolve, reject) => {
+  const openedDirectory = new Promise<string>((resolve, reject) => {
     fs.mkdir(dir, (err) => {
       if (err && err.code !== 'EEXIST') {
         reject(err);
