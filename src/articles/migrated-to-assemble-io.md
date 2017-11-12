@@ -28,7 +28,7 @@ In fact the whole site is a simple [git repository][valotas-com-git] that I can 
 Surprisingly (or not) the site became much faster (plain html with css and only google analytice as javascript) and it is responsive something that blogger lacks for the moment.
 
 That is all, enjoy my new web home :)
- 
+
 [raspberrypi]: http://www.raspberrypi.org/
 [wysiwyg]: http://en.wikipedia.org/wiki/WYSIWYG
 [markdown]: http://daringfireball.net/projects/markdown/
@@ -40,5 +40,5 @@ That is all, enjoy my new web home :)
 [ruby]: https://www.ruby-lang.org/en/
 [grunt]: http://gruntjs.com/
 [gulp]: http://gulpjs.com/
-[assmeble-io]: http://assemble.io/
+[assemble-io]: http://assemble.io/
 [valotas-com-git]: https://github.com/valotas/valotas.com
