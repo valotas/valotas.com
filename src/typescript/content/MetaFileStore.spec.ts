@@ -16,7 +16,7 @@ describe('MetaFileStore', () => {
   });
 
   it('should have a way to add new listeners', () => {
-    store.onChange(function () { });
+    store.onChange(() => { });
   });
 
   it('should have provide a way to load new metafiles', () => {
@@ -28,7 +28,7 @@ describe('MetaFileStore', () => {
     expect(store._loadMetaFile).toHaveBeenCalledWith('/123/meta.json');
   });
 
-  it('should notify the listeners of newly loaded metafiles', (done) => {
+  it('should notify the listeners of newly loaded metafiles', done => {
     const meta = new MetaFile();
     const listener = jasmine.createSpy('listener');
     spyOn(store, '_loadMetaFile').and.returnValue(Promise.resolve(meta));
@@ -41,7 +41,7 @@ describe('MetaFileStore', () => {
       .then(done);
   });
 
-  it('should return a function to deregister listener', (done) => {
+  it('should return a function to deregister listener', done => {
     const meta = new MetaFile();
     const listener = jasmine.createSpy('listener');
     spyOn(store, '_loadMetaFile').and.returnValue(Promise.resolve(meta));
@@ -91,7 +91,7 @@ describe('MetaFileStore', () => {
 
     let body;
 
-    it('should fetch the meta.json', (done) => {
+    it('should fetch the meta.json', done => {
       body = {
         json: function () {
           return Promise.resolve(meta1);
@@ -101,14 +101,14 @@ describe('MetaFileStore', () => {
 
       store
         .load('any')
-        .then((actual) => {
+        .then(actual => {
           expect(actual).toEqual(new MetaFile(meta1));
           expect(fetcher.fetch).toHaveBeenCalledWith('/any/meta.json');
         })
         .then(done);
     });
 
-    it('should also allow arrays of metafiles', (done) => {
+    it('should also allow arrays of metafiles', done => {
       body = {
         json: function () {
           return Promise.resolve([meta1, meta2]);
@@ -118,7 +118,7 @@ describe('MetaFileStore', () => {
 
       store
         .load('any')
-        .then((actual) => {
+        .then(actual => {
           expect(actual).toEqual([new MetaFile(meta1), new MetaFile(meta2)]);
         })
         .then(done);

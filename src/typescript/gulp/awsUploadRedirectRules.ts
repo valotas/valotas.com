@@ -5,7 +5,6 @@ import * as ProgressBar from 'progress';
 import { MetaFile } from '../content/MetaFile';
 import promisify from './promisify';
 
-// tslint:disable-next-line class-name
 export class _RedirectRule {
   constructor(private file: MetaFile) { }
 
@@ -29,7 +28,6 @@ export class _RedirectRule {
 
 const HTTP_DATE_FORMAT = 'ddd, DD MMM YYYY HH:mm:ss';
 
-// tslint:disable-next-line class-name
 export class _Aws {
   private expires: string;
   private exec: (...args) => Promise<any>;
@@ -84,6 +82,7 @@ if (shouldExecute) {
       });
     })
     .catch(err => {
+      // eslint-disable-next-line no-console
       console.error(err);
     });
 }

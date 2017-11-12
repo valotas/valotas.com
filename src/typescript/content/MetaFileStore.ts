@@ -21,9 +21,7 @@ export class MetaFileStore {
   load(input: string | Article) {
     const url = this._createUrl(input);
     return this._loadMetaFile(url)
-      .then((meta) => {
-        return this.setMetaFile(meta);
-      });
+      .then(meta => this.setMetaFile(meta));
   }
 
   _createUrl(input: string | Article) {
@@ -46,7 +44,7 @@ export class MetaFileStore {
   _loadMetaFile(url: string) {
     return this.fetcher
       .fetch(url)
-      .then((body) => body.json())
+      .then(body => body.json())
       .then((json: any) => MetaFile.fromData(json as MetaFileData | MetaFileData[]));
   }
 

@@ -22,7 +22,7 @@ describe('createLayoutHtml', () => {
     }
   };
 
-  it('should add an html with the rendered layout to the given file', (done) => {
+  it('should add an html with the rendered layout to the given file', done => {
     fs.src(['src/articles/better-angular-*.md'], {
       base: path.join(__dirname, '../../')
     })
@@ -35,7 +35,7 @@ describe('createLayoutHtml', () => {
       .on('finish', done);
   });
 
-  it('should not add the html attribute if no meta attribute is found', (done) => {
+  it('should not add the html attribute if no meta attribute is found', done => {
     fs.src(['src/robots.txt'], {
       base: path.join(__dirname, '../../')
     })

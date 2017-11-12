@@ -25,5 +25,5 @@ export function LayoutMainContent({ meta }: LayoutMainContentProps, { metafileSt
 }
 
 function toArticles(arr: MetaFile[]) {
-  return arr.map((input) => createArticle(input));
+  return arr.map(input => createArticle(input));
 }

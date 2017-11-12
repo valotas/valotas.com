@@ -15,6 +15,6 @@ export class CacheableGistStore extends GistStore {
   }
 
   all() {
-    return Promise.all(Object.keys(this.promises).map((k) => this.promises[k]));
+    return Promise.all(Object.keys(this.promises).map(k => this.promises[k]));
   }
 }

@@ -10,7 +10,7 @@ const noopLogger = {
 };
 
 describe('parseMetaFile', () => {
-  it('should parse the meta as yalm', (done) => {
+  it('should parse the meta as yalm', done => {
     fs.src(['src/articles/tomcat-initd-*.md'], {
       base: path.join(__dirname, '../../')
     })
@@ -26,7 +26,7 @@ describe('parseMetaFile', () => {
       .on('finish', done);
   });
 
-  it('should not pass non published files to the pipe chain', (done) => {
+  it('should not pass non published files to the pipe chain', done => {
     let chunk;
     fs.src(['src/articles/documenting-code.md'], {
       base: path.join(__dirname, '../../')
@@ -44,7 +44,7 @@ describe('parseMetaFile', () => {
 });
 
 describe('toArticle', () => {
-  it('should add an article/meta property to the given chunk', (done) => {
+  it('should add an article/meta property to the given chunk', done => {
     fs.src(['src/articles/getters-and-setters.md'], {
       base: path.join(__dirname, '../../')
     })
@@ -59,7 +59,7 @@ describe('toArticle', () => {
       .on('finish', done);
   });
 
-  it('should not be applied no mdfile is available', (done) => {
+  it('should not be applied no mdfile is available', done => {
     fs.src(['src/articles/tomcat-initd-*.md'], {
       base: path.join(__dirname, '../../')
     })
@@ -73,7 +73,7 @@ describe('toArticle', () => {
 });
 
 describe('adaptPaths', () => {
-  it('should adapt the path of the given chunk if it is an md file', (done) => {
+  it('should adapt the path of the given chunk if it is an md file', done => {
     fs.src(['src/articles/tomcat-initd-*.md'], {
       base: path.join(__dirname, '../../')
     })
@@ -88,7 +88,7 @@ describe('adaptPaths', () => {
 });
 
 describe('addMetafiles', () => {
-  it('should add a meta.json for each file with a meta property containing it', (done) => {
+  it('should add a meta.json for each file with a meta property containing it', done => {
     let counter = 0;
     fs.src(['src/articles/tomcat-initd-*.md'], {
       base: path.join(__dirname, '../../')
@@ -110,7 +110,7 @@ describe('addMetafiles', () => {
 });
 
 describe('addIndex', () => {
-  it('should add an index.html and error.html', (done) => {
+  it('should add an index.html and error.html', done => {
     const paths = [];
     fs.src(['src/articles/tomcat-initd-*.md'], {
       base: path.join(__dirname, '../../')

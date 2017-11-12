@@ -15,12 +15,12 @@ function execTsc({ watch }, cb) {
   const child = spawn(cmd, args);
   if (cb) {
     child.on('error', cb);
-    child.on('close', (code) => {
+    child.on('close', code => {
       const err = code !== 0 ? new Error(`Could not execute 'tsc ${args.join(' ')}'`) : null;
       cb(err);
     });
   }
-  child.stdout.on('data', (data) => {
+  child.stdout.on('data', data => {
     data = data.toString().trim();
     if (!data) {
       return;
@@ -32,7 +32,7 @@ function execTsc({ watch }, cb) {
 }
 
 module.exports = {
-  task: () => (cb) => {
+  task: () => cb => {
     execTsc({}, cb);
   },
   watch: () => {
@@ -42,7 +42,7 @@ module.exports = {
     const conf = createSystemConfig(basepath + '/');
     const builder = new Builder(conf);
 
-    return (cb) => {
+    return cb => {
       builder.buildStatic('./build/typescript/main.js', './build/assets/bundle.js', {
         runtime: false,
         minify: !argv.skipMinify

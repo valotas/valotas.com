@@ -11,7 +11,7 @@ function writeFile(name: string, data: string): Promise<string> {
       if (err) {
         reject(err);
       }
-      fs.writeFile(name, data, (err) => {
+      fs.writeFile(name, data, err => {
         if (err) {
           reject(err);
         } else {
@@ -41,14 +41,14 @@ class DirectoryImpl {
   }
 
   writeFile(fileName: string, data: string): Promise<string> {
-    return this.opened.then((path) => {
+    return this.opened.then(path => {
       const name = `${path}/${fileName}`;
       return writeFile(name, data);
     });
   }
 
   readFile(fileName: string): Promise<string> {
-    return this.opened.then((path) => {
+    return this.opened.then(path => {
       const name = `${path}/${fileName}`;
       return readFile(name);
     });
@@ -57,7 +57,7 @@ class DirectoryImpl {
 
 export function createDirectory(dir: string): Directory {
   const openedDirectory = new Promise<string>((resolve, reject) => {
-    fs.mkdir(dir, (err) => {
+    fs.mkdir(dir, err => {
       if (err && err.code !== 'EEXIST') {
         reject(err);
       } else {

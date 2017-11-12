@@ -1,9 +1,9 @@
 /*eslint-env browser*/
 /*eslint-disable no-var*/
-/*global System*/
-'use strict';
+/*global System, module*/
 
 (function (g) {
+  'use strict';
 
   function createConfig(prefix) {
     var pre = prefix || '/';

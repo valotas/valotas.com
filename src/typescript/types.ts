@@ -1,3 +1,4 @@
+/* eslint-disable no-undef */
 import { Moment } from 'moment';
 
 export type Fetch = (url: RequestInfo, init?: RequestInit) => Promise<Response>;

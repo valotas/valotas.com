@@ -54,7 +54,7 @@ export class ArticleComponent extends Component<ArticleProps, {}> {
     if (!this.props.article.hasTweets()) {
       return;
     }
-    loadTwitter().then((twttr) => {
+    loadTwitter().then(twttr => {
       twttr.widgets.load();
     });
   }

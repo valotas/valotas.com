@@ -4,7 +4,7 @@ import { VALOTAS } from '../utils';
 import { Link } from './Link';
 import { Icon } from './Icon';
 
-export function ErrorWithHeader({ }, { metafileStore }) {
+export function ErrorWithHeader(_, { metafileStore }) {
   return (
     <div>
       <Header title={VALOTAS} subtitle='Things to remember | Programming stuff :)' />

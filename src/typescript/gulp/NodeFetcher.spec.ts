@@ -26,21 +26,21 @@ describe('NodeFetcher', () => {
   });
 
   describe('fetch', () => {
-    it('should delegate the call to given fetcher', (done) => {
+    it('should delegate the call to given fetcher', done => {
       const fetcherSpy = spyOn(dummyFetcher, 'fetch').and.callThrough();
       const url = `http://some/url/to/fetch/${random}`;
       const actual = fetcher.fetch(url);
 
       // expect(fetcherSpy).toHaveBeenCalledWith(url);
       actual
-        .then((data) => data.text())
-        .then((text) => {
+        .then(data => data.text())
+        .then(text => {
           expect(text).toEqual(body);
         })
         .then(done, done.fail);
     });
 
-    it('should cache the returned output', (done) => {
+    it('should cache the returned output', done => {
       const url = `some/url/to/fetch/${random}`;
 
       fetcher.fetch(url)
@@ -48,23 +48,19 @@ describe('NodeFetcher', () => {
           const directory = createDirectory(dir);
           return directory.readFile(url.replace(/\//g, '-'));
         })
-        .then((data) => {
+        .then(data => {
           expect(data).toEqual(body);
         })
         .then(done, done.fail);
     });
 
-    it('should not delegate calls to given fetcher once the response is cached', (done) => {
+    it('should not delegate calls to given fetcher once the response is cached', done => {
       const url = `some/url/to/fetch/${random}`;
       const fetchSpy = spyOn(dummyFetcher, 'fetch').and.callThrough();
 
       fetcher.fetch(url)
-        .then(() => {
-          return fetcher.fetch(url);
-        })
-        .then((data) => {
-          return fetcher.fetch(url);
-        })
+        .then(() => fetcher.fetch(url))
+        .then(data => fetcher.fetch(url))
         .then(() => {
           expect(fetchSpy.calls.count()).toBe(1);
         })

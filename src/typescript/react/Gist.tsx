@@ -43,7 +43,7 @@ export class Gist extends Component<GistProps, GistState> {
     if (!this.contentPromise) {
       return;
     }
-    this.contentPromise.then((content) => {
+    this.contentPromise.then(content => {
       this.setState(createState(content, this.props));
     });
   }

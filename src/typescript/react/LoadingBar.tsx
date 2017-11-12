@@ -27,9 +27,9 @@ export class LoadingBar extends Component<any, LoadingBarState> {
   }
 
   componentDidMount() {
-    this.onFetchRegistration = this.context.fetcher.onFetch((promise) => {
+    this.onFetchRegistration = this.context.fetcher.onFetch(promise => {
       this.add(1);
-      promise.then((result) => {
+      promise.then(result => {
         setTimeout(() => {
           this.add(-1);
         }, 15);
@@ -63,7 +63,7 @@ export class LoadingBar extends Component<any, LoadingBarState> {
     return true;
   }
 
-  render({ }, { loading }) {
+  render(_, { loading }) {
     const classNames = `loading-bar ${loading ? 'loading' : ''}`;
     return (
       <div className={classNames}>

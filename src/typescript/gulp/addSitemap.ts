@@ -7,11 +7,11 @@ export function addSitemap() {
   const sitemap: string[] = [];
   let cwd;
   let enc;
-  return through.obj(function (file, enc, callback) {
+  return through.obj(function (file, fileEnc, callback) {
     const meta = file.meta;
     if (meta) {
       cwd = file.cwd;
-      enc = enc;
+      enc = fileEnc;
       sitemap.push(createSitemapEntry(meta));
     }
     callback(null, file);

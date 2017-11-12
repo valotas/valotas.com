@@ -15,10 +15,10 @@ export function createLayoutHtml(pkg: PackageJson, fetcher: Fetcher = null, logg
   const actualFetcher = fetcher || new NodeFetcher(null, '/tmp/valotas.com.createLayoutHtml', logger);
   return through.obj(function (file: GulpFile, enc, callback) {
     if (file.meta) {
-      renderLayout(file, actualFetcher, pkg).then((html) => {
+      renderLayout(file, actualFetcher, pkg).then(html => {
         file.html = html;
         callback(null, file);
-      }, (er) => {
+      }, er => {
         logger.log('Could not create html', file.path, er);
         callback(er);
       });
@@ -45,6 +45,6 @@ function renderLayout(file: GulpFile, fetcher: Fetcher, pkg: PackageJson): Promi
     return Promise.reject(ex);
   }
   return store.all()
-    .then((all) => render(page));
+    .then(all => render(page));
 }
 

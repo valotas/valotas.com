@@ -115,7 +115,7 @@ export class MarkedReactRenderer implements MarkedRenderer {
 
   html(html: string) {
     const block = this.renderOptions.html
-      .map((t) => t(html))
+      .map(t => t(html))
       .filter(notNull)[0];
     this.container.pushBlock(block.type, block.props);
     return EMPTY_STRING;

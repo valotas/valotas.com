@@ -14,16 +14,16 @@ export class NodeFetcher implements Fetcher {
   fetch(url: string | Request, init?: RequestInit) {
     const fileName = createCacheFileName(url);
     return this.cache.readFile(fileName)
-      .then(createResponse, (err) => this.fetchAndCache(fileName, url, init));
+      .then(createResponse, err => this.fetchAndCache(fileName, url, init));
   }
 
   private fetchAndCache(fileName: string, url: string | Request, init?: RequestInit) {
     const fetch = (this.delegate ? this.delegate.fetch : nfetch) as Fetch;
     return fetch(url, init)
-      .then((resp) => resp.text())
-      .then((text) => this.cache.writeFile(fileName, text))
+      .then(resp => resp.text())
+      .then(text => this.cache.writeFile(fileName, text))
       .then(createResponse)
-      .catch((e) => {
+      .catch(e => {
         if (e.code !== 'ENOTFOUND') {
           throw e;
         }
@@ -35,7 +35,7 @@ export class NodeFetcher implements Fetcher {
 
 function createCacheFileName(urlOrRequest: string | Request) {
   const url = isString(urlOrRequest) ? urlOrRequest : urlOrRequest.url;
-  return url.replace(/\:|\//g, '-');
+  return url.replace(/:|\//g, '-');
 }
 
 function createResponse(text: string): Response {

@@ -25,7 +25,7 @@ function Title({ title }) {
 
 function PreCode(props) {
   const dataProps = {};
-  Object.keys(props).forEach((key) => {
+  Object.keys(props).forEach(key => {
     if (key.indexOf('data-') === 0) {
       dataProps[key] = props[key];
     }

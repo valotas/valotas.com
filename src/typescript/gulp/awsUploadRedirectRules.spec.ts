@@ -1,3 +1,4 @@
+/* eslint-env jasmine */
 import * as cp from 'child_process';
 import * as moment from 'moment';
 import { MetaFile } from '../content/MetaFile';
@@ -72,7 +73,7 @@ describe('_Aws', () => {
   describe('putRule', () => {
     const now = moment('2017-08-23T19:43:31');
 
-    it('executes aws s3api put-object', (done) => {
+    it('executes aws s3api put-object', done => {
       const meta = new MetaFile();
       meta.published = true;
       meta.date = '2015-08-24';
@@ -84,7 +85,7 @@ describe('_Aws', () => {
 
       const aws = new _Aws('the-site.com', now);
       aws.putRule(new _RedirectRule(meta))
-        .then((cmd) => {
+        .then(cmd => {
           expect(cmd).toEqual([
             'aws s3api put-object',
             '--acl public-read',

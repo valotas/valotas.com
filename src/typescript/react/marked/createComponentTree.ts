@@ -16,7 +16,7 @@ export function createComponentTree(html: string, options = { firstLetterSpan: f
   return renderer.createComponentTree(html);
 }
 
-const GIST_SCRIPT = /script.*src=.*gist.github.com\/(([^\/]*)\/)?(([^\?]*)\.js(on)?)(\?(file=([^"]*)))?/;
+const GIST_SCRIPT = /script.*src=.*gist.github.com\/(([^/]*)\/)?(([^?]*)\.js(on)?)(\?(file=([^"]*)))?/;
 
 function htmlToGistTransformer(html: string) {
   const matches = GIST_SCRIPT.exec(html);

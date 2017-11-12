@@ -28,7 +28,7 @@ export class Link extends Component<LinkProps, any> {
     return href;
   }
 
-  private handleClick = (e) => {
+  private handleClick = e => {
     const { href, target } = this.props;
     if (href === '#') {
       e.preventDefault();

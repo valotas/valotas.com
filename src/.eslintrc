@@ -3,10 +3,12 @@
     "ecmaVersion": 6,
     "sourceType": "module",
     "ecmaFeatures": {
-      "modules": true
+      "modules": true,
+      "jsx": true
     }
   },
   "rules": {
+    "no-undef": 0,
     "no-unused-vars": 0,
     "typescript/no-unused-vars": 2
   }

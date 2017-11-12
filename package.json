@@ -81,7 +81,10 @@
       "es6": true
     },
     "rules": {
-      "arrow-parens": 2,
+      "arrow-parens": [
+        2,
+        "as-needed"
+      ],
       "arrow-spacing": 2,
       "comma-dangle": [
         2,

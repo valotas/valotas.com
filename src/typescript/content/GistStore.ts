@@ -8,7 +8,7 @@ export class GistStore {
     if (!metafileStore) {
       return;
     }
-    metafileStore.onChange((current) => {
+    metafileStore.onChange(current => {
       this.meta = isValidMetaFile(current) ? current : null;
     });
   }
@@ -24,7 +24,7 @@ export class GistStore {
     }
     const url = this.createUrl(input);
     return this._load(url)
-      .then((content) => {
+      .then(content => {
         this.meta.gists.push({
           content: content,
           gistId: input.gistId,
@@ -40,7 +40,7 @@ export class GistStore {
     if (!gists) {
       return null;
     }
-    const filtered = gists.filter((gist) => gist.gistId === input.gistId && gist.file === input.file);
+    const filtered = gists.filter(gist => gist.gistId === input.gistId && gist.file === input.file);
     return filtered.length === 0 ? null : filtered[0];
   }
 
@@ -52,6 +52,6 @@ export class GistStore {
   _load(url: string) {
     return this.fetcher
       .fetch(url)
-      .then((body) => body.text());
+      .then(body => body.text());
   }
 }

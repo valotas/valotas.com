@@ -1,3 +1,5 @@
+/* eslint-disable no-console */
+
 import { render, h } from 'preact';
 import { Fetcher, MetaFileData } from './types';
 import { PackageJson } from './PackageJson';
@@ -54,7 +56,7 @@ BROWSER.ready(() => {
 
 function createMetafileStore(fetcher: Fetcher) {
   const metafileStore = new MetaFileStore(fetcher);
-  metafileStore.onChange((meta) => {
+  metafileStore.onChange(meta => {
     const state = createPageState(meta);
     BROWSER.history.pushState(state);
     BROWSER.scrollToTop();

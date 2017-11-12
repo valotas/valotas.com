@@ -8,7 +8,7 @@ const ts = require('./gulp/ts');
 const test = require('./gulp/test');
 const browserSync = require('browser-sync').create();
 
-gulp.task('clean-dist', (done) => clean('./dist', done));
+gulp.task('clean-dist', done => clean('./dist', done));
 
 gulp.task('copy-assets', () => {
   return gulp.src([
