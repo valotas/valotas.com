@@ -1,6 +1,6 @@
 {
   "name": "valotas.com",
-  "version": "2.2.0",
+  "version": "2.2.1",
   "repository": "git@github.com:valotas/valotas.com.git",
   "private": true,
   "devDependencies": {
