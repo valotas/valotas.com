@@ -12,7 +12,8 @@
     "@types/through2": "^2.0.32",
     "@types/vinyl-fs": "^2.4.5",
     "browser-sync": "^2.18.12",
-    "eslint": "^3.19.0",
+    "eslint": "^4.11.0",
+    "eslint-plugin-typescript": "^0.8.0",
     "gulp": "3.9.1",
     "gulp-cssmin": "0.2.0",
     "gulp-html-replace": "1.6.2",
@@ -33,7 +34,8 @@
     "through2": "2.0.3",
     "tslib": "^1.7.1",
     "tslint": "^5.2.0",
-    "typescript": "^2.3.2",
+    "typescript": "^2.6.1",
+    "typescript-eslint-parser": "^9.0.0",
     "vinyl": "2.0.2",
     "vinyl-fs": "2.4.4",
     "yargs": "^8.0.1"
@@ -45,7 +47,7 @@
     "dist": "rm -rf dist build && gulp dist",
     "dist:serve": "npm run dist && gulp serve-dist",
     "gulp": "gulp",
-    "lint": "eslint '**/*.js' && tslint 'src/**/*.{ts,tsx}'",
+    "lint": "eslint --ext .js --ext .ts --ext .tsx .",
     "test": "gulp tsc && gulp test",
     "rsync": "rsync -azP dist/ valotas@pi:~/valotas.com",
     "aws:sync": "aws s3 sync dist s3://valotas.com",
@@ -71,16 +73,12 @@
   "eslintConfig": {
     "root": true,
     "extends": "eslint:recommended",
-    "parserOptions": {
-      "ecmaVersion": 6
-    },
+    "parser": "typescript-eslint-parser",
+    "plugins": [
+      "typescript"
+    ],
     "env": {
-      "es6": true,
-      "node": true
-    },
-    "globals": {
-      "require": true,
-      "module": true
+      "es6": true
     },
     "rules": {
       "arrow-parens": 2,
