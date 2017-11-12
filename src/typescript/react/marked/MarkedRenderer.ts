@@ -73,7 +73,7 @@ interface HtmlTransfomer<P> {
     type: AnyComponent<P>,
     props: P
   };
-};
+}
 
 interface LinkProps {
   href?: string;
