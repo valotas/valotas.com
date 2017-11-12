@@ -5,7 +5,7 @@ import { isArray } from '../utils';
 
 const DASHES = /\n?---/;
 const NL_SPLIT = /\n/;
-const KV_SPLIT = /\n|\:/;
+const KV_SPLIT = /\n|:/;
 const INPUT_FORMATS = [
   'YYYY-MM-DD HH:mm',
   'YYYY-MM-DD'
@@ -86,7 +86,7 @@ export class MetaFile implements MetaFileData {
 
 function parseHeader(text) {
   const lines = text.trim().split(NL_SPLIT);
-  return lines.map((line) => {
+  return lines.map(line => {
     const pair = line.split(KV_SPLIT);
     const key = pair.shift();
     return {
@@ -119,9 +119,9 @@ function throwIllegalArgumentException(msg): any {
 }
 
 export function isValidMetaFile(file: any): file is MetaFile {
-  return isValidMetaFileData(file) && (<any>file).moment;
+  return file && file.moment && isValidMetaFileData(file);
 }
 
-function isValidMetaFileData(file: any): file is MetaFileData {
+function isValidMetaFileData(file): file is MetaFileData {
   return file && file.title && file.path && file.type;
 }
