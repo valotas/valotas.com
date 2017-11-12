@@ -35,10 +35,7 @@ function readFile(fileName: string): Promise<string> {
 }
 
 class DirectoryImpl {
-
-  constructor(private opened: Promise<string>) {
-
-  }
+  constructor(private opened: Promise<string>) {}
 
   writeFile(fileName: string, data: string): Promise<string> {
     return this.opened.then(path => {

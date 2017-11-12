@@ -15,7 +15,7 @@ export { addMetafiles } from './addMetaFiles';
 export { createLayoutHtml } from './createLayoutHtml';
 
 export function toArticle() {
-  return through.obj(function (file: GulpFile, enc, callback) {
+  return through.obj(function(file: GulpFile, enc, callback) {
     const meta = file.meta;
     if (isValidMetaFile(meta) && meta.type === 'article') {
       file.article = createArticle(meta);
@@ -27,23 +27,30 @@ export function toArticle() {
 export function addIndex(logger: Logger = gutil) {
   let metas: MetaFile[] = [];
   let cwd;
-  return through.obj(function (file, enc, callback) {
-    const { article } = file;
-    if (article) {
-      cwd = file.cwd;
-      metas.push(createDescriptionMetaFile(article));
+  return through.obj(
+    function(file, enc, callback) {
+      const { article } = file;
+      if (article) {
+        cwd = file.cwd;
+        metas.push(createDescriptionMetaFile(article));
+      }
+      callback(null, file);
+    },
+    function(callback) {
+      metas = metas.sort(compareMoments);
+      const indexPage = createFileWithName('index.html', cwd, metas);
+      this.push(indexPage);
+      logger.log('Addded index Vinyl', indexPage.path);
+      callback();
     }
-    callback(null, file);
-  }, function (callback) {
-    metas = metas.sort(compareMoments);
-    const indexPage = createFileWithName('index.html', cwd, metas);
-    this.push(indexPage);
-    logger.log('Addded index Vinyl', indexPage.path);
-    callback();
-  });
+  );
 }
 
-function createFileWithName(name: string, cwd: string, meta: MetaFile | MetaFile[]) {
+function createFileWithName(
+  name: string,
+  cwd: string,
+  meta: MetaFile | MetaFile[]
+) {
   if (!cwd) {
     throw new Error(`Expected a truthy cwd. Got '${cwd}'`);
   }

@@ -6,7 +6,7 @@ import { MetaFile } from '../content/MetaFile';
 import promisify from './promisify';
 
 export class _RedirectRule {
-  constructor(private file: MetaFile) { }
+  constructor(private file: MetaFile) {}
 
   isApplicable() {
     return !!(this.file && this.file.published && this.file.date);
@@ -33,9 +33,7 @@ export class _Aws {
   private exec: (...args) => Promise<any>;
 
   constructor(private bucket: string, now = moment()) {
-    this.expires = now
-      .add(90, 'days')
-      .format(HTTP_DATE_FORMAT) + ' GTM';
+    this.expires = now.add(90, 'days').format(HTTP_DATE_FORMAT) + ' GTM';
     this.exec = promisify(cp.exec);
   }
 
@@ -73,12 +71,14 @@ if (shouldExecute) {
   readRedirectRules()
     .then(rules => {
       const aws = new _Aws('valotas.com');
-      const bar = new ProgressBar(`uploading rules [:bar] (:current/:total), eta: :etas`, {
-        total: rules.length
-      });
+      const bar = new ProgressBar(
+        `uploading rules [:bar] (:current/:total), eta: :etas`,
+        {
+          total: rules.length
+        }
+      );
       rules.forEach(r => {
-        aws.putRule(r)
-          .then(() => bar.tick());
+        aws.putRule(r).then(() => bar.tick());
       });
     })
     .catch(err => {

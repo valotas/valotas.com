@@ -13,10 +13,18 @@ interface LinkProps {
 }
 
 export class Link extends Component<LinkProps, any> {
-
   render(props) {
     const href = props.href || this.createHref();
-    return <a href={href} className={props.className} onClick={this.handleClick} target={props.target}>{props.children}</a>;
+    return (
+      <a
+        href={href}
+        className={props.className}
+        onClick={this.handleClick}
+        target={props.target}
+      >
+        {props.children}
+      </a>
+    );
   }
 
   private createHref() {
@@ -51,5 +59,5 @@ export class Link extends Component<LinkProps, any> {
 
     e.preventDefault();
     store.load(this.props.article || this.props.href || '/');
-  }
+  };
 }

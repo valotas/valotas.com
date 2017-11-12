@@ -3,14 +3,13 @@ import { highlight, languages } from 'prismjs';
 import 'prismjs/components/prism-java';
 import 'prismjs/components/prism-groovy';
 
-type FormattedCodeProps = { language?, code?, children?};
+type FormattedCodeProps = { language?; code?; children? };
 
 export function FormattedCode({
   language,
   code,
   children
 }: FormattedCodeProps) {
-
   code = code || children[0];
   if (!language) {
     return <code>{code}</code>;

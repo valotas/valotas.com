@@ -1,4 +1,3 @@
-
 export class Bus<T> {
   private listeners: ((T) => void)[] = [];
 

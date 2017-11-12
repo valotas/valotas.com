@@ -25,7 +25,10 @@ class Browser {
 
   createScript(url: string, options?: CreateScriptOptions): HTMLScriptElement {
     const wf = window.document.createElement('script');
-    const proto = options && options.protocol ? options.protocol : 'https:' === document.location.protocol ? 'https' : 'http';
+    const proto =
+      options && options.protocol
+        ? options.protocol
+        : 'https:' === document.location.protocol ? 'https' : 'http';
     wf.src = proto + ':' + url;
     wf.type = 'text/javascript';
     wf.async = true;
@@ -51,7 +54,11 @@ class Browser {
     if (window.document.readyState === 'complete') {
       ondocumentReady();
     } else {
-      window.document.addEventListener('DOMContentLoaded', ondocumentReady, false);
+      window.document.addEventListener(
+        'DOMContentLoaded',
+        ondocumentReady,
+        false
+      );
     }
   }
 

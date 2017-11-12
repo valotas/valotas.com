@@ -9,7 +9,7 @@ interface ResponseListener {
 export class FetchStreamer implements Fetcher {
   private bus: Bus<Promise<Response>> = new Bus();
 
-  constructor(private delegate: Fetcher = BROWSER) { }
+  constructor(private delegate: Fetcher = BROWSER) {}
 
   fetch(url: string | Request, init?: RequestInit) {
     const promise = this.delegate.fetch(url, init);

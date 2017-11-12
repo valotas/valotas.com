@@ -1,6 +1,6 @@
-"use strict";
+'use strict';
 
-const jasmine = require("gulp-jasmine");
+const jasmine = require('gulp-jasmine');
 
 module.exports = function(gulp, path) {
   return () =>

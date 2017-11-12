@@ -12,7 +12,6 @@ export interface Article {
   hasTweets(): boolean;
 }
 
-
 class ArticleImpl implements Article {
   title: string;
   key: string;
@@ -31,7 +30,7 @@ class ArticleImpl implements Article {
   }
 
   description(): string {
-    const {description, raw} = this.meta;
+    const { description, raw } = this.meta;
     return description || raw.substr(0, raw.indexOf('\n#')).trim();
   }
 

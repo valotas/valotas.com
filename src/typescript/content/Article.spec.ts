@@ -2,10 +2,13 @@ import { MetaFile } from './MetaFile';
 import { createArticle as createArticleFromMetaFile } from './Article';
 
 function createArticle(input: any) {
-  const metaInput = Object.assign({
-    type: 'article',
-    path: '/the/article/path'
-  }, input);
+  const metaInput = Object.assign(
+    {
+      type: 'article',
+      path: '/the/article/path'
+    },
+    input
+  );
   return createArticleFromMetaFile(new MetaFile(metaInput));
 }
 

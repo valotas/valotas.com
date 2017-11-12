@@ -8,7 +8,7 @@ interface LoadingBarState {
 
 export class LoadingBar extends Component<any, LoadingBarState> {
   context: {
-    fetcher: FetchStreamer
+    fetcher: FetchStreamer;
   };
 
   private onFetchRegistration;
@@ -67,7 +67,7 @@ export class LoadingBar extends Component<any, LoadingBarState> {
     const classNames = `loading-bar ${loading ? 'loading' : ''}`;
     return (
       <div className={classNames}>
-        <div className='loading-bar-inner'></div>
+        <div className="loading-bar-inner" />
       </div>
     );
   }

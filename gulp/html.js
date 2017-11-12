@@ -1,10 +1,11 @@
 'use strict';
 
-module.exports = function (gulp) {
+module.exports = function(gulp) {
   return () => {
     const plugin = require('../build/typescript/gulp');
     const pkg = require('../package.json');
-    return gulp.src([
+    return gulp
+      .src([
         'src/articles/**/*.md',
         'src/pages/**/*.json',
         'src/*.html',
@@ -18,6 +19,6 @@ module.exports = function (gulp) {
       .pipe(plugin.adaptPaths())
       .pipe(plugin.createLayoutHtml(pkg))
       .pipe(plugin.wrapHtml('src/templates/index.jade', pkg))
-      .pipe(gulp.dest('build'))
+      .pipe(gulp.dest('build'));
   };
 };

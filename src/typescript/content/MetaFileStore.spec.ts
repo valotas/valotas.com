@@ -8,15 +8,13 @@ describe('MetaFileStore', () => {
 
   beforeEach(() => {
     fetcher = {
-      fetch: function () {
-
-      }
+      fetch: function() {}
     };
     store = new MetaFileStore(fetcher);
   });
 
   it('should have a way to add new listeners', () => {
-    store.onChange(() => { });
+    store.onChange(() => {});
   });
 
   it('should have provide a way to load new metafiles', () => {
@@ -34,7 +32,8 @@ describe('MetaFileStore', () => {
     spyOn(store, '_loadMetaFile').and.returnValue(Promise.resolve(meta));
 
     store.onChange(listener);
-    store.load('123')
+    store
+      .load('123')
       .then(() => {
         expect(listener).toHaveBeenCalledWith(meta);
       })
@@ -50,7 +49,8 @@ describe('MetaFileStore', () => {
     expect(deregister).toBeTruthy();
     deregister();
 
-    store.load('123')
+    store
+      .load('123')
       .then(() => {
         expect(listener).not.toHaveBeenCalledWith(meta);
       })
@@ -93,7 +93,7 @@ describe('MetaFileStore', () => {
 
     it('should fetch the meta.json', done => {
       body = {
-        json: function () {
+        json: function() {
           return Promise.resolve(meta1);
         }
       };
@@ -110,7 +110,7 @@ describe('MetaFileStore', () => {
 
     it('should also allow arrays of metafiles', done => {
       body = {
-        json: function () {
+        json: function() {
           return Promise.resolve([meta1, meta2]);
         }
       };

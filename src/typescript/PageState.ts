@@ -8,7 +8,9 @@ export interface PageState {
   path: string;
 }
 
-export function createPageState(meta: MetaFileData | MetaFileData[]): PageState {
+export function createPageState(
+  meta: MetaFileData | MetaFileData[]
+): PageState {
   return {
     meta,
     title: createTitle(meta),

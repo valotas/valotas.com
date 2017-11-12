@@ -13,10 +13,18 @@ interface ArticleProps {
   metafileStore: MetaFileStore;
 }
 
-export function ArticleWithHeaderComponent({ article, metafileStore }: ArticleProps) {
+export function ArticleWithHeaderComponent({
+  article,
+  metafileStore
+}: ArticleProps) {
   return (
     <div>
-      <Header title={article.title} subtitle={VALOTAS} date={article.date('DD/MM/YYYY')} metafileStore={metafileStore} />
+      <Header
+        title={article.title}
+        subtitle={VALOTAS}
+        date={article.date('DD/MM/YYYY')}
+        metafileStore={metafileStore}
+      />
       <ArticleComponent article={article} metafileStore={metafileStore} />
     </div>
   );
@@ -28,18 +36,18 @@ export class ArticleComponent extends Component<ArticleProps, {}> {
       return null;
     }
     return (
-      <div className='container main'>
-        <div className='article text-justify'>
+      <div className="container main">
+        <div className="article text-justify">
           <MarkedComponent meta={article.meta} />
         </div>
-        <div className='actions button-group'>
-          <Link className='button' metafileStore={metafileStore}>
-            <Icon name='fa-home' size='sm-2x' />
-            <span className='text'>&nbsp;Home</span>
+        <div className="actions button-group">
+          <Link className="button" metafileStore={metafileStore}>
+            <Icon name="fa-home" size="sm-2x" />
+            <span className="text">&nbsp;Home</span>
           </Link>
-          <Link href='#' className='button'>
-            <span className='text'>Top&nbsp;</span>
-            <Icon name='fa-toggle-up' size='sm-2x' />
+          <Link href="#" className="button">
+            <span className="text">Top&nbsp;</span>
+            <Icon name="fa-toggle-up" size="sm-2x" />
           </Link>
         </div>
       </div>

@@ -50,14 +50,18 @@ export class Page extends Component<PageProps, PageState> {
   componentDidMount() {
     const { metafileStore } = this.props;
     if (!metafileStore) {
-      throw ex.illegalArgumentException('MetaFileStore is needed on the client side to register for changes');
+      throw ex.illegalArgumentException(
+        'MetaFileStore is needed on the client side to register for changes'
+      );
     }
     metafileStore.onChange((meta: MetaFile) => {
       this._updateState(meta);
     });
 
     if (!BROWSER) {
-      throw ex.illegalArgumentException('window is needed on the client side to register for PopStateEvents');
+      throw ex.illegalArgumentException(
+        'window is needed on the client side to register for PopStateEvents'
+      );
     }
     BROWSER.history.onPopState(this._setPageState);
   }
@@ -68,7 +72,7 @@ export class Page extends Component<PageProps, PageState> {
       this.props.gistStore.meta = isArray(meta) ? null : meta;
     }
     this._updateState(meta);
-  }
+  };
 
   private _updateState(metaOrNull: MetaFile | MetaFile[]) {
     const meta = metaOrNull || MetaFile.fromData(this.props.meta);

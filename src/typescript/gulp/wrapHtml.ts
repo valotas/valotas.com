@@ -9,7 +9,7 @@ import { createPackageJson } from '../PackageJson';
 export function wrapHtml(templateFile, pkg, logger: Logger = gutil) {
   const packageJson = JSON.stringify(createPackageJson(pkg));
   const template = compileFile(templateFile);
-  return through.obj(function (file: GulpFile, enc, callback) {
+  return through.obj(function(file: GulpFile, enc, callback) {
     if (file.html) {
       const html = template({
         title: createTitle(file.meta || null),

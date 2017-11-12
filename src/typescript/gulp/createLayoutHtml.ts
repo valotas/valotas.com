@@ -11,26 +11,42 @@ import { CacheableGistStore } from './CacheableGistStore';
 import { Page } from '../react/Page';
 import { NodeFetcher } from './NodeFetcher';
 
-export function createLayoutHtml(pkg: PackageJson, fetcher: Fetcher = null, logger: Logger = gutil) {
-  const actualFetcher = fetcher || new NodeFetcher(null, '/tmp/valotas.com.createLayoutHtml', logger);
-  return through.obj(function (file: GulpFile, enc, callback) {
+export function createLayoutHtml(
+  pkg: PackageJson,
+  fetcher: Fetcher = null,
+  logger: Logger = gutil
+) {
+  const actualFetcher =
+    fetcher ||
+    new NodeFetcher(null, '/tmp/valotas.com.createLayoutHtml', logger);
+  return through.obj(function(file: GulpFile, enc, callback) {
     if (file.meta) {
-      renderLayout(file, actualFetcher, pkg).then(html => {
-        file.html = html;
-        callback(null, file);
-      }, er => {
-        logger.log('Could not create html', file.path, er);
-        callback(er);
-      });
+      renderLayout(file, actualFetcher, pkg).then(
+        html => {
+          file.html = html;
+          callback(null, file);
+        },
+        er => {
+          logger.log('Could not create html', file.path, er);
+          callback(er);
+        }
+      );
     } else {
       callback(null, file);
     }
   });
 }
 
-function renderLayout(file: GulpFile, fetcher: Fetcher, pkg: PackageJson): Promise<string> {
+function renderLayout(
+  file: GulpFile,
+  fetcher: Fetcher,
+  pkg: PackageJson
+): Promise<string> {
   const meta = file.meta;
-  const store = new CacheableGistStore(fetcher, isValidMetaFile(meta) ? meta : null);
+  const store = new CacheableGistStore(
+    fetcher,
+    isValidMetaFile(meta) ? meta : null
+  );
   const page = h(Page, {
     meta: meta,
     fetcher: fetcher,
@@ -44,7 +60,5 @@ function renderLayout(file: GulpFile, fetcher: Fetcher, pkg: PackageJson): Promi
     ex.message += `. Could not render ${file.path}`;
     return Promise.reject(ex);
   }
-  return store.all()
-    .then(all => render(page));
+  return store.all().then(all => render(page));
 }
-

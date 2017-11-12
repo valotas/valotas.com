@@ -2,7 +2,6 @@ import { MetaFile } from './MetaFile';
 
 describe('MetaFile', () => {
   describe('createFromRawMd', () => {
-
     const raw = `
 ---
 title: Tomcat init.d script

@@ -15,20 +15,34 @@ interface IndexProps {
 export function IndexWithHeader(props: IndexProps) {
   return (
     <div>
-      <Header title={VALOTAS} subtitle='Things to remember | Programming stuff :)' />
+      <Header
+        title={VALOTAS}
+        subtitle="Things to remember | Programming stuff :)"
+      />
       <Index articles={props.articles} metafileStore={props.metafileStore} />
     </div>
   );
 }
 
 function Index({ articles, metafileStore }: IndexProps) {
-  return (<div className='container main'>{toArticleCards(articles, metafileStore)}</div>);
+  return (
+    <div className="container main">
+      {toArticleCards(articles, metafileStore)}
+    </div>
+  );
 }
 
 function toArticleCards(articles: Article[], metafileStore: MetaFileStore) {
   const lastIndex = articles.length - 1;
-  return articles.map((article, index) => <ArticleCardComponent article={article} key={article.key} metafileStore={metafileStore} index={index} last={lastIndex === index} />);
-
+  return articles.map((article, index) => (
+    <ArticleCardComponent
+      article={article}
+      key={article.key}
+      metafileStore={metafileStore}
+      index={index}
+      last={lastIndex === index}
+    />
+  ));
 }
 
 interface ArticleDescriptionComponentProps {
@@ -39,7 +53,12 @@ interface ArticleDescriptionComponentProps {
   last: boolean;
 }
 
-function ArticleCardComponent({ article, metafileStore, index, last }: ArticleDescriptionComponentProps) {
+function ArticleCardComponent({
+  article,
+  metafileStore,
+  index,
+  last
+}: ArticleDescriptionComponentProps) {
   const description = article.description();
   let className = 'article-card';
   if ((index + 1) % 3 === 1) {
@@ -50,19 +69,25 @@ function ArticleCardComponent({ article, metafileStore, index, last }: ArticleDe
   }
   return (
     <div className={className}>
-      <div className='article'>
+      <div className="article">
         <h2>
-          <Link article={article} className='' metafileStore={metafileStore}>
+          <Link article={article} className="" metafileStore={metafileStore}>
             {article.title}
           </Link>
         </h2>
-        <span className='label date'>{article.date()}</span>
-        <div className='descr text-justify'>
-          <MarkedComponent markFirstLetter={false}>{description}</MarkedComponent>
-          <p className='more text-right'>
-            <Link article={article} className='button' metafileStore={metafileStore}>
+        <span className="label date">{article.date()}</span>
+        <div className="descr text-justify">
+          <MarkedComponent markFirstLetter={false}>
+            {description}
+          </MarkedComponent>
+          <p className="more text-right">
+            <Link
+              article={article}
+              className="button"
+              metafileStore={metafileStore}
+            >
               more&nbsp;
-              <Icon name='fa-angle-double-right' />
+              <Icon name="fa-angle-double-right" />
             </Link>
           </p>
         </div>

@@ -3,7 +3,7 @@ import * as path from 'path';
 import { MetaFile } from '../content/MetaFile';
 
 export function parseMetaFile(clone = true) {
-  return through.obj(function (file, enc, callback) {
+  return through.obj(function(file, enc, callback) {
     callback(null, createFile(file, enc));
   });
 }

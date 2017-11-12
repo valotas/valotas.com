@@ -7,5 +7,5 @@ interface IconProps {
 
 export function Icon({ name, size }: IconProps) {
   const className = 'fa ' + name + ' fa-' + (size || '1x');
-  return (<i className={className} />);
+  return <i className={className} />;
 }

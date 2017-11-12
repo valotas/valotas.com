@@ -68,7 +68,9 @@ describe('Page', () => {
       raw: 'some md content',
       path: 'article3'
     });
-    const html = render(<Page meta={[article1, article2, article3]} pkg={pkg} />);
+    const html = render(
+      <Page meta={[article1, article2, article3]} pkg={pkg} />
+    );
     expect(html).toContain('class="article-card"');
   });
 });

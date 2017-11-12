@@ -29,7 +29,7 @@ export function inflate(input: string) {
   return JSON.parse(restored);
 }
 
-function toString (bytes: number[]): string {
+function toString(bytes: number[]): string {
   return String.fromCharCode.apply(null, bytes);
 }
 
@@ -46,17 +46,15 @@ export function compareMoments(a: HasMoment, b: HasMoment): number {
 }
 
 export function isArray(input: any): input is Array<any> {
-    return input && Array.isArray(input);
+  return input && Array.isArray(input);
 }
 
-export function isString (input: any): input is string {
+export function isString(input: any): input is string {
   return typeof input === 'string';
 }
 
-export function isPromise (input: any): input is Promise<any> {
+export function isPromise(input: any): input is Promise<any> {
   return input && input.then;
 }
 
-export function noop () {
-
-}
+export function noop() {}

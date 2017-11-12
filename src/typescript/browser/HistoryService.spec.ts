@@ -7,7 +7,10 @@ describe('HistoryService', () => {
 
   beforeEach(() => {
     win = {
-      addEventListener: (name: string, listener: (ev: PopStateEvent) => void) => {
+      addEventListener: (
+        name: string,
+        listener: (ev: PopStateEvent) => void
+      ) => {
         win[name] = listener;
       }
     } as Window;
@@ -39,7 +42,11 @@ describe('HistoryService', () => {
         path: 'the path'
       };
       history.pushState(state);
-      expect(win.history.pushState).toHaveBeenCalledWith(state, state.title, state.path);
+      expect(win.history.pushState).toHaveBeenCalledWith(
+        state,
+        state.title,
+        state.path
+      );
     });
 
     it('should call notify registered listeners', () => {

@@ -40,25 +40,17 @@ describe('createComponentTree', () => {
   });
 
   it('should render code blocks with a class derived from the language', () => {
-    const source = [
-      'this is a',
-      '',
-      '```java',
-      'a code block',
-      '```'
-    ].join('\n');
+    const source = ['this is a', '', '```java', 'a code block', '```'].join(
+      '\n'
+    );
     const html = renderToStaticMarkup(source);
-    expect(html).toContain('<pre><code class="language-java">a code block</code></pre>');
+    expect(html).toContain(
+      '<pre><code class="language-java">a code block</code></pre>'
+    );
   });
 
   it('should render code blocks with a javasscript class instead of js', () => {
-    const source = [
-      'this is a',
-      '',
-      '```js',
-      'a code block',
-      '```'
-    ].join('\n');
+    const source = ['this is a', '', '```js', 'a code block', '```'].join('\n');
     const html = renderToStaticMarkup(source);
     expect(html).toContain('code class="language-javascript"');
   });
@@ -76,12 +68,16 @@ describe('createComponentTree', () => {
   });
 
   it('should render links', () => {
-    const html = renderToStaticMarkup('this is a [link](/to/another/page) to another page');
+    const html = renderToStaticMarkup(
+      'this is a [link](/to/another/page) to another page'
+    );
     expect(html).toContain('<a href="/to/another/page">link</a>');
   });
 
   it('should pass through html as is', () => {
-    const html = renderToStaticMarkup('this is some\n<script scr="path/to/script"></script>');
+    const html = renderToStaticMarkup(
+      'this is some\n<script scr="path/to/script"></script>'
+    );
     expect(html).toContain('<script scr="path/to/script"></script>');
   });
 
@@ -96,18 +92,30 @@ describe('createComponentTree', () => {
   });
 
   it('should transform gist script to a gist component for java files', () => {
-    const html = renderToStaticMarkup('<script src="https://gist.github.com/1240545.js?file=ServletUsingCustomResponse.java"></script>');
-    expect(html).toContain('<pre data-gist-id="1240545" data-gist-user="valotas" data-gist-file="ServletUsingCustomResponse.java">');
+    const html = renderToStaticMarkup(
+      '<script src="https://gist.github.com/1240545.js?file=ServletUsingCustomResponse.java"></script>'
+    );
+    expect(html).toContain(
+      '<pre data-gist-id="1240545" data-gist-user="valotas" data-gist-file="ServletUsingCustomResponse.java">'
+    );
   });
 
   it('should transform gist script to a gist component for js files', () => {
-    const html = renderToStaticMarkup('<script src="https://gist.github.com/valotas/1175447.js?file=scrapy.js"></script>');
-    expect(html).toContain('<pre data-gist-id="1175447" data-gist-user="valotas" data-gist-file="scrapy.js">');
+    const html = renderToStaticMarkup(
+      '<script src="https://gist.github.com/valotas/1175447.js?file=scrapy.js"></script>'
+    );
+    expect(html).toContain(
+      '<pre data-gist-id="1175447" data-gist-user="valotas" data-gist-file="scrapy.js">'
+    );
   });
 
   it('should transform gist script to a gist component for sh files', () => {
-    const html = renderToStaticMarkup('<script src="https://gist.github.com/valotas/1000094.js?file=tomcat.sh"></script>');
-    expect(html).toContain('<pre data-gist-id="1000094" data-gist-user="valotas" data-gist-file="tomcat.sh">');
+    const html = renderToStaticMarkup(
+      '<script src="https://gist.github.com/valotas/1000094.js?file=tomcat.sh"></script>'
+    );
+    expect(html).toContain(
+      '<pre data-gist-id="1000094" data-gist-user="valotas" data-gist-file="tomcat.sh">'
+    );
   });
 
   it('should render paragraphs with mix span and code blocks', () => {
@@ -149,7 +157,9 @@ This is the first paragraph
 And this is the second one
         `;
     const html = renderToStaticMarkup(source, { firstLetterSpan: true });
-    expect(html).toContain('<p><span class="first-letter">T</span>his is the first paragraph</p>');
+    expect(html).toContain(
+      '<p><span class="first-letter">T</span>his is the first paragraph</p>'
+    );
   });
 
   it('should mark the first leter of only the first paragraph', () => {
@@ -167,7 +177,9 @@ And this is the second one
 Some *strange* first paragraph
         `;
     const html = renderToStaticMarkup(source, { firstLetterSpan: true });
-    expect(html).toContain('<p><span class="first-letter">S</span>ome <em>strange</em>');
+    expect(html).toContain(
+      '<p><span class="first-letter">S</span>ome <em>strange</em>'
+    );
   });
 
   it('should handle greater/lower than charachters right', () => {
@@ -192,6 +204,8 @@ Asume this ><&><
 function xyz() {};
 \`\`\``;
     const html = renderToStaticMarkup(source);
-    expect(html).toContain('<div class="codeblock"><pre><code>function xyz() {};</code></pre></div>');
+    expect(html).toContain(
+      '<div class="codeblock"><pre><code>function xyz() {};</code></pre></div>'
+    );
   });
 });

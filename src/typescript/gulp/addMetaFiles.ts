@@ -6,7 +6,7 @@ import { Logger } from './gulp-types';
 import { MetaFile } from '../content/MetaFile';
 
 export function addMetafiles(logger: Logger = gutil) {
-  return through.obj(function (file, enc, callback) {
+  return through.obj(function(file, enc, callback) {
     const meta = file.meta as MetaFile;
     if (meta) {
       const metaPath = path.join(file.base, meta.path, 'meta.json');

@@ -1,8 +1,6 @@
 import { BROWSER } from './Browser';
 
-function noop() {
-
-}
+function noop() {}
 
 interface SendPageViewArgument {
   path: string;
@@ -31,7 +29,10 @@ class GoogleAnalytics {
   }
 }
 
-export function createGoogleAnalytics(propertyId: string, win = BROWSER): GoogleAnalytics {
+export function createGoogleAnalytics(
+  propertyId: string,
+  win = BROWSER
+): GoogleAnalytics {
   if (!win) {
     return new GoogleAnalytics({ ga: noop }, 'ga', '');
   }
@@ -44,9 +45,11 @@ export function createGoogleAnalytics(propertyId: string, win = BROWSER): Google
   }
 
   window['GoogleAnalyticsObject'] = name;
-  window[name] = window[name] || function () {
-    (window[name].q = window[name].q || []).push(arguments);
-  };
+  window[name] =
+    window[name] ||
+    function() {
+      (window[name].q = window[name].q || []).push(arguments);
+    };
   window[name].l = 1 * new Date().getTime();
 
   win.addScript('//www.google-analytics.com/analytics.js');

@@ -36,8 +36,12 @@ BROWSER.ready(() => {
   const fetcher = new FetchStreamer(BROWSER);
   const metafileStore = createMetafileStore(fetcher);
 
-  const metaHolder = BROWSER.query('script[type="application/json"]') as HTMLElement;
-  const metadata = inflate(metaHolder.innerHTML) as MetaFileData | MetaFileData[];
+  const metaHolder = BROWSER.query(
+    'script[type="application/json"]'
+  ) as HTMLElement;
+  const metadata = inflate(metaHolder.innerHTML) as
+    | MetaFileData
+    | MetaFileData[];
   const meta = MetaFile.fromData(metadata);
   console.debug('Infalted meta', meta);
 
@@ -46,7 +50,11 @@ BROWSER.ready(() => {
     meta,
     metafileStore,
     fetcher,
-    gistStore: new GistStore(fetcher, metafileStore, isValidMetaFile(meta) ? meta : null),
+    gistStore: new GistStore(
+      fetcher,
+      metafileStore,
+      isValidMetaFile(meta) ? meta : null
+    ),
     pkg: BROWSER.prop('pkg') as PackageJson
   };
   const el = h(Page, pageProps);

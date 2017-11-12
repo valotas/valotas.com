@@ -21,9 +21,7 @@ describe('deflate/infalte', () => {
 
 describe('compareMoments', () => {
   class Dummy {
-    constructor(private date: string) {
-
-    }
+    constructor(private date: string) {}
 
     moment() {
       return moment(this.date);

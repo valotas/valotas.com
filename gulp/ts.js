@@ -16,7 +16,10 @@ function execTsc({ watch }, cb) {
   if (cb) {
     child.on('error', cb);
     child.on('close', code => {
-      const err = code !== 0 ? new Error(`Could not execute 'tsc ${args.join(' ')}'`) : null;
+      const err =
+        code !== 0
+          ? new Error(`Could not execute 'tsc ${args.join(' ')}'`)
+          : null;
       cb(err);
     });
   }
@@ -43,11 +46,12 @@ module.exports = {
     const builder = new Builder(conf);
 
     return cb => {
-      builder.buildStatic('./build/typescript/main.js', './build/assets/bundle.js', {
-        runtime: false,
-        minify: !argv.skipMinify
-      })
+      builder
+        .buildStatic('./build/typescript/main.js', './build/assets/bundle.js', {
+          runtime: false,
+          minify: !argv.skipMinify
+        })
         .then(cb.bind(this, null), cb);
-    }
+    };
   }
 };

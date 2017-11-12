@@ -1,5 +1,10 @@
 import * as marked from 'marked';
-import { h, Component, ComponentConstructor, FunctionalComponent } from 'preact';
+import {
+  h,
+  Component,
+  ComponentConstructor,
+  FunctionalComponent
+} from 'preact';
 import * as ex from '../../exceptions';
 import { ParagraphWithFirstLetterSpan } from '../ParagraphWithFirstLetterSpan';
 
@@ -7,16 +12,16 @@ const EMPTY_STRING = '';
 
 // https://github.com/christianalfoni/markdown-to-react-components/blob/master/src/index.js
 
-type IntrinsicComponent<T> = ComponentConstructor<T, any> | FunctionalComponent<T>;
+type IntrinsicComponent<T> =
+  | ComponentConstructor<T, any>
+  | FunctionalComponent<T>;
 type AnyComponent<T> = IntrinsicComponent<T> | string;
 
 class TreeContainer {
   tree = [];
   inline = [];
 
-  constructor(private parent?: TreeContainer) {
-
-  }
+  constructor(private parent?: TreeContainer) {}
 
   childContainer() {
     return new TreeContainer(this);
@@ -24,8 +29,9 @@ class TreeContainer {
 
   pushBlock(type: AnyComponent<any>, props: any = {}, childs?: any[]) {
     props.key = this.tree.length;
-    const children = props.dangerouslySetInnerHTML ?
-      null : firstChildOrFullArray(childs || this.inline);
+    const children = props.dangerouslySetInnerHTML
+      ? null
+      : firstChildOrFullArray(childs || this.inline);
     const args = [type].concat(props).concat(children);
     const el = h.apply(h, args);
     this.inline = [];
@@ -70,8 +76,8 @@ function notNull(obj) {
 
 interface HtmlTransfomer<P> {
   (html: string): {
-    type: AnyComponent<P>,
-    props: P
+    type: AnyComponent<P>;
+    props: P;
   };
 }
 
@@ -96,8 +102,7 @@ export class MarkedReactRenderer implements MarkedRenderer {
   }
 
   nextToken(token: { type: string }) {
-    if (token.type === 'blockquote_start' ||
-      token.type === 'list_start') {
+    if (token.type === 'blockquote_start' || token.type === 'list_start') {
       this.container = this.container.childContainer();
     }
   }
@@ -114,9 +119,7 @@ export class MarkedReactRenderer implements MarkedRenderer {
   }
 
   html(html: string) {
-    const block = this.renderOptions.html
-      .map(t => t(html))
-      .filter(notNull)[0];
+    const block = this.renderOptions.html.map(t => t(html)).filter(notNull)[0];
     this.container.pushBlock(block.type, block.props);
     return EMPTY_STRING;
   }
@@ -139,10 +142,11 @@ export class MarkedReactRenderer implements MarkedRenderer {
   }
   paragraph(text: string) {
     this.paragraphCounter++;
-    const shouldMarkFirstLetter = this.renderOptions.firstLetterSpan
-      && this.paragraphCounter === 1;
-    this.container.pushBlock(shouldMarkFirstLetter
-      ? ParagraphWithFirstLetterSpan : 'p');
+    const shouldMarkFirstLetter =
+      this.renderOptions.firstLetterSpan && this.paragraphCounter === 1;
+    this.container.pushBlock(
+      shouldMarkFirstLetter ? ParagraphWithFirstLetterSpan : 'p'
+    );
     return EMPTY_STRING;
   }
   table(header: string, body: string) {
@@ -153,10 +157,13 @@ export class MarkedReactRenderer implements MarkedRenderer {
     // not implemented yet
     return EMPTY_STRING;
   }
-  tablecell(content: string, flags: {
-    header: boolean,
-    align: string
-  }) {
+  tablecell(
+    content: string,
+    flags: {
+      header: boolean;
+      align: string;
+    }
+  ) {
     // not implemented yet
     return EMPTY_STRING;
   }
@@ -171,8 +178,9 @@ export class MarkedReactRenderer implements MarkedRenderer {
   codespan(code: string, lang?: string) {
     lang = lang === 'js' ? 'javascript' : lang;
     this.container.pushInline(
-      h(this.renderOptions.code,
-        { language: lang }, unescapeText(code)), false);
+      h(this.renderOptions.code, { language: lang }, unescapeText(code)),
+      false
+    );
     return EMPTY_STRING;
   }
   br() {
@@ -217,7 +225,8 @@ export class MarkedReactRenderer implements MarkedRenderer {
 }
 
 function unescapeText(input: string) {
-  return input.replace(/&lt;/g, '<')
+  return input
+    .replace(/&lt;/g, '<')
     .replace(/&gt;/g, '>')
     .replace(/&amp;/g, '&')
     .replace(/&quot;/g, '"');
@@ -225,7 +234,7 @@ function unescapeText(input: string) {
 
 function patchParser(parser, renderer: MarkedReactRenderer) {
   const tok = parser.tok;
-  parser.tok = function () {
+  parser.tok = function() {
     renderer.nextToken(this.token);
     tok.call(parser, arguments);
   };
@@ -237,4 +246,3 @@ function firstChildOrFullArray(input: any[]) {
   }
   return input;
 }
-

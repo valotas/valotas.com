@@ -12,7 +12,7 @@ describe('NodeFetcher', () => {
     }
   } as Response;
   const dummyFetcher = {
-    fetch: function () {
+    fetch: function() {
       return Promise.resolve(resp);
     }
   };
@@ -21,7 +21,9 @@ describe('NodeFetcher', () => {
   let fetcher: NodeFetcher;
 
   beforeEach(() => {
-    random = Math.random().toString(36).substring(2);
+    random = Math.random()
+      .toString(36)
+      .substring(2);
     fetcher = new NodeFetcher(dummyFetcher, dir);
   });
 
@@ -43,7 +45,8 @@ describe('NodeFetcher', () => {
     it('should cache the returned output', done => {
       const url = `some/url/to/fetch/${random}`;
 
-      fetcher.fetch(url)
+      fetcher
+        .fetch(url)
         .then(() => {
           const directory = createDirectory(dir);
           return directory.readFile(url.replace(/\//g, '-'));
@@ -58,7 +61,8 @@ describe('NodeFetcher', () => {
       const url = `some/url/to/fetch/${random}`;
       const fetchSpy = spyOn(dummyFetcher, 'fetch').and.callThrough();
 
-      fetcher.fetch(url)
+      fetcher
+        .fetch(url)
         .then(() => fetcher.fetch(url))
         .then(data => fetcher.fetch(url))
         .then(() => {

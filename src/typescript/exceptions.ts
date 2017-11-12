@@ -1,4 +1,3 @@
-
 export function illegalArgumentException(message: string) {
   return new NamedException('IllegalArgumentException', message);
 }
@@ -8,5 +7,5 @@ export function illegalFromatException(message: string) {
 }
 
 class NamedException implements Error {
-  constructor(public name: string, public message: string) { }
+  constructor(public name: string, public message: string) {}
 }

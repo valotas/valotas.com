@@ -6,7 +6,7 @@ describe('GoogleAnalytics', () => {
   beforeEach(() => {
     win = {
       window: {},
-      addScript: function () { }
+      addScript: function() {}
     };
   });
 
@@ -25,7 +25,9 @@ describe('GoogleAnalytics', () => {
     it('should add the appropriate script using the given function', () => {
       win.addScript = jasmine.createSpy('addScript');
       createGoogleAnalytics('xxx', win);
-      expect(win.addScript).toHaveBeenCalledWith('//www.google-analytics.com/analytics.js');
+      expect(win.addScript).toHaveBeenCalledWith(
+        '//www.google-analytics.com/analytics.js'
+      );
     });
 
     it('should not call addScript more than once', () => {
@@ -42,8 +44,8 @@ describe('GoogleAnalytics', () => {
       const ga = jasmine.createSpy('win.window.ga');
       const actual = createGoogleAnalytics('xxx', win);
       win.window.ga = ga;
-      actual.ga('1', '2', { 'name': 'value' });
-      expect(ga).toHaveBeenCalledWith('1', '2', { 'name': 'value' });
+      actual.ga('1', '2', { name: 'value' });
+      expect(ga).toHaveBeenCalledWith('1', '2', { name: 'value' });
     });
   });
 

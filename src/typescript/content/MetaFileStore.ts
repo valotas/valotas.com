@@ -14,14 +14,11 @@ type MetaFileOrArray = MetaFile | MetaFile[];
 export class MetaFileStore {
   private bus: Bus<MetaFileOrArray> = new Bus();
 
-  constructor(private fetcher: Fetcher) {
-
-  }
+  constructor(private fetcher: Fetcher) {}
 
   load(input: string | Article) {
     const url = this._createUrl(input);
-    return this._loadMetaFile(url)
-      .then(meta => this.setMetaFile(meta));
+    return this._loadMetaFile(url).then(meta => this.setMetaFile(meta));
   }
 
   _createUrl(input: string | Article) {
@@ -38,14 +35,18 @@ export class MetaFileStore {
     if (isArticle(input)) {
       return '/' + input.key + '/meta.json';
     }
-    throw ex.illegalFromatException('Can not create a url from given input: ' + input);
+    throw ex.illegalFromatException(
+      'Can not create a url from given input: ' + input
+    );
   }
 
   _loadMetaFile(url: string) {
     return this.fetcher
       .fetch(url)
       .then(body => body.json())
-      .then((json: any) => MetaFile.fromData(json as MetaFileData | MetaFileData[]));
+      .then((json: any) =>
+        MetaFile.fromData(json as MetaFileData | MetaFileData[])
+      );
   }
 
   setMetaFile(meta: MetaFileOrArray) {

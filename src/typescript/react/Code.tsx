@@ -9,7 +9,7 @@ export function Code(props) {
   const title = children.length > 1 ? children[0] : null;
   const code = children.length > 1 ? children[1] : children;
   return (
-    <div className='codeblock'>
+    <div className="codeblock">
       <Title title={title} />
       <PreCode {...props}>{code}</PreCode>
     </div>
@@ -20,7 +20,7 @@ function Title({ title }) {
   if (!title) {
     return null;
   }
-  return (<div className='title'>{title}</div>);
+  return <div className="title">{title}</div>;
 }
 
 function PreCode(props) {
@@ -32,9 +32,7 @@ function PreCode(props) {
   });
   return (
     <pre {...dataProps}>
-      <OneCodeBlock>
-        {props.children}
-      </OneCodeBlock>
+      <OneCodeBlock>{props.children}</OneCodeBlock>
     </pre>
   );
 }

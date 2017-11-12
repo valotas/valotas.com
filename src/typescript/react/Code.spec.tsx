@@ -9,7 +9,11 @@ describe('Code', () => {
   });
 
   it('should not render <code/> twice if given as child', () => {
-    const html = render(<Code><code>var x = "xxx"</code></Code>);
+    const html = render(
+      <Code>
+        <code>var x = "xxx"</code>
+      </Code>
+    );
     expect(html).toContain('<div class="codeblock"><pre><code>var x =');
   });
 
@@ -21,10 +25,12 @@ describe('Code', () => {
       </Code>
     );
 
-    expect(html).toContain([
-      '<div class="codeblock">',
+    expect(html).toContain(
+      [
+        '<div class="codeblock">',
         '<div class="title"><h1>The title</h1></div>',
         '<pre><code>var x ='
-    ].join(''));
+      ].join('')
+    );
   });
 });

@@ -11,28 +11,35 @@ interface HeaderProps {
   metafileStore?: MetaFileStore;
 }
 
-export function Header({ title, subtitle = VALOTAS, date, metafileStore }: HeaderProps) {
+export function Header({
+  title,
+  subtitle = VALOTAS,
+  date,
+  metafileStore
+}: HeaderProps) {
   return (
-    <div className='header'>
-      <div className='container'>
-        <div className='photo'>
-          <Link className='radius' metafileStore={metafileStore} />
+    <div className="header">
+      <div className="container">
+        <div className="photo">
+          <Link className="radius" metafileStore={metafileStore} />
         </div>
-        <div className='signature'>
-          <h1 className='signature-row'>{title}</h1>
-          <h4 className='signature-row'>{subtitle} <Date date={date} /></h4>
-          <div className='social signature-row'>
-            <a href='https://github.com/valotas' target='_blank'>
-              <Icon name='fa-github-square' size='2x' />
+        <div className="signature">
+          <h1 className="signature-row">{title}</h1>
+          <h4 className="signature-row">
+            {subtitle} <Date date={date} />
+          </h4>
+          <div className="social signature-row">
+            <a href="https://github.com/valotas" target="_blank">
+              <Icon name="fa-github-square" size="2x" />
             </a>
-            <a href='https://www.facebook.com/valotas' target='_blank'>
-              <Icon name='fa-facebook-square' size='2x' />
+            <a href="https://www.facebook.com/valotas" target="_blank">
+              <Icon name="fa-facebook-square" size="2x" />
             </a>
-            <a href='https://twitter.com/valotas' target='_blank'>
-              <Icon name='fa-twitter-square' size='2x' />
+            <a href="https://twitter.com/valotas" target="_blank">
+              <Icon name="fa-twitter-square" size="2x" />
             </a>
-            <a href='http://www.linkedin.com/in/valotas' target='_blank'>
-              <Icon name='fa-linkedin-square' size='2x' />
+            <a href="http://www.linkedin.com/in/valotas" target="_blank">
+              <Icon name="fa-linkedin-square" size="2x" />
             </a>
           </div>
         </div>
@@ -46,8 +53,8 @@ function Date({ date }) {
     return null;
   }
   return (
-    <span className='date label'>
-      <Icon name='fa-pencil-square-o' />
+    <span className="date label">
+      <Icon name="fa-pencil-square-o" />
       &nbsp;
       {date}
     </span>

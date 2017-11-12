@@ -42,7 +42,7 @@ export function loadTwitter(browser = BROWSER) {
 
 function createTwttr(window) {
   const t = window[TWTTR] || { _e: [] };
-  t.ready = function (f) {
+  t.ready = function(f) {
     t._e.push(f);
   };
   return t;

@@ -7,9 +7,7 @@ import { Icon } from './Icon';
 import { Code } from './Code';
 import { FormattedCode } from './FormattedCode';
 
-interface GistProps extends GistDescription {
-
-}
+interface GistProps extends GistDescription {}
 
 interface GistState {
   content: string;
@@ -53,8 +51,8 @@ export class Gist extends Component<GistProps, GistState> {
     const href = `https://gist.github.com/${user}/${gistId}#file-${filetarget}`;
     return (
       <Code data-gist-id={gistId} data-gist-user={user} data-gist-file={file}>
-        <Link href={href} target='_blank'>
-          <Icon name='fa-github' />&nbsp;
+        <Link href={href} target="_blank">
+          <Icon name="fa-github" />&nbsp;
           {file}
         </Link>
         <FormattedCode language={language} code={content} />

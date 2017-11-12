@@ -2,7 +2,7 @@ import { Article } from '../content/Article';
 import { MetaFileData } from '../types';
 
 export interface GulpFile {
-  meta: MetaFileData|MetaFileData[];
+  meta: MetaFileData | MetaFileData[];
   html?: string;
   article?: Article;
   contents?: any;

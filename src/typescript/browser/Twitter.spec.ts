@@ -27,10 +27,13 @@ describe('Twitter', () => {
     it('should add the widget script', () => {
       spyOn(browser, 'addScript').and.callThrough();
       loadTwitter(browser);
-      expect(browser.addScript).toHaveBeenCalledWith('//platform.twitter.com/widgets.js', {
-        id: 'twitter-wjs',
-        protocol: 'https'
-      });
+      expect(browser.addScript).toHaveBeenCalledWith(
+        '//platform.twitter.com/widgets.js',
+        {
+          id: 'twitter-wjs',
+          protocol: 'https'
+        }
+      );
     });
 
     it('should not try to add the script twice', () => {
