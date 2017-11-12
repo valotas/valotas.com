@@ -17,7 +17,7 @@ npm run tsc
 To have an intermediate development site:
 
 ```bash
-gulp play
+npm start
 ```
 
 ## Deploy
