@@ -1,8 +1,6 @@
 import { Moment } from 'moment';
 import * as base64 from 'base64-js';
 
-const TO_STRING = {to: 'string'};
-
 export const VALOTAS = 'Γιώργος Βαλοτάσιος';
 
 export function deflate(obj) {
@@ -35,9 +33,11 @@ function toString (bytes: number[]): string {
   return String.fromCharCode.apply(null, bytes);
 }
 
+/* eslint-disable no-undef */
 interface HasMoment {
   moment(): Moment;
 }
+/* eslint-enable */
 
 export function compareMoments(a: HasMoment, b: HasMoment): number {
   const moment1 = a.moment();

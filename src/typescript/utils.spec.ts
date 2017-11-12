@@ -1,3 +1,4 @@
+/* eslint-env jasmine */
 import { inflate, deflate, compareMoments } from './utils';
 import * as moment from 'moment';
 
