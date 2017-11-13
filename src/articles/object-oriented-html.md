@@ -34,7 +34,7 @@ In our pseudocode world, the result of the `mainArticleDiv.getClassNames()` whou
 
 Let's make a pause here and go back to our computer science world and specifically to object oriented programming. There you can find the term [mixin][mixin] which is actually a way to describe a part of the functionality of an object. Assuming that the browser creates a mixin for every defined css class of ours and the fact that `Node` itself can be a mixin implemented by the browser, we can then describe our div with a class:
 
-```
+```java
 class MainArticle extends Node, CssMain, CssArticle, CssWhite {
   //Nothing to implement
 }
