@@ -8,6 +8,13 @@ import {
 import * as ex from '../../exceptions';
 import { ParagraphWithFirstLetterSpan } from '../ParagraphWithFirstLetterSpan';
 
+declare module "marked" {
+  class Parser {
+    constructor(options: marked.MarkedOptions);
+    parse(tokens: marked.TokensList);
+  }
+}
+
 const EMPTY_STRING = '';
 
 // https://github.com/christianalfoni/markdown-to-react-components/blob/master/src/index.js
@@ -93,7 +100,7 @@ interface MarkRenderOptions {
   firstLetterSpan: boolean;
 }
 
-export class MarkedReactRenderer implements MarkedRenderer {
+export class MarkedReactRenderer implements marked.Renderer {
   private paragraphCounter = 0;
   private container = new TreeContainer();
 
@@ -203,9 +210,11 @@ export class MarkedReactRenderer implements MarkedRenderer {
     }
     return EMPTY_STRING;
   }
+
   image(href: string, title: string, text: string) {
     return EMPTY_STRING;
   }
+
   text(text: string) {
     this.container.pushInline(unescapeText(text), false);
     return text;
@@ -216,7 +225,7 @@ export class MarkedReactRenderer implements MarkedRenderer {
       renderer: this,
       gfm: true,
       smartypants: true
-    } as MarkedOptions);
+    });
     const tokens = marked.lexer(html);
     patchParser(parser, this);
     parser.parse(tokens);
