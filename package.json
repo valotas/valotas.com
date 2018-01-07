@@ -30,7 +30,8 @@
     "node-progress": "^0.1.0",
     "pug": "^2.0.0-rc.1",
     "rimraf": "2.6.1",
-    "systemjs-builder": "0.16.6",
+    "systemjs": "^0.20.19",
+    "systemjs-builder": "^0.16.12",
     "through2": "2.0.3",
     "tslib": "^1.7.1",
     "typescript": "^2.6.1",
@@ -71,8 +72,7 @@
     "preact": "^8.1.0",
     "preact-render-to-string": "^3.6.0",
     "prettier": "^1.8.2",
-    "prismjs": "^1.6.0",
-    "systemjs": "0.20.13"
+    "prismjs": "^1.6.0"
   },
   "eslintConfig": {
     "root": true,
