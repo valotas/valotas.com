@@ -8,7 +8,7 @@ import {
 import * as ex from '../../exceptions';
 import { ParagraphWithFirstLetterSpan } from '../ParagraphWithFirstLetterSpan';
 
-declare module "marked" {
+declare module 'marked' {
   class Parser {
     constructor(options: marked.MarkedOptions);
     parse(tokens: marked.TokensList);

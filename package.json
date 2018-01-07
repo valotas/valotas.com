@@ -28,6 +28,7 @@
     "jasmine-core": "^2.6.2",
     "node-fetch": "1.7.0",
     "node-progress": "^0.1.0",
+    "prettier": "^1.9.2",
     "pug": "^2.0.0-rc.1",
     "rimraf": "2.6.1",
     "systemjs": "^0.20.19",
@@ -71,7 +72,6 @@
     "moment": "2.18.1",
     "preact": "^8.1.0",
     "preact-render-to-string": "^3.6.0",
-    "prettier": "^1.8.2",
     "prismjs": "^1.6.0"
   },
   "eslintConfig": {
