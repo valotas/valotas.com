@@ -1,18 +1,18 @@
 .article-card {
     transition: all 0.5s ease;
-    
+
     &.end {
         @include grid-column-end;
     }
 
-    @media #{$large-up} {
+    @include breakpoint(large up) {
         @include grid-column(4);
-        
+
         &.first {
             clear: left;
         }
     }
-    
+
     .more,
     .button {
         margin: 0;

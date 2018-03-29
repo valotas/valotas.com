@@ -4,14 +4,14 @@
     background: url('greece-wallpaper-hd-pictures-35.jpg');
     background-size: cover;
     padding: rem-calc(20);
-    
+
     .version,
     .icon,
     .note {
         @include grid-column(12);
     }
 
-    @media #{$large-up} {
+    @include breakpoint(large up) {
         .icon {
             @include grid-column(1);
         }

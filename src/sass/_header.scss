@@ -2,24 +2,24 @@
     padding: 4em 4em 4em + $header-overlap-padding;
     background: url('greece-wallpaper-hd-pictures-35.jpg');
     background-size: cover;
-    
-    h1, 
+
+    h1,
     h4 {
         font-family: $body-font-family
     }
-    
+
     h1 {
         font-weight: 600;
     }
-    
+
     h4 {
         font-weight: 200;
     }
-    
+
     .date {
         vertical-align: middle;
     }
-    
+
     .photo {
         @include grid-column(12);
 
@@ -35,19 +35,19 @@
             margin: 0 auto;
         }
     }
-    
+
     .signature {
         @include grid-column(12);
         margin-top: rem-calc(15);
         text-align: center;
     }
-    
+
     .signature-row {
         padding: rem-calc(5 0);
         background: $white-on-blue-background;
     }
 
-    @media #{$large-up} {
+    @include breakpoint(large up) {
         .photo {
             @include grid-column(4);
         }
@@ -56,13 +56,13 @@
             background: transparent;
             text-align: left;
         }
-     
+
         .signature-row {
             background: transparent;
             padding: 0;
-        }   
+        }
     }
-    
+
     .social {
          a {
             display: inline-block;
