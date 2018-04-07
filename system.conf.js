@@ -1,6 +1,6 @@
 /*eslint-env browser*/
 /*eslint-disable no-var*/
-/*global System, module*/
+/*global module*/
 
 (function (g) {
   'use strict';
