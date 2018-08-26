@@ -23,10 +23,9 @@ describe('createLayoutHtml', () => {
   };
 
   it('should add an html with the rendered layout to the given file', done => {
-    fs
-      .src(['src/articles/better-angular-*.md'], {
-        base: path.join(__dirname, '../../')
-      })
+    fs.src(['src/articles/better-angular-*.md'], {
+      base: path.join(__dirname, '../../')
+    })
       .pipe(parseMetaFile())
       .pipe(createLayoutHtml(pkg, dummyFetcher))
       .pipe(
@@ -39,10 +38,9 @@ describe('createLayoutHtml', () => {
   });
 
   it('should not add the html attribute if no meta attribute is found', done => {
-    fs
-      .src(['src/robots.txt'], {
-        base: path.join(__dirname, '../../')
-      })
+    fs.src(['src/robots.txt'], {
+      base: path.join(__dirname, '../../')
+    })
       .pipe(createLayoutHtml(pkg, dummyFetcher))
       .pipe(
         through.obj(function(chunk, enc, cb) {

@@ -52,7 +52,8 @@ export class Gist extends Component<GistProps, GistState> {
     return (
       <Code data-gist-id={gistId} data-gist-user={user} data-gist-file={file}>
         <Link href={href} target="_blank">
-          <Icon name="fa-github" />&nbsp;
+          <Icon name="fa-github" />
+          &nbsp;
           {file}
         </Link>
         <FormattedCode language={language} code={content} />

@@ -15,10 +15,9 @@ const noopLogger = {
 
 describe('parseMetaFile', () => {
   it('should parse the meta as yalm', done => {
-    fs
-      .src(['src/articles/tomcat-initd-*.md'], {
-        base: path.join(__dirname, '../../')
-      })
+    fs.src(['src/articles/tomcat-initd-*.md'], {
+      base: path.join(__dirname, '../../')
+    })
       .pipe(parseMetaFile())
       .pipe(
         through.obj(function(chunk, enc, cb) {
@@ -35,10 +34,9 @@ describe('parseMetaFile', () => {
 
   it('should not pass non published files to the pipe chain', done => {
     let chunk;
-    fs
-      .src(['src/articles/documenting-code.md'], {
-        base: path.join(__dirname, '../../')
-      })
+    fs.src(['src/articles/documenting-code.md'], {
+      base: path.join(__dirname, '../../')
+    })
       .pipe(parseMetaFile())
       .pipe(
         through.obj(function(_chunk, enc, cb) {
@@ -55,10 +53,9 @@ describe('parseMetaFile', () => {
 
 describe('toArticle', () => {
   it('should add an article/meta property to the given chunk', done => {
-    fs
-      .src(['src/articles/getters-and-setters.md'], {
-        base: path.join(__dirname, '../../')
-      })
+    fs.src(['src/articles/getters-and-setters.md'], {
+      base: path.join(__dirname, '../../')
+    })
       .pipe(parseMetaFile())
       .pipe(toArticle())
       .pipe(
@@ -73,10 +70,9 @@ describe('toArticle', () => {
   });
 
   it('should not be applied no mdfile is available', done => {
-    fs
-      .src(['src/articles/tomcat-initd-*.md'], {
-        base: path.join(__dirname, '../../')
-      })
+    fs.src(['src/articles/tomcat-initd-*.md'], {
+      base: path.join(__dirname, '../../')
+    })
       .pipe(toArticle())
       .pipe(
         through.obj(function(chunk, enc, cb) {
@@ -90,10 +86,9 @@ describe('toArticle', () => {
 
 describe('adaptPaths', () => {
   it('should adapt the path of the given chunk if it is an md file', done => {
-    fs
-      .src(['src/articles/tomcat-initd-*.md'], {
-        base: path.join(__dirname, '../../')
-      })
+    fs.src(['src/articles/tomcat-initd-*.md'], {
+      base: path.join(__dirname, '../../')
+    })
       .pipe(parseMetaFile())
       .pipe(adaptPaths())
       .pipe(
@@ -109,10 +104,9 @@ describe('adaptPaths', () => {
 describe('addMetafiles', () => {
   it('should add a meta.json for each file with a meta property containing it', done => {
     let counter = 0;
-    fs
-      .src(['src/articles/tomcat-initd-*.md'], {
-        base: path.join(__dirname, '../../')
-      })
+    fs.src(['src/articles/tomcat-initd-*.md'], {
+      base: path.join(__dirname, '../../')
+    })
       .pipe(parseMetaFile())
       .pipe(addMetafiles(noopLogger))
       .pipe(
@@ -134,10 +128,9 @@ describe('addMetafiles', () => {
 describe('addIndex', () => {
   it('should add an index.html and error.html', done => {
     const paths = [];
-    fs
-      .src(['src/articles/tomcat-initd-*.md'], {
-        base: path.join(__dirname, '../../')
-      })
+    fs.src(['src/articles/tomcat-initd-*.md'], {
+      base: path.join(__dirname, '../../')
+    })
       .pipe(parseMetaFile())
       .pipe(toArticle())
       .pipe(addIndex(noopLogger))

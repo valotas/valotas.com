@@ -28,7 +28,9 @@ class Browser {
     const proto =
       options && options.protocol
         ? options.protocol
-        : 'https:' === document.location.protocol ? 'https' : 'http';
+        : 'https:' === document.location.protocol
+          ? 'https'
+          : 'http';
     wf.src = proto + ':' + url;
     wf.type = 'text/javascript';
     wf.async = true;

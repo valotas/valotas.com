@@ -1,5 +1,5 @@
 import { h } from 'preact';
-import * as render from 'preact-render-to-string';
+import { render } from '../renderToString';
 import { Header } from './Header';
 
 describe('Header', () => {

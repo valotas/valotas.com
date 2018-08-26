@@ -1,5 +1,5 @@
-import * as render from 'preact-render-to-string';
 import * as marked from 'marked';
+import { render } from '../../renderToString';
 import { createComponentTree } from './createComponentTree';
 
 function renderToStaticMarkup(source, options?) {

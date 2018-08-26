@@ -1,8 +1,8 @@
 import { h } from 'preact';
-import * as render from 'preact-render-to-string';
-import { PackageJson } from '../PackageJson';
-import { Page } from './Page';
 import { MetaFile } from '../content/MetaFile';
+import { PackageJson } from '../PackageJson';
+import { render } from '../renderToString';
+import { Page } from './Page';
 
 describe('Page', () => {
   const pkg: PackageJson = {

@@ -2,7 +2,7 @@ import * as through from 'through2';
 import * as path from 'path';
 import * as gutil from 'gulp-util';
 import { h } from 'preact';
-import * as render from 'preact-render-to-string';
+import { render } from '../renderToString';
 import { GulpFile, Logger } from './gulp-types';
 import { Fetcher } from '../types';
 import { PackageJson } from '../PackageJson';
