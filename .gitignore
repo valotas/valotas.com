@@ -1,7 +1,6 @@
-node_modules/**
-vendor/**
-build/**
-dist/**
+node_modules/
+build/
+dist/
 typings/**
 *~
 tscommand.tmp.txt
@@ -11,3 +10,4 @@ server/**/*.js
 .baseDir.ts
 .idea
 .vscode
+.parcel-cache
