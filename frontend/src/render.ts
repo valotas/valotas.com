@@ -1,7 +1,8 @@
 import { renderToString } from "preact-render-to-string";
 import { h } from "preact";
+import type { PageProps } from "./Page";
 import { Page } from "./Page.js";
 
-export function render(_raw: string) {
-  return renderToString(h(Page, null));
+export function render(props: PageProps) {
+  return renderToString(h(Page, props));
 }

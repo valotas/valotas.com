@@ -1,17 +1,17 @@
 import { h } from "preact";
 import { Icon } from "./Icon.js";
 
-interface FooterProps {
-  name?: string;
-  version?: string;
+export interface FooterProps {
+  pkgName?: string;
+  pkgVersion?: string;
 }
 
-export function Footer({ version, name }: FooterProps) {
+export function Footer({ pkgVersion, pkgName }: FooterProps) {
   return (
     <div className="footer" data-testid="footer">
       <div className="container text-center">
         <div className="version">
-          {name || ""} <strong>v{version || ""}</strong> &copy; Γιώργος
+          {pkgName || ""} <strong>v{pkgVersion || ""}</strong> &copy; Γιώργος
           Βαλοτάσιος - CSS by &nbsp;
           <a href="https://twitter.com/MrPirrera" target="_blank">
             @MrPirrera

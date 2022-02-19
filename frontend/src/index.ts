@@ -1,1 +1,1 @@
-export { Page } from "./Page.js";
+export * from "./Page.js";
