@@ -1,18 +1,18 @@
 import { h } from "preact";
-import { PackageJson } from "../PackageJson";
-import { Icon } from "./Icon";
+import { Icon } from "./Icon.js";
 
 interface FooterProps {
-  pkg: PackageJson;
+  name?: string;
+  version?: string;
 }
 
-export function Footer({ pkg }: FooterProps) {
+export function Footer({ version, name }: FooterProps) {
   return (
-    <div className="footer">
+    <div className="footer" data-testid="footer">
       <div className="container text-center">
         <div className="version">
-          {pkg.name} <strong>v{pkg.version}</strong> &copy; Γιώργος Βαλοτάσιος -
-          CSS by &nbsp;
+          {name || ""} <strong>v{version || ""}</strong> &copy; Γιώργος
+          Βαλοτάσιος - CSS by &nbsp;
           <a href="https://twitter.com/MrPirrera" target="_blank">
             @MrPirrera
           </a>

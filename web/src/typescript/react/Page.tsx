@@ -3,7 +3,6 @@ import { PackageJson } from "../PackageJson";
 import { h, Component } from "preact";
 import { MetaFile } from "../content/MetaFile";
 import { LoadingBar } from "./LoadingBar";
-import { Footer } from "./Footer";
 import { MetaFileStore } from "../content/MetaFileStore";
 import { GistStore } from "../content/GistStore";
 import { isArray } from "../utils";
@@ -86,7 +85,6 @@ export class Page extends Component<PageProps, PageState> {
       <div>
         <LoadingBar />
         <LayoutMainContent meta={meta} />
-        <Footer pkg={pkg} />
       </div>
     );
   }
