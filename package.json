@@ -1,6 +1,7 @@
 {
     "name": "@valotas/valotas.com",
     "workspaces": [
+        "frontend",
         "parcel-transformer-md",
         "web"
     ]
