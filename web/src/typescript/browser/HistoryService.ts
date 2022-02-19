@@ -1,13 +1,12 @@
-import { PageState } from '../PageState';
-import { BROWSER } from './Browser';
-import { Bus } from '../Bus';
+import { PageState } from "../PageState";
+import { Bus } from "../Bus";
 
 export class HistoryService {
   private popStateBus: Bus<PageState> = new Bus();
   private pushStateBus: Bus<PageState> = new Bus();
 
   constructor(private win: Window) {
-    win.addEventListener('popstate', (ev: PopStateEvent) => {
+    win.addEventListener("popstate", (ev: PopStateEvent) => {
       const page = ev.state as PageState;
       this.popStateBus.notify(page);
     });

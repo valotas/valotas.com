@@ -1,5 +1,6 @@
-import { BROWSER } from './Browser';
+import { BROWSER } from "./Browser";
 
+// eslint-disable-next-line @typescript-eslint/no-empty-function
 function noop() {}
 
 interface SendPageViewArgument {
@@ -9,21 +10,22 @@ interface SendPageViewArgument {
 
 class GoogleAnalytics {
   constructor(private ctx, private name: string, propertyId: string) {
-    this.ga('create', propertyId, 'auto');
+    this.ga("create", propertyId, "auto");
   }
 
   ga(...args) {
+    // eslint-disable-next-line
     this.ctx[this.name].apply(this.ctx, args);
   }
 
   sendPageView(page?: SendPageViewArgument): GoogleAnalytics {
     if (page) {
-      this.ga('set', {
+      this.ga("set", {
         page: page.path,
-        title: page.title
+        title: page.title,
       });
     }
-    this.ga('send', 'pageview');
+    this.ga("send", "pageview");
 
     return this;
   }
@@ -34,25 +36,26 @@ export function createGoogleAnalytics(
   win = BROWSER
 ): GoogleAnalytics {
   if (!win) {
-    return new GoogleAnalytics({ ga: noop }, 'ga', '');
+    return new GoogleAnalytics({ ga: noop }, "ga", "");
   }
 
   const window = win.window;
-  const name = 'ga';
+  const name = "ga";
   const ga = window[name];
   if (ga) {
     return ga;
   }
 
-  window['GoogleAnalyticsObject'] = name;
+  window["GoogleAnalyticsObject"] = name;
   window[name] =
     window[name] ||
-    function() {
+    function () {
+      //eslint-disable-next-line prefer-rest-params
       (window[name].q = window[name].q || []).push(arguments);
     };
   window[name].l = 1 * new Date().getTime();
 
-  win.addScript('//www.google-analytics.com/analytics.js');
+  win.addScript("//www.google-analytics.com/analytics.js");
 
   return new GoogleAnalytics(window, name, propertyId);
 }

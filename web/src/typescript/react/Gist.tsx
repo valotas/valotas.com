@@ -1,13 +1,12 @@
-import { h, Component } from 'preact';
-import { GistDescription } from '../types';
-import { GistStore } from '../content/GistStore';
-import { isPromise } from '../utils';
-import { Link } from './Link';
-import { Icon } from './Icon';
-import { Code } from './Code';
-import { FormattedCode } from './FormattedCode';
+import { h, Component } from "preact";
+import { GistDescription } from "../types";
+import { isPromise } from "../utils";
+import { Link } from "./Link";
+import { Icon } from "./Icon";
+import { Code } from "./Code";
+import { FormattedCode } from "./FormattedCode";
 
-interface GistProps extends GistDescription {}
+type GistProps = GistDescription;
 
 interface GistState {
   content: string;
@@ -21,7 +20,7 @@ export class Gist extends Component<GistProps, GistState> {
     super(props, context);
 
     this.state = {
-      content: null
+      content: null,
     };
 
     const { gistStore } = this.context;
@@ -41,13 +40,13 @@ export class Gist extends Component<GistProps, GistState> {
     if (!this.contentPromise) {
       return;
     }
-    this.contentPromise.then(content => {
+    this.contentPromise.then((content) => {
       this.setState(createState(content, this.props));
     });
   }
 
-  render({ user = 'valotas', file, gistId }, { content, language }) {
-    const filetarget = file.replace(/\./g, '-').toLocaleLowerCase();
+  render({ user = "valotas", file, gistId }, { content, language }) {
+    const filetarget = file.replace(/\./g, "-").toLocaleLowerCase();
     const href = `https://gist.github.com/${user}/${gistId}#file-${filetarget}`;
     return (
       <Code data-gist-id={gistId} data-gist-user={user} data-gist-file={file}>
@@ -64,16 +63,16 @@ export class Gist extends Component<GistProps, GistState> {
 
 function createState(content, { file }): GistState {
   return {
-    content: content.replace(/\t/g, '  '),
-    language: lang(file)
+    content: content.replace(/\t/g, "  "),
+    language: lang(file),
   };
 }
 
 function lang(file: string) {
-  if (file && file.indexOf('.js') > 0) {
-    return 'javascript';
+  if (file && file.indexOf(".js") > 0) {
+    return "javascript";
   }
-  if (file && file.indexOf('.java') > 0) {
-    return 'java';
+  if (file && file.indexOf(".java") > 0) {
+    return "java";
   }
 }

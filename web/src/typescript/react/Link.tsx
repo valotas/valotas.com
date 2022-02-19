@@ -1,8 +1,7 @@
-import { Article } from '../content/Article';
-import { h, Component } from 'preact';
-import { MetaFileStore } from '../content/MetaFileStore';
-import { Icon } from './Icon';
-import { BROWSER } from '../browser/Browser';
+import { Article } from "../content/Article";
+import { h, Component } from "preact";
+import { MetaFileStore } from "../content/MetaFileStore";
+import { BROWSER } from "../browser/Browser";
 
 interface LinkProps {
   article?: Article;
@@ -28,7 +27,7 @@ export class Link extends Component<LinkProps, any> {
   }
 
   private createHref() {
-    let href = '/';
+    let href = "/";
     const article = this.props.article;
     if (article) {
       href += `${article.key}/`;
@@ -36,9 +35,9 @@ export class Link extends Component<LinkProps, any> {
     return href;
   }
 
-  private handleClick = e => {
+  private handleClick = (e) => {
     const { href, target } = this.props;
-    if (href === '#') {
+    if (href === "#") {
       e.preventDefault();
       window.scrollTo(0, 0);
       return;
@@ -48,7 +47,7 @@ export class Link extends Component<LinkProps, any> {
       return;
     }
 
-    if (target === '_blank' || (href && href.indexOf('http') === 0)) {
+    if (target === "_blank" || (href && href.indexOf("http") === 0)) {
       return;
     }
 
@@ -58,6 +57,6 @@ export class Link extends Component<LinkProps, any> {
     }
 
     e.preventDefault();
-    store.load(this.props.article || this.props.href || '/');
+    store.load(this.props.article || this.props.href || "/");
   };
 }

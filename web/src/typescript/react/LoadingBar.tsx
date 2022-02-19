@@ -1,6 +1,6 @@
-import { h, Component } from 'preact';
-import { FetchStreamer } from '../FetchStreamer';
-import { noop } from '../utils';
+import { h, Component } from "preact";
+import { FetchStreamer } from "../FetchStreamer";
+import { noop } from "../utils";
 
 interface LoadingBarState {
   loading: number;
@@ -21,15 +21,15 @@ export class LoadingBar extends Component<any, LoadingBarState> {
   constructor(props) {
     super(props);
     this.state = {
-      loading: 0
+      loading: 0,
     };
     this.onFetchRegistration = noop;
   }
 
   componentDidMount() {
-    this.onFetchRegistration = this.context.fetcher.onFetch(promise => {
+    this.onFetchRegistration = this.context.fetcher.onFetch((promise) => {
       this.add(1);
-      promise.then(result => {
+      promise.then((result) => {
         setTimeout(() => {
           this.add(-1);
         }, 15);
@@ -48,7 +48,7 @@ export class LoadingBar extends Component<any, LoadingBarState> {
       return;
     }
     this.setState({
-      loading: newLoading
+      loading: newLoading,
     });
   }
 
@@ -64,7 +64,7 @@ export class LoadingBar extends Component<any, LoadingBarState> {
   }
 
   render(_, { loading }) {
-    const classNames = `loading-bar ${loading ? 'loading' : ''}`;
+    const classNames = `loading-bar ${loading ? "loading" : ""}`;
     return (
       <div className={classNames}>
         <div className="loading-bar-inner" />

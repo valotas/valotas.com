@@ -1,7 +1,7 @@
-import { PageState } from '../PageState';
-import { HistoryService } from './HistoryService';
+import { PageState } from "../PageState";
+import { HistoryService } from "./HistoryService";
 
-describe('HistoryService', () => {
+describe("HistoryService", () => {
   let win;
   let history: HistoryService;
 
@@ -12,34 +12,34 @@ describe('HistoryService', () => {
         listener: (ev: PopStateEvent) => void
       ) => {
         win[name] = listener;
-      }
+      },
     } as Window;
     history = new HistoryService(win);
   });
 
-  it('should register an onpopstate listener', () => {
+  it("should register an onpopstate listener", () => {
     expect(win.popstate).toBeDefined();
   });
 
-  describe('onPopState', () => {
-    it('should register popstate listeners', () => {
-      const listener = jasmine.createSpy('popStateListener');
-      const registration = history.onPopState(listener);
+  describe("onPopState", () => {
+    it("should register popstate listeners", () => {
+      const listener = jasmine.createSpy("popStateListener");
+      //const registration = history.onPopState(listener);
       const event = {
-        state: {} as PageState
+        state: {} as PageState,
       };
       win.popstate(event);
       expect(listener).toHaveBeenCalledWith(event.state);
     });
   });
 
-  describe('pushState', () => {
-    it('should call win.history.pushState', () => {
-      win.history = jasmine.createSpyObj('history', ['pushState']);
+  describe("pushState", () => {
+    it("should call win.history.pushState", () => {
+      win.history = jasmine.createSpyObj("history", ["pushState"]);
       const state = {
         meta: [],
-        title: 'the title',
-        path: 'the path'
+        title: "the title",
+        path: "the path",
       };
       history.pushState(state);
       expect(win.history.pushState).toHaveBeenCalledWith(
@@ -49,14 +49,14 @@ describe('HistoryService', () => {
       );
     });
 
-    it('should call notify registered listeners', () => {
-      win.history = jasmine.createSpyObj('history', ['pushState']);
+    it("should call notify registered listeners", () => {
+      win.history = jasmine.createSpyObj("history", ["pushState"]);
       const state = {
         meta: [],
-        title: 'the title',
-        path: 'the path'
+        title: "the title",
+        path: "the path",
       };
-      const listener = jasmine.createSpy('listener');
+      const listener = jasmine.createSpy("listener");
       history.onPushState(listener);
       history.pushState(state);
       expect(listener).toHaveBeenCalledWith(state);

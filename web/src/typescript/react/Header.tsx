@@ -1,8 +1,8 @@
-import { h } from 'preact';
-import { Icon } from './Icon';
-import { VALOTAS } from '../utils';
-import { Link } from './Link';
-import { MetaFileStore } from '../content/MetaFileStore';
+import { h } from "preact";
+import { Icon } from "./Icon";
+import { VALOTAS } from "../utils";
+import { Link } from "./Link";
+import { MetaFileStore } from "../content/MetaFileStore";
 
 interface HeaderProps {
   title: string;
@@ -15,7 +15,7 @@ export function Header({
   title,
   subtitle = VALOTAS,
   date,
-  metafileStore
+  metafileStore,
 }: HeaderProps) {
   return (
     <div className="header">

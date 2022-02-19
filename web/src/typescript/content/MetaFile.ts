@@ -1,12 +1,12 @@
-import * as moment from 'moment';
-import * as ex from '../exceptions';
-import { MetaFileData, MetaFileType, GistContent } from '../types';
-import { isArray } from '../utils';
+import * as moment from "moment";
+import * as ex from "../exceptions";
+import { MetaFileData, MetaFileType, GistContent } from "../types";
+import { isArray } from "../utils";
 
 const DASHES = /\n?---/;
 const NL_SPLIT = /\n/;
 const KV_SPLIT = /\n|:/;
-const INPUT_FORMATS = ['YYYY-MM-DD HH:mm', 'YYYY-MM-DD'];
+const INPUT_FORMATS = ["YYYY-MM-DD HH:mm", "YYYY-MM-DD"];
 
 export class MetaFile implements MetaFileData {
   title: string;
@@ -37,7 +37,7 @@ export class MetaFile implements MetaFileData {
   }
 
   static createFromRawMd(raw: string, path?: string): MetaFile {
-    let file = new MetaFile();
+    const file = new MetaFile();
     const matches = raw.split(DASHES);
     file.raw = matches[2].trim();
 
@@ -45,22 +45,22 @@ export class MetaFile implements MetaFileData {
     file.title = obj.title;
     file.date = obj.date;
     file.published =
-      obj.published === '0' || obj.published === 'false' ? false : true;
+      obj.published === "0" || obj.published === "false" ? false : true;
     file.path = path;
     file.gists = [];
-    file.type = 'article';
+    file.type = "article";
     return file;
   }
 
   static createFromJson(raw: string, path?: string): MetaFile {
     const json = JSON.parse(raw);
-    let file = new MetaFile();
+    const file = new MetaFile();
     file.title = json.title || null;
     file.date = json.date || null;
     file.published = json.published || true;
     file.path = path;
     file.gists = json.gists || [];
-    file.type = 'error';
+    file.type = "error";
     return file;
   }
 
@@ -83,9 +83,9 @@ export class MetaFile implements MetaFileData {
     }
 
     throw ex.illegalFromatException(
-      'Could not parse ' +
+      "Could not parse " +
         this.date +
-        ' as date using formats: ' +
+        " as date using formats: " +
         INPUT_FORMATS
     );
   }
@@ -94,12 +94,12 @@ export class MetaFile implements MetaFileData {
 function parseHeader(text) {
   const lines = text.trim().split(NL_SPLIT);
   return lines
-    .map(line => {
+    .map((line) => {
       const pair = line.split(KV_SPLIT);
       const key = pair.shift();
       return {
         key: key.trim(),
-        value: pair.join(':').trim()
+        value: pair.join(":").trim(),
       };
     })
     .reduce(
@@ -111,14 +111,14 @@ function parseHeader(text) {
         title: null,
         date: null,
         template: null,
-        published: null
+        published: null,
       }
     );
 }
 
 function castOrCreate(data: any): MetaFile {
   if (!isValidMetaFileData(data)) {
-    throw new Error('Given data is not a valid MetaFileData');
+    throw new Error("Given data is not a valid MetaFileData");
   }
   if (isValidMetaFile(data)) {
     return data;

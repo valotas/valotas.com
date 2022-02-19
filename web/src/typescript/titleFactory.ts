@@ -1,5 +1,5 @@
-import { MetaFileData } from './types';
-import { VALOTAS, isArray } from './utils';
+import { MetaFileData } from "./types";
+import { VALOTAS, isArray } from "./utils";
 
 export function createTitle(meta?: MetaFileData | MetaFileData[]) {
   if (!isArray(meta)) {

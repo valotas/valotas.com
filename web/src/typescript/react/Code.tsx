@@ -1,8 +1,4 @@
-import { h } from 'preact';
-import { GistStore } from '../content/GistStore';
-import { isPromise } from '../utils';
-import { Link } from './Link';
-import { Icon } from './Icon';
+import { h } from "preact";
 
 export function Code(props) {
   const { children } = props;
@@ -25,8 +21,8 @@ function Title({ title }) {
 
 function PreCode(props) {
   const dataProps = {};
-  Object.keys(props).forEach(key => {
-    if (key.indexOf('data-') === 0) {
+  Object.keys(props).forEach((key) => {
+    if (key.indexOf("data-") === 0) {
       dataProps[key] = props[key];
     }
   });

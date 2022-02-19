@@ -1,4 +1,4 @@
-import { h, Component } from 'preact';
+import { h } from "preact";
 
 export function ParagraphWithFirstLetterSpan({ children }) {
   const child = children[0] as string;

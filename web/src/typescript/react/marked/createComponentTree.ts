@@ -1,9 +1,9 @@
-import { h, ComponentConstructor, Component } from 'preact';
-import { Gist } from '../Gist';
-import { Link } from '../Link';
-import { Code } from '../Code';
-import { FormattedCode } from '../FormattedCode';
-import { MarkedReactRenderer } from './MarkedRenderer';
+import { h } from "preact";
+import { Gist } from "../Gist";
+import { Link } from "../Link";
+import { Code } from "../Code";
+import { FormattedCode } from "../FormattedCode";
+import { MarkedReactRenderer } from "./MarkedRenderer";
 
 export function createComponentTree(
   html: string,
@@ -14,12 +14,13 @@ export function createComponentTree(
     html: [htmlToGistTransformer],
     pre: Code,
     code: FormattedCode,
-    link: Link
+    link: Link,
   });
   return renderer.createComponentTree(html);
 }
 
-const GIST_SCRIPT = /script.*src=.*gist.github.com\/(([^/]*)\/)?(([^?]*)\.js(on)?)(\?(file=([^"]*)))?/;
+const GIST_SCRIPT =
+  /script.*src=.*gist.github.com\/(([^/]*)\/)?(([^?]*)\.js(on)?)(\?(file=([^"]*)))?/;
 
 function htmlToGistTransformer(html: string) {
   const matches = GIST_SCRIPT.exec(html);
@@ -31,7 +32,7 @@ function htmlToGistTransformer(html: string) {
     props: {
       user: matches[2],
       gistId: matches[4],
-      file: matches[8]
-    }
+      file: matches[8],
+    },
   };
 }

@@ -1,6 +1,6 @@
-import { h } from 'preact';
-import { PackageJson } from '../PackageJson';
-import { Icon } from './Icon';
+import { h } from "preact";
+import { PackageJson } from "../PackageJson";
+import { Icon } from "./Icon";
 
 interface FooterProps {
   pkg: PackageJson;

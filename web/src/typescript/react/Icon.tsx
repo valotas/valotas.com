@@ -1,4 +1,4 @@
-import { h } from 'preact';
+import { h } from "preact";
 
 interface IconProps {
   name: string;
@@ -6,6 +6,6 @@ interface IconProps {
 }
 
 export function Icon({ name, size }: IconProps) {
-  const className = 'fa ' + name + ' fa-' + (size || '1x');
+  const className = "fa " + name + " fa-" + (size || "1x");
   return <i className={className} />;
 }

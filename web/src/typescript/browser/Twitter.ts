@@ -1,7 +1,7 @@
-import { BROWSER } from './Browser';
+import { BROWSER } from "./Browser";
 
-const TWITTER_SCRIPT_ID = 'twitter-wjs';
-const TWTTR = 'twttr';
+const TWITTER_SCRIPT_ID = "twitter-wjs";
+const TWTTR = "twttr";
 
 interface TwttrWidgets {
   load();
@@ -32,9 +32,9 @@ export function loadTwitter(browser = BROWSER) {
     window[TWTTR] = createTwttr(window);
 
     // load the widgets.js
-    browser.addScript('//platform.twitter.com/widgets.js', {
+    browser.addScript("//platform.twitter.com/widgets.js", {
       id: TWITTER_SCRIPT_ID,
-      protocol: 'https'
+      protocol: "https",
     });
   }
   return new TwitterThenable();
@@ -42,7 +42,7 @@ export function loadTwitter(browser = BROWSER) {
 
 function createTwttr(window) {
   const t = window[TWTTR] || { _e: [] };
-  t.ready = function(f) {
+  t.ready = function (f) {
     t._e.push(f);
   };
   return t;

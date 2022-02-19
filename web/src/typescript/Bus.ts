@@ -2,7 +2,7 @@ export class Bus<T> {
   private listeners: ((T) => void)[] = [];
 
   notify(val: T) {
-    this.listeners.forEach(listener => listener(val));
+    this.listeners.forEach((listener) => listener(val));
   }
 
   register(listener: (T) => void) {

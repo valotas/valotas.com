@@ -1,16 +1,16 @@
-import { MetaFileData, Fetcher } from '../types';
-import { PackageJson } from '../PackageJson';
-import { h, Component } from 'preact';
-import { MetaFile } from '../content/MetaFile';
-import { LoadingBar } from './LoadingBar';
-import { Footer } from './Footer';
-import { MetaFileStore } from '../content/MetaFileStore';
-import { GistStore } from '../content/GistStore';
-import { isArray } from '../utils';
-import * as ex from '../exceptions';
-import { BROWSER } from '../browser/Browser';
-import { FetchStreamer } from '../FetchStreamer';
-import { LayoutMainContent } from './LayoutMainContent';
+import { MetaFileData, Fetcher } from "../types";
+import { PackageJson } from "../PackageJson";
+import { h, Component } from "preact";
+import { MetaFile } from "../content/MetaFile";
+import { LoadingBar } from "./LoadingBar";
+import { Footer } from "./Footer";
+import { MetaFileStore } from "../content/MetaFileStore";
+import { GistStore } from "../content/GistStore";
+import { isArray } from "../utils";
+import * as ex from "../exceptions";
+import { BROWSER } from "../browser/Browser";
+import { FetchStreamer } from "../FetchStreamer";
+import { LayoutMainContent } from "./LayoutMainContent";
 
 export interface PageProps {
   meta?: MetaFileData | MetaFileData[];
@@ -29,7 +29,7 @@ export class Page extends Component<PageProps, PageState> {
   constructor(props: PageProps) {
     super(props);
     this.state = {
-      meta: MetaFile.fromData(props.meta)
+      meta: MetaFile.fromData(props.meta),
     };
   }
 
@@ -43,7 +43,7 @@ export class Page extends Component<PageProps, PageState> {
     return {
       metafileStore: this.props.metafileStore,
       fetcher: FetchStreamer.wrap(this.props.fetcher),
-      gistStore: this.props.gistStore
+      gistStore: this.props.gistStore,
     };
   }
 
@@ -51,7 +51,7 @@ export class Page extends Component<PageProps, PageState> {
     const { metafileStore } = this.props;
     if (!metafileStore) {
       throw ex.illegalArgumentException(
-        'MetaFileStore is needed on the client side to register for changes'
+        "MetaFileStore is needed on the client side to register for changes"
       );
     }
     metafileStore.onChange((meta: MetaFile) => {
@@ -60,7 +60,7 @@ export class Page extends Component<PageProps, PageState> {
 
     if (!BROWSER) {
       throw ex.illegalArgumentException(
-        'window is needed on the client side to register for PopStateEvents'
+        "window is needed on the client side to register for PopStateEvents"
       );
     }
     BROWSER.history.onPopState(this._setPageState);
@@ -77,7 +77,7 @@ export class Page extends Component<PageProps, PageState> {
   private _updateState(metaOrNull: MetaFile | MetaFile[]) {
     const meta = metaOrNull || MetaFile.fromData(this.props.meta);
     this.setState({
-      meta: meta
+      meta: meta,
     });
   }
 

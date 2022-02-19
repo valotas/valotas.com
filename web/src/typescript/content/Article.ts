@@ -1,6 +1,6 @@
-import * as moment from 'moment';
-import { MetaFileData } from '../types';
-import { MetaFile } from './MetaFile';
+import * as moment from "moment";
+import { MetaFileData } from "../types";
+import { MetaFile } from "./MetaFile";
 
 export interface Article {
   title: string;
@@ -26,12 +26,12 @@ class ArticleImpl implements Article {
   }
 
   date(format?: string): string {
-    return this.moment().format(format || 'DD/MM/YYYY');
+    return this.moment().format(format || "DD/MM/YYYY");
   }
 
   description(): string {
     const { description, raw } = this.meta;
-    return description || raw.substr(0, raw.indexOf('\n#')).trim();
+    return description || raw.substr(0, raw.indexOf("\n#")).trim();
   }
 
   hasTweets() {

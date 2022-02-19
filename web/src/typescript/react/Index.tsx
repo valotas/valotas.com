@@ -1,11 +1,11 @@
-import { h } from 'preact';
-import { Article } from '../content/Article';
-import { MetaFileStore } from '../content/MetaFileStore';
-import { Link } from './Link';
-import { Icon } from './Icon';
-import { Header } from './Header';
-import { MarkedComponent } from './MarkedComponent';
-import { VALOTAS } from '../utils';
+import { h } from "preact";
+import { Article } from "../content/Article";
+import { MetaFileStore } from "../content/MetaFileStore";
+import { Link } from "./Link";
+import { Icon } from "./Icon";
+import { Header } from "./Header";
+import { MarkedComponent } from "./MarkedComponent";
+import { VALOTAS } from "../utils";
 
 interface IndexProps {
   articles: Article[];
@@ -57,15 +57,15 @@ function ArticleCardComponent({
   article,
   metafileStore,
   index,
-  last
+  last,
 }: ArticleDescriptionComponentProps) {
   const description = article.description();
-  let className = 'article-card';
+  let className = "article-card";
   if ((index + 1) % 3 === 1) {
-    className += ' first';
+    className += " first";
   }
   if (last) {
-    className += ' end';
+    className += " end";
   }
   return (
     <div className={className}>

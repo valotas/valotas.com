@@ -1,5 +1,5 @@
-import { Fetcher, MetaFileData } from '../types';
-import { GistStore } from '../content/GistStore';
+import { Fetcher, MetaFileData } from "../types";
+import { GistStore } from "../content/GistStore";
 
 export class CacheableGistStore extends GistStore {
   private promises: { [k: string]: Promise<string> } = {};
@@ -15,6 +15,6 @@ export class CacheableGistStore extends GistStore {
   }
 
   all() {
-    return Promise.all(Object.keys(this.promises).map(k => this.promises[k]));
+    return Promise.all(Object.keys(this.promises).map((k) => this.promises[k]));
   }
 }

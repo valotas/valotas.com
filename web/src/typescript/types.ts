@@ -1,13 +1,10 @@
-/* eslint-disable no-undef */
-import { Moment } from 'moment';
-
 export type Fetch = (url: RequestInfo, init?: RequestInit) => Promise<Response>;
 
 export interface Fetcher {
   fetch: Fetch;
 }
 
-export type MetaFileType = 'article' | 'error';
+export type MetaFileType = "article" | "error";
 
 export interface MetaFileData {
   title: string;

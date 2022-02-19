@@ -1,6 +1,6 @@
-import { MetaFileData } from './types';
-import { VALOTAS, isArray } from './utils';
-import { createTitle } from './titleFactory';
+import { MetaFileData } from "./types";
+import { isArray } from "./utils";
+import { createTitle } from "./titleFactory";
 
 export interface PageState {
   meta: MetaFileData | MetaFileData[];
@@ -14,7 +14,7 @@ export function createPageState(
   return {
     meta,
     title: createTitle(meta),
-    path: createPath(meta)
+    path: createPath(meta),
   };
 }
 
@@ -22,5 +22,5 @@ function createPath(meta: MetaFileData | MetaFileData[]) {
   if (!isArray(meta)) {
     return `/${meta.path}/`;
   }
-  return '/';
+  return "/";
 }

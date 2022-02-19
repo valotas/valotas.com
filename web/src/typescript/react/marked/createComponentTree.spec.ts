@@ -1,47 +1,47 @@
-import * as marked from 'marked';
-import { render } from '../../renderToString';
-import { createComponentTree } from './createComponentTree';
+import * as marked from "marked";
+import { render } from "../../renderToString";
+import { createComponentTree } from "./createComponentTree";
 
 function renderToStaticMarkup(source, options?) {
   const tree = createComponentTree(source, options);
   return render(tree);
 }
 
-describe('createComponentTree', () => {
-  it('should render headers', () => {
-    const html = renderToStaticMarkup('# head');
-    expect(html).toContain('<h1>head</h1>');
+describe("createComponentTree", () => {
+  it("should render headers", () => {
+    const html = renderToStaticMarkup("# head");
+    expect(html).toContain("<h1>head</h1>");
   });
 
-  it('should render headers with emphasized text', () => {
-    const rendered = createComponentTree('# this _is_ important');
+  it("should render headers with emphasized text", () => {
+    const rendered = createComponentTree("# this _is_ important");
     const html = render(rendered);
-    expect(html).toContain('<em>is</em>');
+    expect(html).toContain("<em>is</em>");
   });
 
-  it('should render paragraphs with strong or emphasized text', () => {
-    const rendered = createComponentTree('this a **very strong** _paragraph_!');
+  it("should render paragraphs with strong or emphasized text", () => {
+    const rendered = createComponentTree("this a **very strong** _paragraph_!");
     const html = render(rendered);
-    expect(html).toContain('<strong>very strong</strong>');
-    expect(html).toContain('<em>paragraph</em>');
+    expect(html).toContain("<strong>very strong</strong>");
+    expect(html).toContain("<em>paragraph</em>");
   });
 
-  it('should render more than one block elements', () => {
-    const rendered = createComponentTree('## header \n\nthis a _paragraph_!');
+  it("should render more than one block elements", () => {
+    const rendered = createComponentTree("## header \n\nthis a _paragraph_!");
     const html = render(rendered);
-    expect(html).toContain('<h2>header</h2>');
-    expect(html).toContain('<em>paragraph</em>');
+    expect(html).toContain("<h2>header</h2>");
+    expect(html).toContain("<em>paragraph</em>");
   });
 
-  it('should render code spans', () => {
-    const rendered = createComponentTree('this a `a code`!');
+  it("should render code spans", () => {
+    const rendered = createComponentTree("this a `a code`!");
     const html = render(rendered);
-    expect(html).toContain('<code>a code</code>');
+    expect(html).toContain("<code>a code</code>");
   });
 
-  it('should render code blocks with a class derived from the language', () => {
-    const source = ['this is a', '', '```java', 'a code block', '```'].join(
-      '\n'
+  it("should render code blocks with a class derived from the language", () => {
+    const source = ["this is a", "", "```java", "a code block", "```"].join(
+      "\n"
     );
     const html = renderToStaticMarkup(source);
     expect(html).toContain(
@@ -49,49 +49,49 @@ describe('createComponentTree', () => {
     );
   });
 
-  it('should render code blocks with a javasscript class instead of js', () => {
-    const source = ['this is a', '', '```js', 'a code block', '```'].join('\n');
+  it("should render code blocks with a javasscript class instead of js", () => {
+    const source = ["this is a", "", "```js", "a code block", "```"].join("\n");
     const html = renderToStaticMarkup(source);
     expect(html).toContain('code class="language-javascript"');
   });
 
-  it('should quotes with paragraphs', () => {
+  it("should quotes with paragraphs", () => {
     const source = `
 > this is a quote paragraph
 >
 > this is another paragraph
 >
     `;
-    const expected = marked(source).replace(/\n/g, '');
+    const expected = marked(source).replace(/\n/g, "");
     const html = renderToStaticMarkup(source);
     expect(html).toContain(expected);
   });
 
-  it('should render links', () => {
+  it("should render links", () => {
     const html = renderToStaticMarkup(
-      'this is a [link](/to/another/page) to another page'
+      "this is a [link](/to/another/page) to another page"
     );
     expect(html).toContain('<a href="/to/another/page">link</a>');
   });
 
-  it('should pass through html as is', () => {
+  it("should pass through html as is", () => {
     const html = renderToStaticMarkup(
       'this is some\n<script scr="path/to/script"></script>'
     );
     expect(html).toContain('<script scr="path/to/script"></script>');
   });
 
-  it('should render ordered/unordered lists', () => {
+  it("should render ordered/unordered lists", () => {
     const source = `
 - item1
 - item2
 `;
-    const expected = marked(source).replace(/\n/g, '');
+    const expected = marked(source).replace(/\n/g, "");
     const html = renderToStaticMarkup(source);
     expect(html).toContain(expected);
   });
 
-  it('should transform gist script to a gist component for java files', () => {
+  it("should transform gist script to a gist component for java files", () => {
     const html = renderToStaticMarkup(
       '<script src="https://gist.github.com/1240545.js?file=ServletUsingCustomResponse.java"></script>'
     );
@@ -100,7 +100,7 @@ describe('createComponentTree', () => {
     );
   });
 
-  it('should transform gist script to a gist component for js files', () => {
+  it("should transform gist script to a gist component for js files", () => {
     const html = renderToStaticMarkup(
       '<script src="https://gist.github.com/valotas/1175447.js?file=scrapy.js"></script>'
     );
@@ -109,7 +109,7 @@ describe('createComponentTree', () => {
     );
   });
 
-  it('should transform gist script to a gist component for sh files', () => {
+  it("should transform gist script to a gist component for sh files", () => {
     const html = renderToStaticMarkup(
       '<script src="https://gist.github.com/valotas/1000094.js?file=tomcat.sh"></script>'
     );
@@ -118,39 +118,39 @@ describe('createComponentTree', () => {
     );
   });
 
-  it('should render paragraphs with mix span and code blocks', () => {
-    const source = 'This is a paragraph  with `code block`.';
+  it("should render paragraphs with mix span and code blocks", () => {
+    const source = "This is a paragraph  with `code block`.";
     const expected = marked(source).trim();
     const html = renderToStaticMarkup(source);
     expect(html).toContain(expected);
   });
 
-  it('should transform links to anchors', () => {
-    const source = 'Go to http://google.com/';
+  it("should transform links to anchors", () => {
+    const source = "Go to http://google.com/";
     const expected = marked(source).trim();
     const html = renderToStaticMarkup(source);
     expect(html).toContain(expected);
   });
 
-  it('should handle escaping', () => {
+  it("should handle escaping", () => {
     const source = 'I\'ve used to use "©" charachters';
     const expected = marked(source, {
-      smartypants: true
+      smartypants: true,
     }).trim();
     const html = renderToStaticMarkup(source);
     expect(html).toContain(expected);
   });
 
-  it('should links with inline code', () => {
-    const source = '[`DAO`](http://link.to/dao)s';
+  it("should links with inline code", () => {
+    const source = "[`DAO`](http://link.to/dao)s";
     const expected = marked(source, {
-      smartypants: true
+      smartypants: true,
     }).trim();
     const html = renderToStaticMarkup(source);
     expect(html).toContain(expected);
   });
 
-  it('should mark the first leter of paragraphs', () => {
+  it("should mark the first leter of paragraphs", () => {
     const source = `
 This is the first paragraph
 
@@ -162,17 +162,17 @@ And this is the second one
     );
   });
 
-  it('should mark the first leter of only the first paragraph', () => {
+  it("should mark the first leter of only the first paragraph", () => {
     const source = `
 This is the first paragraph
 
 And this is the second one
         `;
     const html = renderToStaticMarkup(source, { firstLetterSpan: true });
-    expect(html).toContain('<p>And this is the second one</p>');
+    expect(html).toContain("<p>And this is the second one</p>");
   });
 
-  it('should handle first paragraphs with inline objects', () => {
+  it("should handle first paragraphs with inline objects", () => {
     const source = `
 Some *strange* first paragraph
         `;
@@ -182,24 +182,24 @@ Some *strange* first paragraph
     );
   });
 
-  it('should handle greater/lower than charachters right', () => {
+  it("should handle greater/lower than charachters right", () => {
     const source = `
 Asume this ><&><
         `;
     const html = renderToStaticMarkup(source, { firstLetterSpan: true });
-    expect(html).toContain('this &gt;&lt;&amp;&gt;&lt;');
+    expect(html).toContain("this &gt;&lt;&amp;&gt;&lt;");
   });
 
-  it('should handle special characters in code blocks', () => {
-    const source = 'this is `some > code`';
+  it("should handle special characters in code blocks", () => {
+    const source = "this is `some > code`";
     const expected = marked(source, {
-      smartypants: true
+      smartypants: true,
     }).trim();
     const html = renderToStaticMarkup(source);
     expect(html).toContain(expected);
   });
 
-  it('should wrap pre blocks in a .codeblock', () => {
+  it("should wrap pre blocks in a .codeblock", () => {
     const source = `\`\`\`
 function xyz() {};
 \`\`\``;

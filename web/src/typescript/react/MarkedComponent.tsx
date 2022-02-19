@@ -1,8 +1,6 @@
-import * as marked from 'marked';
-import { h } from 'preact';
-import { MetaFileData } from '../types';
-import * as ex from '../exceptions';
-import { createComponentTree } from './marked/createComponentTree';
+import { h } from "preact";
+import { MetaFileData } from "../types";
+import { createComponentTree } from "./marked/createComponentTree";
 
 interface MarkedComponentProps {
   meta?: MetaFileData;

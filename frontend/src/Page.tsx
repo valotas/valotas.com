@@ -1,5 +1,5 @@
-import { h } from "preact"
+import { h } from "preact";
 
 export function Page() {
-    return <div data-testid="page">hi!</div>
+  return <div data-testid="page">hi!</div>;
 }

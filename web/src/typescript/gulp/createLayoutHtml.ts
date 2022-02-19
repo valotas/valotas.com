@@ -1,15 +1,14 @@
-import * as through from 'through2';
-import * as path from 'path';
-import * as gutil from 'gulp-util';
-import { h } from 'preact';
-import { render } from '../renderToString';
-import { GulpFile, Logger } from './gulp-types';
-import { Fetcher } from '../types';
-import { PackageJson } from '../PackageJson';
-import { isValidMetaFile } from '../content/MetaFile';
-import { CacheableGistStore } from './CacheableGistStore';
-import { Page } from '../react/Page';
-import { NodeFetcher } from './NodeFetcher';
+import * as through from "through2";
+import * as gutil from "gulp-util";
+import { h } from "preact";
+import { render } from "../renderToString";
+import { GulpFile, Logger } from "./gulp-types";
+import { Fetcher } from "../types";
+import { PackageJson } from "../PackageJson";
+import { isValidMetaFile } from "../content/MetaFile";
+import { CacheableGistStore } from "./CacheableGistStore";
+import { Page } from "../react/Page";
+import { NodeFetcher } from "./NodeFetcher";
 
 export function createLayoutHtml(
   pkg: PackageJson,
@@ -18,16 +17,16 @@ export function createLayoutHtml(
 ) {
   const actualFetcher =
     fetcher ||
-    new NodeFetcher(null, '/tmp/valotas.com.createLayoutHtml', logger);
-  return through.obj(function(file: GulpFile, enc, callback) {
+    new NodeFetcher(null, "/tmp/valotas.com.createLayoutHtml", logger);
+  return through.obj(function (file: GulpFile, enc, callback) {
     if (file.meta) {
       renderLayout(file, actualFetcher, pkg).then(
-        html => {
+        (html) => {
           file.html = html;
           callback(null, file);
         },
-        er => {
-          logger.log('Could not create html', file.path, er);
+        (er) => {
+          logger.log("Could not create html", file.path, er);
           callback(er);
         }
       );
@@ -51,7 +50,7 @@ function renderLayout(
     meta: meta,
     fetcher: fetcher,
     gistStore: store,
-    pkg: pkg
+    pkg: pkg,
   });
   // initial rendering to cause the initialization of all our components
   try {
@@ -60,5 +59,5 @@ function renderLayout(
     ex.message += `. Could not render ${file.path}`;
     return Promise.reject(ex);
   }
-  return store.all().then(all => render(page));
+  return store.all().then((_all) => render(page));
 }

@@ -1,8 +1,8 @@
-import { h } from 'preact';
-import { Header } from './Header';
-import { VALOTAS } from '../utils';
-import { Link } from './Link';
-import { Icon } from './Icon';
+import { h } from "preact";
+import { Header } from "./Header";
+import { VALOTAS } from "../utils";
+import { Link } from "./Link";
+import { Icon } from "./Icon";
 
 export function ErrorWithHeader(_, { metafileStore }) {
   return (

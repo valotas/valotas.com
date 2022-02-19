@@ -1,6 +1,6 @@
-import { loadTwitter } from './Twitter';
+import { loadTwitter } from "./Twitter";
 
-describe('Twitter', () => {
+describe("Twitter", () => {
   let browser;
 
   beforeEach(() => {
@@ -9,36 +9,36 @@ describe('Twitter', () => {
       addScriptCallCount: 0,
       addScript: () => {
         browser.addScriptCallCount++;
-      }
+      },
     };
   });
 
-  describe('loadTwitter()', () => {
-    it('should return a thenable', () => {
+  describe("loadTwitter()", () => {
+    it("should return a thenable", () => {
       const actual = loadTwitter(browser);
       expect(actual.then).toBeDefined();
     });
 
-    it('should add the twttr attribute in to the window object', () => {
+    it("should add the twttr attribute in to the window object", () => {
       loadTwitter(browser);
-      expect(browser.window['twttr']).toBeDefined();
+      expect(browser.window["twttr"]).toBeDefined();
     });
 
-    it('should add the widget script', () => {
-      spyOn(browser, 'addScript').and.callThrough();
+    it("should add the widget script", () => {
+      spyOn(browser, "addScript").and.callThrough();
       loadTwitter(browser);
       expect(browser.addScript).toHaveBeenCalledWith(
-        '//platform.twitter.com/widgets.js',
+        "//platform.twitter.com/widgets.js",
         {
-          id: 'twitter-wjs',
-          protocol: 'https'
+          id: "twitter-wjs",
+          protocol: "https",
         }
       );
     });
 
-    it('should not try to add the script twice', () => {
+    it("should not try to add the script twice", () => {
       const initialCallCount = browser.addScriptCallCount;
-      spyOn(browser, 'addScript').and.callThrough();
+      spyOn(browser, "addScript").and.callThrough();
       loadTwitter(browser);
       loadTwitter(browser);
       loadTwitter(browser);

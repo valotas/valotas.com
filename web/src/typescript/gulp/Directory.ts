@@ -1,4 +1,4 @@
-import * as fs from 'fs';
+import * as fs from "fs";
 
 export interface Directory {
   writeFile(fileName: string, data: string): Promise<string>;
@@ -7,11 +7,11 @@ export interface Directory {
 
 function writeFile(name: string, data: string): Promise<string> {
   return new Promise((resolve, reject) => {
-    fs.open(name, 'w+', (err, fd) => {
+    fs.open(name, "w+", (err, _fd) => {
       if (err) {
         reject(err);
       }
-      fs.writeFile(name, data, err => {
+      fs.writeFile(name, data, (err) => {
         if (err) {
           reject(err);
         } else {
@@ -24,7 +24,7 @@ function writeFile(name: string, data: string): Promise<string> {
 
 function readFile(fileName: string): Promise<string> {
   return new Promise((resolve, reject) => {
-    fs.readFile(fileName, 'utf8', (err, data) => {
+    fs.readFile(fileName, "utf8", (err, data) => {
       if (err) {
         reject(err);
       } else {
@@ -38,14 +38,14 @@ class DirectoryImpl {
   constructor(private opened: Promise<string>) {}
 
   writeFile(fileName: string, data: string): Promise<string> {
-    return this.opened.then(path => {
+    return this.opened.then((path) => {
       const name = `${path}/${fileName}`;
       return writeFile(name, data);
     });
   }
 
   readFile(fileName: string): Promise<string> {
-    return this.opened.then(path => {
+    return this.opened.then((path) => {
       const name = `${path}/${fileName}`;
       return readFile(name);
     });
@@ -54,8 +54,8 @@ class DirectoryImpl {
 
 export function createDirectory(dir: string): Directory {
   const openedDirectory = new Promise<string>((resolve, reject) => {
-    fs.mkdir(dir, err => {
-      if (err && err.code !== 'EEXIST') {
+    fs.mkdir(dir, (err) => {
+      if (err && err.code !== "EEXIST") {
         reject(err);
       } else {
         resolve(dir);

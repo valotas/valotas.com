@@ -1,21 +1,15 @@
-import * as marked from 'marked';
-import {
-  h,
-  Component,
-  ComponentConstructor,
-  FunctionalComponent
-} from 'preact';
-import * as ex from '../../exceptions';
-import { ParagraphWithFirstLetterSpan } from '../ParagraphWithFirstLetterSpan';
+import * as marked from "marked";
+import { h, ComponentConstructor, FunctionalComponent } from "preact";
+import { ParagraphWithFirstLetterSpan } from "../ParagraphWithFirstLetterSpan";
 
-declare module 'marked' {
+declare module "marked" {
   class Parser {
     constructor(options: marked.MarkedOptions);
     parse(tokens: marked.TokensList);
   }
 }
 
-const EMPTY_STRING = '';
+const EMPTY_STRING = "";
 
 // https://github.com/christianalfoni/markdown-to-react-components/blob/master/src/index.js
 
@@ -68,12 +62,12 @@ class TreeContainer {
 
 function innerHtmlTransformer(html: string) {
   return {
-    type: 'div',
+    type: "div",
     props: {
       dangerouslySetInnerHTML: {
-        __html: html
-      }
-    }
+        __html: html,
+      },
+    },
   };
 }
 
@@ -109,7 +103,7 @@ export class MarkedReactRenderer implements marked.Renderer {
   }
 
   nextToken(token: { type: string }) {
-    if (token.type === 'blockquote_start' || token.type === 'list_start') {
+    if (token.type === "blockquote_start" || token.type === "list_start") {
       this.container = this.container.childContainer();
     }
   }
@@ -120,70 +114,66 @@ export class MarkedReactRenderer implements marked.Renderer {
     return EMPTY_STRING;
   }
 
-  blockquote(quote: string) {
-    this.container = this.container.pushToParent('blockquote');
+  blockquote(_quote: string) {
+    this.container = this.container.pushToParent("blockquote");
     return EMPTY_STRING;
   }
 
   html(html: string) {
-    const block = this.renderOptions.html.map(t => t(html)).filter(notNull)[0];
+    const block = this.renderOptions.html
+      .map((t) => t(html))
+      .filter(notNull)[0];
     this.container.pushBlock(block.type, block.props);
     return EMPTY_STRING;
   }
 
   heading(text: string, level: number) {
-    this.container.pushBlock('h' + level);
+    this.container.pushBlock("h" + level);
     return EMPTY_STRING;
   }
   hr() {
-    this.container.pushBlock('hr');
+    this.container.pushBlock("hr");
     return EMPTY_STRING;
   }
-  list(body: string, ordered: boolean) {
-    this.container = this.container.pushToParent('ul');
+  list(_body: string, _ordered: boolean) {
+    this.container = this.container.pushToParent("ul");
     return EMPTY_STRING;
   }
-  listitem(text: string) {
-    this.container.pushBlock('li');
+  listitem(_text: string) {
+    this.container.pushBlock("li");
     return EMPTY_STRING;
   }
-  paragraph(text: string) {
+  paragraph(_text: string) {
     this.paragraphCounter++;
     const shouldMarkFirstLetter =
       this.renderOptions.firstLetterSpan && this.paragraphCounter === 1;
     this.container.pushBlock(
-      shouldMarkFirstLetter ? ParagraphWithFirstLetterSpan : 'p'
+      shouldMarkFirstLetter ? ParagraphWithFirstLetterSpan : "p"
     );
     return EMPTY_STRING;
   }
-  table(header: string, body: string) {
+  table(_header: string, _body: string) {
     // not implemented yet
     return EMPTY_STRING;
   }
-  tablerow(content: string) {
+  tablerow(_content: string) {
     // not implemented yet
     return EMPTY_STRING;
   }
-  tablecell(
-    content: string,
-    flags: {
-      header: boolean;
-      align: string;
-    }
-  ) {
+  tablecell() {
     // not implemented yet
     return EMPTY_STRING;
   }
   strong(text: string) {
-    this.container.pushInline(h('strong', null, text));
+    this.container.pushInline(h("strong", null, text));
     return EMPTY_STRING;
   }
   em(text: string) {
-    this.container.pushInline(h('em', null, text));
+    this.container.pushInline(h("em", null, text));
     return EMPTY_STRING;
   }
   codespan(code: string, lang?: string) {
-    lang = lang === 'js' ? 'javascript' : lang;
+    lang = lang === "js" ? "javascript" : lang;
     this.container.pushInline(
       h(this.renderOptions.code, { language: lang }, unescapeText(code)),
       false
@@ -193,7 +183,7 @@ export class MarkedReactRenderer implements marked.Renderer {
   br() {
     return EMPTY_STRING;
   }
-  del(text: string) {
+  del(_text: string) {
     return EMPTY_STRING;
   }
 
@@ -211,7 +201,7 @@ export class MarkedReactRenderer implements marked.Renderer {
     return EMPTY_STRING;
   }
 
-  image(href: string, title: string, text: string) {
+  image(_href: string, _title: string, _text: string) {
     return EMPTY_STRING;
   }
 
@@ -224,27 +214,28 @@ export class MarkedReactRenderer implements marked.Renderer {
     const parser = new marked.Parser({
       renderer: this,
       gfm: true,
-      smartypants: true
+      smartypants: true,
     });
     const tokens = marked.lexer(html);
     patchParser(parser, this);
     parser.parse(tokens);
-    return h('div', {}, firstChildOrFullArray(this.container.tree));
+    return h("div", {}, firstChildOrFullArray(this.container.tree));
   }
 }
 
 function unescapeText(input: string) {
   return input
-    .replace(/&lt;/g, '<')
-    .replace(/&gt;/g, '>')
-    .replace(/&amp;/g, '&')
+    .replace(/&lt;/g, "<")
+    .replace(/&gt;/g, ">")
+    .replace(/&amp;/g, "&")
     .replace(/&quot;/g, '"');
 }
 
 function patchParser(parser, renderer: MarkedReactRenderer) {
   const tok = parser.tok;
-  parser.tok = function() {
+  parser.tok = function () {
     renderer.nextToken(this.token);
+    // eslint-disable-next-line prefer-rest-params
     tok.call(parser, arguments);
   };
 }

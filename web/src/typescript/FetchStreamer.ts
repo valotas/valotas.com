@@ -1,6 +1,6 @@
-import { Fetcher } from './types';
-import { BROWSER } from './browser/Browser';
-import { Bus } from './Bus';
+import { Fetcher } from "./types";
+import { BROWSER } from "./browser/Browser";
+import { Bus } from "./Bus";
 
 interface ResponseListener {
   (promise: Promise<Response>): void;

@@ -1,4 +1,4 @@
-import { HistoryService } from './HistoryService';
+import { HistoryService } from "./HistoryService";
 
 interface CreateScriptOptions {
   protocol?: string;
@@ -12,7 +12,7 @@ class Browser {
   public initialTitle: string;
 
   constructor() {
-    this.browserSupported = window['fetch'] && window['Promise'];
+    this.browserSupported = window["fetch"] && window["Promise"];
     this.window = window;
     this.initialTitle = window.document.title;
     this.history = new HistoryService(window);
@@ -24,15 +24,15 @@ class Browser {
   }
 
   createScript(url: string, options?: CreateScriptOptions): HTMLScriptElement {
-    const wf = window.document.createElement('script');
+    const wf = window.document.createElement("script");
     const proto =
       options && options.protocol
         ? options.protocol
-        : 'https:' === document.location.protocol
-          ? 'https'
-          : 'http';
-    wf.src = proto + ':' + url;
-    wf.type = 'text/javascript';
+        : "https:" === document.location.protocol
+        ? "https"
+        : "http";
+    wf.src = proto + ":" + url;
+    wf.type = "text/javascript";
     wf.async = true;
     if (options && options.id) {
       wf.id = options.id;
@@ -41,7 +41,7 @@ class Browser {
   }
 
   getBody() {
-    return window.document.getElementsByTagName('body')[0];
+    return window.document.getElementsByTagName("body")[0];
   }
 
   query(selector: string) {
@@ -53,11 +53,11 @@ class Browser {
   }
 
   ready(ondocumentReady) {
-    if (window.document.readyState === 'complete') {
+    if (window.document.readyState === "complete") {
       ondocumentReady();
     } else {
       window.document.addEventListener(
-        'DOMContentLoaded',
+        "DOMContentLoaded",
         ondocumentReady,
         false
       );
@@ -65,7 +65,7 @@ class Browser {
   }
 
   on(name: string, f) {
-    window['on' + name] = f;
+    window["on" + name] = f;
   }
 
   fetch(url: string) {
@@ -85,7 +85,7 @@ class Browser {
 }
 
 function createBrowser() {
-  return typeof window === 'undefined' ? null : new Browser();
+  return typeof window === "undefined" ? null : new Browser();
 }
 
 export const BROWSER = createBrowser();

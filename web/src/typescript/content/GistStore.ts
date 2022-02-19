@@ -1,6 +1,6 @@
-import { MetaFileData, Fetcher, GistDescription } from '../types';
-import { MetaFile, isValidMetaFile } from './MetaFile';
-import { MetaFileStore } from './MetaFileStore';
+import { MetaFileData, Fetcher, GistDescription } from "../types";
+import { isValidMetaFile } from "./MetaFile";
+import { MetaFileStore } from "./MetaFileStore";
 
 export class GistStore {
   constructor(
@@ -11,7 +11,7 @@ export class GistStore {
     if (!metafileStore) {
       return;
     }
-    metafileStore.onChange(current => {
+    metafileStore.onChange((current) => {
       this.meta = isValidMetaFile(current) ? current : null;
     });
   }
@@ -26,12 +26,12 @@ export class GistStore {
       return gist.content;
     }
     const url = this.createUrl(input);
-    return this._load(url).then(content => {
+    return this._load(url).then((content) => {
       this.meta.gists.push({
         content: content,
         gistId: input.gistId,
         file: input.file,
-        user: input.user
+        user: input.user,
       });
       return content;
     });
@@ -43,19 +43,17 @@ export class GistStore {
       return null;
     }
     const filtered = gists.filter(
-      gist => gist.gistId === input.gistId && gist.file === input.file
+      (gist) => gist.gistId === input.gistId && gist.file === input.file
     );
     return filtered.length === 0 ? null : filtered[0];
   }
 
   private createUrl(input: GistDescription) {
-    const user = input.user || 'valotas';
-    return `https://gist.githubusercontent.com/${user}/${input.gistId}/raw/${
-      input.file
-    }`;
+    const user = input.user || "valotas";
+    return `https://gist.githubusercontent.com/${user}/${input.gistId}/raw/${input.file}`;
   }
 
   _load(url: string) {
-    return this.fetcher.fetch(url).then(body => body.text());
+    return this.fetcher.fetch(url).then((body) => body.text());
   }
 }

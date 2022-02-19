@@ -1,12 +1,12 @@
-import { Article } from '../content/Article';
-import { h, Component } from 'preact';
-import { Icon } from './Icon';
-import { Link } from './Link';
-import { Header } from './Header';
-import { VALOTAS } from '../utils';
-import { MetaFileStore } from '../content/MetaFileStore';
-import { loadTwitter } from '../browser/Twitter';
-import { MarkedComponent } from './MarkedComponent';
+import { Article } from "../content/Article";
+import { h, Component } from "preact";
+import { Icon } from "./Icon";
+import { Link } from "./Link";
+import { Header } from "./Header";
+import { VALOTAS } from "../utils";
+import { MetaFileStore } from "../content/MetaFileStore";
+import { loadTwitter } from "../browser/Twitter";
+import { MarkedComponent } from "./MarkedComponent";
 
 interface ArticleProps {
   article?: Article;
@@ -15,14 +15,14 @@ interface ArticleProps {
 
 export function ArticleWithHeaderComponent({
   article,
-  metafileStore
+  metafileStore,
 }: ArticleProps) {
   return (
     <div>
       <Header
         title={article.title}
         subtitle={VALOTAS}
-        date={article.date('DD/MM/YYYY')}
+        date={article.date("DD/MM/YYYY")}
         metafileStore={metafileStore}
       />
       <ArticleComponent article={article} metafileStore={metafileStore} />
@@ -30,7 +30,7 @@ export function ArticleWithHeaderComponent({
   );
 }
 
-export class ArticleComponent extends Component<ArticleProps, {}> {
+export class ArticleComponent extends Component<ArticleProps, unknown> {
   render({ article, metafileStore }) {
     if (!article) {
       return null;
@@ -62,7 +62,7 @@ export class ArticleComponent extends Component<ArticleProps, {}> {
     if (!this.props.article.hasTweets()) {
       return;
     }
-    loadTwitter().then(twttr => {
+    loadTwitter().then((twttr) => {
       twttr.widgets.load();
     });
   }

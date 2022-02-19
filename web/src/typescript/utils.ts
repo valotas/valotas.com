@@ -1,7 +1,7 @@
-import { Moment } from 'moment';
-import * as base64 from 'base64-js';
+import { Moment } from "moment";
+import * as base64 from "base64-js";
 
-export const VALOTAS = 'Γιώργος Βαλοτάσιος';
+export const VALOTAS = "Γιώργος Βαλοτάσιος";
 
 export function deflate(obj) {
   if (!obj) {
@@ -50,11 +50,12 @@ export function isArray(input: any): input is Array<any> {
 }
 
 export function isString(input: any): input is string {
-  return typeof input === 'string';
+  return typeof input === "string";
 }
 
 export function isPromise(input: any): input is Promise<any> {
   return input && input.then;
 }
 
+// eslint-disable-next-line @typescript-eslint/no-empty-function
 export function noop() {}

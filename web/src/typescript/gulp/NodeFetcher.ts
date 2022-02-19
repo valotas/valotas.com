@@ -1,8 +1,8 @@
-import nfetch = require('node-fetch');
-import { Fetcher, Fetch } from '../types';
-import { Logger } from './gulp-types';
-import { createDirectory, Directory } from './Directory';
-import { isString } from '../utils';
+import nfetch = require("node-fetch");
+import { Fetcher, Fetch } from "../types";
+import { Logger } from "./gulp-types";
+import { createDirectory, Directory } from "./Directory";
+import { isString } from "../utils";
 
 export class NodeFetcher implements Fetcher {
   private cache: Directory;
@@ -19,7 +19,7 @@ export class NodeFetcher implements Fetcher {
     const fileName = createCacheFileName(url);
     return this.cache
       .readFile(fileName)
-      .then(createResponse, err => this.fetchAndCache(fileName, url, init));
+      .then(createResponse, (_err) => this.fetchAndCache(fileName, url, init));
   }
 
   private fetchAndCache(
@@ -29,11 +29,11 @@ export class NodeFetcher implements Fetcher {
   ) {
     const fetch = (this.delegate ? this.delegate.fetch : nfetch) as Fetch;
     return fetch(url, init)
-      .then(resp => resp.text())
-      .then(text => this.cache.writeFile(fileName, text))
+      .then((resp) => resp.text())
+      .then((text) => this.cache.writeFile(fileName, text))
       .then(createResponse)
-      .catch(e => {
-        if (e.code !== 'ENOTFOUND') {
+      .catch((e) => {
+        if (e.code !== "ENOTFOUND") {
           throw e;
         }
         this.logger.log(e.message);
@@ -44,11 +44,11 @@ export class NodeFetcher implements Fetcher {
 
 function createCacheFileName(urlOrRequest: string | Request) {
   const url = isString(urlOrRequest) ? urlOrRequest : urlOrRequest.url;
-  return url.replace(/:|\//g, '-');
+  return url.replace(/:|\//g, "-");
 }
 
 function createResponse(text: string): Response {
   return {
-    text: () => Promise.resolve(text)
+    text: () => Promise.resolve(text),
   } as Response;
 }

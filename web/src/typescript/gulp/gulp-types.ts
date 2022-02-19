@@ -1,5 +1,5 @@
-import { Article } from '../content/Article';
-import { MetaFileData } from '../types';
+import { Article } from "../content/Article";
+import { MetaFileData } from "../types";
 
 export interface GulpFile {
   meta: MetaFileData | MetaFileData[];

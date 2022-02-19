@@ -1,10 +1,10 @@
-import { h } from 'preact';
-import { createArticle } from '../content/Article';
-import { MetaFile } from '../content/MetaFile';
-import { ArticleWithHeaderComponent } from './ArticleComponent';
-import { IndexWithHeader } from './Index';
-import { ErrorWithHeader } from './Error';
-import { isArray } from '../utils';
+import { h } from "preact";
+import { createArticle } from "../content/Article";
+import { MetaFile } from "../content/MetaFile";
+import { ArticleWithHeaderComponent } from "./ArticleComponent";
+import { IndexWithHeader } from "./Index";
+import { ErrorWithHeader } from "./Error";
+import { isArray } from "../utils";
 
 interface LayoutMainContentProps {
   meta: MetaFile | MetaFile[];
@@ -21,7 +21,7 @@ export function LayoutMainContent(
     );
   }
 
-  if (meta && meta.type === 'article') {
+  if (meta && meta.type === "article") {
     const article = createArticle(meta as MetaFile);
     return (
       <ArticleWithHeaderComponent
@@ -35,5 +35,5 @@ export function LayoutMainContent(
 }
 
 function toArticles(arr: MetaFile[]) {
-  return arr.map(input => createArticle(input));
+  return arr.map((input) => createArticle(input));
 }
