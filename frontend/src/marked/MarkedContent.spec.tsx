@@ -1,5 +1,6 @@
 import { MarkedContent } from "./MarkedContent.js";
-import { render, screen } from "@testing-library/react";
+import { render, screen, waitFor } from "@testing-library/react";
+import { marked } from "marked";
 import React from "react";
 
 describe("MarkedContent", () => {
@@ -126,12 +127,89 @@ this is a _paragraph_!
     );
   });
 
-  it("should render scripts as is", () => {
+  it("should not render unrecognised scripts", () => {
     const { container } = renderMarked(
       'this is some\n<script scr="path/to/script"></script>'
     );
-    expect(container.innerHTML).toContain(
-      '<script scr="path/to/script"></script>'
-    );
+    expect(container.innerHTML).not.toContain("script");
+  });
+
+  describe("gists", () => {
+    it("should replace gist scripts with a component", async () => {
+      const { container } = renderMarked(
+        '<script src="https://gist.github.com/valotas/09f8fabc1a1db4b108b3.js?file=expectObservable.js"></script>'
+      );
+
+      await waitFor(() => {
+        expect(container.innerHTML).toContain(
+          "https://gist.github.com/valotas/09f8fabc1a1db4b108b3"
+        );
+      });
+    });
+
+    [
+      { file: "some.java", language: "java" },
+      { file: "some.js", language: "javascript" },
+    ].forEach(({ file, language }) => {
+      it(`renders 'language-${language}' for file ${file}`, async () => {
+        const { container } = renderMarked(
+          `<script src="https://gist.github.com/valotas/09f8fabc1a1db4b108b3.js?file=${file}"></script>`
+        );
+
+        await waitFor(() => {
+          expect(container.innerHTML).toContain(`class="language-${language}"`);
+        });
+      });
+    });
+  });
+
+  it("should render paragraphs with mix span and code blocks", () => {
+    const source = "This is a paragraph  with `code block`.";
+    const expected = marked.parse(source).trim();
+    const html = renderMarked(source).container.innerHTML;
+    expect(html).toContain(expected);
+  });
+
+  it("should transform links to anchors", () => {
+    const source = "Go to http://google.com/";
+    const expected = marked.parse(source).trim();
+    const html = renderMarked(source).container.innerHTML;
+    expect(html).toContain(expected);
+  });
+
+  it("should links with inline code", () => {
+    const source = "[`DAO`](http://link.to/dao)s";
+    const expected = marked(source, {
+      smartypants: true,
+    }).trim();
+    const html = renderMarked(source).container.innerHTML;
+    expect(html).toContain(expected);
+  });
+
+  it.skip("should handle escaping", () => {
+    const source = 'I\'ve used to use "©" charachters';
+    const expected = marked
+      .parse(source, {
+        smartypants: true,
+      })
+      .trim();
+    const html = renderMarked(source).container.innerHTML;
+    expect(html).toContain(expected);
+  });
+
+  it("should wrap pre blocks in a .codeblock", () => {
+    const source = ["```", "function xyz() {};", "```"].join("\n");
+    const { container } = renderMarked(source);
+
+    const codeblock = container.querySelector(".codeblock");
+    expect(codeblock).toBeTruthy();
+    const pre = codeblock?.querySelector("pre");
+    expect(pre).toBeTruthy();
+  });
+
+  it("should handle greater/lower than charachters right", () => {
+    const source = `Asume this ><&><`;
+    const html = renderMarked(source).container.innerHTML;
+    expect(html).toContain("this &gt;&lt;&amp;&gt;&lt;");
   });
 });

@@ -45,11 +45,22 @@ export default new Transformer<MdTrasformerConfig>({
     };
   },
 
-  async transform({ asset, config: { defaultTemplate, pkgName, pkgVersion } }) {
+  async transform({
+    asset,
+    config: { defaultTemplate, pkgName, pkgVersion },
+    logger,
+  }) {
     const code = await asset.getCode();
 
     const { meta, raw } = parseMD(code);
-    const htmlBody = await renderToString({ bodyMarkdown: raw, pkgName, pkgVersion });
+    const htmlBody = await renderToString({
+      bodyMarkdown: raw,
+      pkgName,
+      pkgVersion,
+      logger: {
+        log: (message: string) => logger.info({ message }),
+      },
+    });
 
     if (!defaultTemplate) {
       throw new Error(`No temlate defined for ${asset.filePath}`);

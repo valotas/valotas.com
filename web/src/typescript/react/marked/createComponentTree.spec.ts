@@ -35,38 +35,6 @@ describe("createComponentTree", () => {
     );
   });
 
-  it("should render paragraphs with mix span and code blocks", () => {
-    const source = "This is a paragraph  with `code block`.";
-    const expected = marked(source).trim();
-    const html = renderToStaticMarkup(source);
-    expect(html).toContain(expected);
-  });
-
-  it("should transform links to anchors", () => {
-    const source = "Go to http://google.com/";
-    const expected = marked(source).trim();
-    const html = renderToStaticMarkup(source);
-    expect(html).toContain(expected);
-  });
-
-  it("should handle escaping", () => {
-    const source = 'I\'ve used to use "©" charachters';
-    const expected = marked(source, {
-      smartypants: true,
-    }).trim();
-    const html = renderToStaticMarkup(source);
-    expect(html).toContain(expected);
-  });
-
-  it("should links with inline code", () => {
-    const source = "[`DAO`](http://link.to/dao)s";
-    const expected = marked(source, {
-      smartypants: true,
-    }).trim();
-    const html = renderToStaticMarkup(source);
-    expect(html).toContain(expected);
-  });
-
   it("should mark the first leter of paragraphs", () => {
     const source = `
 This is the first paragraph
@@ -99,21 +67,6 @@ Some *strange* first paragraph
     );
   });
 
-  it("should handle greater/lower than charachters right", () => {
-    const source = `
-Asume this ><&><
-        `;
-    const html = renderToStaticMarkup(source, { firstLetterSpan: true });
-    expect(html).toContain("this &gt;&lt;&amp;&gt;&lt;");
-  });
-
-  it("should wrap pre blocks in a .codeblock", () => {
-    const source = `\`\`\`
-function xyz() {};
-\`\`\``;
-    const html = renderToStaticMarkup(source);
-    expect(html).toContain(
-      '<div class="codeblock"><pre><code>function xyz() {};</code></pre></div>'
-    );
-  });
+  
+  
 });
