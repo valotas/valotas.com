@@ -8,89 +8,6 @@ function renderToStaticMarkup(source, options?) {
 }
 
 describe("createComponentTree", () => {
-  it("should render headers", () => {
-    const html = renderToStaticMarkup("# head");
-    expect(html).toContain("<h1>head</h1>");
-  });
-
-  it("should render headers with emphasized text", () => {
-    const rendered = createComponentTree("# this _is_ important");
-    const html = render(rendered);
-    expect(html).toContain("<em>is</em>");
-  });
-
-  it("should render paragraphs with strong or emphasized text", () => {
-    const rendered = createComponentTree("this a **very strong** _paragraph_!");
-    const html = render(rendered);
-    expect(html).toContain("<strong>very strong</strong>");
-    expect(html).toContain("<em>paragraph</em>");
-  });
-
-  it("should render more than one block elements", () => {
-    const rendered = createComponentTree("## header \n\nthis a _paragraph_!");
-    const html = render(rendered);
-    expect(html).toContain("<h2>header</h2>");
-    expect(html).toContain("<em>paragraph</em>");
-  });
-
-  it("should render code spans", () => {
-    const rendered = createComponentTree("this a `a code`!");
-    const html = render(rendered);
-    expect(html).toContain("<code>a code</code>");
-  });
-
-  it("should render code blocks with a class derived from the language", () => {
-    const source = ["this is a", "", "```java", "a code block", "```"].join(
-      "\n"
-    );
-    const html = renderToStaticMarkup(source);
-    expect(html).toContain(
-      '<pre><code class="language-java">a code block</code></pre>'
-    );
-  });
-
-  it("should render code blocks with a javasscript class instead of js", () => {
-    const source = ["this is a", "", "```js", "a code block", "```"].join("\n");
-    const html = renderToStaticMarkup(source);
-    expect(html).toContain('code class="language-javascript"');
-  });
-
-  it("should quotes with paragraphs", () => {
-    const source = `
-> this is a quote paragraph
->
-> this is another paragraph
->
-    `;
-    const expected = marked(source).replace(/\n/g, "");
-    const html = renderToStaticMarkup(source);
-    expect(html).toContain(expected);
-  });
-
-  it("should render links", () => {
-    const html = renderToStaticMarkup(
-      "this is a [link](/to/another/page) to another page"
-    );
-    expect(html).toContain('<a href="/to/another/page">link</a>');
-  });
-
-  it("should pass through html as is", () => {
-    const html = renderToStaticMarkup(
-      'this is some\n<script scr="path/to/script"></script>'
-    );
-    expect(html).toContain('<script scr="path/to/script"></script>');
-  });
-
-  it("should render ordered/unordered lists", () => {
-    const source = `
-- item1
-- item2
-`;
-    const expected = marked(source).replace(/\n/g, "");
-    const html = renderToStaticMarkup(source);
-    expect(html).toContain(expected);
-  });
-
   it("should transform gist script to a gist component for java files", () => {
     const html = renderToStaticMarkup(
       '<script src="https://gist.github.com/1240545.js?file=ServletUsingCustomResponse.java"></script>'
@@ -188,15 +105,6 @@ Asume this ><&><
         `;
     const html = renderToStaticMarkup(source, { firstLetterSpan: true });
     expect(html).toContain("this &gt;&lt;&amp;&gt;&lt;");
-  });
-
-  it("should handle special characters in code blocks", () => {
-    const source = "this is `some > code`";
-    const expected = marked(source, {
-      smartypants: true,
-    }).trim();
-    const html = renderToStaticMarkup(source);
-    expect(html).toContain(expected);
   });
 
   it("should wrap pre blocks in a .codeblock", () => {
