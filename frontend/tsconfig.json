@@ -9,14 +9,12 @@
     "outDir": "dist/",
     "declaration": true,
     "target": "es2016",
-    "jsx": "react-jsx",
-    "jsxImportSource": "preact",
+    "jsx": "react",
     "module": "ES6",
     "moduleResolution": "node",
     "isolatedModules": true,
     "esModuleInterop": true,
     "forceConsistentCasingInFileNames": true /* Ensure that casing is correct in imports. */,
-
     /* Type Checking */
     "strict": true,
     "noImplicitAny": true,

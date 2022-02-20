@@ -1,6 +1,6 @@
 {
   "name": "@valotas/parcel-transformer-md",
-  "version": "2.2.4",
+  "version": "2.2.5",
   "private": true,
   "main": "./dist/index.js",
   "engines": {

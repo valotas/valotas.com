@@ -1,6 +1,6 @@
-import { h } from "preact";
 import { Page } from "./Page.js";
-import { render, screen } from "@testing-library/preact";
+import { render, screen } from "@testing-library/react";
+import React from "react";
 
 describe("Page", () => {
   it("should render html", async () => {

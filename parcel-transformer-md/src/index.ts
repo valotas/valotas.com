@@ -48,8 +48,8 @@ export default new Transformer<MdTrasformerConfig>({
   async transform({ asset, config: { defaultTemplate, pkgName, pkgVersion } }) {
     const code = await asset.getCode();
 
-    const { meta } = parseMD(code);
-    const htmlBody = await renderToString({ pkgName, pkgVersion });
+    const { meta, raw } = parseMD(code);
+    const htmlBody = await renderToString({ bodyMarkdown: raw, pkgName, pkgVersion });
 
     if (!defaultTemplate) {
       throw new Error(`No temlate defined for ${asset.filePath}`);
