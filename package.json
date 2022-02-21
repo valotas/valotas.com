@@ -3,6 +3,7 @@
     "workspaces": [
         "frontend",
         "parcel-resolver-staticsite",
+        "parcel-namer-staticsite",
         "parcel-transformer-md",
         "web"
     ],

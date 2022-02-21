@@ -66,6 +66,7 @@ export default new Transformer<MdTrasformerConfig>({
     }
 
     asset.invalidateOnFileChange(defaultTemplate);
+    asset.meta.templateSource = defaultTemplate;
     const renderHtml = compileFile(defaultTemplate);
     const html = renderHtml({ ...meta, body: htmlBody });
 

@@ -3,5 +3,6 @@
   "transformers": {
     "*.md": ["@valotas/parcel-transformer-md"]
   },
-  "resolvers": ["...", "@valotas/parcel-resolver-staticsite"]
+  "resolvers": ["...", "@valotas/parcel-resolver-staticsite"],
+  "namers": ["@valotas/parcel-namer-staticsite", "..."]
 }

@@ -30,7 +30,7 @@ exports.default = new Resolver({
 
     if (file) {
       const filePath = await options.inputFS.realpath(file);
-      logger.log({ message: `found2: ${filePath}` });
+      logger.log({ message: `Resolved '${specifier}' to '${filePath}'` });
       return {
         filePath,
         sideEffects: true,
