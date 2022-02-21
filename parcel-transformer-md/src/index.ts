@@ -3,7 +3,6 @@ import { compileFile } from "pug";
 import * as path from "path";
 import { parseMD } from "./md-parser";
 import { renderToString } from "./render-to-string";
-import { __asyncDelegator } from "tslib";
 
 export type MdTrasformerConfig = {
   pkgVersion: string;
