@@ -2,6 +2,7 @@
     "name": "@valotas/valotas.com",
     "workspaces": [
         "frontend",
+        "parcel-resolver-staticsite",
         "parcel-transformer-md",
         "web"
     ],
