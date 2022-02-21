@@ -1,1 +1,1 @@
-console.log("This is the index.ts");
+console.log("Hello from index.ts");
