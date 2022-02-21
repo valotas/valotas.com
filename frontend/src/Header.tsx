@@ -1,32 +1,23 @@
-import { h } from "preact";
-import { Icon } from "./Icon";
-import { VALOTAS } from "../utils";
-import { Link } from "./Link";
-import { MetaFileStore } from "../content/MetaFileStore";
+import React from "react";
+import { Icon } from "./Icon.js";
 
 interface HeaderProps {
   title: string;
   subtitle?: string;
   date?: string;
-  metafileStore?: MetaFileStore;
 }
 
-export function Header({
-  title,
-  subtitle = VALOTAS,
-  date,
-  metafileStore,
-}: HeaderProps) {
+export function Header({ title, date, subtitle }: HeaderProps) {
   return (
     <div className="header">
       <div className="container">
         <div className="photo">
-          <Link className="radius" metafileStore={metafileStore} />
+          {/* <Link className="radius" metafileStore={metafileStore} /> */}
         </div>
         <div className="signature">
           <h1 className="signature-row">{title}</h1>
           <h4 className="signature-row">
-            {subtitle} <Date date={date} />
+            {subtitle || ""} <Date date={date} />
           </h4>
           <div className="social signature-row">
             <a href="https://github.com/valotas" target="_blank">
@@ -48,7 +39,7 @@ export function Header({
   );
 }
 
-function Date({ date }) {
+function Date({ date }: Pick<HeaderProps, "date">) {
   if (!date) {
     return null;
   }
