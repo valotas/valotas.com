@@ -18,6 +18,11 @@ function getMainEntryAsset({ bundle, bundleGraph }) {
 
 exports.default = new Namer({
   name({ bundle, bundleGraph, logger }) {
+    let name = this.nameHtml(bundle);
+    if (name) {
+      return name;
+    }
+
     if (bundle.type !== "js") {
       return null;
     }
@@ -31,7 +36,7 @@ exports.default = new Namer({
     const template = path.parse(mainEntry.meta.templateSource);
     const source = path.parse(bundle.getMainEntry().filePath);
 
-    let name = `${template.name}.${source.name}`;
+    name = `${template.name}.${source.name}`;
 
     if (!bundle.needsStableName) {
       name += `.${bundle.hashReference}`;
@@ -44,5 +49,19 @@ exports.default = new Namer({
     });
 
     return name;
+  },
+
+  nameHtml(bundle) {
+    if (bundle.type !== "html") {
+      return null;
+    }
+
+    const asset = bundle.getMainEntry();
+    const parsedAssetFilename = path.parse(asset.filePath);
+
+    if (parsedAssetFilename.ext === ".md" && asset.meta.templateSource) {
+      return `${parsedAssetFilename.name}/index.${bundle.type}`;
+    }
+    return null;
   },
 });
