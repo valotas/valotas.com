@@ -1,4 +1,4 @@
-import { MarkedContent } from "./MarkedContent.js";
+import { MarkedContent } from "./MarkedContent";
 import { render, screen, waitFor } from "@testing-library/react";
 import { marked } from "marked";
 import React from "react";
@@ -137,7 +137,7 @@ this is a _paragraph_!
   describe("gists", () => {
     it("should replace gist scripts with a component", async () => {
       const { container } = renderMarked(
-        '<script src="https://gist.github.com/valotas/09f8fabc1a1db4b108b3.js?file=expectObservable.js"></script>'
+        '<script src="https://gist.github.com/valotas/09f8fabc1a1db4b108b3.js?file=expectObservable"></script>'
       );
 
       await waitFor(() => {
@@ -149,7 +149,7 @@ this is a _paragraph_!
 
     [
       { file: "some.java", language: "java" },
-      { file: "some.js", language: "javascript" },
+      { file: "some", language: "javascript" },
     ].forEach(({ file, language }) => {
       it(`renders 'language-${language}' for file ${file}`, async () => {
         const { container } = renderMarked(

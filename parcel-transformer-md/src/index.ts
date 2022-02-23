@@ -1,8 +1,8 @@
 import { Transformer } from "@parcel/plugin";
 import { compileFile } from "pug";
 import * as path from "path";
+import { render } from "@valotas/valotas.com-frontent/dist/render";
 import { parseMD } from "./md-parser";
-import { renderToString } from "./render-to-string";
 
 export type MdTrasformerConfig = {
   pkgVersion: string;
@@ -37,6 +37,11 @@ export default new Transformer<MdTrasformerConfig>({
       config.invalidateOnFileChange(defaultTemplateFilePath);
     }
 
+    config.addDevDependency({
+      specifier: "@valotas/valotas.com-frontent/dist/render",
+      resolveFrom: defaultTemplateFilePath,
+    });
+
     return {
       pkgVersion: version,
       pkgName: name,
@@ -52,7 +57,7 @@ export default new Transformer<MdTrasformerConfig>({
     const code = await asset.getCode();
 
     const { meta, raw } = parseMD(code);
-    const htmlBody = await renderToString({
+    const { body: htmlBody, styles } = await render({
       bodyMarkdown: raw,
       pkgName,
       pkgVersion,
@@ -66,9 +71,16 @@ export default new Transformer<MdTrasformerConfig>({
     }
 
     asset.invalidateOnFileChange(defaultTemplate);
+    asset.addDependency({
+      specifier: "@valotas/valotas.com-frontent",
+      specifierType: "commonjs",
+      resolveFrom: defaultTemplate,
+      isOptional: false,
+    });
+
     asset.meta.templateSource = defaultTemplate;
     const renderHtml = compileFile(defaultTemplate);
-    const html = renderHtml({ ...meta, body: htmlBody });
+    const html = renderHtml({ ...meta, body: htmlBody, styles });
 
     asset.type = "html";
     asset.setCode(html);

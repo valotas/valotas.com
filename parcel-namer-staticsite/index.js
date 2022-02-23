@@ -27,14 +27,18 @@ exports.default = new Namer({
       return null;
     }
 
-    const mainEntry = getMainEntryAsset({ bundle, bundleGraph });
+    const mainEntryAsset = getMainEntryAsset({ bundle, bundleGraph });
 
-    if (!mainEntry.meta.templateSource) {
+    if (!mainEntryAsset.meta.templateSource) {
       return null;
     }
 
-    const template = path.parse(mainEntry.meta.templateSource);
-    const source = path.parse(bundle.getMainEntry().filePath);
+    const template = path.parse(mainEntryAsset.meta.templateSource);
+    const mainEntry = bundle.getMainEntry();
+    if (!mainEntry) {
+      return null;
+    }
+    const source = path.parse(mainEntry.filePath);
 
     name = `${template.name}.${source.name}`;
 

@@ -1,7 +1,7 @@
 import React from "react";
 import { DEFAULT_MARKDOWN_RENDERERS, Markdown } from "react-marked-renderer";
-import { CodeBlock } from "./CodeBlock.js";
-import { Html } from "./Html.js";
+import { CodeBlock } from "./CodeBlock";
+import { Html } from "./Html";
 
 const renderers = {
   ...DEFAULT_MARKDOWN_RENDERERS,

@@ -1,9 +1,15 @@
 import React from "react";
-import { renderToString } from "react-dom/server.js";
+import { renderToString } from "react-dom/server";
 import nfetch from "node-fetch";
+import { setup } from "twind";
+import { asyncVirtualSheet, getStyleTag } from "twind/server";
 import type { PageProps } from "./Page";
-import { Page } from "./Page.js";
-import { createAsyncContextProvider, FetchContent } from "./AsyncContext.js";
+import { Page } from "./Page";
+import { createAsyncContextProvider, FetchContent } from "./AsyncContext";
+
+const sheet = asyncVirtualSheet();
+
+setup({ sheet });
 
 export type Logger = {
   log(msg: string): void;
@@ -44,6 +50,13 @@ export async function render({
   await all();
   skipSSE();
 
+  // prepare the extraction of stylesheet
+  sheet.reset();
+
   //re-render the component
-  return renderToString(component);
+  const body = renderToString(component);
+
+  const styles = getStyleTag(sheet);
+
+  return { body, styles };
 }

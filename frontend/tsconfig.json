@@ -10,7 +10,7 @@
     "declaration": true,
     "target": "es2016",
     "jsx": "react",
-    "module": "ES6",
+    "module": "CommonJS",
     "moduleResolution": "node",
     "isolatedModules": true,
     "esModuleInterop": true,

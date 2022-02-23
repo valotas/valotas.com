@@ -6,21 +6,15 @@
     "url": "git+ssh://git@github.com/valotas/valotas.com.git"
   },
   "private": true,
-  "type": "module",
-  "source": "src/index.ts",
   "main": "dist/index.js",
+  "source": "src/index.ts",
   "types": "dist/index.d.ts",
-  "_moduleAliases": {
-    "react": "preact/compat",
-    "react-dom": "preact/compat",
-    "react-dom/test-utils": "preact/test-utils",
-    "react/jsx-runtime": "preact/jsx-runtime"
-  },
   "scripts": {
     "clean": "rimraf dist",
     "lint": "eslint \"src/**/*.+(ts|js|tsx|jsx)\"",
     "fix": "npm run lint -- --fix",
     "build": "tsc -p .",
+    "watch": "tsc -p . -w",
     "test": "jest --no-cache",
     "test:watch": "jest --watch"
   },
@@ -35,7 +29,9 @@
     "node-fetch": "^2.6.7",
     "prismjs": "^1.27.0",
     "react": "^17.0.2",
-    "react-dom": "^17.0.2"
+    "react-dom": "^17.0.2",
+    "react-marked-renderer": "^1.1.1",
+    "twind": "^0.16.16"
   },
   "devDependencies": {
     "@testing-library/preact": "^2.0.1",

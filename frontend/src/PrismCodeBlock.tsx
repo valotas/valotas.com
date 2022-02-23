@@ -1,6 +1,6 @@
 import prism from "prismjs";
-import "prismjs/components/prism-java.js";
-import "prismjs/components/prism-groovy.js";
+import "prismjs/components/prism-java";
+import "prismjs/components/prism-groovy";
 import React, { PropsWithChildren } from "react";
 
 export type PrismCodeProps = {

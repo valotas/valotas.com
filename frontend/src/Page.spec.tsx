@@ -1,4 +1,4 @@
-import { Page } from "./Page.js";
+import { Page } from "./Page";
 import { render, screen } from "@testing-library/react";
 import React from "react";
 

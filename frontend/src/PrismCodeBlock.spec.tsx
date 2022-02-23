@@ -1,6 +1,6 @@
 import React from "react";
 import { render } from "@testing-library/react";
-import { PrismCodeBlock } from "./PrismCodeBlock.js";
+import { PrismCodeBlock } from "./PrismCodeBlock";
 
 describe("PrismCode", () => {
   it("should render formated the given code", () => {

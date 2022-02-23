@@ -1,4 +1,4 @@
-import { render } from "./render.js";
+import { render } from "./render";
 
 describe("render", () => {
   test("returns an html string", async () => {
@@ -14,7 +14,7 @@ describe("render", () => {
 This is content with a gist script that should cause a fetch request
 as it has the following gist script:
 
-<script src="https://gist.github.com/valotas/c71a7aa41de5d03197a2.js?file=specs.js"></script>
+<script src="https://gist.github.com/valotas/c71a7aa41de5d03197a2.js?file=specs"></script>
 
 that is all!
     `;

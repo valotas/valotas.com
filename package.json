@@ -6,11 +6,5 @@
         "parcel-namer-staticsite",
         "parcel-transformer-md",
         "web"
-    ],
-    "dependencies": {
-        "@parcel/utils": "^2.3.2",
-        "@types/pug": "^2.0.6",
-        "pug": "^3.0.2",
-        "react-marked-renderer": "^1.1.1"
-    }
+    ]
 }

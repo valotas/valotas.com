@@ -1,5 +1,6 @@
 import React from "react";
-import { Icon } from "./Icon.js";
+import { tw } from "twind";
+import { Icon } from "./Icon";
 
 interface HeaderProps {
   title: string;
@@ -9,32 +10,24 @@ interface HeaderProps {
 
 export function Header({ title, date, subtitle }: HeaderProps) {
   return (
-    <div className="header">
-      <div className="container">
-        <div className="photo">
-          {/* <Link className="radius" metafileStore={metafileStore} /> */}
-        </div>
-        <div className="signature">
-          <h1 className="signature-row">{title}</h1>
-          <h4 className="signature-row">
-            {subtitle || ""} <Date date={date} />
-          </h4>
-          <div className="social signature-row">
-            <a href="https://github.com/valotas" target="_blank">
-              <Icon name="fa-github-square" size="2x" />
-            </a>
-            <a href="https://www.facebook.com/valotas" target="_blank">
-              <Icon name="fa-facebook-square" size="2x" />
-            </a>
-            <a href="https://twitter.com/valotas" target="_blank">
-              <Icon name="fa-twitter-square" size="2x" />
-            </a>
-            <a href="http://www.linkedin.com/in/valotas" target="_blank">
-              <Icon name="fa-linkedin-square" size="2x" />
-            </a>
-          </div>
-        </div>
-      </div>
+    <div className={tw`relative z-20 flex justify-between items-center`}>
+      <h1 className="signature-row">{title}</h1>
+      <h4 className="signature-row">
+        {subtitle || ""} <Date date={date} />
+      </h4>
+
+      <a href="https://github.com/valotas" target="_blank">
+        <Icon name="fa-github-square" size="2x" />
+      </a>
+      <a href="https://www.facebook.com/valotas" target="_blank">
+        <Icon name="fa-facebook-square" size="2x" />
+      </a>
+      <a href="https://twitter.com/valotas" target="_blank">
+        <Icon name="fa-twitter-square" size="2x" />
+      </a>
+      <a href="http://www.linkedin.com/in/valotas" target="_blank">
+        <Icon name="fa-linkedin-square" size="2x" />
+      </a>asdasd
     </div>
   );
 }
