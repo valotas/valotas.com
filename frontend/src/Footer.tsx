@@ -1,26 +1,37 @@
 import React from "react";
 import { Icon } from "./Icon";
+import { tw } from "./twind";
 
 export interface FooterProps {
   pkgName?: string;
   pkgVersion?: string;
 }
 
-export function Footer({ pkgVersion, pkgName }: FooterProps) {
+export function Footer({ pkgVersion }: FooterProps) {
   return (
-    <div className="footer" data-testid="footer">
-      <div className="container text-center">
-        <div className="version">
-          {pkgName || ""} <strong>v{pkgVersion || ""}</strong> &copy; Γιώργος
-          Βαλοτάσιος - CSS by &nbsp;
-          <a href="https://twitter.com/MrPirrera" target="_blank">
-            @MrPirrera
+    <div
+      className={tw`mt-12 text-gray-500 flex justify-between items-center`}
+      data-testid="footer"
+    >
+      <div
+        className={tw`pr-4 md:pr-6 lg:pr-12 flex justify-between items-center`}
+      >
+        <div className={tw`w-10 md:w-12 lg:w-20`}>
+          <Icon name="asterisk" className={tw`fill-gray-500  m-auto`} />
+        </div>
+      </div>
+
+      <div>
+        <div>
+          valotas.com <strong>v{pkgVersion || ""}</strong> &copy; Γιώργος
+          Βαλοτάσιος - CSS inspired by
+          <a href="https://adamwathan.me/" target="_blank">
+            Adam Wathan's
           </a>
+          blog
         </div>
-        <div className="icon">
-          <Icon name="fa-asterisk" />
-        </div>
-        <div className="note">
+
+        <div>
           The greek name "
           <strong>
             <em>Γιώργος</em>

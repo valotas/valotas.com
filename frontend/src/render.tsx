@@ -1,7 +1,7 @@
 import React from "react";
 import { renderToString } from "react-dom/server";
 import nfetch from "node-fetch";
-import { setup } from "twind";
+import { setup } from "./twind";
 import { asyncVirtualSheet, getStyleTag } from "twind/server";
 import type { PageProps } from "./Page";
 import { Page } from "./Page";
