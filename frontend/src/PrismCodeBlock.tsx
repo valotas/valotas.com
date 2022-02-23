@@ -1,8 +1,10 @@
-import prism from "prismjs";
+import type prism from "prismjs";
+import { languages, highlight } from "prismjs";
 import "prismjs/themes/prism-okaidia.css";
 import "prismjs/components/prism-java";
 import "prismjs/components/prism-groovy";
 import React, { PropsWithChildren } from "react";
+import { tw } from "./twind";
 
 export type PrismCodeProps = {
   language?: string;
@@ -17,8 +19,8 @@ export function PrismCodeBlock({
   children,
 }: PropsWithChildren<PrismCodeProps>) {
   return (
-    <div className="codeblock">
-      {title && <div className="title">{title}</div>}
+    <div className={tw`bg-gray-100 rounded`}>
+      {title && <div className={tw`px-3 pt-2`}>{title}</div>}
       <PossiblyHighlightedCode language={language} code={code}>
         {children}
       </PossiblyHighlightedCode>
@@ -31,7 +33,7 @@ function PossiblyHighlightedCode({
   code,
   children,
 }: PropsWithChildren<PrismCodeProps>) {
-  const className = language ? `language-${language}` : undefined;
+  const { grammar, lang, className } = getLanguageGrammar(language);
 
   if (children) {
     return (
@@ -41,22 +43,28 @@ function PossiblyHighlightedCode({
     );
   }
 
+  code = (code || "").trim();
   const html = {
-    __html: code ? highlightCode(code, language) : "",
+    __html: highlight(code, grammar, lang),
   };
 
   return (
-    <pre>
+    <pre className={className}>
       <code className={className} dangerouslySetInnerHTML={html} />
     </pre>
   );
 }
 
-function highlightCode(code: string, lang = "none") {
-  const { languages, highlight } = prism;
+function getLanguageGrammar(lang = "none"): {
+  grammar: prism.Grammar;
+  lang: string;
+  className: string;
+} {
   const grammar = languages[lang];
+
   if (!grammar) {
-    return code;
+    return getLanguageGrammar("plain");
   }
-  return highlight(code, grammar, lang);
+
+  return { grammar, lang, className: `language-${lang}` };
 }

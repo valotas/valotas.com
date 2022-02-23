@@ -66,7 +66,7 @@ export function Icon({ name, className, size = "8" }: IconProps) {
   }
 
   return (
-    <div className={tw`w-${size} h-${size} ${className || ""}`}>
+    <div className={tw`inline-block w-${size} h-${size} ${className || ""}`}>
       <TheIcon />
     </div>
   );

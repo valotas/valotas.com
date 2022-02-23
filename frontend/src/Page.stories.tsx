@@ -88,3 +88,16 @@ const scheduler = new Rx.TestScheduler(assertEquals);
   \`\`\`
   `,
 };
+
+export const PageWithGist = Template.bind({});
+PageWithGist.args = {
+  bodyMarkdown: `
+  And here is a very interesting gist:
+
+  <script src="https://gist.github.com/valotas/999051.js?file=GuiceHandler.java"></script>
+
+  While there is another one in javascript:
+  
+  <script src="https://gist.github.com/valotas/1175447.js?file=scrapy.js"></script>
+  `,
+};
