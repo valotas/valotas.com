@@ -1,5 +1,6 @@
 import React from "react";
 import { Icon } from "./Icon";
+import { Link } from "./Link";
 import { tw } from "./twind";
 
 export interface FooterProps {
@@ -24,10 +25,11 @@ export function Footer({ pkgVersion }: FooterProps) {
       <div>
         <div>
           valotas.com <strong>v{pkgVersion || ""}</strong> &copy; Γιώργος
-          Βαλοτάσιος - CSS inspired by
-          <a href="https://adamwathan.me/" target="_blank">
+          Βαλοτάσιος - CSS inspired by{` `}
+          <Link href="https://adamwathan.me/" target="_blank">
             Adam Wathan's
-          </a>
+          </Link>
+          {` `}
           blog
         </div>
 

@@ -1,4 +1,5 @@
 import prism from "prismjs";
+import "prismjs/themes/prism-okaidia.css";
 import "prismjs/components/prism-java";
 import "prismjs/components/prism-groovy";
 import React, { PropsWithChildren } from "react";
@@ -26,7 +27,7 @@ export function PrismCodeBlock({
 }
 
 function PossiblyHighlightedCode({
-  language,
+  language = "none",
   code,
   children,
 }: PropsWithChildren<PrismCodeProps>) {

@@ -45,7 +45,7 @@ export function Header({ title, date, subtitle }: HeaderProps) {
             </a>
           </h1>
           <div
-            className={tw`hidden md:flex mt-3 lg:mt-4 uppercase tracking-wide text-xs spaced-x-6`}
+            className={tw`hidden md:flex mt-3 lg:mt-4 uppercase tracking-wide text-xs`}
           >
             <LinkWithIcon href="https://github.com/valotas" name="github" />
             <LinkWithIcon
