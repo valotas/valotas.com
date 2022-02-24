@@ -1,7 +1,7 @@
 import React from "react";
 import { ComponentStory, ComponentMeta } from "@storybook/react";
 import { PrismCodeBlock } from "./PrismCodeBlock";
-import { Link } from "./Link";
+import { Link } from "./links";
 
 export default {
   title: PrismCodeBlock.name,

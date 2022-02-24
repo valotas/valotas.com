@@ -1,6 +1,6 @@
 import React from "react";
 import { Icon } from "./Icon";
-import { Link } from "./Link";
+import { Link } from "./links";
 import { tw } from "./twind";
 
 export interface FooterProps {
