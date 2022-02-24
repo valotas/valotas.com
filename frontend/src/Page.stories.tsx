@@ -101,3 +101,11 @@ PageWithGist.args = {
   <script src="https://gist.github.com/valotas/1175447.js?file=scrapy.js"></script>
   `,
 };
+
+import trueArticle from "../../web/src/articles/testing-rxjs.md";
+const content = trueArticle.split("---\n");
+
+export const PageWithFullArticle = Template.bind({});
+PageWithFullArticle.args = {
+  bodyMarkdown: content[content.length - 1],
+};
