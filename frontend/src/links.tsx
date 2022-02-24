@@ -7,6 +7,7 @@ export type LinkProps = {
   href: string;
   target?: "_blank";
   className?: string;
+  noUnderline?: boolean;
 };
 
 export function Link({
@@ -14,12 +15,15 @@ export function Link({
   target,
   className,
   children,
+  noUnderline,
 }: PropsWithChildren<LinkProps>) {
   return (
     <a
       href={href}
       target={target || "_blank"}
-      className={tw`border-b-1 border-gray-300 hover:border-gray-500 ${className}`}
+      className={tw`${
+        noUnderline ? "" : "border-b-1 border-gray-300 hover:border-gray-500"
+      } ${className}`}
     >
       {children}
     </a>
