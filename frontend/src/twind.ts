@@ -20,41 +20,11 @@ const fill: twind.Plugin = (parts) => {
   `;
 };
 
-let configurationToLoad: twind.Configuration | null = {
-  plugins: {
-    fill,
-  },
-};
-
-export function setup(conf: twind.Configuration) {
-  if (!configurationToLoad) {
-    throw new Error(`Late setup call. twind has already been configured`);
-  }
-  configurationToLoad = {
-    ...configurationToLoad,
-    ...conf,
-    plugins: { ...(conf.plugins || {}), fill },
-  };
+export function setup(conf: Pick<twind.Configuration, "sheet"> = {}) {
+  twind.setup({
+    plugins: { fill },
+    sheet: conf.sheet,
+  });
 }
 
-function ensureSetup() {
-  if (!configurationToLoad) {
-    return;
-  }
-
-  twind.setup(configurationToLoad);
-
-  configurationToLoad = null;
-}
-
-export const tw: twind.TW = Object.defineProperties(
-  ((templateOrToken: string | twind.Token, ...tokens: twind.Token[]) => {
-    ensureSetup();
-    return twind.tw(templateOrToken, ...tokens);
-  }) as twind.TW,
-  {
-    theme: {
-      get: () => twind.tw.theme,
-    },
-  }
-);
+export const tw = twind.tw;
