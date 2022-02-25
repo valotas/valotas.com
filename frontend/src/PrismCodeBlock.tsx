@@ -1,9 +1,5 @@
-import type prism from "prismjs";
-import { languages, highlight } from "prismjs";
-import "prismjs/themes/prism-okaidia.css";
-import "prismjs/components/prism-java";
-import "prismjs/components/prism-groovy";
 import React, { PropsWithChildren } from "react";
+import { getGrammar, highlight } from "./prism";
 import { tw } from "./twind";
 
 export type PrismCodeProps = {
@@ -33,7 +29,7 @@ function PossiblyHighlightedCode({
   code,
   children,
 }: PropsWithChildren<PrismCodeProps>) {
-  const { grammar, lang, className } = getLanguageGrammar(language);
+  const { grammar, lang, className } = getGrammar(language);
 
   if (children) {
     return (
@@ -53,18 +49,4 @@ function PossiblyHighlightedCode({
       <code className={className} dangerouslySetInnerHTML={html} />
     </pre>
   );
-}
-
-function getLanguageGrammar(lang = "none"): {
-  grammar: prism.Grammar;
-  lang: string;
-  className: string;
-} {
-  const grammar = languages[lang];
-
-  if (!grammar) {
-    return getLanguageGrammar("plain");
-  }
-
-  return { grammar, lang, className: `language-${lang}` };
 }

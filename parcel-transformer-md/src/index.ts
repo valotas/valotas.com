@@ -71,16 +71,16 @@ export default new Transformer<MdTrasformerConfig>({
     }
 
     asset.invalidateOnFileChange(defaultTemplate);
-    asset.addDependency({
-      specifier: "@valotas/valotas.com-frontent",
-      specifierType: "commonjs",
-      resolveFrom: defaultTemplate,
-      isOptional: false,
-    });
 
     asset.meta.templateSource = defaultTemplate;
     const renderHtml = compileFile(defaultTemplate);
     const html = renderHtml({ ...meta, body: htmlBody, styles });
+
+    if (html.indexOf(styles) < 0) {
+      logger.info({
+        message: `Styles have not been rendered for ${asset.filePath}`,
+      });
+    }
 
     asset.type = "html";
     asset.setCode(html);
