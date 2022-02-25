@@ -121,10 +121,10 @@ this is a _paragraph_!
     const { container } = await renderMarked(
       "this is a [link](/to/another/page) to another page"
     );
+    const link = container.querySelector("a");
 
-    expect(container.innerHTML).toContain(
-      '<a href="/to/another/page">link</a>'
-    );
+    expect(link?.href).toContain("/to/another/page");
+    expect(link?.innerHTML).toBe("link");
   });
 
   it("should not render unrecognised scripts", () => {
@@ -149,9 +149,10 @@ this is a _paragraph_!
 
     [
       { file: "some.java", language: "java" },
-      { file: "some", language: "javascript" },
+      { file: "some.js", language: "javascript" },
+      { file: "some", language: "plain" },
     ].forEach(({ file, language }) => {
-      it(`renders 'language-${language}' for file ${file}`, async () => {
+      it(`renders 'language-${language}' for file '${file}'`, async () => {
         const { container } = renderMarked(
           `<script src="https://gist.github.com/valotas/09f8fabc1a1db4b108b3.js?file=${file}"></script>`
         );
@@ -165,25 +166,34 @@ this is a _paragraph_!
 
   it("should render paragraphs with mix span and code blocks", () => {
     const source = "This is a paragraph  with `code block`.";
-    const expected = marked.parse(source).trim();
-    const html = renderMarked(source).container.innerHTML;
-    expect(html).toContain(expected);
+
+    const { container } = renderMarked(source);
+    const paragraph = container.querySelector("p");
+    const code = container.querySelector("code");
+
+    expect(paragraph).toBeTruthy();
+    expect(code).toBeTruthy();
+    expect(code?.parentElement).toBe(paragraph);
   });
 
   it("should transform links to anchors", () => {
     const source = "Go to http://google.com/";
-    const expected = marked.parse(source).trim();
-    const html = renderMarked(source).container.innerHTML;
-    expect(html).toContain(expected);
+
+    const { container } = renderMarked(source);
+    const anchor = container.querySelector("a");
+
+    expect(anchor?.href).toContain("http://google.com/");
+    expect(anchor?.innerHTML).toBe("http://google.com/");
   });
 
   it("should links with inline code", () => {
     const source = "[`DAO`](http://link.to/dao)s";
-    const expected = marked(source, {
-      smartypants: true,
-    }).trim();
-    const html = renderMarked(source).container.innerHTML;
-    expect(html).toContain(expected);
+    const { container } = renderMarked(source);
+    const anchor = container.querySelector("a");
+    expect(anchor).toBeTruthy();
+    const code = container.querySelector("code");
+    expect(code).toBeTruthy();
+    expect(code?.parentNode).toBe(anchor);
   });
 
   it.skip("should handle escaping", () => {
@@ -197,14 +207,14 @@ this is a _paragraph_!
     expect(html).toContain(expected);
   });
 
-  it("should wrap pre blocks in a .codeblock", () => {
+  it("should create pre>code for code blocks", () => {
     const source = ["```", "function xyz() {};", "```"].join("\n");
     const { container } = renderMarked(source);
 
-    const codeblock = container.querySelector(".codeblock");
-    expect(codeblock).toBeTruthy();
-    const pre = codeblock?.querySelector("pre");
+    const pre = container.querySelector("pre");
     expect(pre).toBeTruthy();
+    const code = container.querySelector("code");
+    expect(code?.parentElement).toBe(pre);
   });
 
   it("should handle greater/lower than charachters right", () => {

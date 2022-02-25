@@ -18,4 +18,12 @@ describe("Page", () => {
 
     expect(footer).toBeTruthy();
   });
+
+  it("should render a Header", async () => {
+    render(<Page />);
+
+    const header = await screen.findByTestId("header");
+
+    expect(header).toBeTruthy();
+  });
 });

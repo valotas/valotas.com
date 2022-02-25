@@ -24,7 +24,10 @@ function LinkWithIcon({ href, ...iconProps }: IconProps & { href: string }) {
 
 export function Header({ title }: HeaderProps) {
   return (
-    <div className={tw`flex flex-col md:flex-row items-center`}>
+    <div
+      className={tw`flex flex-col md:flex-row items-center`}
+      data-testid="header"
+    >
       <div className={tw`mb-2 pr-4 md:mb-0 md:pr-6 lg:pr-12`}>
         <Link
           noUnderline

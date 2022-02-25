@@ -3,7 +3,7 @@ import { render } from "./render";
 describe("render", () => {
   test("returns an html string", async () => {
     const html = await render({ bodyMarkdown: "the body" });
-    expect(html).toContain("<p>the body</p>");
+    expect(html.body).toContain(">the body</p>");
   });
 
   test("waits the fetch promises to be resolved before returning", async () => {

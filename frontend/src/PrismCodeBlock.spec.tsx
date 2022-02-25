@@ -14,8 +14,8 @@ describe("PrismCode", () => {
   });
 
   it("should not format anything if no language is given", () => {
-    const html = render(<PrismCodeBlock code='var x = "xxx";' />).container
-      .innerHTML;
-    expect(html).toContain("<code>var x =");
+    const { container } = render(<PrismCodeBlock code='var x = "xxx";' />);
+    const code = container.querySelector("code");
+    expect(code?.innerHTML).toContain(`var x = "xxx"`);
   });
 });

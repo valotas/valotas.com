@@ -12,6 +12,7 @@ module.exports = {
   // strip .js off the import before importing it
   moduleNameMapper: {
     "^(\\.{1,2}/.*)\\.js$": "$1",
+    "\\.(css|less)$": "<rootDir>/dist/__mocks__/emptyImport.js",
   },
   setupFiles: ["./jest.setup.cjs"],
 };
