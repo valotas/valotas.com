@@ -59,7 +59,6 @@ export default new Transformer<MdTrasformerConfig>({
     const { meta, raw } = parseMD(code);
     const { body: htmlBody, styles } = await render({
       bodyMarkdown: raw,
-      pkgName,
       pkgVersion,
       logger: {
         log: (message: string) => logger.info({ message }),

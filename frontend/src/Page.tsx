@@ -1,22 +1,24 @@
-import React from "react";
+import React, { PropsWithChildren } from "react";
 import { tw } from "./twind";
-import type { FooterProps } from "./Footer";
-import { Footer } from "./Footer";
+import { Footer, FooterProps } from "./Footer";
 import { Header } from "./Header";
-import { MarkedContent } from "./marked/MarkedContent";
 
-export type PageProps = FooterProps & { bodyMarkdown?: string; title?: string };
+export type PageProps = FooterProps & {
+  title?: string;
+};
 
-export function Page({ bodyMarkdown, title, ...other }: PageProps) {
+export function Page({
+  title,
+  children,
+  ...other
+}: PropsWithChildren<PageProps>) {
   return (
     <div
       data-testid="page"
       className={tw`py-8 lg:py-16 px-6 md:px-16 lg:px-24`}
     >
       <Header title={title} />
-      <div className={tw`lg:pl-32 mt-12`}>
-        {bodyMarkdown && <MarkedContent raw={bodyMarkdown} />}
-      </div>
+      <div className={tw`lg:pl-32 mt-12`}>{children}</div>
       <Footer {...other} />
     </div>
   );

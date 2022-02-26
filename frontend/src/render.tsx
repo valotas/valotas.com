@@ -3,8 +3,8 @@ import { renderToString } from "react-dom/server";
 import nfetch from "node-fetch";
 import { setup } from "./twind";
 import { asyncVirtualSheet, getStyleTag } from "twind/server";
-import type { PageProps } from "./Page";
-import { Page } from "./Page";
+import type { PageWithMarkdownProps } from "./PageWithMarkdown";
+import { PageWithMarkdown } from "./PageWithMarkdown";
 import { createAsyncContextProvider, FetchContent } from "./AsyncContext";
 
 const sheet = asyncVirtualSheet();
@@ -14,7 +14,7 @@ export type Logger = {
   log(msg: string): void;
 };
 
-export type RenderPageProps = PageProps & {
+export type RenderPageProps = PageWithMarkdownProps & {
   fetchContent?: FetchContent;
   logger?: Logger;
 };
@@ -38,7 +38,7 @@ export async function render({
 
   const component = (
     <AsyncContextProvider>
-      <Page {...pageProps} />
+      <PageWithMarkdown {...pageProps} />
     </AsyncContextProvider>
   );
 

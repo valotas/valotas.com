@@ -4,7 +4,6 @@ import { Link } from "./links";
 import { tw } from "./twind";
 
 export interface FooterProps {
-  pkgName?: string;
   pkgVersion?: string;
 }
 

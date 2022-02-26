@@ -1,4 +1,4 @@
 import { setup } from "./twind";
-export * from "./Page";
+export * from "./PageWithMarkdown";
 
 setup();

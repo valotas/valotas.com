@@ -1,10 +1,10 @@
-import { Page } from "./Page";
+import { PageWithMarkdown } from "./PageWithMarkdown";
 import { render, screen } from "@testing-library/react";
 import React from "react";
 
-describe("Page", () => {
+describe("PageWithMarkdown", () => {
   it("should render html", async () => {
-    render(<Page />);
+    render(<PageWithMarkdown />);
 
     const page = await screen.findByTestId("page");
 
@@ -12,7 +12,7 @@ describe("Page", () => {
   });
 
   it("should render a Footer", async () => {
-    render(<Page />);
+    render(<PageWithMarkdown />);
 
     const footer = await screen.findByTestId("footer");
 
@@ -20,7 +20,7 @@ describe("Page", () => {
   });
 
   it("should render a Header", async () => {
-    render(<Page />);
+    render(<PageWithMarkdown />);
 
     const header = await screen.findByTestId("header");
 
