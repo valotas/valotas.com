@@ -24,8 +24,6 @@ let twInstance = twind.create({
   plugins: { fill },
 });
 
-twind.warn
-
 export function setup(conf: Pick<twind.Configuration, "sheet"> = {}) {
   twInstance = twind.create({
     plugins: { fill },
@@ -42,3 +40,5 @@ export const tw = Object.defineProperties(
     },
   }
 ) as twind.TW;
+
+export { apply } from "twind";

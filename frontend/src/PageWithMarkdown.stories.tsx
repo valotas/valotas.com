@@ -24,7 +24,20 @@ PageWithStaticMarkdown.args = {
 
   This is the first paragraph of our content.
 
+  ## This is an h2
   This is the second paragraph of our content.
+
+  ### This is an h3
+  This is the third paragraph of our content.
+
+  #### This is an h4
+  This is the fourth paragraph of our content.
+
+  ##### This is an h5
+  This is the fifth paragraph of our content.
+
+  ###### This is an h6
+  This is the 6th paragraph of our content.
 
   This paragraph contains some [link to live24.gr](https://live24.gr) and
   one to [example.com][example]

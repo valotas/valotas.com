@@ -1,4 +1,4 @@
-import React, { PropsWithChildren } from "react";
+import React, { PropsWithChildren, StrictMode } from "react";
 import { tw } from "./twind";
 import { Footer, FooterProps } from "./Footer";
 import { Header } from "./Header";
@@ -13,13 +13,15 @@ export function Page({
   ...other
 }: PropsWithChildren<PageProps>) {
   return (
-    <div
-      data-testid="page"
-      className={tw`py-8 lg:py-16 px-6 md:px-16 lg:px-24`}
-    >
-      <Header title={title} />
-      <div className={tw`lg:pl-32 mt-12`}>{children}</div>
-      <Footer {...other} />
-    </div>
+    <StrictMode>
+      <div
+        data-testid="page"
+        className={tw`py-8 lg:py-16 px-6 md:px-16 lg:px-24`}
+      >
+        <Header title={title} />
+        <div className={tw`lg:pl-32 mt-12`}>{children}</div>
+        <Footer {...other} />
+      </div>
+    </StrictMode>
   );
 }

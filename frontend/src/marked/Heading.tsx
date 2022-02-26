@@ -1,8 +1,10 @@
 import { createElement } from "react";
 import { HeadingRendererProps } from "react-marked-renderer";
+import { apply } from "twind";
 import { tw } from "../twind";
 
-const depths = [1, 2, 3, 4, 5, 6];
+type HeadingWeight = "h1" | "h2" | "h3" | "h4";
+const depths = [1, 2, 3, 4];
 
 function getAllowedDepth(d: number) {
   const found = depths.indexOf(d);
@@ -12,11 +14,17 @@ function getAllowedDepth(d: number) {
   return depths[depths.length - 1];
 }
 
+const styles = {
+  h1: apply`text-2xl font-extrabold text-black leading-tight mt-6`,
+  h2: apply`text-2xl font-extrabold text-black leading-tight mt-6`,
+  h3: apply`text-l font-extrabold text-black leading-tight mt-4`,
+  h4: apply`text-l text-black leading-tight mt-4`,
+};
+
 export function Heading(props: HeadingRendererProps) {
   const depth = getAllowedDepth(props.depth);
-  const component = `h${depth}`;
+  const component = `h${depth}` as HeadingWeight;
+  const style = styles[component];
 
-  const className = tw`text-2xl font-extrabold text-black leading-tight mt-1 mb-6`;
-
-  return createElement(component, { className }, props.children);
+  return createElement(component, { className: tw(style) }, props.children);
 }
