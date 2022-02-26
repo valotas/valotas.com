@@ -59,17 +59,27 @@ function useSSE(effect: EffectCallback, deps?: DependencyList) {
   }
 }
 
-export function useFetch(url: string) {
+export type UseFetchResult = { content?: string; loading: boolean };
+
+const cache = new Map<string, UseFetchResult>();
+const loading = { loading: true };
+
+export function useFetch(url: string): UseFetchResult {
   const { fetchContent } = useContext(AsyncContext);
-  const [state, setState] = useState<{ content?: string; loading: boolean }>({
-    loading: true,
-  });
+  const [_, setLoading] = useState(true);
 
   useSSE(() => {
+    if (cache.has(url)) {
+      return;
+    }
+
+    cache.set(url, loading);
+
     fetchContent(url).then((content) => {
-      setState({ content, loading: false });
+      cache.set(url, { content, loading: false });
+      setLoading(false);
     });
   }, [url]);
 
-  return state;
+  return cache.get(url) || loading;
 }

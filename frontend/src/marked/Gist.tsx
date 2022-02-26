@@ -35,9 +35,8 @@ export function Gist({
   gistId,
   file,
 }: PropsWithChildren<GistDescription>) {
-  const { content } = useFetch(
-    `https://gist.githubusercontent.com/${user}/${gistId}/raw/${file}`
-  );
+  const url = `https://gist.githubusercontent.com/${user}/${gistId}/raw/${file}`;
+  const { content } = useFetch(url);
   const language = computeLanguage(file);
 
   let href = `https://gist.github.com/${user}/${gistId}`;
@@ -51,5 +50,7 @@ export function Gist({
     <TextLink href={href} target="_blank" icon="github" title={file || href} />
   );
 
-  return <PrismCodeBlock title={link} code={content} language={language} />;
+  return (
+    <PrismCodeBlock title={link} code={content || ""} language={language} />
+  );
 }
