@@ -20,11 +20,25 @@ const fill: twind.Plugin = (parts) => {
   `;
 };
 
+let twInstance = twind.create({
+  plugins: { fill },
+});
+
+twind.warn
+
 export function setup(conf: Pick<twind.Configuration, "sheet"> = {}) {
-  twind.setup({
+  twInstance = twind.create({
     plugins: { fill },
     sheet: conf.sheet,
   });
 }
 
-export const tw = twind.tw;
+export const tw = Object.defineProperties(
+  (templateOrToken: string | twind.Token, ...tokens: twind.Token[]) =>
+    twInstance.tw(templateOrToken, ...tokens),
+  {
+    theme: {
+      get: () => twInstance.tw.theme,
+    },
+  }
+) as twind.TW;
