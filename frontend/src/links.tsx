@@ -21,9 +21,10 @@ export function Link({
     <a
       href={href}
       target={target || "_blank"}
-      className={tw`${
-        noUnderline ? "" : "border-b-1 border-gray-300 hover:border-gray-500"
-      } ${className}`}
+      className={tw(
+        noUnderline ? "" : "border-b-1 border-gray-300 hover:border-gray-500",
+        className
+      )}
     >
       {children}
     </a>
