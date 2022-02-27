@@ -49,11 +49,7 @@ export default new Transformer<MdTrasformerConfig>({
     };
   },
 
-  async transform({
-    asset,
-    config: { defaultTemplate, pkgName, pkgVersion },
-    logger,
-  }) {
+  async transform({ asset, config: { defaultTemplate, pkgVersion }, logger }) {
     const code = await asset.getCode();
 
     const { meta, raw } = parseMD(code);
