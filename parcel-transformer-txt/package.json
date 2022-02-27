@@ -1,0 +1,22 @@
+{
+  "name": "@valotas/parcel-transformer-txt",
+  "version": "2.2.5",
+  "main": "src/TxtTransformer.js",
+  "engines": {
+    "parcel": "2.x"
+  },
+  "devDependencies": {
+    "eslint": "^8.9.0",
+    "eslint-config-prettier": "^8.4.0",
+    "eslint-plugin-jest": "^26.1.1",
+    "eslint-plugin-prettier": "^4.0.0",
+    "jest": "^27.5.1",
+    "prettier": "^2.5.1",
+    "rimraf": "^3.0.2"
+  },
+  "scripts": {
+    "lint": "eslint \"src/**/*.+(ts|js|tsx|jsx)\"",
+    "test": "jest",
+    "watch:test": "jest --watch"
+  }
+}

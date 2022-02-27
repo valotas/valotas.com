@@ -1,7 +1,8 @@
 {
   "extends": "@parcel/config-default",
   "transformers": {
-    "*.md": ["@valotas/parcel-transformer-md"]
+    "*.md": ["@valotas/parcel-transformer-md"],
+    "*.txt": ["@valotas/parcel-transformer-txt"]
   },
   "resolvers": ["...", "@valotas/parcel-resolver-staticsite"],
   "namers": ["@valotas/parcel-namer-staticsite", "..."]

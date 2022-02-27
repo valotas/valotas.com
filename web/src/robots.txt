@@ -1,1 +1,1 @@
-Sitemap: http://valotas.com/sitemap.txt
+Sitemap: ./sitemap.txt
