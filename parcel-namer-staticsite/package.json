@@ -1,19 +1,24 @@
 {
   "name": "@valotas/parcel-namer-staticsite",
   "version": "2.2.5",
-  "main": "index.js",
+  "main": "./src/index.js",
   "engines": {
     "parcel": "2.x"
   },
   "devDependencies": {
     "eslint": "^8.9.0",
     "eslint-config-prettier": "^8.4.0",
+    "eslint-plugin-jest": "^26.1.1",
     "eslint-plugin-prettier": "^4.0.0",
+    "jest": "^27.5.1",
     "prettier": "^2.5.1",
     "rimraf": "^3.0.2"
   },
   "scripts": {
     "lint": "eslint \"src/**/*.+(ts|js|tsx|jsx)\"",
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "fix": "npm run lint -- --fix",
+    "test:jest": "jest",
+    "test": "npm run lint && npm run test:jest",
+    "watch:test": "jest --watch"
   }
 }

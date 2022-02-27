@@ -3,6 +3,7 @@
 
 const { Namer } = require("@parcel/plugin");
 const path = require("path");
+const { computeKey } = require("./key-factory");
 
 function getMainEntryAsset({ bundle, bundleGraph }) {
   const bundleGroup = bundleGraph.getBundleGroupsContainingBundle(bundle)[0];
@@ -18,7 +19,12 @@ function getMainEntryAsset({ bundle, bundleGraph }) {
 
 exports.default = new Namer({
   name({ bundle, bundleGraph, logger }) {
-    let name = this.nameHtml(bundle);
+    let name = this.nameTxt(bundle);
+    if (name) {
+      return name;
+    }
+
+    name = this.nameHtml(bundle);
     if (name) {
       return name;
     }
@@ -61,11 +67,22 @@ exports.default = new Namer({
     }
 
     const asset = bundle.getMainEntry();
-    const parsedAssetFilename = path.parse(asset.filePath);
+    const { ext, name } = computeKey(asset.filePath);
 
-    if (parsedAssetFilename.ext === ".md" && asset.meta.templateSource) {
-      return `${parsedAssetFilename.name}/index.${bundle.type}`;
+    if (ext === ".md" && asset.meta.templateSource) {
+      return `${name}/index.${bundle.type}`;
     }
     return null;
+  },
+
+  nameTxt(bundle) {
+    if (bundle.type !== "txt") {
+      return null;
+    }
+
+    const asset = bundle.getMainEntry();
+    const { name } = computeKey(asset.filePath);
+
+    return `${name}.${bundle.type}`;
   },
 });
