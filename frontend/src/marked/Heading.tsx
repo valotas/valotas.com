@@ -17,8 +17,8 @@ function getAllowedDepth(d: number) {
 const styles = {
   h1: apply`text-2xl font-extrabold text-black leading-tight mt-6`,
   h2: apply`text-2xl font-extrabold text-black leading-tight mt-6`,
-  h3: apply`text-l font-extrabold text-black leading-tight mt-4`,
-  h4: apply`text-l text-black leading-tight mt-4`,
+  h3: apply`font-extrabold text-black leading-tight mt-4`,
+  h4: apply`text-black leading-tight mt-4`,
 };
 
 export function Heading(props: HeadingRendererProps) {
