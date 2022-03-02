@@ -1,8 +1,8 @@
 import { Transformer } from "@parcel/plugin";
 import { compileFile } from "pug";
 import * as path from "path";
+import { parse } from "@valotas/valotas.com-frontent";
 import { render } from "@valotas/valotas.com-frontent/dist/render";
-import { parseMD } from "./md-parser";
 
 export type MdTrasformerConfig = {
   pkgVersion: string;
@@ -52,7 +52,12 @@ export default new Transformer<MdTrasformerConfig>({
   async transform({ asset, config: { defaultTemplate, pkgVersion }, logger }) {
     const code = await asset.getCode();
 
-    const { meta, raw } = parseMD(code);
+    const { meta, raw } = parse(code);
+    if (meta.draft) {
+      logger.info({ message: `Skipping draft: ${asset.filePath}` });
+      return [];
+    }
+
     const { body: htmlBody, styles } = await render({
       bodyMarkdown: raw,
       pkgVersion,
@@ -72,7 +77,7 @@ export default new Transformer<MdTrasformerConfig>({
     const html = renderHtml({ ...meta, body: htmlBody, styles });
 
     if (html.indexOf(styles) < 0) {
-      logger.info({
+      logger.warn({
         message: `Styles have not been rendered for ${asset.filePath}`,
       });
     }

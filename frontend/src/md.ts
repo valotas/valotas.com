@@ -6,7 +6,7 @@ export type HeaderMeta = {
   title: string | null;
   date: string | null;
   template: string | null;
-  published: string | null;
+  draft: boolean;
 };
 
 function parseHeader(raw: string): HeaderMeta {
@@ -21,25 +21,35 @@ function parseHeader(raw: string): HeaderMeta {
       };
     })
     .reduce(
-      (prev, current) => {
-        (prev as any)[current.key] = current.value;
+      (prev, { key, value }) => {
+        (prev as any)[key] = value;
+
+        // draft property should be a boolean
+        if (key === "draft") {
+          (prev as any)[key] =
+            (value || "").toLowerCase() === "true" ? true : false;
+        }
+
         return prev;
       },
       {
         title: null,
         date: null,
         template: null,
-        published: null,
+        draft: false,
       }
     );
 }
 
-export function parseMD(raw: string) {
+export function parse(raw: string) {
   const matches = raw.split(DASHES);
 
-  raw = matches[2].trim();
+  raw = (matches[2] || matches[0]).trim();
 
-  const meta = parseHeader(matches[1]);
+  const head = matches.length > 1 ? matches[1] : "";
+  const meta = parseHeader(head);
 
-  return { meta, raw };
+  const sections = raw.split(/(#+[^\n]*\n)/g);
+
+  return { meta, raw, firstSection: sections[0] };
 }
