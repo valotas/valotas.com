@@ -17,14 +17,55 @@ function getMainEntryAsset({ bundle, bundleGraph }) {
   return mainBundle.getMainEntry();
 }
 
+/**
+ *
+ * @param {import("@parcel/types").Bundle} bundle
+ */
+function nameHtml(bundle) {
+  if (bundle.type !== "html") {
+    return null;
+  }
+
+  const asset = bundle.getMainEntry();
+  if (asset.meta.key) {
+    return `${asset.meta.key}.${bundle.type}`;
+  }
+
+  if (asset.meta.name) {
+    return asset.meta.name;
+  }
+
+  const { ext, name } = computeKey(asset.filePath);
+
+  if (ext === ".md" && asset.meta.templateSource) {
+    return `${name}/index.${bundle.type}`;
+  }
+  return null;
+}
+
+/**
+ *
+ * @param {import("@parcel/types").Bundle} bundle
+ */
+function nameTxt(bundle) {
+  if (bundle.type !== "txt") {
+    return null;
+  }
+
+  const asset = bundle.getMainEntry();
+  const { name } = computeKey(asset.filePath);
+
+  return `${name}.${bundle.type}`;
+}
+
 exports.default = new Namer({
   name({ bundle, bundleGraph, logger }) {
-    let name = this.nameTxt(bundle);
+    let name = nameTxt(bundle);
     if (name) {
       return name;
     }
 
-    name = this.nameHtml(bundle);
+    name = nameHtml(bundle);
     if (name) {
       return name;
     }
@@ -59,30 +100,5 @@ exports.default = new Namer({
     });
 
     return name;
-  },
-
-  nameHtml(bundle) {
-    if (bundle.type !== "html") {
-      return null;
-    }
-
-    const asset = bundle.getMainEntry();
-    const { ext, name } = computeKey(asset.filePath);
-
-    if (ext === ".md" && asset.meta.templateSource) {
-      return `${name}/index.${bundle.type}`;
-    }
-    return null;
-  },
-
-  nameTxt(bundle) {
-    if (bundle.type !== "txt") {
-      return null;
-    }
-
-    const asset = bundle.getMainEntry();
-    const { name } = computeKey(asset.filePath);
-
-    return `${name}.${bundle.type}`;
   },
 });

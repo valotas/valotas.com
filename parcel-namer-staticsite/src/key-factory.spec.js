@@ -6,12 +6,12 @@ describe("key-factory", () => {
   test("returns the base name", () => {
     const key = computeKey("/path/to.md");
 
-    expect(key).toBe("to");
+    expect(key).toEqual({ name: "to", ext: ".md" });
   });
 
   test("returns the previous directory name if the basename is index", () => {
     const key = computeKey("/path/index.md");
 
-    expect(key).toBe("path");
+    expect(key).toEqual({ name: "path", ext: ".md" });
   });
 });
