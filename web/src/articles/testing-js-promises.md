@@ -1,7 +1,7 @@
 ---
 title: Testing JS Promises
 date: 2017-01-15
-published: false
+draft: true
 ---
 
 Not long ago I've experimented a little bit with [rx testing](testing-rxjs/). Still, many projects I'm involved did not

@@ -1,7 +1,7 @@
 ---
 title: To document or not
 date: 2014-10-20
-published: false
+draft: true
 ---
 
 Documenting code is an needed evil
