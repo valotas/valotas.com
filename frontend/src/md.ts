@@ -51,5 +51,5 @@ export function parse(raw: string) {
 
   const sections = raw.split(/(#+[^\n]*\n)/g);
 
-  return { meta, raw, firstSection: sections[0] };
+  return { ...meta, raw, description: sections[0] };
 }

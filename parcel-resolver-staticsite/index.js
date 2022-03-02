@@ -10,14 +10,16 @@ exports.default = new Resolver({
       return null;
     }
 
-    const file = options.inputFS.findAncestorFile(
+    const fs = options.inputFS;
+
+    const file = fs.findAncestorFile(
       [specifier],
       dependency.resolveFrom,
       options.projectRoot
     );
 
     if (file) {
-      const filePath = await options.inputFS.realpath(file);
+      const filePath = await fs.realpath(file);
 
       return {
         filePath,

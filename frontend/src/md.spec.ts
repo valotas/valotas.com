@@ -23,7 +23,7 @@ template: template
 
 # Content
       `;
-      const { meta } = md.parse(initial);
+      const { raw: _, description: __, ...meta } = md.parse(initial);
 
       expect(meta).toEqual({
         title: "the title",
@@ -70,9 +70,9 @@ this is the description of the first section
 
 This is some paragraph of the second section
       `;
-      const { firstSection } = md.parse(initial);
+      const { description } = md.parse(initial);
 
-      expect(firstSection.trim()).toEqual(
+      expect(description.trim()).toEqual(
         `this is the description of the first section`
       );
     });
@@ -89,9 +89,9 @@ template: template
 
 This is some paragraph of the second section
       `;
-      const { firstSection } = md.parse(initial);
+      const { description } = md.parse(initial);
 
-      expect(firstSection.trim()).toEqual("");
+      expect(description.trim()).toEqual("");
     });
   });
 });

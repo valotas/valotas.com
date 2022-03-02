@@ -6,6 +6,7 @@ import { asyncVirtualSheet, getStyleTag } from "twind/server";
 import type { PageWithMarkdownProps } from "./PageWithMarkdown";
 import { PageWithMarkdown } from "./PageWithMarkdown";
 import { createAsyncContextProvider, FetchContent } from "./AsyncContext";
+import { PageWithItems, PageWithListProps } from "./PageWithItems";
 
 const sheet = asyncVirtualSheet();
 setup({ sheet });
@@ -14,16 +15,19 @@ export type Logger = {
   log(msg: string): void;
 };
 
-export type RenderPageProps = PageWithMarkdownProps & {
+export type RenderToStringProps<T> = {
   fetchContent?: FetchContent;
   logger?: Logger;
+  component: React.ComponentFactory<T, any>;
+  props: T;
 };
 
-export async function render({
+async function _render<T>({
   fetchContent,
   logger,
-  ...pageProps
-}: RenderPageProps) {
+  component: Component,
+  props,
+}: RenderToStringProps<T>) {
   const fetch =
     fetchContent ||
     ((url: string) => {
@@ -36,14 +40,14 @@ export async function render({
     runSSE: true,
   });
 
-  const component = (
+  const comp = (
     <AsyncContextProvider>
-      <PageWithMarkdown {...pageProps} />
+      <Component {...props} />
     </AsyncContextProvider>
   );
 
   // do the first renter to init the fetch calls
-  renderToString(component);
+  renderToString(comp);
 
   // wait for all the fetch that has been done
   await all();
@@ -53,9 +57,45 @@ export async function render({
   sheet.reset();
 
   //re-render the component
-  const body = renderToString(component);
+  const body = renderToString(comp);
 
   const styles = getStyleTag(sheet);
 
   return { body, styles };
+}
+
+export type RenderPageProps = PageWithMarkdownProps & {
+  fetchContent?: FetchContent;
+  logger?: Logger;
+};
+
+export function render({
+  fetchContent,
+  logger,
+  ...pageProps
+}: RenderPageProps) {
+  return _render({
+    fetchContent,
+    logger,
+    component: PageWithMarkdown,
+    props: pageProps,
+  });
+}
+
+export type RenderManyProps = PageWithListProps & {
+  fetchContent?: FetchContent;
+  logger?: Logger;
+};
+
+export function renderMany({
+  fetchContent,
+  logger,
+  ...props
+}: RenderManyProps) {
+  return _render({
+    fetchContent,
+    logger,
+    component: PageWithItems,
+    props: props,
+  });
 }

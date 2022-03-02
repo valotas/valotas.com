@@ -1,14 +1,55 @@
+import type { MutableAsset, PluginLogger } from "@parcel/types";
 import { Transformer } from "@parcel/plugin";
 import { compileFile } from "pug";
 import * as path from "path";
 import { parse } from "@valotas/valotas.com-frontent";
-import { render } from "@valotas/valotas.com-frontent/dist/render";
+import { render, renderMany } from "@valotas/valotas.com-frontent/dist/render";
 
 export type MdTrasformerConfig = {
   pkgVersion: string;
   pkgName: string;
   defaultTemplate?: string;
 };
+
+async function renderBodyAndHead({
+  asset,
+  logger,
+  config: { pkgVersion },
+}: {
+  asset: MutableAsset;
+  logger: PluginLogger;
+  config: MdTrasformerConfig;
+}) {
+  if (asset.meta.publishedFiles) {
+    const items = (asset.meta.publishedFiles as any).map((f: any) => ({
+      ...f,
+      href: `/${f.key}/`,
+    }));
+
+    return renderMany({
+      pkgVersion,
+      logger: {
+        log: (message: string) => logger.info({ message }),
+      },
+      items,
+    });
+  }
+
+  const code = await asset.getCode();
+
+  const { draft, raw } = parse(code);
+  if (draft) {
+    return null;
+  }
+
+  return render({
+    bodyMarkdown: raw,
+    pkgVersion,
+    logger: {
+      log: (message: string) => logger.info({ message }),
+    },
+  });
+}
 
 export default new Transformer<MdTrasformerConfig>({
   async loadConfig({ config }) {
@@ -49,23 +90,19 @@ export default new Transformer<MdTrasformerConfig>({
     };
   },
 
-  async transform({ asset, config: { defaultTemplate, pkgVersion }, logger }) {
-    const code = await asset.getCode();
+  async transform({ asset, config, logger }) {
+    const page = await renderBodyAndHead({
+      asset,
+      logger,
+      config,
+    });
 
-    const { meta, raw } = parse(code);
-    if (meta.draft) {
-      logger.info({ message: `Skipping draft: ${asset.filePath}` });
+    if (!page) {
+      logger.info({ message: `Skipping: ${asset.filePath}` });
       return [];
     }
 
-    const { body: htmlBody, styles } = await render({
-      bodyMarkdown: raw,
-      pkgVersion,
-      logger: {
-        log: (message: string) => logger.info({ message }),
-      },
-    });
-
+    const { defaultTemplate } = config;
     if (!defaultTemplate) {
       throw new Error(`No temlate defined for ${asset.filePath}`);
     }
@@ -74,9 +111,12 @@ export default new Transformer<MdTrasformerConfig>({
 
     asset.meta.templateSource = defaultTemplate;
     const renderHtml = compileFile(defaultTemplate);
-    const html = renderHtml({ ...meta, body: htmlBody, styles });
+    const html = renderHtml({
+      body: page.body,
+      styles: page.styles,
+    });
 
-    if (html.indexOf(styles) < 0) {
+    if (html.indexOf(page.styles) < 0) {
       logger.warn({
         message: `Styles have not been rendered for ${asset.filePath}`,
       });

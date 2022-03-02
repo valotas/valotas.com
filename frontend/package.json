@@ -13,9 +13,9 @@
     "lint": "eslint \"src/**/*.+(ts|js|tsx|jsx)\"",
     "fix": "npm run lint -- --fix",
     "build": "tsc -p .",
-    "watch": "tsc -p . -w",
+    "watch:build": "tsc -p . -w",
     "test": "jest --no-cache",
-    "test:watch": "jest --watch",
+    "watch:test": "jest --watch",
     "storybook": "start-storybook -p 6006",
     "build-storybook": "build-storybook"
   },

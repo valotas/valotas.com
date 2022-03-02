@@ -13,7 +13,7 @@
     "rimraf": "^3.0.2"
   },
   "scripts": {
-    "lint": "eslint \"src/**/*.+(ts|js|tsx|jsx)\"",
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "lint": "eslint \"**/*.+(ts|js|tsx|jsx)\"",
+    "test": "npm run lint"
   }
 }
