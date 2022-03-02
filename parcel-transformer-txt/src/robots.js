@@ -3,8 +3,12 @@ function isSitemapRule(rule) {
 }
 
 class Robots {
+  /**
+   *
+   * @param {Array<{ key: string; value: string }>} rules
+   */
   constructor(rules) {
-    /**@type {Array<{ key: string, value: string }>} */
+    /** @type {Array<{ key: string; value: string }>} */
     this._rules = rules;
   }
 
