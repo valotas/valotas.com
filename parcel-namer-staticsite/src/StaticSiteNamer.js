@@ -58,9 +58,32 @@ function nameTxt(bundle) {
   return `${name}.${bundle.type}`;
 }
 
+/**
+ * @param {import("@parcel/types").Bundle} bundle
+ */
+function nameMeta(bundle) {
+  if (bundle.type !== "meta") {
+    return null;
+  }
+
+  const asset = bundle.getMainEntry();
+  let key = asset.meta.key;
+  if (!key) {
+    const { name } = computeKey(asset.filePath);
+    key = name;
+  }
+
+  return key !== "index" ? `${key}/meta.json` : "meta.json";
+}
+
 exports.default = new Namer({
   name({ bundle, bundleGraph, logger }) {
-    let name = nameTxt(bundle);
+    let name = nameMeta(bundle);
+    if (name) {
+      return name;
+    }
+
+    name = nameTxt(bundle);
     if (name) {
       return name;
     }

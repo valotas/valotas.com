@@ -1,11 +1,9 @@
 import React, { PropsWithChildren, StrictMode } from "react";
 import { tw } from "./twind";
 import { Footer, FooterProps } from "./Footer";
-import { Header } from "./Header";
+import { Header, HeaderProps } from "./Header";
 
-export type PageProps = FooterProps & {
-  title?: string;
-};
+export type PageProps = FooterProps & HeaderProps;
 
 export function Page({
   title,

@@ -5,7 +5,7 @@ import { Icon, IconProps } from "./Icon";
 
 export type LinkProps = {
   href: string;
-  target?: "_blank";
+  target?: "_blank" | "_self";
   className?: string;
   noUnderline?: boolean;
 };
@@ -20,7 +20,7 @@ export function Link({
   return (
     <a
       href={href}
-      target={target || "_blank"}
+      target={target || "_self"}
       className={tw(
         noUnderline ? "" : "border-b-1 border-gray-300 hover:border-gray-500",
         className

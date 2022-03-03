@@ -4,9 +4,7 @@ import { Header } from "./Header";
 
 describe("Header", () => {
   it("should render html with h1 with the given title", () => {
-    const { container } = render(
-      <Header title="The title" subtitle="The subtitle" />
-    );
+    const { container } = render(<Header title="The title" />);
 
     const h1 = container.querySelector("h1");
 

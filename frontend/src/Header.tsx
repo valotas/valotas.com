@@ -5,9 +5,8 @@ import { Icon, IconProps } from "./Icon";
 import { createTitle } from "./title";
 import { Link } from "./links";
 
-interface HeaderProps {
-  title?: string;
-  subtitle?: string;
+export interface HeaderProps {
+  title?: string | null;
   date?: string;
 }
 
@@ -41,13 +40,10 @@ export function Header({ title }: HeaderProps) {
         </Link>
       </div>
       <div>
-        <h1>
-          <a
-            href="/"
-            className={tw`block text-black no-underline font-bold text-xl lg:text-3xl font-extrabold leading-none lg:leading-tight`}
-          >
-            {createTitle(title)}
-          </a>
+        <h1
+          className={tw`block text-black no-underline font-bold text-xl lg:text-3xl font-extrabold leading-none lg:leading-tight`}
+        >
+          {createTitle(title)}
         </h1>
         <div
           className={tw`text-center md:text-left mt-3 lg:mt-4 flex justify-between lg:w-40`}

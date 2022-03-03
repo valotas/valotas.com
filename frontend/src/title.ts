@@ -1,3 +1,3 @@
-export function createTitle(title?: string) {
+export function createTitle(title?: string | null) {
   return title || "Βαλοτάσιος Γεώργιος";
 }

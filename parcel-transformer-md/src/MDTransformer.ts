@@ -1,13 +1,13 @@
-import type { MutableAsset, PluginLogger } from "@parcel/types";
+import type { MutableAsset, PluginLogger, BundleBehavior } from "@parcel/types";
 import { Transformer } from "@parcel/plugin";
 import { compileFile } from "pug";
 import * as path from "path";
-import { parse } from "@valotas/valotas.com-frontent";
+import { parse, createTitle } from "@valotas/valotas.com-frontent";
 import { render, renderMany } from "@valotas/valotas.com-frontent/dist/render";
+import { btoa } from "./base64";
 
 export type MdTrasformerConfig = {
   pkgVersion: string;
-  pkgName: string;
   defaultTemplate?: string;
 };
 
@@ -26,29 +26,33 @@ async function renderBodyAndHead({
       href: `/${f.key}/`,
     }));
 
-    return renderMany({
+    const rendered = await renderMany({
       pkgVersion,
       logger: {
         log: (message: string) => logger.info({ message }),
       },
       items,
     });
+
+    return { ...rendered, title: null };
   }
 
   const code = await asset.getCode();
 
-  const { draft, raw } = parse(code);
+  const { draft, raw, title } = parse(code);
   if (draft) {
     return null;
   }
 
-  return render({
+  const rendered = await render({
     bodyMarkdown: raw,
+    title,
     pkgVersion,
     logger: {
       log: (message: string) => logger.info({ message }),
     },
   });
+  return { ...rendered, title };
 }
 
 export default new Transformer<MdTrasformerConfig>({
@@ -62,7 +66,7 @@ export default new Transformer<MdTrasformerConfig>({
       throw new Error("oups");
     }
 
-    const { version, name } = pkg;
+    const { version } = pkg;
 
     if (!conf || !conf.filePath) {
       throw new Error("Could not load static-site.json");
@@ -85,7 +89,6 @@ export default new Transformer<MdTrasformerConfig>({
 
     return {
       pkgVersion: version,
-      pkgName: name,
       defaultTemplate: defaultTemplateFilePath,
     };
   },
@@ -112,7 +115,9 @@ export default new Transformer<MdTrasformerConfig>({
     asset.meta.templateSource = defaultTemplate;
     const renderHtml = compileFile(defaultTemplate);
     const html = renderHtml({
+      title: createTitle(page.title),
       body: page.body,
+      base64body: btoa(page.body),
       styles: page.styles,
     });
 
@@ -125,6 +130,19 @@ export default new Transformer<MdTrasformerConfig>({
     asset.type = "html";
     asset.setCode(html);
 
-    return [asset];
+    const meta = {
+      type: "meta",
+      uniqueKey: `${asset.id}-meta`,
+      meta: asset.meta,
+      content: JSON.stringify({ aa: 1, base64body: btoa(page.body) }),
+    };
+
+    asset.addDependency({
+      specifier: meta.uniqueKey,
+      specifierType: "commonjs",
+      priority: "lazy",
+    });
+
+    return [asset, meta];
   },
 });

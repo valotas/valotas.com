@@ -105,6 +105,11 @@ async function handleRobots({ asset }) {
 exports.default = new Transformer({
   async transform(props) {
     const { asset } = props;
+
+    if (asset.type === "meta") {
+      return [asset];
+    }
+
     const base = path.parse(asset.filePath).base;
 
     let assets = [];
