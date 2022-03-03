@@ -2,10 +2,14 @@
     "name": "@valotas/valotas.com",
     "workspaces": [
         "frontend",
-        "parcel-transformer-txt",
+        "parcel-transformer-raw",
         "parcel-resolver-staticsite",
         "parcel-namer-staticsite",
         "parcel-transformer-md",
         "web"
-    ]
+    ],
+    "scripts": {
+        "clean": "npm run clean --workspaces --if-present",
+        "build": "npm run build --workspaces --if-present"
+    }
 }
