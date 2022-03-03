@@ -1,28 +1,26 @@
-const { isGlob, glob, normalizeSeparators } = require("@parcel/utils");
-const path = require("path");
-const { computeKey } = require("@valotas/parcel-namer-staticsite");
+import { isGlob, glob, normalizeSeparators } from "@parcel/utils";
+import type { MutableAsset } from "@parcel/types";
+import type { FileSystem } from "@parcel/fs";
+import * as path from "path";
+import { computeKey } from "@valotas/parcel-namer-staticsite";
 
 class Sitemap {
-  /**
-   * Sitemap
-   *
-   * @param {string} baseDir
-   * @param {Array<string>} rules
-   */
-  constructor(baseDir, rules) {
-    /** @type {Array<string>} */
-    this._rules = rules;
-    this._baseDir = baseDir;
+  private rules: string[] = [];
+  private baseDir: string;
+
+  constructor(baseDir: string, rules: string[]) {
+    this.rules = rules;
+    this.baseDir = baseDir;
   }
 
   getDependencies() {
-    return this._rules.map((r) => {
+    return this.rules.map((r) => {
       const { name, ext } = computeKey(r);
       return {
         key: name,
         ext,
         filePath: r,
-        specifier: r.replace(this._baseDir, "."),
+        specifier: r.replace(this.baseDir, "."),
       };
     });
   }
@@ -40,10 +38,15 @@ class Sitemap {
   }
 }
 
-/**
- * @param {{ content: string, filePath: string, fs: import("@parcel/fs").FileSystem }} param0
- */
-async function parseSitemapContent({ content, filePath, fs }) {
+async function parseSitemapContent({
+  content,
+  filePath,
+  fs,
+}: {
+  content: string;
+  filePath: string;
+  fs: FileSystem;
+}) {
   const baseDir = path.dirname(filePath);
 
   const lines = content
@@ -65,14 +68,9 @@ async function parseSitemapContent({ content, filePath, fs }) {
   return new Sitemap(baseDir, all.flat());
 }
 
-exports._parseSitemapContent = parseSitemapContent;
+export const _parseSitemapContent = parseSitemapContent;
 
-/**
- * @param {import("@parcel/types").MutableAsset} asset
- * @param {import("@parcel/fs").FileSystem} fs
- * @returns
- */
-exports.parseSitemap = async function (asset, fs) {
+export async function parseSitemap(asset: MutableAsset, fs: FileSystem) {
   const content = await asset.getCode();
   return parseSitemapContent({ content, filePath: asset.filePath, fs });
-};
+}

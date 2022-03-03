@@ -1,8 +1,8 @@
 {
-  "name": "@valotas/parcel-transformer-md",
+  "name": "@valotas/parcel-transformer-staticsite",
   "version": "2.2.5",
   "private": true,
-  "main": "./dist/MDTransformer.js",
+  "main": "./dist/StaticSiteTransformer.js",
   "engines": {
     "parcel": "2.x"
   },
@@ -12,6 +12,7 @@
     "eslint": "^8.9.0",
     "eslint-config-prettier": "^8.3.0",
     "eslint-plugin-prettier": "^4.0.0",
+    "jest": "^27.5.1",
     "prettier": "^2.5.1",
     "rimraf": "^3.0.2",
     "typescript": "^4.5.5"
@@ -19,11 +20,13 @@
   "scripts": {
     "clean": "rimraf dist",
     "lint": "eslint \"src/**/*.+(ts|js|tsx|jsx)\"",
+    "test": "jest",
     "fix": "npm run lint -- --fix",
     "build": "tsc -p ."
   },
   "dependencies": {
     "@parcel/plugin": "^2.3.1",
+    "@parcel/utils": "^2.3.2",
     "@types/pug": "^2.0.6",
     "pug": "^3.0.2",
     "tslib": "^2.3.1"

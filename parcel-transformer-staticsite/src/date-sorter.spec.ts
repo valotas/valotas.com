@@ -1,6 +1,5 @@
 /* eslint-env jest */
-
-const { sortByDate } = require("./date-sorter");
+import { sortByDate } from "./date-sorter";
 
 describe("date-sorter", () => {
   test("sorts by the containing date", () => {

@@ -1,9 +1,10 @@
 {
   "extends": "@parcel/config-default",
   "transformers": {
-    "*.md": ["@valotas/parcel-transformer-md"],
-    "*.txt": ["@valotas/parcel-transformer-raw"],
-    "*.meta": ["@valotas/parcel-transformer-raw"]
+    "*.txt": ["@valotas/parcel-transformer-staticsite/txt"],
+    "*.md": ["@valotas/parcel-transformer-staticsite/md"],
+    "*.meta": ["@valotas/parcel-transformer-staticsite/meta"],
+    "*.htmlbody": ["@valotas/parcel-transformer-staticsite/htmlbody"]
   },
   "resolvers": ["...", "@valotas/parcel-resolver-staticsite"],
   "namers": ["@valotas/parcel-namer-staticsite", "..."]

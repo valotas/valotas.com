@@ -22,7 +22,7 @@ function getMainEntryAsset({ bundle, bundleGraph }) {
  * @param {import("@parcel/types").Bundle} bundle
  */
 function nameHtml(bundle) {
-  if (bundle.type !== "html") {
+  if (["html", "htmlbody"].indexOf(bundle.type) < 0) {
     return null;
   }
 

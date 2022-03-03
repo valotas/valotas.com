@@ -1,6 +1,5 @@
 /* eslint-env jest */
-
-const { parseRobots } = require("./robots");
+import { parseRobots } from "./robots";
 
 describe("robots", () => {
   test("returns empty rules for empty content", () => {
