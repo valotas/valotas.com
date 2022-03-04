@@ -1,7 +1,5 @@
 import * as cp from "child_process";
-import * as fs from "fs";
 import * as moment from "moment";
-import * as ProgressBar from "progress";
 import { MetaFile } from "../content/MetaFile";
 import promisify from "./promisify";
 

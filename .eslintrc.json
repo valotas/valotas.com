@@ -3,7 +3,8 @@
     "parser": "@typescript-eslint/parser",
     "plugins": [
       "@typescript-eslint",
-      "prettier"
+      "prettier",
+      "import"
     ],
     "extends": [
       "eslint:recommended",
@@ -25,6 +26,7 @@
           "varsIgnorePattern": "^_|h",
           "caughtErrorsIgnorePattern": "^_"
         }
-      ]
+      ],
+      "import/order": ["error"]
     }
   }

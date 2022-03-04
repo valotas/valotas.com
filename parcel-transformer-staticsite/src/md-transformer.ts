@@ -1,4 +1,4 @@
-import type { MutableAsset, PluginLogger, BundleBehavior } from "@parcel/types";
+import type { MutableAsset, PluginLogger } from "@parcel/types";
 import { parse } from "@valotas/valotas.com-frontent";
 import { render } from "@valotas/valotas.com-frontent/dist/render";
 import { btoa } from "./base64";

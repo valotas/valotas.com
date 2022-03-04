@@ -1,8 +1,8 @@
 /* eslint-env node */
 /* eslint-disable @typescript-eslint/no-var-requires */
 
-const { Namer } = require("@parcel/plugin");
 const path = require("path");
+const { Namer } = require("@parcel/plugin");
 const { computeKey } = require("./key-factory");
 
 function getMainEntryAsset({ bundle, bundleGraph }) {

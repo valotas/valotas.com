@@ -1,4 +1,4 @@
-import type { SpecifierType, DependencyPriority } from "@parcel/types";
+import type { DependencyPriority, SpecifierType } from "@parcel/types";
 
 const specifierType: SpecifierType = "commonjs";
 

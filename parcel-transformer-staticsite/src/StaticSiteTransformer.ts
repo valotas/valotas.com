@@ -1,6 +1,6 @@
+import * as path from "path";
 import type { Transformer as TransformerOpts } from "@parcel/types";
 import { Transformer } from "@parcel/plugin";
-import * as path from "path";
 import { transformSitemap } from "./sitemap-transformer";
 import { transformRobots } from "./robots-transformer";
 import { transformMd } from "./md-transformer";

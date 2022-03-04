@@ -1,8 +1,8 @@
-import type { FileSystem } from "@parcel/fs";
 import * as path from "path";
+import type { FileSystem } from "@parcel/fs";
+import { parse } from "@valotas/valotas.com-frontent";
 import { parseSitemap } from "./sitemap";
 import { StaticSiteTransformerFn } from "./StaticSiteTransformer";
-import { parse } from "@valotas/valotas.com-frontent";
 import { sortByDate } from "./date-sorter";
 import { createParallelDependency } from "./dep";
 

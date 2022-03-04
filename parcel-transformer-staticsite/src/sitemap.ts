@@ -1,7 +1,7 @@
-import { isGlob, glob, normalizeSeparators } from "@parcel/utils";
-import type { MutableAsset } from "@parcel/types";
-import type { FileSystem } from "@parcel/fs";
 import * as path from "path";
+import { glob, isGlob, normalizeSeparators } from "@parcel/utils";
+import type { FileSystem } from "@parcel/fs";
+import type { MutableAsset } from "@parcel/types";
 import { computeKey } from "@valotas/parcel-namer-staticsite";
 
 class Sitemap {

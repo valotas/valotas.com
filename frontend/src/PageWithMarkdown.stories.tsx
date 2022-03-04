@@ -1,5 +1,6 @@
 import React from "react";
-import { ComponentStory, ComponentMeta } from "@storybook/react";
+import { ComponentMeta, ComponentStory } from "@storybook/react";
+import trueArticle from "../../web/src/articles/testing-rxjs.md";
 import { PageWithMarkdown } from "./PageWithMarkdown";
 
 export default {
@@ -115,7 +116,6 @@ PageWithGist.args = {
   `,
 };
 
-import trueArticle from "../../web/src/articles/testing-rxjs.md";
 const content = trueArticle.split("---\n");
 
 export const PageWithFullArticle = Template.bind({});
