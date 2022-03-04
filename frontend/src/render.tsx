@@ -3,10 +3,8 @@ import { renderToString } from "react-dom/server";
 import nfetch from "node-fetch";
 import { setup } from "./twind";
 import { asyncVirtualSheet, getStyleTag } from "twind/server";
-import type { PageWithMarkdownProps } from "./PageWithMarkdown";
-import { PageWithMarkdown } from "./PageWithMarkdown";
 import { createAsyncContextProvider, FetchContent } from "./AsyncContext";
-import { PageWithItems, PageWithListProps } from "./PageWithItems";
+import { PageRenderer, PageRendererProps } from "./PageRenderer";
 
 const sheet = asyncVirtualSheet();
 setup({ sheet });
@@ -15,19 +13,16 @@ export type Logger = {
   log(msg: string): void;
 };
 
-export type RenderToStringProps<T> = {
+export type RenderToStringProps = {
   fetchContent?: FetchContent;
   logger?: Logger;
-  component: React.ComponentFactory<T, any>;
-  props: T;
-};
+} & PageRendererProps;
 
-async function _render<T>({
+export async function render({
   fetchContent,
   logger,
-  component: Component,
-  props,
-}: RenderToStringProps<T>) {
+  ...props
+}: RenderToStringProps) {
   const fetch =
     fetchContent ||
     ((url: string) => {
@@ -47,7 +42,7 @@ async function _render<T>({
 
   const comp = (
     <AsyncContextProvider>
-      <Component {...props} />
+      <PageRenderer {...props} />
     </AsyncContextProvider>
   );
 
@@ -67,40 +62,4 @@ async function _render<T>({
   const styles = getStyleTag(sheet);
 
   return { body, styles };
-}
-
-export type RenderPageProps = PageWithMarkdownProps & {
-  fetchContent?: FetchContent;
-  logger?: Logger;
-};
-
-export function render({
-  fetchContent,
-  logger,
-  ...pageProps
-}: RenderPageProps) {
-  return _render({
-    fetchContent,
-    logger,
-    component: PageWithMarkdown,
-    props: pageProps,
-  });
-}
-
-export type RenderManyProps = PageWithListProps & {
-  fetchContent?: FetchContent;
-  logger?: Logger;
-};
-
-export function renderMany({
-  fetchContent,
-  logger,
-  ...props
-}: RenderManyProps) {
-  return _render({
-    fetchContent,
-    logger,
-    component: PageWithItems,
-    props: props,
-  });
 }

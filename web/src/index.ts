@@ -7,10 +7,8 @@ window.addEventListener("load", () => {
   if (!script) {
     return;
   }
-  const decoded = atob(script.innerHTML);
-  const renderProps = JSON.parse(decoded);
 
   const root = document.getElementById("app");
 
-  hydrate(createElement(PageRenderer, { props: renderProps }), root);
+  hydrate(createElement(PageRenderer, { payload: script.innerHTML }), root);
 });

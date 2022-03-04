@@ -1,6 +1,6 @@
 import type { MutableAsset, PluginLogger, BundleBehavior } from "@parcel/types";
 import { parse } from "@valotas/valotas.com-frontent";
-import { render, renderMany } from "@valotas/valotas.com-frontent/dist/render";
+import { render } from "@valotas/valotas.com-frontent/dist/render";
 import { btoa } from "./base64";
 import { StaticSiteTransformerFn } from "./StaticSiteTransformer";
 import { createLazyDependency } from "./dep";
@@ -26,11 +26,11 @@ async function renderBodyAndHead({
     }));
 
     const renderProps = { items, pkgVersion };
-    const rendered = await renderMany({
+    const rendered = await render({
       logger: {
         log: (message: string) => logger.info({ message }),
       },
-      ...renderProps,
+      props: renderProps,
     });
 
     return { ...rendered, ...renderProps };
@@ -52,7 +52,7 @@ async function renderBodyAndHead({
     logger: {
       log: (message: string) => logger.info({ message }),
     },
-    ...renderProps,
+    props: renderProps,
   });
   return { ...rendered, ...renderProps };
 }
