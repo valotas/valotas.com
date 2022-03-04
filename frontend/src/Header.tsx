@@ -3,7 +3,7 @@ import { tw } from "./twind";
 import { useHover } from "./hooks";
 import { Icon, IconProps } from "./Icon";
 import { createTitle } from "./title";
-import { Link } from "./links";
+import { Anchor, Link } from "./links";
 
 export interface HeaderProps {
   title?: string | null;
@@ -15,9 +15,9 @@ function LinkWithIcon({ href, ...iconProps }: IconProps & { href: string }) {
   const fill = isHovered ? "fill-black" : "fill-gray-500";
 
   return (
-    <a href={href} target="_blank" className={tw`block ${fill}`} ref={ref}>
+    <Anchor href={href} target="_blank" className={tw`block ${fill}`} ref={ref}>
       <Icon {...iconProps} />
-    </a>
+    </Anchor>
   );
 }
 

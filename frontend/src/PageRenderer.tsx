@@ -1,6 +1,7 @@
-import React from "react";
+import React, { useEffect, useState, useCallback } from "react";
 import { PageWithItems, PageWithListProps } from "./PageWithItems";
 import { PageWithMarkdown, PageWithMarkdownProps } from "./PageWithMarkdown";
+import { createTitle } from "./title";
 
 function getPageProps(input: PageRendererProps) {
   if ("payload" in input) {
@@ -25,8 +26,36 @@ export type PageRendererProps =
     }
   | { props: PageWithListProps | PageWithMarkdownProps };
 
+function usePageProps(initial: PageRendererProps) {
+  const [props, updateProps] = useState(initial);
+
+  const handlePopState = useCallback(
+    (e: any) => {
+      const state = e.detail?.state || e.state;
+      updateProps({ payload: state });
+    },
+    [0]
+  );
+
+  useEffect(() => {
+    document.addEventListener("pushstate", handlePopState);
+    window.addEventListener("popstate", handlePopState);
+
+    return () => {
+      window.removeEventListener("popstate", handlePopState);
+      document.removeEventListener("pushstate", handlePopState);
+    };
+  }, [0]);
+
+  return getPageProps(props);
+}
+
 export function PageRenderer(props: PageRendererProps) {
-  const pageProps = getPageProps(props);
+  const pageProps = usePageProps(props);
+
+  useEffect(() => {
+    document.title = createTitle(pageProps.title);
+  }, [pageProps.title]);
 
   if (isPageWithMarkdownProps(pageProps)) {
     return <PageWithMarkdown {...pageProps} />;

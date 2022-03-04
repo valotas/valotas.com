@@ -1,6 +1,6 @@
 import React, { PropsWithChildren } from "react";
 import { useFetch } from "../AsyncContext";
-import { TextLink } from "../links";
+import { LinkWithIcon } from "../links";
 import { PrismCodeBlock } from "../PrismCodeBlock";
 
 function computeLanguage(file?: string) {
@@ -49,7 +49,12 @@ export function Gist({
   }
 
   const link = (
-    <TextLink href={href} target="_blank" icon="github" title={file || href} />
+    <LinkWithIcon
+      href={href}
+      target="_blank"
+      icon="github"
+      title={file || href}
+    />
   );
 
   return (

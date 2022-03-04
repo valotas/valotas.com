@@ -1,7 +1,63 @@
-import React from "react";
+import React, {
+  ForwardedRef,
+  forwardRef,
+  MouseEvent,
+  useCallback,
+} from "react";
 import { PropsWithChildren } from "react";
 import { tw } from "./twind";
 import { Icon, IconProps } from "./Icon";
+
+export type AnchorProps = {
+  href: string;
+  title?: string;
+  target?: "_blank" | "_self";
+  className?: string;
+};
+
+export const Anchor = forwardRef<
+  HTMLAnchorElement,
+  PropsWithChildren<AnchorProps>
+>(AnchorWithRef);
+
+function AnchorWithRef(
+  { href, title, target, className, children }: PropsWithChildren<AnchorProps>,
+  ref: ForwardedRef<HTMLAnchorElement>
+) {
+  const handleClick = useCallback(
+    (e: MouseEvent) => {
+      if (href.startsWith("/")) {
+        e.preventDefault();
+
+        fetch(`${href}meta.json`)
+          .then((resp) => resp.text())
+          .then((payload) => {
+            history.pushState(payload, title || document.title, href);
+            document.dispatchEvent(
+              new CustomEvent("pushstate", {
+                detail: {
+                  state: payload,
+                },
+              })
+            );
+          });
+      }
+    },
+    [href, title]
+  );
+
+  return (
+    <a
+      href={href}
+      onClick={handleClick}
+      target={target || "_self"}
+      className={className}
+      ref={ref}
+    >
+      {children}
+    </a>
+  );
+}
 
 export type LinkProps = {
   href: string;
@@ -18,7 +74,7 @@ export function Link({
   noUnderline,
 }: PropsWithChildren<LinkProps>) {
   return (
-    <a
+    <Anchor
       href={href}
       target={target || "_self"}
       className={tw(
@@ -27,7 +83,7 @@ export function Link({
       )}
     >
       {children}
-    </a>
+    </Anchor>
   );
 }
 
@@ -37,7 +93,7 @@ export type TextLinkProps = LinkProps & {
   color?: string;
 };
 
-export function TextLink({
+export function LinkWithIcon({
   icon,
   title,
   color = "gray-500",

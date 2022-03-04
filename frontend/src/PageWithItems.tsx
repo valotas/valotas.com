@@ -3,7 +3,7 @@ import { parseISO } from "date-fns/fp";
 import { format } from "date-fns";
 import { Page, PageProps } from "./Page";
 import { tw } from "./twind";
-import { Link } from "./links";
+import { Anchor, Link } from "./links";
 import { MarkedContent } from "./marked/MarkedContent";
 
 export type PageItem = {
@@ -29,13 +29,13 @@ function PageItemPresenter({
         {formatedDate || " "}
       </span>
       <div>
-        <a
+        <Anchor
           href={href}
           title={title}
           className={tw`text-lg text-black font-bold no-underline hover:underline`}
         >
           {title}
-        </a>
+        </Anchor>
       </div>
       {description && <MarkedContent raw={description} />}
       <Link
