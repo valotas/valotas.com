@@ -14,9 +14,10 @@ const fill: twind.Plugin = (parts) => {
   const selectedColor: any = colors[color];
   const weight = parseInt(parts[1], 10) || 500;
   const colorWithWeight = selectedColor[weight];
+  const finalColor = colorWithWeight || selectedColor;
 
   return css`
-    fill: ${colorWithWeight};
+    fill: ${finalColor};
   `;
 };
 

@@ -1,6 +1,5 @@
 import React from "react";
 import { tw } from "./twind";
-import { useHover } from "./hooks";
 import { Icon, IconProps } from "./Icon";
 import { createTitle } from "./title";
 import { Anchor, Link } from "./links";
@@ -11,11 +10,12 @@ export interface HeaderProps {
 }
 
 function LinkWithIcon({ href, ...iconProps }: IconProps & { href: string }) {
-  const [ref, isHovered] = useHover<HTMLAnchorElement>();
-  const fill = isHovered ? "fill-black" : "fill-gray-500";
-
   return (
-    <Anchor href={href} target="_blank" className={tw`block ${fill}`} ref={ref}>
+    <Anchor
+      href={href}
+      target="_blank"
+      className={tw`block fill-gray-500 hover:fill-black`}
+    >
       <Icon {...iconProps} />
     </Anchor>
   );

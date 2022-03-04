@@ -1,9 +1,4 @@
-import React, {
-  ForwardedRef,
-  forwardRef,
-  MouseEvent,
-  useCallback,
-} from "react";
+import React, { MouseEvent, useCallback } from "react";
 import { PropsWithChildren } from "react";
 import { tw } from "./twind";
 import { Icon, IconProps } from "./Icon";
@@ -15,15 +10,13 @@ export type AnchorProps = {
   className?: string;
 };
 
-export const Anchor = forwardRef<
-  HTMLAnchorElement,
-  PropsWithChildren<AnchorProps>
->(AnchorWithRef);
-
-function AnchorWithRef(
-  { href, title, target, className, children }: PropsWithChildren<AnchorProps>,
-  ref: ForwardedRef<HTMLAnchorElement>
-) {
+export function Anchor({
+  href,
+  title,
+  target,
+  className,
+  children,
+}: PropsWithChildren<AnchorProps>) {
   const handleClick = useCallback(
     (e: MouseEvent) => {
       if (href.startsWith("/")) {
@@ -52,7 +45,6 @@ function AnchorWithRef(
       onClick={handleClick}
       target={target || "_self"}
       className={className}
-      ref={ref}
     >
       {children}
     </a>
