@@ -32,7 +32,12 @@ async function _render<T>({
     fetchContent ||
     ((url: string) => {
       logger?.log(`Downloading ${url}`);
-      return nfetch(url).then((b) => b.text());
+      return nfetch(url).then((b) => {
+        if (!b.ok) {
+          throw new Error(`Could not download ${url}`);
+        }
+        return b.text();
+      });
     });
 
   const { all, skipSSE, AsyncContextProvider } = createAsyncContextProvider({
