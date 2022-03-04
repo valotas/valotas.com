@@ -1,9 +1,14 @@
 import * as twind from "twind";
 import { css } from "twind/css";
-import * as colors from "twind/colors";
+import { trueGray } from "twind/colors";
 
 type Colors = typeof colors;
 type Color = keyof Colors;
+
+const colors = {
+  black: "#272822",
+  gray: trueGray,
+};
 
 function isColor(c?: string): c is Color {
   return (c && c in colors) || false;
@@ -21,13 +26,18 @@ const fill: twind.Plugin = (parts) => {
   `;
 };
 
-let twInstance = twind.create({
+const defaultConfig: twind.Configuration = {
+  theme: {
+    colors,
+  },
   plugins: { fill },
-});
+};
+
+let twInstance = twind.create(defaultConfig);
 
 export function setup(conf: Pick<twind.Configuration, "sheet"> = {}) {
   twInstance = twind.create({
-    plugins: { fill },
+    ...defaultConfig,
     sheet: conf.sheet,
   });
 }
