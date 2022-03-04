@@ -8,9 +8,9 @@ html(lang='en')
     meta(name='google-site-verification', content='Tq6L96TOcvuR7nl6ikpW4tV4PUoA6zYK1-CArKe3ji0')
     link(rel='shortcut icon' href='./favicon.ico')
     link(rel='stylesheet' href='./page.css')
-    script(src='./index.ts' type='application/ts' async=true)
+    script(src='./index.ts' type='module' async=true)
     title!= title
     | !{styles}
   body
     div(id='app')!= body 
-    script(type='application/json')!= base64body
+    script(type='application/json')!= base64
