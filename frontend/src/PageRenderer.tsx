@@ -5,8 +5,9 @@ import { createTitle } from "./title";
 
 function getPageProps(input: PageRendererProps) {
   if ("payload" in input) {
-    const decoded = (input.decode || atob)(input.payload);
-    return JSON.parse(decoded) as PageWithListProps | PageWithMarkdownProps;
+    return JSON.parse(input.payload) as
+      | PageWithListProps
+      | PageWithMarkdownProps;
   }
   return input.props;
 }
@@ -20,10 +21,7 @@ function isPageWithMarkdownProps(props: any): props is PageWithMarkdownProps {
 }
 
 export type PageRendererProps =
-  | {
-      payload: string;
-      decode?: (input: string) => string;
-    }
+  | { payload: string }
   | { props: PageWithListProps | PageWithMarkdownProps };
 
 function usePageProps(initial: PageRendererProps) {

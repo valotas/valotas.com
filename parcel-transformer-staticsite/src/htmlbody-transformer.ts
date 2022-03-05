@@ -6,7 +6,7 @@ function getString(obj: object, prop: string) {
   const value = (obj as any)[prop];
   const type = typeof value;
   if (type !== "string") {
-    throw new Error(`Expected ${prop} of type string but got ${type}`);
+    throw new Error(`Expected '${prop}' of type string but got ${type}`);
   }
 
   return value as string;
@@ -30,13 +30,13 @@ export const transformHtmlBody: StaticSiteTransformerFn = async ({
 
   const title = getString(asset.meta, "title");
   const styles = getString(asset.meta, "styles");
-  const base64 = getString(asset.meta, "base64");
+  const payload = getString(asset.meta, "payload");
 
   const html = renderHtml({
     title: createTitle(title),
     body,
     styles,
-    base64,
+    payload: Buffer.from(payload).toString("base64"),
   });
 
   if (html.indexOf(styles) < 0) {

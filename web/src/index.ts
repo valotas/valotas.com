@@ -9,6 +9,7 @@ window.addEventListener("load", () => {
   }
 
   const root = document.getElementById("app");
+  const payload = atob(script.innerHTML);
 
-  hydrate(createElement(PageRenderer, { payload: script.innerHTML }), root);
+  hydrate(createElement(PageRenderer, { payload }), root);
 });

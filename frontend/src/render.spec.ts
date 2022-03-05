@@ -6,18 +6,10 @@ describe("render", () => {
     expect(html.body).toContain(">the body</p>");
   });
 
-  test("decodes the given props", async () => {
+  test("decodes the given payload", async () => {
     const props = { bodyMarkdown: "the body" };
     const payload = JSON.stringify(props);
-    const html = await render({ payload, decode: (input) => input });
-    expect(html.body).toContain(">the body</p>");
-  });
-
-  test("it does a base64 decoding by default", async () => {
-    const props = { bodyMarkdown: "the body" };
-    const payload = JSON.stringify(props);
-    const encodedPayload = Buffer.from(payload).toString("base64");
-    const html = await render({ payload: encodedPayload });
+    const html = await render({ payload });
     expect(html.body).toContain(">the body</p>");
   });
 

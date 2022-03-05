@@ -1,7 +1,6 @@
 import type { MutableAsset, PluginLogger } from "@parcel/types";
 import { parse } from "@valotas/valotas.com-frontent";
 import { render } from "@valotas/valotas.com-frontent/dist/render";
-import { btoa } from "./base64";
 import { StaticSiteTransformerFn } from "./StaticSiteTransformer";
 import { createLazyDependency } from "./dep";
 
@@ -75,9 +74,9 @@ export const transformMd: StaticSiteTransformerFn = async ({
 
   const { body, styles, ...renderProps } = page;
 
-  const base64 = btoa(JSON.stringify(renderProps));
+  const paylod = JSON.stringify(renderProps);
 
-  asset.meta.base64 = base64;
+  asset.meta.payload = paylod;
   asset.meta.title = "title" in renderProps ? renderProps.title : "";
   asset.meta.styles = styles;
 
@@ -88,7 +87,7 @@ export const transformMd: StaticSiteTransformerFn = async ({
     type: "meta",
     uniqueKey: `${asset.id}-meta`,
     meta: asset.meta,
-    content: base64,
+    content: paylod,
   };
 
   asset.addDependency(createLazyDependency(meta.uniqueKey));
