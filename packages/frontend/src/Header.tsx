@@ -1,4 +1,5 @@
 import React from "react";
+import { DateSpan } from "./DateSpan";
 import { tw } from "./twind";
 import { Icon, IconProps } from "./Icon";
 import { createTitle } from "./title";
@@ -21,7 +22,7 @@ function LinkWithIcon({ href, ...iconProps }: IconProps & { href: string }) {
   );
 }
 
-export function Header({ title }: HeaderProps) {
+export function Header({ title, date }: HeaderProps) {
   return (
     <div
       className={tw`flex flex-col md:flex-row items-center`}
@@ -45,6 +46,7 @@ export function Header({ title }: HeaderProps) {
         >
           {createTitle(title)}
         </h1>
+        <DateSpan iso={date} />
         <div
           className={tw`text-center md:text-left mt-3 lg:mt-4 flex justify-between lg:w-40`}
         >

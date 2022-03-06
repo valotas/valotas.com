@@ -1,6 +1,5 @@
 import React from "react";
-import { parseISO } from "date-fns/fp";
-import { format } from "date-fns";
+import { DateSpan } from "./DateSpan";
 import { Page, PageProps } from "./Page";
 import { tw } from "./twind";
 import { Anchor, Link } from "./links";
@@ -18,16 +17,9 @@ function PageItemPresenter({
 }: {
   item: PageItem;
 }) {
-  const parsedDate = date ? parseISO(date) : undefined;
-  const formatedDate = parsedDate ? format(parsedDate, "PPP") : undefined;
-
   return (
     <div className={tw`mt-10`}>
-      <span
-        className={tw`block text-gray-500 uppercase font-semibold text-xs tracking-wide mb-1`}
-      >
-        {formatedDate || " "}
-      </span>
+      <DateSpan iso={date} />
       <div>
         <Anchor
           href={href}

@@ -26,4 +26,12 @@ describe("PageWithMarkdown", () => {
 
     expect(header).toBeTruthy();
   });
+
+  it("should render a date at the header when given", async () => {
+    render(<PageWithMarkdown date="2010-12-22" />);
+
+    const date = await screen.findByTestId("date");
+
+    expect(date.innerHTML).toContain("December 22nd, 2010");
+  });
 });
