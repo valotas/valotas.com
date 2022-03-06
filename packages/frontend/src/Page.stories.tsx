@@ -23,3 +23,9 @@ export const PageWithTitle = Template.bind({});
 PageWithTitle.args = {
   title: "Some other title",
 };
+
+export const PageWithTitleAndDate = Template.bind({});
+PageWithTitleAndDate.args = {
+  title: "This is page has a date",
+  date: "2022-01-22",
+};
