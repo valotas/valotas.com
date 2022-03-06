@@ -12,7 +12,7 @@
         "clean": "npm run clean --workspaces --if-present && rimraf .parcel-cache",
         "fix": "npm run fix --workspaces --if-present",
         "build": "npm run build --workspaces --if-present",
-        "sb": "npm run storybook -w frontend",
-        "serve": "npm run serve -w web"
+        "sb": "npm run storybook -w packages/frontend",
+        "serve": "npm run serve -w packages/web"
     }
 }
