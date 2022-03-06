@@ -1,6 +1,7 @@
 import React from "react";
 import { ComponentMeta, ComponentStory } from "@storybook/react";
 import trueArticle from "../../web/src/articles/testing-rxjs.md";
+import articleContainingTweet from "../../web/src/articles/devoxx-2014.md";
 import { PageWithMarkdown } from "./PageWithMarkdown";
 
 export default {
@@ -116,9 +117,17 @@ PageWithGist.args = {
   `,
 };
 
-const content = trueArticle.split("---\n");
+function getContent(md: string) {
+  const content = md.split("---\n");
+  return content[content.length - 1];
+}
 
 export const PageWithFullArticle = Template.bind({});
 PageWithFullArticle.args = {
-  bodyMarkdown: content[content.length - 1],
+  bodyMarkdown: getContent(trueArticle),
+};
+
+export const PageWithArticleContainingTweet = Template.bind({});
+PageWithArticleContainingTweet.args = {
+  bodyMarkdown: getContent(articleContainingTweet),
 };

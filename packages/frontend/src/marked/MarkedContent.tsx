@@ -1,6 +1,5 @@
 import React from "react";
 import { DEFAULT_MARKDOWN_RENDERERS, Markdown } from "react-marked-renderer";
-import { Blockquote } from "./Blockquote";
 import { CodeBlock } from "./CodeBlock";
 import { CodeSpan } from "./CodeSpan";
 import { Heading } from "./Heading";
@@ -17,7 +16,6 @@ const renderers = {
   heading: Heading,
   paragraph: Paragraph,
   link: MarkedLink,
-  blockquote: Blockquote,
   list: List,
 };
 
