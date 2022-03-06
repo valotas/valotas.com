@@ -1,17 +1,18 @@
 {
     "name": "@valotas/valotas.com",
     "workspaces": [
-        "frontend",
-        "parcel-reporter-staticsite",
-        "parcel-resolver-staticsite",
-        "parcel-namer-staticsite",
-        "parcel-transformer-staticsite",
-        "web"
+        "packages/frontend",
+        "packages/parcel-reporter-staticsite",
+        "packages/parcel-resolver-staticsite",
+        "packages/parcel-namer-staticsite",
+        "packages/parcel-transformer-staticsite",
+        "packages/web"
     ],
     "scripts": {
         "clean": "npm run clean --workspaces --if-present && rimraf .parcel-cache",
         "fix": "npm run fix --workspaces --if-present",
         "build": "npm run build --workspaces --if-present",
+        "sb": "npm run storybook -w frontend",
         "serve": "npm run serve -w web"
     }
 }

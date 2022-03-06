@@ -2,11 +2,10 @@ import { createReadStream } from "fs";
 import { lookup } from "mime-types";
 import { PutObjectCommand, S3Client } from "@aws-sdk/client-s3";
 
-const bucketName = "test.valotas.com";
-const region = "eu-central-1";
-
 class AWSService {
-  private client = new S3Client({ region });
+  private region = "eu-central-1";
+  private bucket = "test.valotas.com";
+  private client = new S3Client({ region: this.region });
 
   async upload({ distDir, filePath }: { distDir: string; filePath: string }) {
     const start = Date.now();
@@ -22,7 +21,7 @@ class AWSService {
     return this.client
       .send(
         new PutObjectCommand({
-          Bucket: bucketName,
+          Bucket: this.bucket,
           Key: name,
           Body: fileStream,
           ContentType: contentType,
@@ -42,7 +41,7 @@ class AWSService {
     return this.client
       .send(
         new PutObjectCommand({
-          Bucket: bucketName,
+          Bucket: this.bucket,
           Key: from,
           Body: "",
           WebsiteRedirectLocation: `/${to}`,
@@ -57,7 +56,7 @@ class AWSService {
   }
 
   getPublicUrl() {
-    return `http://${bucketName}.s3-website.${region}.amazonaws.com/`;
+    return `http://${this.bucket}.s3-website.${this.region}.amazonaws.com/`;
   }
 }
 
