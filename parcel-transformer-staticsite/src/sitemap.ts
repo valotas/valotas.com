@@ -2,7 +2,7 @@ import * as path from "path";
 import { glob, isGlob, normalizeSeparators } from "@parcel/utils";
 import type { FileSystem } from "@parcel/fs";
 import type { MutableAsset } from "@parcel/types";
-import { computeKey } from "@valotas/parcel-namer-staticsite";
+import { computeKey } from "./key-factory";
 
 class Sitemap {
   private rules: string[] = [];

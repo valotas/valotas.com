@@ -5,6 +5,7 @@ import { parseSitemap } from "./sitemap";
 import { StaticSiteTransformerFn } from "./StaticSiteTransformer";
 import { sortByDate } from "./date-sorter";
 import { createParallelDependency } from "./dep";
+import { computeKey } from "./key-factory";
 
 async function parseMD(fs: FileSystem, filePath: string) {
   if (path.extname(filePath) !== ".md") {
@@ -41,6 +42,7 @@ export const transformSitemap: StaticSiteTransformerFn = async ({
   }
 
   asset.setCode(sitemap.getCode());
+  asset.meta.key = computeKey(asset.filePath).name;
 
   const indexFile = {
     type: "md",

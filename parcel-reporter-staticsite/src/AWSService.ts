@@ -36,6 +36,26 @@ class AWSService {
       }));
   }
 
+  async uploadRedirection({ from, to }: { from: string; to: string }) {
+    const start = Date.now();
+
+    return this.client
+      .send(
+        new PutObjectCommand({
+          Bucket: bucketName,
+          Key: from,
+          Body: "",
+          WebsiteRedirectLocation: `/${to}`,
+        })
+      )
+      .then((resp) => ({
+        from,
+        to,
+        etag: resp.ETag,
+        time: Date.now() - start,
+      }));
+  }
+
   getPublicUrl() {
     return `http://${bucketName}.s3-website.${region}.amazonaws.com/`;
   }

@@ -1,6 +1,6 @@
 /* eslint-env jest */
 
-const { computeKey } = require("./key-factory");
+import { computeKey } from "./key-factory";
 
 describe("key-factory", () => {
   test("returns the base name", () => {

@@ -3,7 +3,6 @@
 
 const path = require("path");
 const { Namer } = require("@parcel/plugin");
-const { computeKey } = require("./key-factory");
 
 function getMainEntryAsset({ bundle, bundleGraph }) {
   const bundleGroup = bundleGraph.getBundleGroupsContainingBundle(bundle)[0];
@@ -27,35 +26,19 @@ function nameHtml(bundle) {
   }
 
   const asset = bundle.getMainEntry();
-  if (asset.meta.key) {
-    return `${asset.meta.key}.${bundle.type}`;
-  }
-
-  if (asset.meta.name) {
-    return asset.meta.name;
-  }
-
-  const { ext, name } = computeKey(asset.filePath);
-
-  if (ext === ".md" && asset.meta.templateSource) {
-    return `${name}/index.${bundle.type}`;
-  }
-  return null;
-}
-
-/**
- *
- * @param {import("@parcel/types").Bundle} bundle
- */
-function nameTxt(bundle) {
-  if (bundle.type !== "txt") {
+  if (!asset.meta.templateSource) {
     return null;
   }
 
-  const asset = bundle.getMainEntry();
-  const { name } = computeKey(asset.filePath);
+  const { key } = asset.meta;
 
-  return `${name}.${bundle.type}`;
+  if (!key) {
+    throw new Error(
+      `Can not name html asset with templateSource but no meta.key`
+    );
+  }
+
+  return key !== "index" ? `${key}/index.html` : "index.html";
 }
 
 /**
@@ -67,10 +50,9 @@ function nameMeta(bundle) {
   }
 
   const asset = bundle.getMainEntry();
-  let key = asset.meta.key;
+  const { key } = asset.meta;
   if (!key) {
-    const { name } = computeKey(asset.filePath);
-    key = name;
+    throw new Error(`Can not name meta asset without meta.key`);
   }
 
   return key !== "index" ? `${key}/meta.json` : "meta.json";
@@ -83,14 +65,14 @@ exports.default = new Namer({
       return name;
     }
 
-    name = nameTxt(bundle);
+    name = nameHtml(bundle);
     if (name) {
       return name;
     }
 
-    name = nameHtml(bundle);
-    if (name) {
-      return name;
+    const mainEntry = bundle.getMainEntry();
+    if (mainEntry.meta.key) {
+      return `${mainEntry.meta.key}.${bundle.type}`;
     }
 
     if (bundle.type !== "js") {
@@ -104,7 +86,6 @@ exports.default = new Namer({
     }
 
     const template = path.parse(mainEntryAsset.meta.templateSource);
-    const mainEntry = bundle.getMainEntry();
     if (!mainEntry) {
       return null;
     }

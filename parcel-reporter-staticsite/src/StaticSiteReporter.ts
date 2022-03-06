@@ -2,7 +2,7 @@
 import { Reporter } from "@parcel/plugin";
 import * as chalk from "chalk";
 import { createAWSService } from "./AWSService";
-import { log } from "./utils";
+import { createRedirectionRule, log } from "./utils";
 
 const aws = createAWSService();
 
@@ -26,6 +26,12 @@ export default new Reporter({
       });
 
       log(chalk.dim(name), `as ${chalk.bold(contentType)}`, `took ${time}ms`);
+
+      const redirection = createRedirectionRule(bundle);
+      if (redirection) {
+        const { from, to, time } = await aws.uploadRedirection(redirection);
+        log(chalk.dim(from), `=>`, chalk.dim(to), `took ${time}ms`);
+      }
     }
 
     log(

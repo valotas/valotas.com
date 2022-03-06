@@ -3,6 +3,7 @@ import { parse } from "@valotas/valotas.com-frontent";
 import { render } from "@valotas/valotas.com-frontent/dist/render";
 import { StaticSiteTransformerFn } from "./StaticSiteTransformer";
 import { createLazyDependency } from "./dep";
+import { computeKey } from "./key-factory";
 
 export type MdTrasformerConfig = {
   pkgVersion: string;
@@ -37,7 +38,7 @@ async function renderBodyAndHead({
 
   const code = await asset.getCode();
 
-  const { draft, raw, title } = parse(code);
+  const { draft, raw, title, date } = parse(code);
   if (draft) {
     return null;
   }
@@ -46,6 +47,7 @@ async function renderBodyAndHead({
     bodyMarkdown: raw,
     title,
     pkgVersion,
+    date: date || undefined,
   };
   const rendered = await render({
     logger: {
@@ -79,6 +81,8 @@ export const transformMd: StaticSiteTransformerFn = async ({
   asset.meta.payload = paylod;
   asset.meta.title = "title" in renderProps ? renderProps.title : "";
   asset.meta.styles = styles;
+  asset.meta.key = asset.meta.key || computeKey(asset.filePath).name;
+  asset.meta.date = "date" in renderProps ? renderProps.date : undefined;
 
   asset.setCode(body);
   asset.type = "htmlbody";
