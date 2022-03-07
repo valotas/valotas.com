@@ -9,10 +9,13 @@ module.exports = {
       useESM: true,
     },
   },
+  transform: {
+    "^.+\\.(t|j)sx?$": ["@swc/jest"],
+  },
   // strip .js off the import before importing it
   moduleNameMapper: {
     "^(\\.{1,2}/.*)\\.js$": "$1",
-    "\\.(css|less)$": "<rootDir>/dist/__mocks__/emptyImport.js",
+    "\\.(css|less)$": "<rootDir>/src/__mocks__/emptyImport.ts",
   },
   setupFiles: ["./jest.setup.cjs"],
 };

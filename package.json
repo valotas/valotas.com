@@ -12,10 +12,14 @@
         "clean": "npm run clean --workspaces --if-present && rimraf .parcel-cache",
         "fix": "npm run fix --workspaces --if-present",
         "build": "npm run build --workspaces --if-present",
+        "test": "npm run test --workspaces --if-present",
         "sb": "npm run storybook -w packages/frontend",
         "serve": "npm run serve -w packages/web",
         "bump": "npm --include-workspace-root --workspaces -m \"Release v%s\" version",
         "release-patch": "npm run bump patch"
     },
-    "version": "2.2.13"
+    "version": "2.2.13",
+    "devDependencies": {
+        "@swc/jest": "^0.2.20"
+    }
 }
