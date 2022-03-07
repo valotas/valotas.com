@@ -13,9 +13,10 @@ export type FetchContent = (url: string) => Promise<string>;
 export type AsyncContextState = {
   fetchContent: FetchContent;
   runSSE: boolean;
+  currentFetchCount?: number;
 };
 
-const AsyncContext = createContext<AsyncContextState>({
+export const AsyncContext = createContext<AsyncContextState>({
   fetchContent: (url) => fetch(url).then((b) => b.text()),
   runSSE: false,
 });
