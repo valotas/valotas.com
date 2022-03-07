@@ -15,6 +15,7 @@
   },
   "scripts": {
     "lint": "eslint \"**/*.+(ts|js|tsx|jsx)\"",
-    "test": "npm run lint"
+    "test": "npm run lint",
+    "preversion": "npm run test"
   }
 }

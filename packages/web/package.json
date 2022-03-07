@@ -24,15 +24,13 @@
     "clean": "rimraf dist",
     "lint": "eslint \"src/**/*.+(ts|js|tsx|jsx)\"",
     "fix": "npm run lint -- --fix",
-    "build": "AWSDEPLOY=1 parcel build src/robots.txt --no-autoinstall",
+    "build": "parcel build src/robots.txt --no-autoinstall",
+    "deploy": "npm run build -- --reporter @valotas/parcel-reporter-staticsite",
     "watch:build": "parcel watch src/robots.txt --no-autoinstall",
     "serve": "serve dist",
-    "aws:sync": "aws s3 sync dist s3://valotas.com",
-    "aws:upload-redirect-rules": "node build/typescript/gulp/awsUploadRedirectRules.js",
-    "upload-dist": "npm run aws:sync && npm run aws:upload-redirect-rules",
-    "deploy": "npm version patch -m \"Release v%s\"",
-    "preversion": "npm run lint && npm test",
-    "postversion": "npm run dist && npm run upload-dist && git push origin master --tags"
+    "-deploy": "npm version patch -m \"Release v%s\"",
+    "preversion": "npm run lint",
+    "postversion": "npm run deploy"
   },
   "dependencies": {
     "parcel": "^2.3.1"

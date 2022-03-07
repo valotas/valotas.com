@@ -7,6 +7,5 @@
     "*.htmlbody": ["@valotas/parcel-transformer-staticsite/htmlbody"]
   },
   "resolvers": ["...", "@valotas/parcel-resolver-staticsite"],
-  "namers": ["@valotas/parcel-namer-staticsite", "..."],
-  "reporters": ["...", "@valotas/parcel-reporter-staticsite"]
+  "namers": ["@valotas/parcel-namer-staticsite", "..."]
 }

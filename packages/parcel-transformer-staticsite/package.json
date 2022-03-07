@@ -23,7 +23,8 @@
     "lint": "eslint \"src/**/*.+(ts|js|tsx|jsx)\"",
     "test": "jest",
     "fix": "npm run lint -- --fix",
-    "build": "tsc -p ."
+    "build": "tsc -p .",
+    "preversion": "npm run lint && npm run build && npm run test"
   },
   "dependencies": {
     "@parcel/plugin": "^2.3.1",
