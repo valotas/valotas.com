@@ -4,13 +4,13 @@ import * as chalk from "chalk";
 import { createAWSService } from "./AWSService";
 import { createRedirectionRule, log } from "./utils";
 
-const aws = createAWSService();
-
 export default new Reporter({
   async report({ event }) {
     if (event.type !== "buildSuccess") {
       return;
     }
+
+    const aws = await createAWSService();
 
     const bundles = event.bundleGraph.getBundles();
 

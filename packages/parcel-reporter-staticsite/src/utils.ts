@@ -1,3 +1,4 @@
+import { exec } from "child_process";
 import { parseISO, format } from "date-fns";
 import { PackagedBundle } from "@parcel/types";
 
@@ -35,4 +36,13 @@ export function createRedirectionRule(bundle: PackagedBundle) {
   }
 
   return { from: createAlias({ key, date }), to: `${key}/` };
+}
+
+export function getBranch() {
+  return new Promise((resolve, reject) => {
+    return exec("git rev-parse --abbrev-ref HEAD", (err, stdout, _) => {
+      if (err) reject(`getBranch Error: ${err}`);
+      else if (typeof stdout === "string") resolve(stdout.trim());
+    });
+  });
 }

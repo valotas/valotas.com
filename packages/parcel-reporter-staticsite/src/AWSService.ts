@@ -1,11 +1,16 @@
 import { createReadStream } from "fs";
 import { lookup } from "mime-types";
 import { PutObjectCommand, S3Client } from "@aws-sdk/client-s3";
+import { getBranch } from "./utils";
 
 class AWSService {
   private region = "eu-central-1";
-  private bucket = "test.valotas.com";
+  private bucket: string;
   private client = new S3Client({ region: this.region });
+
+  constructor(bucket = "test.valotas.com") {
+    this.bucket = bucket;
+  }
 
   async upload({ distDir, filePath }: { distDir: string; filePath: string }) {
     const start = Date.now();
@@ -60,6 +65,10 @@ class AWSService {
   }
 }
 
-export function createAWSService() {
-  return new AWSService();
+export async function createAWSService() {
+  const branch = await getBranch();
+
+  return new AWSService(
+    branch === "master" ? "valotas.com" : "test.valotas.com"
+  );
 }
