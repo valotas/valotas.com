@@ -1,6 +1,6 @@
 {
   "name": "@valotas/parcel-namer-staticsite",
-  "version": "2.2.6",
+  "version": "2.2.7",
   "main": "./src/index.js",
   "engines": {
     "parcel": "2.x"
