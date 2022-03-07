@@ -57,3 +57,4 @@ export const tw = Object.defineProperties(
 ) as twind.TW;
 
 export { apply } from "twind";
+export { keyframes, animation } from "twind/css";

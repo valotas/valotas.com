@@ -3,6 +3,7 @@ import { ComponentMeta, ComponentStory } from "@storybook/react";
 import trueArticle from "../../web/src/articles/testing-rxjs.md";
 import articleContainingTweet from "../../web/src/articles/devoxx-2014.md";
 import { PageWithMarkdown } from "./PageWithMarkdown";
+import { AsyncContext, AsyncContextState } from "./AsyncContext";
 
 export default {
   title: "PageWithMarkdown",
@@ -130,4 +131,21 @@ PageWithFullArticle.args = {
 export const PageWithArticleContainingTweet = Template.bind({});
 PageWithArticleContainingTweet.args = {
   bodyMarkdown: getContent(articleContainingTweet),
+};
+
+const asyncContextWithCounter: AsyncContextState = {
+  fetchContent: (url) => fetch(url).then((resp) => resp.text()),
+  runSSE: false,
+  currentFetchCount: 1,
+};
+
+export const PageWithWithLoadingBar = () => {
+  return (
+    <AsyncContext.Provider value={asyncContextWithCounter}>
+      <PageWithMarkdown
+        pkgVersion="6.6.6"
+        bodyMarkdown={getContent(trueArticle)}
+      />
+    </AsyncContext.Provider>
+  );
 };
