@@ -1,8 +1,8 @@
 /* eslint-env node */
 /* eslint-disable @typescript-eslint/no-var-requires */
 
-const { Resolver } = require("@parcel/plugin");
 const path = require("path");
+const { Resolver } = require("@parcel/plugin");
 
 exports.default = new Resolver({
   async resolve({ options, specifier, dependency }) {

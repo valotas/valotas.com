@@ -1,6 +1,6 @@
 {
   "name": "@valotas/valotas.com-frontent",
-  "version": "2.2.4",
+  "version": "2.2.12",
   "repository": {
     "type": "git",
     "url": "git+ssh://git@github.com/valotas/valotas.com.git"
@@ -16,6 +16,8 @@
     "watch:build": "tsc -p . -w",
     "test": "jest --no-cache",
     "watch:test": "jest --watch",
+    "preversion": "npm run lint && npm run build && npm run test",
+    "postversion": "git add . && git commit --amend --no-edit",
     "storybook": "start-storybook -p 6006",
     "build-storybook": "build-storybook"
   },

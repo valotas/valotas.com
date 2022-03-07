@@ -1,6 +1,6 @@
 {
   "name": "@valotas/web",
-  "version": "2.2.4",
+  "version": "2.2.12",
   "repository": {
     "type": "git",
     "url": "git+ssh://git@github.com/valotas/valotas.com.git"
@@ -24,15 +24,13 @@
     "clean": "rimraf dist",
     "lint": "eslint \"src/**/*.+(ts|js|tsx|jsx)\"",
     "fix": "npm run lint -- --fix",
-    "build": "AWSDEPLOY=1 parcel build src/robots.txt --no-autoinstall",
+    "build": "parcel build src/robots.txt --no-autoinstall",
+    "deploy": "npm run build -- --reporter @valotas/parcel-reporter-staticsite",
     "watch:build": "parcel watch src/robots.txt --no-autoinstall",
     "serve": "serve dist",
-    "aws:sync": "aws s3 sync dist s3://valotas.com",
-    "aws:upload-redirect-rules": "node build/typescript/gulp/awsUploadRedirectRules.js",
-    "upload-dist": "npm run aws:sync && npm run aws:upload-redirect-rules",
-    "deploy": "npm version patch -m \"Release v%s\"",
-    "preversion": "npm run lint && npm test",
-    "postversion": "npm run dist && npm run upload-dist && git push origin master --tags"
+    "preversion": "npm run lint",
+    "version": "npm run deploy",
+    "postversion": "git add . && git commit --amend --no-edit"
   },
   "dependencies": {
     "parcel": "^2.3.1"
