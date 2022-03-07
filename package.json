@@ -13,6 +13,7 @@
         "fix": "npm run fix --workspaces --if-present",
         "build": "npm run build --workspaces --if-present",
         "sb": "npm run storybook -w packages/frontend",
-        "serve": "npm run serve -w packages/web"
+        "serve": "npm run serve -w packages/web",
+        "release-patch": "npm version patch --no-git-tag-version --workspaces"
     }
 }
