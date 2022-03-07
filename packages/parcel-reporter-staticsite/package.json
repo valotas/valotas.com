@@ -1,6 +1,6 @@
 {
   "name": "@valotas/parcel-reporter-staticsite",
-  "version": "2.2.10",
+  "version": "2.2.11",
   "main": "dist/StaticSiteReporter.js",
   "engines": {
     "parcel": "2.x"
@@ -21,7 +21,8 @@
     "watch:test": "jest --watch",
     "fix": "npm run lint -- --fix",
     "build": "tsc -p .",
-    "preversion": "npm run lint && npm run build && npm run test"
+    "preversion": "npm run lint && npm run build && npm run test",
+    "postversion": "git add . && git commit --amend --no-edit"
   },
   "dependencies": {
     "@aws-sdk/client-s3": "^3.53.1",

@@ -1,6 +1,6 @@
 {
   "name": "@valotas/web",
-  "version": "2.2.10",
+  "version": "2.2.11",
   "repository": {
     "type": "git",
     "url": "git+ssh://git@github.com/valotas/valotas.com.git"
@@ -30,7 +30,8 @@
     "serve": "serve dist",
     "-deploy": "npm version patch -m \"Release v%s\"",
     "preversion": "npm run lint",
-    "postversion": "npm run deploy"
+    "version": "npm run deploy",
+    "postversion": "git add . && git commit --amend --no-edit"
   },
   "dependencies": {
     "parcel": "^2.3.1"
