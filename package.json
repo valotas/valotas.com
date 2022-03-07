@@ -15,5 +15,6 @@
         "sb": "npm run storybook -w packages/frontend",
         "serve": "npm run serve -w packages/web",
         "release-patch": "npm version patch --no-git-tag-version --workspaces"
-    }
+    },
+    "version": "2.2.6"
 }
