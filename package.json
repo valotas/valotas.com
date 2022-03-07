@@ -16,5 +16,5 @@
         "serve": "npm run serve -w packages/web",
         "release-patch": "npm version patch --include-workspace-root --workspaces -m \"Release v%s\""
     },
-    "version": "2.2.9"
+    "version": "2.2.10"
 }
