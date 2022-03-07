@@ -11,5 +11,8 @@ window.addEventListener("load", () => {
   const root = document.getElementById("app");
   const payload = atob(script.innerHTML);
 
+  // push the current state
+  history.pushState(payload, document.title, location.pathname);
+
   hydrate(createElement(PageRenderer, { payload }), root);
 });
