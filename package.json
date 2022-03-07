@@ -14,7 +14,7 @@
         "build": "npm run build --workspaces --if-present",
         "sb": "npm run storybook -w packages/frontend",
         "serve": "npm run serve -w packages/web",
-        "release-patch": "npm version patch --no-git-tag-version --workspaces && npm version patch -m\"Release v%s\""
+        "release-patch": "npm version patch --no-git-tag-version --workspaces && git add . && npm version patch -m\"Release v%s\""
     },
     "version": "2.2.6"
 }
