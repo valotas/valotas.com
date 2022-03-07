@@ -7,7 +7,11 @@ import React, {
 import { AsyncContext } from "./AsyncContext";
 
 export function FetchTracker({ children }: PropsWithChildren<unknown>) {
-  const { fetchContent, runSSE } = useContext(AsyncContext);
+  const {
+    fetchContent,
+    runSSE,
+    currentFetchCount: parrentCounter,
+  } = useContext(AsyncContext);
   const [currentFetchCount, setCurrentFetchCount] = useState(0);
 
   const wrappedFetchContent = useCallback(
@@ -24,7 +28,11 @@ export function FetchTracker({ children }: PropsWithChildren<unknown>) {
 
   return (
     <AsyncContext.Provider
-      value={{ fetchContent: wrappedFetchContent, runSSE, currentFetchCount }}
+      value={{
+        fetchContent: wrappedFetchContent,
+        runSSE,
+        currentFetchCount: parrentCounter || currentFetchCount,
+      }}
     >
       {children}
     </AsyncContext.Provider>
