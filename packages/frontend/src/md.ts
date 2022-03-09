@@ -51,7 +51,7 @@ export function parse(raw: string) {
   const head = matches.length > 1 ? matches[1] : "";
   const meta = parseHeader(head);
 
-  const sections = raw.split(/(#+[^\n]*\n)/g);
+  const sections = raw.split(/((\n#+|#{2,})[^\n]*\n)/g);
 
   return { ...meta, raw, description: sections[0] };
 }
