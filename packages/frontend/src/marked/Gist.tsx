@@ -24,7 +24,7 @@ export function parseGist(html: string): GistDescription | null {
   }
 
   return {
-    user: matches[2],
+    user: matches[2] || "valotas",
     gistId: matches[4],
     file: matches[8],
   };
@@ -35,9 +35,7 @@ export function Gist({
   gistId,
   file,
 }: PropsWithChildren<GistDescription>) {
-  const url = `https://gist.githubusercontent.com/${
-    user || "valotas"
-  }/${gistId}/raw/${file}`;
+  const url = `https://gist.githubusercontent.com/${user}/${gistId}/raw/${file}`;
   const { content } = useFetch(url);
   const language = computeLanguage(file);
 
