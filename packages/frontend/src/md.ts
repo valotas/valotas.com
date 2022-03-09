@@ -7,6 +7,7 @@ export type HeaderMeta = {
   date: string | null;
   template: string | null;
   draft: boolean;
+  skipIndex: boolean;
 };
 
 function parseHeader(raw: string): HeaderMeta {
@@ -37,6 +38,7 @@ function parseHeader(raw: string): HeaderMeta {
         date: null,
         template: null,
         draft: false,
+        skipIndex: false,
       }
     );
 }

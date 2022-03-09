@@ -33,7 +33,7 @@ export const transformSitemap: StaticSiteTransformerFn = async ({
       continue;
     }
 
-    if (md) {
+    if (md && !md.skipIndex) {
       const { raw: _, ...rest } = md;
       mdFiles.push({ ...rest, key: dep.key });
     }
