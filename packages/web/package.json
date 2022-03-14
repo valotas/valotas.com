@@ -23,6 +23,7 @@
     "postversion": "git add . && git commit --amend --no-edit"
   },
   "dependencies": {
-    "parcel": "^2.3.1"
+    "parcel": "^2.3.1",
+    "reveal.js": "^4.3.0"
   }
 }
