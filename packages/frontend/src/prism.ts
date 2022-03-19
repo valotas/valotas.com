@@ -18,8 +18,5 @@ export function getGrammar(lang = "none"): {
 }
 
 export function highlight(code: string, grammar: prism.Grammar, lang: string) {
-  if (typeof window !== "undefined") {
-    require("prismjs/themes/prism-okaidia.css");
-  }
   return pHighlight(code, grammar, lang);
 }

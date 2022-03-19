@@ -1,0 +1,19 @@
+.george {
+  background: url("./george3.jpg") no-repeat;
+  background-size: cover;
+}
+
+.george:hover {
+  background: url("./george1.jpg") no-repeat;
+  background-size: cover;
+}
+
+/* preload images as defined at https://stackoverflow.com/questions/1373142/preloading-css-images */
+body::after{
+  position:absolute;
+  width:0;
+  height:0;
+  overflow:hidden;
+  z-index:-1;
+  content: url("./george1.jpg");
+}

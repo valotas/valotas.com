@@ -1,3 +1,5 @@
+import "../src/assets.css";
+import "prismjs/themes/prism-okaidia.css";
 import { domSheet } from "twind/sheets";
 import { setup } from "../src/twind";
 

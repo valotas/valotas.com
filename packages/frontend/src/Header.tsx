@@ -34,10 +34,9 @@ export function Header({ title, date }: HeaderProps) {
           href="/"
           className={tw`flex items-center no-underline`}
         >
-          <img
-            src="https://avatars.githubusercontent.com/u/26611?v=4"
-            className={tw`h-12 w-12 lg:h-20 lg:w-20 rounded-full`}
-          />
+          <div
+            className={`george ${tw`h-12 w-12 lg:h-20 lg:w-20 rounded-full`}`}
+          ></div>
         </Link>
       </div>
       <div>
