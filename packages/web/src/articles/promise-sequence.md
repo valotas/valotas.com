@@ -141,7 +141,7 @@ function reduceInSequence(actions) {
 }
 ```
 
-### Thinging more coplex
+### Thinking more coplex
 When I first tried to implement a solution I had in mind that I needed an implementation that could give me back a
 Promise with an array of the results. I ended up using recursion for implementing it:
 
