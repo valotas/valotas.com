@@ -38,5 +38,10 @@ export default new Reporter({
       `✨ Uploaded ${bundles.length} bundles in ${Date.now() - start}ms to`,
       chalk.underline(aws.getPublicUrl())
     );
+
+    const { invalidation } = await aws.invalidateDistribution();
+    if (invalidation) {
+      log(`✨ Created valotas.com invalidation: ${invalidation.Id}`);
+    }
   },
 });
