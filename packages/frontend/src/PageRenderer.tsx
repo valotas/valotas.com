@@ -27,11 +27,13 @@ export type PageRendererProps =
 
 function usePageProps(initial: PageRendererProps) {
   const [props, updateProps] = useState(initial);
+  const [scrollTop, updateScrollTop] = useState(false);
 
   const handlePopState = useCallback(
     (e: any) => {
       const state = e.detail?.state || e.state;
       updateProps({ payload: state });
+      updateScrollTop(e.detail ? true : false);
     },
     [0]
   );
@@ -40,15 +42,18 @@ function usePageProps(initial: PageRendererProps) {
     return history().onPushState(handlePopState);
   }, [0]);
 
-  return getPageProps(props);
+  return { pageProps: getPageProps(props), scrollTop };
 }
 
 export function PageRenderer(props: PageRendererProps) {
-  const pageProps = usePageProps(props);
+  const { pageProps, scrollTop } = usePageProps(props);
 
   useEffect(() => {
     document.title = createTitle(pageProps.title);
-  }, [pageProps.title]);
+    if (scrollTop) {
+      window.scrollTo({ top: 0, behavior: "smooth" });
+    }
+  }, [pageProps.title, scrollTop]);
 
   if (isPageWithMarkdownProps(pageProps)) {
     return <PageWithMarkdown {...pageProps} />;
