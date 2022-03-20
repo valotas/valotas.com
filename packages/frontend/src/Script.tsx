@@ -1,12 +1,15 @@
 import { useEffect } from "react";
 
-export type ScriptProps = { src: string };
+export type ScriptProps = { src: string; onReload?: () => void };
 
 const loaded: string[] = [];
 
-export function Script({ src }: ScriptProps) {
+export function Script({ src, onReload }: ScriptProps) {
   useEffect(() => {
     if (loaded.indexOf(src) >= 0) {
+      if (onReload) {
+        onReload();
+      }
       return;
     }
 

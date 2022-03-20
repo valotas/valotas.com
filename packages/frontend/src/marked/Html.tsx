@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useCallback } from "react";
 import { HtmlRendererProps } from "react-marked-renderer";
 import { Script } from "../Script";
 import { Gist, parseGist } from "./Gist";
@@ -6,6 +6,13 @@ import { Gist, parseGist } from "./Gist";
 const twitterUrl = "//platform.twitter.com/widgets.js";
 
 export function Html({ raw }: HtmlRendererProps) {
+  const loadTwitterOnReload = useCallback(() => {
+    const { twttr } = window as any;
+    if (twttr) {
+      twttr.widgets.load();
+    }
+  }, [0]);
+
   const gist = parseGist(raw);
   if (gist) {
     return <Gist {...gist} />;
@@ -21,7 +28,7 @@ export function Html({ raw }: HtmlRendererProps) {
           __html: html,
         }}
       />
-      {hasTwitter && <Script src={twitterUrl} />}
+      {hasTwitter && <Script src={twitterUrl} onReload={loadTwitterOnReload} />}
     </>
   );
 }
