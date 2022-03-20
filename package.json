@@ -11,10 +11,13 @@
     "scripts": {
         "clean": "npm run clean --workspaces --if-present && rimraf .parcel-cache",
         "fix": "npm run fix --workspaces --if-present",
+        "watch:frontend": "npm run watch:build -w packages/frontend",
+        "watch:web": "npm run watch:build -w packages/web",
         "build": "npm run build --workspaces --if-present",
         "test": "npm run test --workspaces --if-present",
         "sb": "npm run storybook -w packages/frontend",
         "serve": "npm run serve -w packages/web",
+        "dev": "run-p watch:* serve",
         "bump": "npm --include-workspace-root --workspaces -m \"Release v%s\" version",
         "release-patch": "npm run bump patch"
     },
@@ -31,6 +34,7 @@
         "eslint-plugin-prettier": "^4.0.0",
         "jest": "^27.5.1",
         "jest-fetch-mock": "^3.0.3",
+        "npm-run-all": "^4.1.5",
         "prettier": "^2.5.1",
         "sharp": "^0.29.3",
         "ts-jest": "^27.1.3",
