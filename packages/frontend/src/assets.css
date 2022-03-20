@@ -1,10 +1,10 @@
 .george {
-  background: url("./george3.jpg") no-repeat;
+  background: url("./george3.jpg?width=100") no-repeat;
   background-size: cover;
 }
 
 .george:hover {
-  background: url("./george1.jpg") no-repeat;
+  background: url("./george1.jpg?width=100") no-repeat;
   background-size: cover;
 }
 
@@ -15,5 +15,5 @@ body::after{
   height:0;
   overflow:hidden;
   z-index:-1;
-  content: url("./george1.jpg");
+  content: url("./george1.jpg?width=100");
 }
