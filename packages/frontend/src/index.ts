@@ -4,5 +4,6 @@ export * from "./PageWithItems";
 export * from "./PageRenderer";
 export * from "./md";
 export * from "./title";
+export * from "./History";
 
 setup();

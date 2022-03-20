@@ -16,7 +16,7 @@
     "fix": "npm run lint -- --fix",
     "build": "parcel build src/robots.txt --no-autoinstall",
     "deploy": "npm run build -- --reporter @valotas/parcel-reporter-staticsite",
-    "watch:build": "parcel watch src/robots.txt --no-autoinstall",
+    "watch:build": "parcel watch src/robots.txt --no-autoinstall --no-cache",
     "serve": "serve dist",
     "preversion": "npm run lint",
     "version": "npm run deploy",

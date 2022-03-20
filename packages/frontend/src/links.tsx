@@ -2,6 +2,7 @@ import React, { MouseEvent, useCallback } from "react";
 import { PropsWithChildren } from "react";
 import { tw } from "./twind";
 import { Icon, IconProps } from "./Icon";
+import { history } from "./History";
 
 export type AnchorProps = {
   href: string;
@@ -22,17 +23,11 @@ export function Anchor({
       if (href.startsWith("/")) {
         e.preventDefault();
 
-        fetch(`${href}meta.json`)
+        const url = `${href}${href.endsWith("/") ? "" : "/"}meta.json`;
+        fetch(url)
           .then((resp) => resp.text())
           .then((payload) => {
-            history.pushState(payload, title || document.title, href);
-            document.dispatchEvent(
-              new CustomEvent("pushstate", {
-                detail: {
-                  state: payload,
-                },
-              })
-            );
+            history().pushState(payload, title || document.title, href);
           });
       }
     },

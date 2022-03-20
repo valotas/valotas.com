@@ -2,6 +2,7 @@ import React, { useCallback, useEffect, useState } from "react";
 import { PageWithItems, PageWithListProps } from "./PageWithItems";
 import { PageWithMarkdown, PageWithMarkdownProps } from "./PageWithMarkdown";
 import { createTitle } from "./title";
+import { history } from "./History";
 
 function getPageProps(input: PageRendererProps) {
   if ("payload" in input) {
@@ -36,13 +37,7 @@ function usePageProps(initial: PageRendererProps) {
   );
 
   useEffect(() => {
-    document.addEventListener("pushstate", handlePopState);
-    window.addEventListener("popstate", handlePopState);
-
-    return () => {
-      window.removeEventListener("popstate", handlePopState);
-      document.removeEventListener("pushstate", handlePopState);
-    };
+    return history().onPushState(handlePopState);
   }, [0]);
 
   return getPageProps(props);
