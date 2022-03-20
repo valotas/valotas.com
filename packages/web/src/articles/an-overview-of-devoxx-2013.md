@@ -6,12 +6,12 @@ date: 2013-11-21
 So, devoxx 2013 is over. My first java community (or not) conference is over. The thing is that devoxx is not about java. It is more a technology/programming conference which I personal find it even better as you have a better overview of what is going on and what the future will be.
 
 ## Java vs Google
-Having said that, we must have always in mind that it has it's roots in to the java world, but I'm pretty sure that it can make it without it. Just like a lot of parts of google have been build with java, it is not the google can not leave without it. Oh, did I say google, yes, that is maybe because if you take the half of the talks out of the conference you end up with... [AngularJS][angularjs] and [dart][dartlang]. And that is by considering android talks java related. So let's dive into what I got from this conference.
+Having said that, we must have always in mind that it has it's roots in to the java world, but I'm pretty sure that it can make it without it. Just like a lot of parts of google have been build with java, it is not the google can not live without it. Oh, did I say google, yes, that is maybe because if you take the half of the talks out of the conference you end up with... [AngularJS][angularjs] and [dart][dartlang]. And that is by considering android talks java related. So let's dive into what I got from this conference.
 
 ### Java 8 is here
 I mean, it has not been shipped, but finally the language gets lambda support. That was the most significant thing I took from Mark Reinhold and Brian Goetz. As the last one said, we know that the community has been expecting that for a long time but it was a hard thing to implement something in a way to maintain backwards compatibility.
 
-Never the less, we'll be soon able to use this new idiomatic future of java. Apart from that I saw Mark Reinhold's need to state that java is not dead. It was his closing statement, but it was kinda comic to try to convince  3500 mostly java developers that already paid to attend a java conference that java is not dead. Of course we can take this statement as Oracle's submition to the java language and this is quite exciting.
+Never the less, we'll be soon able to use this new idiomatic future of java. Apart from that I saw Mark Reinhold's need to state that java is not dead. It was his closing statement, but it was kinda funny to try to convince  3500 mostly java developers that already paid to attend a java conference that java is not dead. Of course we can take this statement as Oracle's submition to the java language and this is quite exciting.
 
 From the other point of view, he could just feeling the presure of the competition (Kotlin, Ceylon, Dart, Clojure, Javascript, Scala, Groovy gave their presence to the conference)
 
@@ -19,7 +19,7 @@ From the other point of view, he could just feeling the presure of the competiti
 In fact one other thing that came to my attention was the [IoT](http://en.wikipedia.org/wiki/Internet_of_Things) (Internet of things). I never really though seriously about it, but it looks like an emerging market (for developers and not only). Java wants to be part of this market and that for there was some talks regarding this. For sure a thing to keep an eye on.
 
 ## Not only Java
-As I said before, devoxx is not only java and the proof of that is that two big sponsors of the conference, RedHad and Google, have chosen Devoxx to announce the stable (v1.0) release of their new language. So Redhat announced [Ceylon](http://ceylon-lang.org/) and Google announced [Dart][dartlang]. Guess what, both of them are compiling to this strange bytecode called javascript :).
+As I said before, devoxx is not only java and the proof of that is that two big sponsors of the conference, RedHad and Google, have chosen Devoxx to announce the stable (v1.0) release of their new language. So Redhat announced [Ceylon](http://ceylon-lang.org/) and Google announced [Dart][dartlang]. Guess what, both of them are compiling to this strange bytecode called javascript 😁.
 
 That is another interesting thing. We do not like javascript but, we write code compiling down to javascript in order to be able to run it everywhere! Any way, I did not follow the ceylon stuff, but I'm follow dart for [about a year](https://github.com/valotas/mustache4dart) now.
 
@@ -29,7 +29,7 @@ So, a language that looks like a hybrid of java and javascript, has it's own vir
 Of course I do not know how yet another language for the web will not fragment web browsers. For sure Google will try to push it as much as possible. I can not think that it has been announced by coincidence at the second's day keynote with the title "Shaping the future of web development". On top of that, I heard Lars Bak saying that soon Chrome browser will get shipped with the dart virtual machine in order to run natively dart applications.
 
 ### AngularJS
-For sure Dart was the thing for the second day of the conference, but all the previous days google was busy giving talks about the cool javascript framework called [AngularJS][angularjs]. I did not follow most of the talks there as I'm aware of the framework and used it, but just to give you an Idea of how good it is, google is in the process of porting it to Dart too :).
+For sure Dart was the thing for the second day of the conference, but all the previous days google was busy giving talks about the cool javascript framework called [AngularJS][angularjs]. I did not follow most of the talks there as I'm aware of the framework and used it, but just to give you an Idea of how good it is, google is in the process of porting it to Dart too.
 
 Given though the fact that the framework is popular enough already, I would not expect 25 talks (that is the number the Java Posse guys counted) been given by almost the same guys.
 
