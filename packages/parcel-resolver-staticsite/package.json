@@ -1,6 +1,6 @@
 {
   "name": "@valotas/parcel-resolver-staticsite",
-  "version": "3.5.2",
+  "version": "3.5.3",
   "main": "index.js",
   "engines": {
     "parcel": "2.x"
