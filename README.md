@@ -8,40 +8,31 @@ Assuming that you have `nodejs` and `npm` installed, just do the following:
 npm install
 ```
 
-To compile typescript files:
+To build everything just
 
 ```bash
-npm run tsc
+npm run build
 ```
 
-To have an intermediate development site:
+To have a storybook running with the frontend stuff
 
 ```bash
-npm start
+npm run sb
 ```
+
+### Local serve
+
+After building you can
+
+```bash
+npm run serve
+```
+
+in order to see the bundled distribution
 
 ## Deploy
-Among the available npm scripts the `deploy` is available that should handle the creation of the website locally and the deployment
-to AWS.
-
-### Requirements
-
-In order to do that the [aws cli](http://docs.aws.amazon.com/cli/latest/userguide/installing.html) should be installed. If
-that is the case, the following should be all you need:
-
-### Deployment
-
-For a patch release all you need is
+Deployment is done as part of the versioning when on the `master` branch. Just
 
 ```bash
-npm run deploy
+npm run bump [patch|minor|major]
 ```
-
-This script is actually an alias to `npm version patch`. If you need to do a minor or major release you have to manually run
-the following
-
-```bash
-npm version minor -m "Release v%s"
-```
-
-adjusting minor appropriatelly.
