@@ -82,9 +82,9 @@ class AWSService {
         new CreateInvalidationCommand({
           DistributionId: this.distributionId,
           InvalidationBatch: {
-            CallerReference: undefined,
+            CallerReference: `${AWSService.name}-${Date.now()}`,
             Paths: {
-              Quantity: undefined,
+              Quantity: 1,
               Items: ["/*"],
             },
           },
