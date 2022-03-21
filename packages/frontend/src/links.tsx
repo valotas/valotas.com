@@ -1,8 +1,14 @@
-import React, { MouseEvent, useCallback } from "react";
-import { PropsWithChildren } from "react";
+import React, { MouseEvent, useCallback, PropsWithChildren } from "react";
 import { tw } from "./twind";
 import { Icon, IconProps } from "./Icon";
 import { history } from "./History";
+
+function computeHref(href: string) {
+  if (!href.endsWith("/")) {
+    href += "/";
+  }
+  return href;
+}
 
 export type AnchorProps = {
   href: string;
@@ -23,11 +29,11 @@ export function Anchor({
       if (href.startsWith("/")) {
         e.preventDefault();
 
-        const url = `${href}${href.endsWith("/") ? "" : "/"}meta.json`;
-        fetch(url)
+        const finalHref = computeHref(href);
+        fetch(`${finalHref}meta.json`)
           .then((resp) => resp.text())
           .then((payload) => {
-            history().pushState(payload, title || document.title, href);
+            history().pushState(payload, title || document.title, finalHref);
           });
       }
     },

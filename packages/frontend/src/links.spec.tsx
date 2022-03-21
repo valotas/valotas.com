@@ -57,7 +57,7 @@ describe("links", () => {
         pushState,
         onPushState: jest.fn(),
       });
-      const href = "/here";
+      const href = "/here/";
       const { container } = render(<Anchor href={href}>Hi</Anchor>);
 
       const a = container.querySelector("a");
@@ -70,6 +70,31 @@ describe("links", () => {
           payload,
           expect.any(String),
           href
+        );
+      });
+    });
+
+    it("pushes an href with an ending / to the history", async () => {
+      const payload = "payload";
+      fetchMock.mockOnce(payload);
+      const pushState = jest.fn();
+      jest.spyOn(history, "history").mockReturnValue({
+        pushState,
+        onPushState: jest.fn(),
+      });
+      const href = "/here";
+      const { container } = render(<Anchor href={href}>Hi</Anchor>);
+
+      const a = container.querySelector("a");
+      if (a) {
+        fireEvent.click(a);
+      }
+
+      await waitFor(() => {
+        expect(pushState).toHaveBeenCalledWith(
+          payload,
+          expect.any(String),
+          `${href}/`
         );
       });
     });
