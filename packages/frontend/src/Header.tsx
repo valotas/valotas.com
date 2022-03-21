@@ -29,11 +29,7 @@ export function Header({ title, date }: HeaderProps) {
       data-testid="header"
     >
       <div className={tw`mb-2 pr-4 md:mb-0 md:pr-6 lg:pr-12`}>
-        <Link
-          noUnderline
-          href="/"
-          className={tw`flex items-center no-underline`}
-        >
+        <Link noUnderline href="/" className={tw`flex no-underline`}>
           <div
             className={`george ${tw`h-12 w-12 lg:h-20 lg:w-20 rounded-full`}`}
           ></div>
@@ -41,7 +37,7 @@ export function Header({ title, date }: HeaderProps) {
       </div>
       <div className={tw`flex flex-col items-center md:items-start`}>
         <h1
-          className={tw`block text-black no-underline font-bold text-xl lg:text-3xl font-extrabold leading-none lg:leading-tight text-center md:text-left`}
+          className={tw`text-black text-xl lg:text-3xl font-extrabold leading-none lg:leading-tight`}
         >
           {createTitle(title)}
         </h1>
