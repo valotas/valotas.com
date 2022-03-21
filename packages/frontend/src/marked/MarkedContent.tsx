@@ -6,7 +6,6 @@ import { Heading } from "./Heading";
 import { Html } from "./Html";
 import { List } from "./List";
 import { MarkedLink } from "./MarkedLink";
-import { Paragraph } from "./Paragraph";
 
 const renderers = {
   ...DEFAULT_MARKDOWN_RENDERERS,
@@ -14,7 +13,6 @@ const renderers = {
   codeblock: CodeBlock,
   codespan: CodeSpan,
   heading: Heading,
-  paragraph: Paragraph,
   link: MarkedLink,
   list: List,
 };

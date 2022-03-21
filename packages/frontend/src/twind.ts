@@ -30,6 +30,7 @@ const defaultConfig: twind.Configuration = {
   preflight: (preflight) => ({
     ...preflight,
     blockquote: twind.apply`pl-6 pt-1 pb-1 border-l-4 border-gray-300`,
+    p: twind.apply`pb-1 pt-1`,
   }),
   theme: {
     colors,
