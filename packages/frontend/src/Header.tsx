@@ -39,16 +39,14 @@ export function Header({ title, date }: HeaderProps) {
           ></div>
         </Link>
       </div>
-      <div>
+      <div className={tw`flex flex-col items-center md:items-start`}>
         <h1
-          className={tw`block text-black no-underline font-bold text-xl lg:text-3xl font-extrabold leading-none lg:leading-tight`}
+          className={tw`block text-black no-underline font-bold text-xl lg:text-3xl font-extrabold leading-none lg:leading-tight text-center md:text-left`}
         >
           {createTitle(title)}
         </h1>
         <DateSpan iso={date} />
-        <div
-          className={tw`text-center md:text-left mt-3 lg:mt-4 flex justify-between lg:w-40`}
-        >
+        <div className={tw`mt-3 lg:mt-4 flex justify-between w-40`}>
           <LinkWithIcon href="https://github.com/valotas" name="github" />
           <LinkWithIcon
             href="https://www.linkedin.com/in/valotas"
