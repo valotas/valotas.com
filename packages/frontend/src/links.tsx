@@ -71,7 +71,9 @@ export function Link({
       href={href}
       target={target || "_self"}
       className={tw(
-        noUnderline ? "" : "border-b-1 border-gray-300 hover:border-gray-500",
+        noUnderline
+          ? ""
+          : "border-b-1 border-gray-300 hover:border-gray-500 leading-tight inline-block",
         className
       )}
     >
