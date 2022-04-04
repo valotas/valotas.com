@@ -26,7 +26,7 @@ function nameHtml(bundle) {
   }
 
   const asset = bundle.getMainEntry();
-  if (!asset.meta.templateSource) {
+  if (!asset?.meta.templateSource) {
     return null;
   }
 
@@ -71,6 +71,10 @@ exports.default = new Namer({
     }
 
     const mainEntry = bundle.getMainEntry();
+    if (!mainEntry) {
+      return null;
+    }
+
     if (mainEntry.meta.key) {
       return `${mainEntry.meta.key}.${bundle.type}`;
     }
@@ -86,9 +90,7 @@ exports.default = new Namer({
     }
 
     const template = path.parse(mainEntryAsset.meta.templateSource);
-    if (!mainEntry) {
-      return null;
-    }
+
     const source = path.parse(mainEntry.filePath);
 
     name = `${template.name}.${source.name}`;
