@@ -2,6 +2,7 @@
 title: Parcel 2 as static site generator
 author: valotas
 date: 2022-03-20
+tags: javascript
 ---
 
 Felt like doing an update to my outdated website and ended up changing the whole generation of the static pages.

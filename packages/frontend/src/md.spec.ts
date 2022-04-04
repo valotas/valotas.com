@@ -31,6 +31,7 @@ template: template
         template: "template",
         draft: false,
         skipIndex: false,
+        tags: [],
       });
     });
 
@@ -137,6 +138,43 @@ This is some paragraph of the second section
       const { description } = md.parse(initial);
 
       expect(description.trim()).toEqual("");
+    });
+
+    it("returns the tags of the file in a list", () => {
+      const initial = `
+---
+title: the title
+date: 2022-10-11
+template: template
+tags: tag1
+---
+
+### first section
+
+This is some paragraph of the second section
+      `;
+      const { tags } = md.parse(initial);
+
+      expect(tags.length).toEqual(1);
+      expect(tags).toEqual(["tag1"]);
+    });
+
+    it("returns the tags of the file in a list", () => {
+      const initial = `
+---
+title: the title
+date: 2022-10-11
+template: template
+tags: tag1, tag2
+---
+
+### first section
+
+This is some paragraph of the second section
+      `;
+      const { tags } = md.parse(initial);
+
+      expect(tags).toEqual(["tag1", "tag2"]);
     });
   });
 });

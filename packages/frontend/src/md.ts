@@ -8,6 +8,7 @@ export type HeaderMeta = {
   template: string | null;
   draft: boolean;
   skipIndex: boolean;
+  tags: string[];
 };
 
 function parseHeader(raw: string): HeaderMeta {
@@ -23,6 +24,11 @@ function parseHeader(raw: string): HeaderMeta {
     })
     .reduce(
       (prev, { key, value }) => {
+        if (key === "tags") {
+          (prev as any)[key] = value.split(",").map((v) => v.trim());
+          return prev;
+        }
+
         (prev as any)[key] = value;
 
         // draft property should be a boolean
@@ -39,6 +45,7 @@ function parseHeader(raw: string): HeaderMeta {
         template: null,
         draft: false,
         skipIndex: false,
+        tags: [],
       }
     );
 }

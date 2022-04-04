@@ -2,6 +2,7 @@
 title: An overview of Devoxx 2013
 author: valotas
 date: 2013-11-21
+tags: devoxx
 ---
 So, devoxx 2013 is over. My first java community (or not) conference is over. The thing is that devoxx is not about java. It is more a technology/programming conference which I personal find it even better as you have a better overview of what is going on and what the future will be.
 

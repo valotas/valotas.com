@@ -2,6 +2,7 @@
 title: An overview of Devoxx 2014
 author: valotas
 date: 2014-11-16
+tags: devoxx
 ---
 
 This year I was lucky enough to attend yet another time the [devoxx conference](http://devoxx.com). Here are what I saw/felt especially in regards to the my [previous visit](/an-overview-of-devoxx-2013).

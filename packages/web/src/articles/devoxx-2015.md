@@ -2,6 +2,7 @@
 title: An overview of Devoxx 2015
 author: valotas
 date: 2015-11-29
+tags: devoxx
 ---
 
 This year's devoxx was once again an excuse to write a new blogpost.

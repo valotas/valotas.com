@@ -1,6 +1,7 @@
 ---
 title: Promise.sequence
 date: 2017-05-08
+tags: javascript
 ---
 
 Lately I came across a problem for which the standard [`Promise`][promise]'s api wasn't enough. I needed something

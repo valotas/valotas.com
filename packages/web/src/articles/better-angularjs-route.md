@@ -2,7 +2,9 @@
 title: Better $routeProvider for AngularJS
 author: valotas
 date: 2015-04-13
+tags: javascript
 ---
+
 So, you just did your first angularjs webapp and are ready for production. And then comes the requirement that before initilization you have to do an ajax request. There should be an easy way to do that right?
 
 ## The problem
