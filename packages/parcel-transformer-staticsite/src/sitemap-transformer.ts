@@ -60,12 +60,13 @@ function groupByTag(files: MDMeta[]): Map<string, MDMeta[]> {
 }
 
 function getAllTags(groups: Map<string, any>): string[] {
-  return Array.from(groups.values());
+  return Array.from(groups.keys());
 }
 
 export const transformSitemap: StaticSiteTransformerFn = async ({
   asset,
   options,
+  logger,
 }) => {
   const sitemap = await parseSitemap(asset, options.inputFS);
   const sitemapDependencies = sitemap.getDependencies();
@@ -77,6 +78,10 @@ export const transformSitemap: StaticSiteTransformerFn = async ({
 
   const mdGroupByTags: Map<string, MDMeta[]> = groupByTag(mdMetas);
   const tags = getAllTags(mdGroupByTags);
+
+  logger.info({
+    message: `Found ${mdMetas.length} md files with ${tags.length} tags`,
+  });
 
   const indexFile = {
     type: "md",

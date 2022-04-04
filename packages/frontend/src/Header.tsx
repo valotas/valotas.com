@@ -8,6 +8,7 @@ import { Anchor, Link } from "./links";
 export interface HeaderProps {
   title?: string | null;
   date?: string;
+  tags?: string[];
 }
 
 function LinkWithIcon({ href, ...iconProps }: IconProps & { href: string }) {
@@ -22,18 +23,35 @@ function LinkWithIcon({ href, ...iconProps }: IconProps & { href: string }) {
   );
 }
 
-export function Header({ title, date }: HeaderProps) {
+export function Header({ title, date, tags }: HeaderProps) {
   return (
     <div
       className={tw`flex flex-col md:flex-row items-center`}
       data-testid="header"
     >
       <div className={tw`mb-2 pr-4 md:mb-0 md:pr-6 lg:pr-12`}>
-        <Link noUnderline href="/" className={tw`flex no-underline`}>
-          <div
-            className={`george ${tw`h-12 w-12 lg:h-20 lg:w-20 rounded-full`}`}
-          ></div>
-        </Link>
+        <div className={tw`group relative`}>
+          <Link noUnderline href="/" className={tw`flex no-underline`}>
+            <div
+              className={`george ${tw`h-12 w-12 lg:h-20 lg:w-20 rounded-full`}`}
+            ></div>
+          </Link>
+          {tags && (
+            <div
+              className={tw`absolute left-0 invisible lg:group-hover:visible w-12 lg:w-20 pr-1 pb-2`}
+            >
+              <ul>
+                {tags.map((tag) => (
+                  <li key={tag}>
+                    <Link className={tw`w-full`} href={`/tag/${tag}/`}>
+                      {tag}
+                    </Link>
+                  </li>
+                ))}
+              </ul>
+            </div>
+          )}
+        </div>
       </div>
       <div className={tw`flex flex-col items-center md:items-start`}>
         <h1

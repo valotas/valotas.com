@@ -29,3 +29,10 @@ PageWithTitleAndDate.args = {
   title: "This is page has a date",
   date: "2022-01-22",
 };
+
+export const PageWithTitleDateAndTags = Template.bind({});
+PageWithTitleDateAndTags.args = {
+  title: "This is page has a date",
+  date: "2022-01-22",
+  tags: ["devoxx", "javascript"],
+};

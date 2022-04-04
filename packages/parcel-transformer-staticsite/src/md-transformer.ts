@@ -19,13 +19,17 @@ async function renderBodyAndHead({
   logger: PluginLogger;
   config: MdTrasformerConfig;
 }) {
+  const tags = Array.isArray(asset.meta.tags)
+    ? (asset.meta.tags as string[])
+    : [];
+
   if (asset.meta.publishedFiles) {
     const items = (asset.meta.publishedFiles as any).map((f: any) => ({
       ...f,
       href: `/${f.key}/`,
     }));
 
-    const renderProps = { items, pkgVersion };
+    const renderProps = { items, pkgVersion, tags };
     const rendered = await render({
       logger: {
         log: (message: string) => logger.info({ message }),
@@ -48,6 +52,7 @@ async function renderBodyAndHead({
     title,
     pkgVersion,
     date: date || undefined,
+    tags,
   };
   const rendered = await render({
     logger: {
