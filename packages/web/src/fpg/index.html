@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <link rel="stylesheet" href="npm:reveal.js/dist/reveal.css">
+    <link rel="stylesheet" href="npm:reveal.js/dist/theme/sky.css">
+    <link rel="stylesheet" href="npm:reveal.js/plugin/highlight/monokai.css">
+    <link rel="shortcut icon" href="../favicon.ico">
+    <script src="./reveal.ts" type="module"></script>
+    <style>
+      .reveal .slides section .fragment.semi-fade-out.visible {
+        opacity: 0.2
+      }
+      .relative {
+        position: relative;
+      }
+      .absolute {
+        position: absolute;
+        left: 0;
+      }
+    </style>
+  </head>
+  <body>
+    <div class="reveal">
+      <div class="slides">
+        <section>
+          
+          <h1>valotas.com</h1>
+
+          <h3 class="fragment" data-fragment-index="1">By Georg<span class="relative">
+              <span class="fragment semi-fade-out" data-fragment-index="2">ios</span>
+              <span class="fragment fade-in absolute" data-fragment-index="2">e</span>
+            </span>
+          </h3>
+          
+          <p class="fragment" data-fragment-index="3">The history of this website</p>
+
+        </section>
+
+        <section>
+
+          <img src="data:image/png;base64,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" data-deferred="1" class="rg_i Q4LuWd" jsname="Q4LuWd" width="62" alt="Blogger.com – Wikipedia" data-atf="true" data-iml="1808.3999999985099">
+          <div class="fragment">
+            <p>⬇</p>
+            <h3>Static Html Pages</h3>
+          </div>
+          <p class="fragment">md files as content</p>
+          <p class="fragment">git repo as storage</p>
+          <p class="fragment">raspberry pi as webserver</p>
+
+        </section>
+
+        <section>
+          <h3>Isomorphic</h3>
+
+          <p class="fragment">React components</p>
+          <p class="fragment">Wrap in html page</p>
+          <p class="fragment">Serve rendered static file</p>
+          <p class="fragment">On click, fetch json and render on client</p>
+
+        </section>
+
+        <section>
+          <pre><code data-trim data-noescape>
+            return function () {
+              var plugin = require('../build/typescript/gulp');
+              return gulp.src([
+                  'src/articles/**/*.md'
+                ])
+                .pipe(plugin.mdFile()) //create metadata out of the *.md files
+                .pipe(plugin.toArticle()) //convert the metadata to articles
+                .pipe(plugin.addIndex()) //add an index of all articles
+                .pipe(plugin.addMetafiles()) //add metadata files as json
+                .pipe(plugin.adaptPaths()) //make sure all files are in a folder named after the title
+                .pipe(plugin.wrapHtml('src/templates/index.jade')) //wrap created html
+                .pipe(gulp.dest('build')) //write the output
+            };
+</code></pre>
+        </section>
+
+        <section>
+          <h1>Q&A</h1>
+        </section>
+      </div>
+    </div>
+  </body>
+</html>
