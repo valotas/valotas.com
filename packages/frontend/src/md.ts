@@ -25,7 +25,10 @@ function parseHeader(raw: string): HeaderMeta {
     .reduce(
       (prev, { key, value }) => {
         if (key === "tags") {
-          (prev as any)[key] = value.split(",").map((v) => v.trim());
+          (prev as any)[key] = value
+            .split(",")
+            .map((v) => v.trim())
+            .sort((a, b) => (a > b ? 1 : a === b ? 0 : -1));
           return prev;
         }
 

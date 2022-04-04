@@ -176,5 +176,23 @@ This is some paragraph of the second section
 
       expect(tags).toEqual(["tag1", "tag2"]);
     });
+
+    it("returns the tags of the file in a list sorted", () => {
+      const initial = `
+---
+title: the title
+date: 2022-10-11
+template: template
+tags: tag2, tag1
+---
+
+### first section
+
+This is some paragraph of the second section
+      `;
+      const { tags } = md.parse(initial);
+
+      expect(tags).toEqual(["tag1", "tag2"]);
+    });
   });
 });

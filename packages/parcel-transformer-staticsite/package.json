@@ -12,6 +12,7 @@
   "scripts": {
     "clean": "rimraf dist",
     "lint": "eslint \"src/**/*.+(ts|js|tsx|jsx)\"",
+    "watch:test": "jest --watch",
     "test": "jest",
     "fix": "npm run lint -- --fix",
     "build": "tsc -p .",

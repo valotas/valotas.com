@@ -59,8 +59,10 @@ function groupByTag(files: MDMeta[]): Map<string, MDMeta[]> {
   }, new Map<string, MDMeta[]>());
 }
 
-function getAllTags(groups: Map<string, any>): string[] {
-  return Array.from(groups.keys());
+export function _getAllTags(groups: Map<string, any>): string[] {
+  return Array.from(groups.keys()).sort((a, b) =>
+    a > b ? 1 : a == b ? 0 : -1
+  );
 }
 
 export const transformSitemap: StaticSiteTransformerFn = async ({
@@ -77,7 +79,7 @@ export const transformSitemap: StaticSiteTransformerFn = async ({
   }));
 
   const mdGroupByTags: Map<string, MDMeta[]> = groupByTag(mdMetas);
-  const tags = getAllTags(mdGroupByTags);
+  const tags = _getAllTags(mdGroupByTags);
 
   logger.info({
     message: `Found ${mdMetas.length} md files with ${tags.length} tags`,
