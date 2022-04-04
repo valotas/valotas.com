@@ -3,6 +3,7 @@ title: Grails, the first parts, a long introduction
 author: valotas
 date: 2009-12-13
 template: article.jade
+tags: java, groovy
 ---
 
 Inspired by the title of Douglas Crockford book, "Javascript, the good parts" and having to write an introduction on grails as a course for some colleagues, I thought it would be good to just blog about grails and the first steps some one should take.

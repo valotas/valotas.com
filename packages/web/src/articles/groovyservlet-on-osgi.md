@@ -3,6 +3,7 @@ title: GroovyServlet on the OSGI
 author: valotas
 date: 2009-11-15
 template: article.jade
+tags: java, groovy
 ---
 
 After having [static resources get served right with Jetty within an OSGI enviroment](/jetty-defaultservlet-on-osgi/)

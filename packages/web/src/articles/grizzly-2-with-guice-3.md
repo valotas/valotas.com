@@ -3,6 +3,7 @@ title: Grizzly 2 with guice 3
 author: valotas
 date: 2011-05-30
 template: article.jade
+tags: java
 ---
 
 Playing with grizzly and guice. Considering that you already have a `ServletModule` and and a `GuiceServletContextListener` defined the above code should do the job.

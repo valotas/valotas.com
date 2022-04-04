@@ -3,6 +3,7 @@ title: Java database connections management
 author: valotas
 date: 2010-06-30
 template: article.jade
+tags: java
 ---
 
 A month ago, I had to do some work on a legacy application. As there is no definition of the "legacy application" expression I refer to an old one where no actual framework has been used for its creation. So there is no any ORM technology here. In that case you have to deal with plain old JDBC.

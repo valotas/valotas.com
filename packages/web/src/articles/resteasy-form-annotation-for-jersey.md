@@ -3,6 +3,7 @@ title: Resteasy Form annotations for Jersey
 author: valotas
 date: 2011-01-16
 template: article.jade
+tags: java
 ---
 
 Lately I was developing a jax-rs application. What I really like with jaxrs is the way you can handle any kind of parameter values of a request using annotations. So when I need a query parameter I just annotate a field or an argument of a Resource class with `@QueryParam("paramName")` and the parameter value will get injected for me.

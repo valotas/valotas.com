@@ -3,6 +3,7 @@ title: Server side OSGI with Equinox
 author: valotas
 date: 2009-09-26
 template: article.jade
+tags: java
 ---
 
 Well this is not about OSGi itself but using it at the server side. So assuming that you have some osgi bundle you want to run them on a server. There is many osgi frameworks that you can use but here we are about to use Equinox.

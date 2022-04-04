@@ -3,6 +3,7 @@ title: Java Decorator pattern example
 author: valotas
 date: 2011-09-11
 template: article.jade
+tags: java
 ---
 
 Ok what the hell is the decorator pattern? Why do I need it?

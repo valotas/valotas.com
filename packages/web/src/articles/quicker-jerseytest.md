@@ -3,6 +3,7 @@ title: Quicker JerseyTest
 author: valotas
 date: 2012-04-09
 template: article.jade
+tags: java
 ---
 
 That is a quick one. These days I was playing around with [Jersey][jersey] in order to create a rest web service. The thing is that I would like to test what I create. The good thing is that Jersey provides a testing framework. But... 

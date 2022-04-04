@@ -3,6 +3,7 @@ title: Hibernate, mssql and limit
 author: valotas
 date: 2010-07-08
 template: article.jade
+tags: java
 ---
 
 This is a strange combination. Not the hibernate with mssql (and any kind of

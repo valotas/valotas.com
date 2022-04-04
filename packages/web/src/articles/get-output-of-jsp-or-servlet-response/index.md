@@ -3,6 +3,7 @@ title: Get the output of a jsp or servlet response as String
 author: valotas
 date: 2011-09-25
 template: article.jade
+tags: java
 ---
 Well, at the first glance the answer to this problem would be to just make an http request to the jsp file and get the output! 
 

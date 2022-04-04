@@ -3,6 +3,7 @@ title: Groovy SQL to the resque
 author: valotas
 date: 2009-10-24
 template: article.jade
+tags: java, groovy
 ---
 
 The case is an sql table with about 30 columns that I have to query and export
