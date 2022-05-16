@@ -4,6 +4,13 @@ import type { FileSystem } from "@parcel/fs";
 import type { MutableAsset } from "@parcel/types";
 import { computeKey } from "./key-factory";
 
+export type SitemapDependency = {
+  key: string;
+  ext: string;
+  filePath: string;
+  specifier: string;
+};
+
 class Sitemap {
   private rules: string[] = [];
   private baseDir: string;
@@ -13,7 +20,7 @@ class Sitemap {
     this.baseDir = baseDir;
   }
 
-  getDependencies() {
+  getDependencies(): SitemapDependency[] {
     return this.rules.map((r) => {
       const { name, ext } = computeKey(r);
       return {
@@ -23,6 +30,23 @@ class Sitemap {
         specifier: r.replace(this.baseDir, "."),
       };
     });
+  }
+
+  getDependenciesGroupedByExt() {
+    return this.getDependencies().reduce<{
+      md: SitemapDependency[];
+      other: SitemapDependency[];
+    }>(
+      (acc, dep) => {
+        if (dep.ext === ".md") {
+          acc.md.push(dep);
+        } else {
+          acc.other.push(dep);
+        }
+        return acc;
+      },
+      { md: [], other: [] }
+    );
   }
 
   getCode() {

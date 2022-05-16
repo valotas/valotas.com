@@ -48,7 +48,7 @@ describe("sitemap", () => {
     expect(sitemap.getDependencies()).toHaveLength(1);
   });
 
-  test("other files too as dependencies", async () => {
+  test("return other files too as dependencies", async () => {
     const sitemap = await _parseSitemapContent({
       content: `
       ./articles/tomcat-initd-script.md
@@ -101,6 +101,21 @@ describe("sitemap", () => {
         path.join(filePath, "..", "./articles/tomcat-initd-script.md")
       )
     );
+  });
+
+  test("getDependenciesGroupedByExt return the dependencies grouped", async () => {
+    const sitemap = await _parseSitemapContent({
+      content: `
+      ./articles/tomcat-initd-script.md
+      ./google.html
+      `,
+      filePath,
+      fs,
+    });
+
+    const { md, other } = sitemap.getDependenciesGroupedByExt();
+    expect(md).toHaveLength(1);
+    expect(other).toHaveLength(1);
   });
 
   xtest("resolves and returns glob patterns", async () => {

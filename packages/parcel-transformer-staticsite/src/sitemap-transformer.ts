@@ -71,9 +71,15 @@ export const transformSitemap: StaticSiteTransformerFn = async ({
   logger,
 }) => {
   const sitemap = await parseSitemap(asset, options.inputFS);
-  const sitemapDependencies = sitemap.getDependencies();
+  const { md, other } = sitemap.getDependenciesGroupedByExt();
 
-  const mdFiles: MD[] = await readMDFiles(options.inputFS, sitemapDependencies);
+  logger.info({ message: `Found ${other.length} non md files` });
+
+  other.forEach((dep) => {
+    asset.addDependency(createParallelDependency(dep.specifier));
+  });
+
+  const mdFiles: MD[] = await readMDFiles(options.inputFS, md);
   const mdMetas: MDMeta[] = mdFiles.map(({ raw: _, ...rest }) => ({
     ...rest,
   }));
