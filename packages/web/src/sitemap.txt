@@ -1,4 +1,5 @@
 ./articles/**/*.md
 ./opensystems-presentation-passion/index.html
 ./fpg/index.html
+./dochub/index.html
 ./google35c7e5b468113980.html
