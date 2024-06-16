@@ -13,7 +13,7 @@
         "fix": "npm run fix --workspaces --if-present",
         "watch:frontend": "npm run watch:build -w packages/frontend",
         "watch:web": "npm run watch:build -w packages/web",
-        "build": "npm run build --workspaces --if-present",
+        "build": "NODE_OPTIONS=--no-experimental-fetch npm run build --workspaces --if-present",
         "test": "npm run test --workspaces --if-present",
         "sb": "npm run storybook -w packages/frontend",
         "serve": "npm run serve -w packages/web",
