@@ -13,7 +13,7 @@
         "fix": "npm run fix --workspaces --if-present",
         "watch:frontend": "npm run watch:build -w packages/frontend",
         "watch:web": "npm run watch:build -w packages/web",
-        "build": "npm run build --workspaces --if-present",
+        "build": "NODE_OPTIONS=--no-experimental-fetch npm run build --workspaces --if-present",
         "test": "npm run test --workspaces --if-present",
         "sb": "npm run storybook -w packages/frontend",
         "serve": "npm run serve -w packages/web",
@@ -21,7 +21,7 @@
         "bump": "npm --include-workspace-root --workspaces -m \"Release v%s\" version",
         "release-patch": "npm run bump patch"
     },
-    "version": "3.6.2",
+    "version": "3.7.0",
     "devDependencies": {
         "@swc/jest": "^0.2.20",
         "@testing-library/react": "^12.1.3",

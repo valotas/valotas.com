@@ -1,6 +1,6 @@
 {
   "name": "@valotas/web",
-  "version": "3.6.2",
+  "version": "3.7.0",
   "repository": {
     "type": "git",
     "url": "git+ssh://git@github.com/valotas/valotas.com.git"
@@ -15,7 +15,7 @@
     "lint": "eslint \"src/**/*.+(ts|js|tsx|jsx)\"",
     "fix": "npm run lint -- --fix",
     "build": "parcel build src/robots.txt --no-autoinstall",
-    "deploy": "npm run build -- --reporter @valotas/parcel-reporter-staticsite",
+    "deploy": "npm run build",
     "watch:build": "parcel watch src/robots.txt --no-autoinstall --no-cache",
     "serve": "serve dist",
     "preversion": "npm run lint",

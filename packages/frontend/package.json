@@ -1,6 +1,6 @@
 {
-  "name": "@valotas/valotas.com-frontent",
-  "version": "3.6.2",
+  "name": "@valotas/valotas-frontend",
+  "version": "3.7.0",
   "repository": {
     "type": "git",
     "url": "git+ssh://git@github.com/valotas/valotas.com.git"
