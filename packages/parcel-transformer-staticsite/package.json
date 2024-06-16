@@ -1,6 +1,6 @@
 {
   "name": "@valotas/parcel-transformer-staticsite",
-  "version": "3.6.2",
+  "version": "3.6.3",
   "private": true,
   "main": "./dist/StaticSiteTransformer.js",
   "engines": {
