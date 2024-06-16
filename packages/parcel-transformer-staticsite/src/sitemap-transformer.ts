@@ -1,7 +1,7 @@
 import * as path from "path";
 import type { FileSystem } from "@parcel/fs";
 import type { TransformerResult } from "@parcel/types";
-import { parse } from "@valotas/valotas.com-frontent";
+import { parse } from "@valotas/valotas-frontend";
 import { parseSitemap } from "./sitemap";
 import { StaticSiteTransformerFn } from "./StaticSiteTransformer";
 import { sortByDate } from "./date-sorter";

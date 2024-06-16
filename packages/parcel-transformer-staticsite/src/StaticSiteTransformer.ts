@@ -42,7 +42,7 @@ export default new Transformer<MdTrasformerConfig>({
     }
 
     config.addDevDependency({
-      specifier: "@valotas/valotas.com-frontent/dist/render",
+      specifier: "@valotas/valotas-frontend/dist/render",
       resolveFrom: defaultTemplateFilePath,
     });
 

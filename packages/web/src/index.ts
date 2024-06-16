@@ -1,6 +1,6 @@
 import { createElement } from "react";
 import { hydrate } from "react-dom";
-import { PageRenderer, history } from "@valotas/valotas.com-frontent";
+import { PageRenderer, history } from "@valotas/valotas-frontend";
 
 window.addEventListener("load", () => {
   const script = document.querySelector("script[type='application/json']");

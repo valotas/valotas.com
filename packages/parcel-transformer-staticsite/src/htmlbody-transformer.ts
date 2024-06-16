@@ -1,5 +1,5 @@
 import { compileFile } from "pug";
-import { createTitle } from "@valotas/valotas.com-frontent";
+import { createTitle } from "@valotas/valotas-frontend";
 import { StaticSiteTransformerFn } from "./StaticSiteTransformer";
 
 function getString(obj: object, prop: string) {

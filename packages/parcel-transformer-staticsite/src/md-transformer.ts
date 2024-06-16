@@ -1,6 +1,6 @@
 import type { MutableAsset, PluginLogger } from "@parcel/types";
-import { parse } from "@valotas/valotas.com-frontent";
-import { render } from "@valotas/valotas.com-frontent/dist/render";
+import { parse } from "@valotas/valotas-frontend";
+import { render } from "@valotas/valotas-frontend/dist/render";
 import { StaticSiteTransformerFn } from "./StaticSiteTransformer";
 import { createLazyDependency } from "./dep";
 import { computeKey } from "./key-factory";
