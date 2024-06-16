@@ -31,8 +31,10 @@ npm run serve
 in order to see the bundled distribution
 
 ## Deploy
-Deployment is done as part of the versioning when on the `master` branch. Just
+To deploy make sure that you bump the version and deploy:
 
 ```bash
 npm run bump [patch|minor|major]
+fly deploy
 ```
+
