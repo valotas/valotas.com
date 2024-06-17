@@ -1,6 +1,6 @@
 {
   "name": "@valotas/parcel-reporter-staticsite",
-  "version": "3.8.0",
+  "version": "3.8.1",
   "main": "dist/StaticSiteReporter.js",
   "engines": {
     "parcel": "2.x"
