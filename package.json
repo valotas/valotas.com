@@ -21,7 +21,7 @@
         "bump": "npm --include-workspace-root --workspaces -m \"Release v%s\" version",
         "release-patch": "NODE_OPTIONS=--no-experimental-fetch npm run bump patch"
     },
-    "version": "3.8.0",
+    "version": "3.9.0",
     "devDependencies": {
         "@swc/jest": "^0.2.20",
         "@testing-library/react": "^12.1.3",
