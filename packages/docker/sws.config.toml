@@ -1,0 +1,17 @@
+[general]
+log-level = "info"
+root = "/public"
+
+# d. Simple route redirect using the `host` option
+# to perform www to non-www redirection.
+[[advanced.redirects]]
+host = "www.valotas.com"
+source = "/{*}"
+destination = "https://valotas.com/$1"
+kind = 301
+
+[[advanced.redirects]]
+host = "blog.valotas.com"
+source = "/{*}"
+destination = "https://valotas.com/$1"
+kind = 301
