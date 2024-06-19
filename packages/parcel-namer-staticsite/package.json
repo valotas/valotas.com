@@ -7,7 +7,7 @@
   },
   "devDependencies": {
     "eslint-plugin-jest": "^26.1.1",
-    "rimraf": "^3.0.2"
+    "rimraf": "^5.0.7"
   },
   "scripts": {
     "lint": "eslint \"src/**/*.+(ts|js|tsx|jsx)\"",
