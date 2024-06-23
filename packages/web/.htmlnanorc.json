@@ -1,0 +1,25 @@
+{
+  "minifyJs": false,
+  "minifyCss": false,
+  "minifySvg": {
+    "plugins": [
+      {
+        "name": "preset-default",
+        "params": {
+          "overrides": {
+            "collapseGroups": false,
+            "convertShapeToPath": false,
+            "removeTitle": false,
+            "removeDesc": false,
+            "removeUnknownsAndDefaults": {
+              "keepAriaAttrs": true,
+              "keepRoleAttr": true
+            },
+            "cleanupIds": false
+          }
+        }
+      },
+      "removeXMLNS"
+    ]
+  }
+}
