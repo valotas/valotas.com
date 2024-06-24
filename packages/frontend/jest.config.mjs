@@ -1,6 +1,5 @@
-/** @type {import('ts-jest/dist/types').InitialOptionsTsJest} */
-//eslint-disable-next-line
-module.exports = {
+/** @type {import('jest').Config} */
+const config = {
   modulePathIgnorePatterns: ["dist"],
   preset: "ts-jest",
   testEnvironment: "jsdom",
@@ -10,7 +9,7 @@ module.exports = {
     },
   },
   transform: {
-    "^.+\\.(t|j)sx?$": ["@swc/jest"],
+    "^.+\\.(t|j)sx?$": "@swc/jest",
   },
   // strip .js off the import before importing it
   moduleNameMapper: {
@@ -19,3 +18,5 @@ module.exports = {
   },
   setupFiles: ["./jest.setup.cjs"],
 };
+
+export default config;
