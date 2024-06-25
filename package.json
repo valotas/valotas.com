@@ -20,9 +20,10 @@
         "serve": "npm run serve -w packages/web",
         "dev": "run-p watch:* serve",
         "bump": "npm version --include-workspace-root --workspaces --no-git-tag-version",
+        "postbump": "node packages/scripts/postbump.mjs",
         "release-patch": "npm run bump patch"
     },
-    "version": "3.9.1",
+    "version": "3.10.2",
     "devDependencies": {
         "@swc/jest": "^0.2.20",
         "@testing-library/react": "^12.1.3",
