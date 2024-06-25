@@ -23,7 +23,7 @@
         "postbump": "node packages/scripts/postbump.mjs",
         "release-patch": "npm run bump patch"
     },
-    "version": "3.10.4",
+    "version": "3.10.5",
     "devDependencies": {
         "@swc/jest": "^0.2.20",
         "@testing-library/react": "^12.1.3",
