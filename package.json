@@ -19,7 +19,7 @@
         "sb": "npm run storybook -w packages/frontend",
         "serve": "npm run serve -w packages/web",
         "dev": "run-p watch:* serve",
-        "bump": "npm --include-workspace-root --workspaces -m \"Release v%s\" version",
+        "bump": "npm version --include-workspace-root --workspaces --no-git-tag-version",
         "release-patch": "npm run bump patch"
     },
     "version": "3.9.1",

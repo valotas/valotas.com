@@ -1,6 +1,6 @@
 {
   "name": "@valotas/web",
-  "version": "3.8.1",
+  "version": "3.9.1",
   "repository": {
     "type": "git",
     "url": "git+ssh://git@github.com/valotas/valotas.com.git"
@@ -19,8 +19,7 @@
     "watch:build": "parcel watch src/robots.txt --no-autoinstall --no-cache",
     "serve": "serve dist",
     "preversion": "npm run lint",
-    "version": "npm run deploy",
-    "postversion": "git add . && git commit --amend --no-edit"
+    "version": "npm run deploy"
   },
   "dependencies": {
     "parcel": "^2.12.0",

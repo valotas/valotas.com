@@ -1,6 +1,6 @@
 {
   "name": "@valotas/parcel-reporter-staticsite",
-  "version": "3.8.1",
+  "version": "3.9.1",
   "main": "dist/StaticSiteReporter.js",
   "engines": {
     "parcel": "2.x"
@@ -15,8 +15,7 @@
     "watch:test": "jest --watch",
     "fix": "npm run lint -- --fix",
     "build": "tsc -p .",
-    "preversion": "npm run lint && npm run build && npm run test",
-    "postversion": "git add . && git commit --amend --no-edit"
+    "preversion": "npm run lint && npm run build && npm run test"
   },
   "dependencies": {
     "@aws-sdk/client-cloudfront": "^3.54.1",

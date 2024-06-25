@@ -1,6 +1,6 @@
 {
   "name": "@valotas/parcel-transformer-staticsite",
-  "version": "3.8.1",
+  "version": "3.9.1",
   "private": true,
   "main": "./dist/StaticSiteTransformer.js",
   "engines": {
@@ -16,8 +16,7 @@
     "test": "jest",
     "fix": "npm run lint -- --fix",
     "build": "tsc -p .",
-    "preversion": "npm run lint && npm run build && npm run test",
-    "postversion": "git add . && git commit --amend --no-edit"
+    "preversion": "npm run lint && npm run build && npm run test"
   },
   "dependencies": {
     "@parcel/plugin": "^2.12.0",

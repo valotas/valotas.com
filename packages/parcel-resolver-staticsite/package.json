@@ -1,6 +1,6 @@
 {
   "name": "@valotas/parcel-resolver-staticsite",
-  "version": "3.8.1",
+  "version": "3.9.1",
   "main": "index.js",
   "engines": {
     "parcel": "2.x"
@@ -11,7 +11,6 @@
   "scripts": {
     "lint": "eslint \"**/*.+(ts|js|tsx|jsx)\"",
     "test": "npm run lint",
-    "preversion": "npm run test",
-    "postversion": "git add . && git commit --amend --no-edit"
+    "preversion": "npm run test"
   }
 }
