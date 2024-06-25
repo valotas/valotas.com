@@ -1,11 +1,23 @@
 import { act, render } from "@testing-library/react";
 import React from "react";
 import { PageRenderer } from "./PageRenderer";
-import * as historyModule from "./History";
+import { history } from "./History";
+
+jest.mock("./History", () => {
+  const history = jest.fn();
+  return { history };
+});
 
 describe("PageRenderer", () => {
   afterEach(() => {
     jest.resetAllMocks();
+  });
+
+  beforeEach(() => {
+    jest.mocked(history).mockImplementation(() => ({
+      onPushState: jest.fn(),
+      pushState: jest.fn(),
+    }));
   });
 
   it("exists", async () => {
@@ -43,13 +55,13 @@ describe("PageRenderer", () => {
 
     beforeEach(() => {
       scroll = jest.spyOn(window, "scrollTo").mockReturnValue();
-      jest.spyOn(historyModule, "history").mockReturnValue({
+      jest.mocked(history).mockImplementation(() => ({
         onPushState: (h) => {
           handler = h;
           return jest.fn();
         },
         pushState: jest.fn(),
-      });
+      }));
     });
 
     it("re-renders onPushState with state", async () => {

@@ -6,7 +6,7 @@
     "parcel": "2.x"
   },
   "devDependencies": {
-    "rimraf": "^3.0.2"
+    "rimraf": "^5.0.7"
   },
   "scripts": {
     "lint": "eslint \"**/*.+(ts|js|tsx|jsx)\"",

@@ -4,9 +4,18 @@ import { render, fireEvent, waitFor } from "@testing-library/react";
 import { Anchor } from "./links";
 import * as history from "./History";
 
+jest.mock("./History", () => ({
+  history: jest.fn(),
+}));
+
 describe("links", () => {
   beforeEach(() => {
     fetchMock.resetMocks();
+
+    jest.mocked(history.history).mockReturnValue({
+      pushState: jest.fn(),
+      onPushState: jest.fn(),
+    });
   });
 
   describe("Anchor", () => {
@@ -53,7 +62,7 @@ describe("links", () => {
       const payload = "payload";
       fetchMock.mockOnce(payload);
       const pushState = jest.fn();
-      jest.spyOn(history, "history").mockReturnValue({
+      jest.mocked(history.history).mockReturnValue({
         pushState,
         onPushState: jest.fn(),
       });
@@ -78,7 +87,7 @@ describe("links", () => {
       const payload = "payload";
       fetchMock.mockOnce(payload);
       const pushState = jest.fn();
-      jest.spyOn(history, "history").mockReturnValue({
+      jest.mocked(history.history).mockReturnValue({
         pushState,
         onPushState: jest.fn(),
       });
