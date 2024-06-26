@@ -18,7 +18,7 @@ export function FetchTracker({ children }: PropsWithChildren<unknown>) {
         return result;
       });
     },
-    [fetchContent]
+    [fetchContent],
   );
 
   return (

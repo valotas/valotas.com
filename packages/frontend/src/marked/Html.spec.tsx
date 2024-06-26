@@ -5,7 +5,7 @@ import { Html } from "./Html";
 describe("Html", () => {
   it("should render html", async () => {
     const { container } = render(
-      <Html raw="aa" pre={false} text="" type="html" children={[]} />
+      <Html raw="aa" pre={false} text="" type="html" children={[]} />,
     );
 
     expect(container.innerHTML).toContain(">aa</div>");
@@ -26,7 +26,7 @@ describe("Html", () => {
         text=""
         type="html"
         children={[]}
-      />
+      />,
     );
 
     expect(container.innerHTML).toContain(`Some content`);
@@ -50,7 +50,7 @@ describe("Html", () => {
         text=""
         type="html"
         children={[]}
-      />
+      />,
     );
 
     expect(container.innerHTML).not.toContain(`<script>`);

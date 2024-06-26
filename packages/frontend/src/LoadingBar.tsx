@@ -17,7 +17,7 @@ function creatingAnimation() {
         margin-left: 100%;
         width: 0;
       }
-    `
+    `,
   );
 }
 

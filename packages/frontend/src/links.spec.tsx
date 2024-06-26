@@ -77,7 +77,7 @@ describe("links", () => {
         expect(pushState).toHaveBeenCalledWith(
           payload,
           expect.any(String),
-          href
+          href,
         );
       });
     });
@@ -102,7 +102,7 @@ describe("links", () => {
         expect(pushState).toHaveBeenCalledWith(
           payload,
           expect.any(String),
-          `${href}/`
+          `${href}/`,
         );
       });
     });

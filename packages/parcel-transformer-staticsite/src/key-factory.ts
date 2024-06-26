@@ -2,7 +2,7 @@ import * as path from "path";
 
 export function computeKey(
   filePath: string,
-  ext?: string
+  ext?: string,
 ): { name: string; ext: string } {
   const parsed = path.parse(filePath);
   ext = ext || parsed.ext;

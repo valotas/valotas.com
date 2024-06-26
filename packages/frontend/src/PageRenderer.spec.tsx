@@ -41,7 +41,7 @@ describe("PageRenderer", () => {
   it("renders a page when a payload is given", async () => {
     const props = { bodyMarkdown: "the body", title: "payload title" };
     const { container } = await render(
-      <PageRenderer payload={JSON.stringify(props)} />
+      <PageRenderer payload={JSON.stringify(props)} />,
     );
 
     const title = container.querySelector("h1");
@@ -71,7 +71,7 @@ describe("PageRenderer", () => {
             bodyMarkdown: "the body",
             title: "initial title",
           })}
-        />
+        />,
       );
 
       act(() => handler({ state: JSON.stringify(newProps) }));
@@ -85,7 +85,7 @@ describe("PageRenderer", () => {
       const { container } = await render(
         <PageRenderer
           payload={JSON.stringify({ bodyMarkdown: "", title: "initial title" })}
-        />
+        />,
       );
 
       act(() => handler({ detail: { state: JSON.stringify(newProps) } }));
@@ -102,7 +102,7 @@ describe("PageRenderer", () => {
             bodyMarkdown: "the body",
             title: "initial title",
           })}
-        />
+        />,
       );
 
       act(() => handler({ state: JSON.stringify(newProps) }));
@@ -118,7 +118,7 @@ describe("PageRenderer", () => {
             bodyMarkdown: "the body",
             title: "initial title",
           })}
-        />
+        />,
       );
 
       act(() => handler({ detail: { state: JSON.stringify(newProps) } }));
@@ -134,7 +134,7 @@ describe("PageRenderer", () => {
             bodyMarkdown: "the body",
             title: "initial title",
           })}
-        />
+        />,
       );
 
       act(() => handler({ state: JSON.stringify(newProps) }));

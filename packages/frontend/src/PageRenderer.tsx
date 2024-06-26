@@ -35,7 +35,7 @@ function usePageProps(initial: PageRendererProps) {
       updateProps({ payload: state });
       updateScrollTop(e.detail ? true : false);
     },
-    [0]
+    [0],
   );
 
   useEffect(() => {

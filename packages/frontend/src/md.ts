@@ -49,7 +49,7 @@ function parseHeader(raw: string): HeaderMeta {
         draft: false,
         skipIndex: false,
         tags: [],
-      }
+      },
     );
 }
 

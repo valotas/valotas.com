@@ -10,7 +10,7 @@ function getMainEntryAsset({ bundle, bundleGraph }) {
     includeInline: true,
   });
   const mainBundle = bundleGroupBundles.find((b) =>
-    b.getEntryAssets().some((a) => a.id === bundleGroup.entryAssetId)
+    b.getEntryAssets().some((a) => a.id === bundleGroup.entryAssetId),
   );
 
   return mainBundle.getMainEntry();
@@ -34,7 +34,7 @@ function nameHtml(bundle) {
 
   if (!key) {
     throw new Error(
-      `Can not name html asset with templateSource but no meta.key`
+      `Can not name html asset with templateSource but no meta.key`,
     );
   }
 

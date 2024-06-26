@@ -36,7 +36,7 @@ export default new Reporter({
 
     log(
       `✨ Uploaded ${bundles.length} bundles in ${Date.now() - start}ms to`,
-      chalk.underline(aws.getPublicUrl())
+      chalk.underline(aws.getPublicUrl()),
     );
 
     const { invalidation } = await aws.invalidateDistribution();

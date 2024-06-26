@@ -26,7 +26,7 @@ class History {
         detail: {
           state: payload,
         },
-      })
+      }),
     );
   }
 }
