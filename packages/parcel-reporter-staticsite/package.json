@@ -9,7 +9,7 @@
     "rimraf": "^5.0.7"
   },
   "scripts": {
-    "clean": "rimraf dist",
+    "clean": "rimraf dist node_modules",
     "lint": "eslint \"src/**/*.+(ts|js|tsx|jsx)\"",
     "test": "jest",
     "watch:test": "jest --watch",

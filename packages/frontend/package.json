@@ -9,7 +9,7 @@
   "main": "dist/index.js",
   "types": "dist/index.d.ts",
   "scripts": {
-    "clean": "rimraf dist",
+    "clean": "rimraf dist node_modules",
     "lint": "eslint \"src/**/*.+(ts|js|tsx|jsx)\"",
     "fix": "npm run lint -- --fix",
     "build": "tsc -p .",

@@ -9,6 +9,7 @@
     "rimraf": "^5.0.7"
   },
   "scripts": {
+    "clean": "rimraf dist",
     "lint": "eslint \"**/*.+(ts|js|tsx|jsx)\"",
     "test": "npm run lint",
     "preversion": "npm run test"

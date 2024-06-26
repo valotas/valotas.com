@@ -11,7 +11,7 @@
     "serve": "^14.2.3"
   },
   "scripts": {
-    "clean": "rimraf dist",
+    "clean": "rimraf dist node_modules",
     "lint": "eslint \"src/**/*.+(ts|js|tsx|jsx)\"",
     "fix": "npm run lint -- --fix",
     "build": "parcel build src/robots.txt --no-autoinstall",
