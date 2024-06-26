@@ -36,7 +36,7 @@ class AWSService {
           Key: name,
           Body: fileStream,
           ContentType: contentType,
-        })
+        }),
       )
       .then((resp) => ({
         etag: resp.ETag,
@@ -56,7 +56,7 @@ class AWSService {
           Key: from,
           Body: "",
           WebsiteRedirectLocation: `/${to}`,
-        })
+        }),
       )
       .then((resp) => ({
         from,
@@ -88,7 +88,7 @@ class AWSService {
               Items: ["/*"],
             },
           },
-        })
+        }),
       )
       .then(({ Invalidation }) => ({
         distributionId: this.distributionId,
@@ -102,6 +102,6 @@ export async function createAWSService() {
   const branch = await getBranch();
 
   return new AWSService(
-    branch === "master" ? "valotas.com" : "test.valotas.com"
+    branch === "master" ? "valotas.com" : "test.valotas.com",
   );
 }

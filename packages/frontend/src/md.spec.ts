@@ -54,7 +54,7 @@ this is some paragraph
 # Content
 
 this is some paragraph
-      `.trim()
+      `.trim(),
       );
     });
 
@@ -75,7 +75,7 @@ This is some paragraph of the second section
       const { description } = md.parse(initial);
 
       expect(description.trim()).toEqual(
-        `this is the description of the first section`
+        `this is the description of the first section`,
       );
     });
 
@@ -102,7 +102,7 @@ Well, the idea in OO languages is very simple. You have a class and you have a p
 Recently I [had a look at the Dart programming language][thoughts-on-dart] and that reminded me of the getters and setters mechanism that someone has with [C#][csharp]. So let's have a look at them.
 
 [thoughts-on-dart]: http://valotas.com/dart-language/
-[csharp]: http://en.wikipedia.org/wiki/C_Sharp_(programming_language)`.trim()
+[csharp]: http://en.wikipedia.org/wiki/C_Sharp_(programming_language)`.trim(),
       );
     });
 

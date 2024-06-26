@@ -32,7 +32,7 @@ Sitemap: value2
       `
 Rule1: value1
 Sitemap: /path/to/sitemap.txt    
-    `.trim()
+    `.trim(),
     );
   });
 

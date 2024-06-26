@@ -1,4 +1,4 @@
-import React, { MouseEvent, useCallback, PropsWithChildren } from "react";
+import { MouseEvent, useCallback, PropsWithChildren } from "react";
 import { tw } from "./twind";
 import { Icon, IconProps } from "./Icon";
 import { history } from "./History";
@@ -37,7 +37,7 @@ export function Anchor({
           });
       }
     },
-    [href, title]
+    [href, title],
   );
 
   return (
@@ -74,7 +74,7 @@ export function Link({
         noUnderline
           ? ""
           : "border-b-1 border-gray-300 hover:border-gray-500 leading-tight inline-block",
-        className
+        className,
       )}
     >
       {children}

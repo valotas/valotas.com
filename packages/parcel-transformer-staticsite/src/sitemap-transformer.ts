@@ -24,7 +24,7 @@ async function parseMD(fs: FileSystem, filePath: string) {
 
 async function readMDFiles(
   fs: FileSystem,
-  dependencies: Array<{ filePath: string; key: string; specifier: string }>
+  dependencies: Array<{ filePath: string; key: string; specifier: string }>,
 ): Promise<MD[]> {
   const mdFiles: MD[] = [];
 
@@ -61,7 +61,7 @@ function groupByTag(files: MDMeta[]): Map<string, MDMeta[]> {
 
 export function _getAllTags(groups: Map<string, any>): string[] {
   return Array.from(groups.keys()).sort((a, b) =>
-    a > b ? 1 : a == b ? 0 : -1
+    a > b ? 1 : a == b ? 0 : -1,
   );
 }
 
@@ -131,7 +131,7 @@ export const transformSitemap: StaticSiteTransformerFn = async ({
   const additionalAssets = [indexFile, ...groupDependencies, ...mdAssets];
 
   additionalAssets.forEach((dep) =>
-    asset.addDependency(createParallelDependency(dep.uniqueKey))
+    asset.addDependency(createParallelDependency(dep.uniqueKey)),
   );
 
   return [asset, ...additionalAssets];

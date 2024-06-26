@@ -1,4 +1,3 @@
-import React from "react";
 import { tw } from "./twind";
 
 function LinkedInIcon() {
@@ -44,12 +43,12 @@ export function Icon({ name, className, size = "8" }: IconProps) {
     name == "linkedin"
       ? LinkedInIcon
       : name === "github"
-      ? Github
-      : name === "twitter"
-      ? Twitter
-      : name === "ig"
-      ? Instagram
-      : undefined;
+        ? Github
+        : name === "twitter"
+          ? Twitter
+          : name === "ig"
+            ? Instagram
+            : undefined;
 
   if (!TheIcon) {
     return null;

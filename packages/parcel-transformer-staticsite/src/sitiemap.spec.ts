@@ -12,7 +12,7 @@ const filePath = path.resolve(
   "..",
   "web",
   "src",
-  "sitemap.txt"
+  "sitemap.txt",
 );
 
 describe("sitemap", () => {
@@ -71,7 +71,7 @@ describe("sitemap", () => {
     });
 
     expect(sitemap.getDependencies()[0].specifier).toBe(
-      "./articles/tomcat-initd-script.md"
+      "./articles/tomcat-initd-script.md",
     );
   });
 
@@ -98,8 +98,8 @@ describe("sitemap", () => {
 
     expect(sitemap.getDependencies()[0].filePath).toBe(
       path.resolve(
-        path.join(filePath, "..", "./articles/tomcat-initd-script.md")
-      )
+        path.join(filePath, "..", "./articles/tomcat-initd-script.md"),
+      ),
     );
   });
 
@@ -144,7 +144,7 @@ describe("sitemap", () => {
       `
 /tomcat-initd-script/
 /some-other-page.html
-    `.trim()
+    `.trim(),
     );
   });
 });

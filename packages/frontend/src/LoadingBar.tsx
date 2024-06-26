@@ -1,4 +1,4 @@
-import React, { useMemo } from "react";
+import { useMemo } from "react";
 import { useFetchCounter } from "./FetchTracker";
 import { tw, animation, keyframes } from "./twind";
 
@@ -17,7 +17,7 @@ function creatingAnimation() {
         margin-left: 100%;
         width: 0;
       }
-    `
+    `,
   );
 }
 

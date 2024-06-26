@@ -15,7 +15,7 @@ exports.default = new Resolver({
     const file = fs.findAncestorFile(
       [specifier],
       dependency.resolveFrom,
-      options.projectRoot
+      options.projectRoot,
     );
 
     if (file) {

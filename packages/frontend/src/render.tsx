@@ -1,4 +1,3 @@
-import React from "react";
 import { renderToString } from "react-dom/server";
 import nfetch from "node-fetch";
 import { asyncVirtualSheet, getStyleTag } from "twind/server";

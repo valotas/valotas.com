@@ -1,4 +1,3 @@
-import React from "react";
 import { ComponentMeta, ComponentStory } from "@storybook/react";
 import { PrismCodeBlock } from "./PrismCodeBlock";
 import { Link } from "./links";

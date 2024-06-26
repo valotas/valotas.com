@@ -1,4 +1,3 @@
-import React from "react";
 import fetchMock from "jest-fetch-mock";
 import { render, fireEvent, waitFor } from "@testing-library/react";
 import { Anchor } from "./links";
@@ -78,7 +77,7 @@ describe("links", () => {
         expect(pushState).toHaveBeenCalledWith(
           payload,
           expect.any(String),
-          href
+          href,
         );
       });
     });
@@ -103,7 +102,7 @@ describe("links", () => {
         expect(pushState).toHaveBeenCalledWith(
           payload,
           expect.any(String),
-          `${href}/`
+          `${href}/`,
         );
       });
     });

@@ -54,7 +54,7 @@ export const tw = Object.defineProperties(
     theme: {
       get: () => twInstance.tw.theme,
     },
-  }
+  },
 ) as twind.TW;
 
 export { apply } from "twind";

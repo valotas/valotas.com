@@ -1,4 +1,4 @@
-import React, { useCallback, useEffect, useState } from "react";
+import { useCallback, useEffect, useState } from "react";
 import { PageWithItems, PageWithListProps } from "./PageWithItems";
 import { PageWithMarkdown, PageWithMarkdownProps } from "./PageWithMarkdown";
 import { createTitle } from "./title";
@@ -35,7 +35,7 @@ function usePageProps(initial: PageRendererProps) {
       updateProps({ payload: state });
       updateScrollTop(e.detail ? true : false);
     },
-    [0]
+    [0],
   );
 
   useEffect(() => {

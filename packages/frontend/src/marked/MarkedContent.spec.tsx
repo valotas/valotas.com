@@ -35,7 +35,7 @@ describe("MarkedContent", () => {
 
   it("should render paragraphs with strong or emphasized text", async () => {
     const { container } = await renderMarked(
-      "this a **very strong** _paragraph_!"
+      "this a **very strong** _paragraph_!",
     );
 
     const strong = container.querySelector("strong");
@@ -69,7 +69,7 @@ this is a _paragraph_!
 
   it("should render code blocks with a class derived from the language", async () => {
     const source = ["this is a", "", "```java", "a code block", "```"].join(
-      "\n"
+      "\n",
     );
     const { container } = await renderMarked(source);
 
@@ -119,7 +119,7 @@ this is a _paragraph_!
 
   it("should render links", async () => {
     const { container } = await renderMarked(
-      "this is a [link](/to/another/page) to another page"
+      "this is a [link](/to/another/page) to another page",
     );
     const link = container.querySelector("a");
 
@@ -129,7 +129,7 @@ this is a _paragraph_!
 
   it("should not render unrecognised scripts", () => {
     const { container } = renderMarked(
-      'this is some\n<script scr="path/to/script"></script>'
+      'this is some\n<script scr="path/to/script"></script>',
     );
     expect(container.innerHTML).not.toContain("script");
   });
@@ -137,12 +137,12 @@ this is a _paragraph_!
   describe("gists", () => {
     it("should replace gist scripts with a component", async () => {
       const { container } = renderMarked(
-        '<script src="https://gist.github.com/valotas/09f8fabc1a1db4b108b3.js?file=expectObservable"></script>'
+        '<script src="https://gist.github.com/valotas/09f8fabc1a1db4b108b3.js?file=expectObservable"></script>',
       );
 
       await waitFor(() => {
         expect(container.innerHTML).toContain(
-          "https://gist.github.com/valotas/09f8fabc1a1db4b108b3"
+          "https://gist.github.com/valotas/09f8fabc1a1db4b108b3",
         );
       });
     });
@@ -154,7 +154,7 @@ this is a _paragraph_!
     ].forEach(({ file, language }) => {
       it(`renders 'language-${language}' for file '${file}'`, async () => {
         const { container } = renderMarked(
-          `<script src="https://gist.github.com/valotas/09f8fabc1a1db4b108b3.js?file=${file}"></script>`
+          `<script src="https://gist.github.com/valotas/09f8fabc1a1db4b108b3.js?file=${file}"></script>`,
         );
 
         await waitFor(() => {

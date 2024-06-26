@@ -45,7 +45,7 @@ class Sitemap {
         }
         return acc;
       },
-      { md: [], other: [] }
+      { md: [], other: [] },
     );
   }
 

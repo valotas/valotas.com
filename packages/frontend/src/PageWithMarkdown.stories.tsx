@@ -1,4 +1,3 @@
-import React from "react";
 import { ComponentMeta, ComponentStory } from "@storybook/react";
 import trueArticle from "../../web/src/articles/testing-rxjs.md";
 import articleContainingTweet from "../../web/src/articles/devoxx-2014.md";
