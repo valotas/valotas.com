@@ -1,4 +1,3 @@
-import React from "react";
 import { Link } from "./links";
 import { tw } from "./twind";
 import { name } from "./title";

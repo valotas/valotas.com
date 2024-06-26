@@ -1,5 +1,4 @@
 import { act, render } from "@testing-library/react";
-import React from "react";
 import { PageRenderer } from "./PageRenderer";
 import { history } from "./History";
 

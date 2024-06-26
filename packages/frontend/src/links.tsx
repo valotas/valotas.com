@@ -1,4 +1,4 @@
-import React, { MouseEvent, useCallback, PropsWithChildren } from "react";
+import { MouseEvent, useCallback, PropsWithChildren } from "react";
 import { tw } from "./twind";
 import { Icon, IconProps } from "./Icon";
 import { history } from "./History";

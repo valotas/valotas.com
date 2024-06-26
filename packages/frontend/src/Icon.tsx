@@ -1,4 +1,3 @@
-import React from "react";
 import { tw } from "./twind";
 
 function LinkedInIcon() {

@@ -1,4 +1,4 @@
-import React, { PropsWithChildren } from "react";
+import { PropsWithChildren } from "react";
 import { getGrammar, highlight } from "./prism";
 import { tw } from "./twind";
 
