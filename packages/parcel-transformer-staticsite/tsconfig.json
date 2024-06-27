@@ -5,7 +5,7 @@
       and https://parceljs.org/languages/typescript/ to see why some
       values have been chosen
      */
-    "module": "CommonJS",
+    "module": "ES2020",
     "target": "es2020",
     "moduleResolution": "Node",
     "isolatedModules": true,

@@ -1,11 +1,11 @@
 import React from "react";
 import { DEFAULT_MARKDOWN_RENDERERS, Markdown } from "react-marked-renderer";
-import { CodeBlock } from "./CodeBlock";
-import { CodeSpan } from "./CodeSpan";
-import { Heading } from "./Heading";
-import { Html } from "./Html";
-import { List } from "./List";
-import { MarkedLink } from "./MarkedLink";
+import { CodeBlock } from "./CodeBlock.js";
+import { CodeSpan } from "./CodeSpan.js";
+import { Heading } from "./Heading.js";
+import { Html } from "./Html.js";
+import { List } from "./List.js";
+import { MarkedLink } from "./MarkedLink.js";
 
 const renderers = {
   ...DEFAULT_MARKDOWN_RENDERERS,

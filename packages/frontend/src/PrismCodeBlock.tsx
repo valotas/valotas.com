@@ -1,6 +1,7 @@
+import React from "react";
 import { PropsWithChildren } from "react";
-import { getGrammar, highlight } from "./prism";
-import { tw } from "./twind";
+import { getGrammar, highlight } from "./prism.js";
+import { tw } from "./twind.js";
 
 export type PrismCodeProps = {
   language?: string;

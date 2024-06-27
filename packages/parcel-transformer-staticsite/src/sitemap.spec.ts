@@ -1,10 +1,12 @@
 /* eslint-env jest */
 import * as path from "path";
+import { fileURLToPath } from "node:url";
 import { NodeFS } from "@parcel/fs";
-import { _parseSitemapContent } from "./sitemap";
+import { _parseSitemapContent } from "./sitemap.js";
 
 const fs = new NodeFS();
 
+const __filename = fileURLToPath(import.meta.url);
 const filePath = path.resolve(
   __filename,
   "..",

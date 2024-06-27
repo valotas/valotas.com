@@ -5,7 +5,7 @@ import {
   CloudFrontClient,
   CreateInvalidationCommand,
 } from "@aws-sdk/client-cloudfront";
-import { getBranch } from "./utils";
+import { getBranch } from "./utils.js";
 
 class AWSService {
   private region = "eu-central-1";

@@ -1,6 +1,7 @@
+import React from "react";
 import { useMemo } from "react";
-import { useFetchCounter } from "./FetchTracker";
-import { tw, animation, keyframes } from "./twind";
+import { useFetchCounter } from "./FetchTracker.js";
+import { tw, animation, keyframes } from "./twind.js";
 
 function creatingAnimation() {
   return animation(

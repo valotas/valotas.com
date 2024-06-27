@@ -1,6 +1,7 @@
+import React from "react";
 import { act, render } from "@testing-library/react";
-import { PageRenderer } from "./PageRenderer";
-import { history } from "./History";
+import { PageRenderer } from "./PageRenderer.js";
+import { history } from "./History.js";
 
 jest.mock("./History", () => {
   const history = jest.fn();

@@ -1,7 +1,7 @@
 import { render, screen, waitFor } from "@testing-library/react";
 import { marked } from "marked";
 import React from "react";
-import { MarkedContent } from "./MarkedContent";
+import { MarkedContent } from "./MarkedContent.js";
 
 describe("MarkedContent", () => {
   function renderMarked(raw: string) {

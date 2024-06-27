@@ -1,7 +1,7 @@
 import React, { PropsWithChildren } from "react";
-import { useFetch } from "../AsyncContext";
-import { LinkWithIcon } from "../links";
-import { PrismCodeBlock } from "../PrismCodeBlock";
+import { useFetch } from "../AsyncContext.js";
+import { LinkWithIcon } from "../links.js";
+import { PrismCodeBlock } from "../PrismCodeBlock.js";
 
 function computeLanguage(file?: string) {
   if (file && file.indexOf(".js") > 0) {

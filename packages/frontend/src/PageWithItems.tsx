@@ -1,8 +1,9 @@
-import { DateSpan } from "./DateSpan";
-import { Page, PageProps } from "./Page";
-import { tw } from "./twind";
-import { Anchor, Link } from "./links";
-import { MarkedContent } from "./marked/MarkedContent";
+import React from "react";
+import { DateSpan } from "./DateSpan.js";
+import { Page, PageProps } from "./Page.js";
+import { tw } from "./twind.js";
+import { Anchor, Link } from "./links.js";
+import { MarkedContent } from "./marked/MarkedContent.js";
 
 export type PageItem = {
   date?: string;

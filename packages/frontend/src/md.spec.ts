@@ -1,4 +1,4 @@
-import * as md from "./md";
+import * as md from "./md.js";
 
 describe("md", () => {
   it("exports parse function", () => {

@@ -1,7 +1,7 @@
 import React, { useCallback } from "react";
 import { HtmlRendererProps } from "react-marked-renderer";
-import { Script } from "../Script";
-import { Gist, parseGist } from "./Gist";
+import { Script } from "../Script.js";
+import { Gist, parseGist } from "./Gist.js";
 
 const twitterUrl = "//platform.twitter.com/widgets.js";
 

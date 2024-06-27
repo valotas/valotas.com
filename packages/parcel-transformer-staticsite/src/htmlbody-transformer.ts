@@ -1,6 +1,6 @@
 import { compileFile } from "pug";
 import { createTitle } from "@valotas/valotas-frontend";
-import { StaticSiteTransformerFn } from "./StaticSiteTransformer";
+import { StaticSiteTransformerFn } from "./StaticSiteTransformer.js";
 
 function getString(obj: object, prop: string) {
   const value = (obj as any)[prop];

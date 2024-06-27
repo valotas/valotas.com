@@ -1,7 +1,8 @@
+import React from "react";
 import { MouseEvent, useCallback, PropsWithChildren } from "react";
-import { tw } from "./twind";
-import { Icon, IconProps } from "./Icon";
-import { history } from "./History";
+import { tw } from "./twind.js";
+import { Icon, IconProps } from "./Icon.js";
+import { history } from "./History.js";
 
 function computeHref(href: string) {
   if (!href.endsWith("/")) {

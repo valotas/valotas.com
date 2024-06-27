@@ -1,9 +1,9 @@
 import type { MutableAsset, PluginLogger } from "@parcel/types";
 import { parse } from "@valotas/valotas-frontend";
-import { render } from "@valotas/valotas-frontend/dist/render";
-import { StaticSiteTransformerFn } from "./StaticSiteTransformer";
-import { createLazyDependency } from "./dep";
-import { computeKey } from "./key-factory";
+import { render } from "@valotas/valotas-frontend/dist/render.js";
+import { StaticSiteTransformerFn } from "./StaticSiteTransformer.js";
+import { createLazyDependency } from "./dep.js";
+import { computeKey } from "./key-factory.js";
 
 export type MdTrasformerConfig = {
   pkgVersion: string;

@@ -1,10 +1,10 @@
 import * as path from "path";
 import type { Transformer as TransformerOpts } from "@parcel/types";
 import { Transformer } from "@parcel/plugin";
-import { transformSitemap } from "./sitemap-transformer";
-import { transformRobots } from "./robots-transformer";
-import { transformMd } from "./md-transformer";
-import { transformHtmlBody } from "./htmlbody-transformer";
+import { transformSitemap } from "./sitemap-transformer.js";
+import { transformRobots } from "./robots-transformer.js";
+import { transformMd } from "./md-transformer.js";
+import { transformHtmlBody } from "./htmlbody-transformer.js";
 
 export type MdTrasformerConfig = {
   pkgVersion: string;

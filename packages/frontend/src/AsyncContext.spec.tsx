@@ -1,6 +1,7 @@
+import React from "react";
 import fetchMock from "jest-fetch-mock";
 import { render, waitFor } from "@testing-library/react";
-import { useFetch } from "./AsyncContext";
+import { useFetch } from "./AsyncContext.js";
 
 function UseFetchTester({ url }: { url: string }) {
   const { content, loading } = useFetch(url);
@@ -10,7 +11,7 @@ function UseFetchTester({ url }: { url: string }) {
 
 describe("AsyncContext", () => {
   beforeEach(() => {
-    fetchMock.resetMocks();
+    fetchMock.default.resetMocks();
   });
 
   describe("useFetch", () => {
@@ -26,7 +27,7 @@ describe("AsyncContext", () => {
     it("it returns { loading: true } while response is not done", async () => {
       const url = "/url/to/be/fetched/2";
       //eslint-disable-next-line
-      fetchMock.mockReturnValue(new Promise((_) => {}));
+      fetchMock.default.mockReturnValue(new Promise((_) => {}));
 
       const { container } = render(<UseFetchTester url={url} />);
 
@@ -38,7 +39,7 @@ describe("AsyncContext", () => {
     it("it returns { loading: false, content } when response is done", async () => {
       const url = "/url/to/be/fetched/3";
       const content = "this is the content";
-      fetchMock.mockOnce(content);
+      fetchMock.default.mockOnce(content);
 
       const { container } = render(<UseFetchTester url={url} />);
 

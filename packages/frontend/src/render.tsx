@@ -1,10 +1,11 @@
-import { renderToString } from "react-dom/server";
-import nfetch from "node-fetch";
+import React from "react";
+import { renderToString } from "react-dom/server.js";
 import { asyncVirtualSheet, getStyleTag } from "twind/server";
-import { setup } from "./twind";
-import { FetchContent, createAsyncContextProvider } from "./AsyncContext";
-import { PageRenderer, PageRendererProps } from "./PageRenderer";
+import { setup } from "./twind.js";
+import { FetchContent, createAsyncContextProvider } from "./AsyncContext.js";
+import { PageRenderer, PageRendererProps } from "./PageRenderer.js";
 
+const _fetch = fetch;
 const sheet = asyncVirtualSheet();
 setup({ sheet });
 
@@ -26,7 +27,7 @@ export async function render({
     fetchContent ||
     ((url: string) => {
       logger?.log(`Downloading ${url}`);
-      return nfetch(url).then((b) => {
+      return _fetch(url).then((b) => {
         if (!b.ok) {
           throw new Error(`Could not download ${url}`);
         }

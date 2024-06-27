@@ -2,11 +2,11 @@ import * as path from "path";
 import type { FileSystem } from "@parcel/fs";
 import type { TransformerResult } from "@parcel/types";
 import { parse } from "@valotas/valotas-frontend";
-import { parseSitemap } from "./sitemap";
-import { StaticSiteTransformerFn } from "./StaticSiteTransformer";
-import { sortByDate } from "./date-sorter";
-import { createParallelDependency } from "./dep";
-import { computeKey } from "./key-factory";
+import { parseSitemap } from "./sitemap.js";
+import { StaticSiteTransformerFn } from "./StaticSiteTransformer.js";
+import { sortByDate } from "./date-sorter.js";
+import { createParallelDependency } from "./dep.js";
+import { computeKey } from "./key-factory.js";
 
 type MD = ReturnType<typeof parse> & { key: string; specifier: string };
 type MDMeta = Omit<MD, "raw" | "specifier">;

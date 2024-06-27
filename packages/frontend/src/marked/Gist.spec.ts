@@ -1,4 +1,4 @@
-import { parseGist } from "./Gist";
+import { parseGist } from "./Gist.js";
 
 describe("Gist", () => {
   describe("parseGist", () => {

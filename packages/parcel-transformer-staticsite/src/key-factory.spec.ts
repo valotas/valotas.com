@@ -1,6 +1,6 @@
 /* eslint-env jest */
 
-import { computeKey } from "./key-factory";
+import { computeKey } from "./key-factory.js";
 
 describe("key-factory", () => {
   test("returns the base name", () => {

@@ -1,6 +1,7 @@
-import { Link } from "./links";
-import { tw } from "./twind";
-import { name } from "./title";
+import React from "react";
+import { Link } from "./links.js";
+import { tw } from "./twind.js";
+import { name } from "./title.js";
 
 export interface FooterProps {
   pkgVersion?: string;

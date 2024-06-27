@@ -1,14 +1,14 @@
 import type prism from "prismjs";
-import { languages, highlight as pHighlight } from "prismjs";
-import "prismjs/components/prism-java";
-import "prismjs/components/prism-groovy";
+import prismjs from "prismjs";
+import "prismjs/components/prism-java.js";
+import "prismjs/components/prism-groovy.js";
 
 export function getGrammar(lang = "none"): {
   grammar: prism.Grammar;
   lang: string;
   className: string;
 } {
-  const grammar = languages[lang];
+  const grammar = prismjs.languages[lang];
 
   if (!grammar) {
     return getGrammar("plain");
@@ -18,5 +18,5 @@ export function getGrammar(lang = "none"): {
 }
 
 export function highlight(code: string, grammar: prism.Grammar, lang: string) {
-  return pHighlight(code, grammar, lang);
+  return prismjs.highlight(code, grammar, lang);
 }
