@@ -17,9 +17,7 @@
     "watch:build": "tsc -p . -w",
     "test": "jest --no-cache",
     "watch:test": "jest --watch",
-    "preversion": "npm run lint && npm run build && npm run test",
-    "storybook": "start-storybook -p 6006",
-    "build-storybook": "build-storybook"
+    "preversion": "npm run lint && npm run build && npm run test"
   },
   "dependencies": {
     "@types/marked": "^4.0.2",
@@ -35,15 +33,6 @@
   },
   "devDependencies": {
     "@babel/core": "^7.24.7",
-    "@storybook/addon-actions": "^6.4.19",
-    "@storybook/addon-docs": "^6.4.19",
-    "@storybook/addon-essentials": "^6.4.19",
-    "@storybook/addon-interactions": "^6.4.19",
-    "@storybook/addon-links": "^6.4.19",
-    "@storybook/builder-webpack5": "^6.4.19",
-    "@storybook/manager-webpack5": "^6.4.19",
-    "@storybook/react": "^6.4.19",
-    "@storybook/testing-library": "^0.0.9",
     "@types/react": "^17.0.0",
     "@types/react-dom": "^17.0.0",
     "babel-loader": "^8.2.3"
