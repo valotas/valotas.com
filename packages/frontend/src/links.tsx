@@ -1,5 +1,4 @@
 import { MouseEvent, useCallback, PropsWithChildren } from "react";
-import { tw } from "./twind.js";
 import { Icon, IconProps } from "./Icon.js";
 import { history } from "./History.js";
 
@@ -70,22 +69,28 @@ export function Link({
     <Anchor
       href={href}
       target={target || "_self"}
-      className={tw(
+      className={`${
         noUnderline
           ? ""
-          : "border-b-1 border-gray-300 hover:border-gray-500 leading-tight inline-block",
-        className,
-      )}
+          : "border-b-1 border-gray-300 hover:border-gray-500 leading-tight inline-block"
+      } ${className || ""}`}
     >
       {children}
     </Anchor>
   );
 }
 
+const sizeToClassName = new Map<string, string>([
+  ["gray-500", "text-gray-700"],
+]);
+const sizeToFillClassName = new Map<string, string>([
+  ["gray-500", "fill-gray-700"],
+]);
+
 export type TextLinkProps = LinkProps & {
   icon: IconProps["name"];
   title: string;
-  color?: string;
+  color?: "gray-500";
 };
 
 export function LinkWithIcon({
@@ -95,7 +100,8 @@ export function LinkWithIcon({
   className,
   ...linkProps
 }: TextLinkProps) {
-  const colorClassName = tw`text-${color}`;
+  //TODO: fix this
+  const colorClassName = sizeToClassName.get(color);
   const classNameWithColor = `${className || ""} ${colorClassName}`;
 
   return (
@@ -103,8 +109,8 @@ export function LinkWithIcon({
       className={`inline-flex items-center ${classNameWithColor}`}
       {...linkProps}
     >
-      <Icon name={icon} size="4" className={tw`fill-${color}`} />
-      <span className={tw`pl-2`}>{title}</span>
+      <Icon name={icon} size="4" className={sizeToFillClassName.get(color)} />
+      <span className={`pl-2`}>{title}</span>
     </Link>
   );
 }

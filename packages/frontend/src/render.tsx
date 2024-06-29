@@ -1,12 +1,8 @@
 import { renderToString } from "react-dom/server";
-import { asyncVirtualSheet, getStyleTag } from "twind/server";
-import { setup } from "./twind.js";
 import { FetchContent, createAsyncContextProvider } from "./AsyncContext.js";
 import { PageRenderer, PageRendererProps } from "./PageRenderer.js";
 
 const _fetch = fetch;
-const sheet = asyncVirtualSheet();
-setup({ sheet });
 
 export type Logger = {
   log(msg: string): void;
@@ -52,13 +48,8 @@ export async function render({
   await all();
   skipSSE();
 
-  // prepare the extraction of stylesheet
-  sheet.reset();
-
   //re-render the component
   const body = renderToString(comp);
 
-  const styles = getStyleTag(sheet);
-
-  return { body, styles };
+  return { body };
 }

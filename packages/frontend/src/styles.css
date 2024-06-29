@@ -1,0 +1,17 @@
+@keyframes loading-bar {
+  0% {
+    width: 0;
+  }
+  50% {
+    width: 100%;
+    margin-left: 0;
+  }
+  100% {
+    margin-left: 100%;
+    width: 0;
+  }
+}
+
+.loading-bar {
+  animation: loading-bar 1.2s ease-out infinite;
+}

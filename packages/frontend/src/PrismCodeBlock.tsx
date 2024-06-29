@@ -1,6 +1,5 @@
 import { PropsWithChildren } from "react";
 import { getGrammar, highlight } from "./prism.js";
-import { tw } from "./twind.js";
 
 export type PrismCodeProps = {
   language?: string;
@@ -15,8 +14,8 @@ export function PrismCodeBlock({
   children,
 }: PropsWithChildren<PrismCodeProps>) {
   return (
-    <div className={tw`bg-gray-100 rounded`}>
-      {title && <div className={tw`px-3 pt-2`}>{title}</div>}
+    <div className={`bg-gray-100 rounded`}>
+      {title && <div className={`px-3 pt-2`}>{title}</div>}
       <PossiblyHighlightedCode language={language} code={code}>
         {children}
       </PossiblyHighlightedCode>
