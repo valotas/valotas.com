@@ -1,4 +1,3 @@
-import React from "react";
 import { Page, PageProps } from "./Page.js";
 import { MarkedContent } from "./marked/MarkedContent.js";
 

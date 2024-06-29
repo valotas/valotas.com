@@ -1,4 +1,3 @@
-import React from "react";
 import fetchMock from "jest-fetch-mock";
 import { render, waitFor } from "@testing-library/react";
 import { useFetch } from "./AsyncContext.js";

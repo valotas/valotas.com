@@ -1,4 +1,3 @@
-import React from "react";
 import { DateSpan } from "./DateSpan.js";
 import { tw } from "./twind.js";
 import { Icon, IconProps } from "./Icon.js";

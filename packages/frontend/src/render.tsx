@@ -1,4 +1,3 @@
-import React from "react";
 import { renderToString } from "react-dom/server";
 import { asyncVirtualSheet, getStyleTag } from "twind/server";
 import { setup } from "./twind.js";

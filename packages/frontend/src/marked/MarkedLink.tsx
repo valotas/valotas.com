@@ -1,4 +1,3 @@
-import React from "react";
 // @ts-expect-error TS2305
 import { LinkRendererProps } from "react-marked-renderer";
 import { Link } from "../links.js";
