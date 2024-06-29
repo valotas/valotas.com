@@ -1,4 +1,4 @@
-import React from "react";
+// @ts-expect-error TS2305
 import { CodeBlockRendererProps } from "react-marked-renderer";
 import { PrismCodeBlock } from "../PrismCodeBlock.js";
 

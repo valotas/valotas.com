@@ -1,4 +1,3 @@
-import React from "react";
 import fetchMock from "jest-fetch-mock";
 import { render, fireEvent, waitFor } from "@testing-library/react";
 import { Anchor } from "./links.js";

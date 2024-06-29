@@ -1,4 +1,3 @@
-import React from "react";
 import { PropsWithChildren, StrictMode } from "react";
 import { tw } from "./twind.js";
 import { Footer, FooterProps } from "./Footer.js";

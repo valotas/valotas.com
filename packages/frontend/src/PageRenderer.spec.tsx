@@ -1,4 +1,3 @@
-import React from "react";
 import { act, render } from "@testing-library/react";
 import { PageRenderer } from "./PageRenderer.js";
 import { history } from "./History.js";

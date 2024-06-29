@@ -1,4 +1,5 @@
 import React, { useCallback } from "react";
+// @ts-expect-error TS2305
 import { HtmlRendererProps } from "react-marked-renderer";
 import { Script } from "../Script.js";
 import { Gist, parseGist } from "./Gist.js";

@@ -1,4 +1,3 @@
-import React from "react";
 import { DateSpan } from "./DateSpan.js";
 import { Page, PageProps } from "./Page.js";
 import { tw } from "./twind.js";

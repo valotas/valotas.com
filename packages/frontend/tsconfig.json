@@ -9,7 +9,7 @@
     "outDir": "dist/",
     "declaration": true,
     "target": "es2021",
-    "jsx": "react",
+    "jsx": "react-jsx",
     "module": "Node16",
     "moduleResolution": "node16",
     "isolatedModules": true,

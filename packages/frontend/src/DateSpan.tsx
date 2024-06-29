@@ -1,4 +1,3 @@
-import React from "react";
 import { format as fnsFormat, parseISO } from "date-fns";
 import { tw } from "./twind.js";
 

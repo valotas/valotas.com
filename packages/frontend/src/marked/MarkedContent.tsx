@@ -1,4 +1,4 @@
-import React from "react";
+// @ts-expect-error TS2305
 import { DEFAULT_MARKDOWN_RENDERERS, Markdown } from "react-marked-renderer";
 import { CodeBlock } from "./CodeBlock.js";
 import { CodeSpan } from "./CodeSpan.js";
