@@ -1,5 +1,6 @@
+import React from "react";
 import { render, screen } from "@testing-library/react";
-import { PageWithMarkdown } from "./PageWithMarkdown";
+import { PageWithMarkdown } from "./PageWithMarkdown.js";
 
 describe("PageWithMarkdown", () => {
   it("should render html", async () => {

@@ -1,4 +1,5 @@
-import { tw } from "./twind";
+import React from "react";
+import { tw } from "./twind.js";
 
 function LinkedInIcon() {
   return (

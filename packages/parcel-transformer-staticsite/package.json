@@ -3,6 +3,7 @@
   "version": "3.10.6",
   "private": true,
   "main": "./dist/StaticSiteTransformer.js",
+  "type": "module",
   "engines": {
     "parcel": "2.x"
   },

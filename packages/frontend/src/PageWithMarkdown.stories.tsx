@@ -1,8 +1,9 @@
+import React from "react";
 import { ComponentMeta, ComponentStory } from "@storybook/react";
 import trueArticle from "../../web/src/articles/testing-rxjs.md";
 import articleContainingTweet from "../../web/src/articles/devoxx-2014.md";
-import { PageWithMarkdown } from "./PageWithMarkdown";
-import { AsyncContext, AsyncContextState } from "./AsyncContext";
+import { PageWithMarkdown } from "./PageWithMarkdown.js";
+import { AsyncContext, AsyncContextState } from "./AsyncContext.js";
 
 export default {
   title: "PageWithMarkdown",

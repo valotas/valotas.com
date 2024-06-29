@@ -1,7 +1,7 @@
 import { createElement } from "react";
 import { HeadingRendererProps } from "react-marked-renderer";
 import { apply } from "twind";
-import { tw } from "../twind";
+import { tw } from "../twind.js";
 
 type HeadingWeight = "h1" | "h2" | "h3" | "h4";
 const depths = [1, 2, 3, 4];

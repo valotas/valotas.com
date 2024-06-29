@@ -1,7 +1,8 @@
+import React from "react";
 import fetchMock from "jest-fetch-mock";
 import { render, fireEvent, waitFor } from "@testing-library/react";
-import { Anchor } from "./links";
-import * as history from "./History";
+import { Anchor } from "./links.js";
+import * as history from "./History.js";
 
 jest.mock("./History", () => ({
   history: jest.fn(),
@@ -9,7 +10,7 @@ jest.mock("./History", () => ({
 
 describe("links", () => {
   beforeEach(() => {
-    fetchMock.resetMocks();
+    fetchMock.default.resetMocks();
 
     jest.mocked(history.history).mockReturnValue({
       pushState: jest.fn(),
@@ -59,7 +60,7 @@ describe("links", () => {
 
     it("pushes the fetched state to history", async () => {
       const payload = "payload";
-      fetchMock.mockOnce(payload);
+      fetchMock.default.mockOnce(payload);
       const pushState = jest.fn();
       jest.mocked(history.history).mockReturnValue({
         pushState,
@@ -84,7 +85,7 @@ describe("links", () => {
 
     it("pushes an href with an ending / to the history", async () => {
       const payload = "payload";
-      fetchMock.mockOnce(payload);
+      fetchMock.default.mockOnce(payload);
       const pushState = jest.fn();
       jest.mocked(history.history).mockReturnValue({
         pushState,

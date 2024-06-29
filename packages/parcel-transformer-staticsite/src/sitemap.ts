@@ -1,8 +1,10 @@
 import * as path from "path";
-import { glob, isGlob, normalizeSeparators } from "@parcel/utils";
+import parcelUtils from "@parcel/utils";
 import type { FileSystem } from "@parcel/fs";
 import type { MutableAsset } from "@parcel/types";
-import { computeKey } from "./key-factory";
+import { computeKey } from "./key-factory.js";
+
+const { glob, isGlob, normalizeSeparators } = parcelUtils;
 
 export type SitemapDependency = {
   key: string;

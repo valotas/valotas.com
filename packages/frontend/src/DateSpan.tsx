@@ -1,6 +1,6 @@
-import { parseISO } from "date-fns/fp";
-import { format as fnsFormat } from "date-fns";
-import { tw } from "./twind";
+import React from "react";
+import { format as fnsFormat, parseISO } from "date-fns";
+import { tw } from "./twind.js";
 
 export type DateSpanProps = {
   iso?: string;

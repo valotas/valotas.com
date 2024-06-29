@@ -1,7 +1,7 @@
-import { createParallelDependency } from "./dep";
-import { computeKey } from "./key-factory";
-import { parseRobots } from "./robots";
-import { StaticSiteTransformerFn } from "./StaticSiteTransformer";
+import { createParallelDependency } from "./dep.js";
+import { computeKey } from "./key-factory.js";
+import { parseRobots } from "./robots.js";
+import { StaticSiteTransformerFn } from "./StaticSiteTransformer.js";
 
 export const transformRobots: StaticSiteTransformerFn = async ({ asset }) => {
   const robotsContent = await asset.getCode();

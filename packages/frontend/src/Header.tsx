@@ -1,8 +1,9 @@
-import { DateSpan } from "./DateSpan";
-import { tw } from "./twind";
-import { Icon, IconProps } from "./Icon";
-import { createTitle } from "./title";
-import { Anchor, Link } from "./links";
+import React from "react";
+import { DateSpan } from "./DateSpan.js";
+import { tw } from "./twind.js";
+import { Icon, IconProps } from "./Icon.js";
+import { createTitle } from "./title.js";
+import { Anchor, Link } from "./links.js";
 
 export interface HeaderProps {
   title?: string | null;

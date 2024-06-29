@@ -1,6 +1,6 @@
 import React from "react";
 import { CodeBlockRendererProps } from "react-marked-renderer";
-import { PrismCodeBlock } from "../PrismCodeBlock";
+import { PrismCodeBlock } from "../PrismCodeBlock.js";
 
 export function CodeBlock({ lang, children }: CodeBlockRendererProps) {
   const code = typeof children === "string" ? children : undefined;

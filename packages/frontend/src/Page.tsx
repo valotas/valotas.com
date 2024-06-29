@@ -1,9 +1,10 @@
+import React from "react";
 import { PropsWithChildren, StrictMode } from "react";
-import { tw } from "./twind";
-import { Footer, FooterProps } from "./Footer";
-import { Header, HeaderProps } from "./Header";
-import { LoadingBar } from "./LoadingBar";
-import { FetchTracker } from "./FetchTracker";
+import { tw } from "./twind.js";
+import { Footer, FooterProps } from "./Footer.js";
+import { Header, HeaderProps } from "./Header.js";
+import { LoadingBar } from "./LoadingBar.js";
+import { FetchTracker } from "./FetchTracker.js";
 
 export type PageProps = FooterProps & HeaderProps;
 

@@ -1,5 +1,6 @@
+import React from "react";
 import { ComponentMeta, ComponentStory } from "@storybook/react";
-import { PageWithItems } from "./PageWithItems";
+import { PageWithItems } from "./PageWithItems.js";
 
 export default {
   title: "PageWithItems",

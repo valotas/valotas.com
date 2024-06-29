@@ -1,8 +1,8 @@
-import { useCallback, useEffect, useState } from "react";
-import { PageWithItems, PageWithListProps } from "./PageWithItems";
-import { PageWithMarkdown, PageWithMarkdownProps } from "./PageWithMarkdown";
-import { createTitle } from "./title";
-import { history } from "./History";
+import React, { useCallback, useEffect, useState } from "react";
+import { PageWithItems, PageWithListProps } from "./PageWithItems.js";
+import { PageWithMarkdown, PageWithMarkdownProps } from "./PageWithMarkdown.js";
+import { createTitle } from "./title.js";
+import { history } from "./History.js";
 
 function getPageProps(input: PageRendererProps) {
   if ("payload" in input) {

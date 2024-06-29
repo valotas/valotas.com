@@ -1,4 +1,4 @@
-import { render } from "./render";
+import { render } from "./render.js";
 
 describe("render", () => {
   test("returns an html string", async () => {

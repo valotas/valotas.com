@@ -1,5 +1,6 @@
+import React from "react";
 import { PropsWithChildren, useContext, useCallback, useState } from "react";
-import { AsyncContext } from "./AsyncContext";
+import { AsyncContext } from "./AsyncContext.js";
 
 export function FetchTracker({ children }: PropsWithChildren<unknown>) {
   const {

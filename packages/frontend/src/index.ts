@@ -1,9 +1,9 @@
-import { setup } from "./twind";
-export * from "./PageWithMarkdown";
-export * from "./PageWithItems";
-export * from "./PageRenderer";
-export * from "./md";
-export * from "./title";
-export * from "./History";
+import { setup } from "./twind.js";
+export * from "./PageWithMarkdown.js";
+export * from "./PageWithItems.js";
+export * from "./PageRenderer.js";
+export * from "./md.js";
+export * from "./title.js";
+export * from "./History.js";
 
 setup();

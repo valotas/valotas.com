@@ -1,8 +1,8 @@
 /* eslint-env node */
 import { Reporter } from "@parcel/plugin";
 import * as chalk from "chalk";
-import { createAWSService } from "./AWSService";
-import { createRedirectionRule, log } from "./utils";
+import { createAWSService } from "./AWSService.js";
+import { createRedirectionRule, log } from "./utils.js";
 
 export default new Reporter({
   async report({ event }) {

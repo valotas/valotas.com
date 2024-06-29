@@ -1,6 +1,6 @@
 import { createElement } from "react";
 import { ListRendererProps } from "react-marked-renderer";
-import { tw } from "../twind";
+import { tw } from "../twind.js";
 
 export function List({ children, ordered }: ListRendererProps) {
   const Component = ordered ? "ol" : "ul";

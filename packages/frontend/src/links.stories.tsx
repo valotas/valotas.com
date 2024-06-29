@@ -1,7 +1,8 @@
+import React from "react";
 import { ComponentMeta, ComponentStory } from "@storybook/react";
-import { PageWithMarkdown } from "./PageWithMarkdown";
-import { Link } from "./links";
-import { CodeSpan } from "./marked/CodeSpan";
+import { PageWithMarkdown } from "./PageWithMarkdown.js";
+import { Link } from "./links.js";
+import { CodeSpan } from "./marked/CodeSpan.js";
 
 export default {
   title: "links",

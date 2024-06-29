@@ -1,6 +1,6 @@
 /* eslint-env jest */
 
-import { createAlias } from "./utils";
+import { createAlias } from "./utils.js";
 
 describe("utils", () => {
   describe("createAlias", () => {
