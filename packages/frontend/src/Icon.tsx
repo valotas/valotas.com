@@ -1,5 +1,3 @@
-import { tw } from "./twind.js";
-
 function LinkedInIcon() {
   return (
     <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512">
@@ -32,9 +30,14 @@ function Instagram() {
   );
 }
 
+const sizeToClassName = new Map<string, string>([
+  ["8", "w-8 h-8"],
+  ["4", "w-4 h-4"],
+]);
+
 export interface IconProps {
   name: "linkedin" | "github" | "twitter" | "ig";
-  size?: string;
+  size?: "8" | "4";
   className?: string;
 }
 
@@ -55,7 +58,9 @@ export function Icon({ name, className, size = "8" }: IconProps) {
   }
 
   return (
-    <div className={tw`inline-block w-${size} h-${size} ${className || ""}`}>
+    <div
+      className={`inline-block ${sizeToClassName.get(size)} ${className || ""}`}
+    >
       <TheIcon />
     </div>
   );

@@ -79,13 +79,12 @@ export const transformMd: StaticSiteTransformerFn = async ({
     return [];
   }
 
-  const { body, styles, ...renderProps } = page;
+  const { body, ...renderProps } = page;
 
   const paylod = JSON.stringify(renderProps);
 
   asset.meta.payload = paylod;
   asset.meta.title = "title" in renderProps ? renderProps.title : "";
-  asset.meta.styles = styles;
   asset.meta.key = asset.meta.key || computeKey(asset.filePath).name;
   asset.meta.date = "date" in renderProps ? renderProps.date : undefined;
 

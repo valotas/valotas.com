@@ -1,6 +1,5 @@
 import { DateSpan } from "./DateSpan.js";
 import { Page, PageProps } from "./Page.js";
-import { tw } from "./twind.js";
 import { Anchor, Link } from "./links.js";
 import { MarkedContent } from "./marked/MarkedContent.js";
 
@@ -17,13 +16,13 @@ function PageItemPresenter({
   item: PageItem;
 }) {
   return (
-    <div className={tw`mt-10`}>
+    <div className={`mt-10`}>
       <DateSpan iso={date} />
       <div>
         <Anchor
           href={href}
           title={title}
-          className={tw`text-lg text-black font-bold no-underline hover:underline`}
+          className={`text-lg text-black font-bold no-underline hover:underline`}
         >
           {title}
         </Anchor>
@@ -32,7 +31,7 @@ function PageItemPresenter({
       <Link
         href={href}
         noUnderline
-        className={tw`text-sm text-gray-500 hover:text-black no-underline hover:underline`}
+        className={`text-sm text-gray-500 hover:text-black no-underline hover:underline`}
       >
         More →
       </Link>

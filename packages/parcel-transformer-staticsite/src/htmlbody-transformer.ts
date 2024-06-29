@@ -15,7 +15,6 @@ function getString(obj: object, prop: string) {
 export const transformHtmlBody: StaticSiteTransformerFn = async ({
   asset,
   config,
-  logger,
 }) => {
   const { defaultTemplate } = config;
   if (!defaultTemplate) {
@@ -29,21 +28,13 @@ export const transformHtmlBody: StaticSiteTransformerFn = async ({
   const renderHtml = compileFile(defaultTemplate);
 
   const title = getString(asset.meta, "title");
-  const styles = getString(asset.meta, "styles");
   const payload = getString(asset.meta, "payload");
 
   const html = renderHtml({
     title: createTitle(title),
     body,
-    styles,
     payload: Buffer.from(payload).toString("base64"),
   });
-
-  if (html.indexOf(styles) < 0) {
-    logger.warn({
-      message: `Styles have not been rendered for ${asset.filePath}`,
-    });
-  }
 
   asset.type = "html";
   asset.setCode(html);

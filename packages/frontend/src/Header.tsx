@@ -1,5 +1,4 @@
 import { DateSpan } from "./DateSpan.js";
-import { tw } from "./twind.js";
 import { Icon, IconProps } from "./Icon.js";
 import { createTitle } from "./title.js";
 import { Anchor, Link } from "./links.js";
@@ -15,7 +14,7 @@ function LinkWithIcon({ href, ...iconProps }: IconProps & { href: string }) {
     <Anchor
       href={href}
       target="_blank"
-      className={tw`block fill-gray-500 hover:fill-black`}
+      className={`block fill-gray-500 hover:fill-black`}
     >
       <Icon {...iconProps} />
     </Anchor>
@@ -25,24 +24,24 @@ function LinkWithIcon({ href, ...iconProps }: IconProps & { href: string }) {
 export function Header({ title, date, tags }: HeaderProps) {
   return (
     <div
-      className={tw`flex flex-col md:flex-row items-center`}
+      className={`flex flex-col md:flex-row items-center`}
       data-testid="header"
     >
-      <div className={tw`mb-2 pr-4 md:mb-0 md:pr-6 lg:pr-12`}>
-        <div className={tw`group relative`}>
-          <Link noUnderline href="/" className={tw`flex no-underline`}>
+      <div className={`mb-2 pr-4 md:mb-0 md:pr-6 lg:pr-12`}>
+        <div className={`group relative`}>
+          <Link noUnderline href="/" className={`flex no-underline`}>
             <div
-              className={`george ${tw`h-12 w-12 lg:h-20 lg:w-20 rounded-full`}`}
+              className={`george ${`h-12 w-12 lg:h-20 lg:w-20 rounded-full`}`}
             ></div>
           </Link>
           {tags && (
             <div
-              className={tw`absolute left-0 invisible lg:group-hover:visible w-12 lg:w-20 pr-1 pb-2`}
+              className={`absolute left-0 invisible lg:group-hover:visible w-12 lg:w-20 pr-1 pb-2`}
             >
               <ul>
                 {tags.map((tag) => (
                   <li key={tag}>
-                    <Link className={tw`w-full`} href={`/tag/${tag}/`}>
+                    <Link className={`w-full`} href={`/tag/${tag}/`}>
                       {tag}
                     </Link>
                   </li>
@@ -52,14 +51,14 @@ export function Header({ title, date, tags }: HeaderProps) {
           )}
         </div>
       </div>
-      <div className={tw`flex flex-col items-center md:items-start`}>
+      <div className={`flex flex-col items-center md:items-start`}>
         <h1
-          className={tw`text-black text-xl lg:text-3xl font-extrabold leading-none lg:leading-tight`}
+          className={`text-black text-xl lg:text-3xl font-extrabold leading-none lg:leading-tight`}
         >
           {createTitle(title)}
         </h1>
         <DateSpan iso={date} />
-        <div className={tw`mt-3 lg:mt-4 flex justify-between w-40`}>
+        <div className={`mt-3 lg:mt-4 flex justify-between w-40`}>
           <LinkWithIcon href="https://github.com/valotas" name="github" />
           <LinkWithIcon
             href="https://www.linkedin.com/in/valotas"

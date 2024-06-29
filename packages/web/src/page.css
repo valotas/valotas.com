@@ -1,2 +1,6 @@
-@import "npm:@valotas/valotas-frontend/src/assets.css";
-@import "npm:prismjs/themes/prism-okaidia.css";
+@import "tailwindcss/base";
+@import "tailwindcss/components";
+@import "tailwindcss/utilities";
+@import "@valotas/valotas-frontend/src/styles.css";
+@import "@valotas/valotas-frontend/src/assets.css";
+@import "prismjs/themes/prism-okaidia.css";
