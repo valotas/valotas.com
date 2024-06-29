@@ -1,4 +1,5 @@
 import React from "react";
+// @ts-expect-error TS2305
 import { CodeSpanRendererProps } from "react-marked-renderer";
 import { tw } from "../twind.js";
 

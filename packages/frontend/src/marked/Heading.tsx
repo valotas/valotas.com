@@ -1,4 +1,5 @@
 import { createElement } from "react";
+// @ts-expect-error TS2305
 import { HeadingRendererProps } from "react-marked-renderer";
 import { apply } from "twind";
 import { tw } from "../twind.js";
