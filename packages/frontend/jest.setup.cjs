@@ -2,7 +2,7 @@
 const { TextEncoder } = require("util");
 
 const { enableFetchMocks } = require("jest-fetch-mock");
-const React = require("react");
+const React = require("preact/compat");
 
 enableFetchMocks();
 global.React = React;
