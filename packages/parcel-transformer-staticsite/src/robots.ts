@@ -28,8 +28,16 @@ class Robots {
     });
   }
 
-  getCode() {
-    return this.rules.map((rule) => `${rule.key}: ${rule.value}`).join("\n");
+  getCode(baseUrl?: string) {
+    return this.rules
+      .map((rule) => {
+        if (baseUrl && isSitemapRule(rule) && !rule.value.startsWith(baseUrl)) {
+          return { ...rule, value: new URL(rule.value, baseUrl).toString() };
+        }
+        return rule;
+      })
+      .map((rule) => `${rule.key}: ${rule.value}`)
+      .join("\n");
   }
 }
 

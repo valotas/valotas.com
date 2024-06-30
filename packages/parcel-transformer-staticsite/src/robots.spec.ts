@@ -36,6 +36,26 @@ Sitemap: /path/to/sitemap.txt
     );
   });
 
+  test.each([
+    "./path/to/sitemap.txt",
+    "/path/to/sitemap.txt",
+    "path/to/sitemap.txt",
+  ])("add the base url to sitemap value: %s", (sitemap) => {
+    const code = `
+Rule1: value1
+Sitemap: ${sitemap}
+`.trim();
+
+    const robots = parseRobots(code);
+
+    expect(robots.getCode("https://foo.bar")).toBe(
+      `
+Rule1: value1
+Sitemap: https://foo.bar/path/to/sitemap.txt    
+    `.trim(),
+    );
+  });
+
   test("retrieves the sitemap value", () => {
     const code = `
 Rule1: value1

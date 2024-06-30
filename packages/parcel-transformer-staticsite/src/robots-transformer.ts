@@ -13,7 +13,7 @@ export const transformRobots: StaticSiteTransformerFn = async ({ asset }) => {
   }
   robots.setSitemap("/sitemap.txt");
 
-  asset.setCode(robots.getCode());
+  asset.setCode(robots.getCode("https://valotas.com"));
   asset.meta.key = computeKey(asset.filePath).name;
 
   return [asset];
