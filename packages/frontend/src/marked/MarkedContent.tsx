@@ -1,20 +1,49 @@
-// @ts-expect-error TS2305
-import { DEFAULT_MARKDOWN_RENDERERS, Markdown } from "react-marked-renderer";
+import Markdown, { type MarkdownToJSX } from "markdown-to-jsx";
 import { CodeBlock } from "./CodeBlock.js";
-import { CodeSpan } from "./CodeSpan.js";
+import { MarkdownScript, isMarkdownScript } from "./MarkdownScript.js";
 import { Heading } from "./Heading.js";
-import { Html } from "./Html.js";
-import { List } from "./List.js";
-import { MarkedLink } from "./MarkedLink.js";
 
-const renderers = {
-  ...DEFAULT_MARKDOWN_RENDERERS,
-  html: Html,
-  codeblock: CodeBlock,
-  codespan: CodeSpan,
-  heading: Heading,
-  link: MarkedLink,
-  list: List,
+const codeBlock = "3";
+
+const options: MarkdownToJSX.Options = {
+  forceBlock: true,
+  renderRule(next, node, _render, state) {
+    if (node.type === codeBlock) {
+      const code = node.text;
+      return <CodeBlock key={state.key} lang={node.lang} code={code} />;
+    }
+
+    if (isMarkdownScript(node)) {
+      return <MarkdownScript key={state.key} {...node} />;
+    }
+
+    try {
+      return next();
+    } catch (e) {
+      if (e instanceof Error) {
+        e.message = `${e.message}: while rendering node: ${JSON.stringify(node)}`;
+      }
+      throw e;
+    }
+  },
+  overrides: {
+    ul: {
+      component: "ul",
+      props: { className: "pl-6 list-disc" },
+    },
+    ol: {
+      component: "ol",
+      props: { className: "pl-6 list-decimal" },
+    },
+    code: {
+      component: "code",
+      props: { className: "bg-gray-200 rounded px-1" },
+    },
+    h1: { component: Heading, props: { depth: 1 } },
+    h2: { component: Heading, props: { depth: 2 } },
+    h3: { component: Heading, props: { depth: 3 } },
+    h4: { component: Heading, props: { depth: 4 } },
+  },
 };
 
 export type MarkedContentProps = { raw: string };
@@ -22,7 +51,7 @@ export type MarkedContentProps = { raw: string };
 export function MarkedContent({ raw }: MarkedContentProps) {
   return (
     <div data-testid="marked">
-      <Markdown markdown={raw} renderers={renderers} />
+      <Markdown options={options}>{raw}</Markdown>
     </div>
   );
 }

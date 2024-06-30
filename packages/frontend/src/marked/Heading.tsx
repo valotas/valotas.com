@@ -1,6 +1,4 @@
-import { createElement } from "react";
-// @ts-expect-error TS2305
-import { HeadingRendererProps } from "react-marked-renderer";
+import { createElement, type PropsWithChildren } from "react";
 
 type HeadingWeight = "h1" | "h2" | "h3" | "h4";
 const depths = [1, 2, 3, 4];
@@ -20,7 +18,9 @@ const styles = {
   h4: `text-black leading-tight mt-4`,
 };
 
-export function Heading(props: HeadingRendererProps) {
+export type HeadingRendererProps = { depth: number };
+
+export function Heading(props: PropsWithChildren<HeadingRendererProps>) {
   const depth = getAllowedDepth(props.depth);
   const component = `h${depth}` as HeadingWeight;
   const style = styles[component];

@@ -1,5 +1,4 @@
 import { render, screen, waitFor } from "@testing-library/react";
-import { marked } from "marked";
 import { MarkedContent } from "./MarkedContent.js";
 
 describe("MarkedContent", () => {
@@ -93,7 +92,7 @@ this is a _paragraph_!
     expect(container.innerHTML).toContain("some &gt; code");
   });
 
-  it.skip("should render code blocks with a javasscript class instead of js", async () => {
+  it("should render code blocks with a javasscript class instead of js", async () => {
     const source = ["this is a", "", "```js", "a code block", "```"].join("\n");
     const { container } = await renderMarked(source);
     expect(container.innerHTML).toContain('code class="language-javascript"');
@@ -195,17 +194,6 @@ this is a _paragraph_!
     expect(code?.parentNode).toBe(anchor);
   });
 
-  it.skip("should handle escaping", () => {
-    const source = 'I\'ve used to use "©" charachters';
-    const expected = marked
-      .parse(source, {
-        smartypants: true,
-      })
-      .trim();
-    const html = renderMarked(source).container.innerHTML;
-    expect(html).toContain(expected);
-  });
-
   it("should create pre>code for code blocks", () => {
     const source = ["```", "function xyz() {};", "```"].join("\n");
     const { container } = renderMarked(source);
@@ -220,5 +208,64 @@ this is a _paragraph_!
     const source = `Asume this ><&><`;
     const html = renderMarked(source).container.innerHTML;
     expect(html).toContain("this &gt;&lt;&amp;&gt;&lt;");
+  });
+
+  it("renders styled <ol/>", () => {
+    const source = `Handles uls:
+1. item 1
+1. item 2    
+    `;
+    const html = renderMarked(source).container.innerHTML;
+    expect(html).toContain("<ol");
+    expect(html).toContain("list-decimal");
+  });
+
+  it("renders styled <ul/>", () => {
+    const source = `Handles uls:
+- item 1
+- item 2    
+    `;
+    const html = renderMarked(source).container.innerHTML;
+    expect(html).toContain("<ul");
+    expect(html).toContain("list-disc");
+  });
+
+  it("renders styled inline codes", () => {
+    const source = "Handles `inline code`";
+    const html = renderMarked(source).container.innerHTML;
+    expect(html).toContain("<code");
+    expect(html).toContain("bg-gray-200 rounded px-1");
+  });
+
+  it("renders styled <h1/>", () => {
+    const source = "# Header";
+    const html = renderMarked(source).container.innerHTML;
+    expect(html).toContain("<h1");
+    expect(html).toContain(
+      "text-2xl font-extrabold text-black leading-tight mt-6",
+    );
+  });
+
+  it("renders styled <h2/>", () => {
+    const source = "## Header";
+    const html = renderMarked(source).container.innerHTML;
+    expect(html).toContain("<h2");
+    expect(html).toContain(
+      "text-2xl font-extrabold text-black leading-tight mt-6",
+    );
+  });
+
+  it("renders styled <h3/>", () => {
+    const source = "### Header";
+    const html = renderMarked(source).container.innerHTML;
+    expect(html).toContain("<h3");
+    expect(html).toContain(`font-extrabold text-black leading-tight mt-4`);
+  });
+
+  it("renders styled <h4/>", () => {
+    const source = "#### Header";
+    const html = renderMarked(source).container.innerHTML;
+    expect(html).toContain("<h4");
+    expect(html).toContain(`text-black leading-tight mt-4`);
   });
 });

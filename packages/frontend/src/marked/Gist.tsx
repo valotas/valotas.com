@@ -12,13 +12,19 @@ function computeLanguage(file?: string) {
   }
 }
 
-const GIST_SCRIPT =
-  /script.*src=.*gist.github.com\/(([^/]*)\/)?(([^?]*)\.js(on)?)(\?(file=([^"]*)))?/;
+const GIST_SRC =
+  /.*gist.github.com\/(([^/]*)\/)?(([^?]*)\.js(on)?)(\?(file=([^"|$]*)))?/;
+
+const GIST_SCRIPT = new RegExp(`script.*src=${GIST_SRC.source}`);
 
 export type GistDescription = { user: string; gistId: string; file?: string };
 
-export function parseGist(html: string): GistDescription | null {
-  const matches = GIST_SCRIPT.exec(html);
+export function parseGist(
+  html: string,
+  srcOnly: boolean = false,
+): GistDescription | null {
+  const regex = srcOnly ? GIST_SRC : GIST_SCRIPT;
+  const matches = regex.exec(html);
   if (!matches) {
     return null;
   }
