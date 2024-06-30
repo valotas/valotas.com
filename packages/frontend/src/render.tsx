@@ -1,8 +1,13 @@
-import { renderToString } from "react-dom/server";
+import { renderToString } from "preact-render-to-string";
 import { FetchContent, createAsyncContextProvider } from "./AsyncContext.js";
 import { PageRenderer, PageRendererProps } from "./PageRenderer.js";
 
 const _fetch = fetch;
+
+async function importRenderToString(): Promise<(comp: JSX.Element) => string> {
+  //const { renderToString } = await import("preact-render-to-string");
+  return renderToString;
+}
 
 export type Logger = {
   log(msg: string): void;
@@ -40,6 +45,8 @@ export async function render({
       <PageRenderer {...props} />
     </AsyncContextProvider>
   );
+
+  const renderToString = await importRenderToString();
 
   // do the first renter to init the fetch calls
   renderToString(comp);
