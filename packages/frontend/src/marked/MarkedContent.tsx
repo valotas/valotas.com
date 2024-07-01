@@ -2,6 +2,7 @@ import Markdown, { type MarkdownToJSX } from "markdown-to-jsx";
 import { CodeBlock } from "./CodeBlock.js";
 import { MarkdownScript, isMarkdownScript } from "./MarkdownScript.js";
 import { Heading } from "./Heading.js";
+import { MarkedLink } from "./MarkedLink.js";
 
 const codeBlock = "3";
 
@@ -39,6 +40,7 @@ const options: MarkdownToJSX.Options = {
       component: "code",
       props: { className: "bg-gray-200 rounded px-1" },
     },
+    a: { component: MarkedLink },
     h1: { component: Heading, props: { depth: 1 } },
     h2: { component: Heading, props: { depth: 2 } },
     h3: { component: Heading, props: { depth: 3 } },

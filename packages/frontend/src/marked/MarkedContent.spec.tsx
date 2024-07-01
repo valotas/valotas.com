@@ -268,4 +268,15 @@ this is a _paragraph_!
     expect(html).toContain("<h4");
     expect(html).toContain(`text-black leading-tight mt-4`);
   });
+
+  it("renders styled <a/>", () => {
+    const source = "[a link](http://link.to)";
+    const { container } = renderMarked(source);
+    const a = container.querySelector("a");
+
+    expect(a).toBeTruthy();
+    expect(a?.className).toContain(
+      "border-b-1 border-gray-300 hover:border-gray-500 leading-tight inline-block",
+    );
+  });
 });

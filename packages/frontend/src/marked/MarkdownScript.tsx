@@ -37,5 +37,5 @@ export function MarkdownScript({ tag, type, attrs }: MarksdownScriptProps) {
     return <Script src={scriptSrc} onReload={loadTwitterOnReload} />;
   }
 
-  return null; //TODO fix this
+  return null;
 }
