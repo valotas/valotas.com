@@ -72,7 +72,7 @@ export function Link({
       className={`${
         noUnderline
           ? ""
-          : "border-b-1 border-gray-300 hover:border-gray-500 leading-tight inline-block"
+          : "border-b border-gray-300 hover:border-gray-500 leading-tight inline-block"
       } ${className || ""}`}
     >
       {children}
