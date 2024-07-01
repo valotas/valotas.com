@@ -2,7 +2,6 @@
     "name": "@valotas/valotas.com",
     "workspaces": [
         "packages/frontend",
-        "packages/parcel-reporter-staticsite",
         "packages/parcel-resolver-staticsite",
         "packages/parcel-namer-staticsite",
         "packages/parcel-transformer-staticsite",
