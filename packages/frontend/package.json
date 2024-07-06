@@ -15,10 +15,9 @@
     "fix": "npm run lint -- --fix",
     "build": "tsc -p .",
     "watch:build": "tsc -p . -w",
-    "test": "jest --no-cache",
-    "watch:test": "jest --watch",
-    "preversion": "npm run lint && npm run build && npm run test",
-    "v": "tsc --version"
+    "test": "NODE_OPTIONS=\"$NODE_OPTIONS --experimental-vm-modules\" jest --no-cache",
+    "watch:test": "NODE_OPTIONS=\"$NODE_OPTIONS --experimental-vm-modules\" jest --watch",
+    "preversion": "npm run lint && npm run build && npm run test"
   },
   "dependencies": {
     "@types/marked": "^4.0.2",
@@ -33,6 +32,7 @@
   },
   "devDependencies": {
     "@babel/core": "^7.24.7",
+    "@jest/globals": "^29.7.0",
     "@testing-library/react": "^16.0.0",
     "@types/react": "^18.3.3",
     "@types/react-dom": "^18.3.0",

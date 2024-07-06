@@ -10,7 +10,8 @@ const config = {
     "^(\\.{1,2}/.*)\\.js$": "$1",
     "\\.(css|less)$": "<rootDir>/src/__mocks__/emptyImport.ts",
   },
-  setupFiles: ["./jest.setup.cjs"],
+  setupFiles: ["./jest.setup.mjs"],
+  extensionsToTreatAsEsm: [".tsx", ".ts"],
 };
 
 export default config;

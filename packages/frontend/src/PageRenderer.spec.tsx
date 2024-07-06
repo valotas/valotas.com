@@ -1,11 +1,12 @@
 import { act, render } from "@testing-library/react";
-import { PageRenderer } from "./PageRenderer.js";
-import { history } from "./History.js";
+import { jest } from "@jest/globals";
 
-jest.mock("./History", () => {
+jest.unstable_mockModule("./History", () => {
   const history = jest.fn();
   return { history };
 });
+const history = await import("./History.js");
+const { PageRenderer } = await import("./PageRenderer.js");
 
 describe("PageRenderer", () => {
   afterEach(() => {
@@ -13,10 +14,13 @@ describe("PageRenderer", () => {
   });
 
   beforeEach(() => {
-    jest.mocked(history).mockImplementation(() => ({
-      onPushState: jest.fn(),
-      pushState: jest.fn(),
-    }));
+    jest.mocked(history.history).mockImplementation(
+      () =>
+        ({
+          onPushState: jest.fn(),
+          pushState: jest.fn(),
+        }) as any,
+    );
   });
 
   it("exists", async () => {
@@ -50,17 +54,22 @@ describe("PageRenderer", () => {
 
   describe("on history change", () => {
     let handler: any;
-    let scroll: jest.SpyInstance;
+    let scroll: jest.SpiedFunction<any>;
 
     beforeEach(() => {
-      scroll = jest.spyOn(window, "scrollTo").mockReturnValue();
-      jest.mocked(history).mockImplementation(() => ({
-        onPushState: (h) => {
-          handler = h;
-          return jest.fn();
-        },
-        pushState: jest.fn(),
-      }));
+      scroll = jest
+        .spyOn(window, "scrollTo")
+        .mockReturnValue() as jest.SpiedFunction<any>;
+      jest.mocked(history.history).mockImplementation(
+        () =>
+          ({
+            onPushState: (h: any) => {
+              handler = h;
+              return jest.fn();
+            },
+            pushState: jest.fn(),
+          }) as any,
+      );
     });
 
     it("re-renders onPushState with state", async () => {

@@ -1,11 +1,14 @@
 import fetchMock from "jest-fetch-mock";
+import { jest } from "@jest/globals";
 import { render, fireEvent, waitFor } from "@testing-library/react";
-import { Anchor } from "./links.js";
-import * as history from "./History.js";
 
-jest.mock("./History", () => ({
-  history: jest.fn(),
-}));
+jest.unstable_mockModule("./History", () => {
+  const history = jest.fn();
+  return { history };
+});
+
+const history = await import("./History.js");
+const { Anchor } = await import("./links.js");
 
 describe("links", () => {
   beforeEach(() => {
@@ -14,7 +17,7 @@ describe("links", () => {
     jest.mocked(history.history).mockReturnValue({
       pushState: jest.fn(),
       onPushState: jest.fn(),
-    });
+    } as any);
   });
 
   describe("Anchor", () => {
@@ -64,14 +67,12 @@ describe("links", () => {
       jest.mocked(history.history).mockReturnValue({
         pushState,
         onPushState: jest.fn(),
-      });
+      } as any);
       const href = "/here/";
       const { container } = render(<Anchor href={href}>Hi</Anchor>);
 
       const a = container.querySelector("a");
-      if (a) {
-        fireEvent.click(a);
-      }
+      fireEvent.click(a!);
 
       await waitFor(() => {
         expect(pushState).toHaveBeenCalledWith(
@@ -89,7 +90,7 @@ describe("links", () => {
       jest.mocked(history.history).mockReturnValue({
         pushState,
         onPushState: jest.fn(),
-      });
+      } as any);
       const href = "/here";
       const { container } = render(<Anchor href={href}>Hi</Anchor>);
 

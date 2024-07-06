@@ -1,3 +1,4 @@
+import { jest } from "@jest/globals";
 import { render } from "./render.js";
 
 describe("render", () => {
@@ -14,7 +15,7 @@ describe("render", () => {
   });
 
   test("waits the fetch promises to be resolved before returning", async () => {
-    const fetch = jest
+    const fetch: any = jest
       .fn()
       .mockReturnValue(Promise.resolve("resolved fetch content"));
     const markdown = `
