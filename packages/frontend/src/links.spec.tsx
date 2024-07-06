@@ -1,6 +1,6 @@
 import fetchMock from "jest-fetch-mock";
 import { jest } from "@jest/globals";
-import { render, fireEvent, waitFor } from "@testing-library/react";
+import { render, fireEvent, waitFor } from "./testing.js";
 
 jest.unstable_mockModule("./History", () => {
   const history = jest.fn();

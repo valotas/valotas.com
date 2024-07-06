@@ -1,4 +1,4 @@
-import { render, screen } from "@testing-library/react";
+import { render, screen } from "./testing.js";
 import { PageWithMarkdown } from "./PageWithMarkdown.js";
 
 describe("PageWithMarkdown", () => {

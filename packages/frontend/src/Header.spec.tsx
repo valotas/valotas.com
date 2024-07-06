@@ -1,4 +1,4 @@
-import { render } from "@testing-library/react";
+import { render } from "./testing.js";
 import { Header } from "./Header.js";
 
 describe("Header", () => {

@@ -1,5 +1,5 @@
-import { act, render } from "@testing-library/react";
 import { jest } from "@jest/globals";
+import { act, render } from "./testing.js";
 
 jest.unstable_mockModule("./History", () => {
   const history = jest.fn();

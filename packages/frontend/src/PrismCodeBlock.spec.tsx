@@ -1,4 +1,4 @@
-import { render } from "@testing-library/react";
+import { render } from "./testing.js";
 import { PrismCodeBlock } from "./PrismCodeBlock.js";
 
 describe("PrismCode", () => {

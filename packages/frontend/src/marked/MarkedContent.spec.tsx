@@ -1,4 +1,4 @@
-import { render, screen, waitFor } from "@testing-library/react";
+import { render, screen, waitFor } from "../testing.js";
 import { MarkedContent } from "./MarkedContent.js";
 
 describe("MarkedContent", () => {

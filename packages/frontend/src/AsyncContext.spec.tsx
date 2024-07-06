@@ -1,5 +1,5 @@
 import fetchMock from "jest-fetch-mock";
-import { render, waitFor } from "@testing-library/react";
+import { render, waitFor } from "./testing.js";
 import { useFetch } from "./AsyncContext.js";
 
 function UseFetchTester({ url }: { url: string }) {
