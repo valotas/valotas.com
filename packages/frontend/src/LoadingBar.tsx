@@ -1,4 +1,4 @@
-import { useMemo } from "react";
+import { useMemo } from "./jsx.js";
 import { useFetchCounter } from "./FetchTracker.js";
 
 export function LoadingBar() {

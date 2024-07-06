@@ -1,4 +1,4 @@
-import { PropsWithChildren } from "react";
+import { PropsWithChildren } from "./jsx.js";
 import { getGrammar, highlight } from "./prism.js";
 
 export type PrismCodeProps = {

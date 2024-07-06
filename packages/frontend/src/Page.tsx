@@ -1,4 +1,4 @@
-import { PropsWithChildren, StrictMode } from "react";
+import { PropsWithChildren, StrictMode } from "./jsx.js";
 import { Footer, FooterProps } from "./Footer.js";
 import { Header, HeaderProps } from "./Header.js";
 import { LoadingBar } from "./LoadingBar.js";

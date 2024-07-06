@@ -1,4 +1,4 @@
-import { useCallback } from "react";
+import { useCallback } from "../jsx.js";
 import { Script } from "../Script.js";
 import { Gist, parseGist } from "./Gist.js";
 

@@ -1,4 +1,4 @@
-import { createElement, type PropsWithChildren } from "react";
+import { createElement, type PropsWithChildren } from "../jsx.js";
 
 type HeadingWeight = "h1" | "h2" | "h3" | "h4";
 const depths = [1, 2, 3, 4];

@@ -1,4 +1,4 @@
-import { useEffect } from "react";
+import { useEffect } from "./jsx.js";
 
 export type ScriptProps = { src: string; onReload?: () => void };
 

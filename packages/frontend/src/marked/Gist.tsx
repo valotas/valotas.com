@@ -1,4 +1,4 @@
-import React, { PropsWithChildren } from "react";
+import { PropsWithChildren } from "../jsx.js";
 import { useFetch } from "../AsyncContext.js";
 import { LinkWithIcon } from "../links.js";
 import { PrismCodeBlock } from "../PrismCodeBlock.js";

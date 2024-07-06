@@ -1,4 +1,4 @@
-import type { PropsWithChildren } from "react";
+import type { PropsWithChildren } from "../jsx.js";
 import { PrismCodeBlock } from "../PrismCodeBlock.js";
 
 export type CodeBlockProps = {

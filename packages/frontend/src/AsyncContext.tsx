@@ -1,4 +1,4 @@
-import React, {
+import {
   DependencyList,
   EffectCallback,
   PropsWithChildren,
@@ -6,7 +6,7 @@ import React, {
   useContext,
   useEffect,
   useState,
-} from "react";
+} from "./jsx.js";
 
 export type FetchContent = (url: string) => Promise<string>;
 

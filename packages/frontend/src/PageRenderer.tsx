@@ -1,4 +1,4 @@
-import React, { useCallback, useEffect, useState } from "react";
+import { useCallback, useEffect, useState } from "./jsx.js";
 import { PageWithItems, PageWithListProps } from "./PageWithItems.js";
 import { PageWithMarkdown, PageWithMarkdownProps } from "./PageWithMarkdown.js";
 import { createTitle } from "./title.js";

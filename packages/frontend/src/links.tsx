@@ -1,4 +1,4 @@
-import { MouseEvent, useCallback, PropsWithChildren } from "react";
+import { MouseEvent, useCallback, PropsWithChildren } from "./jsx.js";
 import { Icon, IconProps } from "./Icon.js";
 import { history } from "./History.js";
 
