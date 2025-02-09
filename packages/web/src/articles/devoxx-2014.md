@@ -20,7 +20,7 @@ Having heard so much about lambda/streams, here is my thoughts. The feature brin
 
 Well, there is nothing new here as [Vlad](https://twitter.com/DevoxxBorat) said...
 
-<blockquote class="twitter-tweet" lang="en"><p><a href="https://twitter.com/hashtag/Devoxx?src=hash">#Devoxx</a> <a href="https://twitter.com/valotas">@valotas</a> is not new. Is we use with .niet in Azamat for centuries</p>&mdash; Born to be Borat. (@DevoxxBorat) <a href="https://twitter.com/DevoxxBorat/status/533363657024233472">November 14, 2014</a></blockquote>
+<blockquote className="twitter-tweet" lang="en"><p><a href="https://twitter.com/hashtag/Devoxx?src=hash">#Devoxx</a> <a href="https://twitter.com/valotas">@valotas</a> is not new. Is we use with .niet in Azamat for centuries</p>&mdash; Born to be Borat. (@DevoxxBorat) <a href="https://twitter.com/DevoxxBorat/status/533363657024233472">November 14, 2014</a></blockquote>
 
 The thing is though that even with a delay of some years [reactive programming](http://www.reactivemanifesto.org/) becomes a trend to Java too (and once again in software engineering in general). There where some libraries for reactive prgramming before but lambdas again can make the existing apis much more fluent.
 
