@@ -22,7 +22,7 @@ More information on that can be found searching for stand alone equinox or headl
 
 ## Equinox as a service
 
-Well I'm ok with my bundles! How can I put them on the server side? We need an enviroment to put them and the most appropriate one would be a windows service or a linux deamon!
+Well I'm ok with my bundles! How can I put them on the server side? We need an environment to put them and the most appropriate one would be a windows service or a linux daemon!
 
 I couldn't find any solutions ready to go. So I had to create one! [Java Service Wrapper][java-service-wrapper] to the rescue.
 
@@ -64,7 +64,7 @@ Now we also need to call the equinox jar with some java properties. This is done
 
 Now after that we must provide the wrapper class with our main class and possible parameters. This is done with the wrapper.app.parameter properties, but what to put there? Looking at our equinox manifest file we get the main class: `org.eclipse.core.runtime.adaptor.EclipseStarter` we we also added the `-console port_num` parameters in order to be able to telnet to port_num and install or uninstall bundles
 
-Now all the other properties has to do with with the service name. You can ofcourse give what ever values you want!
+Now all the other properties has to do with with the service name. You can of course give what ever values you want!
 
 *Step 4*: At last just install the service calling the install script that can be found in the bin folder of the wrapper.
 

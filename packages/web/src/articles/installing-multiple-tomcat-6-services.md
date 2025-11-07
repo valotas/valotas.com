@@ -52,7 +52,7 @@ You then must adjust the newly created account settings, in order to do that go 
 
 Actually the most important rule is the last one. You can't skip this one as the service will not be able to start otherwise
 
-All the other rules is a step further securing our machine and ofcourse will not cost anything using them!
+All the other rules is a step further securing our machine and of course will not cost anything using them!
 
 ### Update: Installing on a win 64bit machine
 

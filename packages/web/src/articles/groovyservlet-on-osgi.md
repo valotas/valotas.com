@@ -6,7 +6,7 @@ template: article.jade
 tags: java, groovy
 ---
 
-After having [static resources get served right with Jetty within an OSGI enviroment](/jetty-defaultservlet-on-osgi/)
+After having [static resources get served right with Jetty within an OSGI environment](/jetty-defaultservlet-on-osgi/)
 you may want to be able to use groovy and more specific some groovlets
 
 More or less the problem is the one that has been described at a [previous post](/jetty-defaultservlet-on-osgi/).

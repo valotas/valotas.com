@@ -30,7 +30,7 @@ This is the most important method for us, as developers, as it gives a binding p
 </div>
 ```
 
-In our pseudocode world, the result of the `mainArticleDiv.getClassNames()` whould be the list: `['main', 'article', 'white']`. But this list is not just another attribute of our div. It describes some of the div's functionality (styling) and therefor it looks more like metadata of the mainArticleDiv's interface rather than data of the interface. Since it is metadata, a list within our class is not the right way to describe them.
+In our pseudocode world, the result of the `mainArticleDiv.getClassNames()` would be the list: `['main', 'article', 'white']`. But this list is not just another attribute of our div. It describes some of the div's functionality (styling) and therefor it looks more like metadata of the mainArticleDiv's interface rather than data of the interface. Since it is metadata, a list within our class is not the right way to describe them.
 
 Let's make a pause here and go back to our computer science world and specifically to object oriented programming. There you can find the term [mixin][mixin] which is actually a way to describe a part of the functionality of an object. Assuming that the browser creates a mixin for every defined css class of ours and the fact that `Node` itself can be a mixin implemented by the browser, we can then describe our div with a class:
 
