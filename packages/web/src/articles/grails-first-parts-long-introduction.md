@@ -12,7 +12,7 @@ Inspired by the title of Douglas Crockford book, "Javascript, the good parts" an
 
 Well the installation is not as easy as one double click but I can live with that and anyone that will have to deal with web application deployment should. That is because you will probably find harder things to deal with! The place to start is [grails download page](http://grails.org/Download) and the [official installation instructions](http://grails.org/Installation).
 
-I assume that these steps are easy to follow. If not you should really reconsider your thoughts about the framework and web development. Not that you wouldn't be able to create a simple project but because you probably wouldn't understand a thing of what you where doing.
+I assume that these steps are easy to follow. If not you should really reconsider your thoughts about the framework and web development. Not that you wouldn't be able to create a simple project but because you probably wouldn't understand a thing of what you were doing.
 
 ## First grails project
 
@@ -32,7 +32,7 @@ Ok! This is not what you had in mind but, it is a really big step. You have a se
 
 Before we start lets have some theory as a background. One thing you should care about is MVC. MVC is a pattern and is THE pattern when developing a web application and especially in java. We may not deal with java here directly but we do live in a java environment. What is MVC? MVC stands for Model View Control and lets have an example explaining it.
 
-Lets say that a client needs something from the server. An xml, an html or whatever he may want. The server should be responsible for giving him what we wan't. This is where the developer (that should be you) have to do his job. Should check what the client needs and serve it. So you need a mechanism that will analyze what a client want retrieve the data and serve them in a form that the client asked for. This mechanism is called Controller.
+Lets say that a client needs something from the server. An xml, an html or whatever he may want. The server should be responsible for giving him what we want. This is where the developer (that should be you) have to do his job. Should check what the client needs and serve it. So you need a mechanism that will analyze what a client want retrieve the data and serve them in a form that the client asked for. This mechanism is called Controller.
 
 We also mentioned the data. That is probably something we store in our database. Generally the data are never in a format that the client want so you give them in the format he wants. So the data is your Model and the format the View. We may have many views. For example an xml representation of the data or an html representation of the same data.
 
@@ -66,7 +66,7 @@ class EchoController {
 }
 ```
 
-This should do the what exactly we want to. But before we continue we should also see how are we going to represent this data to the user
+This should do exactly what we want to. But before we continue we should also see how are we going to represent this data to the user
 
 ### The View
 
@@ -92,13 +92,13 @@ Now we can check if that works pointing our browser here: http://localhost:8080/
 
 Well, how did that happen? Again grails wires many things together in order to have this kind of magic without doing anything. The whole concept is that every action can return a model witch is just a map. When this happens grails looks for a gsp page having the same name with our action inside the folder witch have the same name with our controller, except the Controller part. All the views must be placed inside the views folder. That is why we've placed the echophrase.gsp inside the echo folder in the views.
 
-This is what we should if we have to return html pages. As we've said before a model may have more than one representation. So we could just return the model as xml or as json. Of course our main concern is html pages, so in this case we will stick to the gsps. Not the returning an xml or a json is hard to do! It is easier as you don't even have to write a gsp template!
+This is what we should if we have to return html pages. As we've said before a model may have more than one representation. So we could just return the model as xml or as json. Of course our main concern is html pages, so in this case we will stick to the gsps. Note the returning an xml or a json is hard to do! It is easier as you don't even have to write a gsp template!
 
 ## The Model: take our webapp to the next level: database
 
 As we have seen in our example the model part is just a phrase a user passed to our controller as a parameter to it's request. This isn't the case of course in real web applications as in most cases we also have to do some interaction with the database. In order to do that we will also save the Echo phrase in the database and show the user a small history of the previous Echos.
 
-To do that we must some how tell grails what we would like to save to the database. We define this using the so called domain classes. For our example we would like our echos to have a date they have been submited and the actual phrase the user has been submited. Domain classes are simple groovy classes inside the inside the `grails-app/domain` folder of our application. Let's create one manually (by creating an appropriate file) or letting grails doing it for us: `$ grails create-domain-class com.valotas.firstgrailsproject.Echo`. Now just edit the newly created file:
+To do that we must some how tell grails what we would like to save to the database. We define this using the so called domain classes. For our example we would like our echos to have a date they have been submitted and the actual phrase the user has been submitted. Domain classes are simple groovy classes inside the inside the `grails-app/domain` folder of our application. Let's create one manually (by creating an appropriate file) or letting grails doing it for us: `$ grails create-domain-class com.valotas.firstgrailsproject.Echo`. Now just edit the newly created file:
 
 ```groovy
 package com.valotas.firstgrailsproject
@@ -113,7 +113,7 @@ class Echo {
 }
 ```
 
-We defined what we would like our model to have. Mention here that we would also like our phrases to have a size not bigger the 100 characters. We also defined that with in the constraints.
+We defined what we would like our model to have. Note here that we would also like our phrases to have a size not bigger the 100 characters. We also defined that with in the constraints.
 
 Now let's add an action to also save the echos, and except from the last posted one display the previous ones ordered by the dateCreated descended.
 
@@ -172,9 +172,9 @@ Yes it was that simple. We now save our echo to an inmemory database witch we th
 
 ## Productivity
 
-As you can understand, grails not only provide us with utility methods within the domain class to validate it, but it also binds these errors to the domain class, and provide us with a custom tag to check the errors of a domain class with in the view. Generally you can find a lot of utility methods and tags to use.
+As you can understand, grails not only provide us with utility methods within the domain class to validate it, but it also binds these errors to the domain class, and provide us with a custom tag to check the errors of a domain class within the view. Generally you can find a lot of utility methods and tags to use.
 
-Except from them witch make our life easier, grails provide us with a more exotic feature witch pushed productivity to a next level. It is called scaffolding and it is the ability of grails to provide you with a simple yet very useful html based user interface. What exactly is this? If you are familiar with Domain Driven Development then this feature is your gateway!
+Except for those which make our life easier, grails provide us with a more exotic feature which pushed productivity to a next level. It is called scaffolding and it is the ability of grails to provide you with a simple yet very useful html based user interface. What exactly is this? If you are familiar with Domain Driven Development then this feature is your gateway!
 
 ### Domain Driven Development
 
@@ -188,7 +188,7 @@ As you can see, things are getting complicated. But not with scaffolding. Scaffo
 
 I've seen people who just get stack on how are they going to change something like the label of an input field of a scaffolded view. That's why I would suggest not to get experiment with scaffolding until you've understand the basic flow used to handle user's requests. So once you've done something the echo example you can start playing with scaffolding.
 
-The idea behind scaffolding is that having domain described by your domain classes you will have to do some basic operations with them. These operations are Create Read Update Delete operations witch are also known as CRUD operations. Thing like that with todays tools are in most cases extremely easy to implement. But you still have to implement them and you have to do it for all your domain classes. A good programmer will consider having a helper class for this case but when you come to html form that things are getting more difficult. So why not we just have some kind of templates for such things that could easily get overwritten.
+The idea behind scaffolding is that having domain described by your domain classes you will have to do some basic operations with them. These operations are Create Read Update Delete operations which are also known as CRUD operations. Things like that with todays tools are in most cases extremely easy to implement. But you still have to implement them and you have to do it for all your domain classes. A good programmer will consider having a helper class for this case but when you come to html form that things are getting more difficult. So why not we just have some kind of templates for such things that could easily get overwritten.
 
 In that case all we need is the implementation of simple actions and its views. These actions are `list`, `show`, `delete`, `edit`, `update`, `create`, save and their views: `create.gsp`, `edit.gsp`, `list.gsp`, `show.gsp`. The views are not equal with the actions as some actions actually redirect the user to someother action. That is what scaffolding do. Generate boilerplate code that otherwise you should write. In my opinion this generated code is not written the best possible way and that is why I would suggest to use it only when prototyping a project.
 

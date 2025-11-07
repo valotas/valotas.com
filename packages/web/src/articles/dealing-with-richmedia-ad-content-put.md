@@ -9,7 +9,7 @@ Long story short: *Always put your javascript at the bottom of the html*. But wh
 
 ## What is the deal here?
 
-When you have to deal with richmedia ad content many thing could slow you down. The basic problem here is that the richmedia ad content needs javascript in order to implement their "rich" part! The bad thing here is that in order to have a better page rendering performance you have to put the javascript stuff at the bottom of you html page. Why? Well [this](http://developer.yahoo.com/performance/rules.html#js_bottom) should give you something to start with and google searching well get you in to it!
+When you have to deal with richmedia ad content many thing could slow you down. The basic problem here is that the richmedia ad content needs javascript in order to implement their "rich" part! The bad thing here is that in order to have a better page rendering performance you have to put the javascript stuff at the bottom of you html page. Why? Well [this](http://developer.yahoo.com/performance/rules.html#js_bottom) should give you something to start with and google searching will get you into it!
 
 ## Putting richmedia scripts at the bottom
 
@@ -21,17 +21,17 @@ Unfortunately css side (html rewriting) solution is not always that easy and mos
 
 Instead of trying to use javascript to cure the positioning of some banners we could just use it to reposition all of them. So this is another solution to our problem.
 
-The idea of this solution is to have placeholders where we would like the ad slots to appear. These placeholders will then help as compute the position of the actual slot (lets call them bannerholder) that will be put at the bottom of the html, possibly in a hidden block.
+The idea of this solution is to have placeholders where we would like the ad slots to appear. These placeholders will then help us compute the position of the actual slot (lets call them bannerholder) that will be put at the bottom of the html, possibly in a hidden block.
 
-### jQuery to the resque
+### jQuery to the rescue
 
-I'm personaly a big fun of jQuery and so I wrote a small plugin to do just that
+I'm personally a big fan of jQuery and so I wrote a small plugin to do just that
 
 ```javascript
 /**
  * We have banner placeholders and the actual banners loaded at the end of
  * the page. The banner placeholders have an id of type placeholder__[banner_id]
- * and the banners are placed in a div with id banner__[banner_id] witch we will
+ * and the banners are placed in a div with id banner__[banner_id] which we will
  * call bannerholder
  */
 $.fn.attachBanners = function(o) {
@@ -48,7 +48,7 @@ $.fn.attachBanners = function(o) {
       bannerholderWidth,
       bannerholderHeight;
 
-    if ($bannerholder.lenght > 0) {
+    if ($bannerholder.length > 0) {
       /*
        * We compute the width and height of the bannerholder. They are both equal to zero we
        * will not do anything and retry as the DOM of the bannerholder might not be ready yet
@@ -111,9 +111,9 @@ $.fn.offset = function(o) {
 };
 ```
 
-Now assuming that you have a slot with id myslot, all you have to do is ad a div with id `placeholder__myslot` where you would like your slot to be displayed and a div with id `banner__myslot` with your rich media markup inside. Then a `$(#placeholder__myslot).attachBanners()` will do the positioning for you no matter where you've got your `div#banner__myslot` placed!
+Now assuming that you have a slot with id myslot, all you have to do is add a div with id `placeholder__myslot` where you would like your slot to be displayed and a div with id `banner__myslot` with your rich media markup inside. Then a `$(#placeholder__myslot).attachBanners()` will do the positioning for you no matter where you've got your `div#banner__myslot` placed!
 
-Update: Reviewing the code (as it must have been over a year since I first wrote it), I can say that the offset function is a little bit useless as jQuery provide us with a function witch does this this exactly! No need to rewrite stuff!
+Update: Reviewing the code (as it must have been over a year since I first wrote it), I can say that the offset function is a little bit useless as jQuery provide us with a function which does this this exactly! No need to rewrite stuff!
 
 
 
