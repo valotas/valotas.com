@@ -10,11 +10,11 @@ This year I was lucky enough to attend yet another time the [devoxx conference](
 ## Java
 This year the conference was a lot more about java. There was some sessions for other stuff too but did not have these 24 session for angularjs.
 
-As it was about java, it was ofcourse about java8 and it's new features. So, as you may know lambdas have been introduced to java8 and this alone is enough to start building a lot more features on top of the platform.
+As it was about java, it was of course about java8 and it's new features. So, as you may know lambdas have been introduced to java8 and this alone is enough to start building a lot more features on top of the platform.
 
 So along with the lambdas, we had streams and a refined collections api that allows a more functional way of programming.
 
-Having heard so much about lambda/streams, here is my thoughts. The feature bring easyness and beuty to the language mostly by reducing boilerplate code. No one likes boilerplate but remember that this boilerplate is information/documentation to the user. Therefore I would suggest to make use of it with extreme caution as it is really easy to misuse it in the name of coolness. So please have a second thought before you go ahead and refine your api.
+Having heard so much about lambda/streams, here is my thoughts. The feature bring ease and beauty to the language mostly by reducing boilerplate code. No one likes boilerplate but remember that this boilerplate is information/documentation to the user. Therefore I would suggest to make use of it with extreme caution as it is really easy to misuse it in the name of coolness. So please have a second thought before you go ahead and refine your api.
 
 ## Reactive programming
 
@@ -22,15 +22,15 @@ Well, there is nothing new here as [Vlad](https://twitter.com/DevoxxBorat) said.
 
 <blockquote className="twitter-tweet" lang="en"><p><a href="https://twitter.com/hashtag/Devoxx?src=hash">#Devoxx</a> <a href="https://twitter.com/valotas">@valotas</a> is not new. Is we use with .niet in Azamat for centuries</p>&mdash; Born to be Borat. (@DevoxxBorat) <a href="https://twitter.com/DevoxxBorat/status/533363657024233472">November 14, 2014</a></blockquote>
 
-The thing is though that even with a delay of some years [reactive programming](http://www.reactivemanifesto.org/) becomes a trend to Java too (and once again in software engineering in general). There where some libraries for reactive prgramming before but lambdas again can make the existing apis much more fluent.
+The thing is though that even with a delay of some years [reactive programming](http://www.reactivemanifesto.org/) becomes a trend to Java too (and once again in software engineering in general). There were some libraries for reactive programming before but lambdas again can make the existing apis much more fluent.
 
 I believe a very good answer to most of the newbies questions would be [netflix's article](http://techblog.netflix.com/2013/02/rxjava-netflix-api.html) regarding the use of a reactive programming model. Interestingly, I find this post a very good abstract of [Venkat Subramaniam](https://twitter.com/venkat_s)'s [university session](http://cfp.devoxx.be/2014/talk/SUC-8683/Reactive_Programming:_creating_highly_responsive_applications) which was the most popular session within the 5 days of the conference.
 
 ## Docker
 
-I do not think that there are much to say for this topic. [Docker][docker] can be described as a very light weight linux base vm. Everybody seems to be using it and it looks like it is a matter of time that you'll be using it. I do not believe that there is any question regarding it's benefits and therefor just go for it as soon as possible.
+I do not think that there are much to say for this topic. [Docker][docker] can be described as a very light weight linux base vm. Everybody seems to be using it and it looks like it is a matter of time that you'll be using it. I do not believe that there is any question regarding it's benefits and therefore just go for it as soon as possible.
 
-As a side note. I do not know if it is java developers disliking system programming, but I did not heard a single thing regarding the background of the tool. It is a success story for [Google's golang](https://golang.org/) but nobody felt like mentioning it.
+As a side note. I do not know if it is java developers disliking system programming, but I did not hear a single thing regarding the background of the tool. It is a success story for [Google's golang](https://golang.org/) but nobody felt like mentioning it.
 
 ## Google, Microsoft and others
 
@@ -40,7 +40,7 @@ So regarding the web. Everybody should now switch to this new thing (angular.js 
 
 Apart from that Microsoft's target was once more the marketing of the Azure platform and nothing more. That is again sad considering the [changes](http://www.forbes.com/sites/benkepes/2014/11/14/how-the-worm-turns-microsoft-open-sources-net/) that made public during the devoxx days. I would really like to see some more programming centric stuff from Microsoft in such a conference.
 
-Finally this years devoxx had more non programming related stuff. A bunch of startup related stuff among with a talk regarding [creativity](http://thecreativedose.com/) by the Chief Creativity Evangelist (cool title) named Denise Jacobs. The talk was too American for my taske, but still a good addition to the conference.
+Finally this years devoxx had more non programming related stuff. A bunch of startup related stuff among with a talk regarding [creativity](http://thecreativedose.com/) by the Chief Creativity Evangelist (cool title) named Denise Jacobs. The talk was too American for my taste, but still a good addition to the conference.
 
 ## Devoxxed
 
