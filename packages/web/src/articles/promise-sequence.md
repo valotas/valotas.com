@@ -25,9 +25,9 @@ inSequence([action1, action2, action3])
   });
 ```
 
-The solution was very simple googling, but I am not fun of copy & paste development if I do not understand what am I
-copying, so as an excerise I though it would be a good idea to implement a solution myself. In order to attack the
-problem, I'll try to solve it with just 2 promises in the **dumpest possible way**:
+The solution was very simple googling, but I am not fan of copy & paste development if I do not understand what am I
+copying, so as an exercise I thought it would be a good idea to implement a solution myself. In order to attack the
+problem, I'll try to solve it with just 2 promises in the **dumbest possible way**:
 
 ```js
 var result = action1()
@@ -124,7 +124,7 @@ function inSequence(actions) {
 ```
 
 ### Working with arrays
-Now that we have a solution we can improve a lilte bit. When we have an array and we want to create a single
+Now that we have a solution we can improve a little bit. When we have an array and we want to create a single
 value out of it, we can use the `reduce` function of the array. We would like to reduce our array of actions
 into one promise of arrays:
 
@@ -142,7 +142,7 @@ function reduceInSequence(actions) {
 }
 ```
 
-### Thinking more coplex
+### Thinking more complex
 When I first tried to implement a solution I had in mind that I needed an implementation that could give me back a
 Promise with an array of the results. I ended up using recursion for implementing it:
 
@@ -162,7 +162,7 @@ function recursiveInSequence(actions, results) {
 }
 ```
 
-while the solution works just fine, it looks a little bit complexer, but I still have it writen here as a reminder to
+while the solution works just fine, it looks a little bit more complex, but I still have it written here as a reminder to
 always split problems as much as possible.
 
 ## How to test it
@@ -206,7 +206,7 @@ it("should work with an array of more than 2 actions", function (done) {
 ```
 
 ## TLDR
-Since code speeks itself, you can [play with it](http://jsbin.com/gist/valotas/f785f29dff1502366554901ace772716?js,output)
+Since code speaks itself, you can [play with it](http://jsbin.com/gist/valotas/f785f29dff1502366554901ace772716?js,output)
 or just have a look at it:
 
 <script src="https://gist.github.com/valotas/f785f29dff1502366554901ace772716.js?file=script.js"></script>

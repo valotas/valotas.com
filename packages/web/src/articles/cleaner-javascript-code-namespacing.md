@@ -24,7 +24,7 @@ So you can have namespacing...
 ```javascript
 var mySite = {
   validation: {
-    validationofsomethig: function() {
+    validationofsomething: function() {
       //do some validation
     }
   },
@@ -53,6 +53,6 @@ mySite.moduleX.doSomething = function() {
 };
 ```
 
-Now when on your code see something like `mySite.moduleX.doSomething()` where will you start looking for more information? Hope not on the `mySite.moduleX` "namespase"!
+Now when on your code see something like `mySite.moduleX.doSomething()` where will you start looking for more information? Hope not on the `mySite.moduleX` "namespace"!
 
 

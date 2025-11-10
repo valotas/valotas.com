@@ -51,7 +51,7 @@ var george = new Person("George", "Valotasios");
 assert george.name === "George Valotasios"
 ```
 
-## Just anonther method declaration
+## Just another method declaration
 So, what is happening now? Well the vm knows that the class Person does not have the field named `name` but there is a special method that can be called whenever a someone tries to access the `Person`'s `name` field.
 
 This is actually what we are forced to do with Java where no such feature exists. The normal way of dealing with data objects in Java is to have only private fields and provide methods named after the field with a `get` or `set` prefix. So in java the same class would look like:
@@ -74,17 +74,17 @@ class Person {
 
 and making sure that you followed the rule of having private fields, you only end up having to always write some more characters for accessing fields: `person.getName()` instead of `persons.name`.
 
-All in all, till now getters and setters looks like "special" methods. They either have a special name or a special syntax. That speciallity allows you to make some assumptions about what is going to happen. But should it be that way?
+All in all, till now getters and setters looks like "special" methods. They either have a special name or a special syntax. That speciality allows you to make some assumptions about what is going to happen. But should it be that way?
 
 ## Getters and setters should not be regular methods
-Getters and setters in general should describe a property of a class. That said they should just update or return that property value. So in theory no computation should happen in then, they should be fast and of they should be side-effect free. For simplicity, lets change a little bit the definition of them and apply only two rules:
+Getters and setters in general should describe a property of a class. That said they should just update or return that property value. So in theory no computation should happen in them, they should be fast and they should be side-effect free. For simplicity, lets change a little bit the definition of them and apply only two rules:
 
 - they should be fast
 - they should have any side-effect other than updating the underlying property (in the case of a setter)
 
-These two rules are a simplification of the [principle of least surprise][pols] and tells you for example that you should not do there any IO stuff or spawn new threads or even update any fields other that the one that the name of the setter defines. Still these two rules has been violated even by developers who's exeprtise in a language is not questionable.
+These two rules are a simplification of the [principle of least surprise][pols] and tells you for example that you should not do there any IO stuff or spawn new threads or even update any fields other that the one that the name of the setter defines. Still these two rules has been violated even by developers who's expertise in a language is not questionable.
 
-As I can not question their expertise, I can only assume that it easy to just abuse this feature by mistake. But if that is the case, there should at least be some precations. Static analysis tools have been around for a while, so for sure they can help us there.
+As I can not question their expertise, I can only assume that it easy to just abuse this feature by mistake. But if that is the case, there should at least be some precautions. Static analysis tools have been around for a while, so for sure they can help us there.
 
 It would be also cooler if the compiler of a language would be able to do the analysis for you as part of the compilation. In that case it makes sense to help the compiler and yourself with a special definition of the feature:
 
