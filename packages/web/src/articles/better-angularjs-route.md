@@ -12,9 +12,9 @@ Well, it looks like there is no straight forward way to solve this problem. And 
 
 Till now I haven't seen a single angular webapp that is not using any kind of routing and the first out of the box solution is `ngRoute`. The thing is though that this module has been build with the idea that routes should be defined at the config phase. This looks like pretty logical except from the fact that you can only inject providers within the config phase.
 
-That means that once your app starts, routing has already been defined. If you force the user to start with a specific route, the initialization of the app should not be a problem. But if your user tries to reach `/route/xxx` without reaching let's say the root route (`/`) where all the initialization should take place, you have to problem of trying to use services and controllers depending of stuff that have been not properly initialized.
+That means that once your app starts, routing has already been defined. If you force the user to start with a specific route, the initialization of the app should not be a problem. But if your user tries to reach `/route/xxx` without reaching let's say the root route (`/`) where all the initialization should take place, you have the problem of trying to use services and controllers depending on stuff that have not been properly initialized.
 
-So a solution to the problem would be to have a way to run **always** some initialization code before defining the routes so that angular can continue with the routing after that. And it looks like this is not possible in your config phase, as no services are available there and during run phase no providers are available.
+So a solution to the problem would be to have a way to always run some initialization code before defining the routes so that angular can continue with the routing after that. And it looks like this is not possible in your config phase, as no services are available there and during run phase no providers are available.
 
 ## A `$routeProvider` provider
 Now let's try a naive hack and find a way to inject `$routeProvider` after the config phase. Then we can configure it lazily (let's say after our initialization). It looks like `$provider` is a service available at the config phase and we can use it to register new services/factories. So, let's try to register a `$routeProvider` service:

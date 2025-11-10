@@ -36,7 +36,7 @@ Lets say that a client needs something from the server. An xml, an html or whate
 
 We also mentioned the data. That is probably something we store in our database. Generally the data are never in a format that the client want so you give them in the format he wants. So the data is your Model and the format the View. We may have many views. For example an xml representation of the data or an html representation of the same data.
 
-Grails is build with this pattern in mind. Ok this is another good thing! I also mention here data. Yes grails takes care of the this too! It provides you with a ready to use database with in the development environment. Another thing that you should not bother until you'll reach the production phase.
+Grails is built with this pattern in mind. Ok this is another good thing! I also mention data here. Yes grails takes care of this too! It provides you with a ready to use database within the development environment. Another thing that you should not bother about until you'll reach the production phase.
 
 ### The controller
 
@@ -98,7 +98,7 @@ This is what we should if we have to return html pages. As we've said before a m
 
 As we have seen in our example the model part is just a phrase a user passed to our controller as a parameter to it's request. This isn't the case of course in real web applications as in most cases we also have to do some interaction with the database. In order to do that we will also save the Echo phrase in the database and show the user a small history of the previous Echos.
 
-To do that we must some how tell grails what we would like to save to the database. We define this using the so called domain classes. For our example we would like our echos to have a date they have been submitted and the actual phrase the user has been submitted. Domain classes are simple groovy classes inside the inside the `grails-app/domain` folder of our application. Let's create one manually (by creating an appropriate file) or letting grails doing it for us: `$ grails create-domain-class com.valotas.firstgrailsproject.Echo`. Now just edit the newly created file:
+To do that we must somehow tell grails what we would like to save to the database. We define this using the so called domain classes. For our example we would like our echos to have a date they have been submitted and the actual phrase the user has submitted. Domain classes are simple groovy classes inside the `grails-app/domain` folder of our application. Let's create one manually (by creating an appropriate file) or let grails do it for us: `$ grails create-domain-class com.valotas.firstgrailsproject.Echo`. Now just edit the newly created file:
 
 ```groovy
 package com.valotas.firstgrailsproject
@@ -113,7 +113,7 @@ class Echo {
 }
 ```
 
-We defined what we would like our model to have. Note here that we would also like our phrases to have a size not bigger the 100 characters. We also defined that with in the constraints.
+We defined what we would like our model to have. Note here that we would also like our phrases to have a size not bigger than 100 characters. We also defined that within the constraints.
 
 Now let's add an action to also save the echos, and except from the last posted one display the previous ones ordered by the dateCreated descended.
 

@@ -57,7 +57,7 @@ So it was mostly [Stephan][stephan] announcing the end of [Parleys](https://www.
 
 Then [Mark Reinhold](http://mreinhold.org/) took the step to talk about jdk9 and mostly about modulatity. Given the fact the we've been talking about it for the last 3 major Java releases, I did not see anyone extremely excited about it.
 
-Finally theoretical physics professor [Lawrence M. Krauss](https://twitter.com/LKrauss1) talked about how irrelevant was what we were doing at devoxx. I do not know if that is the best way to start a conference, but for sure it was the [best talk](https://www.youtube.com/watch?v=T-Kf2dR_SrQ) of day one.
+Finally theoretical physics professor [Lawrence M. Krauss](https://twitter.com/LKrauss1) talked about how irrelevant what we were doing at devoxx was. I do not know if that is the best way to start a conference, but for sure it was the [best talk](https://www.youtube.com/watch?v=T-Kf2dR_SrQ) of day one.
 
 ## Lack of advertisements talks
 
@@ -65,7 +65,7 @@ I did tweet the following:
 
 <blockquote className="twitter-tweet" lang="en"><p lang="en" dir="ltr">No advertising talk till now at <a href="https://twitter.com/hashtag/devoxx2015?src=hash">#devoxx2015</a> either my filter works better or there is an improvement there!</p>&mdash; Yoryos Valotassios (@valotas) <a href="https://twitter.com/valotas/status/664743040448376832">November 12, 2015</a></blockquote>
 
-Although someone can argue that there were no marketing talks, I have to say that this time at least were not that obvious ones. This is in my opinion a major improvement. I can understand the need of them but I do not see what they can bring in terms of marketing if there are only a couple of people watching them.
+Although someone can argue that there were no marketing talks, I have to say that this time at least they were not that obvious. This is in my opinion a major improvement. I can understand the need for them but I do not see what they can bring in terms of marketing if there are only a couple of people watching them.
 
 A very good example of such a talk in my opinion was [The Twelve Factor app: Best Practices for Java Deployment](https://www.youtube.com/watch?v=94PxlbuizCU) where you at least got a couple of useful information regarding the [12 factor app](http://12factor.net/) (which in my opinion is 12 rule of thumbs for creating microservices) and the only advertisement was that you could deploy that super easy with [heroku](https://www.heroku.com/).
 
@@ -77,7 +77,7 @@ Although there were no big news, there were some obvious trends. It looks like r
 
 ### Reactive programming
 
-Working with streams has been the thing for some years now. Unfortunatelly Microsoft who is I think the main player behind the whole reactive idea, did not present anything the last 3 years on devoxx. But this is another topic...
+Working with streams has been the thing for some years now. Unfortunately Microsoft who is I think the main player behind the whole reactive idea, did not present anything in the last 3 years at devoxx. But this is another topic...
 
 Back to reactive, as I watched some talks on this topic the previous years, I skipped these talks this time. Unfortunately, Java has only recently added basic support for that with the changes of JDK8, which means that it lacks the apis on the EE side and not only. 
 
@@ -87,26 +87,26 @@ More about reactive can be found at [reactivex.io](http://reactivex.io/).
 
 ### Microservices
 
-Yes, microservices are still the trend. Unfortunatelly, the term is so abstract, that you can give you own description. For some reason I tend to agree with what Hadi Hariri said about them, at his funny talk: [The Silver Bullet Syndrome][silver-bullet]. They are what SOAP used to be but, SOAP is so bad, you do not call to name them like that :)
+Yes, microservices are still the trend. Unfortunately, the term is so abstract, that you can give your own description. For some reason I tend to agree with what Hadi Hariri said about them, at his funny talk: [The Silver Bullet Syndrome][silver-bullet]. They are what SOAP used to be but, SOAP is so bad, you do not want to name them like that :)
 
 Never the less, if you would like to play with microservices, I haven't been to a talk on this topic without hearing once about [Spring boot](http://projects.spring.io/spring-boot/). It looks like it does the job just fine, but it doesn't mean that there are no alternatives. Actually there is one offering pretty much exactly what Spring boot does by embedding an application server with your app which I think deserves a serious look at. It is no other than [Wildfly Swarm](http://wildfly.org/swarm/) and you can guess which application server is used.
 
-If you think that EE can not be used for microservices, [think again](https://www.parleys.com/tutorial/pico-services-java-ee-7-java-8-docker). If you don't like EE anymore, then there is what you can also checkout:
+If you think that EE cannot be used for microservices, [think again](https://www.parleys.com/tutorial/pico-services-java-ee-7-java-8-docker). If you don't like EE anymore, then there is what you can also check out:
 
 - [grpc](http://www.grpc.io/) for communication
 - [spark](http://sparkjava.com/) for rest
 - [dropwizard](http://www.dropwizard.io/) for a little bit more than spark
 - [vertx](http://vertx.io/) which is kind of I can do everything framework
 
-After checking them all out, let me know what kind of database microservice you are going to use. Although this comment is kind of sarcastic, when you do something, you have to remember that it is all about the code. So, have a look at [Microservices and Modularity or the difference between treatment and cure!](https://www.youtube.com/watch?v=O77777Zy_HE) and see how an EE application can be refactored to something osgi base (yes, it still lives).
+After checking them all out, let me know what kind of database microservice you are going to use. Although this comment is kind of sarcastic, when you do something, you have to remember that it is all about the code. So, have a look at [Microservices and Modularity or the difference between treatment and cure!](https://www.youtube.com/watch?v=O77777Zy_HE) and see how an EE application can be refactored to something osgi based (yes, it still lives).
 
 ## What about the JVM?
 
 Back to [Graal.js][graal-js]...
 
-When we are talking about Java, we are mostly referring to the Java as a language. This wouldn't be possible without that beast called JVM. I did not spot any JVM specific talks to be honest, but I did found one with a title that was giving you the impression that it was yet another javascript on the jvm implementation.
+When we are talking about Java, we are mostly referring to Java as a language. This wouldn't be possible without that beast called JVM. I did not spot any JVM specific talks to be honest, but I did find one with a title that was giving you the impression that it was yet another javascript on the jvm implementation.
 
-Apparently the talk was mostly about how mature the JVM became and how it can nowadays be used as a platform from other languages. Given the number of languages implemented on top of that, this is not new news, but the interoperability of them it is. It worth having a look at the talk, to see how javascript code has been used from within [R code](https://www.r-project.org/).
+Apparently the talk was mostly about how mature the JVM became and how it can nowadays be used as a platform by other languages. Given the number of languages implemented on top of that, this is not new news, but the interoperability of them is. It's worth having a look at the talk, to see how javascript code has been used from within [R code](https://www.r-project.org/).
 
 [stephan]: https://twitter.com/Stephan007
 [graal-js]: https://www.youtube.com/watch?v=OUo3BFMwQFo
