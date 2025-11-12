@@ -12,3 +12,4 @@ server/**/*.js
 .vscode
 .parcel-cache
 frontend/src/stories
+.DS_Store

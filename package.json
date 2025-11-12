@@ -5,6 +5,7 @@
         "packages/parcel-resolver-staticsite",
         "packages/parcel-namer-staticsite",
         "packages/parcel-transformer-staticsite",
+        "packages/html2pdf",
         "packages/web"
     ],
     "scripts": {

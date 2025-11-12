@@ -1,0 +1,195 @@
+@page {
+  size: A4;
+  margin: 15mm 15mm 0mm 15mm; /* Adjusted bottom margin to match PDF spacing */
+  padding-bottom: 15mm;
+  @bottom-center {
+    content: element(footer);
+  }
+}
+
+body {
+  margin: 0;
+  padding: 0;
+  font-family: "Roboto Condensed", sans-serif;
+  font-size: 11pt;
+  line-height: 1.2;
+  color: #000;
+  background: #fff;
+}
+
+body a {
+  color: #000;
+  text-decoration: none;
+}
+
+.page {
+  width: 210mm;
+  max-width: 210mm;
+  margin: 0 auto;
+  padding: 18mm 15mm;
+  box-sizing: border-box;
+  position: relative;
+  min-height: 297mm;
+}
+
+h1 {
+  font-size: 20pt;
+  margin: 0 0 2mm 0;
+  font-weight: bold;
+}
+
+.header {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  margin-bottom: 5mm;
+}
+
+.contact {
+  flex: 1;
+  color: #666;
+}
+
+.contact a {
+  color: #666;
+}
+
+.photo {
+  width: 26mm;
+  height: 40mm;
+  object-fit: cover;
+  object-position: center;
+  border-radius: 3mm;
+  margin-left: 8mm;
+  flex-shrink: 0;
+}
+
+.summary {
+  margin: 5mm 0 6mm 0;
+  text-align: justify;
+  line-height: 1.2;
+  font-style: italic;
+}
+
+h2 {
+  font-size: 11pt;
+  font-weight: bold;
+  margin: 7mm 0 2.5mm 0;
+  letter-spacing: 0.4pt;
+  page-break-after: avoid;
+  color: #666;
+}
+
+.job {
+  margin-bottom: 5mm;
+  page-break-inside: avoid;
+}
+
+.job-title::after {
+  content: ", ";
+}
+
+.job-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: baseline;
+  flex-wrap: wrap;
+  margin-bottom: 1.5mm;
+}
+
+.job-title-info {
+  display: flex;
+  align-items: baseline;
+}
+
+.job-title {
+  font-weight: bold;
+  white-space: pre-wrap;
+}
+
+.job-info {
+  white-space: nowrap;
+}
+
+.job-date {
+  font-style: italic;
+  white-space: nowrap;
+}
+
+.job ul {
+  margin: 2mm 0 0 0;
+  margin-left: 4mm;
+  padding-left: 5.5mm;
+  list-style: none;
+}
+
+.job li {
+  position: relative;
+}
+
+.job li:before {
+  content: "•";
+  position: absolute;
+  left: -5.5mm;
+  font-weight: bold;
+}
+
+.education-title {
+  font-weight: bold;
+  margin: 3mm 0 1mm 0;
+}
+
+.education-subtitle {
+  margin-bottom: 1.5mm;
+}
+
+.thesis {
+  font-style: italic;
+  margin: 2mm 0 6mm 0;
+}
+
+footer {
+  position: fixed;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  height: 8mm;
+  text-align: center;
+  background-color: #fff;
+  color: #666;
+  padding-top: 3mm;
+  box-shadow: 0 -2px 4px rgba(0, 0, 0, 0.1);
+}
+
+footer a {
+  color: #666;
+  text-decoration: none;
+}
+
+.overview {
+  color: #fff;
+  font-size: 4pt;
+}
+
+@media print {
+  body {
+    -webkit-print-color-adjust: exact;
+  }
+  section {
+    page-break-inside: avoid;
+  }
+  footer {
+    padding: 0;
+    box-shadow: none;
+    /*border: 1px solid red;*/
+  }
+  .section-title {
+    page-break-after: avoid;
+  }
+  h2 {
+    page-break-after: avoid;
+  }
+  .job {
+    page-break-inside: avoid;
+  }
+}
