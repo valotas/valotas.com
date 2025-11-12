@@ -1,9 +1,7 @@
 @page {
   size: A4;
-  margin: 15mm 15mm 10mm 15mm; /* Adjusted bottom margin to match PDF spacing */
-  @top-center {
-    content: none;
-  }
+  margin: 15mm 15mm 0mm 15mm; /* Adjusted bottom margin to match PDF spacing */
+  padding-bottom: 15mm;
   @bottom-center {
     content: element(footer);
   }
@@ -13,7 +11,7 @@ body {
   margin: 0;
   padding: 0;
   font-family: "Roboto Condensed", sans-serif;
-  font-size: 10pt;
+  font-size: 11pt;
   line-height: 1.2;
   color: #000;
   background: #fff;
@@ -35,7 +33,7 @@ body a {
 }
 
 h1 {
-  font-size: 18pt;
+  font-size: 20pt;
   margin: 0 0 2mm 0;
   font-weight: bold;
 }
@@ -48,7 +46,6 @@ h1 {
 }
 
 .contact {
-  font-size: 9pt;
   flex: 1;
   color: #666;
 }
@@ -75,7 +72,7 @@ h1 {
 }
 
 h2 {
-  font-size: 10pt;
+  font-size: 11pt;
   font-weight: bold;
   margin: 7mm 0 2.5mm 0;
   letter-spacing: 0.4pt;
@@ -158,7 +155,6 @@ footer {
   right: 0;
   height: 8mm;
   text-align: center;
-  font-size: 8pt;
   background-color: #fff;
   color: #666;
   padding-top: 3mm;
@@ -170,20 +166,22 @@ footer a {
   text-decoration: none;
 }
 
+.overview {
+  color: #fff;
+  font-size: 4pt;
+}
+
 @media print {
   body {
     -webkit-print-color-adjust: exact;
-    padding-bottom: 5mm; /* Add padding to prevent content overlap */
-  }
-  .page {
-    padding: 0 0 20mm 0;
   }
   section {
     page-break-inside: avoid;
   }
   footer {
-    position: running(footer);
+    padding: 0;
     box-shadow: none;
+    /*border: 1px solid red;*/
   }
   .section-title {
     page-break-after: avoid;
