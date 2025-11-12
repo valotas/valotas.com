@@ -2,3 +2,4 @@
 ./opensystems-presentation-passion/index.html
 ./fpg/index.html
 ./google35c7e5b468113980.html
+./cv/*.html
