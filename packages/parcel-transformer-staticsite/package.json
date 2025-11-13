@@ -20,8 +20,8 @@
     "preversion": "npm run lint && npm run build && npm run test"
   },
   "dependencies": {
-    "@parcel/plugin": "^2.12.0",
-    "@parcel/utils": "^2.12.0",
+    "@parcel/plugin": "^2.16.1",
+    "@parcel/utils": "^2.16.1",
     "@types/pug": "^2.0.6",
     "pug": "^3.0.3"
   }
