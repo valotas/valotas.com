@@ -26,19 +26,41 @@ function nameHtml(bundle) {
   }
 
   const asset = bundle.getMainEntry();
-  if (!asset?.meta.templateSource) {
+  if (!asset) {
     return null;
   }
 
-  const { key } = asset.meta;
+  // If asset has templateSource and key, use the key-based naming
+  if (asset.meta.templateSource) {
+    const { key } = asset.meta;
 
-  if (!key) {
-    throw new Error(
-      `Can not name html asset with templateSource but no meta.key`,
-    );
+    if (!key) {
+      throw new Error(
+        `Can not name html asset with templateSource but no meta.key`,
+      );
+    }
+
+    return key !== "index" ? `${key}/index.html` : "index.html";
   }
 
-  return key !== "index" ? `${key}/index.html` : "index.html";
+  // For HTML assets without templateSource (e.g., static HTML files),
+  // If they have a key in meta, use it
+  if (asset.meta.key) {
+    const { key } = asset.meta;
+    return key !== "index" ? `${key}/index.html` : "index.html";
+  }
+
+  // For static HTML files without key or templateSource,
+  // derive the path from the asset's file path
+  // Find "src/" in the path and use everything after it
+  const filePath = asset.filePath;
+  const srcIndex = filePath.indexOf("/src/");
+  if (srcIndex >= 0) {
+    return filePath.substring(srcIndex + 5); // +5 to skip "/src/"
+  }
+
+  // Fallback: use just the basename
+  return path.basename(filePath);
 }
 
 /**
