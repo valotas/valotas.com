@@ -2,20 +2,6 @@
 
 A TypeScript package that converts HTML to PDF using Playwright, with support for metadata extraction.
 
-## Features
-
-- 🎯 **HTML to PDF Conversion**: Convert HTML content, files, or URLs to PDF
-- 📝 **Metadata Support**: Automatically extracts and embeds metadata from HTML meta tags
-- 🎨 **Styling Support**: Preserves CSS styling in the generated PDF
-- ⚙️ **Customizable Options**: Control page size, margins, fonts, and more
-- 🧪 **Fully Tested**: Comprehensive test suite included
-
-## Installation
-
-```bash
-npm install @valotas/html2pdf
-```
-
 ## Usage
 
 ```bash
