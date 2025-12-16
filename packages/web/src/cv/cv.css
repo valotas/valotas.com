@@ -1,9 +1,11 @@
 @page {
   size: A4;
-  margin: 15mm 15mm 0mm 15mm; /* Adjusted bottom margin to match PDF spacing */
-  padding-bottom: 15mm;
+  margin: 15mm 15mm 15mm 15mm;
   @bottom-center {
-    content: element(footer);
+    content: "Georgios Valotasios | 076 247 5976 | valotas@gmail.com | https://valotas.com";
+    color: #666;
+    font-size: 8pt;
+    font-family: "Roboto Condensed", sans-serif;
   }
 }
 
@@ -29,7 +31,6 @@ body a {
   padding: 18mm 15mm;
   box-sizing: border-box;
   position: relative;
-  min-height: 297mm;
 }
 
 h1 {
@@ -149,16 +150,7 @@ h2 {
 }
 
 footer {
-  position: fixed;
-  bottom: 0;
-  left: 0;
-  right: 0;
-  height: 8mm;
-  text-align: center;
-  background-color: #fff;
-  color: #666;
-  padding-top: 3mm;
-  box-shadow: 0 -2px 4px rgba(0, 0, 0, 0.1);
+  display: none;
 }
 
 footer a {
@@ -179,9 +171,7 @@ footer a {
     page-break-inside: avoid;
   }
   footer {
-    padding: 0;
-    box-shadow: none;
-    /*border: 1px solid red;*/
+    display: none;
   }
   .section-title {
     page-break-after: avoid;
