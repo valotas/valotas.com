@@ -20,3 +20,13 @@ export function getGrammar(lang = "none"): {
 export function highlight(code: string, grammar: prism.Grammar, lang: string) {
   return prismjs.highlight(code, grammar, lang);
 }
+
+export type Token = prism.Token;
+export type TokenStream = string | Token | (string | Token)[];
+
+export function tokenize(
+  code: string,
+  grammar: prism.Grammar,
+): (string | Token)[] {
+  return prismjs.tokenize(code, grammar);
+}
