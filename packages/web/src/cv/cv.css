@@ -90,11 +90,18 @@ h2 {
   content: ", ";
 }
 
+.job-positions .job-title::after {
+  content: "";
+}
+
 .job-header {
   display: flex;
   justify-content: space-between;
   align-items: baseline;
   flex-wrap: wrap;
+}
+
+.job-margin-bottom {
   margin-bottom: 1.5mm;
 }
 
@@ -133,6 +140,10 @@ h2 {
   position: absolute;
   left: -5.5mm;
   font-weight: bold;
+}
+
+ul.job-positions > li:before {
+  content: "";
 }
 
 .education-title {
