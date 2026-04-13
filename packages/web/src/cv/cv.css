@@ -124,22 +124,35 @@ h2 {
   white-space: nowrap;
 }
 
-.job ul {
+.competence-title {
+  font-weight: bold;
+}
+
+.bullet-list {
   margin: 2mm 0 0 0;
   margin-left: 4mm;
   padding-left: 5.5mm;
   list-style: none;
 }
 
-.job li {
+.bullet-list li {
   position: relative;
 }
 
-.job li:before {
+.bullet-list li:before {
   content: "•";
   position: absolute;
   left: -5.5mm;
   font-weight: bold;
+}
+
+.bullet-list.core-competences li:before {
+  content: none;
+}
+
+.bullet-list.core-competences {
+  margin-left: 0;
+  padding-left: 0;
 }
 
 ul.job-positions > li:before {
