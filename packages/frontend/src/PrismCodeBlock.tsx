@@ -1,5 +1,6 @@
 import { PropsWithChildren } from "./jsx.js";
-import { getGrammar, highlight } from "./prism.js";
+import { getGrammar, tokenize } from "./prism.js";
+import { TokenRenderer } from "./TokenRenderer.js";
 
 export type PrismCodeProps = {
   language?: string;
@@ -28,7 +29,7 @@ function PossiblyHighlightedCode({
   code,
   children,
 }: PropsWithChildren<PrismCodeProps>) {
-  const { grammar, lang, className } = getGrammar(language);
+  const { grammar, className } = getGrammar(language);
 
   if (children) {
     return (
@@ -39,13 +40,13 @@ function PossiblyHighlightedCode({
   }
 
   code = (code || "").trim();
-  const html = {
-    __html: highlight(code, grammar, lang),
-  };
+  const tokens = tokenize(code, grammar);
 
   return (
     <pre className={className}>
-      <code className={className} dangerouslySetInnerHTML={html} />
+      <code className={className}>
+        <TokenRenderer tokens={tokens} />
+      </code>
     </pre>
   );
 }
