@@ -82,7 +82,15 @@ h2 {
 }
 
 .job {
+  page-break-inside: avoid;
+}
+
+.job,
+.job-break {
   margin-bottom: 5mm;
+}
+
+.no-break {
   page-break-inside: avoid;
 }
 
