@@ -17,4 +17,16 @@ describe("PrismCode", () => {
     const code = container.querySelector("code");
     expect(code?.innerHTML).toContain(`var x = "xxx"`);
   });
+
+  it("should render tokens without using dangerouslySetInnerHTML", () => {
+    const { container } = render(
+      <PrismCodeBlock language="js" code="function test() { return 42; }" />,
+    );
+    const code = container.querySelector("code");
+    // Verify that tokens are rendered as React elements, not as raw HTML
+    expect(code).toBeTruthy();
+    expect(code?.innerHTML).toContain('<span class="token keyword">function</span>');
+    expect(code?.innerHTML).toContain('<span class="token keyword">return</span>');
+    expect(code?.innerHTML).toContain('<span class="token number">42</span>');
+  });
 });
