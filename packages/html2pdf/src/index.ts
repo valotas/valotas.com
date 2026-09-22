@@ -187,7 +187,7 @@ async function postProcessPdfForPdfA1b(
     // Save the modified PDF
     const modifiedPdfBuffer = await pdfDoc.save();
     fs.writeFileSync(filePath, modifiedPdfBuffer);
-  } catch (error) {
+  } catch (_error) {
     // If pdf-lib is not available, log a warning but don't fail
     // The PDF will still be generated, just without metadata
     console.warn(

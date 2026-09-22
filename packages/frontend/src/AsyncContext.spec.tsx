@@ -25,7 +25,6 @@ describe("AsyncContext", () => {
 
     it("it returns { loading: true } while response is not done", async () => {
       const url = "/url/to/be/fetched/2";
-      //eslint-disable-next-line
       fetchMock.default.mockReturnValue(new Promise((_) => {}));
 
       const { container } = render(<UseFetchTester url={url} />);
@@ -56,7 +55,7 @@ describe("AsyncContext", () => {
       rerender(<UseFetchTester url={url} />);
 
       await waitFor(() => {
-        expect(fetchMock).toBeCalledTimes(1);
+        expect(fetchMock).toHaveBeenCalledTimes(1);
       });
     });
   });

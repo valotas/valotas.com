@@ -1,6 +1,6 @@
 import Reveal from "reveal.js";
-import RealNotes from "reveal.js/plugin/notes/notes";
-import Hightlight from "reveal.js/plugin/highlight/highlight";
+import RealNotes from "reveal.js/plugin/notes";
+import Hightlight from "reveal.js/plugin/highlight";
 
 function onLoad(fn: () => void) {
   if (["complete", "interactive"].indexOf(document.readyState) >= 0) {

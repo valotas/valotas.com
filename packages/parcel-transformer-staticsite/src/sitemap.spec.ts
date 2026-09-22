@@ -1,4 +1,3 @@
-/* eslint-env jest */
 import * as path from "path";
 import { fileURLToPath } from "node:url";
 import { NodeFS } from "@parcel/fs";

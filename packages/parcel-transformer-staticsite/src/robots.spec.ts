@@ -1,4 +1,3 @@
-/* eslint-env jest */
 import { parseRobots } from "./robots.js";
 
 describe("robots", () => {

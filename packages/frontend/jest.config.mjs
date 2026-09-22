@@ -9,6 +9,8 @@ const config = {
   moduleNameMapper: {
     "^(\\.{1,2}/.*)\\.js$": "$1",
     "\\.(css|less)$": "<rootDir>/src/__mocks__/emptyImport.ts",
+    // jsdom selects the browser server build, which expects MessageChannel.
+    "^react-dom/server$": "react-dom/server.node",
   },
   setupFiles: ["./jest.setup.mjs"],
   extensionsToTreatAsEsm: [".tsx", ".ts"],

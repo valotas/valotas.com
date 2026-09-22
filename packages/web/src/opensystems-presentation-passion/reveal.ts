@@ -1,5 +1,5 @@
 import Reveal from "reveal.js";
-import RealNotes from "reveal.js/plugin/notes/notes";
+import RealNotes from "reveal.js/plugin/notes";
 
 function onLoad(fn: () => void) {
   if (["complete", "interactive"].indexOf(document.readyState) >= 0) {

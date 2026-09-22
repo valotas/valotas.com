@@ -1,3 +1,4 @@
+import type { JSX } from "react";
 import { PropsWithChildren } from "./jsx.js";
 import { getGrammar, highlight } from "./prism.js";
 

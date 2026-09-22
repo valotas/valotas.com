@@ -7,8 +7,7 @@ import { history } from "./History.js";
 function getPageProps(input: PageRendererProps) {
   if ("payload" in input) {
     return JSON.parse(input.payload) as
-      | PageWithListProps
-      | PageWithMarkdownProps;
+      PageWithListProps | PageWithMarkdownProps;
   }
   return input.props;
 }
@@ -22,8 +21,7 @@ function isPageWithMarkdownProps(props: any): props is PageWithMarkdownProps {
 }
 
 export type PageRendererProps =
-  | { payload: string }
-  | { props: PageWithListProps | PageWithMarkdownProps };
+  { payload: string } | { props: PageWithListProps | PageWithMarkdownProps };
 
 function usePageProps(initial: PageRendererProps) {
   const [props, updateProps] = useState(initial);

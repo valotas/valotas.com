@@ -1,4 +1,3 @@
-/* eslint-env jest */
 import { _getAllTags } from "./sitemap-transformer.js";
 
 describe("sitemap-transformer", () => {
