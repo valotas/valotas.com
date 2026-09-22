@@ -1,11 +1,11 @@
 import { chromium } from "playwright";
 
+export type { PdfA1bMetadata } from "./pdfa1b.js";
 export {
   convertToXmpMetadata,
   isPdfA1bCompliant,
   PDF_A_1B_REQUIREMENTS,
 } from "./pdfa1b.js";
-export type { PdfA1bMetadata } from "./pdfa1b.js";
 
 /**
  * Represents metadata extracted from HTML meta tags

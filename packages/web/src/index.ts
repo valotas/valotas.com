@@ -1,6 +1,6 @@
+import { history, PageRenderer } from "@valotas/valotas-frontend";
 import { createElement } from "react";
 import { hydrateRoot } from "react-dom/client";
-import { PageRenderer, history } from "@valotas/valotas-frontend";
 
 window.addEventListener("load", () => {
   const script = document.querySelector("script[type='application/json']");

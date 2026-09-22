@@ -1,7 +1,7 @@
 import { DateSpan } from "./DateSpan.js";
 import { Icon, IconProps } from "./Icon.js";
-import { createTitle } from "./title.js";
 import { Anchor, Link } from "./links.js";
+import { createTitle } from "./title.js";
 
 export interface HeaderProps {
   title?: string | null;

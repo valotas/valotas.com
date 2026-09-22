@@ -1,10 +1,10 @@
-import * as path from "path";
-import type { Transformer as TransformerOpts } from "@parcel/types";
 import { Transformer } from "@parcel/plugin";
-import { transformSitemap } from "./sitemap-transformer.js";
-import { transformRobots } from "./robots-transformer.js";
-import { transformMd } from "./md-transformer.js";
+import type { Transformer as TransformerOpts } from "@parcel/types";
+import * as path from "path";
 import { transformHtmlBody } from "./htmlbody-transformer.js";
+import { transformMd } from "./md-transformer.js";
+import { transformRobots } from "./robots-transformer.js";
+import { transformSitemap } from "./sitemap-transformer.js";
 
 export type MdTrasformerConfig = {
   pkgVersion: string;
@@ -31,7 +31,7 @@ export default new Transformer<MdTrasformerConfig>({
       throw new Error("Could not load static-site.json");
     }
 
-    const { defaultTemplate } = conf?.contents as any;
+    const { defaultTemplate } = conf.contents as any;
 
     const defaultTemplateFilePath = defaultTemplate
       ? path.join(path.dirname(conf?.filePath), defaultTemplate)

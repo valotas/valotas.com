@@ -1,7 +1,7 @@
-import Markdown, { RuleType, type MarkdownToJSX } from "markdown-to-jsx";
+import Markdown, { type MarkdownToJSX, RuleType } from "markdown-to-jsx";
 import { CodeBlock } from "./CodeBlock.js";
-import { MarkdownScript, isMarkdownScript } from "./MarkdownScript.js";
 import { Heading } from "./Heading.js";
+import { isMarkdownScript, MarkdownScript } from "./MarkdownScript.js";
 import { MarkedLink } from "./MarkedLink.js";
 
 const options: MarkdownToJSX.Options = {

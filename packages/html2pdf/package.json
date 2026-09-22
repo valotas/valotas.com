@@ -11,8 +11,8 @@
   "types": "dist/index.d.ts",
   "scripts": {
     "clean": "rimraf dist node_modules",
-    "lint": "eslint \"src/**/*.+(ts|js|tsx|jsx)\"",
-    "fix": "npm run lint -- --fix",
+    "lint": "biome check src",
+    "fix": "biome check --write src",
     "build": "tsc -p .",
     "watch:build": "tsc -p . -w",
     "test": "NODE_OPTIONS=\"$NODE_OPTIONS --experimental-vm-modules\" jest --no-cache",

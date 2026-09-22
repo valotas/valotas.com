@@ -1,6 +1,6 @@
-import { MouseEvent, useCallback, PropsWithChildren } from "./jsx.js";
-import { Icon, IconProps } from "./Icon.js";
 import { history } from "./History.js";
+import { Icon, IconProps } from "./Icon.js";
+import { MouseEvent, PropsWithChildren, useCallback } from "./jsx.js";
 
 function computeHref(href: string) {
   if (!href.endsWith("/")) {

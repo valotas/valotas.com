@@ -1,7 +1,7 @@
 import { DateSpan } from "./DateSpan.js";
-import { Page, PageProps } from "./Page.js";
 import { Anchor, Link } from "./links.js";
 import { MarkedContent } from "./marked/MarkedContent.js";
+import { Page, PageProps } from "./Page.js";
 
 export type PageItem = {
   date?: string;

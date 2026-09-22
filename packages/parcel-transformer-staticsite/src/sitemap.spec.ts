@@ -1,6 +1,6 @@
-import * as path from "path";
 import { fileURLToPath } from "node:url";
 import { NodeFS } from "@parcel/fs";
+import * as path from "path";
 import { _parseSitemapContent } from "./sitemap.js";
 
 const fs = new NodeFS();

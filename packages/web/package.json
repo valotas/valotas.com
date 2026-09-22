@@ -17,8 +17,8 @@
   },
   "scripts": {
     "clean": "rimraf dist node_modules",
-    "lint": "eslint \"src/**/*.+(ts|js|tsx|jsx)\"",
-    "fix": "npm run lint -- --fix",
+    "lint": "biome check src",
+    "fix": "biome check --write src",
     "build": "parcel build src/robots.txt --no-autoinstall",
     "deploy": "npm run build",
     "watch:build": "parcel watch src/robots.txt --no-autoinstall --no-cache",

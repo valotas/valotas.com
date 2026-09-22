@@ -1,5 +1,5 @@
-import fetchMock from "jest-fetch-mock";
 import { render, waitFor } from "@testing-library/react";
+import fetchMock from "jest-fetch-mock";
 import { useFetch } from "./AsyncContext.js";
 
 function UseFetchTester({ url }: { url: string }) {
@@ -25,7 +25,11 @@ describe("AsyncContext", () => {
 
     it("it returns { loading: true } while response is not done", async () => {
       const url = "/url/to/be/fetched/2";
-      fetchMock.default.mockReturnValue(new Promise((_) => {}));
+      fetchMock.default.mockReturnValue(
+        new Promise(() => {
+          // Keep the request pending so loading stays true.
+        }),
+      );
 
       const { container } = render(<UseFetchTester url={url} />);
 

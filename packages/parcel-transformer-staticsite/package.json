@@ -12,10 +12,10 @@
   },
   "scripts": {
     "clean": "rimraf dist node_modules",
-    "lint": "eslint \"src/**/*.+(ts|js|tsx|jsx)\"",
+    "lint": "biome check src",
     "watch:test": "jest --watch",
     "test": "jest",
-    "fix": "npm run lint -- --fix",
+    "fix": "biome check --write src",
     "build": "tsc -p .",
     "preversion": "npm run lint && npm run build && npm run test"
   },

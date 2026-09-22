@@ -1,9 +1,9 @@
+import { afterAll, beforeAll, describe, expect, it } from "@jest/globals";
 import { existsSync, mkdirSync, rmSync } from "fs";
 import { join } from "path";
 import { fileURLToPath } from "url";
-import { describe, it, expect, beforeAll, afterAll } from "@jest/globals";
 
-import { extractMetadataFromHtml, html2pdf, Html2PdfOptions } from "./index.js";
+import { extractMetadataFromHtml, Html2PdfOptions, html2pdf } from "./index.js";
 
 const __dirname = fileURLToPath(new URL(".", import.meta.url));
 const outputDir = join(__dirname, "..", "..", "test-output");

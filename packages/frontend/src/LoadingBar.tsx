@@ -1,5 +1,5 @@
-import { useMemo } from "./jsx.js";
 import { useFetchCounter } from "./FetchTracker.js";
+import { useMemo } from "./jsx.js";
 
 export function LoadingBar() {
   const counter = useFetchCounter();

@@ -10,7 +10,7 @@
   },
   "scripts": {
     "clean": "rimraf dist",
-    "lint": "eslint \"**/*.+(ts|js|tsx|jsx)\"",
+    "lint": "biome check .",
     "test": "npm run lint",
     "preversion": "npm run test"
   }
