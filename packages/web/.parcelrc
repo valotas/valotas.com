@@ -9,6 +9,7 @@
   "resolvers": ["...", "@valotas/parcel-resolver-staticsite"],
   "namers": ["@valotas/parcel-namer-staticsite", "..."],
   "optimizers": {
-    "*.css": ["@parcel/optimizer-cssnano"]
+    "*.css": ["@parcel/optimizer-cssnano"],
+    "*.html": []
   }
 }
