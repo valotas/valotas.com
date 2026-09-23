@@ -3,7 +3,7 @@
  * This file demonstrates the basic usage of the @valotas/html2pdf package
  */
 
-import { html2pdf, extractMetadataFromHtml } from "./index.js";
+import { extractMetadataFromHtml, html2pdf } from "./index.js";
 
 // Example 1: Basic HTML to PDF conversion
 async function example1_basicConversion() {

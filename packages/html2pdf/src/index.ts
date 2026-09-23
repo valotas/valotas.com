@@ -1,11 +1,11 @@
 import { chromium } from "playwright";
 
+export type { PdfA1bMetadata } from "./pdfa1b.js";
 export {
   convertToXmpMetadata,
   isPdfA1bCompliant,
   PDF_A_1B_REQUIREMENTS,
 } from "./pdfa1b.js";
-export type { PdfA1bMetadata } from "./pdfa1b.js";
 
 /**
  * Represents metadata extracted from HTML meta tags
@@ -187,7 +187,7 @@ async function postProcessPdfForPdfA1b(
     // Save the modified PDF
     const modifiedPdfBuffer = await pdfDoc.save();
     fs.writeFileSync(filePath, modifiedPdfBuffer);
-  } catch (error) {
+  } catch (_error) {
     // If pdf-lib is not available, log a warning but don't fail
     // The PDF will still be generated, just without metadata
     console.warn(

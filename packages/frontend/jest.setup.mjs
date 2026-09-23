@@ -1,4 +1,3 @@
-/* eslint-disable no-undef */
 import { TextEncoder } from "util";
 import { createRequire } from "module";
 import React from "react";

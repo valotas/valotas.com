@@ -12,7 +12,6 @@ await execAsync(
   `git commit -am "Release v${version}" && git tag -a v${version} -m "Release v${version}"`
 );
 
-// eslint-disable-next-line no-undef
 console.log(`Committed and tagged v${version}, to push run:
   
   git push origin master --tags`);

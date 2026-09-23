@@ -1,17 +1,18 @@
+import { RuleType } from "markdown-to-jsx";
 import { useCallback } from "../jsx.js";
 import { Script } from "../Script.js";
 import { Gist, parseGist } from "./Gist.js";
 
 export type MarksdownScriptProps = {
   tag?: string;
-  type?: string;
+  type?: string | number;
   attrs?: {
     src: string;
   };
 };
 
 export function isMarkdownScript(node: any): node is MarksdownScriptProps {
-  return node.tag === "script" && node.type === "11";
+  return node.tag === "script" && node.type === RuleType.htmlBlock;
 }
 
 export function MarkdownScript({ tag, type, attrs }: MarksdownScriptProps) {

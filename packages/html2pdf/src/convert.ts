@@ -50,7 +50,7 @@ async function convert() {
           console.log(`📋 Injecting CSS: ${cssPath}`);
           const styleTag = `<style>${cssContent}</style>`;
           htmlContent = htmlContent.replace(match[0], styleTag);
-        } catch (error) {
+        } catch (_error) {
           console.warn(`⚠️  Could not load CSS file: ${cssPath}`);
         }
       }
@@ -86,7 +86,7 @@ async function convert() {
 
             console.log(`🖼️  Embedding image: ${src}`);
             return `<img ${before}src="data:${mimeType};base64,${base64Image}"${after}>`;
-          } catch (error) {
+          } catch (_error) {
             console.warn(`⚠️  Could not resolve image path: ${src}`);
             return fullMatch;
           }

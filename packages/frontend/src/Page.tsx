@@ -1,8 +1,8 @@
-import { PropsWithChildren, StrictMode } from "./jsx.js";
+import { FetchTracker } from "./FetchTracker.js";
 import { Footer, FooterProps } from "./Footer.js";
 import { Header, HeaderProps } from "./Header.js";
+import { PropsWithChildren, StrictMode } from "./jsx.js";
 import { LoadingBar } from "./LoadingBar.js";
-import { FetchTracker } from "./FetchTracker.js";
 
 export type PageProps = FooterProps & HeaderProps;
 

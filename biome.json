@@ -1,0 +1,281 @@
+{
+  "$schema": "https://biomejs.dev/schemas/2.5.14/schema.json",
+  "vcs": { "enabled": true, "clientKind": "git", "useIgnoreFile": true },
+  "files": {
+    "ignoreUnknown": true,
+    "includes": [
+      "packages/frontend/src/**",
+      "packages/html2pdf/src/**",
+      "packages/parcel-namer-staticsite/src/**",
+      "packages/parcel-resolver-staticsite/**",
+      "packages/parcel-transformer-staticsite/src/**",
+      "packages/web/src/**",
+      "!**/dist/**",
+      "!**/*.json",
+      "!**/*.md",
+      "!**/*.html",
+      "!**/*.css",
+      "!**/*.pug"
+    ]
+  },
+  "formatter": {
+    "enabled": true,
+    "indentStyle": "space",
+    "indentWidth": 2,
+    "lineEnding": "lf",
+    "lineWidth": 80
+  },
+  "linter": {
+    "enabled": true,
+    "rules": {
+      "preset": "none",
+      "complexity": {
+        "noAdjacentSpacesInRegex": "error",
+        "noExtraBooleanCast": "error",
+        "noUselessCatch": "error",
+        "noUselessEscapeInRegex": "error",
+        "noUselessTypeConstraint": "error"
+      },
+      "correctness": {
+        "noConstAssign": "error",
+        "noConstantCondition": "error",
+        "noEmptyCharacterClassInRegex": "error",
+        "noEmptyPattern": "error",
+        "noGlobalObjectCalls": "error",
+        "noInvalidBuiltinInstantiation": "error",
+        "noInvalidConstructorSuper": "error",
+        "noNonoctalDecimalEscape": "error",
+        "noPrecisionLoss": "error",
+        "noSelfAssign": "error",
+        "noSetterReturn": "error",
+        "noSwitchDeclarations": "error",
+        "noUndeclaredVariables": "error",
+        "noUnreachable": "error",
+        "noUnreachableSuper": "error",
+        "noUnsafeFinally": "error",
+        "noUnsafeOptionalChaining": "error",
+        "noUnusedLabels": "error",
+        "noUnusedImports": "warn",
+        "noUnusedVariables": {
+          "level": "warn",
+          "options": { "ignore": { "variable": ["h"] } }
+        },
+        "useIsNan": "error",
+        "useValidForDirection": "error",
+        "useValidTypeof": "error",
+        "useYield": "error"
+      },
+      "style": {
+        "noCommonJs": "error",
+        "noNamespace": "error",
+        "useArrayLiterals": "error",
+        "useAsConstAssertion": "error",
+        "useBlockStatements": "off"
+      },
+      "suspicious": {
+        "noAsyncPromiseExecutor": "error",
+        "noCatchAssign": "error",
+        "noClassAssign": "error",
+        "noCompareNegZero": "error",
+        "noConstantBinaryExpressions": "error",
+        "noControlCharactersInRegex": "error",
+        "noDebugger": "error",
+        "noDuplicateCase": "error",
+        "noDuplicateClassMembers": "error",
+        "noDuplicateElseIf": "error",
+        "noDuplicateEnumValues": "error",
+        "noDuplicateObjectKeys": "error",
+        "noDuplicateParameters": "error",
+        "noEmptyBlockStatements": "error",
+        "noExplicitAny": "off",
+        "noExtraNonNullAssertion": "error",
+        "noFallthroughSwitchClause": "error",
+        "noFunctionAssign": "error",
+        "noGlobalAssign": "error",
+        "noImportAssign": "error",
+        "noIrregularWhitespace": "error",
+        "noMisleadingCharacterClass": "error",
+        "noMisleadingInstantiator": "error",
+        "noNonNullAssertedOptionalChain": "error",
+        "noPrototypeBuiltins": "error",
+        "noRedeclare": "error",
+        "noShadowRestrictedNames": "error",
+        "noSparseArray": "error",
+        "noUnsafeDeclarationMerging": "error",
+        "noUnsafeNegation": "error",
+        "noUnusedExpressions": "off",
+        "noUselessRegexBackrefs": "error",
+        "noWith": "error",
+        "useGetterReturn": "error",
+        "useNamespaceKeyword": "error"
+      }
+    },
+    "includes": [
+      "**",
+      "!**/dist/**",
+      "!**/node_modules/**",
+      "!**/.parcel-cache/**"
+    ]
+  },
+  "javascript": {
+    "formatter": {
+      "quoteStyle": "double",
+      "jsxQuoteStyle": "double",
+      "semicolons": "always",
+      "trailingCommas": "all",
+      "arrowParentheses": "always",
+      "bracketSpacing": true,
+      "bracketSameLine": false
+    }
+  },
+  "overrides": [
+    {
+      "includes": ["**/*.ts", "**/*.tsx", "**/*.mts", "**/*.cts"],
+      "linter": {
+        "rules": {
+          "complexity": { "noArguments": "error" },
+          "correctness": {
+            "noConstAssign": "off",
+            "noGlobalObjectCalls": "off",
+            "noInvalidBuiltinInstantiation": "off",
+            "noInvalidConstructorSuper": "off",
+            "noSetterReturn": "off",
+            "noUndeclaredVariables": "off",
+            "noUnreachable": "off",
+            "noUnreachableSuper": "off"
+          },
+          "style": { "useConst": "error", "useSpreadOverApply": "error" },
+          "suspicious": {
+            "noClassAssign": "off",
+            "noDuplicateClassMembers": "off",
+            "noDuplicateObjectKeys": "off",
+            "noDuplicateParameters": "off",
+            "noFunctionAssign": "off",
+            "noImportAssign": "off",
+            "noRedeclare": "off",
+            "noUnsafeNegation": "off",
+            "noVar": "error",
+            "noWith": "off",
+            "useGetterReturn": "off"
+          }
+        }
+      }
+    },
+    {
+      "includes": [
+        "packages/parcel-namer-staticsite/**/*.js",
+        "packages/parcel-resolver-staticsite/**/*.js"
+      ],
+      "javascript": {
+        "globals": [
+          "AbortController",
+          "AbortSignal",
+          "Blob",
+          "BroadcastChannel",
+          "Buffer",
+          "ByteLengthQueuingStrategy",
+          "CloseEvent",
+          "CompressionStream",
+          "CountQueuingStrategy",
+          "Crypto",
+          "CryptoKey",
+          "CustomEvent",
+          "DOMException",
+          "DecompressionStream",
+          "ErrorEvent",
+          "Event",
+          "EventTarget",
+          "File",
+          "FormData",
+          "Headers",
+          "MessageChannel",
+          "MessageEvent",
+          "MessagePort",
+          "Navigator",
+          "Performance",
+          "PerformanceEntry",
+          "PerformanceMark",
+          "PerformanceMeasure",
+          "PerformanceObserver",
+          "PerformanceObserverEntryList",
+          "PerformanceResourceTiming",
+          "QuotaExceededError",
+          "ReadableByteStreamController",
+          "ReadableStream",
+          "ReadableStreamBYOBReader",
+          "ReadableStreamBYOBRequest",
+          "ReadableStreamDefaultController",
+          "ReadableStreamDefaultReader",
+          "Request",
+          "Response",
+          "Storage",
+          "SubtleCrypto",
+          "Temporal",
+          "TextDecoder",
+          "TextDecoderStream",
+          "TextEncoder",
+          "TextEncoderStream",
+          "TransformStream",
+          "TransformStreamDefaultController",
+          "URL",
+          "URLPattern",
+          "URLSearchParams",
+          "WebAssembly",
+          "WebSocket",
+          "WritableStream",
+          "WritableStreamDefaultController",
+          "WritableStreamDefaultWriter",
+          "__dirname",
+          "__filename",
+          "atob",
+          "btoa",
+          "clearImmediate",
+          "clearInterval",
+          "clearTimeout",
+          "console",
+          "crypto",
+          "exports",
+          "fetch",
+          "global",
+          "localStorage",
+          "module",
+          "navigator",
+          "performance",
+          "process",
+          "queueMicrotask",
+          "require",
+          "sessionStorage",
+          "setImmediate",
+          "setInterval",
+          "setTimeout",
+          "structuredClone"
+        ]
+      },
+      "linter": { "rules": { "style": { "noCommonJs": "off" } } }
+    },
+    {
+      "includes": ["packages/parcel-namer-staticsite/**/*.js"],
+      "javascript": {
+        "globals": [
+          "afterAll",
+          "afterEach",
+          "beforeAll",
+          "beforeEach",
+          "describe",
+          "expect",
+          "fit",
+          "it",
+          "jest",
+          "test",
+          "xdescribe",
+          "xit",
+          "xtest"
+        ]
+      }
+    }
+  ],
+  "assist": {
+    "enabled": true,
+    "actions": { "source": { "organizeImports": "on" } }
+  }
+}

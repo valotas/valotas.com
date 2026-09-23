@@ -1,4 +1,3 @@
-/* eslint-env jest */
 import { sortByDate } from "./date-sorter.js";
 
 describe("date-sorter", () => {

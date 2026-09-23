@@ -1,7 +1,7 @@
-import * as path from "path";
-import parcelUtils from "@parcel/utils";
 import type { FileSystem } from "@parcel/fs";
 import type { MutableAsset } from "@parcel/types";
+import parcelUtils from "@parcel/utils";
+import * as path from "path";
 import { computeKey } from "./key-factory.js";
 
 const { glob, isGlob, normalizeSeparators } = parcelUtils;

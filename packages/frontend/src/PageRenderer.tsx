@@ -1,8 +1,8 @@
+import { history } from "./History.js";
 import { useCallback, useEffect, useState } from "./jsx.js";
 import { PageWithItems, PageWithListProps } from "./PageWithItems.js";
 import { PageWithMarkdown, PageWithMarkdownProps } from "./PageWithMarkdown.js";
 import { createTitle } from "./title.js";
-import { history } from "./History.js";
 
 function getPageProps(input: PageRendererProps) {
   if ("payload" in input) {

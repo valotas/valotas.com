@@ -1,21 +1,28 @@
-import Markdown, { type MarkdownToJSX } from "markdown-to-jsx";
+import Markdown, { type MarkdownToJSX, RuleType } from "markdown-to-jsx";
 import { CodeBlock } from "./CodeBlock.js";
-import { MarkdownScript, isMarkdownScript } from "./MarkdownScript.js";
 import { Heading } from "./Heading.js";
+import { isMarkdownScript, MarkdownScript } from "./MarkdownScript.js";
 import { MarkedLink } from "./MarkedLink.js";
-
-const codeBlock = "3";
 
 const options: MarkdownToJSX.Options = {
   forceBlock: true,
+  // Keep raw <script> nodes so gist and Twitter embeds can be rewritten.
+  tagfilter: false,
   renderRule(next, node, _render, state) {
-    if (node.type === codeBlock) {
+    if (node.type === RuleType.codeBlock) {
       const code = node.text;
       return <CodeBlock key={state.key} lang={node.lang} code={code} />;
     }
 
     if (isMarkdownScript(node)) {
-      return <MarkdownScript key={state.key} {...node} />;
+      return (
+        <MarkdownScript
+          key={state.key}
+          tag={node.tag}
+          type={node.type}
+          attrs={node.attrs}
+        />
+      );
     }
 
     try {

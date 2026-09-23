@@ -1,6 +1,6 @@
+import { history, PageRenderer } from "@valotas/valotas-frontend";
 import { createElement } from "react";
-import { hydrate } from "react-dom";
-import { PageRenderer, history } from "@valotas/valotas-frontend";
+import { hydrateRoot } from "react-dom/client";
 
 window.addEventListener("load", () => {
   const script = document.querySelector("script[type='application/json']");
@@ -9,10 +9,13 @@ window.addEventListener("load", () => {
   }
 
   const root = document.getElementById("app");
+  if (!root) {
+    return;
+  }
   const payload = atob(script.innerHTML);
 
   // push the current state
   history().pushState(payload, document.title);
 
-  hydrate(createElement(PageRenderer, { payload }), root);
+  hydrateRoot(root, createElement(PageRenderer, { payload }));
 });

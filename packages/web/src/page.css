@@ -1,6 +1,6 @@
-@import "tailwindcss/base";
-@import "tailwindcss/components";
-@import "tailwindcss/utilities";
+@import "tailwindcss";
+@source "./**/*.{html,js,ts,tsx,pug,md}";
+@source "../../frontend/src/**/*.{js,jsx,ts,tsx}";
 @import "@valotas/valotas-frontend/src/styles.css";
 @import "@valotas/valotas-frontend/src/assets.css";
 @import "prismjs/themes/prism-okaidia.css";

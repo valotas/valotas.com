@@ -1,5 +1,5 @@
-import { Page, PageProps } from "./Page.js";
 import { MarkedContent } from "./marked/MarkedContent.js";
+import { Page, PageProps } from "./Page.js";
 
 export type PageWithMarkdownProps = PageProps & {
   bodyMarkdown?: string;

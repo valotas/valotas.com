@@ -1,5 +1,3 @@
-/* eslint-env jest */
-
 import { computeKey } from "./key-factory.js";
 
 describe("key-factory", () => {

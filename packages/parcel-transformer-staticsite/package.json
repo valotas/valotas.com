@@ -8,21 +8,21 @@
     "parcel": "2.x"
   },
   "devDependencies": {
-    "rimraf": "^5.0.7"
+    "rimraf": "^6.1.3"
   },
   "scripts": {
     "clean": "rimraf dist node_modules",
-    "lint": "eslint \"src/**/*.+(ts|js|tsx|jsx)\"",
+    "lint": "biome check src",
     "watch:test": "jest --watch",
     "test": "jest",
-    "fix": "npm run lint -- --fix",
+    "fix": "biome check --write src",
     "build": "tsc -p .",
     "preversion": "npm run lint && npm run build && npm run test"
   },
   "dependencies": {
-    "@parcel/plugin": "^2.16.1",
-    "@parcel/utils": "^2.16.1",
+    "@parcel/plugin": "^2.16.4",
+    "@parcel/utils": "^2.16.4",
     "@types/pug": "^2.0.6",
-    "pug": "^3.0.3"
+    "pug": "^3.0.4"
   }
 }

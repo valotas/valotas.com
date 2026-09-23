@@ -1,5 +1,5 @@
 import { renderToString } from "react-dom/server";
-import { FetchContent, createAsyncContextProvider } from "./AsyncContext.js";
+import { createAsyncContextProvider, FetchContent } from "./AsyncContext.js";
 import { PageRenderer, PageRendererProps } from "./PageRenderer.js";
 
 const _fetch = fetch;
