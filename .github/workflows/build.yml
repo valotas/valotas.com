@@ -9,6 +9,11 @@ on:
 jobs:
   build:
     runs-on: ubuntu-latest
+    # Keep the image tag in sync with playwright in package-lock.json.
+    # Browsers and OS deps ship in the image, so CI skips playwright install.
+    container:
+      image: mcr.microsoft.com/playwright:v1.63.0-noble
+      options: --user 1001 --ipc=host
 
     strategy:
       matrix:
@@ -23,7 +28,6 @@ jobs:
           cache: "npm"
 
       - run: npm ci
-      - run: npx playwright install --with-deps
       - run: npm run lint
       - run: npm run build
       - run: npm run test
